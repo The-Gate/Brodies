@@ -1,0 +1,4 @@
+name = Brodies
+description = "Brodies Customisation"
+core = 6.x
+php = 4.0.0

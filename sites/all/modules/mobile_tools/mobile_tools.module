@@ -1,0 +1,748 @@
+<?php
+
+/**
+ * @file
+ * Primarily Drupal hooks.
+ */
+
+/**
+ * Implementation of hook_perm().
+ */
+function mobile_tools_perm() {
+  return array('configure Mobile Tools');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function mobile_tools_menu() {
+  $items['admin/settings/mobile-tools'] = array(
+    'title' => 'Mobile Tools',
+    'description' => 'Change detection, theme switching and general configuration settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mobile_tools_configuration_form'),
+    'access arguments' => array('configure Mobile Tools'),
+    'file' => 'mobile_tools.admin.inc',
+  );
+  $items['admin/settings/mobile-tools/configuration'] = array(
+    'title' => 'Configuration',
+    'description' => 'Configure mobile and desktop URLs, redirection options and other general settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mobile_tools_configuration_form'),
+    'access arguments' => array('configure Mobile Tools'),
+    'file' => 'mobile_tools.admin.inc',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/settings/mobile-tools/detection'] = array(
+    'title' => 'Detection',
+    'description' => 'Configure how detection is handled.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mobile_tools_external_modules_configuration_form'),
+    'access arguments' => array('configure Mobile Tools'),
+    'file' => 'mobile_tools.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/settings/mobile-tools/theme-switching'] = array(
+    'title' => 'Theme switching',
+    'description' => 'Configure when and how to switch themes.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('mobile_tools_themes_configuration_form'),
+    'access arguments' => array('configure Mobile Tools'),
+    'file' => 'mobile_tools.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['mt/desktop/%mobile_tools_menu_link'] = array(
+    'title' => 'Full site',
+    'page callback' => 'mobile_tools_menu_switch_site',
+    'access callback' => 'mobile_tools_menu_link_access',
+    'access arguments' => array('desktop'),
+  );
+  $items['mt/mobile/%mobile_tools_menu_link'] = array(
+    'title' => 'Mobile Site',
+    'page callback' => 'mobile_tools_menu_switch_site',
+    'access callback' => 'mobile_tools_menu_link_access',
+    'access arguments' => array('mobile'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function mobile_tools_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#mobile_tools':
+      return '<p>' . t('Visit the <a href="@documentation">documentation page</a> for more information.', array('@documentation' => 'http://drupal.org/node/459686')) . '<p>';
+  }
+}
+
+/**
+ * Access function for the mobile tools menu links. It decides on which link to shown.
+ */
+function mobile_tools_menu_link_access($target_site) {
+  if (preg_match('/admin\/build\/menu/', $_GET['q'])) {
+    return TRUE;
+  }
+
+  $current_site = mobile_tools_site_type();
+
+  // Only show the link if it's target is different then the current site
+  if ($target_site == $current_site) {
+    return FALSE;
+  }
+  else {
+    return TRUE;
+  }
+}
+
+/**
+ * Implementation of %mobile_tools_menu_link.
+ */
+function mobile_tools_menu_link_to_arg($arg) {
+  return $_GET['q'];
+}
+
+/**
+ * Redirect the user to the right path.
+ */
+function mobile_tools_menu_switch_site() {
+  $args = arg();
+  array_shift($args);
+  $site = array_shift($args);
+  $path = implode('/', $args);
+
+  // In case of redirect, we already redirect to the target url
+  if (variable_get('mobile_tools_redirect', FALSE)) {
+    if ($site == 'desktop') {
+      $url = variable_get('mobile_tools_desktop_url', '') . '/' . $path;
+    }
+    else {
+      $url =  variable_get('mobile_tools_mobile_url', '') . '/' . $path;
+    }
+  }
+  else {
+    $url = $path;
+  }
+
+  $querystring = drupal_query_string_encode(array_merge($_GET, array('device' => $site)), array('q'));
+
+  drupal_goto($url, $querystring);
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function mobile_tools_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks['mobile_tools_message'] = array(
+        'info' => t('Mobile Tools message block'),
+        'cache' => BLOCK_NO_CACHE,
+      );
+      return $blocks;
+    case 'view':
+      switch ($delta) {
+        case 'mobile_tools_message':
+          $block['content'] = _mobile_tools_block_message();
+          break;
+      }
+      return $block;
+  }
+}
+
+/**
+ * Helper function returning the configurable message for the notification.
+ */
+function _mobile_tools_block_message() {
+  $site = mobile_tools_site_type();
+
+  if ($site == 'mobile') {
+    $text = variable_get('mobile_notification', 'View full site');
+    $path = 'mt/desktop/' . filter_xss($_GET['q']);
+  }
+  elseif ($site == 'desktop') {
+    $text = variable_get('desktop_notification', 'View mobile site');
+    $path = 'mt/mobile/' . filter_xss($_GET['q']);
+  }
+
+  return l($text, $path);
+}
+
+/**
+ * Implementation of hook_boot().
+ */
+function mobile_tools_boot() {
+  global $mobile_tools_device, $conf;
+
+  // Skip everything in case drush is used
+  if (php_sapi_name() == 'cli') {
+    return;
+  }
+
+  // Get the device object
+  $mobile_tools_device =  mobile_tools_get_device();
+
+  // First call the redirect function. This will redirect the user if needed
+  if (variable_get('mobile_tools_redirect', FALSE)) {
+    $redirected = mobile_tools_device_redirect($mobile_tools_device);
+  }
+
+  if ($mobile_tools_device['type'] == 'mobile' && mobile_tools_site_type() == 'mobile') {
+    $conf['site_frontpage'] = variable_get('site_frontpage_mobile', variable_get('site_frontpage', 'node'));
+  }
+
+  // Switch theme if needed
+  $theme_switched = mobile_tools_switch_theme($mobile_tools_device);
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function mobile_tools_init() {
+  global $mobile_tools_device, $conf;
+
+  // Skip everything in case Drush is used
+  if (php_sapi_name() == 'cli') {
+    return;
+  }
+
+  // Some small extras
+  if (mobile_tools_site_type() == 'mobile') {
+    $conf['default_nodes_main'] = variable_get('default_nodes_main_mobile', variable_get('default_nodes_main', 10));
+  }
+
+  // Set the content
+  if (module_exists('context')) {
+    $plugin = context_get_plugin('condition', 'mobile');
+    if (!empty($plugin) && is_object($plugin)) {
+      $device = mobile_tools_get_device();
+      $plugin->execute($device['type']);
+      $plugin->execute($device['group']);
+    }
+  }
+
+  // Initialize i18n variables so they are retrieved before non-translated variables.
+  if (module_exists('i18n')) {
+    i18n_variable_init();
+  }
+}
+
+/**
+ * This function is in charge of redirection or displaying a notification.
+ *
+ * @param $device
+ *   The device object array('type' => [mobile/desktop], 'group' => [group])
+ */
+function mobile_tools_device_redirect($device) {
+  global $base_url;
+
+  //only consider redirection if the mobile url and the destkop url are different
+  $mobile_url = variable_get('mobile_tools_mobile_url', '');
+  $desktop_url = variable_get('mobile_tools_desktop_url', '');
+
+  if ($mobile_url == $desktop_url) {
+    return;
+  }
+
+  // see if the user is currently requestin the mobile or desktop url
+  $current_url_type = mobile_tools_site_type();
+
+  // code takes into account path exceptions in the configuration.
+  $pages = variable_get('mobile_tools_redirect_exceptions', '');
+
+  $page_match = FALSE;
+
+  if (isset($_GET['q']) && $pages != '') {
+    //check if there is no exception in the redirect path (code comes from block.module)
+    include_once './includes/bootstrap.inc';
+    drupal_bootstrap(DRUPAL_BOOTSTRAP_PATH);
+    $path = drupal_get_path_alias($_GET['q']);
+    // Compare with the internal and path alias (if any).
+    $page_match = drupal_match_path($path, $pages);
+
+    if ($path != $_GET['q']) {
+      $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
+    }
+  }
+
+  // check if exceptions are pages on which to redirect, or not to redirect
+  if (variable_get('mobile_tools_redirect_exceptions_type', 0) == 'only-redirect') {
+    $page_match = !$page_match;
+  }
+
+  // Redirection
+  if (!$page_match) {
+    // The case where a mobile user is accessing the desktop site
+    if ($device['type'] == 'mobile' && $current_url_type == 'desktop') {
+      $destination_url = mobile_tools_get_redirect_url('mobile');
+      mobile_tools_goto($destination_url);
+    // The case where a desktop user is accessing the mobile site
+    }
+    elseif ($device['type'] == 'desktop' && $current_url_type == 'mobile') {
+      $destination_url = mobile_tools_get_redirect_url('desktop');
+      mobile_tools_goto($destination_url);
+    }
+  }
+}
+
+/**
+ * This function is in charge of changing to the mobile theme.
+ */
+function mobile_tools_switch_theme($device) {
+  global $custom_theme, $conf;
+
+  // check if theme switching is forced
+  $current_url_type = mobile_tools_site_type();
+
+  $mobile_detection_module = variable_get('mobile-tools-device-detection', NULL);
+  $group = $device['group'];
+
+  if (isset($mobile_detection_module)) {
+    if (($current_url_type == 'mobile' &&  variable_get('mobile-tools-theme-switch', '') == 'mobile-tools-mobile-url') || (variable_get('mobile-tools-theme-switch', '') == 'mobile-tools-mobile-device' && $device['type']  == 'mobile')) {
+      if (variable_get($mobile_detection_module . '_' . $group . '_enable', '') == 1) {
+        $custom_theme = variable_get($mobile_detection_module . '_' . $group . '_theme', $conf['theme_default']);
+        return TRUE;
+      }
+      else {
+        $custom_theme  = variable_get('mobile_tools_theme_name', $conf['theme_default']);
+        return TRUE;
+      }
+    }
+    elseif (!empty($device['group'])) { //device groups are independent of device types
+      if (variable_get($mobile_detection_module . '_' . $group . '_enable', '') == 1) {
+        $custom_theme = variable_get($mobile_detection_module . '_' . $group . '_theme', $conf['theme_default']);
+        return $custom_theme;
+      }
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Get $device object.
+ *
+ * Check if the 'device' argument is present or a cookie is set to overwrite the device:
+ * - device=mobile =>  mobile view
+ * - device=desktop => desktop view
+ * - device=[group] => specific group view
+ * - device=auto => reset overwrite
+ *
+ * @return $device
+ *  The $device object
+ */
+function mobile_tools_get_device() {
+  global $cookie_domain, $mobile_tools_device;
+
+  // Currently the boot method saves the result in a global variable.
+  if (isset($mobile_tools_device)) {
+    return $mobile_tools_device;
+  }
+
+  // Checking the possible arguments
+  $session_time = variable_get('mobile_tools_cookie_session', 3600 * 24 * 30);
+
+  // Cookie sessions set to zero are session cookies and will expire at the end
+  // of the session. For all other lengths, make valid by adding the current time.
+  if ($session_time > 0) {
+    $session_time = $session_time + time();
+  }
+
+  //first check if the device type is forced in the device argument
+  if (isset($_GET['device'])) {
+    switch ($_GET['device']) {
+      case 'desktop':
+      case 'mobile':
+        setCookie('mt_device', $_GET['device'], $session_time, '/', $cookie_domain);
+        return array(
+          'type' => $_GET['device'],
+          'group' => '',
+        );
+        break;
+      case 'auto':
+        setCookie('mt_device', '', time() - 3600, '/', $cookie_domain);
+        break;
+      default:
+        $device_groups = mobile_tools_device_groups();
+        if (isset($device_groups[$_GET['device']])) {
+          setCookie('mt_device', $_GET['device'], $session_time, '/', $cookie_domain);
+          return array(
+            'type' => 'mobile',
+            'group' => $_GET['device'],
+          );
+        }
+    }
+  }
+  elseif (isset($_COOKIE['mt_device'])) {
+    switch ($_COOKIE['mt_device']) {
+      case 'desktop':
+      case 'mobile':
+        return array(
+          'type' => $_COOKIE['mt_device'],
+          'group' => '',
+        );
+        break;
+      case 'auto':
+        setCookie('mt_device', '', time() - 3600, '/');
+        break;
+      default:
+        $device_groups = mobile_tools_device_groups();
+        if (isset($device_groups[$_COOKIE['mt_device']])) {
+          setCookie('mt_device', $_COOKIE['mt_device'], $session_time, '/');
+          return array(
+            'type' => 'mobile',
+            'group' => $_COOKIE['mt_device'],
+          );
+        }
+    }
+  }
+
+  return mobile_tools_is_mobile_device();
+}
+
+/**
+ * Determine if the current user agent represents a mobile device.
+ *
+ * @return array
+ *   An associative array with the following keys:
+ *   - 'type' either 'desktop' or 'mobile'
+ *   - 'group' the device group this device belongs to, e.g. 'iphone'
+ */
+function mobile_tools_is_mobile_device() {
+  static $browser;
+
+  if (!isset($browser)) {
+    $module = variable_get('mobile-tools-device-detection', NULL);
+
+    if (isset($module)) {
+      drupal_load('module', $module);
+
+      $browser = module_invoke($module, 'detect_mobile_device');
+    }
+    else {
+      $browser = array(
+        'type' => 'desktop',
+        'group' => '',
+      );
+    }
+  }
+
+  return $browser;
+}
+
+/**
+ * Determine the current site type.
+ *
+ * @return string
+ *   A string, either 'desktop' or 'mobile', representing the current site type.
+ */
+function mobile_tools_site_type() {
+  static $site_type;
+
+  if (!isset($site_type)) {
+    $module = variable_get('mobile-tools-site-type-detection', NULL);
+
+    if (isset($module)) {
+      drupal_load('module', $module);
+
+      $site_type = module_invoke($module, 'is_mobile_site');
+    }
+    else {
+      $site_type = 'desktop';
+    }
+  }
+
+  return $site_type;
+}
+
+/**
+ * Get a list of device groups.
+ *
+ * @return array
+ *   An array of device groups.
+ */
+function mobile_tools_device_groups() {
+  static $device_groups;
+
+  if (!isset($device_groups)) {
+    $module = variable_get('mobile-tools-device-detection', NULL);
+
+    if (isset($module)) {
+      drupal_load('module', $module);
+
+      $device_groups = module_invoke($module, 'device_groups_info');
+    }
+    else {
+      $device_groups = array();
+    }
+  }
+
+  return $device_groups;
+}
+
+/**
+ * Inspect a certain capability of the current user agent.
+ *
+ * @param string
+ *   The capability to check for.
+ *   Example: 'is_wireless_device' or 'resolution_width'.
+ * @return mixed
+ *   The value of the capability.
+ *   Example: FALSE or 500px.
+ */
+function mobile_tools_devicecapability($capability) {
+  static $device_capability;
+
+  if (!isset($device_capability)) {
+    $module = variable_get('mobile-tools-device-capability', NULL);
+
+    if (isset($module)) {
+      drupal_load('module', $module);
+
+      $device_capability = module_invoke($module, 'determine_device_capability', $capability);
+    }
+    else {
+      $device_capability = array();
+    }
+  }
+
+  return $device_capability;
+}
+
+/**
+ * Creation of the redirect url. Special care to create the correct url that will
+ * cause the Global Redirect module not to redirect!
+ */
+function mobile_tools_get_redirect_url($destination_site) {
+  include_once './includes/bootstrap.inc';
+
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+
+  $destination_url = ($destination_site == 'mobile') ? variable_get('mobile_tools_mobile_url', '') : variable_get('mobile_tools_desktop_url', '');
+
+  // Collect query parameters
+  if (drupal_is_front_page()) {
+    return $destination_url;
+  }
+
+  $query = array();
+
+  foreach ($_GET as $key => $value) {
+    if ($key != 'q') {
+      $query[] =  $key . '=' . $value;
+    }
+  }
+
+  $query = (count($query) > 0) ? implode('&', $query) : '';
+
+  //create the path and reassemble
+  $base = preg_replace('{/$}', '', $destination_url);
+  $currentUrl = url($_GET['q'], array('query' => $query));
+  $currentPath = str_replace(base_path(), "/" , $currentUrl);
+  $url = $base . $currentPath ;
+
+  return $url;
+}
+
+/**
+ * Helper function to assist in making a mobile url (m.*) from a given url
+ *
+ * @parm $url
+ *  orginal url
+ * @return
+ *  the mobile url
+ */
+function mobile_tools_create_mobile_url($url) {
+  $url_parsed = parse_url($url);
+
+  if (!empty($url_parsed) && !array_key_exists('path', $url_parsed)) {
+    $url_parsed['path'] = '';
+  }
+
+  $url = $url_parsed['host'];
+
+  $url = explode('.', $url);
+
+  $mobile_url = '';
+
+  if (count($url) == 3 ) {
+    $url[0] = 'm';
+    $mobile_url = 'http://'. implode('.', $url)  . $url_parsed['path'];
+  }
+  elseif (count($url) == 2) {
+    $mobile_url = 'http://m.'. implode('.', $url)  . $url_parsed['path'];
+  }
+  else {
+    $mobile_url = 'http://'.  implode('.', $url)  . $url_parsed['path'] .'/mobile';
+  }
+
+  return $mobile_url;
+}
+
+/**
+ * Implementation of template_preprocess_page().
+ */
+function mobile_tools_preprocess_page(&$variables) {
+  // Determine the current site type
+  $site = mobile_tools_site_type();
+
+  // Add the mobile device meta tags only if they are enabled and the site
+  // visitor is viewing the mobile site
+  if (variable_get('mobile_tools_add_header', 1) && $site == 'mobile') {
+    // Add mobile device meta tags
+    drupal_set_html_head('<meta name="viewport" content="user-scalable=no, width=device-width, maximum-scale=1.0" />');
+    drupal_set_html_head('<meta name="apple-mobile-web-app-capable" content="yes" />');
+    drupal_set_html_head('<meta name="HandheldFriendly" content="true" />');
+
+    $variables['head'] = drupal_get_html_head();
+  }
+}
+
+/**
+ * Copy of drupal_goto, since this is called in hook_boot, while the function is not yet available
+ */
+function mobile_tools_goto($path = '', $query = NULL, $fragment = NULL, $http_response_code = 302) {
+  $url = $path;
+
+  // Make the given path or URL absolute
+  if (!preg_match('/^[a-z]+:\/\//', $url)) {
+    global $base_url;
+    $url = $base_url .'/'. $url;
+  }
+
+  $url .= (empty($query)    ? '' : '?'. $query);
+  $url .= (empty($fragment) ? '' : '#'. $fragment);
+
+  // Remove newlines from the URL to avoid header injection attacks.
+  $url = str_replace(array("\n", "\r"), '', $url);
+
+  // Before the redirect, allow modules to react to the end of the page request.
+  bootstrap_invoke_all('exit');
+
+  // Even though session_write_close() is registered as a shutdown function, we
+  // need all session data written to the database before redirecting.
+  session_write_close();
+
+  header('Location: ' . $url, TRUE, $http_response_code);
+
+  // The "Location" header sends a REDIRECT status code to the http
+  // daemon. In some cases this can go wrong, so we make sure none
+  // of the code below the drupal_goto() call gets executed when we redirect.
+  exit();
+}
+
+/**
+ * Implementation of hook_ctools_plugin_directory().
+ */
+function mobile_tools_ctools_plugin_directory($module, $plugin) {
+  if ($plugin == 'access') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function mobile_tools_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($op == 'load' && mobile_tools_site_type() == 'mobile' && variable_get('mobile_tools_enable_build_mode', 0)) {
+    $node->build_mode = 'mobile';
+  }
+}
+
+/**
+ * Implementation of hook_content_build_modes().
+ */
+function mobile_tools_content_build_modes() {
+  $build_modes = array();
+
+  $build_modes['mobile_tools_types'] = array(
+    'title' => 'Mobile Device',
+    'build modes' => array(
+      'mobile' => array(
+         'title' => 'Mobile',
+         'views style' => TRUE,
+      ),
+    ),
+  );
+
+  return $build_modes;
+}
+
+/**
+ * Implementation of hook_context_plugins().
+ */
+function mobile_tools_context_plugins() {
+  $plugins = array();
+
+  $plugins['mobile_tools_context_condition_mobile'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 'mobile_tools') .'/plugins',
+      'file' => 'mobile_tools_context_condition_mobile.inc',
+      'class' => 'mobile_tools_context_condition_mobile',
+      'parent' => 'context_condition',
+    ),
+  );
+
+  return $plugins;
+}
+
+/**
+ * Implementation of hook_context_registry().
+ */
+function mobile_tools_context_registry() {
+  return array(
+    'conditions' => array(
+      'mobile' => array(
+        'title' => t('Context for mobile devices'),
+        'plugin' => 'mobile_tools_context_condition_mobile',
+        'description' => t('Choose for which device type or device group this context must apply.'),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function mobile_tools_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'mobile_tools') . '/views',
+  );
+}
+
+/**
+ * Implementation of hook_views_check_access().
+ */
+function mobile_tools_views_check_access($device, $perms, $rids) {
+  global $user;
+
+  // First check device permission
+  $current_device = mobile_tools_site_type();
+
+  // General case of mobile site
+  if (!empty($device[$current_device])) {
+    $access = TRUE;
+  }
+  else {
+    return FALSE;
+  }
+
+  // Additional check
+  if (!empty($perms)) {
+    foreach ($perms as $perm) {
+      $access = $access && user_access($perm);
+    }
+  }
+
+  $account = isset($account) ? $account : $user;
+  $roles = array_keys($account->roles);
+  $roles[] = $account->uid ? DRUPAL_AUTHENTICATED_RID : DRUPAL_ANONYMOUS_RID;
+
+  if ($rids) {
+    $access = $access && (user_access('access all views', $account) || array_intersect(array_filter($rids), $roles));
+  }
+
+  return $access;
+}

@@ -1,0 +1,43 @@
+#content .middle #block-views-CTA_Blocks-block_1,
+#content .middle #block-views-CTA_Blocks-block_2,
+#content .middle #block-views-CTA_Blocks-block_2 .left,
+#content .middle #block-views-CTA_Blocks-block_2 .right,
+#content .node  .col-left,
+#content .node  .col-right,
+#content .l-people .item,
+#content .l-people .item .col-left,
+#content .l-people .item .col-right,
+#content .middle .box,#content #block-views-Case_Studies-block_2 .views-row,
+.listing.l-video .col-left,
+.listing.l-video .col-right,
+.view-top-news .col-left,
+.view-top-news .col-right,
+#content .right .block-views .field-content h2,
+#content .right .block-views .field-content .content,
+#postscript-left,
+#postscript-right,
+#postscript-left #block-block-10,
+#postscript-left #block-block-11,
+#postscript-right #block-block-12,
+#postscript-right #block-block-13,
+.content-webform .webform-component-textfield,.content-webform .webform-component-email{ 
+zoom: 1;
+    *display: inline;
+    }
+    .content-webform .webform-component-textfield,.content-webform .webform-component-email{
+      width:49%
+    }
+#zone-header-background,
+#content .middle .cta.large .cta-title {
+ left:0;
+}
+#section-postscript{
+  margin-bottom:-60px;
+}
+#postscript{
+  padding-bottom:20px;
+}
+
+#block-br-2 {
+top: 30px;
+}
