@@ -1,0 +1,425 @@
+/* 
+WOO CUSTOM STYLESHEET
+---------------------
+
+Instructions:
+
+Add your custom styles in this file instead of style.css so it 
+is easier to update the theme. Simply copy an existing style 
+from style.css to this file, and modify it to your liking. */
+
+
+/* 
+GLOBAL STYLES
+----------------
+Add styles beneath this line that you want to be applied across your entire site */
+
+
+h1 {color:#00245d;font-size:2.15em;}
+.section-body a{color:#F6A01A;}
+.section-body a:hover{color:#00245d;}
+a {color:#00245d;}
+a:hover {color:#f6a01a; text-decoration:none;}
+p {font-size:0.875em;}
+li {font-size:0.875em;}
+
+.hidden {display:none;}
+.inline {display:inline!important;}
+
+/*Header*/
+#header-wrap{
+background:url(http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header_Mobile.jpg) no-repeat left top #000;
+
+background-size:768px ;
+}
+
+#navigation a {color:#fff;}
+#navigation a:hover {color:#f6a01a;}
+ul#main-nav .page-item-3092 {display:none;}
+
+#categoryWrap {padding:0 20px;}
+#categoryInner {margin-top:30px; margin-bottom:30px; border-bottom:1px solid #f6a01a;}
+#catH2 {width:20%; float:left; height:60px; text-transform:uppercase; font-size:0.875em; color:#f6a01a;}
+#catList {width:60%; float:left; height:80px;}
+#catList a {float:left; width:25%; text-transform:uppercase; font-size:0.875em;}
+#socLinks {width:20%; float:right; }
+
+#mr-social-sharing-toolkit-follow-widget-2 .mr_social_sharing {float:right;}
+ #navigation .nav li a:hover {
+    background-color: none;
+  }
+
+/* Home Page */
+.archive-header h1.f1 {color:#444;}
+.homeRec {width:100%; float:left; overflow:hidden; height:auto; border-bottom:1px solid #999; margin-bottom:20px;}
+.homeRecRSS {width:20%; float:left;} 
+.homeRecRSS a {font-size:0.6em; text-transform:uppercase; padding:4px 0; background:#f6a01a; color:#fff; width:115px; display:block; text-align:center; }
+.homeRecRSS a:hover {background:#E57606; text-decoration:none;}
+.homeRec .widget {width:515px; float:right; }
+.homeRec .srp-widget-container {padding:12px; background:#eee; border:1px solid #444;}
+.homeRec .widget h3 {font-size:2em; color:#E57606;}
+.homeRec h4.srp-post-title {font-size:1.4em; margin-bottom:0;}
+.homeRec h4.srp-post-title a {color:#00245d;}
+.homeRec h4.srp-post-title a:hover {color:#E57606;}
+.homeRec .srp-widget-date {font-size:0.8em; color:#888; margin-bottom:8px;}
+.homeRec .srp-widget-stringbreak-link {font-weight:bold; color:#00245d; margin-left:8px;}
+.homeRec .srp-widget-stringbreak-link:hover {color:#E57606;}
+div.srp-widget-singlepost {border-bottom:0;}
+
+/* Sidebar */
+#sidebar h3 {color:#f6a01a; font-size:1em;}
+
+.style1 ul.tabbernav li {padding:0;}
+
+.style1 ul.tabbernav li a {background:none; padding:5px 8px; border:none;  color:#111; font-size:0.95em; color:#00245d;}
+.style1 ul.tabbernav li a:hover {color:#f6a01a; background:#F7F7F7;}
+.style1 ul.tabbernav li.tabberactive a {background:#ddd; border:none; border-bottom:none;  font-size:0.95em; color:#F28100;}
+ 
+.tabberlive.style1 {background:#fff; padding-top:8px; }
+.style1 ul.tabbernav {margin:0 0 5px!important; padding:0!important;}
+#recent-posts-2, #wpp-2, #authors-2 {margin:0 0 8px; background:#F7F7F7; border:none; border-top:1px solid #ddd;}
+/*#wdg_specialrecentpostsfree-11 h4.srp-post-title {font-size:0.875em; margin-bottom:0; color:#00245d;}
+#wdg_specialrecentpostsfree-11 .srp-widget-date {font-size:0.75em; color:#f6a01a;}
+#wdg_specialrecentpostsfree-11 .srp-widget-excerpt {font-size:0.75em;}
+#wdg_specialrecentpostsfree-11 .srp-widget-stringbreak-link {color:#00245d; margin-left:8px; font-weight:bold;}
+#wdg_specialrecentpostsfree-11 .srp-widget-stringbreak-link:hover {color:#f6a01a; } */
+/* Category/Archive pages */
+#archive-latest h3.section-title {display:none;}
+#content #archive-latest ul li h3.title {width:100%; font-size:1.4em; color:#00245d;}
+#content #archive-latest ul li h3.title:hover {text-decoration:none; color:#f6a01a; }
+#content #archive-latest ul.archiveList li {background:none; list-style:none; height:auto; overflow:hidden; margin-bottom:20px; box-shadow:none; border-bottom:1px solid #f6a01a; padding-bottom:15px;}
+#content #archive-latest ul li.post-date {background: url("images/ico-calendar.png") no-repeat scroll left center transparent; padding: 0.356em 0.356em 0.356em 1.8em !important;
+    word-wrap: break-word; border-bottom:none; color:#f6a01a; font-size:1em;}
+#content #archive-latest ul li.archive-post-tags {border-bottom:none;}
+#content #archive-latest ul li aside.post-meta {width:20%; float:left;}  
+#content #archive-latest ul li div.archive-post-content {width:80%; float:right;}
+.archive-post-readmore {margin-top:8px;}
+
+.expandedBrod {display:list-item!important;}
+
+/*Secondary Posts (2col)*/
+#content #archive-latest ul li.archiveItem4, #content #archive-latest ul li.archiveItem5 {width:45%; padding-bottom:15px; *min-height: 260px; }
+#content #archive-latest ul li.archiveItem5 {clear: right;}
+#content #archive-latest ul li.archiveItem6 { clear: both; }
+#content #archive-latest ul li.archiveItem4 aside.post-meta, #content #archive-latest ul li.archiveItem5 aside.post-meta {width:100%;}
+#content #archive-latest ul li.archiveItem4 div.archive-post-content, #content #archive-latest ul li.archiveItem5 div.archive-post-content {width:100%;}
+#content #archive-latest ul li.archiveItem4 li.post-date, #content #archive-latest ul li.archiveItem5 li.post-date {margin-bottom:0;}
+#content #archive-latest ul li.archiveItem4 li.archive-post-tags, #content #archive-latest ul li.archiveItem5 li.archive-post-tags {display:none;}
+
+
+/*Tertiary Posts (4col) */
+#content #archive-latest ul li.archiveItem11, #content #archive-latest ul li.archiveItem12, #content #archive-latest ul li.archiveItem6, #content #archive-latest ul li.archiveItem7, #content #archive-latest ul li.archiveItem8, #content #archive-latest ul li.archiveItem9, #content #archive-latest ul li.archiveItem10, #content #archive-latest ul li.archiveItem13  { width:20%; border-bottom:0; margin-bottom:0; *min-height: 100px; }
+#content #archive-latest ul li.archiveItem11 h3.title, #content #archive-latest ul li.archiveItem12 h3.title, #content #archive-latest ul li.archiveItem6 h3.title, #content #archive-latest ul li.archiveItem7 h3.title, #content #archive-latest ul li.archiveItem8 h3.title, #content #archive-latest ul li.archiveItem9 h3.title, #content #archive-latest ul li.archiveItem10 h3.title, #content #archive-latest ul li.archiveItem13 h3.title {font-size:0.8em;}
+#content #archive-latest ul li.archiveItem10 { clear: left; }
+#content #archive-latest ul li.archiveItem11 div.archive-post-content, #content #archive-latest ul li.archiveItem12 div.archive-post-content, #content #archive-latest ul li.archiveItem6 div.archive-post-content, #content #archive-latest ul li.archiveItem7 div.archive-post-content, #content #archive-latest ul li.archiveItem8 div.archive-post-content, #content #archive-latest ul li.archiveItem9 div.archive-post-content, #content #archive-latest ul li.archiveItem10 div.archive-post-content, #content #archive-latest ul li.archiveItem13 div.archive-post-content {display:none;}
+
+#content #archive-latest ul li.archiveItem11 aside.post-meta, #content #archive-latest ul li.archiveItem12 aside.post-meta, #content #archive-latest ul li.archiveItem6 aside.post-meta, #content #archive-latest ul li.archiveItem7 aside.post-meta, #content #archive-latest ul li.archiveItem8 aside.post-meta, #content #archive-latest ul li.archiveItem9 aside.post-meta, #content #archive-latest ul li.archiveItem10 aside.post-meta, #content #archive-latest ul li.archiveItem13 aside.post-meta {width:100%;}
+
+#content #archive-latest ul li.archiveItem11 li.archive-post-tags, #content #archive-latest ul li.archiveItem12 li.archive-post-tags, #content #archive-latest ul li.archiveItem6 li.archive-post-tags, #content #archive-latest ul li.archiveItem7 li.archive-post-tags, #content #archive-latest ul li.archiveItem8 li.archive-post-tags, #content #archive-latest ul li.archiveItem9 li.archive-post-tags, #content #archive-latest ul li.archiveItem10 li.archive-post-tags, #content #archive-latest ul li.archiveItem13 li.archive-post-tags {display:none;}
+
+#content #archive-latest ul li.archiveItem11 li.post-date, #content #archive-latest ul li.archiveItem12 li.post-date, #content #archive-latest ul li.archiveItem6 li.post-date, #content #archive-latest ul li.archiveItem7 li.post-date, #content #archive-latest ul li.archiveItem8 li.post-date, #content #archive-latest ul li.archiveItem9 li.post-date, #content #archive-latest ul li.archiveItem10 li.post-date, #content #archive-latest ul li.archiveItem13 li.post-date {margin-bottom:0;}
+
+/* Twitter widgets */
+/*tech*/
+#woodojo_twitterprofile-3 {display:none; float:left; width:100%; margin-bottom:20px;}
+#woodojo_tweets-3 {display:none;}
+/*Bclaims*/
+#woodojo_twitterprofile-4 {display:none; float:left; width:100%; margin-bottom:20px;}
+#woodojo_tweets-4 {display:none;}
+/*public law*/
+#woodojo_twitterprofile-6 {display:none; float:left; width:100%; margin-bottom:20px;}
+#woodojo_tweets-6 {display:none;}
+/*Emp law*/
+#woodojo_twitterprofile-7 {display:none; float:left; width:100%; margin-bottom:20px;}
+#woodojo_tweets-7 {display:none;}
+
+/* Subscribe form */
+#text-2 {padding:12px; background:#f3f3f3; height:auto; overflow:hidden;}
+#fm-form-1 {float:left; height:auto; overflow:hidden; position:relative; width:100%;}
+input#text-517e73783a800, input#text-517e737ae633f {width:100%!important;}
+#fm-form-1 .fm-checkbox-list input {}
+
+/* Posts */
+
+.single .post li {margin-left:20px;}
+.single .post .first {padding:0; width:100% !important;}
+.single .post .last {padding:0; width:100%!important;}
+#content #archive-latest ul li.archiveItem9, #content #archive-latest ul li.archiveItem13 {margin-right:0;}
+aside.post-meta, .post-meta ul li a {color:#f6a01a;}
+
+/* Hide author - remove to show */
+.single-post #post-author {display:none;}
+
+/*comments*/
+#respond h3, #comments h3, .comment-footer .date, #comments .comment .reply a, #comments .comment .edit a, #comments .comment .name a {color:#f6a01a;}
+
+
+/* author pages */
+
+.author #content #archive-latest ul li.post-date {box-shadow:none; background: url("images/ico-calendar.png") no-repeat scroll left 5px transparent}
+.author #content #archive-latest ul li.archive-post-tags {box-shadow:none;}
+.author #content #archive-latest ul li {height:auto; overflow:hidden;}
+
+
+/* legal page */
+.page-id-3127 #comments, .page-id-3127 #respond {display:none;}
+
+/* 
+
+/* Gate Styles */
+/* Register form hide stuff */
+
+
+
+
+
+#footer #credit{
+	display:none;	
+}
+ul.nav li a:hover {
+	background-color:none !important;
+}
+.floater{
+	width:55%;	
+}
+.catListBack{
+	display:none;	
+}
+.jcl_symbol{
+	display:none;	
+}
+
+.svg-logo{
+	float:left;	
+}
+
+/* End Gate Styles */
+
+@media only screen and (max-width: 360px) {
+#header-wrap{
+background:url(http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header_Mobile.jpg) no-repeat left top #000;
+background-size:768px ;
+}
+#catH2 {
+	font-size:1.1em !important;	
+}
+#socLinks{
+	width:50px;	
+}
+
+
+}
+
+
+@media only screen and (max-width: 767px) {
+	
+	#catList{
+	clear:both;
+	width:97%;
+	height:auto;
+	display:none;
+}
+.home #catList{
+	display:block;
+}
+	#catList a{
+	width:100%;
+	padding:10px;
+	text-align:center;
+	background-color:#F6A01A;
+	float:none;
+	display:block;
+	margin-bottom:5px;
+	font-size:1em;
+	font-family:Helvetica,Arial,sans-serif;
+	font-weight:bolder;
+	color:white;
+}
+#catList a:hover{
+	background-color:#00245D;
+}
+.catListBack{
+	display:block;	
+}
+.catListBack a {
+	display:none;
+	float:left;
+	padding:10px;
+	background-color:#F6A01A;
+	color:white;
+	font-family:Helvetica,Arial,sans-serif;
+	text-transform:uppercase;
+	font-weight:bolder;
+}
+.catListBack a:hover {
+	background-color:#00245D;
+}
+header h1{
+	font-size:2.5em;	
+}
+
+.category-bclaims .catListBack .home, .category-corporate .catListBack .home, .category-employment .catListBack .home, .category-family-law .catListBack .home, .category-planning .catListBack .home, .category-public-law .catListBack .home, .category-renewables .catListBack .home, .category-technology .catListBack .home{
+	display:block;
+}
+
+.parent-category-bclaims .catListBack .claims, .parent-bclaims .catListBack .claims  {
+	display:block;	
+}
+
+.parent-category-corporate .catListBack .corporate, .parent-corporate .catListBack .corporate {
+	display:block;	
+}
+.parent-category-employment .catListBack .employment, .parent-employment .catListBack .employment {
+	display:block;	
+}
+ .parent-category-family-law .catListBack .family, .parent-family-law .catListBack .family {
+	display:block;	
+}
+.parent-category-health-and-safety .catListBack .health, .parent-health-and-safety .catListBack .health {
+	display:block;	
+}
+.parent-category-planning .catListBack .planning, .parent-planning .catListBack .planning {
+	display:block;	
+}
+.parent-category-public-law .catListBack .public-law, .parent-public-law .catListBack .public-law{
+	display:block;	
+}
+.parent-category-renewables .catListBack .renew, .parent-renewables .catListBack .renew{
+	display:block;	
+}
+.parent-category-technology .catListBack .tech, .parent-technology .catListBack .tech{
+	display:block;	
+}
+
+#socLinks{
+	width:140px;
+	height:30px;
+	
+}
+#catH2{
+	display:none;
+}
+.home #catH2{
+	display:block;
+}
+.nav-toggle{
+	background-color:white;
+	padding:5px;
+}
+.nav-toggle a{
+	color:#F6A01A;
+	text-transform:uppercase;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:0.8em;
+}
+#header .search_main{
+	display:none;	
+}
+#header{
+	padding:1.333em 0 0;	
+}
+#header-wrap{
+	border-bottom:0;
+	
+}
+.home #content{
+	display:none;	
+}
+
+.single .post .first {padding-right:0; width:100% !important; }
+.single .post .last {padding-left:0; width:100%!important;}
+
+#respond #commentform #form-box input.txt{
+	width:100%;
+}
+#catH2{
+	width:100%;
+	font-size:1.5em;
+	height:20px;
+	color:#00245D;	
+}
+.home #categoryInner {
+	border:0;
+}
+#content #archive-latest ul li div.archive-post-content{
+	float:none;
+	clear:both;
+	width:100%;	
+}
+#content #archive-latest ul li aside.post-meta .archive-post-tags{
+	display:none;
+}
+
+#content #archive-latest ul li.post-date, #content #archive-latest ul li aside.post-meta{
+	width:100%;
+	padding-bottom:0;
+}
+#content #archive-latest ul li.archiveItem4, #content #archive-latest ul li.archiveItem5{
+	width:100%;	
+}
+.archive-post-readmore a{
+	padding:10px;
+	background-color:#F6A01A;
+	color:white;	
+}
+.archive-post-readmore{
+	float:right;
+	margin:30px 0px 10px 0px;
+	}
+#content #archive-latest ul.archiveList li{
+	/*padding:0 0 7px 0;*/	
+}
+#content #archive-latest ul li:nth-child(3n+3), #content #archive-latest ul.archiveList li{
+	margin-right:0;	
+}
+#content #archive-latest ul li.archiveItem11, #content #archive-latest ul li.archiveItem12, #content #archive-latest ul li.archiveItem6, #content #archive-latest ul li.archiveItem7, #content #archive-latest ul li.archiveItem8, #content #archive-latest ul li.archiveItem9, #content #archive-latest ul li.archiveItem10, #content #archive-latest ul li.archiveItem13{
+	width:40%;
+	margin-right:0;	
+}
+#content #archive-latest ul li.archiveItem11 h3.title, #content #archive-latest ul li.archiveItem12 h3.title, #content #archive-latest ul li.archiveItem6 h3.title, #content #archive-latest ul li.archiveItem7 h3.title, #content #archive-latest ul li.archiveItem8 h3.title, #content #archive-latest ul li.archiveItem9 h3.title, #content #archive-latest ul li.archiveItem10 h3.title, #content #archive-latest ul li.archiveItem13 h3.title{
+	font-size:1em;
+}
+#sidebar h3{
+	color:#00245D;
+	padding-bottom:10px;
+	border-bottom:1px solid #DDDDDD;	
+}
+.post header h1{
+	font-size:2em;	
+}
+#categoryWrap{
+	padding:0 20px 0px 20px;	
+}
+
+}
+	
+@media only screen and (min-width: 768px) {
+	#header-wrap{
+	background:url(http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header.jpg) repeat-x left top #fff;
+	background-size:1000px 255px;
+}
+
+body #header {
+    padding: 2.8em 0 2.9em;
+}
+	
+}
+
+#header-wrap{
+	*background:url(http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header-ie.jpg) repeat-x left top #fff !important;
+	
+}
+.ie-logo{
+	display:none;	
+}
+.svg-logo{
+	*display:none;
+}
+.ie-logo{
+	*display:block;	
+	float:left;
+}
+div.mr_social_sharing_wrapper{
+	/*display:none;*/
+}
+

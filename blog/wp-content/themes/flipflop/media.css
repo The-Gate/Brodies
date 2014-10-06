@@ -1,0 +1,210 @@
+@media only screen and (max-width: 360px) {
+#header-wrap{
+background:url("http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header_Mobile.jpg") no-repeat left top #000;
+background-size:768px ;
+}
+#catH2 {
+	font-size:1.1em !important;	
+}
+#socLinks{
+	width:50px;	
+}
+
+
+}
+
+
+@media only screen and (max-width: 767px) {
+	
+	#catList{
+	clear:both;
+	width:97%;
+	height:auto;
+	display:none;
+}
+.home #catList{
+	display:block;
+}
+	#catList a{
+	width:100%;
+	padding:10px;
+	text-align:center;
+	background-color:#F6A01A;
+	float:none;
+	display:block;
+	margin-bottom:5px;
+	font-size:1em;
+	font-family:Helvetica,Arial,sans-serif;
+	font-weight:bolder;
+	color:white;
+}
+#catList a:hover{
+	background-color:#00245D;
+}
+.catListBack{
+	display:block;	
+}
+.catListBack a {
+	display:none;
+	float:left;
+	padding:10px;
+	background-color:#F6A01A;
+	color:white;
+	font-family:Helvetica,Arial,sans-serif;
+	text-transform:uppercase;
+	font-weight:bolder;
+}
+.catListBack a:hover {
+	background-color:#00245D;
+}
+#header h1{
+	font-size:2.5em;	
+}
+
+.category-bclaims .catListBack .home, .category-corporate .catListBack .home, .category-employment .catListBack .home, .category-family-law .catListBack .home, .category-planning .catListBack .home, .category-public-law .catListBack .home, .category-renewables .catListBack .home, .category-technology .catListBack .home{
+	display:block;
+}
+
+.parent-category-bclaims .catListBack .claims, .parent-bclaims .catListBack .claims  {
+	display:block;	
+}
+
+.parent-category-corporate .catListBack .corporate, .parent-corporate .catListBack .corporate {
+	display:block;	
+}
+.parent-category-employment .catListBack .employment, .parent-employment .catListBack .employment {
+	display:block;	
+}
+ .parent-category-family-law .catListBack .family, .parent-family-law .catListBack .family {
+	display:block;	
+}
+.parent-category-health-and-safety .catListBack .health, .parent-health-and-safety .catListBack .health {
+	display:block;	
+}
+.parent-category-planning .catListBack .planning, .parent-planning .catListBack .planning {
+	display:block;	
+}
+.parent-category-public-law .catListBack .public-law, .parent-public-law .catListBack .public-law{
+	display:block;	
+}
+.parent-category-renewables .catListBack .renew, .parent-renewables .catListBack .renew{
+	display:block;	
+}
+.parent-category-technology .catListBack .tech, .parent-technology .catListBack .tech{
+	display:block;	
+}
+
+#socLinks{
+	width:140px;
+	height:30px;
+	
+}
+#catH2{
+	display:none;
+}
+.home #catH2{
+	display:block;
+}
+.nav-toggle{
+	background-color:white;
+	padding:5px;
+}
+.nav-toggle a{
+	color:#F6A01A;
+	text-transform:uppercase;
+	font-family:Helvetica,Arial,sans-serif;
+	font-size:0.8em;
+}
+#header .search_main{
+	display:none;	
+}
+#header{
+	padding:1.333em 0 0;	
+}
+#header-wrap{
+	border-bottom:0;
+	
+}
+.home #content{
+	display:none;	
+}
+
+.single .post .first {padding-right:0; width:100% !important; }
+.single .post .last {padding-left:0; width:100%!important;}
+
+#respond #commentform #form-box input.txt{
+	width:100%;
+}
+#catH2{
+	width:100%;
+	font-size:1.5em;
+	height:20px;
+	color:#00245D;	
+}
+.home #categoryInner {
+	border:0;
+}
+#content #archive-latest ul li div.archive-post-content{
+	float:none;
+	clear:both;
+	width:100%;	
+}
+#content #archive-latest ul li aside.post-meta .archive-post-tags{
+	display:none;
+}
+
+#content #archive-latest ul li.post-date, #content #archive-latest ul li aside.post-meta{
+	width:100%;
+	padding-bottom:0;
+}
+#content #archive-latest ul li.archiveItem4, #content #archive-latest ul li.archiveItem5{
+	width:100%;	
+}
+.archive-post-readmore a{
+	padding:10px;
+	background-color:#F6A01A;
+	color:white;	
+}
+.archive-post-readmore{
+	float:right;
+	margin:30px 0px 10px 0px;
+	}
+#content #archive-latest ul.archiveList li{
+	/*padding:0 0 7px 0;*/	
+}
+#content #archive-latest ul li:nth-child(3n+3), #content #archive-latest ul.archiveList li{
+	margin-right:0;	
+}
+#content #archive-latest ul li.archiveItem11, #content #archive-latest ul li.archiveItem12, #content #archive-latest ul li.archiveItem6, #content #archive-latest ul li.archiveItem7, #content #archive-latest ul li.archiveItem8, #content #archive-latest ul li.archiveItem9, #content #archive-latest ul li.archiveItem10, #content #archive-latest ul li.archiveItem13{
+	width:40%;
+	margin-right:0;	
+}
+#content #archive-latest ul li.archiveItem11 h3.title, #content #archive-latest ul li.archiveItem12 h3.title, #content #archive-latest ul li.archiveItem6 h3.title, #content #archive-latest ul li.archiveItem7 h3.title, #content #archive-latest ul li.archiveItem8 h3.title, #content #archive-latest ul li.archiveItem9 h3.title, #content #archive-latest ul li.archiveItem10 h3.title, #content #archive-latest ul li.archiveItem13 h3.title{
+	font-size:1em;
+}
+#sidebar h3{
+	color:#00245D;
+	padding-bottom:10px;
+	border-bottom:1px solid #DDDDDD;	
+}
+.post header h1{
+	font-size:2em;	
+}
+#categoryWrap{
+	padding:0 20px 0px 20px;	
+}
+
+}
+	
+@media only screen and (min-width: 768px) {
+	#header-wrap{
+	background:url("http://brodies.com/blog/wp-content/themes/flipflop/images/Brodies_Blog_Header.jpg") repeat-x left top #fff;
+	background-size:1000px 196px;
+}
+
+body #header {
+    padding: 2.8em 0 2.9em;
+}
+	
+}
+
