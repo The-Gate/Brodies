@@ -1,0 +1,26 @@
+
+2014-02-04 14:51:25 000000 --  **** Start logging **** mp_mail *** log forced **** (5.4)
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - :::: external recipient ::::
+2014-02-04 14:51:25 000000 --  
+
+ ------------------- start of mail -------------------   
+ From : Brodies LLP <mailbox@brodies.com>  
+ To   : Ben Ausden <ben@line.uk.com>  
+ Subject : Connection test : Brodies LLP Legal Resource Area - Template : posts 
+   ------------------- plaintext -------------------  
+ Brodies LLP Legal Resource Area
+Brodies LLP Legal Resource Area
+
+
+							this mail is brought to you by MailPress 
+
+ ------------------ end of mail ------------------  
+
+
+2014-02-04 14:51:25 000000 -- **** Empty user/password for SMTP connection ****
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - Disconnecting from blogbrodies (MP_Mail)
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - Disconnected (MP_Mail)
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - Connecting to blogbrodies (MP_Mail)
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - Connected (MP_Mail)
+2014-02-04 14:51:25 000000 -- MAILPRESS [NOTICE] - :::: Mail not saved as required ::::
+2014-02-04 14:51:25 000000 --  **** End   logging **** mp_mail *** level : 0 **** status : TRUE 

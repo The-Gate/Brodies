@@ -1,0 +1,183 @@
+.cat_sub_toggler{
+    background: #d7d7d7;
+    padding: 10px;
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.cat_sub_toggler span{
+    font-size: smaller;
+    color: #999;
+    float: right;
+}
+
+.toggler_target{
+    display: none;
+}
+
+#documentation_target dt{
+    font-weight: bold;
+}
+
+#documentation_target dd{
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+#documentation_target h3{
+    margin-top: 2em;
+}
+
+#documentation_target .doc_container{
+    padding: 0em 1em 0em 1em;
+    border: 1px solid;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.widefat .column-cat_sub_subscriptions{
+  white-space: nowrap;
+  overflow: auto;
+}
+
+.widefat tr td .sub{
+	display:none;
+}
+
+
+/* no show for subcats */
+.cat_sub_subscriptions br {display:block; height:0px; margin-bottom:0px; line-height:0px;}
+
+input#cs_c_119, label[for=cs_c_119], select[name=csdt_119] {display:none;}
+input#cs_c_120, label[for=cs_c_120], select[name=csdt_120] {display:none;}
+input#cs_c_121, label[for=cs_c_121], select[name=csdt_121] {display:none;}
+input#cs_c_122, label[for=cs_c_122], select[name=csdt_122] {display:none;}
+input#cs_c_123, label[for=cs_c_123], select[name=csdt_123] {display:none;}
+input#cs_c_124, label[for=cs_c_124], select[name=csdt_124] {display:none;}
+input#cs_c_125, label[for=cs_c_125], select[name=csdt_125] {display:none;}
+input#cs_c_126, label[for=cs_c_126], select[name=csdt_126] {display:none;}
+input#cs_c_127, label[for=cs_c_127], select[name=csdt_127] {display:none;}
+input#cs_c_128, label[for=cs_c_128], select[name=csdt_128] {display:none;}
+input#cs_c_129, label[for=cs_c_129], select[name=csdt_129] {display:none;}
+input#cs_c_130, label[for=cs_c_130], select[name=csdt_130] {display:none;}
+input#cs_c_131, label[for=cs_c_131], select[name=csdt_131] {display:none;}
+input#cs_c_132, label[for=cs_c_132], select[name=csdt_132] {display:none;}
+input#cs_c_133, label[for=cs_c_133], select[name=csdt_133] {display:none;}
+input#cs_c_134, label[for=cs_c_134], select[name=csdt_134] {display:none;}
+
+
+input#cs_c_10, label[for=cs_c_10], select[name=csdt_10] {display:none;}
+input#cs_c_11, label[for=cs_c_11], select[name=csdt_11] {display:none;}
+input#cs_c_12, label[for=cs_c_12], select[name=csdt_12] {display:none;}
+input#cs_c_13, label[for=cs_c_13], select[name=csdt_13] {display:none;}
+input#cs_c_14, label[for=cs_c_14], select[name=csdt_14] {display:none;}
+input#cs_c_15, label[for=cs_c_15], select[name=csdt_15] {display:none;}
+input#cs_c_16, label[for=cs_c_16], select[name=csdt_16] {display:none;}
+input#cs_c_17, label[for=cs_c_17], select[name=csdt_17] {display:none;}
+input#cs_c_18, label[for=cs_c_18], select[name=csdt_18] {display:none;}
+input#cs_c_19, label[for=cs_c_19], select[name=csdt_19] {display:none;}
+input#cs_c_20, label[for=cs_c_20], select[name=csdt_20] {display:none;}
+input#cs_c_21, label[for=cs_c_21], select[name=csdt_21] {display:none;}
+input#cs_c_22, label[for=cs_c_22], select[name=csdt_22] {display:none;}
+input#cs_c_23, label[for=cs_c_23], select[name=csdt_23] {display:none;}
+input#cs_c_24, label[for=cs_c_24], select[name=csdt_24] {display:none;}
+input#cs_c_25, label[for=cs_c_25], select[name=csdt_25] {display:none;}
+input#cs_c_26, label[for=cs_c_26], select[name=csdt_26] {display:none;}
+input#cs_c_27, label[for=cs_c_27], select[name=csdt_27] {display:none;}
+input#cs_c_28, label[for=cs_c_28], select[name=csdt_28] {display:none;}
+input#cs_c_29, label[for=cs_c_29], select[name=csdt_29] {display:none;}
+input#cs_c_30, label[for=cs_c_30], select[name=csdt_30] {display:none;}
+input#cs_c_31, label[for=cs_c_31], select[name=csdt_31] {display:none;}
+input#cs_c_32, label[for=cs_c_32], select[name=csdt_32] {display:none;}
+input#cs_c_33, label[for=cs_c_33], select[name=csdt_33] {display:none;}
+input#cs_c_34, label[for=cs_c_34], select[name=csdt_34] {display:none;}
+input#cs_c_35, label[for=cs_c_35], select[name=csdt_35] {display:none;}
+input#cs_c_36, label[for=cs_c_36], select[name=csdt_36] {display:none;}
+input#cs_c_37, label[for=cs_c_37], select[name=csdt_37] {display:none;}
+input#cs_c_38, label[for=cs_c_38], select[name=csdt_38] {display:none;}
+input#cs_c_39, label[for=cs_c_39], select[name=csdt_39] {display:none;}
+input#cs_c_40, label[for=cs_c_40], select[name=csdt_40] {display:none;}
+input#cs_c_41, label[for=cs_c_41], select[name=csdt_41] {display:none;}
+input#cs_c_42, label[for=cs_c_42], select[name=csdt_42] {display:none;}
+input#cs_c_43, label[for=cs_c_43], select[name=csdt_43] {display:none;}
+input#cs_c_44, label[for=cs_c_44], select[name=csdt_44] {display:none;}
+input#cs_c_45, label[for=cs_c_45], select[name=csdt_45] {display:none;}
+
+input#cs_c_346, label[for=cs_c_346], select[name=csdt_346] {display:none;}
+input#cs_c_347, label[for=cs_c_347], select[name=csdt_347] {display:none;}
+input#cs_c_348, label[for=cs_c_348], select[name=csdt_348] {display:none;}
+input#cs_c_349, label[for=cs_c_349], select[name=csdt_349] {display:none;}
+input#cs_c_350, label[for=cs_c_350], select[name=csdt_350] {display:none;}
+input#cs_c_351, label[for=cs_c_351], select[name=csdt_351] {display:none;}
+input#cs_c_352, label[for=cs_c_352], select[name=csdt_352] {display:none;}
+input#cs_c_353, label[for=cs_c_353], select[name=csdt_353] {display:none;}
+input#cs_c_354, label[for=cs_c_354], select[name=csdt_354] {display:none;}
+input#cs_c_355, label[for=cs_c_355], select[name=csdt_355] {display:none;}
+
+input#cs_c_231, label[for=cs_c_231], select[name=csdt_231] {display:none;}
+input#cs_c_232, label[for=cs_c_232], select[name=csdt_232] {display:none;}
+input#cs_c_233, label[for=cs_c_233], select[name=csdt_233] {display:none;}
+input#cs_c_234, label[for=cs_c_234], select[name=csdt_234] {display:none;}
+input#cs_c_235, label[for=cs_c_235], select[name=csdt_235] {display:none;}
+input#cs_c_236, label[for=cs_c_236], select[name=csdt_236] {display:none;}
+input#cs_c_237, label[for=cs_c_237], select[name=csdt_237] {display:none;}
+input#cs_c_238, label[for=cs_c_238], select[name=csdt_238] {display:none;}
+input#cs_c_239, label[for=cs_c_239], select[name=csdt_239] {display:none;}
+input#cs_c_240, label[for=cs_c_240], select[name=csdt_240] {display:none;}
+input#cs_c_241, label[for=cs_c_241], select[name=csdt_241] {display:none;}
+input#cs_c_242, label[for=cs_c_242], select[name=csdt_242] {display:none;}
+input#cs_c_243, label[for=cs_c_243], select[name=csdt_243] {display:none;}
+input#cs_c_244, label[for=cs_c_244], select[name=csdt_244] {display:none;}
+input#cs_c_245, label[for=cs_c_245], select[name=csdt_245] {display:none;}
+input#cs_c_246, label[for=cs_c_246], select[name=csdt_246] {display:none;}
+
+input#cs_c_220, label[for=cs_c_220], select[name=csdt_220] {display:none;}
+input#cs_c_221, label[for=cs_c_221], select[name=csdt_221] {display:none;}
+input#cs_c_222, label[for=cs_c_222], select[name=csdt_222] {display:none;}
+input#cs_c_223, label[for=cs_c_223], select[name=csdt_223] {display:none;}
+input#cs_c_224, label[for=cs_c_224], select[name=csdt_224] {display:none;}
+input#cs_c_225, label[for=cs_c_225], select[name=csdt_225] {display:none;}
+input#cs_c_226, label[for=cs_c_226], select[name=csdt_226] {display:none;}
+input#cs_c_227, label[for=cs_c_227], select[name=csdt_227] {display:none;}
+input#cs_c_228, label[for=cs_c_228], select[name=csdt_228] {display:none;}
+input#cs_c_229, label[for=cs_c_229], select[name=csdt_229] {display:none;}
+input#cs_c_230, label[for=cs_c_230], select[name=csdt_230] {display:none;}
+
+
+input#cs_c_135, label[for=cs_c_135], select[name=csdt_135] {display:none;}
+input#cs_c_136, label[for=cs_c_136], select[name=csdt_136] {display:none;}
+input#cs_c_137, label[for=cs_c_137], select[name=csdt_137] {display:none;}
+input#cs_c_138, label[for=cs_c_138], select[name=csdt_138] {display:none;}
+input#cs_c_139, label[for=cs_c_139], select[name=csdt_139] {display:none;}
+input#cs_c_140, label[for=cs_c_140], select[name=csdt_140] {display:none;}
+input#cs_c_141, label[for=cs_c_141], select[name=csdt_141] {display:none;}
+input#cs_c_142, label[for=cs_c_142], select[name=csdt_142] {display:none;}
+input#cs_c_143, label[for=cs_c_143], select[name=csdt_143] {display:none;}
+input#cs_c_144, label[for=cs_c_144], select[name=csdt_144] {display:none;}
+input#cs_c_145, label[for=cs_c_145], select[name=csdt_145] {display:none;}
+input#cs_c_146, label[for=cs_c_146], select[name=csdt_146] {display:none;}
+input#cs_c_147, label[for=cs_c_147], select[name=csdt_147] {display:none;}
+input#cs_c_148, label[for=cs_c_148], select[name=csdt_148] {display:none;}
+input#cs_c_149, label[for=cs_c_149], select[name=csdt_149] {display:none;}
+input#cs_c_150, label[for=cs_c_150], select[name=csdt_150] {display:none;}
+input#cs_c_151, label[for=cs_c_151], select[name=csdt_151] {display:none;}
+input#cs_c_152, label[for=cs_c_152], select[name=csdt_152] {display:none;}
+input#cs_c_153, label[for=cs_c_153], select[name=csdt_153] {display:none;}
+input#cs_c_154, label[for=cs_c_154], select[name=csdt_154] {display:none;}
+input#cs_c_155, label[for=cs_c_155], select[name=csdt_155] {display:none;}
+input#cs_c_156, label[for=cs_c_156], select[name=csdt_156] {display:none;}
+input#cs_c_157, label[for=cs_c_157], select[name=csdt_157] {display:none;}
+input#cs_c_158, label[for=cs_c_158], select[name=csdt_158] {display:none;}
+input#cs_c_159, label[for=cs_c_159], select[name=csdt_159] {display:none;}
+input#cs_c_160, label[for=cs_c_160], select[name=csdt_160] {display:none;}
+input#cs_c_161, label[for=cs_c_161], select[name=csdt_161] {display:none;}
+input#cs_c_162, label[for=cs_c_162], select[name=csdt_162] {display:none;}
+input#cs_c_163, label[for=cs_c_163], select[name=csdt_163] {display:none;}
+input#cs_c_164, label[for=cs_c_164], select[name=csdt_164] {display:none;}
+input#cs_c_165, label[for=cs_c_165], select[name=csdt_165] {display:none;}
+
+
+
