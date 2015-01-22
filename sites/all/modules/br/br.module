@@ -47,7 +47,7 @@ function br_menu() {
   );
 
   $items['application-forms'] = array(
-    'title' => 'Traineeship application form 2016',
+    'title' => 'Summer placements application form 2015',
     'page callback' => 'br_applications_page',
     'access callback' => TRUE,
     'file' => 'br.pages.inc'
@@ -440,7 +440,7 @@ function br_signup_ebulletin_form($form_state) {
       'Public Sector Services' => 'Public Sector Services',
       'Shipping' => 'Shipping',
       'Tax' => 'Tax',
-      'Traineeship & Summer Placement News' => 'Traineeship & Summer Placement News',
+//      'Traineeship & Summer Placement News' => 'Traineeship & Summer Placement News',
     ),
     '#prefix' => '<div class="options">',
     '#suffix' => '</div><div class="ff"></div>'
@@ -1106,7 +1106,7 @@ function br_mail($key, &$message, $params) {
     case 'application-confirm-user':
       $message['subject'] = t('Thank you for submitting your application');
       $message['body'][] = 
-	  t("Thank you for submitting your Brodies Traineeship application for 2016. Your application is now being reviewed. Closing date for applications is Sunday 12th October 2014.\nWe will be back in touch approximately two weeks after this date to let you if know your application has been successful or not. \n\n
+	  t("Thank you for submitting your Brodies Summer Placement application for 2015. Your application is now being reviewed. Closing date for applications is Sunday 11th January 2015.\nWe will be back in touch approximately two weeks after this date to let you if know your application has been successful or not. \n\n
 Good luck and if you have any queries in the meantime please email graduaterecruitment@brodies.com.", array('@name' => $params['application_name']));
 
 

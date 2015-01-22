@@ -2282,7 +2282,9 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
         drupal_goto(arg(0) . '/' . arg(1) . '/' . arg(2));
       }
       else {
-        $result = db_query("SELECT n.nid FROM {node} n INNER JOIN {content_type_asub} ca on n.vid = ca.vid where " . ($_GET['not-completed'] ? ' 1 ' : 'field_as_completed_value = 1') . " and field_as_app_nid = %d " . ($uid == 'csv' ? '' : 'and uid = ' . $uid) . " order by n.changed desc", $app_id);
+
+        $result = db_query("SELECT n.nid FROM {node} n INNER JOIN {content_type_asub} ca on n.vid = ca.vid where ". ($_GET['not-completed']?'( field_as_completed_value <> 1 OR field_as_completed_value is null) ':'field_as_completed_value = 1') ." and field_as_app_nid = %d ". ($uid == 'csv'?'':'and uid = '. $uid) ." order by n.changed desc" , $app_id);
+	  
         $count = 2;
 
         if ($_GET['simple']) {
@@ -2371,7 +2373,7 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
 
     if ($rows) {
       $out .= theme("table", array('Completion Date', 'Name', 'Email', 'Action'), $rows, array('cellspacing' => 1));
-      $out .= '<br /><table><tr><th>Download Completed</th><th>Download ALL</th></tr><tr><td>' . l('All fields', 'application-forms/submissions/' . $app_id . '/csv') . '</td><td>' . l('All fields', 'application-forms/submissions/' . $app_id . '/csv', array('query' => 'not-completed=1')) . '</td></tr>
+      $out .= '<br /><table><tr><th>Download Completed</th><th>Download Incomplete</th></tr><tr><td>' . l('All fields', 'application-forms/submissions/' . $app_id . '/csv') . '</td><td>' . l('All fields', 'application-forms/submissions/' . $app_id . '/csv', array('query' => 'not-completed=1')) . '</td></tr>
 	  <tr><td>' . l('Main details', 'application-forms/submissions/' . $app_id . '/csv', array('query' => 'simple=1')) . '</td><td>' . l('Main details', 'application-forms/submissions/' . $app_id . '/csv', array('query' => 'not-completed=1&simple=1')) . '</td></tr></table>';
     }
     else {
@@ -2410,7 +2412,7 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
   else {
     $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you've taken the first step to potentially become a Brodies' trainee or summer student of the future. Take your time when completing the form, make sure that you answer all of the questions fully and that you give strong examples which highlight that you have the skills and competencies that we look for in all of our people.
  </p><p>
-Good luck!</p><p><b>Closing date for applications: Sunday 12th October 2014</b></p><p>Please note: There are conditions for applying. You are eligible to apply if you are a minimum of 3rd year of your LLB or 1st year of your accelerated LLB and you should be on track for a 2:1.</p>";
+Good luck!</p><p>Our online application process for Summer Placements 2015 is now open and will <b>close on Sunday 11 January 2015.</b></p><p>Applicants must be a minimum of 3rd year LLB or 1st year accelerated LLB to apply.</p>";
 
     $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n 
       where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);

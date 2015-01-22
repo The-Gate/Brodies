@@ -3317,3 +3317,5 @@ font-weight:bolder;
     padding: 6px 2%;
     width: 48%;
 }
+/* Added by Scott 20-01-2015 temp fix as add to calendar functionality not currently working */
+.page-id-4641 .details div:nth-child(5){display:none;}
