@@ -3,8 +3,8 @@
 //brodies pages 
 
 function br_sector_page($node) {
-  $mobile = mis_is_mobile(); 
-  
+  $mobile = mis_is_mobile();
+
   if (br_popup_request_check() && isset($_GET['text-only'])) {
     return '<h1>' . $node->title . '</h1><div class="body">' . $node->body . '</div>';
   }
@@ -43,16 +43,16 @@ function br_sector_page($node) {
     if ($node->field_related_video[0]['nid']) {
       $video_node = node_load($node->field_related_video[0]['nid']);
       $video_data = br_get_video_data($video_node->field_video_url[0]['value'], TRUE);
-      $video = '<div class="text">'. (isset($_GET['text-only'])?'<a href="'. url($_GET['q']) .'">&lt; back to video</a>':'<a href="?text-only" class="popup">Text only</a>') .'</div><div class="video">'. $video_data['embed'] .'</div>';
+      $video = '<div class="text">' . (isset($_GET['text-only']) ? '<a href="' . url($_GET['q']) . '">&lt; back to video</a>' : '<a href="?text-only" class="popup">Text only</a>') . '</div><div class="video">' . $video_data['embed'] . '</div>';
       $more = '<a href="?text-only" class="popup">Read more &raquo;</a>';
-      $body = '<div class="short">'. $node->teaser .'</div>';
-    } 
-    return '<div class="back"><a href="'. url('<front>') .'">&laquo; Back</a></div>'.
-            ($video_data['embed']?'<div class="video">'. $video_data['embed'] .'</div>':'') .
-            '<div class="body">'. $node->body .'</div>'.
-            br_area('cs', $node) . br_area('news', $node) . br_area('people', $node) . br_area('sae', $node);
+      $body = '<div class="short">' . $node->teaser . '</div>';
+    }
+    return '<div class="back"><a href="' . url('<front>') . '">&laquo; Back</a></div>' .
+        ($video_data['embed'] ? '<div class="video">' . $video_data['embed'] . '</div>' : '') .
+        '<div class="body">' . $node->body . '</div>' .
+        br_area('cs', $node) . br_area('news', $node) . br_area('people', $node) . br_area('sae', $node);
   }
-    
+
   return $rtn_string;
 }
 
@@ -75,11 +75,11 @@ function br_listing($type, $popup = FALSE, $stype = '') {
         while ($data = db_fetch_object($result)) {
           $order_nids[$data->rid] = $data->rid;
         }
-  
+
         if (count($order_nids)) {
           $order = " ORDER BY FIND_IN_SET(n.nid, '" . implode(',', $order_nids) . "') ";
         }
-  
+
         $filter_names[] = 'Sector: ' . $name;
       }
     }
@@ -92,45 +92,45 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       $filter_names[] = 'Service: ' . $name;
     }
   }
-  
+
   switch ($type) {
     case 'win':
       $rpp = 6;
-      
+
       if ($_GET['sector'] && is_numeric($_GET['sector'])) {
         $name = db_result(db_query("SELECT title FROM {node} where nid = %d and type = 'sector'", $_GET['sector']));
         if ($name) {
-          $wjoins .= ' INNER JOIN {content_field_related_sector} rsec on field_related_sector_nid = ' . (int) $_GET['sector'] . ' AND rsec.vid = n.vid';       
+          $wjoins .= ' INNER JOIN {content_field_related_sector} rsec on field_related_sector_nid = ' . (int) $_GET['sector'] . ' AND rsec.vid = n.vid';
         }
       }
-      
+
       if ($_GET['service'] && is_numeric($_GET['service'])) {
         $name = db_result(db_query("SELECT title FROM {node} where nid = %d and type = 'service'", $_GET['service']));
         if ($name) {
-          $wjoins .= ' INNER JOIN {content_field_related_service} rser on field_related_service_nid = ' . (int) $_GET['service'] . ' AND rser.vid = n.vid';       
+          $wjoins .= ' INNER JOIN {content_field_related_service} rser on field_related_service_nid = ' . (int) $_GET['service'] . ' AND rser.vid = n.vid';
         }
       }
-        
-      $sql = "SELECT n.nid, n.title FROM {node} n INNER JOIN content_type_win br on n.vid = br.vid " . $wjoins . " WHERE status = 1 and type='" . $type . "' " . $filters . " ORDER BY field_w_date_value DESC";      
+
+      $sql = "SELECT n.nid, n.title FROM {node} n INNER JOIN content_type_win br on n.vid = br.vid " . $wjoins . " WHERE status = 1 and type='" . $type . "' " . $filters . " ORDER BY field_w_date_value DESC";
       break;
-      
+
     case 'download':
       $rpp = 6;
       $filter_text .= br_search('download');
-      
+
       if ($_GET['category'] && is_numeric($_GET['category'])) {
-        $wjoins .= ' INNER JOIN term_node tn on n.vid = tn.vid and tn.tid='. $_GET['category'] .' ';
+        $wjoins .= ' INNER JOIN term_node tn on n.vid = tn.vid and tn.tid=' . $_GET['category'] . ' ';
       }
-      
+
       if ($_GET['keyword']) {
         $filters .= " AND ( n.title like ('%%%s%%') OR nr.body like ('%%%s%%'))";
         $args[] = $_GET['keyword'];
         $args[] = $_GET['keyword'];
       }
-        
-      $sql = "SELECT n.nid, n.title FROM {node} n INNER JOIN node_revisions nr on nr.vid = n.vid INNER JOIN content_type_download br on n.vid = br.vid " . $wjoins . " WHERE status = 1 and type='" . $type . "' " . $filters . " ORDER BY field_d_date_value DESC";      
+
+      $sql = "SELECT n.nid, n.title FROM {node} n INNER JOIN node_revisions nr on nr.vid = n.vid INNER JOIN content_type_download br on n.vid = br.vid " . $wjoins . " WHERE status = 1 and type='" . $type . "' " . $filters . " ORDER BY field_d_date_value DESC";
       break;
-            
+
     case 'people':
       $rpp = 30;
       if ($_GET['a-z']) {
@@ -158,7 +158,7 @@ function br_listing($type, $popup = FALSE, $stype = '') {
 
       if ($mobile) {
         $filter_text .= br_search('people');
-      }      
+      }
       break;
     case 'cs':
       if (!$order) {
@@ -170,10 +170,10 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       $sql = "SELECT n.nid, n.title, cs.* FROM {content_type_cs} cs INNER JOIN {node} n on n.vid = cs.vid LEFT JOIN {node_revisions} nr on nr.vid = n.vid " . $joins . " WHERE 1 " . $filters . " " . $having . " " . $order;
 
       $no_results = '<p><b>A number of related case studies coming soon. Please refer to the main page text in the meantime, for examples of expertise and recent clients.</b></p>';
-      
+
       if ($mobile) {
         $rpp = 0;
-      }      
+      }
       break;
     case 'event':
       if ($_REQUEST['q'] == 'seminars-and-events') {
@@ -226,9 +226,9 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       $sql = "SELECT n.nid, n.title, nr.teaser, filepath  FROM {content_type_news} ns INNER JOIN {node} n on n.vid = ns.vid LEFT JOIN {content_field_teaser_image} ti on ti.vid = ns.vid LEFT JOIN {files} f on ti.field_teaser_image_fid = f.fid LEFT JOIN {node_revisions} nr on nr.vid = n.vid WHERE n.status = 1 " . $filters . " ORDER BY created DESC";
 
       if (mis_is_mobile()) {
-        $out .= '<div class="back"><a href="'. url('node/53') .'">&laquo; Back</a></div>';
+        $out .= '<div class="back"><a href="' . url('node/53') . '">&laquo; Back</a></div>';
       }
-        
+
       break;
     case 'lupdate':
       if ($_GET['legal-area'] && is_numeric($_GET['legal-area'])) {
@@ -266,10 +266,10 @@ function br_listing($type, $popup = FALSE, $stype = '') {
 
       $sql = "SELECT n.nid, n.title, u.*, nr.teaser FROM {content_type_lupdate} u INNER JOIN {node} n on n.vid = u.vid LEFT JOIN {node_revisions} nr on nr.vid = n.vid WHERE type='" . $type . "' and status=1 " . $filters . " " . $order;
       $rpp = 10;
-      
+
       if (mis_is_mobile()) {
-        $out .= '<div class="back"><a href="'. url('node/62') .'">&laquo; Back</a></div>';
-      }  
+        $out .= '<div class="back"><a href="' . url('node/62') . '">&laquo; Back</a></div>';
+      }
       break;
     case 'publication':
       if ($_GET['area'] && is_numeric($_GET['area'])) {
@@ -283,14 +283,14 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       if ($_GET['year'] || $_GET['area']) {
         $sql = "SELECT n.nid, n.title, p.*, nr.body, f.* FROM {content_type_publication} p INNER JOIN {node} n on n.vid = p.vid LEFT JOIN {node_revisions} nr on nr.vid = n.vid LEFT JOIN {files} f on f.fid = field_p_file_fid WHERE type='" . $type . "' and n.status= 1 " . $filters . " ORDER BY p.field_p_date_value DESC ";
       }
-      
+
       if (mis_is_mobile()) {
-        $out .= '<div class="back"><a href="'. url('node/62') .'">&laquo; Back</a></div>';
-      }       
-      
+        $out .= '<div class="back"><a href="' . url('node/62') . '">&laquo; Back</a></div>';
+      }
+
       break;
     case 'video':
-      if (strlen($order) < 1){
+      if (strlen($order) < 1) {
         $order = "ORDER BY n.changed desc";
       }
       $sql = "SELECT n.nid, n.title, filepath, cs.field_video_url_value, nr.body FROM {content_type_video} cs INNER JOIN {node} n on n.vid = cs.vid LEFT JOIN {node_revisions} nr on nr.vid = n.vid LEFT JOIN {content_field_teaser_image} ti on ti.vid = n.vid LEFT JOIN {files} f on f.fid = field_teaser_image_fid " . $joins . " WHERE 1 " . $filters . " " . $order;
@@ -322,7 +322,7 @@ function br_listing($type, $popup = FALSE, $stype = '') {
   if ($result) {
     while ($data = db_fetch_object($result)) {
       $count++;
-      if ((!(empty($data->letter))) and (!($data->letter == $current_letter))) {
+      if ((!(empty($data->letter))) and ( !($data->letter == $current_letter))) {
         $out .='<div class="result-header"><h2>' . $data->letter . '</h2></div>';
         $current_letter = $data->letter;
       }
@@ -345,7 +345,7 @@ function br_listing($type, $popup = FALSE, $stype = '') {
   else if ($popup) {
     $out .= '<h2 class="all">' . l('All ' . drupal_get_title(), $_GET['q'], array('query' => drupal_query_string_encode($_GET, array('q')), 'html' => TRUE)) . '</h2>';
   }
-  
+
   if ($rpp && $count) {
     $out = '<div class="listing-wrapper">' . $out . '</div><div class="ff"></div>' . br_pager($rpp, $mobile);
   }
@@ -356,12 +356,12 @@ function br_listing($type, $popup = FALSE, $stype = '') {
 function br_pager($rpp, $mobile = FALSE) {
   global $pager_page_array, $pager_total, $pager_total_items;
   return //'<div class="totals">Viewing page '. ($pager_page_array[0] + 1) .' of '. $pager_total[0] .',  giving '. $pager_total_items[0] .' results</div>'. 
-      theme('pager', NULL, $rpp, 0, array(), $mobile?5:9);
+      theme('pager', NULL, $rpp, 0, array(), $mobile ? 5 : 9);
 }
 
 function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
   $mobile = mis_is_mobile();
-  
+
   if ($popup) {
     $image = '';
     if ($data->filepath) {
@@ -387,39 +387,39 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
     switch ($type) {
       case 'people';
         if ($mobile) {
-          $content = $image .'<h3>'. $data->title .'</h3><div class="more">'. l('More information', 'node/'. $data->nid, array('query' => drupal_get_destination())) .'</div>';
+          $content = $image . '<h3>' . $data->title . '</h3><div class="more">' . l('More information', 'node/' . $data->nid, array('query' => drupal_get_destination())) . '</div>';
         }
         else {
           $content = '<div class="col-left"><div class="img">' . ($data->filepath ? ($stype != 'profile' ? '<a href="' . url('node/' . $data->nid) . '"><img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/></a>' : '<img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>') : '&nbsp;') . '</div></div><div class="col-right"><div class="name">' . ($stype != 'profile' ? l($data->field_people_sname_value . ', ' . $data->field_people_fname_value, 'node/' . $data->nid) : $data->field_people_sname_value . ', ' . $data->field_people_fname_value) . '</div><div class="nr">' . $data->field_people_phone_value . '</div><div class="email">' . l('Email', 'mailto:' . $data->field_people_email_value) . '</div></div><div class="ff"></div>';
         }
         break;
       case 'win';
-        $node = node_load($data->nid);        
+        $node = node_load($data->nid);
         $src = $node->field_w_image[0]['filepath'];
-        $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>'; 
+        $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
         if (user_access('edit any win content')) {
           $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
         }
-        $content = '<div class="il"><h3>' . $node->title .'</h3><div class="date">'. date("d.m.y", $node->field_w_date[0]['value']) .'</div><div class="text">'. $node->body .'</div></div><div class="ir">'. $image .'</div><div class="ff"></div>'. $controls;
-        
+        $content = '<div class="il"><h3>' . $node->title . '</h3><div class="date">' . date("d.m.y", $node->field_w_date[0]['value']) . '</div><div class="text">' . $node->body . '</div></div><div class="ir">' . $image . '</div><div class="ff"></div>' . $controls;
+
         break;
       case 'download';
-        $node = node_load($data->nid);        
+        $node = node_load($data->nid);
         $src = $node->field_d_thumbail[0]['filepath'];
-        $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>'; 
+        $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
         if (user_access('edit any dowload content')) {
           $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
         }
-        
+
         $cats = '';
         if (count($node->taxonomy)) {
           $catsa = array();
           foreach ($node->taxonomy as $term) {
             $catsa[] = ucfirst(strtolower($term->name));
           }
-          $cats = '<div class="cats"><b>Category:</b> '. implode(', ', $catsa) .'</div>';         
+          $cats = '<div class="cats"><b>Category:</b> ' . implode(', ', $catsa) . '</div>';
         }
-        
+
         $download = '';
         if ($node->field_d_file[0]['filepath']) {
           $dhref = $node->field_d_file[0]['filepath'];
@@ -427,28 +427,28 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
             $blank = TRUE;
           }
         }
-        
+
         if ($node->field_d_url[0]['value']) {
           $dhref = $node->field_d_url[0]['value'];
           $blank = TRUE;
         }
-        
+
         if ($dhref) {
-          $download = '<a href="'. $dhref .'"'. ($blank?' target="_blank"':'') .' class="download">Download guide</a>';
+          $download = '<a href="' . $dhref . '"' . ($blank ? ' target="_blank"' : '') . ' class="download">Download guide</a>';
         }
-        
-        $content = '<div class="il"><h3>' . $node->title .'</h3><div class="date">'. date("d.m.y", $node->field_d_date[0]['value']) .'</div><div class="text">'. $node->body .'</div>'. $cats . $download .'</div><div class="ir">'. $image .'</div><div class="ff"></div>'. $controls;
-        
-        break;        
+
+        $content = '<div class="il"><h3>' . $node->title . '</h3><div class="date">' . date("d.m.y", $node->field_d_date[0]['value']) . '</div><div class="text">' . $node->body . '</div>' . $cats . $download . '</div><div class="ir">' . $image . '</div><div class="ff"></div>' . $controls;
+
+        break;
       case 'cs';
         $content = $image . '<h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="ff"></div>';
         if ($mobile) {
-          $content = $image .'<h3>'. $data->title .'</h3><div class="more">'. l('More information', 'node/'. $data->nid, array('query' => drupal_get_destination())) .'</div>';
-        }        
+          $content = $image . '<h3>' . $data->title . '</h3><div class="more">' . l('More information', 'node/' . $data->nid, array('query' => drupal_get_destination())) . '</div>';
+        }
         break;
       case 'event';
         $details_html = '';
-        $details = array('When' => date('l j F Y', $data->field_event_date_value), 'Time' => $data->field_event_time_value, 'Where' => $data->location);
+        $details = array('When' => date('l j F Y', $data->field_event_date_value), 'Time' => date('H:i', $data->field_event_date_value) . ' - ' . date('H:i', $data->field_event_date_value2), 'Where' => $data->location);
         foreach ($details as $label => $value) {
           $details_html .= '<div><div>' . $label . ':</div><span>' . $value . '</span></div>';
         }
@@ -457,7 +457,7 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
         if ($data->field_event_type_value == 'seminar') {
           if ($node->field_event_full[0]['value']) {
             $book = '<div class="ff"></div><div class="booked">Fully booked</div>';
-            $book .= l('Seminar waiting list', 'node/'. $data->nid, array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));;
+            $book .= l('Seminar waiting list', 'node/' . $data->nid, array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
           }
           else {
             $book = br_book_link($data);
@@ -473,15 +473,15 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
         if ($count == 1 || $count == 2) {
           $popup = 1;
         }
-        
-        $node = node_load($data->nid);        
-        $date = $node->field_date[0]['value']?$node->field_date[0]['value']:$node->created;        
-        $content = $image . '<div class="text"><h3>' . l($data->title, 'node/' . $data->nid, array('html' => TRUE)) . '</h3><div class="date">'. date("d.m.y", $date) .'</div>' . ($popup ? $data->teaser : '') . '</div>';
+
+        $node = node_load($data->nid);
+        $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->created;
+        $content = $image . '<div class="text"><h3>' . l($data->title, 'node/' . $data->nid, array('html' => TRUE)) . '</h3><div class="date">' . date("d.m.y", $date) . '</div>' . ($popup ? $data->teaser : '') . '</div>';
         break;
       case 'lupdate':
-        $node = node_load($data->nid);        
-        $date = $node->field_date[0]['value']?$node->field_date[0]['value']:$node->field_l_date[0]['value'];
-        $content = '<div class="u-right"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">'. date("d.m.y", $date) .'</div></div>';
+        $node = node_load($data->nid);
+        $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_l_date[0]['value'];
+        $content = '<div class="u-right"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">' . date("d.m.y", $date) . '</div></div>';
         break;
       case 'publication':
         $type = strtoupper(substr($data->filemime, strrpos($data->filemime, '/') + 1));
@@ -490,19 +490,19 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
         if (user_access('edit any publication content')) {
           $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
         }
-        
-        $node = node_load($data->nid);        
-        $date = $node->field_date[0]['value']?$node->field_date[0]['value']:$node->field_p_date[0]['value'];
-        
-        $content = '<h3>' . $data->title . ' [' . $type . ' ' . $size . ']</h3>' . $controls . '<div class="date">'. date("d.m.y", $date) .'</div><div class="text">' . $data->body . '</div>' . l('&raquo; Download ' . $data->title . ' document', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE));
+
+        $node = node_load($data->nid);
+        $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_p_date[0]['value'];
+
+        $content = '<h3>' . $data->title . ' [' . $type . ' ' . $size . ']</h3>' . $controls . '<div class="date">' . date("d.m.y", $date) . '</div><div class="text">' . $data->body . '</div>' . l('&raquo; Download ' . $data->title . ' document', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE));
         break;
       case 'video';
         $image = '&nbsp;';
         $vdata = br_get_video_data($data->field_video_url_value, $data->filepath ? '/' . $data->filepath : '');
         $controls = '';
         if ($mobile) {
-            $content = $vdata['embed'] .'<h3>'. $data->title .'</h3><div class="desc">'. strip_tags($data->body) .'</div>';
-        }                    
+          $content = $vdata['embed'] . '<h3>' . $data->title . '</h3><div class="desc">' . strip_tags($data->body) . '</div>';
+        }
         else {
           if (user_access('edit any publication content')) {
             $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
@@ -510,11 +510,11 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
           $thumbnail_img = '';
           if (strpos($vdata['thumbnail'], 'http') === 0) {
             $thumbnail_img = $vdata['thumbnail'];
-          } else {
-            $thumbnail_img = imagecache_create_url('video-list', ltrim($vdata['thumbnail'],'/') );
-            
           }
-          $content = $controls . '<div class="col-left"><h3>'. $data->title . '</h3><div class="desc">' . strip_tags($data->body) . '</div></div><div class="col-right"><a target="_blank" href="' . $data->field_video_url_value . '"><div class="img"><img src="' . $thumbnail_img . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/><span>' . drupal_to_js(array('video' => $vdata['embed'])) . '</span></div></a></div><div class="ff"></div>';
+          else {
+            $thumbnail_img = imagecache_create_url('video-list', ltrim($vdata['thumbnail'], '/'));
+          }
+          $content = $controls . '<div class="col-left"><h3>' . $data->title . '</h3><div class="desc">' . strip_tags($data->body) . '</div></div><div class="col-right"><a target="_blank" href="' . $data->field_video_url_value . '"><div class="img"><img src="' . $thumbnail_img . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/><span>' . drupal_to_js(array('video' => $vdata['embed'])) . '</span></div></a></div><div class="ff"></div>';
         }
 
         break;
@@ -571,7 +571,7 @@ function br_search($type) {
     case 'download':
       $path = 'guides-and-downloads';
       $title = 'Search for Guides and Resources';
-      break;            
+      break;
   }
 
   if (count($_GET) > 1) {
@@ -616,7 +616,7 @@ function br_search_form($form_state, $type) {
   if (count($form['sector']['#options']) == 1) {
     unset($form['sector']);
   }
-  
+
   switch ($type) {
     case 'people':
       $form['a-z'] = array(
@@ -744,16 +744,16 @@ function br_search_form($form_state, $type) {
         '#title' => 'Search by Keyword',
         '#default_value' => $_GET['keyword'],
         '#weight' => 22,
-        //'#attributes' => array('placeholder' => 'Search by Keyword')
+          //'#attributes' => array('placeholder' => 'Search by Keyword')
       );
-                  
+
       $categories = array();
       foreach (taxonomy_get_tree(3) as $term) {
-        if (db_result(db_query('SELECT nid FROM term_node where tid='. $term->tid .' '))) {;        
+        if (db_result(db_query('SELECT nid FROM term_node where tid=' . $term->tid . ' '))) {
           $categories[$term->tid] = ucfirst($term->name);
         }
       }
-      
+
       $form['category'] = array(
         '#type' => 'select',
         '#title' => 'Filter your search',
@@ -761,9 +761,9 @@ function br_search_form($form_state, $type) {
         '#options' => array('' => 'Categories') + $categories,
         '#weight' => 23,
         '#suffix' => '<div class="ff"></div>',
-        //'#attributes' => array('placeholder' => 'Search by Keyword')
+          //'#attributes' => array('placeholder' => 'Search by Keyword')
       );
-      
+
       unset($form['service'], $form['sector']);
       break;
   }
@@ -830,7 +830,7 @@ and nid in (SELECT field_related_service_nid FROM content_field_related_service 
 INNER JOIN content_type_win cs on cs.vid = rs.vid) order by title ASC";
     }
   }
-  
+
   $result = db_query($sql, $type);
   while ($data = db_fetch_object($result)) {
     $options[$data->nid] = $data->title;
@@ -888,7 +888,7 @@ function br_people_page($node) {
     }
 
     if ($value)
-      $out .= '<div class="field"><h3>' . $name . ':</h3><p>' . $value . '</p></div>' . (++$count % 2 == 0 ? ' <div class="ff"></div>' : '');
+      $out .= '<div class="field"><h3>' . $name . ':</h3><p>' . $value . '</p></div>' . ( ++$count % 2 == 0 ? ' <div class="ff"></div>' : '');
   }
 
   $out .= '<div class="ff"></div><div class="bio">' . $node->content['body']['#value'] . '</div>';
@@ -1067,64 +1067,80 @@ function theme_br_content_edit_draggable_form($form) {
 function dateToCal($timestamp) {
   return date('Ymd\THis\Z', $timestamp);
 }
- 
+
 // Escapes a string of characters
 function escapeString($string) {
-  return preg_replace('/([\,;])/','\\\$1', $string);
+  return preg_replace('/([\,;])/', '\\\$1', $string);
 }
 
 function br_event_page($node) {
-  if ($_GET['calendar'] == 'ical') {
-    header('Content-type: text/calendar; charset=utf-8');
-    header('Content-Disposition: attachment; filename=ical.ics');
-    print 
-'BEGIN:VCALENDAR
+
+
+
+  if (!empty($_GET['calendar'])) {
+    $cal_dtstart = dateToCal($node->field_event_date[0]['value']);
+    $cal_dtend = dateToCal($node->field_event_date[0]['value2']);
+    $cal_uid = $node->uid;
+    $cal_location = escapeString(strip_tags(nl2br($node->field_event_l_details[0]['value'])));
+    $cal_description = escapeString(strip_tags(nl2br($node->teaser)));
+    $cal_url = escapeString(url($_GET['q'], array('absolute' => TRUE)));
+    $cal_summary = escapeString(strip_tags(nl2br($node->title)));
+    if ($_GET['calendar'] == 'ical') {
+      header('Content-type: text/calendar; charset=utf-8');
+      header('Content-Disposition: attachment; filename=ical.ics');
+      print
+          'BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-DTEND:'. dateToCal($node->field_event_date[0]['value']) .'
-UID:'. $node->uid .'
-DTSTAMP:'. dateToCal($node->field_event_date[0]['value']) .'
-LOCATION:'. escapeString(db_result(db_query("SELECT title FROM {node} where nid = %d", $node->field_event_location[0]['nid']))) .'
-DESCRIPTION:'. escapeString($node->title) .'
-URL;VALUE=URI:'. escapeString(url($_GET['q'], array('absolute' => TRUE))) .'
-SUMMARY:'. escapeString(strip_tags(nl2br($node->teaser))) .'
-DTSTART:'. dateToCal($node->field_event_date[0]['value']) .'
+DTSTART:' . $cal_dtstart . '
+DTEND:' . $cal_dtend . '
+UID:' . $cal_uid . '
+DTSTAMP:' . $cal_dtstart . '
+LOCATION:' . $cal_location . '
+DESCRIPTION:' . $cal_description . '
+URL;VALUE=URI:' . $cal_url . '
+SUMMARY:' . $cal_summary . '
 END:VEVENT
 END:VCALENDAR';
-    exit();
+      exit();
+    }
+
+    if ($_GET['calendar'] == 'vcal') {
+      header("Content-Type: text/x-vCalendar");
+      header("Content-Disposition: inline; filename=vcal.vcs");
+      print
+          'BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTART:' . $cal_dtstart . '
+DTEND:' . $cal_dtend . '
+UID:' . $cal_uid . '
+DTSTAMP:' . $cal_dtstart . '
+LOCATION:' . $cal_location . '
+DESCRIPTION:' . $cal_description . '
+URL;VALUE=URI:' . $cal_url . '
+SUMMARY:' . $cal_summary . '
+END:VEVENT
+END:VCALENDAR';
+      exit();
+    }
   }
-  
-  if ($_GET['calendar'] == 'vcal') {
-    header("Content-Type: text/x-vCalendar");
-    header("Content-Disposition: inline; filename=vcal.vcs"); 
-    print 
-'BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//hacksw/handcal//NONSGML v1.0//EN
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-DTEND:'. dateToCal($node->field_event_date[0]['value']) .'
-UID:'. $node->uid .'
-DTSTAMP:'. dateToCal($node->field_event_date[0]['value']) .'
-LOCATION:'. escapeString(db_result(db_query("SELECT title FROM {node} where nid = %d", $node->field_event_location[0]['nid']))) .'
-DESCRIPTION:'. escapeString($node->title) .'
-URL;VALUE=URI:'. escapeString(url($_GET['q'], array('absolute' => TRUE))) .'
-SUMMARY:'. escapeString(strip_tags(nl2br($node->teaser))) .'
-DTSTART:'. dateToCal($node->field_event_date[0]['value']) .'
-END:VEVENT
-END:VCALENDAR';
-    exit();
-  }  
-  
   $out = '<div class="text">' . $node->content['body']['#value'] . '</div>';
-  $calendar_links = '<span class="calendars">'. l('iCalendar', $_GET['q'], array('query' => 'calendar=ical')) .'<br />'. l('vCalendar', $_GET['q'], array('query' => 'calendar=vcal')) .'</span>';
-  $details = array('When' => date('l j F Y', $node->field_event_date[0]['value']), 'Time' => $node->field_event_time[0]['value'], 'Where' => db_result(db_query("SELECT title FROM {node} where nid = %d", $node->field_event_location[0]['nid'])), ' ' => $node->field_event_l_details[0]['value'], 'Add to calendar' => $calendar_links);
+  $calendar_links = '<span class="calendars">' . l('iCalendar', $_GET['q'], array('query' => 'calendar=ical')) . '<br />' . l('vCalendar', $_GET['q'], array('query' => 'calendar=vcal')) . '</span>';
+  $details = array(
+    'When' => date('l j F Y', $node->field_event_date[0]['value']),
+    'Time' => date('H:i', $node->field_event_date[0]['value']) . ' - ' . date('H:i', $node->field_event_date[0]['value2']),
+    'Where' => db_result(db_query("SELECT title FROM {node} where nid = %d", $node->field_event_location[0]['nid'])), ' ' => $node->field_event_l_details[0]['value'],
+    'Add to calendar' => $calendar_links
+  );
   $out .= '<div class="details">';
   foreach ($details as $label => $value) {
     if ($value) {
-      $out .= '<div><div>' . ($label != ' '?$label .':':'&nbsp;') . '</div><span>' . $value . '</span></div>';
+      $out .= '<div><div>' . ($label != ' ' ? $label . ':' : '&nbsp;') . '</div><span>' . $value . '</span></div>';
     }
   }
   $out .= '</div><div class="ff"></div>';
@@ -1190,21 +1206,22 @@ LEFT JOIN content_type_people p on p.vid = ns.vid order by delta", $node->nid);
   }
 
   if ($node->field_event_type[0]['value'] == 'seminar') {
-    
+
     if ($node->field_event_full[0]['value']) {
       if (isset($_GET['seminar-waiting-list'])) {
         $out .= drupal_get_form('br_waiting_list_form', $node);
       }
-      else {   
+      else {
         $book = '';
         if ($node->field_event_full[0]['value']) {
           $book = '<div class="ff"></div><div class="booked info">Fully booked</div>';
-        }      
-        $out .= '<div class="ff"></div>'. $book . l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));;
+        }
+        $out .= '<div class="ff"></div>' . $book . l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
+        ;
       }
     }
     else {
-      $out .= br_book_link($node);      
+      $out .= br_book_link($node);
     }
   }
 
@@ -1212,7 +1229,7 @@ LEFT JOIN content_type_people p on p.vid = ns.vid order by delta", $node->nid);
 }
 
 function br_waiting_list_form($form_init, $event) {
-    $form = array();
+  $form = array();
   $form['intro'] = array('#value' => '<h2>Please fill in the form below and we\'ll place you on our seminar waiting lis. We will inform you as soon as possible if a space arises.</h2><p>Fields marked with <span class="form-required">*</span> are required.</p>');
   $form['#attributes'] = array('class' => 'custom-form');
   $form['first-name'] = array(
@@ -1235,7 +1252,7 @@ function br_waiting_list_form($form_init, $event) {
     '#required' => TRUE,
     '#weight' => 25,
   );
-  
+
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Email',
@@ -1262,13 +1279,13 @@ function br_waiting_list_form($form_init, $event) {
     '#value' => $event,
   );
 
- $form['submit'] = array(
+  $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
     '#weight' => 70,
     '#prefix' => '<div class="ff"></div>'
   );
-  
+
   return $form;
 }
 
@@ -1288,15 +1305,14 @@ function br_waiting_list_form_submit($form_init, $form_values) {
 
   $form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $params['contact_details'] = $form_values['values'];
-  $params['contact_details']['related seminar'] = $event->title .' '. url('node/'. $event->nid, array('absolute' => TRUE));
-  $admin_email = 'contact@brodies.com';      
+  $params['contact_details']['related seminar'] = $event->title . ' ' . url('node/' . $event->nid, array('absolute' => TRUE));
+  $admin_email = 'contact@brodies.com';
 
   drupal_mail('br', 'waiting-list', $admin_email, language_default(), $params);
 
   //redirect to thank you
   unset($_REQUEST['destination']);
-  drupal_goto('thank-you-waiting-list');  
-
+  drupal_goto('thank-you-waiting-list');
 }
 
 function br_events_checkout() {
@@ -1322,11 +1338,11 @@ function br_events_checkout() {
   return $out;
 }
 
-function br_page_seminars_checkout() {     
+function br_page_seminars_checkout() {
   $sdata = $_SESSION['seminars'];
   $out = '<div class="node">';
   if (mis_is_mobile()) {
-    $out .= '<div class="back"><a href="'. url('node/44') .'">&laquo; Back</a></div>';
+    $out .= '<div class="back"><a href="' . url('node/44') . '">&laquo; Back</a></div>';
   }
   if (count($sdata)) {
     $out .= '<p>You are about to book places on the following ' . format_plural(count($sdata), 'seminar', 'seminars') . '</p>';
@@ -1515,7 +1531,7 @@ function br_news_submenu($mobile = FALSE) {
   else {
     $llinks = '<li>No related services</li>';
   }
-  return (!$mobile?'<h2>'. $ltitle .'</h2>':'') .'<ul>'. $llinks .'</ul>';  
+  return (!$mobile ? '<h2>' . $ltitle . '</h2>' : '') . '<ul>' . $llinks . '</ul>';
 }
 
 function br_print_news($data, $count) {
@@ -1542,9 +1558,9 @@ function br_overview_page($node) {
       $mobile = mis_is_mobile();
       $left = br_news_submenu($mobile);
       if ($mobile) {
-        $out .= '<div class="back"><a href="'. url('<front>') .'">&laquo; Back</a></div>';
+        $out .= '<div class="back"><a href="' . url('<front>') . '">&laquo; Back</a></div>';
         $out .= '<div class="news">
-          <div class="left">'. $left .'</div>                  
+          <div class="left">' . $left . '</div>                  
           <div class="ff"></div>
        </div>';
       }
@@ -1555,14 +1571,14 @@ function br_overview_page($node) {
             $news[$data['nid']] = $data['nid'];
           }
         }
-  
+
         $result = db_query("SELECT n.nid, n.title, nr.teaser, filepath FROM {node} n INNER JOIN {content_type_news} s on s.vid = n.vid LEFT JOIN {content_field_teaser_image} ti on ti.vid = s.vid LEFT JOIN {files} f on ti.field_teaser_image_fid = f.fid LEFT JOIN {node_revisions} nr on nr.vid = n.vid WHERE n.status = 1 and n.nid in (" . implode(',', $news) . ")");
         while ($data = db_fetch_object($result)) {
           $news[$data->nid] = br_print_news($data, array_search($data->nid, array_keys($news)));
         }
-  
+
         $news = array_values($news);
-  
+
         $out = '<div class="news">
           <div class="left">' . $left . '</div>
           <div class="middle">          
@@ -2283,8 +2299,8 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
       }
       else {
 
-        $result = db_query("SELECT n.nid FROM {node} n INNER JOIN {content_type_asub} ca on n.vid = ca.vid where ". ($_GET['not-completed']?'( field_as_completed_value <> 1 OR field_as_completed_value is null) ':'field_as_completed_value = 1') ." and field_as_app_nid = %d ". ($uid == 'csv'?'':'and uid = '. $uid) ." order by n.changed desc" , $app_id);
-	  
+        $result = db_query("SELECT n.nid FROM {node} n INNER JOIN {content_type_asub} ca on n.vid = ca.vid where " . ($_GET['not-completed'] ? '( field_as_completed_value <> 1 OR field_as_completed_value is null) ' : 'field_as_completed_value = 1') . " and field_as_app_nid = %d " . ($uid == 'csv' ? '' : 'and uid = ' . $uid) . " order by n.changed desc", $app_id);
+
         $count = 2;
 
         if ($_GET['simple']) {
@@ -2511,29 +2527,29 @@ function br_application_form($form_state, $step) {
         '#prefix' => '</div><div class="item-right">',
         '#suffix' => '</div><div class="ff"></div></div>'
       );
-	  
-	  $form['applied_in_past_placement'] = array(
+
+      $form['applied_in_past_placement'] = array(
         '#title' => 'Have you applied to Brodies in the past for a summer placement or traineeship?',
         '#required' => TRUE,
-        '#type' => 'select',        
-        '#options' => array('no' => 'No', 
-		'yes Summer Placement 2013' => 'Yes Summer Placement 2013', 
-		'Yes Traineeship 2013' => 'Yes Traineeship 2013', 
-		'Yes Summer Placement 2014' => 'Yes Summer Placement 2014', 
-		'Yes Traineeship 2014' => 'Yes Traineeship 2014',
-		'Yes Summer Placement 2015' => 'Yes Summer Placement 2015',
-		'Yes Traineeship 2015' => 'Yes Traineeship 2015', 
-		)
-      );	  	 
-	  
+        '#type' => 'select',
+        '#options' => array('no' => 'No',
+          'yes Summer Placement 2013' => 'Yes Summer Placement 2013',
+          'Yes Traineeship 2013' => 'Yes Traineeship 2013',
+          'Yes Summer Placement 2014' => 'Yes Summer Placement 2014',
+          'Yes Traineeship 2014' => 'Yes Traineeship 2014',
+          'Yes Summer Placement 2015' => 'Yes Summer Placement 2015',
+          'Yes Traineeship 2015' => 'Yes Traineeship 2015',
+        )
+      );
+
       $form['interviewed_with_brodies'] = array(
         '#title' => 'If you have interviewed with Brodies in the past, please provide details below',
         '#required' => FALSE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
-		'#prefix' => '<br />',
+        '#prefix' => '<br />',
       );
-	  
+
       $form['break'] = array(
         '#value' => '<hr />',
       );
@@ -3113,7 +3129,7 @@ function br_application_submission_format($sub) {
         $out .= '</table><h2>Character Reference</h2><table width="90%" cellspacing="5">';
       }
 
-	  if ($field_name == 'edu_history') {
+      if ($field_name == 'edu_history') {
         $data = explode('-', $field_name);
         $value = "<table cellspacing='5'><tr><th>Year</th><th>Subjects</th><th>Grade</th><th>Attempts</th></tr>";
         foreach ($sub[2]['subject'] as $year => $item) {
@@ -3132,20 +3148,20 @@ function br_application_submission_format($sub) {
       }
       else {
         foreach ($sub as $step => $values) {
-		  if (is_array($values) && count($values)) {
-			  foreach ($values as $fname => $fvalue) {
-				if ($fname == $field_name) {
-				  $value = $fvalue;
-				  if ($field_name == 'home_address') {
-					$value = str_replace("\n", ', ', $value) .'</td></tr><tr><td width="30%"><i>Home postcode</i><br /><br /></td><td width="70%">'. $sub[1]['postcode'];
-				  }
-				  if ($field_name == 'term_time_address') {
-					$value = str_replace("\n", ', ', $value) .'</td></tr><tr><td width="30%"><i>Term Time Postcode</i><br /><br /></td><td width="70%">'. $sub[1]['term_postcode'];
-				  }
-				  break 2;
-				}
-			  }
-		  }
+          if (is_array($values) && count($values)) {
+            foreach ($values as $fname => $fvalue) {
+              if ($fname == $field_name) {
+                $value = $fvalue;
+                if ($field_name == 'home_address') {
+                  $value = str_replace("\n", ', ', $value) . '</td></tr><tr><td width="30%"><i>Home postcode</i><br /><br /></td><td width="70%">' . $sub[1]['postcode'];
+                }
+                if ($field_name == 'term_time_address') {
+                  $value = str_replace("\n", ', ', $value) . '</td></tr><tr><td width="30%"><i>Term Time Postcode</i><br /><br /></td><td width="70%">' . $sub[1]['term_postcode'];
+                }
+                break 2;
+              }
+            }
+          }
         }
       }
 
@@ -3185,32 +3201,32 @@ function br_application_save($values) {
   node_save($pnode);
 }
 
-function br_landing_page($node) {    
+function br_landing_page($node) {
   $feeds = '<div class="feeds">
-                <div class="feed"><h3>News</h3>'. $node->field_lp_news[0]['value'] .'<div class="mask"></div><a class="view" href="'. $node->field_lp_new_more[0]['value'] .'">More</a></div>
-                <div class="feed"><h3>Blog</h3>'. $node->field_lp_blog[0]['value'] .'<div class="mask"></div><a class="view" href="'. $node->field_lp_blog_more[0]['value'] .'">More</a></div>
+                <div class="feed"><h3>News</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
+                <div class="feed"><h3>Blog</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
                 <div class="ff"></div>
           </div>';
-$_GET['test'] = 1;  
-if ($_GET['test']) {
-$contacts = '<div class="feed"><h3>'. $node->field_lp_3rd_name[0]['value'] .'</h3>'. $node->field_lp_3rd_content[0]['value'] .'<div class="mask"></div></div>';
-}
-else {
-$contacts = '<div class="contacts">
-                <div class="contact"><a href="'. $node->field_lp_contact_l_url[0]['value'] .'"><img src="/'. $node->field_lp_contact_l_img[0]['filepath'] .'"><b>Key contact</b><p>'. $node->field_lp_contact_l_name[0]['value'] .'</p></a></div>
-                <div class="contact"><a href="'. $node->field_lp_contact_r_url[0]['value'] .'"><img src="/'. $node->field_lp_contact_r_img[0]['filepath'] .'"><b>Key contact</b><p>'. $node->field_lp_contact_r_name[0]['value'] .'</p></a></div>
+  $_GET['test'] = 1;
+  if ($_GET['test']) {
+    $contacts = '<div class="feed"><h3>' . $node->field_lp_3rd_name[0]['value'] . '</h3>' . $node->field_lp_3rd_content[0]['value'] . '<div class="mask"></div></div>';
+  }
+  else {
+    $contacts = '<div class="contacts">
+                <div class="contact"><a href="' . $node->field_lp_contact_l_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_l_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_l_name[0]['value'] . '</p></a></div>
+                <div class="contact"><a href="' . $node->field_lp_contact_r_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_r_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_r_name[0]['value'] . '</p></a></div>
                 <div class="ff"></div>
-          </div>';  
-}
+          </div>';
+  }
 
-$ctas = '<div class="ctas" '. ($_GET['test']?' style="margin-top:0px;" ':'') .'>
-                <div class="cta" '. ($_GET['test']?' style="margin-left:4%;height:95px;overflow:hidden;margin-bottom:15px;" ':'') .'><a href="'. $node->field_lp_cta_l_url[0]['value'] .'"><img src="/'. $node->field_lp_cta_l_image[0]['filepath'] .'"><div class="cont"><b>'. $node->field_lp_cta_l_title[0]['value'] .'</b><p>'. $node->field_lp_cta_l_text[0]['value'] .'</p></div></a></div>
-                <div class="cta"><a href="'. $node->field_lp_cta_r_url[0]['value'] .'"><img src="/'. $node->field_lp_cta_r_image[0]['filepath'] .'"><div class="cont"><b>'. $node->field_lp_cta_r_title[0]['value'] .'</b><p>'. $node->field_lp_cta_r_text[0]['value'] .'</p></div></a></div>
+  $ctas = '<div class="ctas" ' . ($_GET['test'] ? ' style="margin-top:0px;" ' : '') . '>
+                <div class="cta" ' . ($_GET['test'] ? ' style="margin-left:4%;height:95px;overflow:hidden;margin-bottom:15px;" ' : '') . '><a href="' . $node->field_lp_cta_l_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_l_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_l_title[0]['value'] . '</b><p>' . $node->field_lp_cta_l_text[0]['value'] . '</p></div></a></div>
+                <div class="cta"><a href="' . $node->field_lp_cta_r_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_r_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_r_title[0]['value'] . '</b><p>' . $node->field_lp_cta_r_text[0]['value'] . '</p></div></a></div>
                 <div class="ff"></div>
           </div>';
-		  
-  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);  
-  $video = '<a href="'. $node->field_lp_v_link[0]['value'] .'" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/'. $node->field_lp_v_image[0]['filepath'] .'" /></a>';
+
+  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
+  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
   drupal_add_js("
           $(document).ready(function(){
             $('.vi').click(function(){                
@@ -3222,14 +3238,14 @@ $ctas = '<div class="ctas" '. ($_GET['test']?' style="margin-top:0px;" ':'') .'>
             });            
           });
           ", 'inline');
-  return  '<div class="row1">
-              <div class="col-left">'. $node->body .'</div>
-              <div class="col-right">'. $video .'</div>
+  return '<div class="row1">
+              <div class="col-left">' . $node->body . '</div>
+              <div class="col-right">' . $video . '</div>
               <div class="ff"></div>
-           </div>'.
-          '<div class="row2">
-              <div class="col-left">'. $feeds .'</div>
-              <div class="col-right">'. $contacts . $ctas .'</div>
+           </div>' .
+      '<div class="row2">
+              <div class="col-left">' . $feeds . '</div>
+              <div class="col-right">' . $contacts . $ctas . '</div>
               <div class="ff"></div>
            </div>';
 }
