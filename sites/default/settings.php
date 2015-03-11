@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING));
 /**
  * @file
  * Drupal site-specific configuration file.

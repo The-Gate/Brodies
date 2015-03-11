@@ -1082,7 +1082,8 @@ function br_event_page($node) {
     $cal_dtend = dateToCal($node->field_event_date[0]['value2']);
     $cal_uid = $node->uid;
     $cal_location = escapeString(strip_tags(nl2br($node->field_event_l_details[0]['value'])));
-    $cal_description = escapeString(strip_tags(nl2br($node->teaser)));
+    //$cal_description = escapeString(strip_tags(nl2br($node->teaser)));
+     $cal_description = '';
     $cal_url = escapeString(url($_GET['q'], array('absolute' => TRUE)));
     $cal_summary = escapeString(strip_tags(nl2br($node->title)));
     if ($_GET['calendar'] == 'ical') {
@@ -1454,12 +1455,20 @@ function br_seminars_form_submit($form_state, $form_values) {
   $form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $params['contact_details'] = $form_values['values'];
 
-
+  
   $out = $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " booked the following seminars:<table border='1'>
 <tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
   foreach ($_SESSION['seminars'] as $nid) {
-    $data = db_fetch_object(db_query("SELECT n.title, field_event_time_value as time, n1.title as location FROM node n INNER join content_type_event e on n.vid = e.vid left join node n1 on n1.nid = e.field_event_location_nid where n.nid = %d", $nid));
-    $out .= "<tr><td>" . l($data->title, 'node/' . $data->nid, array('absolute' => TRUE)) . "</td><td>" . $data->location . "</td><td>" . $data->time . "</td><td>1</td></tr>";
+    $data = db_fetch_object(db_query("SELECT n.title, field_event_date_value as timestart, field_event_date_value2 as timeend, n1.title as location FROM node n INNER join content_type_event e on n.vid = e.vid left join node n1 on n1.nid = e.field_event_location_nid where n.nid = %d", $nid));
+    $out .= "<tr>";
+    $out .= "<td>" . l($data->title, 'node/' . $nid, array('absolute' => TRUE)) . "</td>";
+    $out .= "<td>" . $data->location . "</td>";
+    $out .= "<td>" .  date ( 'd M Y H:i' , $data->timestart );
+    if (isset($data->timeend )){
+    $out .= ' - ' .date ( 'd M Y H:i' , $data->timeend );
+    }
+    $out .= "</td>";
+    $out .= "<td>1</td></tr>";
   }
   $out .= '</table><br><br>
   <b>Lead Delegate</b><br>
@@ -1512,7 +1521,7 @@ function br_seminars_form_submit($form_state, $form_values) {
   unset($_SESSION['seminars']);
 
   $admin_email = 'seminars@brodies.com';
-  //$admin_email = 'chris.bobin@gmail.com';
+  //$admin_email = 'callum@sakurabrae.co.uk';
   drupal_mail('br', 'seminars-checkout-admin', $admin_email, language_default(), $params);
 
   //redirect to thank you
