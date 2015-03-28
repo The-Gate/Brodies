@@ -1,0 +1,2 @@
+!function(o){o(window).load(function(){o(".location-locations-wrapper > .vcard").wrap("<li></li>"),o(".location-locations-wrapper > li").wrapAll("<ol></ol>")})}(jQuery);
+//# sourceMappingURL=map-locations-dist.js.map

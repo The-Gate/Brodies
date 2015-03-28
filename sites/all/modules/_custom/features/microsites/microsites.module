@@ -1,0 +1,3 @@
+<?php
+include_once('microsites.features.inc');
+// Drupal needs this blank file.

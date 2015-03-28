@@ -28,6 +28,9 @@ if(typeof(CKEDITOR) !== 'undefined') {
             */
 
             { name : 'Box'		, element : 'div', attributes : { 'class' : 'box' } },
+            { name : 'progTime'		, element : 'p', attributes : { 'class' : 'progTime' } },
+            { name : 'speakerInfo'		, element : 'div', attributes : { 'class' : 'speakerInfo' } },
+            { name : 'highlight'		, element : 'p', attributes : { 'class' : 'highlight' } },
 //            { name : 'Red Title'		, element : 'h3', styles : { 'color' : 'Red' } },
 
             /* Inline Styles */

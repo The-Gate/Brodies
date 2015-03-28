@@ -1,0 +1,707 @@
+@charset "UTF-8";
+/* Simple fluid media
+   Note: Fluid media requires that you remove the media's height and width attributes from the HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+  max-width: 100%;
+  height:auto;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+  width:100%;
+}
+
+/*
+  Dreamweaver Fluid Grid Properties
+  ----------------------------------
+  dw-num-cols-mobile:		2;
+  dw-num-cols-tablet:		3;
+  dw-num-cols-desktop:	3;
+  dw-gutter-percentage:	5;
+  
+  Inspiration from "Responsive Web Design" by Ethan Marcotte 
+  http://www.alistapart.com/articles/responsive-web-design
+  
+  and Golden Grid System by Joni Korpi
+  http://goldengridsystem.com/
+*/
+
+/* Mobile Layout: 480px and below. */
+h1, h2, h3{
+  font-weight:bold;
+  color:#00235D;
+}
+h4{
+  font-size:14px;	
+
+  font-weight:lighter !important;
+}
+#mobileMenu{
+  display:block;
+  margin:0px 0 20px 0;
+  width:100%;	
+}
+
+#mobileMenu ul{
+  list-style:none;
+}	
+#mobileMenu,
+#rightCol,
+#footer { 
+  .merge-list{
+    padding:0;
+    margin:0;
+  }
+}
+#mobileMenu {
+  li{
+    margin:0;
+    a{
+      text-decoration:none;
+      margin:5px 0px;
+      display:block;
+      font-weight:bolder;
+      &.active{
+        color:#F69F19;
+      }
+    }
+  }
+}
+#mobileMenu form select{
+  width:100%;	
+}
+
+.gridContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 97.619%;
+  padding-left: 1.1904%;
+  padding-right: 1.1904%;
+}
+#LayoutDiv1 {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#msHeader{
+  clear: both;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#HeaderTop {
+  clear: both;
+  float: left;
+  margin: 10px 0 ;
+  width: 100%;
+  display: block;
+}
+#headerTopButton {
+  clear:none;
+  margin-left: 0;
+  width: 30%;
+  display: inline-block;
+  float:left;
+}
+#headerTopButton a{
+  text-decoration:none;
+  color:#fff;
+  text-transform:uppercase;
+  font-weight:bolder;
+  font-size:0.9em;
+  padding:10px 10px 10px 35px;
+  margin-left: 0;
+  display: block;
+  background:url(../images/home-icon.gif) #F6A01A left center no-repeat;
+}
+#headerTopButton a:hover{
+  background-color:#00235D;	
+}
+#headerTopSocial {
+  clear:none;
+  text-align:right;
+  margin-left: 0;
+  width: 60%;
+  display: block;
+  float:right;
+}
+#headerBanner {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#headerMenu {
+  clear: both;
+  float: left;
+  margin:0 0 0 0;
+  width: 100%;
+  display: block;
+  height:133px;
+  background:url(../images/menu-back.gif) -40px top no-repeat;
+}
+#pageContent {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#pageContent p{
+  margin-top:0;
+  line-height:1.5em;
+}
+#leftCol {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#centerCol {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#rightCol {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: none;
+  .right{
+    padding:13px 0 0 40px;
+  }
+}
+#fullCol{
+  clear:both;
+  float:left;
+  width:100%;	
+}
+/*#rightCol ul{
+  display:none;
+}*/
+
+#rightCol,
+#footer { 
+  ul{
+    list-style:none;
+    margin-left:0;
+    font-size: 1em;
+    li{
+      margin-bottom:7px;
+      a{
+        font-weight: 700;
+        color: #00235D;
+        text-decoration:none;
+        &:hover,
+          &.active{
+          color:#F6A01A;
+        }
+      }
+    }
+  }
+}
+
+
+
+#footerBanner {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+}
+#footer {
+  clear: both;
+  float: left;
+  margin-left: 0;
+  width: 97%;
+  display: block;
+}
+
+#headerMenuRight{
+  margin-top:150px;
+  text-align:center;
+  display:none;
+  a {
+    font-size:0.9em;
+    font-weight:bolder;
+    display:inline;
+    background-color:#00235D;
+    color:white;
+    text-transform:uppercase;
+    text-decoration:none;
+    width: 19%;
+    padding: 12px 14px;
+    text-align: center;
+    margin-right:10px;
+    &:hover {
+      background-color:#F6A01A;
+    }
+  }
+}
+#footer{
+  padding:10px;
+  background-color:#BBD6E5;	
+  h2{
+    font-size: 1em;
+    text-transform: uppercase;	
+  }
+}
+
+#footerLeft {
+  clear:both;
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+
+}
+
+#footerRight {
+  float: left;
+  margin-left: 0;
+  width: 100%;
+  display: block; 
+  ul {
+    display: block;
+    margin-top:0;
+    li a{
+      font-weight:normal;
+    }
+  }
+}
+#footerRight ul, #footerLeft ul {
+  list-style:none;
+
+}
+.webform-component-fieldset{
+  float:none;
+  width:95%;
+  margin-bottom:20px;
+  label{
+    font-weight:bolder;	
+  }
+}
+form 
+.formBottom{
+  width:100%;
+  clear:both;	
+}
+.formSelect{
+  margin-top:10px;
+}
+.formSelect select{
+  width:95%;	
+}
+.formSpecial{
+  clear:left;
+  width:100%;	
+}
+form {
+  input{
+    width:95%;	
+    font-weight:bolder;
+    border:1px solid #009;
+    padding:2px;
+  }
+  input:focus{
+    border:2px solid #FC0;
+  }
+  hr{
+    clear:both;	
+    margin:10px 0px;
+    background:none;
+  }
+  .checkbox{
+    border:none;
+    float:left;	
+    width:20px;
+    margin-bottom:30px;
+    display:block;
+  }
+  .form-item{
+    margin-bottom: 13px;
+  }
+  .form-actions {
+      text-align: right;
+    .form-submit{
+      text-align: center;
+      display:inline-block;
+      width:auto;
+      background-color:#039;
+      color:white;
+      text-transform:uppercase;
+      padding:10px;
+      font-weight:bolder;	
+      border:none;
+      margin:10px 30px 10px 10px;
+    }
+  }
+}
+div.speakerInfo{ 
+  min-height:171px;
+  margin-bottom:30px;	
+  clear:both;	
+  img{
+    clear:both;
+    margin-bottom:20px;
+  }
+  h3{
+    margin:0;
+  }
+  p{
+    padding-top: 0px !important;
+    margin: 0;
+    word-break:break-all;
+  }
+  .highlight{
+    color:#CC9900;	
+  }
+  a{
+    text-decoration:none;
+  }
+}
+hr{
+  clear:both;
+  display:block;
+  margin-top:20px;	
+}
+
+.progTime{
+  padding:5px;
+  color:white;
+  background-color:#00235D;
+  font-size:15px;
+  font-weight:lighter;
+  display:block;	
+  border-left:5px solid #CC9900;
+}
+
+.formSelect .highLight{
+  color:#00235D;
+  font-weight:bolder;
+  margin:5px 0;
+}
+a.homeReg{
+  text-decoration:none;
+  color:#fff;
+  text-transform:uppercase;
+  font-weight:bolder;
+  font-size:1em;
+  padding:10px 35px 10px 10px;
+  margin-left: 0;
+  display: block;
+  background:url(../images/reg-button.png) #F6A01A right center no-repeat;	
+}
+.error{
+  color:red;
+  clear:both;
+  float:none;
+  display:block;
+}
+/* map */ 
+.location-locations-wrapper .geo,
+.block-gmap_location h2{
+ display:none; 
+}
+.location.vcard{
+  margin-bottom:10px;
+}
+.block-gmap_location{
+  margin-bottom:20px;
+}
+/* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 481px) {
+  #mobileMenu{
+    display:none;	
+  }
+  .gridContainer {
+    width: 91.5238%;
+    padding-left: 0.738%;
+    padding-right: 0.738%;
+  }
+  #LayoutDiv1 {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #msHeader{
+    clear: both;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #HeaderTop {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #headerTopButton {
+    float: left;
+    margin-left: 0;
+    width: 40%;
+    display: block;
+  }
+  #headerTopButton a{
+    width: 120px;
+  }
+  #headerTopSocial {
+    float: right;
+    margin-left: 0;
+    width: 40%;
+    display: block;
+  }
+  #headerMenu {
+    background:url(../images/menu-back.gif) left top no-repeat;
+  }
+  #headerMenuRight {
+    min-width:450px;
+    display:block;
+    /*margin:100px 0 0 0;*/
+  }
+  #pageContent {
+    clear: both;
+    float: left;
+    margin: 80px 0 0 0;
+    width: 100%;
+    display: block;
+  }
+
+
+  #leftCol {
+    clear:both;
+    float: left;
+    margin-left: 0;
+    width: 70%;
+    display: block;
+  }
+  #centerCol {
+    clear:left;
+    float: left;
+    margin-left: 0;
+    width: 70%;
+    display: block;
+  }
+  #rightCol {
+    clear:none;
+    float: left;
+    margin-left: 0;
+    width: 20%;
+    display: block;
+  }
+  #fullCol{
+    float:left;
+    width:75%;	
+  }
+
+  #footerBanner {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #footer {
+
+
+  }
+  #headerMenuRight {
+    clear: both;
+    float: left;
+    margin: 80px 0 0 0;
+    width: 100%;
+    display: block;
+  }
+  #headerMenuRight a{
+    margin:55px 20px 0 0;
+    float:right;
+    width:22%;
+  }
+  #footerLeft{
+    clear:none;
+    width:25%;
+  }
+  #footerRight{
+    clear:none;
+    width:70%
+  }
+  .webform-component-fieldset{
+    display: inline-block;
+    width:45%;
+    width:calc(50% - 17px);
+    vertical-align: top;
+  }
+  .webform-component-fieldset:nth-child(even){
+    margin-left:10px;
+  }
+  .speakerDivLeft, .speakerDivRight{
+    width:100%;	
+  }
+
+
+
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 769px) {
+  .gridContainer {
+    width: 88.5714%;
+    max-width: 940px;
+    padding-left: 0.7142%;
+    padding-right: 0.7142%;
+    margin: auto;
+  }
+  #LayoutDiv1 {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #msHeader{
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+  }
+  #HeaderTop {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #headerTopButton {
+
+    float: left;
+    margin-left: 0;
+    width: 40%;
+    display: block;
+  }
+  #headerTopSocial {
+
+    float: right;
+    margin-left: 0;
+    width: 40%;
+    display: block;
+  }
+  #headerBanner {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    display: block;
+  }
+  #headerMenu {
+    clear: both;
+    float: left;
+    margin-left:0;
+    width: 100%;
+    display: block;
+  }
+  #headerMenuRight {
+    float:right;
+    margin:0;
+    width: 60%;
+  }
+
+  #headerMenuRight a{
+    width: 20%;
+  }
+  #pageContent {
+    clear: both;
+    float: left;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+  #pageContent img{
+    max-width:95%;
+    padding-bottom:20px;
+  }
+
+  #leftCol {
+    clear:none;
+    width: 40%;
+  }
+  #centerCol {
+    clear:none;
+    width: 40%;
+  }
+  #rightCol {
+    clear:none;
+    width: 20%;
+  }
+
+
+
+  #footerBanner {
+    clear: both;
+    float: left;
+    margin-left: 0;
+    width: 100%;
+    display: block;
+  }
+  #footer {
+
+  }
+  #headerMenuRight {
+
+  }
+  #footerLeft {
+
+
+  }
+  #footerRight {
+
+
+  }
+  .formSelect{
+    clear:both;
+    word-break:break-all;
+    text-wrap:normal;
+    overflow:visible;
+  }
+  .formSpecial{
+    width:100%;
+    float:left;	
+  }
+
+  div.speakerInfo{
+    width:100%;
+    background-color:#D7D7D7;	
+    clear:both;
+    display:block;
+    margin-top:30px;
+    &:first-child{
+      margin-top:0;
+    }
+    img{
+      clear:none;
+      float:right;
+      margin-bottom:0;
+      padding-bottom:0;
+    }
+    h3,p{
+      width:40%;
+      padding:0 10px;	
+    }
+    h3{
+      padding:10px 10px 0;	
+    }
+  }
+
+}
