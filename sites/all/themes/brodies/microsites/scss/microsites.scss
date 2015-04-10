@@ -315,6 +315,15 @@ form {
   input:focus{
     border:2px solid #FC0;
   }
+  .form-checkboxes{
+    input{
+      width:auto;
+    }
+    .form-item label.option{
+      display:block;
+      margin-bottom:10px;
+    }
+  }
   hr{
     clear:both;	
     margin:10px 0px;

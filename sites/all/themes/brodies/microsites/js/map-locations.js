@@ -5,6 +5,7 @@
  */
 (function ($) {
   $(window).load(function () {
+    $('#block-gmap_location-0').append($('.location-locations-wrapper'));
     /**
      * make the addresses into an ordered list
      */
