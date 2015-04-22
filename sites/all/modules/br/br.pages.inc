@@ -3311,3 +3311,52 @@ function br_landing_page2($node) {
               <div class="ff"></div>
            </div>';
 }
+
+function br_landing_pagef($node) {
+  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
+  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
+  drupal_add_js("
+          $(document).ready(function(){
+            $('.vi').click(function(){                
+              var content = '';
+              eval('content = ' + $('span.video', this).html());
+                            
+              init_popup('<div class=\"video\">' + content.video + '</div>');
+              return false;              
+            });            
+          });
+          ", 'inline');
+  $col1 = (isset($node->field_lp_blk_1[0]['value'])) ? lp_update_output($node->field_lp_blk_1[0]['value']) : '';
+  $col2 = (isset($node->field_lp_blk_2[0]['value'])) ? lp_update_output($node->field_lp_blk_2[0]['value']) : '';
+  $col3 = (isset($node->field_lp_blk_3[0]['value'])) ? lp_update_output($node->field_lp_blk_3[0]['value']) : '';
+  $col4 = (isset($node->field_lp_blk_4[0]['value'])) ? lp_update_output($node->field_lp_blk_4[0]['value']) : '';
+
+  $output = '<div class="row1"><div class="col-left"><div class="text-wrapper">' . $node->body . '</div></div>';
+  $output .= '<div class="col-right">' . $video . '</div><div class="ff"></div></div>';
+  $output .= '<div class="row2"><div class="col-left"><div class="col"';
+  if (isset($node->field_lp_blk_1_colour[0]['value'])) {
+    $output .= ' style="background-color:' . $node->field_lp_blk_1_colour[0]['value'] .'"';
+  }
+  $output .= '>' . $col1 . '</div><div class="col l-margin"';
+  if (isset($node->field_lp_blk_2_colour[0]['value'])) {
+    $output .= ' style="background-color:' . $node->field_lp_blk_2_colour[0]['value'] .'"';
+  }
+  $output .= '>' . $col2 . '</div></div>';
+  $output .= '<div class="col-right"><div class="col"';
+  if (isset($node->field_lp_blk_3_colour[0]['value'])) {
+    $output .= ' style="background-color:' . $node->field_lp_blk_3_colour[0]['value'] .'"';
+  }
+  $output .= '>' . $col3 . '</div><div class="col l-margin"';
+  if (isset($node->field_lp_blk_4_colour[0]['value'])) {
+    $output .= ' style="background-color:' . $node->field_lp_blk_4_colour[0]['value'] .'"';
+  }
+  $output .= '>' . $col4 . '</div></div><div class="ff"></div></div>';
+  return $output;
+}
+
+function lp_update_output($data){
+  if (strpos ($data , 'class="view"' ) == TRUE){
+    $data = $data.'<div class="mask"></div>';
+  }
+  return  $data;
+}

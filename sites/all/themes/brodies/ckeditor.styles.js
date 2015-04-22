@@ -31,6 +31,10 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'progTime'		, element : 'p', attributes : { 'class' : 'progTime' } },
             { name : 'speakerInfo'		, element : 'div', attributes : { 'class' : 'speakerInfo' } },
             { name : 'highlight'		, element : 'p', attributes : { 'class' : 'highlight' } },
+            { name : 'LP - View Link'		, element : 'a', attributes : { 'class' : 'view' } },
+            { name : 'LP - Contact Wrapper'		, element : 'div', attributes : { 'class' : 'contact' } },
+            { name : 'LP - Contat Image'		, element : 'div', attributes : { 'class' : 'contact-image' } },
+            { name : 'LP - Contat Info'		, element : 'div', attributes : { 'class' : 'contact-info' } },
 //            { name : 'Red Title'		, element : 'h3', styles : { 'color' : 'Red' } },
 
             /* Inline Styles */

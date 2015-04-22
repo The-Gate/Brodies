@@ -2870,6 +2870,12 @@ optgroup{
   font-weight: normal;
   color:#FFF;
 }
+.lpf .col h4{
+  font-size: 10px;
+  font-family: Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  margin-top:0;
+}
 
 .lp .col-left p {
   font-size:12px;  
@@ -2897,11 +2903,20 @@ optgroup{
   overflow:hidden;
 }
 
+.lpf .col{
+  width:48%;
+  float:left;
+  height:218px;
+  overflow:hidden;
+}
 .lp .feed:first-child {
   margin-left:0%;
 }
 
-.lp .feed h3, .lp .contact b {
+.lp .feed h3,
+.lp .contact b, 
+.lpf .col h3, 
+.lpf .col b{
   font-size:12px;
   font-weight:bold;
   text-transform: uppercase;
@@ -2912,17 +2927,20 @@ optgroup{
   margin:8px 10px 5px 10px;
 }
 
-.lp .feed ul {
+.lp .feed ul,
+.lpf .col ul{
   list-style-type: none;
   margin:5px 10px;
   padding:0px;
 }
 
-.lp .feed ul li{
+.lp .feed ul li
+.lpf .col ul li{
   border-bottom:2px solid #5286c3;
 }
 
-.lp .feed ul li a{
+.lp .feed ul li a,
+.lpf .col ul li a{
   padding:3px 0px;
   display:block;
   color:#FFF;
@@ -2930,7 +2948,8 @@ optgroup{
   font-size:12px;
 }
 
-.lp .feed .mask {
+.lp .feed .mask,
+.lpf .col .mask{
   position:absolute;
   bottom:0px;
   left:0px;
@@ -2947,7 +2966,8 @@ optgroup{
 
 }
 
-.lp .feed .view {
+.lp .feed .view,
+.lpf .col .view{
   position:absolute;
   text-transform: uppercase;
   bottom:5px;
@@ -2960,26 +2980,32 @@ optgroup{
   float:left;
 }
 
-.lp .contact {
+.lp .contact{
   float:left;
   width:48%;
   margin-left:4%;
   background-color: #00245d;
 }
-.lp2 .contact {
+.lp2 .contact,
+.lpf .contact {
   width:100%;
   margin-left:0;
   margin-bottom:17px;
 }
-.lp2 .contact:last-child {
+.lp2 .contact:last-child,
+.lpf .contact:last-child {
   margin-bottom:0;
 }
-.lp .contact a:hover p, .lp .contact a:hover b, .lp .cta:hover .cont p, .lp .cta:hover .cont b{
+.lp .contact a:hover p,
+.lp .contact a:hover b,
+.lp .cta:hover .cont p,
+.lp .cta:hover .cont b{
   color: #f69f19;
   text-decoration: none;
 }
 
-.lp .col-right a:hover img {
+.lp .col-right a:hover img
+.lpf .col a:hover img{
   opacity: 0.9;
 }
 
@@ -3016,24 +3042,30 @@ optgroup{
   text-decoration: none;
 }
 .lp2 .contact-img,
-.lp2 .contact-info{
+.lp2 .contact-info,
+.lpf .contact-img,
+.lpf .contact-info{
   float:none;
   display:inline-block;
   vertical-align: top;
 }
-.lp2 .contact-img{
+.lp2 .contact-img,
+.lpf .contact-img{
   width:128px;
 }
 
-.lp2 .contact-info{
+.lp2 .contact-info,
+.lpf .contact-info{
   width:88px;
 }
-.lp2 .contact-info b{
+.lp2 .contact-info b,
+.lpf .contact-info b{
   font-family: helvetica,arial;
   font-size: 10px;
   width:100%;
 }
-.lp2 .contact p {
+.lp2 .contact p,
+.lpf .contact p{
   margin:5px 0;
 }
 .lp .cta {
@@ -3049,6 +3081,13 @@ optgroup{
 
 .lp .row2 {
   margin:10px 0px 10px 0px;
+}
+.lpf .col {
+  position:relative;
+  color:#fff;
+}
+.lpf .col.l-margin{
+    margin-left: 4%;
 }
 
 .lp .cta:first-child {
@@ -3129,12 +3168,13 @@ optgroup{
   margin-bottom:0;
 }
 
-.lp2 .lp2-show-more{
+.lp2-show-more{
     margin-top: 10px;
     text-align: right;
 }
 .lp .feed .view:after,
-.lp2 .lp2-show-more a:after{
+.lp2-show-more a:after,
+.lpf .col .view:after{
   content:'';
   display:inline-block;
   vertical-align: top;

@@ -210,7 +210,7 @@ $(document).ready(function () {
   });
   // landing page v2
   // if the main content is longer than the right video image, hide under a 'more' link
-  if ($('.lp2').length > 0) {
+  if ($('.lp2,.lpf').length > 0) {
     var rheight = $('.row1 .col-right').height();
     if ($('.row1 .col-left .text-wrapper').height() > rheight) {
       

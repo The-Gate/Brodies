@@ -55,6 +55,10 @@ function phptemplate_preprocess_page(&$vars) {
     // "page-lpage.tpl.php".
     $vars['template_files'][] = 'page-lpage2';
   }
+  else if (isset($vars['node']) && $vars['node']->type == 'lpagef' && !arg(2)) {
+    // "page-lpagef.tpl.php".
+    $vars['template_files'][] = 'page-lpagef';
+  }
   else if (user_access('edit any slide content')) {
     $vars['header'] .= '<div class="controls slideshow">' . l(t('Edit slideshow'), 'content/edit/slide', array('query' => str_replace('destination', 'back', drupal_get_destination()))) . '</div>';
   }
