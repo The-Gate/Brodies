@@ -2880,7 +2880,8 @@ optgroup{
 .lp .col-left p {
   font-size:12px;  
 }
-.lp2 .row1 .col-left p:first-child {
+.lp2 .row1 .col-left p:first-child,
+.lpf .row1 .col-left p:first-child {
   font-size:16px;  
 }
 
@@ -3172,8 +3173,20 @@ optgroup{
     margin-top: 10px;
     text-align: right;
 }
+.lp2-show-more a{
+  font-weight:bold;
+}
+.lp2-show-more a:after{
+  content:'';
+  display:inline-block;
+  vertical-align: top;
+  width:9px;
+  height:8px;
+  margin:2px 0 0 5px;
+  background: url('/sites/all/themes/brodies/gfx/less-arrow.png') no-repeat 0 0;
+}
 .lp .feed .view:after,
-.lp2-show-more a:after,
+.lp2-show-more a.closed:after,
 .lpf .col .view:after{
   content:'';
   display:inline-block;
@@ -3183,6 +3196,7 @@ optgroup{
   margin:2px 0 0 5px;
   background: url('/sites/all/themes/brodies/gfx/more-arrow.png') no-repeat 0 0;
 }
+
 /********* //TODO: Recent Wins ***********************************************/
 .section-recent-wins #br-search-form{
   margin-top:20px;

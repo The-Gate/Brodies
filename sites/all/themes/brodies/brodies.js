@@ -213,12 +213,19 @@ $(document).ready(function () {
   if ($('.lp2,.lpf').length > 0) {
     var rheight = $('.row1 .col-right').height();
     if ($('.row1 .col-left .text-wrapper').height() > rheight) {
-      
+
       $('.row1 .col-left .text-wrapper').css({'height': rheight - 30, 'overflow': 'hidden'});
-      $('.row1 .col-left .text-wrapper').after('<div class="lp2-show-more"><a href="#">MORE</a></div>');
+      $('.row1 .col-left .text-wrapper').after('<div class="lp2-show-more"><a href="#" class="closed">MORE</a></div>');
       $('.lp2-show-more a').click(function () {
-        $('.row1 .col-left .text-wrapper').css({'height': '', 'overflow': ''});
-        $('.lp2-show-more').remove();
+        if ($(this).hasClass('closed')) {
+          $('.row1 .col-left .text-wrapper').css({'height': '', 'overflow': ''});
+          $(this).removeClass('closed')
+          $(this).text('HIDE');
+        } else {
+          $('.row1 .col-left .text-wrapper').css({'height': rheight - 30, 'overflow': 'hidden'});
+          $(this).addClass('closed')
+          $(this).text('MORE');
+        }
       });
     }
   }
