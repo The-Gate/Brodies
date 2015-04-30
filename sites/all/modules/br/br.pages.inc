@@ -531,7 +531,7 @@ function br_book_link($data) {
     $title = 'remove';
   }
   else {
-    $title = 'Book now';
+    $title = 'Add to Basket';
   }
 
   return l($title, $_GET['q'], array('query' => 'book-seminar=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'book')));
@@ -1145,6 +1145,27 @@ END:VCALENDAR';
     }
   }
   $out .= '</div><div class="ff"></div>';
+  if ($node->field_event_type[0]['value'] == 'seminar') {
+
+    if ($node->field_event_full[0]['value']) {
+      if (isset($_GET['seminar-waiting-list'])) {
+        $out .= drupal_get_form('br_waiting_list_form', $node);
+      }
+      else {
+        $book = '';
+        if ($node->field_event_full[0]['value']) {
+          $book = '<div class="ff"></div><div class="booked info">Fully booked</div>';
+        }
+        $out .= '<div class="ff"></div>' . $book . l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
+        ;
+      }
+    }
+    else {
+      $out .= br_book_link($node);
+    }
+  }
+  
+  $out .= '<div class="ff"></div>';
   if ($node->field_event_speakers[0]['nid']) {
     $out .= '<div class="speakers"><b>Speakers:</b>';
     $result = db_query("SELECT ns.title, p.*
@@ -1205,27 +1226,6 @@ LEFT JOIN content_type_people p on p.vid = ns.vid order by delta", $node->nid);
   if ($node->field_event_guest[0]['value']) {
     $out .= '<div class="guest">' . $node->field_event_guest[0]['value'] . '</div>';
   }
-
-  if ($node->field_event_type[0]['value'] == 'seminar') {
-
-    if ($node->field_event_full[0]['value']) {
-      if (isset($_GET['seminar-waiting-list'])) {
-        $out .= drupal_get_form('br_waiting_list_form', $node);
-      }
-      else {
-        $book = '';
-        if ($node->field_event_full[0]['value']) {
-          $book = '<div class="ff"></div><div class="booked info">Fully booked</div>';
-        }
-        $out .= '<div class="ff"></div>' . $book . l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
-        ;
-      }
-    }
-    else {
-      $out .= br_book_link($node);
-    }
-  }
-
   return $out;
 }
 
@@ -1335,7 +1335,7 @@ function br_events_checkout() {
   }
 
   $nr = count($_SESSION['seminars']);
-  $out = '<div class="checkout"><h2>Basket</h2><div class="basket-items">You have ' . (int) $nr . ' ' . format_plural($nr, 'seminar', 'seminars') . ' on your list.' . ($nr ? l('Clear basket', $_GET['q'], array('attributes' => array('class' => 'clear'), 'query' => 'clear&' . drupal_get_destination())) . l('Checkout', 'seminars-and-events/checkout', array('attributes' => array('class' => 'checkout'), 'query' => drupal_get_destination())) : '') . '</div></div>';
+  $out = '<div class="checkout"><h2>Basket</h2><div class="basket-items">You have ' . (int) $nr . ' ' . format_plural($nr, 'seminar', 'seminars') . ' on your list.' . ($nr ? l('Clear basket', $_GET['q'], array('attributes' => array('class' => 'clear'), 'query' => 'clear&' . drupal_get_destination())) . l('Confirm', 'seminars-and-events/checkout', array('attributes' => array('class' => 'checkout'), 'query' => drupal_get_destination())) : '') . '</div></div>';
   return $out;
 }
 
@@ -3335,28 +3335,28 @@ function br_landing_pagef($node) {
   $output .= '<div class="col-right">' . $video . '</div><div class="ff"></div></div>';
   $output .= '<div class="row2"><div class="col-left"><div class="col"';
   if (isset($node->field_lp_blk_1_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_1_colour[0]['value'] .'"';
+    $output .= ' style="background-color:' . $node->field_lp_blk_1_colour[0]['value'] . '"';
   }
   $output .= '>' . $col1 . '</div><div class="col l-margin"';
   if (isset($node->field_lp_blk_2_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_2_colour[0]['value'] .'"';
+    $output .= ' style="background-color:' . $node->field_lp_blk_2_colour[0]['value'] . '"';
   }
   $output .= '>' . $col2 . '</div></div>';
   $output .= '<div class="col-right"><div class="col"';
   if (isset($node->field_lp_blk_3_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_3_colour[0]['value'] .'"';
+    $output .= ' style="background-color:' . $node->field_lp_blk_3_colour[0]['value'] . '"';
   }
   $output .= '>' . $col3 . '</div><div class="col l-margin"';
   if (isset($node->field_lp_blk_4_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_4_colour[0]['value'] .'"';
+    $output .= ' style="background-color:' . $node->field_lp_blk_4_colour[0]['value'] . '"';
   }
   $output .= '>' . $col4 . '</div></div><div class="ff"></div></div>';
   return $output;
 }
 
-function lp_update_output($data){
-  if (strpos ($data , 'class="view"' ) == TRUE){
-    $data = $data.'<div class="mask"></div>';
+function lp_update_output($data) {
+  if (strpos($data, 'class="view"') == TRUE) {
+    $data = $data . '<div class="mask"></div>';
   }
-  return  $data;
+  return $data;
 }
