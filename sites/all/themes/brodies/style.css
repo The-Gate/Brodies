@@ -1605,7 +1605,7 @@ div.messages.blue {
 #content .l-event .text {
   margin:80px 10px 5px 10px;
   height:150px;
-  /*  overflow:hidden;*/
+  overflow:hidden;
 }
 
 #content .l-event .details div div , .node-event .details div div{
