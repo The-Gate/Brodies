@@ -810,12 +810,29 @@ div.messages.blue {
   padding:3px 0 12px;
   text-transform: uppercase;
 }
+#content .right #block-br-13{
+  background: #002659; /* Old browsers */
+  background: -moz-linear-gradient(top, #8595a6 0%, #2c4c73 10%, #2c4c73 100%, #002659 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8595a6), color-stop(10%,#2c4c73), color-stop(100%,#2c4c73), color-stop(100%,#002659)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #8595a6 0%,#2c4c73 10%,#2c4c73 100%,#002659 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #8595a6 0%,#2c4c73 10%,#2c4c73 100%,#002659 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #8595a6 0%,#2c4c73 10%,#2c4c73 100%,#002659 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #8595a6 0%,#2c4c73 10%,#2c4c73 100%,#002659 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8595a6', endColorstr='#002659',GradientType=0 ); /* IE6-9 */
+  color:#fff;
+}
 #content .right #block-br-13 h2{
   margin-bottom:0;
+  padding:3px 14px 12px;
+  background:url(/sites/all/themes/brodies/gfx/icon-basket.png) no-repeat 95% 28%;
 }
 #content .right #block-br-13 .basket-items{
   padding-top:15px;
-  background: #f5f5f5;
+}
+#content .right #block-br-13 .basket-items a{
+  border-top:#39709f solid 1px;
+  color:#fff;
+  padding-top:5px;
 }
 
 #content .left .block:first-child .submenu h2 a{
@@ -864,8 +881,7 @@ div.messages.blue {
 }
 
 .checkout .basket-items{
-
-  padding:5px 5px;
+  padding:5px 14px 5px 8px;
 }
 .checkout .clear, .checkout .checkout {
   display:block;
@@ -1599,13 +1615,12 @@ div.messages.blue {
 
 #content .l-event .details, #content .l-event .text {
   margin:20px 10px 5px 10px;
+  position: relative;
 }
 
 
 #content .l-event .text {
-  margin:80px 10px 5px 10px;
-  height:150px;
-  overflow:hidden;
+  margin:20px 10px 15px 10px;
 }
 
 #content .l-event .details div div , .node-event .details div div{
@@ -1622,14 +1637,18 @@ div.messages.blue {
   max-height:200px;
   overflow:hidden;
 }
-
+#content .l-event .details ,
+.node-event  .details{
+  position:relative;
+}
 #content .l-event .details div span , .node-event .details div span{
   float:left;
   width:70%;
 }
 
 .node-event .details div span{
-  width:85%;
+  width:60%;
+  margin-right:20%;
 }
 
 #content .l-event .item h3 a{
@@ -1638,9 +1657,8 @@ div.messages.blue {
 
 #content .l-event .more {
   margin:20px 10px;
-  font-weight:bold;
+  text-align: right
 }
-
 #content .l-event .book, .node-event .book, #content .l-event .booked, .node .booked {
   float:right;
   background-color: #F6A01A;
@@ -1739,8 +1757,9 @@ div.messages.blue {
 #content .node-event .book {
   float:left;
   color:#FFF;  
-  font-weight:bold;
   margin-top:10px;  
+  width:106px;
+  text-align: center;
 }
 
 /* LISTING - careers */
@@ -1867,9 +1886,21 @@ div.messages.blue {
 #content .node-career .content > div a,
 #content .view-top-news  .views-field-view-node .views-field-view-node a,
 #content #block-views-latest_legal_update-block_1 .views-field-view-node a,
-#content .l-event .book, #content .node-event .book{
+#content .l-event .book,
+#content .l-event .more a{
   padding:10px;
   background:#00235d;
+  text-transform: uppercase;
+}
+#content .l-event .more a{
+  color:#fff;
+}
+#content .node-event .book{
+  position: absolute;
+  top:0;
+  right:0;
+  margin:0;
+  padding:10px;
   text-transform: uppercase;
 }
 #content .node-career .content > div a:hover,
@@ -1877,6 +1908,27 @@ div.messages.blue {
 #content #block-views-latest_legal_update-block_1 .views-field-view-node a:hover,
 #content .l-event .book, #content .node-event .book:hover{
   background:#F6A01A;
+}
+#content .l-event .more a,
+#content .l-event .book{
+  width:86px;
+  text-align:center
+}
+
+#content .l-event .more a{
+  display:inline-block;
+}
+
+#content .l-event .book{
+  position:absolute;
+  margin:0;
+  top:0;
+  right:0;
+}
+#content .node-event .book:hover,
+#content .l-event .book:hover {
+  color: #FFF;
+    background: #00235d;
 }
 
 /* Pager */
@@ -3088,7 +3140,7 @@ optgroup{
   color:#fff;
 }
 .lpf .col.l-margin{
-    margin-left: 4%;
+  margin-left: 4%;
 }
 
 .lp .cta:first-child {
@@ -3170,8 +3222,8 @@ optgroup{
 }
 
 .lp2-show-more{
-    margin-top: 10px;
-    text-align: right;
+  margin-top: 10px;
+  text-align: right;
 }
 .lp2-show-more a{
   font-weight:bold;

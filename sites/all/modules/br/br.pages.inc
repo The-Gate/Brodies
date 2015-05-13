@@ -463,7 +463,7 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
             $book = br_book_link($data);
           }
         }
-        $content = '<h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="details">' . $details_html . '<div class="ff"></div></div><div class="text">' . $data->teaser . '</div><div class="more">' . l('More information', 'node/' . $data->nid, array('html' => TRUE)) . $book . '</div><div class="ff"></div>';
+        $content = '<h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="details">' . $details_html . $book . '<div class="ff"></div></div><div class="text">' . $data->teaser . '</div><div class="more">' . l('More info', 'node/' . $data->nid, array('html' => TRUE)) . '</div><div class="ff"></div>';
         break;
       case 'news':
         if ($data->filepath) {
@@ -1065,7 +1065,9 @@ function theme_br_content_edit_draggable_form($form) {
 }
 
 function dateToCal($timestamp) {
-  return date('Ymd\THis\Z', $timestamp);
+  date_default_timezone_set('UTC');
+  $cal_date =  date('Ymd\THis\Z', $timestamp);
+  return $cal_date;
 }
 
 // Escapes a string of characters
@@ -1138,34 +1140,35 @@ END:VCALENDAR';
     'Where' => db_result(db_query("SELECT title FROM {node} where nid = %d", $node->field_event_location[0]['nid'])), ' ' => $node->field_event_l_details[0]['value'],
     'Add to calendar' => $calendar_links
   );
+  $book = '';
+  $book_form = '';
+  if ($node->field_event_type[0]['value'] == 'seminar') {
+    if ($node->field_event_full[0]['value']) {
+      if (isset($_GET['seminar-waiting-list'])) {
+        $book_form.= drupal_get_form('br_waiting_list_form', $node);
+        $book_form .= '<div class="ff"></div>';
+      }
+      else {
+        $book = '<div class="ff"></div>';
+        if ($node->field_event_full[0]['value']) {
+          $book .= '<div class="booked info">Fully booked</div>';
+        }
+        $book .= l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
+        ;
+      }
+    }
+    else {
+      $book .= br_book_link($node);
+    }
+  }
   $out .= '<div class="details">';
   foreach ($details as $label => $value) {
     if ($value) {
       $out .= '<div><div>' . ($label != ' ' ? $label . ':' : '&nbsp;') . '</div><span>' . $value . '</span></div>';
     }
   }
-  $out .= '</div><div class="ff"></div>';
-  if ($node->field_event_type[0]['value'] == 'seminar') {
-
-    if ($node->field_event_full[0]['value']) {
-      if (isset($_GET['seminar-waiting-list'])) {
-        $out .= drupal_get_form('br_waiting_list_form', $node);
-      }
-      else {
-        $book = '';
-        if ($node->field_event_full[0]['value']) {
-          $book = '<div class="ff"></div><div class="booked info">Fully booked</div>';
-        }
-        $out .= '<div class="ff"></div>' . $book . l('Seminar waiting list', $_GET['q'], array('query' => 'seminar-waiting-list=' . $data->nid . '&' . drupal_get_destination(), 'attributes' => array('class' => 'booked')));
-        ;
-      }
-    }
-    else {
-      $out .= br_book_link($node);
-    }
-  }
-  
-  $out .= '<div class="ff"></div>';
+  $out .= $book . '</div><div class="ff"></div>';
+  $out .= $book_form;
   if ($node->field_event_speakers[0]['nid']) {
     $out .= '<div class="speakers"><b>Speakers:</b>';
     $result = db_query("SELECT ns.title, p.*

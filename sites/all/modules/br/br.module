@@ -443,6 +443,7 @@ function br_signup_ebulletin_form($form_state) {
       'Public Sector Services' => 'Public Sector Services',
       'Shipping' => 'Shipping',
       'Tax' => 'Tax',
+      'Housebuilding'=>'Housebuilding',
 //      'Traineeship & Summer Placement News' => 'Traineeship & Summer Placement News',
     ),
     '#prefix' => '<div class="options">',
