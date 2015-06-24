@@ -2878,6 +2878,9 @@ optgroup{
   font-weight:normal;
   text-transform: uppercase;
 }
+.lpf h1 {
+  width:auto; 
+}
 
 .lp #logo {
   left:0px;

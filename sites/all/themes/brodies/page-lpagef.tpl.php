@@ -35,7 +35,7 @@
               <div id="slogan" class="clearfix"><span><?php print $header_slogan ?></span></div>
               <?php
               if ($title) {
-                if (isset($node->field_lp_title_img)) {
+                if (isset($node->field_lp_title_img[0]['filepath'])) {
                   print ('<h1><img src="/'.$node->field_lp_title_img[0]['filepath'].'" alt="'.$title.'"></h1>');
                 }
                 else {
