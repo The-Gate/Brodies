@@ -427,7 +427,9 @@ function br_signup_ebulletin_form($form_state) {
     '#weight' => 80,
     '#title' => 'Sign up options',
     '#options' => array(
+      'Arts & Culture' => 'Arts & Culture',
       'Banking, Finance & Contentious Banking' => 'Banking, Finance & Contentious Banking',
+      'Charities and Third Sector' => 'Charities and Third Sector',
       'Construction & Engineering' => 'Construction & Engineering',
       'Corporate' => 'Corporate',
       'Restructuring & Insolvency' => 'Restructuring & Insolvency',
@@ -438,6 +440,7 @@ function br_signup_ebulletin_form($form_state) {
       'Insurance & Risk' => 'Insurance & Risk',
       'Intellectual Property, Technology & Outsourcing' => 'Intellectual Property, Technology & Outsourcing',
       'Land & Rural Business' => 'Land & Rural Business',
+      'Personal & Family' => 'Personal & Family',
       'Planning & Environment' => 'Planning & Environment',
       'Projects & Infrastructure' => 'Projects & Infrastructure',
       'Property' => 'Property',
