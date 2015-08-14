@@ -47,7 +47,7 @@ function br_menu() {
   );
 
   $items['application-forms'] = array(
-    'title' => 'Summer placements application form 2015',
+    'title' => 'Traineeship Application Form',
     'page callback' => 'br_applications_page',
     'access callback' => TRUE,
     'file' => 'br.pages.inc'
@@ -1118,10 +1118,7 @@ function br_mail($key, &$message, $params) {
       break;
     case 'application-confirm-user':
       $message['subject'] = t('Thank you for submitting your application');
-      $message['body'][] = t("Thank you for submitting your Brodies Summer Placement application for 2015. Your application is now being reviewed. Closing date for applications is Sunday 11th January 2015.\nWe will be back in touch approximately two weeks after this date to let you if know your application has been successful or not. \n\n
-Good luck and if you have any queries in the meantime please email graduaterecruitment@brodies.com.", array('@name' => $params['application_name']));
-
-
+      $message['body'][] = t("Thank you for your interest in Brodies LLP.\n\nWe acknowledge receipt of your application form and we will be in contact following our closing date of Friday 9th October 2015.\n\nPlease note that it is our policy to keep any applications or CVs submitted to us on file for the next 2 years. If you would prefer us not to keep your details on file for this length of time, please let us know and we will delete all the information that we hold about you from our records after 6 months in accordance with our data protection obligations.");
       break;
     case 'application-confirm-admin':
       $message['subject'] = t('Brodies : user "@name" filled in application form', array('@name' => $params['full_name']));

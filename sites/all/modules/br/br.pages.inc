@@ -1066,7 +1066,7 @@ function theme_br_content_edit_draggable_form($form) {
 
 function dateToCal($timestamp) {
   date_default_timezone_set('UTC');
-  $cal_date =  date('Ymd\THis\Z', $timestamp);
+  $cal_date = date('Ymd\THis\Z', $timestamp);
   return $cal_date;
 }
 
@@ -2438,9 +2438,7 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
     }
   }
   else {
-    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you've taken the first step to potentially become a Brodies' trainee or summer student of the future. Take your time when completing the form, make sure that you answer all of the questions fully and that you give strong examples which highlight that you have the skills and competencies that we look for in all of our people.
- </p><p>
-Good luck!</p><p>Our online application process for Summer Placements 2015 is now open and will <b>close on Sunday 11 January 2015.</b></p><p>Applicants must be a minimum of 3rd year LLB or 1st year accelerated LLB to apply.</p>";
+    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you’ve taken the first step to potentially becoming a Brodies trainee of the future. Take your time when completing the form, make sure that you answer all the questions fully and that you give strong examples which highlight that you have the skills and competencies we are looking for in our trainees.</p><p>Good luck!</p><p>Closing dates for applications : <b>Friday 9th October 2015</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 4th year of your LLB or 1st year of your accelerated LLB and you should be on track for a 2:1</p>";
 
     $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n 
       where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);
@@ -2517,7 +2515,16 @@ function br_application_form($form_state, $step) {
         '#clearfix' => TRUE
       );
 
-      $form['applied_in_past_pre'] = array('#value' => '<div class="form-item">
+      $form['completed diploma'] = array(
+        '#title' => 'I will have completed my diploma and can be considered for a traineeship in',
+        '#type' => 'checkboxes',
+        '#options' => array(
+          '2016' => '2016',
+          '2017' => '2017',
+        )
+      );
+
+      $form['applied_in_past_pre'] = array('#value' => '<div class="form-item" style="clear:both">
  <label>Please advise if you have applied to Brodies in the past and if so, when was this?: <span title="This field is required." class="form-required">*</span></label>
  <div class="item-left">');
 
@@ -2659,8 +2666,9 @@ each subject and the number of attempts. <span class="notice">Please declare mar
       $form['further_information'] = array(
         '#title' => 'Further Information',
         '#required' => FALSE,
-        '#pre_label' => '<!--<p>Please provide details of the subjects you have, or are due to study at fourth year level. If you have completed fourth year, please also indicate your marks and number of attempts.</p>--><p>If you have taken a year out, please provide details below</p>',
+        '#pre_label' => '<!--<p>Please provide details of the subjects you have, or are due to study at fourth year level. If you have completed fourth year, please also indicate your marks and number of attempts.</p>--><p>If you have taken a year out, please provide details below. (maximum of 150 words)</p>',
         '#type' => 'textarea',
+        '#attributes' => array('maxlength' => 1000),
         '#resizable' => FALSE,
       );
       break;
@@ -2714,10 +2722,11 @@ each subject and the number of attempts. <span class="notice">Please declare mar
       $form['employment_history'] = array('#value' => br_multiple_field($defaults[$step], 'employment'));
 
       $form['emplotment_other'] = array(
-        '#title' => 'Are there any other relevant experiences you would like to tell us about?',
+        '#title' => 'Are there any other relevant experiences you would like to tell us about? (maximum of 200 words)',
         '#no-colon' => TRUE,
         '#required' => FALSE,
         '#type' => 'textarea',
+        '#attributes' => array('maxlength' => 1000),
         '#resizable' => FALSE,
       );
       break;
@@ -2736,21 +2745,21 @@ each subject and the number of attempts. <span class="notice">Please declare mar
     case 7:
       $title = 'Supporting Information';
       $form['effective_communication'] = array(
-        '#title' => 'Please tell us about an occasion where you had to adapt your communication style to suit the audience you were communicating/presenting to. (maximum of 200 words)',
+        '#title' => 'Please tell us about an occasion where you have had to be an effective communicator. (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
       );
 
       $form['team_contribution'] = array(
-        '#title' => 'Describe a time when you played an important role in a project as a member of a team (maximum of 200 words)',
+        '#title' => 'At Brodies we aim to always go “Above and Beyond” for our clients. Please tell us about a time you have exceeded someone’s expectations of you. (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
       );
 
       $form['commercial_awareness'] = array(
-        '#title' => 'What is your understanding of the term \'Commercial Awareness\' and how this applies to Brodies (maximum of 200 words) ?',
+        '#title' => 'What is your understanding of the term \'Commercial Awareness\'? and from your research of Brodies give us an example of how you think we demonstrate this as a firm (maximum of 200 words) ?',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
@@ -2868,10 +2877,7 @@ each subject and the number of attempts. <span class="notice">Please declare mar
 
     case 10:
       $title = 'Data Protection';
-      $form['intro'] = array('#value' => '<p>For the purposes of Data Protection, by ticking this box I consent to Brodies
-LLP holding and processing the information provided on this form as part of
-their trainee selection process and to the retention of such information by
-Brodies LLP should my application for a traineeship be successful.</p>');
+      $form['intro'] = array('#value' => '<p>I confirm that Brodies may keep my application on file for the next 2 years, after which it will be deleted in accordance with Brodies data protection obligations.</p>');
 
       $form['confirm_information'] = array(
         '#required' => TRUE,
@@ -3076,7 +3082,8 @@ function br_application_form_submit($form_state, $form_values) {
     $default['completed'] = 1;
     $user_email = $user->mail;
     $admin_email = 'graduaterecruitment@brodies.com';
-    //$admin_email = 'grant.mckendry@thegateworldwide.com,chris.bobin@gmail.com';
+    //$admin_email = 'grant.mckendry@thegateworldwide.com';
+    //$admin_email = 'callum@sakurabrae.co.uk';
     $app = node_load(arg(1));
     $details_url = url('application-forms/submissions/' . arg(1) . '/' . $user->uid, array('absolute' => TRUE));
     $details = br_application_submission_format($default);
