@@ -2515,7 +2515,7 @@ function br_application_form($form_state, $step) {
         '#clearfix' => TRUE
       );
 
-      $form['completed diploma'] = array(
+      $form['completed_diploma'] = array(
         '#title' => 'I will have completed my diploma and can be considered for a traineeship in',
         '#type' => 'checkboxes',
         '#options' => array(
@@ -3164,6 +3164,14 @@ function br_application_submission_format($sub) {
           $value .= '<tr><td>' . $sub[5]['name'][$ikey] . '</td><td>' . $sub[5]['time'][$ikey] . '</td><td>' . $sub[5]['job_title'][$ikey] . '</td></tr>';
         }
         $value .= "</table>";
+      }
+      elseif ($field_name == 'completed_diploma') {
+        if (!empty($sub[1]['completed_diploma'])) {
+          $value = '';
+          foreach ($sub[1]['completed_diploma'] as $printout) {
+            $value .= $printout . '<br/>';
+          }
+        }
       }
       else {
         foreach ($sub as $step => $values) {
