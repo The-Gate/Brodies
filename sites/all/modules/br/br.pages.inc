@@ -2438,7 +2438,7 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
     }
   }
   else {
-    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you’ve taken the first step to potentially becoming a Brodies trainee of the future. Take your time when completing the form, make sure that you answer all the questions fully and that you give strong examples which highlight that you have the skills and competencies we are looking for in our trainees.</p><p>Good luck!</p><p>Closing dates for applications : <b>Friday 9th October 2015</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 4th year of your LLB or 1st year of your accelerated LLB and you should be on track for a 2:1</p>";
+    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you’ve taken the first step to potentially becoming a Brodies trainee of the future. Take your time when completing the form, make sure that you answer all the questions fully and that you give strong examples which highlight that you have the skills and competencies we are looking for in our trainees.</p><p>Good luck!</p><p>Closing dates for applications : <b>Sunday 11th October 2015</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 4th year of your LLB or 1st year of your accelerated LLB and you should be on track for a 2:1</p>";
 
     $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n 
       where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);
