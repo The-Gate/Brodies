@@ -1201,7 +1201,9 @@ LEFT JOIN content_type_people p on p.vid = ns.vid order by delta", $node->nid);
     }
     $out .= '</div><div class="ff"></div>';
   }
-
+  if ($node->field_event_guest[0]['value']) {
+    $out .= '<div class="guest">' . $node->field_event_guest[0]['value'] . '</div>';
+  }
   if ($node->field_event_audience[0]['value']) {
     $out .= '<div class="audience"><b>Audience:</b>';
     foreach ($node->field_event_audience as $data) {
@@ -1226,9 +1228,6 @@ LEFT JOIN content_type_people p on p.vid = ns.vid order by delta", $node->nid);
     $out .= '</div>';
   }
 
-  if ($node->field_event_guest[0]['value']) {
-    $out .= '<div class="guest">' . $node->field_event_guest[0]['value'] . '</div>';
-  }
   return $out;
 }
 
