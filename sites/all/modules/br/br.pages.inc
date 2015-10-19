@@ -635,7 +635,7 @@ function br_search_form($form_state, $type) {
       break;
     case 'event':
       unset($form['service']);
-      $seminars = $_REQUEST['q'] == 'seminars-and-events';
+      $seminars = (!(strpos($_REQUEST['q'] , 'seminars-and-events' )===false)) ? true : false;
 
       //$form['services'] = array('#value' => '<ul><li>' . l('Seminars', 'node/44', array('html' => TRUE)) . '</li></ul>', '#weight' => 5);
       unset($form['sector']);
@@ -1310,6 +1310,7 @@ function br_waiting_list_form_submit($form_init, $form_values) {
   $params['contact_details'] = $form_values['values'];
   $params['contact_details']['related seminar'] = $event->title . ' ' . url('node/' . $event->nid, array('absolute' => TRUE));
   $admin_email = 'contact@brodies.com';
+//  $admin_email = 'info@sakurabrae.co.uk';
 
   drupal_mail('br', 'waiting-list', $admin_email, language_default(), $params);
 

@@ -435,7 +435,7 @@ function br_signup_ebulletin_form($form_state) {
       'Dispute Resolution & Litigation' => 'Dispute Resolution & Litigation',
       'Employment, Pensions & Benefits' => 'Employment, Pensions & Benefits',
       'General news' => 'General news',
-      'Housebuilding'=>'Housebuilding',
+      'Housebuilding' => 'Housebuilding',
       'Insurance & Risk' => 'Insurance & Risk',
       'Intellectual Property, Technology & Outsourcing' => 'Intellectual Property, Technology & Outsourcing',
       'Land & Rural Business' => 'Land & Rural Business',
@@ -786,11 +786,12 @@ function br_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
         for ($i = 1; $i < 5; $i++) {
           if ($node->{'field_p_v_image_' . $i}[0]['filepath'] && $node->{'field_p_v_text_' . $i}[0]['value'] && $node->{'field_p_v_url_' . $i}[0]['value']) {
             $vdata = br_get_video_data($node->{'field_p_v_url_' . $i}[0]['value']);
-            $src = imagecache_create_url('inline-videos-thumb', $node->{'field_p_v_image_' . $i}[0]['filepath']);
             if (mis_is_mobile()) {
+              $src = imagecache_create_url('inline-videos-thumb-mobile', $node->{'field_p_v_image_' . $i}[0]['filepath']);
               $videos_html .= '<div class="ivideo video-' . $i . '"><a href="' . $node->{'field_p_v_url_' . $i}[0]['value'] . '" target="_blank"><img src="' . $src . '"><p>' . $node->{'field_p_v_text_' . $i}[0]['value'] . '</p><span class="view">PLAY VIDEO</span></a></div>';
             }
             else {
+              $src = imagecache_create_url('inline-videos-thumb', $node->{'field_p_v_image_' . $i}[0]['filepath']);
               $videos_html .= '<div class="ivideo video-' . $i . '"><span class="video">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="' . $src . '"><p>' . $node->{'field_p_v_text_' . $i}[0]['value'] . '</p><span class="view">PLAY VIDEO</span></div>';
             }
           }
@@ -1061,7 +1062,7 @@ function sm($element, $return = FALSE) {
 
 function br_mail_alter(&$message) {
   global $language;
-  ini_set('SMTP', 'smtp-auth.lumison.net');
+  //ini_set('SMTP', 'smtp-auth.lumison.net');
   $message['headers']['From'] = "contact@brodies.com";
   $message['headers']['Reply-To'] = "contact@brodies.com";
 
