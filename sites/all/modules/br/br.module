@@ -160,6 +160,7 @@ function br_block($op = 'list', $delta = 0, $edit = array()) {
       102 => array('info' => t('MOBILE : logo & slogan')),
       103 => array('info' => t('MOBILE : Social links')),
       104 => array('info' => t('MOBILE : Central Menu')),
+      105 => array('info' => t('Legal Updates & Publications Archive : LISTING')),
     );
 
     return $blocks;
@@ -338,6 +339,11 @@ function br_block($op = 'list', $delta = 0, $edit = array()) {
       case 103: $out = br_social_links(TRUE);
         break;
       case 104: $out = br_mobile_center_menu();
+        break;
+
+      case 105:
+        include_once(drupal_get_path('module', 'br') . '/br.pages.inc');
+        $out = br_listing('lupdate_publication');
         break;
     }
 
@@ -1062,7 +1068,9 @@ function sm($element, $return = FALSE) {
 
 function br_mail_alter(&$message) {
   global $language;
-  //ini_set('SMTP', 'smtp-auth.lumison.net');
+  if (!($_SERVER['HTTP_HOST'] == 'dev.brodies.com')) {
+    ini_set('SMTP', 'smtp-auth.lumison.net');
+  }
   $message['headers']['From'] = "contact@brodies.com";
   $message['headers']['Reply-To'] = "contact@brodies.com";
 
@@ -1120,7 +1128,7 @@ function br_mail($key, &$message, $params) {
       break;
     case 'application-confirm-user':
       $message['subject'] = t('Thank you for submitting your application');
-      $message['body'][] = t("Thank you for your interest in Brodies LLP.\n\nWe acknowledge receipt of your application form and we will be in contact following our closing date of Sunday 11th October 2015.\n\nPlease note that it is our policy to keep any applications or CVs submitted to us on file for the next 2 years. If you would prefer us not to keep your details on file for this length of time, please let us know and we will delete all the information that we hold about you from our records after 6 months in accordance with our data protection obligations.");
+      $message['body'][] = t("Thank you for your interest in Brodies LLP.  We acknowledge receipt of your email and we will be in contact shortly.\n\nPlease note that it is our policy to keep any applications or CVs submitted to us on file for the next 2 years.  If you would prefer us not to keep your details on file for this length of time, please let us know and we will delete all the information that we hold about your from our records after 6 months in accordance with our data protection obligations.");
       break;
     case 'application-confirm-admin':
       $message['subject'] = t('Brodies : user "@name" filled in application form', array('@name' => $params['full_name']));

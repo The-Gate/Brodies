@@ -26,13 +26,24 @@
   <<?php print $field->inline_html;?> class="views-field-<?php print $field->class; ?>">
     <?php if ($field->label): ?>
       <label class="views-label-<?php print $field->class; ?>">
-        <?php print $field->label; ?>
+        <?php print $field->label; ?><div class="icon"></div> 
       </label>
     <?php endif; ?>
       <?php
       // $field->element_type is either SPAN or DIV depending upon whether or not
       // the field is a 'block' element type or 'inline' element type.
       ?>
+      <?php 
+      if ($field->handler->view->current_display == 'block_1' && $field->handler->view->name == 'latest_legal_update') {
+          if ($field->class == 'nid') {
+            $node = node_load($field->content);
+            $date = $node->field_date[0]['value']?$node->field_date[0]['value']:$node->created;
+            $field->content = '<div class="date">'. date("d.m.y", $date) .'</div>';
+          }      
+      }  
+      ?>      
       <<?php print $field->element_type; ?> class="field-content"><?php print $field->content; ?></<?php print $field->element_type; ?>>
   </<?php print $field->inline_html;?>>
+  <?php      
+  ?>
 <?php endforeach; ?>

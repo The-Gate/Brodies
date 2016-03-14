@@ -1,7 +1,6 @@
 <?php
   if ($_GET['destination']) {
-    $data = br_back_url($_GET['destination']);    
-    print '<div class="back"><a href="'. url($data['q'], array('query' => $data['query'])) .'">&laquo; Back</a></div>';
+    print '<div class="back"><a href="'. url(drupal_get_path_alias($_GET['destination'])) .'">&laquo; Back</a></div>';
   }
 ?>
 <div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?> node-<?php print $node->type; ?>">

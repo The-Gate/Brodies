@@ -46,8 +46,18 @@ function phptemplate_preprocess_page(&$vars) {
       $break = ' margin-top';
     }
   }
+  
+  $controls = '';
+  if (user_access('administer menu')) {
+    $controls .= '<div class="controls">' . l('Edit menu', 'admin/build/menu-customize/' . 'menu-mobile-top', array('query' => drupal_get_destination())) . '</div>';
+  }
    
-  $vars['mobile_top_menu'] = '<span>Menu</span> <ul>'. $header_menu .'</ul>';  
+  $vars['mobile_top_menu'] = '<span>Menu</span> <ul>'. $header_menu .'</ul>'. $controls;  
+  
+  if (isset($vars['node']) && $vars['node']->type == 'lpage' && !arg(2)) {    
+    // "page-lpage.tpl.php".
+    $vars['template_files'][] = 'page-lpage';
+  }  
   
   /*
   

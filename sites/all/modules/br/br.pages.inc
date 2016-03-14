@@ -289,6 +289,44 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       }
 
       break;
+
+    case 'lupdate_publication':
+      $filter_text .= br_search('lupdate_publication');
+      $order = ' ORDER BY latest_date desc ';
+      if ($_GET['category'] && is_numeric($_GET['category'])) {
+        $filters .= ' AND (p.field_p_area_nid = %d or u.field_l_area_nid = %d) ';
+        $args[] = $_GET['category'];
+        $args[] = $_GET['category'];
+      }
+
+      if ($_GET['keyword']) {
+        $filters .= ' AND (nr.title like ("%%%s%%")
+                      OR nr.body like ("%%%s%%")
+                      OR u.field_l_left_value like ("%%%s%%")
+                      OR f.filename like ("%%%s%%")
+                              ) ';
+        $args[] = $_GET['keyword'];
+        $args[] = $_GET['keyword'];
+        $args[] = $_GET['keyword'];
+        $args[] = $_GET['keyword'];
+      }
+
+      $sql = "SELECT  n.type, u.*, p.*, nr.teaser, nr.body, f.*, n.nid, n.title,
+        COALESCE(field_p_date_value, field_l_date_value) as latest_date
+        FROM  {node} n
+        LEFT JOIN {content_type_lupdate} u  on n.vid = u.vid 
+        LEFT JOIN {content_type_publication} p  on n.vid = p.vid 
+        LEFT JOIN {files} f on f.fid = field_p_file_fid 
+        INNER JOIN {node_revisions} nr on nr.vid = n.vid 
+        WHERE (type='lupdate' or type='publication') 
+        and n.status=1" . $filters . $order;
+      $rpp = 10;
+
+      if (mis_is_mobile()) {
+        $out .= '<div class="back"><a href="' . url('node/62') . '">&laquo; Back</a></div>';
+      }
+      break;
+
     case 'video':
       if (strlen($order) < 1) {
         $order = "ORDER BY n.changed desc";
@@ -326,7 +364,8 @@ function br_listing($type, $popup = FALSE, $stype = '') {
         $out .='<div class="result-header"><h2>' . $data->letter . '</h2></div>';
         $current_letter = $data->letter;
       }
-      $out .= br_print_row($data, $type, $popup ? $count : FALSE, $count, $stype);
+      $filter_type = ($type == 'lupdate_publication') ? $data->type : $type;
+      $out .= br_print_row($data, $filter_type, $popup ? $count : FALSE, $count, $stype);
     }
   }
 
@@ -387,7 +426,7 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
     switch ($type) {
       case 'people';
         if ($mobile) {
-          $content = $image . '<h3>' . $data->title . '</h3><div class="more">' . l('More information', 'node/' . $data->nid, array('query' => drupal_get_destination())) . '</div>';
+          $content = '<div class="col-left"><div class="img">' . ($data->filepath ? ($stype != 'profile' ? '<a href="' . url('node/' . $data->nid) . '"><img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/></a>' : '<img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>') : '&nbsp;') . '</div></div><div class="col-right"><div class="name">' . ($stype != 'profile' ? l($data->field_people_sname_value . ', ' . $data->field_people_fname_value, 'node/' . $data->nid) : $data->field_people_sname_value . ', ' . $data->field_people_fname_value) . '</div></div>';
         }
         else {
           $content = '<div class="col-left"><div class="img">' . ($data->filepath ? ($stype != 'profile' ? '<a href="' . url('node/' . $data->nid) . '"><img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/></a>' : '<img src="' . imagecache_create_url('people-list-thumb', $data->filepath) . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>') : '&nbsp;') . '</div></div><div class="col-right"><div class="name">' . ($stype != 'profile' ? l($data->field_people_sname_value . ', ' . $data->field_people_fname_value, 'node/' . $data->nid) : $data->field_people_sname_value . ', ' . $data->field_people_fname_value) . '</div><div class="nr">' . $data->field_people_phone_value . '</div><div class="email">' . l('Email', 'mailto:' . $data->field_people_email_value) . '</div></div><div class="ff"></div>';
@@ -481,7 +520,26 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
       case 'lupdate':
         $node = node_load($data->nid);
         $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_l_date[0]['value'];
-        $content = '<div class="u-right"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">' . date("d.m.y", $date) . '</div></div>';
+        if (mis_is_mobile()) {
+          $image = '';
+        }
+        else {
+          if (!empty($node->field_d_thumbail[0]['filepath'])) {
+            $src = $node->field_d_thumbail[0]['filepath'];
+            $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
+          }
+          else {
+            $field = content_fields('field_d_thumbail', 'lupdate');
+            $image = theme('image', $field['widget']['default_image']['filepath']);
+          }
+        }
+        $area_array = $node->field_l_area;
+        $area_output = '';
+        foreach ($area_array as $key => $value) {
+          $this_area = node_load($value);
+          $area_output .= $this_area->title;
+        }
+        $content = '<div class="item"><div class="il"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">' . date("d.m.y", $date) . '</div><div class="text"><p>' . strip_tags($data->teaser) . '</p></div><div class="cats"><b>CATEGORY:</b> ' . $area_output . '</div></div><div class="ir">' . $image . '</div><div class="ff"></div></div>';
         break;
       case 'publication':
         $type = strtoupper(substr($data->filemime, strrpos($data->filemime, '/') + 1));
@@ -490,11 +548,28 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
         if (user_access('edit any publication content')) {
           $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
         }
-
         $node = node_load($data->nid);
         $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_p_date[0]['value'];
-
-        $content = '<h3>' . $data->title . ' [' . $type . ' ' . $size . ']</h3>' . $controls . '<div class="date">' . date("d.m.y", $date) . '</div><div class="text">' . $data->body . '</div>' . l('&raquo; Download ' . $data->title . ' document', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE));
+        if (mis_is_mobile()) {
+          $image = '';
+        }
+        else {
+          if (!empty($node->field_d_thumbail[0]['filepath'])) {
+            $src = $node->field_d_thumbail[0]['filepath'];
+            $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
+          }
+          else {
+            $field = content_fields('field_d_thumbail', 'lupdate');
+            $image = theme('image', $field['widget']['default_image']['filepath']);
+          }
+        }
+        $area_array = $node->field_p_area;
+        $area_output = '';
+        foreach ($area_array as $key => $value) {
+          $this_area = node_load($value);
+          $area_output .= $this_area->title;
+        }
+        $content = '<div class="item"><div class="il"><h3>' . l($data->title . '<br><span class="smaller">[' . $type . ' ' . $size . ']</span>', $data->filepath, array('attributes' => array('target' => '_blank'), 'html' => TRUE)) . '</h3>' . $controls . '<div class="date">' . date("d.m.y", $date) . '</div><div class="text">' . $data->body . '</div><div class="cats"><b>CATEGORY:</b> ' . $area_output . '</div></div><div class="ir"><div class="thumb_wrapper">' . $image . '</div><div class="download_wrapper">' . l('Download Guide', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE)) . '</div></div><div class="ff"></div></div>';
         break;
       case 'video';
         $image = '&nbsp;';
@@ -551,6 +626,10 @@ function br_search($type) {
     case 'event':
       $path = 'node/44';
       $title = 'Seminar search';
+      break;
+    case 'lupdate_publication':
+      $path = 'node/63';
+      $title = 'Search for Legal Updates';
       break;
     case 'lupdate':
       $path = 'node/63';
@@ -635,7 +714,7 @@ function br_search_form($form_state, $type) {
       break;
     case 'event':
       unset($form['service']);
-      $seminars = (!(strpos($_REQUEST['q'] , 'seminars-and-events' )===false)) ? true : false;
+      $seminars = (!(strpos($_REQUEST['q'], 'seminars-and-events') === false)) ? true : false;
 
       //$form['services'] = array('#value' => '<ul><li>' . l('Seminars', 'node/44', array('html' => TRUE)) . '</li></ul>', '#weight' => 5);
       unset($form['sector']);
@@ -683,6 +762,25 @@ function br_search_form($form_state, $type) {
         '#default_value' => $_GET['location'],
         '#weight' => 14
       );
+      break;
+    case 'lupdate_publication':
+      unset($form['service'], $form['sector']);
+      $form['keyword'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Search by Keyword',
+        '#default_value' => $_GET['keyword'],
+        '#weight' => 10,
+        '#attributes' => array('placeholder' => 'Search by Keyword')
+      );
+      $form['category'] = array(
+        '#type' => 'select',
+        '#title' => 'Categories',
+        '#options' => array('' => 'Categories') + br_node_options_list('larea') + br_node_options_list('parea'),
+        '#default_value' => $_GET['category'],
+        '#weight' => 20,
+        '#suffix' => '<div class="ff"></div>',
+      );
+
       break;
     case 'lupdate':
       unset($form['service'], $form['sector']);
@@ -2283,6 +2381,11 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
         }
       }
 
+      if ($step == 4) {
+        $form_data['grades_exam'] = array('#type' => 1, '#title' => 'Exam');
+        $form_data['grades_subject'] = array('#type' => 1, '#title' => 'Subject');
+        $form_data['grades_grade'] = array('#type' => 1, '#title' => 'Grade');
+      }
       if ($step == 5) {
         $form_data['name'] = array('#type' => 1, '#title' => 'Name of employer');
         $form_data['time'] = array('#type' => 1, '#title' => 'Period of time in employment');
@@ -2338,6 +2441,11 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
             $value = '';
             if ($field_name == 'submission_date') {
               $value = date("H:i d M y", $pnode->changed);
+            }
+            elseif (strpos($field_name, 'grades_exam') === 0 || strpos($field_name, 'grades_subject') === 0 || strpos($field_name, 'grades_grade') === 0) {
+              foreach ($sub[4][$field_name] as $ikey => $item) {
+                $value .= ' (' . ($ikey + 1) . ') ' . $item . " \n ";
+              }
             }
             elseif (strpos($field_name, 'subject') !== FALSE || strpos($field_name, 'grade') !== FALSE || strpos($field_name, 'attempt') !== FALSE) {
               $data = explode('-', $field_name);
@@ -2438,10 +2546,9 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
     }
   }
   else {
-    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you’ve taken the first step to potentially becoming a Brodies trainee of the future. Take your time when completing the form, make sure that you answer all the questions fully and that you give strong examples which highlight that you have the skills and competencies we are looking for in our trainees.</p><p>Good luck!</p><p>Closing dates for applications : <b>Sunday 11th October 2015</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 4th year of your LLB or 1st year of your accelerated LLB and you should be on track for a 2:1</p>";
+    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you've taken the first step to potentially become a Brodies' trainee or summer student of the future. Take your time when completing the form, make sure that you answer all of the questions fully and that you give strong examples which highlight that you have the skills and competencies that we look for in all of our people.</p><p>Good luck!</p><p>Closing date for applications: <b>Monday 11 January 2016</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 3rd year of your LLB or 1st year of your accelerated LLB</p>";
 
-    $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n 
-      where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);
+    $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);
 
     $rows = array();
     while ($data = db_fetch_object($result)) {
@@ -2515,15 +2622,6 @@ function br_application_form($form_state, $step) {
         '#clearfix' => TRUE
       );
 
-      $form['completed_diploma'] = array(
-        '#title' => 'I will have completed my diploma and can be considered for a traineeship in',
-        '#type' => 'checkboxes',
-        '#options' => array(
-          '2016' => '2016',
-          '2017' => '2017',
-        )
-      );
-
       $form['applied_in_past_pre'] = array('#value' => '<div class="form-item" style="clear:both">
  <label>Please advise if you have applied to Brodies in the past and if so, when was this?: <span title="This field is required." class="form-required">*</span></label>
  <div class="item-left">');
@@ -2559,14 +2657,6 @@ function br_application_form($form_state, $step) {
           'Yes Summer Placement 2015' => 'Yes Summer Placement 2015',
           'Yes Traineeship 2015' => 'Yes Traineeship 2015',
         )
-      );
-
-      $form['interviewed_with_brodies'] = array(
-        '#title' => 'If you have interviewed with Brodies in the past, please provide details below',
-        '#required' => FALSE,
-        '#type' => 'textarea',
-        '#resizable' => FALSE,
-        '#prefix' => '<br />',
       );
 
       $form['break'] = array(
@@ -2636,7 +2726,7 @@ function br_application_form($form_state, $step) {
       );
 
       $form['helth_limitations'] = array(
-        '#title' => 'Please tell us of any health limitations or special requirements that may affect your attendance at an assessment centre',
+        '#title' => 'Please tell us of any health limitations or special needs that may affect your attendance at an interview',
         '#required' => FALSE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
@@ -2660,15 +2750,13 @@ function br_application_form($form_state, $step) {
         '#type' => 'textfield'
       );
 
-      $form['subjects'] = array('#value' => '<p>Please list all the subjects you have studied and have yet to study for your law degree, the marks for each year for
-each subject and the number of attempts. <span class="notice">Please declare mark, rather than pass/fail subjects.</span></p>' . br_multiple_field($defaults[$step], 'subjects'));
+      $form['subjects'] = array('#value' => '<p>Please list all the subjects you have studied (and have yet to study) for your law degree, the marks for each year for each subject and the number of attempts. <span class="notice">Please declare mark, rather than  pass/fail.</span></p>' . br_multiple_field($defaults[$step], 'subjects'));
 
       $form['further_information'] = array(
         '#title' => 'Further Information',
         '#required' => FALSE,
-        '#pre_label' => '<!--<p>Please provide details of the subjects you have, or are due to study at fourth year level. If you have completed fourth year, please also indicate your marks and number of attempts.</p>--><p>If you have taken a year out, please provide details below. (maximum of 150 words)</p>',
+        '#pre_label' => '<!--<p>Please provide details of the subjects you have, or are due to study at fourth year level. If you have completed fourth year, please also indicate your marks and number of attempts.</p>--><p>If you have taken a year out, please provide details below.</p>',
         '#type' => 'textarea',
-        '#attributes' => array('maxlength' => 1000),
         '#resizable' => FALSE,
       );
       break;
@@ -2692,6 +2780,21 @@ each subject and the number of attempts. <span class="notice">Please declare mar
         '#rows' => 12,
         '#better' => 'Education other degrees - qualifications'
       );
+      $form['eduction_other_degrees_university_2'] = array(
+        '#title' => 'Name of university/college',
+        '#required' => FALSE,
+        '#type' => 'textfield',
+        '#better' => 'Education other degrees - university/college name'
+      );
+
+      $form['eduction_other_degrees_qualifications_2'] = array(
+        '#title' => 'Qualifications',
+        '#required' => FALSE,
+        '#type' => 'textarea',
+        '#resizable' => FALSE,
+        '#rows' => 12,
+        '#better' => 'Education other degrees - qualifications'
+      );
 
       break;
 
@@ -2704,15 +2807,8 @@ each subject and the number of attempts. <span class="notice">Please declare mar
         '#better' => 'Education school - school/college name'
       );
 
-      $form['eduction_school_qualifications'] = array(
-        '#title' => 'Qualifications',
-        '#required' => FALSE,
-        '#type' => 'textarea',
-        '#resizable' => FALSE,
-        '#rows' => 12,
-        '#pre_label' => '<p>Please list the Scottish Higher Certificate (or equivalent) exams you have taken. <br /><b>e.g.</b> English Higher A</p>',
-        '#better' => 'Education school - qualifications'
-      );
+      $form['education_exams'] = array('#value' => '<p>Please list the Scottish Higher Certificate (or equivalent) exams you have taken. <br /><b>e.g.</b> English Higher A</p>' . br_multiple_field($defaults[$step], 'education_exams'));
+
 
       break;
 
@@ -2721,12 +2817,11 @@ each subject and the number of attempts. <span class="notice">Please declare mar
       $form['intro'] = array('#value' => '<p>Please state full employment history</p>');
       $form['employment_history'] = array('#value' => br_multiple_field($defaults[$step], 'employment'));
 
-      $form['emplotment_other'] = array(
-        '#title' => 'Are there any other relevant experiences you would like to tell us about? (maximum of 200 words)',
+      $form['employtment_other'] = array(
+        '#title' => 'Are there any other relevant experiences you would like to tell us about?',
         '#no-colon' => TRUE,
         '#required' => FALSE,
         '#type' => 'textarea',
-        '#attributes' => array('maxlength' => 1000),
         '#resizable' => FALSE,
       );
       break;
@@ -2744,34 +2839,29 @@ each subject and the number of attempts. <span class="notice">Please declare mar
 
     case 7:
       $title = 'Supporting Information';
-      $form['effective_communication'] = array(
-        '#title' => 'Please tell us about an occasion where you have had to be an effective communicator. (maximum of 200 words)',
+      $form['supporting_info_intro'] = array('#value' => '<p>Please keep your answers succinct. Responses are typically around 200 words.</p>');
+      $form['why_summer_placement'] = array(
+        '#title' => 'Tell us why a summer placement at Brodies would help you prepare for a career in law?',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
       );
 
-      $form['team_contribution'] = array(
-        '#title' => 'At Brodies we aim to always go “Above and Beyond” for our clients. Please tell us about a time you have exceeded someone’s expectations of you. (maximum of 200 words)',
+      $form['skill_checklist'] = array(
+        '#title' => 'Write a checklist of the skills and attributes required to be an effective communicator. Tell us about an occasion when you have used those skills to communicate successfully',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
       );
 
       $form['commercial_awareness'] = array(
-        '#title' => 'What is your understanding of the term \'Commercial Awareness\'? and from your research of Brodies give us an example of how you think we demonstrate this as a firm (maximum of 200 words) ?',
+        '#title' => 'What is your understanding of the term \'Commercial Awareness\'? From your research of Brodies give us an example of how we have demonstrated commercial awareness as a firm',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
       );
-      $form['pursue_career'] = array(
-        '#title' => 'Please explain why you have decided to pursue a career with Brodies (maximum of 200 words)',
-        '#required' => TRUE,
-        '#type' => 'textarea',
-        '#resizable' => FALSE,
-      );
-      $form['selling_points'] = array(
-        '#title' => 'What are your unique selling points (maximum of 200 words) ?',
+      $form['unique_selling_points'] = array(
+        '#title' => 'What are your unique selling points?',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
@@ -2849,7 +2939,7 @@ each subject and the number of attempts. <span class="notice">Please declare mar
 
     case 9:
       $title = 'Equality monitoring';
-      $form['intro'] = array('#value' => '<p>We operate a policy of equality and diversity in the recruitment process. To help us monitor this policy, please complete the form below.</p><p>You are not required to complete this form but are encouraged to do so to ensure that the survey is as accurate as possible. The information you supply will be kept in strict confidence and will be used for statistical purposes only. It does not form part of the selection procedure.  </p>');
+      $form['intro'] = array('#value' => '<p>We operate a policy of equality and diversity in the recruitment process. To help us monitor this policy, please complete the form below.</p><p>You are not required to complete this form but are encouraged to do so to ensure that the survey is as accurate as possible. The information you supply will be kept in strict confidence and will be used for statistical purposes only. It does not form part of the selection process.</p>');
 
       $form['equality_gender'] = array(
         //'#required' => TRUE,
@@ -2877,7 +2967,7 @@ each subject and the number of attempts. <span class="notice">Please declare mar
 
     case 10:
       $title = 'Data Protection';
-      $form['intro'] = array('#value' => '<p>I confirm that Brodies may keep my application on file for the next 2 years, after which it will be deleted in accordance with Brodies data protection obligations.</p>');
+      $form['intro'] = array('#value' => '<p>For the purposes of Data Protection, by ticking this box I consent to Brodies LLP holding and processing the information provided on this form as part of their summer placement selection process and to the retention of such information by Brodies LLP for a 2 year period.</p>');
 
       $form['confirm_information'] = array(
         '#required' => TRUE,
@@ -2963,6 +3053,20 @@ function br_multiple_field($def, $type) {
       }
       break;
 
+    case 'education_exams':
+      $add = 'add subject';
+      $rows = array();
+      for ($s = 0; $s <= (max(count($_POST['grades_exam'] ? $_POST['grades_exam'] : $def['grades_exam']), 3)) - 1; $s++) {
+        $rows[] = array(
+          br_input('grades_exam[]', $_POST['grades_exam'][$s] ? $_POST['grades_exam'][$s] : $def['grades_exam'][$s]),
+          br_input('grades_subject[]', $_POST['grades_subject'][$s] ? $_POST['grades_subject'][$s] : $def['grades_subject'][$s]),
+          br_input('grades_grade[]', $_POST['grades_grade'][$s] ? $_POST['grades_grade'][$s] : $def['grades_grade'][$s]),
+        );
+      }
+      $out .= theme('table', array(array('data' => 'Exam', 'width' => '40%'), array('data' => 'Subject', 'width' => '40%'), array('data' => 'Grade', 'width' => '20%')), $rows) . '<div class="add-field">' . $add . '</div>';
+
+      break;
+
     case 'employment':
       $add = 'add employment';
 
@@ -3020,6 +3124,11 @@ function br_application_form_validate($form_state, $form_values) {
       $default[$step]['grade'] = $_POST['grade'];
       $default[$step]['attempts'] = $_POST['attempts'];
     }
+    else if ($step == 4) {
+      $default[$step]['grades_exam'] = $_POST['grades_exam'];
+      $default[$step]['grades_subject'] = $_POST['grades_subject'];
+      $default[$step]['grades_grade'] = $_POST['grades_grade'];
+    }
     else if ($step == 5) {
       $default[$step]['name'] = $_POST['name'];
       $default[$step]['time'] = $_POST['time'];
@@ -3071,6 +3180,11 @@ function br_application_form_submit($form_state, $form_values) {
     $default[$step]['subject'] = $_POST['subject'];
     $default[$step]['grade'] = $_POST['grade'];
     $default[$step]['attempts'] = $_POST['attempts'];
+  }
+  else if ($step == 4) {
+    $default[$step]['grades_exam'] = $_POST['grades_exam'];
+    $default[$step]['grades_subject'] = $_POST['grades_subject'];
+    $default[$step]['grades_grade'] = $_POST['grades_grade'];
   }
   else if ($step == 5) {
     $default[$step]['name'] = $_POST['name'];
@@ -3127,6 +3241,9 @@ function br_application_submission_format($sub) {
       $form_data['edu_history'] = array('#type' => 1, '#title' => 'Please list all the subjects you have studied (and have yet to study) for your law degree, the marks for each year for each subject and the number of attempts. Please declare mark, rather than pass/fail.');
     }
 
+    if ($step == 4) {
+      $form_data['exam_history'] = array('#type' => 1, '#title' => 'Please list the Scottish Higher Certificate (or equivalent) exams you have taken');
+    }
     if ($step == 5) {
       $form_data['emp_history'] = array('#type' => 1, '#title' => 'Please state full employment history');
     }
@@ -3155,6 +3272,13 @@ function br_application_submission_format($sub) {
           foreach ($sub[2]['subject'][$year] as $sub_key => $sub_item) {
             $value .= '<tr><td>' . $year . '</td><td>' . $sub[2]['subject'][$year][$sub_key] . '</td><td>' . $sub[2]['grade'][$year][$sub_key] . '</td><td>' . $sub[2]['attempts'][$year][$sub_key] . '</td></tr>';
           }
+        }
+        $value .= "</table>";
+      }
+      elseif ($field_name == 'exam_history') {
+        $value = "<table cellspacing='5'><tr><th>Exam</th><th>Subject</th><th>Grade</th></tr>";
+        foreach ($sub[5]['name'] as $ikey => $item) {
+          $value .= '<tr><td>' . $sub[4]['grades_exam'][$ikey] . '</td><td>' . $sub[4]['grades_subject'][$ikey] . '</td><td>' . $sub[4]['grades_grade'][$ikey] . '</td></tr>';
         }
         $value .= "</table>";
       }
