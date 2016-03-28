@@ -35,6 +35,9 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'LP - Contact Wrapper'		, element : 'div', attributes : { 'class' : 'contact' } },
             { name : 'LP - Contat Image'		, element : 'div', attributes : { 'class' : 'contact-image' } },
             { name : 'LP - Contat Info'		, element : 'div', attributes : { 'class' : 'contact-info' } },
+            { name : 'Blockquote Wrapper'		, element : 'div', attributes : { 'class' : 'blockquote-wrapper' } },
+            { name : 'Info Panel Wrapper'		, element : 'div', attributes : { 'class' : 'infopanel-wrapper' } },
+            { name : 'Image and Caption Wrapper'		, element : 'div', attributes : { 'class' : 'imagecaption-wrapper' } },
 //            { name : 'Red Title'		, element : 'h3', styles : { 'color' : 'Red' } },
 
             /* Inline Styles */

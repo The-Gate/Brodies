@@ -192,3 +192,41 @@ function brodies_form_element($element, $value) {
 
   return $output;
 }
+
+
+// take form input cand convert to rbg if it looks like hex
+function getRBGvalue($form_value, $default_value) {
+  $return = $default_value;
+  if ((!empty($form_value)) and strlen($form_value) == 6) {
+    $convert = true;
+    $form_value_array = str_split($form_value);
+    foreach ($form_value_array as $testcase) {
+      if (!ctype_xdigit($testcase)) {
+        $convert = false;
+      }
+    }
+    if ($convert) {
+      $return = hex2rgb($form_value);
+    }
+  }
+  return $return;
+}
+
+// convert hex to rgb
+function hex2rgb($hex) {
+  $hex = str_replace("#", "", $hex);
+
+  if (strlen($hex) == 3) {
+    $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
+    $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
+    $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+  }
+  else {
+    $r = hexdec(substr($hex, 0, 2));
+    $g = hexdec(substr($hex, 2, 2));
+    $b = hexdec(substr($hex, 4, 2));
+  }
+  $rgb = array($r, $g, $b);
+  //return implode(",", $rgb); // returns the rgb values separated by commas
+  return $rgb; // returns an array with the rgb values
+}

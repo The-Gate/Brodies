@@ -1,6 +1,5 @@
 <?php
-
-/**
+ /**
  * @file
  * Common functionality for file handling CCK field modules.
  */
@@ -348,7 +347,6 @@ function field_file_check_directory(&$directory, $mode = 0, $form_item = NULL) {
     return FALSE;
   }
 
-/*
   if ((file_directory_path() == $directory || file_directory_temp() == $directory) && !is_file("$directory/.htaccess")) {
     $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\nOptions None\nOptions +FollowSymLinks";
     if (($fp = fopen("$directory/.htaccess", 'w')) && fputs($fp, $htaccess_lines)) {
@@ -361,7 +359,7 @@ function field_file_check_directory(&$directory, $mode = 0, $form_item = NULL) {
       watchdog('security', "Security warning: Couldn't write .htaccess file. Please create a .htaccess file in your %directory directory which contains the following lines:<br /><code>!htaccess</code>", $repl, WATCHDOG_ERROR);
     }
   }
-*/
+
   return TRUE;
 }
 

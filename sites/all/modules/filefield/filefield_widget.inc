@@ -338,16 +338,13 @@ function filefield_widget_process($element, $edit, &$form_state, $form) {
     // does a reference check in addition to our basic status check.
     if (isset($edit['fid'])) {
       $removed_file = field_file_load($edit['fid']);
-      if ($removed_file['status'] == 0) {
+      // Users are only allowed to remove their own files.
+      if ($removed_file['status'] == 0  && $GLOBALS['user']->uid == $removed_file['uid']) {
         field_file_delete($removed_file);
       }
     }
     $item = array('fid' => 0, 'list' => $field['list_default'], 'data' => array('description' => ''));
   }
-
-  // Set access on the buttons.
-  $element['filefield_upload']['#access'] = empty($item['fid']);
-  $element['filefield_remove']['#access'] = !empty($item['fid']);
 
   // Add progress bar support to the upload if possible.
   $progress_indicator = isset($field['widget']['progress_indicator']) ? $field['widget']['progress_indicator'] : 'bar';
@@ -377,18 +374,26 @@ function filefield_widget_process($element, $edit, &$form_state, $form) {
   // Set the FID.
   $element['fid'] = array(
     '#type' => 'hidden',
-    '#value' => $item['fid'],
+    '#value' => isset($item['fid']) ? $item['fid'] : 0,
   );
 
-  if ($item['fid'] != 0) {
-    $element['preview'] = array(
-      '#type' => 'markup',
-      '#value' => theme('filefield_widget_preview', $item),
-    );
+  if (!empty($item['fid'])) {
+    if (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE && function_exists('file_download_access') && !empty($item['status']) && !file_download_access($item['filepath'])) {
+      $element['preview'] = array(
+        '#type' => 'markup',
+        '#value' => t('Access denied'),
+      );
+    }
+    else {
+      $element['preview'] = array(
+        '#type' => 'markup',
+        '#value' => theme('filefield_widget_preview', $item),
+      );
+    }
   }
 
   // Grant access to temporary files.
-  if ($item['fid'] && isset($item['status']) && $item['status'] == 0 && variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE) {
+  if (!empty($item['fid']) && isset($item['status']) && $item['status'] == 0 && variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE) {
     $_SESSION['filefield_access'][] = $item['fid'];
   }
 
@@ -401,7 +406,6 @@ function filefield_widget_process($element, $edit, &$form_state, $form) {
 
   if (!empty($field['description_field'])) {
     $element['data']['description'] = array(
-      '#type' => 'textfield',
       '#title' => t('Description'),
       '#value' => isset($item['data']['description']) ? $item['data']['description'] : '',
       '#type' => variable_get('filefield_description_type', 'textfield'),
@@ -446,6 +450,13 @@ function filefield_widget_process($element, $edit, &$form_state, $form) {
   return $element;
 }
 
+function filefield_widget_after_build($element, &$form_state) {
+  // Set access on the buttons.
+  $element['filefield_upload']['#access'] = empty($element['fid']['#value']);
+  $element['filefield_remove']['#access'] = !empty($element['fid']['#value']);
+  return $element;
+}
+
 /**
  * An #element_validate callback for the filefield_widget field.
  */
@@ -458,7 +469,7 @@ function filefield_widget_validate(&$element, &$form_state) {
     if ($file = field_file_load($element['fid']['#value'])) {
       $file = (object) $file;
       if ($file->status == FILE_STATUS_PERMANENT) {
-        if (field_file_references($file) == 0) {
+        if (field_file_references($file) == 0 || (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE && function_exists('file_download_access') && !file_download_access($file->filepath))) {
           form_error($element, t('Referencing to the file used in the %field field is not allowed.', array('%field' => $element['#title'])));
         }
       }
@@ -479,7 +490,7 @@ function theme_filefield_widget($element) {
 
 function theme_filefield_widget_preview($item) {
   // Remove the current description so that we get the filename as the link.
-  if (isset($item['data']['description'])) {
+  if (isset($item['data']) && is_array($item['data']) && isset($item['data']['description'])) {
     unset($item['data']['description']);
   }
 
@@ -561,13 +572,13 @@ function filefield_node_form_validate($form, &$form_state) {
     }
 
     if (!$valid && $field['required'] && filefield_edit_access($field['type_name'], $field_name, $form['#node'])) {
-      form_set_error($field_name, t('%title field is required.', array('%title' => $field['widget']['label'])));
+      form_set_error($field_name, t('%title field is required.', array('%title' => t($field['widget']['label']))));
     }
     $max_filesize = parse_size($field['widget']['max_filesize_per_node']);
     if ($max_filesize && $total_filesize > $max_filesize) {
       form_set_error($field_name, t('Total filesize for %title, %tsize, exceeds field settings of %msize.',
                                     array(
-                                      '%title' => $field['widget']['label'],
+                                      '%title' => t($field['widget']['label']),
                                       '%tsize' => format_size($total_filesize),
                                       '%msize' => format_size($max_filesize)
                                     )
