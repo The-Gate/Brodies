@@ -289,44 +289,6 @@ function br_listing($type, $popup = FALSE, $stype = '') {
       }
 
       break;
-
-    case 'lupdate_publication':
-      $filter_text .= br_search('lupdate_publication');
-      $order = ' ORDER BY latest_date desc ';
-      if ($_GET['category'] && is_numeric($_GET['category'])) {
-        $filters .= ' AND (p.field_p_area_nid = %d or u.field_l_area_nid = %d) ';
-        $args[] = $_GET['category'];
-        $args[] = $_GET['category'];
-      }
-
-      if ($_GET['keyword']) {
-        $filters .= ' AND (nr.title like ("%%%s%%")
-                      OR nr.body like ("%%%s%%")
-                      OR u.field_l_left_value like ("%%%s%%")
-                      OR f.filename like ("%%%s%%")
-                              ) ';
-        $args[] = $_GET['keyword'];
-        $args[] = $_GET['keyword'];
-        $args[] = $_GET['keyword'];
-        $args[] = $_GET['keyword'];
-      }
-
-      $sql = "SELECT  n.type, u.*, p.*, nr.teaser, nr.body, f.*, n.nid, n.title,
-        COALESCE(field_p_date_value, field_l_date_value) as latest_date
-        FROM  {node} n
-        LEFT JOIN {content_type_lupdate} u  on n.vid = u.vid 
-        LEFT JOIN {content_type_publication} p  on n.vid = p.vid 
-        LEFT JOIN {files} f on f.fid = field_p_file_fid 
-        INNER JOIN {node_revisions} nr on nr.vid = n.vid 
-        WHERE (type='lupdate' or type='publication') 
-        and n.status=1" . $filters . $order;
-      $rpp = 10;
-
-      if (mis_is_mobile()) {
-        $out .= '<div class="back"><a href="' . url('node/62') . '">&laquo; Back</a></div>';
-      }
-      break;
-
     case 'video':
       if (strlen($order) < 1) {
         $order = "ORDER BY n.changed desc";
@@ -364,8 +326,7 @@ function br_listing($type, $popup = FALSE, $stype = '') {
         $out .='<div class="result-header"><h2>' . $data->letter . '</h2></div>';
         $current_letter = $data->letter;
       }
-      $filter_type = ($type == 'lupdate_publication') ? $data->type : $type;
-      $out .= br_print_row($data, $filter_type, $popup ? $count : FALSE, $count, $stype);
+      $out .= br_print_row($data, $type, $popup ? $count : FALSE, $count, $stype);
     }
   }
 
@@ -520,26 +481,7 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
       case 'lupdate':
         $node = node_load($data->nid);
         $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_l_date[0]['value'];
-        if (mis_is_mobile()) {
-          $image = '';
-        }
-        else {
-          if (!empty($node->field_d_thumbail[0]['filepath'])) {
-            $src = $node->field_d_thumbail[0]['filepath'];
-            $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
-          }
-          else {
-            $field = content_fields('field_d_thumbail', 'lupdate');
-            $image = theme('image', $field['widget']['default_image']['filepath']);
-          }
-        }
-        $area_array = $node->field_l_area;
-        $area_output = '';
-        foreach ($area_array as $key => $value) {
-          $this_area = node_load($value);
-          $area_output .= $this_area->title;
-        }
-        $content = '<div class="item"><div class="il"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">' . date("d.m.y", $date) . '</div><div class="text"><p>' . strip_tags($data->teaser) . '</p></div><div class="cats"><b>CATEGORY:</b> ' . $area_output . '</div></div><div class="ir">' . $image . '</div><div class="ff"></div></div>';
+        $content = '<div class="u-right"><h3>' . l($data->title, 'node/' . $data->nid) . '</h3><div class="date">' . date("d.m.y", $date) . '</div></div>';
         break;
       case 'publication':
         $type = strtoupper(substr($data->filemime, strrpos($data->filemime, '/') + 1));
@@ -548,28 +490,11 @@ function br_print_row($data, $type, $popup = FALSE, $count = 0, $stype = '') {
         if (user_access('edit any publication content')) {
           $controls = '<div class="controls">' . l(t('Edit'), 'node/' . $data->nid . '/edit', array('query' => drupal_get_destination())) . '</div>';
         }
+
         $node = node_load($data->nid);
         $date = $node->field_date[0]['value'] ? $node->field_date[0]['value'] : $node->field_p_date[0]['value'];
-        if (mis_is_mobile()) {
-          $image = '';
-        }
-        else {
-          if (!empty($node->field_d_thumbail[0]['filepath'])) {
-            $src = $node->field_d_thumbail[0]['filepath'];
-            $image = '<img src="' . $src . '" alt="' . check_plain($data->title) . '" title="' . check_plain($data->title) . '"/>';
-          }
-          else {
-            $field = content_fields('field_d_thumbail', 'lupdate');
-            $image = theme('image', $field['widget']['default_image']['filepath']);
-          }
-        }
-        $area_array = $node->field_p_area;
-        $area_output = '';
-        foreach ($area_array as $key => $value) {
-          $this_area = node_load($value);
-          $area_output .= $this_area->title;
-        }
-        $content = '<div class="item"><div class="il"><h3>' . l($data->title . '<br><span class="smaller">[' . $type . ' ' . $size . ']</span>', $data->filepath, array('attributes' => array('target' => '_blank'), 'html' => TRUE)) . '</h3>' . $controls . '<div class="date">' . date("d.m.y", $date) . '</div><div class="text">' . $data->body . '</div><div class="cats"><b>CATEGORY:</b> ' . $area_output . '</div></div><div class="ir"><div class="thumb_wrapper">' . $image . '</div><div class="download_wrapper">' . l('Download Guide', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE)) . '</div></div><div class="ff"></div></div>';
+
+        $content = '<h3>' . $data->title . ' [' . $type . ' ' . $size . ']</h3>' . $controls . '<div class="date">' . date("d.m.y", $date) . '</div><div class="text">' . $data->body . '</div>' . l('&raquo; Download ' . $data->title . ' document', $data->filepath, array('attributes' => array('class' => 'download', 'target' => '_blank'), 'html' => TRUE));
         break;
       case 'video';
         $image = '&nbsp;';
@@ -626,10 +551,6 @@ function br_search($type) {
     case 'event':
       $path = 'node/44';
       $title = 'Seminar search';
-      break;
-    case 'lupdate_publication':
-      $path = 'node/63';
-      $title = 'Search for Legal Updates';
       break;
     case 'lupdate':
       $path = 'node/63';
@@ -762,25 +683,6 @@ function br_search_form($form_state, $type) {
         '#default_value' => $_GET['location'],
         '#weight' => 14
       );
-      break;
-    case 'lupdate_publication':
-      unset($form['service'], $form['sector']);
-      $form['keyword'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Search by Keyword',
-        '#default_value' => $_GET['keyword'],
-        '#weight' => 10,
-        '#attributes' => array('placeholder' => 'Search by Keyword')
-      );
-      $form['category'] = array(
-        '#type' => 'select',
-        '#title' => 'Categories',
-        '#options' => array('' => 'Categories') + br_node_options_list('larea') + br_node_options_list('parea'),
-        '#default_value' => $_GET['category'],
-        '#weight' => 20,
-        '#suffix' => '<div class="ff"></div>',
-      );
-
       break;
     case 'lupdate':
       unset($form['service'], $form['sector']);
@@ -3410,11 +3312,11 @@ function br_landing_page2($node) {
 
   $feeds = '<div class="feeds">
                 <div class="feed"><h3>Useful Links</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
-                <div class="feed"><h3>Related Publications</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
+                <div class="feed"><h3>Recent Publications</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
                 <div class="ff"></div>
           </div>';
 
-  $ctas = '<div class="landing-download"><h3>Our Expertise (PDFs)</h3>';
+  $ctas = '<div class="landing-download"><h3>Downloads (PDFs)</h3>';
   if (!empty($node->field_lp_dl_file_1[0]['filepath'])) {
     $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_1[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_1[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_1[0]['value'] . '</a></div>';
   }
