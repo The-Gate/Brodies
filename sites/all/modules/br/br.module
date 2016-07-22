@@ -47,7 +47,7 @@ function br_menu() {
   );
 
   $items['application-forms'] = array(
-    'title' => 'Traineeship Application Form',
+    'title' => 'Summer Placement Form 2016',
     'page callback' => 'br_applications_page',
     'access callback' => TRUE,
     'file' => 'br.pages.inc'
@@ -160,7 +160,6 @@ function br_block($op = 'list', $delta = 0, $edit = array()) {
       102 => array('info' => t('MOBILE : logo & slogan')),
       103 => array('info' => t('MOBILE : Social links')),
       104 => array('info' => t('MOBILE : Central Menu')),
-      105 => array('info' => t('Legal Updates & Publications Archive : LISTING')),
     );
 
     return $blocks;
@@ -340,11 +339,6 @@ function br_block($op = 'list', $delta = 0, $edit = array()) {
         break;
       case 104: $out = br_mobile_center_menu();
         break;
-
-      case 105:
-        include_once(drupal_get_path('module', 'br') . '/br.pages.inc');
-        $out = br_listing('lupdate_publication');
-        break;
     }
 
     if ($out)
@@ -435,6 +429,7 @@ function br_signup_ebulletin_form($form_state) {
     '#options' => array(
       'Arts & Culture' => 'Arts & Culture',
       'Banking, Finance & Contentious Banking' => 'Banking, Finance & Contentious Banking',
+	  'Brexit' => 'Brexit',
       'Charities and Third Sector' => 'Charities and Third Sector',
       'Construction & Engineering' => 'Construction & Engineering',
       'Corporate' => 'Corporate',
@@ -1068,9 +1063,7 @@ function sm($element, $return = FALSE) {
 
 function br_mail_alter(&$message) {
   global $language;
-  if (!($_SERVER['HTTP_HOST'] == 'dev.brodies.com')) {
-    ini_set('SMTP', 'smtp-auth.lumison.net');
-  }
+  ini_set('SMTP', 'smtp-auth.lumison.net');
   $message['headers']['From'] = "contact@brodies.com";
   $message['headers']['Reply-To'] = "contact@brodies.com";
 
