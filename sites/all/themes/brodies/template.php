@@ -76,6 +76,12 @@ function phptemplate_preprocess_page(&$vars) {
   }
 }
 
+function phptemplate_preprocess_node(&$variables) {
+  if (!empty($variables['teaser']) and $variables['teaser'] == 1) {
+    $variables['template_files'][] = 'node-' . $variables['type'] . '-teaser';
+  }
+}
+
 /**
  * Returns the rendered local tasks. The default implementation renders
  * them as tabs. Overridden to split the secondary tasks.
@@ -192,7 +198,6 @@ function brodies_form_element($element, $value) {
 
   return $output;
 }
-
 
 // take form input cand convert to rbg if it looks like hex
 function getRBGvalue($form_value, $default_value) {

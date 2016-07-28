@@ -1062,6 +1062,58 @@ div.messages.blue {
     font-weight: bold;
 }
 
+/** people teasers **/
+#content .view-Key-Contacts .l-people .field-field-people-phone,
+#content .view-Key-Contacts .l-people .field-field-people-email,
+#content .view-Key-Contacts .l-people .item.embedded{
+    display:none;
+}
+#content .field-field-related-people .related-people-sidebar{
+    display:none;
+}
+#content .field-field-related-people .node{
+    padding:0 !important;
+}
+#content .field-field-related-people  > .field-label{
+    width:100%;
+    border-bottom:3px solid #f7a11a;
+    text-transform: uppercase;
+    padding-bottom:10px;
+}
+#content .field-field-related-people  .field-item{
+    width:225px;
+    display:inline-block;
+    vertical-align:top;
+}
+#content .field-field-related-people .l-people .item{
+    width:100%;
+}
+#content .field-field-related-people .l-people .item .col-left,
+#content .field-field-related-people .l-people .item .col-right{
+    vertical-align: bottom;
+}
+#content .field-field-related-people .l-people .item .col-right{
+    margin-right:0;
+}
+/** brexit news page **/
+.page-id-3631 #block-views-top_news-block_4 .date{
+    display:none;
+}
+
+.page-id-3631 #block-views-top_news-block_4 .view-content{
+    border-bottom:none !important;
+}
+.page-id-3631 #block-block-35{
+    width: 480px;
+    border-bottom: 3px solid #f7a11a;
+    text-transform: uppercase;
+    padding: 0 0 10px !important;
+    font-weight:700;
+    margin:20px 0 30px 20px;
+}
+.page-id-3631 #block-block-35  p{
+    margin:0;
+}
 /* AREAS */
 #content .area {
     float:left;
@@ -2423,6 +2475,64 @@ optgroup{
     position:absolute;
     left:27px;
     top:-35px;
+}
+
+/* brexit form */
+.section-private_business_planning_session.content-webform #content .middle h1, 
+.section-private_business_planning_session.content-webform #content .middle .node, 
+.section-private_business_planning_session.content-webform #content .middle .block{
+    padding:0 15px;;
+}
+
+
+.section-private_business_planning_session .form-item label,
+.section-private_business_planning_session .form-item input{
+    display:inline-block;
+    vertical-align: top;
+}
+.section-private_business_planning_session .form-item {
+    padding-left:110px;
+}
+
+.section-private_business_planning_session .form-item label{
+    width:150px;
+    text-align:right;
+}
+
+.section-private_business_planning_session.content-webform .webform-component-textfield, 
+.section-private_business_planning_session.content-webform .webform-component-textarea, 
+.section-private_business_planning_session.content-webform .webform-component-email{
+    width:auto;
+
+}
+
+.section-private_business_planning_session.content-webform textarea,
+.section-private_business_planning_session.content-webform input{
+    margin-left:40px;        
+    border:1px solid #b5cddd;
+}
+.section-private_business_planning_session.content-webform input{
+    width:345px;
+}
+.section-private_business_planning_session.content-webform textarea{
+    width:340px;
+}
+.section-private_business_planning_session.content-webform .captcha{
+    margin-left:300px;
+    width:340px;
+    border:none;
+    padding:0;
+}
+.section-private_business_planning_session.content-webform .captcha .form-item{
+    padding:0;
+}
+
+.section-private_business_planning_session.content-webform #edit-submit{
+    background: #00235d;
+    padding:5px 6px;
+    float:none;
+    margin-left:300px;
+    width:auto;
 }
 
 #content .right .block-views .field-content h2,
