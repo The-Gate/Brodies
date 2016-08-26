@@ -47,7 +47,7 @@ function br_menu() {
   );
 
   $items['application-forms'] = array(
-    'title' => 'Summer Placement Form 2016',
+    'title' => 'Traineeship application form 2018',
     'page callback' => 'br_applications_page',
     'access callback' => TRUE,
     'file' => 'br.pages.inc'
@@ -276,7 +276,7 @@ function br_block($op = 'list', $delta = 0, $edit = array()) {
         break;
       case 32: $out = br_application_forms();
         break;
-      case 33: $out = '<h2>Quick links</h2><div class="content"><ul class="menu"><li class="leaf first">' . l('Overview', 'application-forms') . '</li><li class="leaf first">' . l('Logout', 'logout', array('query' => drupal_query_string_encode(array('destination' => 'careers/traineeship-application-form')))) . '</li></ul></div>
+      case 33: $out = '<h2>Quick links</h2><div class="content"><ul class="menu"><li class="leaf first">' . l('Overview', 'application-forms') . '</li><li class="leaf first">' . l('Logout', 'logout', array('query' => drupal_query_string_encode(array('destination' => 'careers/online-application-form')))) . '</li></ul></div>
 ';
         break;
 
@@ -1067,7 +1067,7 @@ function br_mail_alter(&$message) {
   $message['headers']['From'] = "contact@brodies.com";
   $message['headers']['Reply-To'] = "contact@brodies.com";
 
-  if ($message['id'] == 'br_seminars-checkout-admin' || $message['id'] == 'br_application-confirm-admin' || $message['id'] == 'br_payment-complete' || $message['id'] == 'br_payment-pending') {
+  if ($message['id'] == 'br_application-confirm-user' || $message['id'] == 'br_seminars-checkout-admin' || $message['id'] == 'br_application-confirm-admin' || $message['id'] == 'br_payment-complete' || $message['id'] == 'br_payment-pending') {
     $message['headers']['Content-Type'] = "text/html; charset=utf-8";
     $message['headers']['Mime-Version'] = "1.0";
   }
@@ -1121,7 +1121,7 @@ function br_mail($key, &$message, $params) {
       break;
     case 'application-confirm-user':
       $message['subject'] = t('Thank you for submitting your application');
-      $message['body'][] = t("Thank you for your interest in Brodies LLP.  We acknowledge receipt of your email and we will be in contact shortly.\n\nPlease note that it is our policy to keep any applications or CVs submitted to us on file for the next 2 years.  If you would prefer us not to keep your details on file for this length of time, please let us know and we will delete all the information that we hold about your from our records after 6 months in accordance with our data protection obligations.");
+      $message['body'][] = t("Thank you for your interest in Brodies LLP. We acknowledge receipt of your application form, we will be in contact again following our closing date of Sunday 9th October 2016 Please note that it is our policy to keep any applications or CVs submitted to us on file for the next 2 years. This data shall only be used for internal purposes and will not be shared with any third parties. If you would prefer us not to keep your details on file for this length of time, please let us know and we will delete all the information that we hold about your from our records after 6 months in accordance with our data protection obligations.<br><br>completed application form @name, <br /><br /> !data", array('@name' => $params['application_name'], '!data' => $params['submit_details']));
       break;
     case 'application-confirm-admin':
       $message['subject'] = t('Brodies : user "@name" filled in application form', array('@name' => $params['full_name']));
