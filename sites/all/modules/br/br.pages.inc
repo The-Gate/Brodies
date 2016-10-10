@@ -3194,7 +3194,7 @@ function br_application_submission_format($sub) {
       }
       elseif ($field_name == 'exam_history') {
         $value = "<table cellspacing='5'><tr><th>Exam</th><th>Subject</th><th>Grade</th></tr>";
-        foreach ($sub[5]['name'] as $ikey => $item) {
+        foreach ($sub[4]['grades_exam'] as $ikey => $item) {
           $value .= '<tr><td>' . $sub[4]['grades_exam'][$ikey] . '</td><td>' . $sub[4]['grades_subject'][$ikey] . '</td><td>' . $sub[4]['grades_grade'][$ikey] . '</td></tr>';
         }
         $value .= "</table>";
