@@ -47,7 +47,7 @@ function br_menu() {
   );
 
   $items['application-forms'] = array(
-    'title' => 'Traineeship application form 2018',
+    'title' => 'Summer Placement 2017',
     'page callback' => 'br_applications_page',
     'access callback' => TRUE,
     'file' => 'br.pages.inc'

@@ -2448,7 +2448,7 @@ function br_applications_page($app_id = '', $step = 1, $uid = 0, $sub_id = 0) {
     }
   }
   else {
-    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you've taken the first step to potentially become a Brodies' trainee or summer student of the future. Take your time when completing the form, make sure that you answer all of the questions fully and that you give strong examples which highlight that you have the skills and competencies that we look for in all of our people.</p><p>Good luck!</p><p>Closing date for applications: <b>Sunday 9th October 2016</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 3rd year of your LLB or 1st year of your accelerated LLB</p>";
+    $out .= "<h2>Overview</h2><p>Welcome to our online application form, by creating an account you've taken the first step to potentially become a Brodies' trainee or summer student of the future. Take your time when completing the form, make sure that you answer all of the questions fully and that you give strong examples which highlight that you have the skills and competencies that we look for in all of our people.</p><p>Good luck!</p><p>Closing date for applications: <b>Sunday January 8th 2017</b></p><p><b>Please note:</b> You are eligible to apply if you are a minimum of 3rd year of your LLB or 1st year of your accelerated LLB</p>";
 
     $result = db_query("SELECT n.nid, n.title, n.status FROM {node} n where n.type = 'application' ORDER BY n.created DESC limit 0,1", $user->uid);
 
@@ -2525,40 +2525,31 @@ function br_application_form($form_state, $step) {
       );
 
       $form['applied_in_past_pre'] = array('#value' => '<div class="form-item" style="clear:both">
- <label>Please advise if you have applied to Brodies in the past and if so, when was this?: <span title="This field is required." class="form-required">*</span></label>
- <div class="item-left">');
+ <p><label>Please advise if you have applied to Brodies in the past:</label></p>');
 
-      $form['applied_in_past'] = array(
-        '#title' => 'Please advise if you have applied to Brodies in the past and if so, when was this?',
+$form['applied_summer_placement'] = array(
+        '#title' => 'Summer Placement',
         '#required' => TRUE,
         '#type' => 'radios',
-        '#clear' => TRUE,
-        '#options' => array('yes' => 'YES', 'no' => 'NO')
+        '#options' => array('yes' => 'YES', 'no' => 'NO'),
+        '#clearfix' => TRUE
       );
-
-      $form['applied_when'] = array(
-        '#required' => FALSE,
-        '#type' => 'textarea',
-        '#rows' => 2,
-        '#clear' => TRUE,
-        '#title' => 'When applied',
-        '#resizable' => FALSE,
-        '#prefix' => '</div><div class="item-right">',
-        '#suffix' => '</div><div class="ff"></div></div>'
-      );
-
-      $form['applied_in_past_placement'] = array(
-        '#title' => 'Have you applied to Brodies in the past for a summer placement or traineeship?',
+      $form['applied_traineeship'] = array(
+        '#title' => 'Traineeship',
         '#required' => TRUE,
-        '#type' => 'select',
-        '#options' => array('no' => 'No',
-          'Yes Summer Placement 2014' => 'Yes Summer Placement 2014',
-          'Yes Traineeship 2014' => 'Yes Traineeship 2014',
-          'Yes Summer Placement 2015' => 'Yes Summer Placement 2015',
-          'Yes Traineeship 2015' => 'Yes Traineeship 2015',
-          'Yes Summer Placement 2016' => 'Yes Summer Placement 2016',
-        )
+        '#type' => 'radios',
+        '#options' => array('yes' => 'YES', 'no' => 'NO'),
+        '#clearfix' => TRUE
       );
+      $form['applied_interviewed_for_positions'] = array(
+        '#title' => 'Have you been interviewed for any of the positions you applied for?',
+        '#required' => TRUE,
+        '#type' => 'radios',
+        '#clearfix' => TRUE,
+        '#options' => array('yes' => 'YES', 'no' => 'NO'),
+        '#suffix' => '</div>'
+      );
+
 
       $form['break'] = array(
         '#value' => '<hr />',
@@ -2627,7 +2618,7 @@ function br_application_form($form_state, $step) {
       );
 
       $form['helth_limitations'] = array(
-        '#title' => 'Please tell us of any health limitation or special needs that may affect your attendance at an assessment centre',
+        '#title' => 'Please tell us of any health limitations or special needs that may affect your attendance at an interview',
         '#required' => FALSE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
@@ -2745,38 +2736,31 @@ function br_application_form($form_state, $step) {
     case 7:
       $title = 'Supporting Information';
       $form['supporting_info_intro'] = array('#value' => '<p>Please keep your answers succinct. Responses are typically around 200 words.</p>');
-      $form['effective_communicator'] = array(
-        '#title' => '1 Please tell us about an occasion where you have had to be an effective communicator (maximum of 200 words)',
+      $form['supporting_1'] = array(
+        '#title' => '1. Tell us why a summer placement at Brodies would help you prepare for a career in law?  (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
         '#attributes' => array('maxlength' => 2000),
       );
 
-      $form['exceeded_expectations'] = array(
-        '#title' => '2 At Brodies we aim to always go "Above and Beyond" for our clients. Please tell us about a time you have exceeded someone\'s expectations of you (maximum of 200 words)',
+      $form['supporting_2'] = array(
+        '#title' => '2. Tell us about the challenges of communicating in a professional context, with an example of how you overcome these challenges (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
         '#attributes' => array('maxlength' => 2000),
       );
 
-      $form['commercial_awareness'] = array(
-        '#title' => '3 What is your understanding of the term \'Commercial Awareness\'? Please provide us with an example of how you think you could demonstrate commercial awareness as a trainee of the firm (maximum of 200 words)',
+      $form['supporting_3'] = array(
+        '#title' => '3. From your research of Brodies give us an example of how we have demonstrated commercial awareness as a firm (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
         '#attributes' => array('maxlength' => 2000),
       );
-      $form['career_with_brodies'] = array(
-        '#title' => '4 Please explain why you have decided to pursue a career with Brodies (maximum of 200 words)',
-        '#required' => TRUE,
-        '#type' => 'textarea',
-        '#resizable' => FALSE,
-        '#attributes' => array('maxlength' => 2000),
-      );
-      $form['unique_selling_points'] = array(
-        '#title' => '5 What are your unique selling points? (maximum of 200 words))',
+      $form['supporting_4'] = array(
+        '#title' => '4. What are your unique selling points? (maximum of 200 words)',
         '#required' => TRUE,
         '#type' => 'textarea',
         '#resizable' => FALSE,
@@ -2883,7 +2867,7 @@ function br_application_form($form_state, $step) {
 
     case 10:
       $title = 'Data Protection';
-      $form['intro'] = array('#value' => '<p>I confirm that Brodies may keep my application on file for the next 2 years, after which it will be deleted in accordance with Brodies data protection obligations.</p>');
+      $form['intro'] = array('#value' => '<p>For the purposes of Data Protection, by ticking this box I consent to Brodies LLP holding and processing the information provided on this form as part of their summer placement selection process and to the retention of such information by Brodies LLP for a 2 year period.</p>');
 
       $form['confirm_information'] = array(
         '#required' => TRUE,
