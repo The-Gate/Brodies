@@ -88,7 +88,7 @@ error_reporting(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING));
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysqli://brodies_user:passw0rd@localhost/brodies';
+$db_url = 'mysqli://brodies_user:passw0rd@localhost/brodies_d7';
 $db_prefix = '';
 
 /**
@@ -256,3 +256,20 @@ ini_set('url_rewriter.tags',        '');
 #   'forum'      => 'Discussion board',
 #   '@count min' => '@count minutes',
 # );
+
+$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'driver' => 'mysql',
+      'database' => 'brodies_d7',
+      'username' => 'brodies_user',
+      'password' => 'passw0rd',
+      'host' => 'localhost',
+      'port' => '',
+      'prefix' => '',
+    ),
+  ),
+);
+$drupal_hash_salt = 'xnQ--rrCMRle4GXl7cWYkHUkiz9rVw7WFo_E-bgOlsE';
