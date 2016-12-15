@@ -31,8 +31,8 @@ See http://drupal.org/getting-started/install-contrib for instructions on
 how to install or update Drupal modules.
 
 Once XML Sitemap is installed and enabled, you can adjust the settings for your
-site's sitemap at admin/settings/xmlsitemap. Your can view your site's sitemap
-at http://yoursite.com/sitemap.xml.
+site's sitemap at admin/config/search/xmlsitemap. Your can view your site's
+sitemap at http://yoursite.com/sitemap.xml.
 
 It is highly recommended that you have clean URLs enabled for this module.
 
@@ -65,7 +65,7 @@ MORE INFORMATION
   queue at http://drupal.org/project/issues/xmlsitemap.
 
 - For additional documentation, see the online module handbook at
-  http://drupal.org/handbook/modules/gsitemap.
+  http://drupal.org/handbook/modules/xmlsitemap.
 
 - You can view the sitemap.org specification at http://sitemaps.org.
 
