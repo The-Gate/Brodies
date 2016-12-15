@@ -95,7 +95,7 @@ function page_title_uninstall() {
   variable_del('page_title_comment_child_reply');
 
   // Clear the node specific variables
-  $types = node_get_types('names');
+  $types = node_type_get_types('names');
   foreach ($types as $type => $name) {
     variable_del("page_title_type_{$type}");
     variable_del("page_title_type_{$type}_showfield");
