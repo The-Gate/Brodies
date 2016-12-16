@@ -2,7 +2,7 @@
 $imce =& $imce_ref['imce'];//keep this line.
 
 /*
- * Although the file list table here is avaliable for theming,
+ * Although the file list table here is available for theming,
  * it is not recommended to change the table structure, because
  * it is read and manipulated by javascript assuming this is the deafult structure.
  * You can always change the data created by format functions
@@ -18,7 +18,7 @@ if ($imce['perm']['browse'] && !empty($imce['files'])) {
     <td class="size" id="<?php print $file['size']; ?>"><?php print format_size($file['size']); ?></td>
     <td class="width"><?php print $file['width']; ?></td>
     <td class="height"><?php print $file['height']; ?></td>
-    <td class="date" id="<?php print $file['date']; ?>"><?php print format_date($file['date'], 'small'); ?></td>
+    <td class="date" id="<?php print $file['date']; ?>"><?php print format_date($file['date'], 'short'); ?></td>
   </tr><?php
   }
 }?>

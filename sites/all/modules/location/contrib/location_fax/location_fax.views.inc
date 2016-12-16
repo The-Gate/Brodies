@@ -2,22 +2,20 @@
 
 /**
  * @file
- * Views 2 support for Location Fax.
+ * Views 3 support for Location Fax.
  */
 
 /**
- * Implementation of hook_views_data().
+ * Implements hook_views_data().
  */
 function location_fax_views_data() {
-  // ----------------------------------------------------------------
   // location_fax table -- basic table information.
+  // Define the base group of this table.
+  // Fields that don't have a group defined will go into this field by default.
 
-  // Define the base group of this table. Fields that don't
-  // have a group defined will go into this field by default.
+  $data['location_fax']['table']['group'] = t('Location', array(), array('context' => 'geolocation'));
 
-  $data['location_fax']['table']['group'] = t('Location');
-
-  // Join location_fax to all the tables that would be useful
+  // Join location_fax to all the tables that would be useful.
   $data['location_fax']['table']['join'] = array(
     // location_fax links to location via lid.
     'location' => array(
@@ -30,8 +28,8 @@ function location_fax_views_data() {
       'left_field' => 'lid',
       'field' => 'lid',
     ),
-    // location_fax links to node_revisions through location_instance via lid.
-    'node_revisions' => array(
+    // location_fax links to node_revision through location_instance via lid.
+    'node_revision' => array(
       'left_table' => 'location_instance',
       'left_field' => 'lid',
       'field' => 'lid',
@@ -44,9 +42,7 @@ function location_fax_views_data() {
     ),
   );
 
-  // ----------------------------------------------------------------
-  // location_fax table -- fields
-
+  // location_fax table -- fields.
   $data['location_fax']['fax'] = array(
     'title' => t('Fax'),
     'help' => t('The fax number of the selected location.'),

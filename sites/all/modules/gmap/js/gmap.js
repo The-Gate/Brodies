@@ -3,11 +3,12 @@
  * Drupal to Google Maps API bridge.
  */
 
-/*global $, Drupal, GLatLng, GSmallZoomControl, GLargeMapControl, GMap2 */
+/*global jQuery, Drupal, GLatLng, GSmallZoomControl, GLargeMapControl, GMap2 */
 /*global GMapTypeControl, GSmallMapControl, G_HYBRID_MAP, G_NORMAL_MAP */
 /*global G_PHYSICAL_MAP, G_SATELLITE_MAP, GHierarchicalMapTypeControl */
 /*global GKeyboardHandler, GLatLngBounds, GMenuMapTypeControl, GEvent */
 /*global GOverviewMapControl, GScaleControl, GUnload */
+/*jshint -W069 */
 
 (function () { // BEGIN closure
     var handlers = {};
@@ -123,7 +124,7 @@
                 ajaxoffset++;
             }
             settings.id = mapid;
-            $(this)
+            jQuery(this)
                 .attr('id', 'gmap-' + mapid + '-gmap0')
                 .css('width', settings.width)
                 .css('height', settings.height)
@@ -134,7 +135,7 @@
                 .addClass('gmap-' + mapid + '-gmap')
                 .addClass('gmap-processed')
                 .each(function () {
-                    Drupal.gmap.setup.call(this, settings)
+                    Drupal.gmap.setup.call(this, settings);
                 });
         });
     };
@@ -212,7 +213,7 @@ Drupal.gmap.addHandler('gmap', function (elem) {
     var _ib = {};
 
     // Respond to incoming zooms
-    _ib.zoom = obj.bind("zoom", function () {
+    _ib.zoom = obj.bind("zoom", function (zoom) {
         obj.map.setZoom(obj.vars.zoom);
     });
 
@@ -239,13 +240,14 @@ Drupal.gmap.addHandler('gmap', function (elem) {
     // Respond to incoming control type changes.
     _ib.ctc = obj.bind("controltypechange", function () {
         if (obj.vars.controltype === 'Small') {
-            obj.map.setOptions({navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL}});
+            obj.map.setOptions({zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}});
         }
         else if (obj.vars.controltype === 'Large') {
-            obj.map.setOptions({navigationControlOptions: {style: google.maps.NavigationControlStyle.ZOOM_PAN}});
+            obj.map.setOptions({zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE}});
         }
+        // obsolete
         else if (obj.vars.controltype === 'Android') {
-            obj.map.setOptions({navigationControlOptions: {style: google.maps.NavigationControlStyle.ANDROID}});
+            obj.map.setOptions({zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}});
         }
     });
     // Send out outgoing control type changes.
@@ -285,7 +287,9 @@ Drupal.gmap.addHandler('gmap', function (elem) {
             case 'Satellite':
                 opts.mapTypeId = google.maps.MapTypeId.SATELLITE;
                 break;
+            /* falls through */
             case 'Map':
+            /* falls through */
             default:
                 opts.mapTypeId = google.maps.MapTypeId.ROADMAP;
                 break;
@@ -294,7 +298,6 @@ Drupal.gmap.addHandler('gmap', function (elem) {
         // Null out the enabled types.
         opts.mapTypeIds = [];
 
-        // Load google map types.
         if (obj.vars.baselayers.Map) {
             opts.mapTypeIds.push(google.maps.MapTypeId.ROADMAP);
         }
@@ -330,17 +333,27 @@ Drupal.gmap.addHandler('gmap', function (elem) {
         else if (obj.vars.mtc === 'menu') {
             opts.mapTypeControlOptions.style = google.maps.MapTypeControlStyle.DROPDOWN_MENU;
         }
+        else if (obj.vars.mtc === 'none') {
+            opts.mapTypeControl = false;
+        }
 
         // Navigation control type
         if (obj.vars.controltype !== 'None') {
-            opts.navigationControl = true;
+            opts.zoomControl = true;
+        }
+        if (obj.vars.pancontrol) {
+            opts.panControl = true;
+        }
+        if (obj.vars.streetviewcontrol) {
+            opts.streetViewControl = true;
         }
         if (obj.vars.controltype === 'Small') {
-            opts.navigationControlOptions = {style: google.maps.NavigationControlStyle.SMALL};
+            obj.zoomControlOptions = {style: google.maps.ZoomControlStyle.SMALL};
         }
         else if (obj.vars.controltype === 'Large') {
-            opts.navigationControlOptions = {style: google.maps.NavigationControlStyle.ZOOM_PAN};
+            obj.zoomControlOptions = {style: google.maps.ZoomControlStyle.LARGE};
         }
+
 
         // Set scale control visibility
         opts.scaleControl = obj.vars.behavior.scale;
@@ -353,7 +366,16 @@ Drupal.gmap.addHandler('gmap', function (elem) {
         if (obj.vars.behavior.nocontzoom) {
             opts.disableDoubleClickZoom = true;
         }
+        // Overview Map
+        if (obj.vars.behavior.overview) {
+            opts.overviewMapControl = true;
+            opts.overviewMapControlOptions = {opened: true};
+        }
 
+        // Map styles.
+        if (obj.vars.mapstyles) {
+            obj.opts.styles = obj.vars.mapstyles;
+        }
     });
 
     obj.bind("boot", function () {
@@ -385,10 +407,13 @@ Drupal.gmap.addHandler('gmap', function (elem) {
             // hence it being a behavior.
             setTimeout(function () {
                 var r = function () {
-                    google.maps.event.trigger(map);
-                    map.setCenter(new google.maps.LatLng(obj.vars.latitude, obj.vars.longitude), obj.vars.zoom);
+                    var coord = map.getCenter();
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(new google.maps.LatLng(coord.lat(), coord.lng()), obj.vars.zoom);
                 };
-                $(elem).parents('fieldset.collapsible').children('legend').children('a').click(r);
+                jQuery(elem).parents('fieldset.collapsible').children('legend').children('a').click(r);
+                jQuery('.vertical-tab-button', jQuery(elem).parents('.vertical-tabs')).children('a').click(r);
+                jQuery(window).bind('hashchange', r);
                 // Would be nice, but doesn't work.
                 //$(elem).parents('fieldset.collapsible').children('.fieldset-wrapper').scroll(r);
             }, 0);
@@ -444,7 +469,7 @@ Drupal.gmap.addHandler('zoom', function (elem) {
         elem.value = obj.vars.zoom;
     });
     // Send out outgoing zooms
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         obj.vars.zoom = parseInt(elem.value, 10);
         obj.change("zoom", binding);
     });
@@ -492,7 +517,7 @@ Drupal.gmap.addHandler('latlon', function (elem) {
         elem.value = '' + obj.vars.latitude + ',' + obj.vars.longitude;
     });
     // Send out outgoing movements.
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         var t = this.value.split(',');
         obj.vars.latitude = Number(t[0]);
         obj.vars.longitude = Number(t[1]);
@@ -510,7 +535,7 @@ Drupal.gmap.addHandler('maptype', function (elem) {
         elem.value = obj.vars.maptype;
     });
     // Send out outgoing movements.
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         obj.vars.maptype = elem.value;
         obj.change("maptypechange", binding);
     });
@@ -536,7 +561,7 @@ Drupal.gmap.addHandler('maptype', function (elem) {
             elem.value = normalize(w);
         });
         // Send out outgoing width changes.
-        $(elem).change(function () {
+        jQuery(elem).change(function () {
             var n;
             if ((n = normalize(elem.value))) {
                 elem.value = n;
@@ -544,7 +569,7 @@ Drupal.gmap.addHandler('maptype', function (elem) {
             }
         });
         obj.bind('init', function () {
-            $(elem).change();
+            jQuery(elem).change();
         });
     });
 
@@ -558,7 +583,7 @@ Drupal.gmap.addHandler('maptype', function (elem) {
             elem.value = normalize(h);
         });
         // Send out outgoing height changes.
-        $(elem).change(function () {
+        jQuery(elem).change(function () {
             var n;
             if ((n = normalize(elem.value))) {
                 elem.value = n;
@@ -566,7 +591,7 @@ Drupal.gmap.addHandler('maptype', function (elem) {
             }
         });
         obj.bind('init', function () {
-            $(elem).change();
+            jQuery(elem).change();
         });
     });
 })(); // END CLOSURE
@@ -581,19 +606,39 @@ Drupal.gmap.addHandler('controltype', function (elem) {
         elem.value = obj.vars.controltype;
     });
     // Send out outgoing height changes.
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         obj.vars.controltype = elem.value;
         obj.change("controltypechange", binding);
     });
 });
 
-Drupal.behaviors.GMap = function (context) {
-    if (Drupal.settings && Drupal.settings['gmap_remap_widgets']) {
-        jQuery.each(Drupal.settings['gmap_remap_widgets'], function (key, val) {
-            $('#' + key).addClass('gmap-control');
+// // Map cleanup.
+// if (Drupal.jsEnabled) {
+//   $(document).unload(GUnload);
+// }
+
+Drupal.behaviors.GMap = {
+    attach: function (context, settings) {
+        if (Drupal.settings && Drupal.settings['gmap_remap_widgets']) {
+            jQuery.each(Drupal.settings['gmap_remap_widgets'], function (key, val) {
+                jQuery('#' + key).addClass('gmap-control');
+            });
+        }
+        jQuery('.gmap-gmap:not(.gmap-processed)', context).addClass('gmap-processed').each(function () {
+            Drupal.gmap.setup.call(this);
         });
+        jQuery('.gmap-control:not(.gmap-processed)', context).addClass('gmap-processed').each(function () {
+            Drupal.gmap.setup.call(this);
+        });
+    },
+    detach: function (context, settings) {
+        jQuery('.gmap-processed', context).each(function (element) {
+            //find mapid
+            var id = jQuery(this).attr('id');
+            var mapid = id.split('-', 2);
+
+            //unload map
+            Drupal.gmap.unloadMap(mapid[1]);
+        }).removeClass('gmap-processed');
     }
-    $('.gmap-control:not(.gmap-processed)', context).addClass('gmap-processed').each(function () {
-        Drupal.gmap.setup.call(this)
-    });
 };

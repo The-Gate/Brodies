@@ -15,7 +15,7 @@ function _webform_defaults_textfield() {
     'pid' => 0,
     'weight' => 0,
     'value' => '',
-    'mandatory' => 0,
+    'required' => 0,
     'extra' => array(
       'width' => '',
       'maxlength' => '',
@@ -25,8 +25,11 @@ function _webform_defaults_textfield() {
       'unique' => 0,
       'title_display' => 0,
       'description' => '',
+      'description_above' => FALSE,
+      'placeholder' => '',
       'attributes' => array(),
       'private' => FALSE,
+      'analysis' => FALSE,
     ),
   );
 }
@@ -37,7 +40,7 @@ function _webform_defaults_textfield() {
 function _webform_theme_textfield() {
   return array(
     'webform_display_textfield' => array(
-      'arguments' => array('element' => NULL),
+      'render element' => 'element',
       'file' => 'components/textfield.inc',
     ),
   );
@@ -52,7 +55,7 @@ function _webform_edit_textfield($component) {
     '#type' => 'textfield',
     '#title' => t('Default value'),
     '#default_value' => $component['value'],
-    '#description' => t('The default value of the field.') . theme('webform_token_help'),
+    '#description' => t('The default value of the field.') . ' ' . theme('webform_token_help'),
     '#size' => 60,
     '#maxlength' => 1024,
     '#weight' => 0,
@@ -67,31 +70,39 @@ function _webform_edit_textfield($component) {
     '#weight' => 0,
     '#parents' => array('extra', 'width'),
   );
+  $form['display']['placeholder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Placeholder'),
+    '#default_value' => $component['extra']['placeholder'],
+    '#description' => t('The placeholder will be shown in the field until the user starts entering a value.'),
+    '#weight' => 1,
+    '#parents' => array('extra', 'placeholder'),
+  );
   $form['display']['field_prefix'] = array(
     '#type' => 'textfield',
-    '#title' => t('Prefix text placed to the left of the field'),
+    '#title' => t('Prefix text placed to the left of the textfield'),
     '#default_value' => $component['extra']['field_prefix'],
     '#description' => t('Examples: $, #, -.'),
     '#size' => 20,
     '#maxlength' => 127,
-    '#weight' => 1.1,
+    '#weight' => 2.1,
     '#parents' => array('extra', 'field_prefix'),
   );
   $form['display']['field_suffix'] = array(
     '#type' => 'textfield',
-    '#title' => t('Postfix text placed to the right of the field'),
+    '#title' => t('Postfix text placed to the right of the textfield'),
     '#default_value' => $component['extra']['field_suffix'],
     '#description' => t('Examples: lb, kg, %.'),
     '#size' => 20,
     '#maxlength' => 127,
-    '#weight' => 1.2,
+    '#weight' => 2.2,
     '#parents' => array('extra', 'field_suffix'),
   );
   $form['display']['disabled'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disabled'),
     '#return_value' => 1,
-    '#description' => t('Make this field non-editable. Useful for setting an unchangeable default value.'),
+    '#description' => t('Make this field non-editable. Useful for displaying default value. Changeable via JavaScript or developer tools.'),
     '#weight' => 11,
     '#default_value' => $component['extra']['disabled'],
     '#parents' => array('extra', 'disabled'),
@@ -121,25 +132,31 @@ function _webform_edit_textfield($component) {
 /**
  * Implements _webform_render_component().
  */
-function _webform_render_textfield($component, $value = NULL, $filter = TRUE) {
+function _webform_render_textfield($component, $value = NULL, $filter = TRUE, $submission = NULL) {
   $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
 
   $element = array(
     '#type' => 'textfield',
-    '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title' => $filter ? webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
-    '#default_value' => $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, FALSE) : $component['value'],
-    '#required' => $component['mandatory'],
+    '#default_value' => $filter ? webform_replace_tokens($component['value'], $node) : $component['value'],
+    '#required' => $component['required'],
     '#weight' => $component['weight'],
-    '#field_prefix' => empty($component['extra']['field_prefix']) ? NULL : ($filter ? _webform_filter_xss($component['extra']['field_prefix']) : $component['extra']['field_prefix']),
-    '#field_suffix' => empty($component['extra']['field_suffix']) ? NULL : ($filter ? _webform_filter_xss($component['extra']['field_suffix']) : $component['extra']['field_suffix']),
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+    '#field_prefix' => empty($component['extra']['field_prefix']) ? NULL : ($filter ? webform_filter_xss($component['extra']['field_prefix']) : $component['extra']['field_prefix']),
+    '#field_suffix' => empty($component['extra']['field_suffix']) ? NULL : ($filter ? webform_filter_xss($component['extra']['field_suffix']) : $component['extra']['field_suffix']),
+    '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#attributes' => $component['extra']['attributes'],
-    '#theme_wrappers' => array('webform_element_wrapper'),
-    '#pre_render' => array('webform_element_title_display'),
-    '#post_render' => array('webform_element_wrapper'),
+    '#theme_wrappers' => array('webform_element'),
     '#translatable' => array('title', 'description', 'field_prefix', 'field_suffix'),
   );
+
+  if ($component['required']) {
+    $element['#attributes']['required'] = 'required';
+  }
+
+  if ($component['extra']['placeholder']) {
+    $element['#attributes']['placeholder'] = $component['extra']['placeholder'];
+  }
 
   if ($component['extra']['disabled']) {
     if ($filter) {
@@ -163,7 +180,7 @@ function _webform_render_textfield($component, $value = NULL, $filter = TRUE) {
     $element['#maxlength'] = $component['extra']['maxlength'];
   }
 
-  if (isset($value)) {
+  if (isset($value[0])) {
     $element['#default_value'] = $value[0];
   }
 
@@ -173,13 +190,13 @@ function _webform_render_textfield($component, $value = NULL, $filter = TRUE) {
 /**
  * Implements _webform_display_component().
  */
-function _webform_display_textfield($component, $value, $format = 'html') {
+function _webform_display_textfield($component, $value, $format = 'html', $submission = array()) {
   return array(
     '#title' => $component['name'],
+    '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#weight' => $component['weight'],
     '#theme' => 'webform_display_textfield',
-    '#theme_wrappers' => $format == 'html' ? array('webform_element', 'webform_element_wrapper') : array('webform_element_text'),
-    '#post_render' => array('webform_element_wrapper'),
+    '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
     '#field_prefix' => $component['extra']['field_prefix'],
     '#field_suffix' => $component['extra']['field_suffix'],
     '#format' => $format,
@@ -191,9 +208,10 @@ function _webform_display_textfield($component, $value, $format = 'html') {
 /**
  * Format the output of data for this component.
  */
-function theme_webform_display_textfield($element) {
-  $prefix = $element['#format'] == 'html' ? filter_xss($element['#field_prefix']) : $element['#field_prefix'];
-  $suffix = $element['#format'] == 'html' ? filter_xss($element['#field_suffix']) : $element['#field_suffix'];
+function theme_webform_display_textfield($variables) {
+  $element = $variables['element'];
+  $prefix = $element['#format'] == 'html' ? '' : $element['#field_prefix'];
+  $suffix = $element['#format'] == 'html' ? '' : $element['#field_suffix'];
   $value = $element['#format'] == 'html' ? check_plain($element['#value']) : $element['#value'];
   return $value !== '' ? ($prefix . $value . $suffix) : ' ';
 }
@@ -201,19 +219,26 @@ function theme_webform_display_textfield($element) {
 /**
  * Implements _webform_analysis_component().
  */
-function _webform_analysis_textfield($component, $sids = array()) {
-  $placeholders = count($sids) ? array_fill(0, count($sids), "'%s'") : array();
-  $sidfilter = count($sids) ? " AND sid in (" . implode(",", $placeholders) . ")" : "";
-  $query = 'SELECT data ' .
-    ' FROM {webform_submitted_data} ' .
-    ' WHERE nid = %d ' .
-    ' AND cid = %d ' . $sidfilter;
+function _webform_analysis_textfield($component, $sids = array(), $single = FALSE, $join = NULL) {
+  $query = db_select('webform_submitted_data', 'wsd', array('fetch' => PDO::FETCH_ASSOC))
+    ->fields('wsd', array('data'))
+    ->condition('wsd.nid', $component['nid'])
+    ->condition('wsd.cid', $component['cid']);
+
+  if (count($sids)) {
+    $query->condition('wsd.sid', $sids, 'IN');
+  }
+
+  if ($join) {
+    $query->innerJoin($join, 'ws2_', 'wsd.sid = ws2_.sid');
+  }
+
   $nonblanks = 0;
   $submissions = 0;
   $wordcount = 0;
 
-  $result = db_query($query, array_merge(array($component['nid'], $component['cid']), $sids));
-  while ($data = db_fetch_array($result)) {
+  $result = $query->execute();
+  foreach ($result as $data) {
     if (drupal_strlen(trim($data['data'])) > 0) {
       $nonblanks++;
       $wordcount += str_word_count(trim($data['data']));
@@ -223,8 +248,13 @@ function _webform_analysis_textfield($component, $sids = array()) {
 
   $rows[0] = array(t('Left Blank'), ($submissions - $nonblanks));
   $rows[1] = array(t('User entered value'), $nonblanks);
-  $rows[2] = array(t('Average submission length in words (ex blanks)'), ($nonblanks != 0 ? number_format($wordcount/$nonblanks, 2) : '0'));
-  return $rows;
+
+  $other[] = array(t('Average submission length in words (ex blanks)'), ($nonblanks != 0 ? number_format($wordcount/$nonblanks, 2) : '0'));
+
+  return array(
+    'table_rows' => $rows,
+    'other_data' => $other,
+  );
 }
 
 /**
@@ -235,13 +265,21 @@ function _webform_table_textfield($component, $value) {
 }
 
 /**
+ * Implements _webform_action_set_component().
+ */
+function _webform_action_set_textfield($component, &$element, &$form_state, $value) {
+  $element['#value'] = $value;
+  form_set_value($element, $value, $form_state);
+}
+
+/**
  * Implements _webform_csv_headers_component().
  */
 function _webform_csv_headers_textfield($component, $export_options) {
   $header = array();
   $header[0] = '';
   $header[1] = '';
-  $header[2] = $component['name'];
+  $header[2] = $export_options['header_keys'] ? $component['form_key'] : $component['name'];
   return $header;
 }
 

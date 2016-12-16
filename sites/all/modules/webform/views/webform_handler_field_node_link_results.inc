@@ -9,27 +9,43 @@
  * Field handler to present a link node edit.
  */
 class webform_handler_field_node_link_results extends views_handler_field_node_link {
-  function construct() {
-    parent::construct();
-    $this->additional_fields['uid'] = 'uid';
-    $this->additional_fields['type'] = 'type';
-    $this->additional_fields['format'] = array('table' => 'node_revisions', 'field' => 'format');
+
+  function option_definition() {
+    $options = parent::option_definition();
+    $options['subpath'] = array('default' => '');
+    return $options;
   }
 
-  function render($values) {
-    // ensure user has access to edit this node.
-    $node = new stdClass();
-    $node->nid = $values->{$this->aliases['nid']};
-    $node->uid = $values->{$this->aliases['uid']};
-    $node->type = $values->{$this->aliases['type']};
-    $node->format = $values->{$this->aliases['format']};
-    $node->status = 1; // unpublished nodes ignore access control
-    if (!webform_results_access($node)) {
+  function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
+    $form['subpath'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Subpath'),
+      '#default_value' => $this->options['subpath'],
+      '#field_prefix' => 'node/NID/webform-results/',
+    );
+  }
+
+  /**
+   * Renders the link.
+   */
+  function render_link($node, $values) {
+    // Ensure node is webform-enabled and user has access node's webform results.
+    if (!in_array($node->type, webform_node_types()) || !webform_results_access($node)) {
       return;
     }
 
-    $text = !empty($this->options['text']) ? $this->options['text'] : t('results');
-    return l($text, "node/$node->nid/webform-results");
-  }
-}
+    // For clear, ensure user has access to clear all the submissions.
+    if (stripos($this->options['subpath'], 'clear') === 0 && !user_access('delete all webform submissions')) {
+      return;
+    }
 
+    $this->options['alter']['make_link'] = TRUE;
+    $this->options['alter']['path'] = "node/$node->nid/webform-results" .
+                                      (strlen($this->options['subpath']) ? '/' . $this->options['subpath'] : '');
+
+    $text = !empty($this->options['text']) ? $this->options['text'] : t('results');
+    return $text;
+  }
+
+}

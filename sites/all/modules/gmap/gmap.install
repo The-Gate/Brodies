@@ -2,7 +2,7 @@
 
 /**
  * @file
- *  GMap install/uninstall routines.
+ * GMap install/uninstall routines.
  */
 
 /**
@@ -15,15 +15,16 @@ function gmap_uninstall() {
   variable_del('gmap_mm_type');
   variable_del('gmap_load_zoom_plugin');
   variable_del('gmap_markermanager');
+  variable_del('gmap_marker_custom_dir');
   variable_del('gmap_markerfiles');
   variable_del('gmap_node_markers');
   variable_del('gmap_private_markerfile');
-
-  variable_del('googlemap_api_key');
+  variable_del('gmap_api_key');
 }
 
 /**
  * Updates from 5.x-1.0alpha1 to 5.x-1.0.
+ *
  * Do some tidying up of the settings.
  */
 function gmap_update_5000() {
@@ -34,7 +35,7 @@ function gmap_update_5000() {
   // Add the previous implicit baselayers back in.
   if (!isset($d['baselayers'])) {
     $d['baselayers'] = array(
-      // Default map type
+      // Default map type.
       'maptype' => isset($d['maptype']) ? $d['maptype'] : 'Map',
       'Map' => 1,
       'Satellite' => 1,
@@ -57,7 +58,7 @@ function gmap_update_5000() {
     }
   }
 
-  // notype is gone, mtc is more generic.
+  // Notype is gone, mtc is more generic.
   if (isset($d['behavior']['notype'])) {
     unset($d['behavior']['notype']);
   }
@@ -68,6 +69,7 @@ function gmap_update_5000() {
 
 /**
  * Post 5.x-1.0beta2 update 1.
+ *
  * We added a menu callback, force a rebuild.
  */
 function gmap_update_5001() {
@@ -98,4 +100,34 @@ function gmap_update_5003() {
   }
   drupal_set_message(t('Border Padding on marker managers is now defaulting to the recommended 256 pixels, rather than 0 pixels. You may wish to change your marker manager settings on the <a href="@url">GMap settings page</a> to match.', array('@url' => url('admin/settings/gmap'))));
   return $ret;
+}
+
+/**
+ * Drupal 7 clean up.
+ */
+/*
+function gmap_update_7000() {
+  $ret = array();
+  variable_del('gmap_private_markerfile');
+
+  return $ret;
+}
+*/
+
+/**
+ * Mini-update -- update gmap markerfiles variable to an array if it is not
+ * already.
+ */
+function gmap_update_7201() {
+ $markerdirs = variable_get('gmap_markerfiles', array(drupal_get_path('module', 'gmap') . '/markers'));
+ if (!is_array($markerdirs)) {
+   variable_set('gmap_markerfiles', array($markerdirs));
+  }
+}
+
+/**
+ * Gmap:deleted gmap_marker_custom_dir since it is not using.
+ */
+function gmap_update_7202() {
+  variable_del('gmap_marker_custom_dir');
 }

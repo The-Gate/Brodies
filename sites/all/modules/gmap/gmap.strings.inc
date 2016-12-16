@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Translation definitions for builtin data.
+ */
+
+/**
+ * Get an array with a marker's labels.
+ */
 function gmap_marker_labels_potx() {
   $marker_labels = array(
     0 => t('Small Red'),

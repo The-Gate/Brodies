@@ -3,7 +3,7 @@
  * Address widget and GMap geocoder routines.
  */
 
-/*global $, Drupal, GClientGeocoder */
+/*global jQuery, Drupal, GClientGeocoder */
 
 /**
  * Provide a shared geocoder.
@@ -84,7 +84,7 @@ Drupal.gmap.addHandler('address', function (elem) {
     var obj = this;
 
     // Respond to focus event.
-    $(elem).focus(function () {
+    jQuery(elem).focus(function () {
         this.value = '';
     });
 
@@ -95,7 +95,7 @@ Drupal.gmap.addHandler('address', function (elem) {
     });
     // Send out outgoing movements.
     // This happens ASYNC!!!
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         if (elem.value.length > 0) {
             Drupal.gmap.geocoder().geocode({'address': elem.value}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -124,7 +124,7 @@ Drupal.gmap.addHandler('locpick_address', function (elem) {
     var obj = this;
 
     // Respond to focus event.
-    $(elem).focus(function () {
+    jQuery(elem).focus(function () {
         this.value = '';
     });
 
@@ -135,7 +135,7 @@ Drupal.gmap.addHandler('locpick_address', function (elem) {
     });
     // Send out outgoing movements.
     // This happens ASYNC!!!
-    $(elem).change(function () {
+    jQuery(elem).change(function () {
         if (elem.value.length > 0) {
             Drupal.gmap.geocoder().geocode({'address': elem.value}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {

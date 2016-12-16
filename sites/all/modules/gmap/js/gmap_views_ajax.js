@@ -5,25 +5,17 @@
  * This file is part of the solution to this problem.
  */
 
-$(document).ready(function () {
-    Drupal.gmapAjax = Drupal.gmapAjax || {};
-
-    /**
-     * An ajax responder that accepts a packet of JSON data and acts appropriately.
-     *
-     * The following fields control behavior.
-     * - 'display': Display the associated data in the view area.
-     */
-    Drupal.gmapAjax.ajaxFixMaps = function (target, response) {
-        var $view = $(target);
+(function ($) {
+    Drupal.ajax.prototype.commands.gmapAjaxViewsFix = function (ajax, response, status) {
+        var $view = $(response.target);
 
         if (response.settings) {
             var i = 0;
             var gmap = {};
 
             for (i = 0; i < response.settings.length; i++) {
-                if (typeof(response.settings[i]['gmap']) == 'object') {
-                    gmap = response.settings[i]['gmap'];
+                if (typeof(response.settings[i].gmap) == 'object') {
+                    gmap = response.settings[i].gmap;
                 }
             }
 
@@ -39,5 +31,4 @@ $(document).ready(function () {
             });
         }
     };
-});
-
+})(jQuery);

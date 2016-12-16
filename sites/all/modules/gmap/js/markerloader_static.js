@@ -1,3 +1,5 @@
+/* $Id: markerloader_static.js,v 1.3 2009/02/11 19:30:22 bdragon Exp $ */
+
 /**
  * @file
  * GMap Marker Loader
@@ -23,7 +25,9 @@ Drupal.gmap.addHandler('gmap', function (elem) {
                 // Pass around the object, bindings can change it if necessary.
                 obj.change('preparemarker', -1, marker);
                 // And add it.
-                obj.change('addmarker', -1, marker);
+                if (marker && marker.marker == undefined) {
+                  obj.change('addmarker', -1, marker);
+                }
             }
             obj.change('markersready', -1);
         });

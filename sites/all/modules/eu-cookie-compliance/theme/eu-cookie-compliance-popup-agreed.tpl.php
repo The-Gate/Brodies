@@ -12,17 +12,18 @@
  *
  * Variables available:
  * - $message:  Contains the text that will be display whithin the pop-up
+ * - $hide_button: Contains hide butlon title
+ * - $find_more_button: Contains find more button title
  */
 ?>
-
 <div>
   <div class ="popup-content agreed">
     <div id="popup-text">
       <?php print $message ?>
     </div>
     <div id="popup-buttons">
-      <button type="button" class="hide-popup-button"><?php print t("Hide this message"); ?> </button>
-      <button type="button" class="find-more-button" ><?php print t("More information on cookies"); ?></button>
+      <button type="button" class="hide-popup-button"><?php print $hide_button; ?></button>
+      <button type="button" class="find-more-button" ><?php print $find_more_button; ?></button>
     </div>
   </div>
 </div>

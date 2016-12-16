@@ -1,3 +1,5 @@
+(function ($) {
+
 /**
  *  This file is for developers only.
  *
@@ -113,3 +115,5 @@ $(document).ready(function() {
   console.groupEnd();
 
 });
+
+})(jQuery);

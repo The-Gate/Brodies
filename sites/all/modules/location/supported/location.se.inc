@@ -1,10 +1,16 @@
 <?php
-// $Id $
 
-// Sweden
+/**
+ * @file
+ * Sweden.
+ */
 
+/**
+ * Returns an associative array of states/territories.
+ */
 function location_province_list_se() {
-  return array('ST' => "Stockholm",
+  return array(
+    'ST' => "Stockholm",
     'UP' => "Uppsala",
     'SO' => "Södermanland",
     'OG' => "Östergotland",
@@ -24,7 +30,8 @@ function location_province_list_se() {
     'VN' => "Västernorrland",
     'JA' => "Jämtland",
     'VB' => "Västerbotten",
-    'NO' => "Norrbotten");
+    'NO' => "Norrbotten"
+  );
 }
 
 /**

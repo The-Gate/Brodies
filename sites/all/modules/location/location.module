@@ -8,21 +8,21 @@
  * some options are configured through an interface provided by location.module.
  */
 
-define('LOCATION_PATH',                   drupal_get_path('module', 'location'));
+define('LOCATION_PATH', drupal_get_path('module', 'location'));
 
-define('LOCATION_LATLON_UNDEFINED',       0);
-define('LOCATION_LATLON_USER_SUBMITTED',  1);
+define('LOCATION_LATLON_UNDEFINED', 0);
+define('LOCATION_LATLON_USER_SUBMITTED', 1);
 define('LOCATION_LATLON_GEOCODED_APPROX', 2);
-define('LOCATION_LATLON_GEOCODED_EXACT',  3);
-define('LOCATION_LATLON_JIT_GEOCODING',   4); // Force regeocoding immediately.
+define('LOCATION_LATLON_GEOCODED_EXACT', 3);
+// Force regeocoding immediately.
+define('LOCATION_LATLON_JIT_GEOCODING', 4);
+define('LOCATION_USER_DONT_COLLECT', 0);
+define('LOCATION_USER_COLLECT', 1);
 
-define('LOCATION_USER_DONT_COLLECT',      0);
-define('LOCATION_USER_COLLECT',           1);
-
-include_once LOCATION_PATH .'/location.inc';
+include_once DRUPAL_ROOT . '/' . LOCATION_PATH . '/location.inc';
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function location_menu() {
   $items = array();
@@ -32,13 +32,8 @@ function location_menu() {
     'page callback' => '_location_autocomplete',
     'type' => MENU_CALLBACK,
   );
-  $items['location/fetch_provinces'] = array(
-    'access arguments' => array('access content'),
-    'page callback' => '_location_fetch_provinces',
-    'type' => MENU_CALLBACK,
-  );
 
-  $items['admin/settings/location'] = array(
+  $items['admin/config/content/location'] = array(
     'title' => 'Location',
     'description' => 'Settings for Location module',
     'page callback' => 'drupal_get_form',
@@ -46,11 +41,11 @@ function location_menu() {
     'file' => 'location.admin.inc',
     'access arguments' => array('administer site configuration'),
   );
-  $items['admin/settings/location/main'] = array(
+  $items['admin/config/content/location/main'] = array(
     'title' => 'Main settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
-  $items['admin/settings/location/maplinking'] = array(
+  $items['admin/config/content/location/maplinking'] = array(
     'title' => 'Map links',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('location_map_link_options_form'),
@@ -59,7 +54,7 @@ function location_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 1,
   );
-  $items['admin/settings/location/geocoding'] = array(
+  $items['admin/config/content/location/geocoding'] = array(
     'title' => 'Geocoding options',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('location_geocoding_options_form'),
@@ -68,13 +63,13 @@ function location_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 2,
   );
-  $items['admin/settings/location/geocoding/%/%'] = array(
+  $items['admin/config/content/location/geocoding/%/%'] = array(
     'page callback' => 'location_geocoding_parameters_page',
-    'page arguments' => array(4, 5),
+    'page arguments' => array(5, 6),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
   );
-  $items['admin/settings/location/util'] = array(
+  $items['admin/config/content/location/util'] = array(
     'title' => 'Location utilities',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('location_util_form'),
@@ -88,63 +83,86 @@ function location_menu() {
 }
 
 /**
- *
+ * Location API.
  */
 function location_api_variant() {
   return 2;
 }
 
 /**
- * Implementation of hook_perm().
+ * Implements hook_permission().
  */
-function location_perm() {
+function location_permission() {
   return array(
-    'submit latitude/longitude',
-    'view location directory',
-    'view node location table',
-    'view user location table',
+    'view location directory' => array(
+      'title' => t('View location directory'),
+    ),
+    'view node location table' => array(
+      'title' => t('View node location table'),
+    ),
+    'view user location table' => array(
+      'title' => t('View user location table'),
+    ),
+    'submit latitude/longitude' => array(
+      'title' => t('Submit latitude/longitude'),
+    ),
   );
 }
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  *
  * @TODO: check/fix this: admin/content/configure/types (still use %? still same url?)
  */
 function location_help($path, $arg) {
   switch ($path) {
     case 'admin/help#location':
-      $output = '<p>'. t('The location module allows you to associate a geographic location with content and users. Users can do proximity searches by postal code.  This is useful for organizing communities that have a geographic presence.') .'</p>';
-      $output .= '<p>'. t('To administer locative information for content, use the content type administration page.  To support most location enabled features, you will need to install the country specific include file.  To support postal code proximity searches for a particular country, you will need a database dump of postal code data for that country.  As of June 2007 only U.S. and German postal codes are supported.') .'</p>';
-      $output .= t('<p>You can</p>
-<ul>
-<li>administer locative information at <a href="@admin-node-configure-types">Administer &gt;&gt; Content management &gt;&gt; Content types</a> to configure a type and see the locative information.</li>
-<li>administer location at <a href="@admin-settings-location">Administer &gt;&gt; Site configuration &gt;&gt; Location</a>.</li>
-<li>use a database dump for a U.S. and/or German postal codes table that can be found at <a href="@external-http-cvs-drupal-org">zipcode database</a>.</li>
-', array('@admin-node-configure-types' => url('admin/content/types'), '@admin-settings-location' => url('admin/settings/location'), '@external-http-cvs-drupal-org' => 'http://cvs.drupal.org/viewcvs/drupal/contributions/modules/location/database/')) .'</ul>';
-      $output .= '<p>'. t('For more information please read the configuration and customization handbook <a href="@location">Location page</a>.', array('@location' => 'http://www.drupal.org/handbook/modules/location/')) .'</p>';
+      $output = '<p>' . t(
+          'The location module allows you to associate a geographic location with content and users. Users can do proximity searches by postal code.  This is useful for organizing communities that have a geographic presence.'
+        ) . '</p>';
+      $output .= '<p>' . t(
+          'To administer locative information for content, use the content type administration page.  To support most location enabled features, you will need to install the country specific include file.  To support postal code proximity searches for a particular country, you will need a database dump of postal code data for that country.  As of June 2007 only U.S. and German postal codes are supported.'
+        ) . '</p>';
+      $output .= t(
+          '<p>You can</p>
+          <ul>
+          <li>administer locative information at <a href="@admin-node-configure-types">Administer &gt;&gt; Content management &gt;&gt; Content types</a> to configure a type and see the locative information.</li>
+          <li>administer location at <a href="@admin-settings-location">Administer &gt;&gt; Site configuration &gt;&gt; Location</a>.</li>
+          <li>use a database dump for a U.S. and/or German postal codes table that can be found at <a href="@external-http-cvs-drupal-org">zipcode database</a>.</li>
+          ',
+          array(
+            '@admin-node-configure-types' => url('admin/content/types'),
+            '@admin-settings-location' => url('admin/config/content/location'),
+            '@external-http-cvs-drupal-org' => 'http://cvs.drupal.org/viewcvs/drupal/contributions/modules/location/database/'
+          )
+        ) . '</ul>';
+      $output .= '<p>' . t(
+          'For more information read the configuration and customization handbook <a href="@location">Location page</a>.',
+          array('@location' => 'http://www.drupal.org/handbook/modules/location/')
+        ) . '</p>';
+
       return $output;
   }
 }
 
 /**
- * Implementation of hook_elements().
+ * Implements hook_element_info().
  */
-function location_elements() {
+function location_element_info() {
   return array(
     'location_element' => array(
       '#input' => TRUE,
-      '#process' => array('_location_expand_location'),
+      '#process' => array('_location_process_location'),
       '#tree' => TRUE,
       '#location_settings' => array(),
       '#required' => FALSE,
-      '#attributes' => array('class' => 'location'),
+      '#attributes' => array('class' => array('location')),
       // Element level validation.
       '#element_validate' => array('location_element_validate'),
     ),
     'location_settings' => array(
       '#input' => TRUE,
-      '#process' => array('_location_expand_location_settings'),
+      '#process' => array('_location_process_location_settings'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#tree' => TRUE,
@@ -153,56 +171,103 @@ function location_elements() {
 }
 
 /**
- * Theme function to fixup location elements.
- * @ingroup themable
+ * Implements hook_field_extra_fields().
  */
-function theme_location_element($element) {
-  // Prevent spurious "Array" from appearing.
-  unset($element['#value']);
-  return theme('fieldset', $element);
+function location_field_extra_fields() {
+  $info = array();
+  foreach (node_type_get_types() as $node_type) {
+    if (!isset($info['node'][$node_type->type]['form']['locations'])) {
+      $info['node'][$node_type->type]['form']['locations'] = array(
+        'label' => t('Location'),
+        'description' => t('Location module form elements'),
+        'weight' => 30,
+      );
+    }
+  }
+
+  return $info;
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_flush_caches().
+ */
+function location_flush_caches() {
+  return array('cache_location');
+}
+
+/**
+ * Theme function to fixup location elements.
+ * @ingroup themable
+ */
+function theme_location_element($variables) {
+  $element = $variables['element'];
+
+  // Prevent spurious "Array" from appearing.
+  unset($element['#value']);
+
+  return theme('fieldset', array('element' => $element));
+}
+
+/**
+ * Implements hook_theme().
  */
 function location_theme() {
   return array(
-    'location_settings' => array('arguments' => array('element')),
+    'location_settings' => array(
+      'render element' => 'element',
+    ),
     'locations' => array(
       'template' => 'locations',
-      'arguments' => array(
+      'variables' => array(
         'locations' => NULL,
         'hide' => array(),
       ),
     ),
     'location' => array(
       'template' => 'location',
-      'arguments' => array(
+      'variables' => array(
         'location' => NULL,
         'hide' => array(),
       ),
     ),
-    'location_latitude_dms' => array('arguments' => array('latitude')),
-    'location_longitude_dms' => array('arguments' => array('longitude')),
-    'location_map_link_options' => array('arguments' => array('form')),
-    'location_geocoding_options' => array('arguments' => array('form')),
-    'location_element' => array('arguments' => array('element')),
-    'location_distance' => array('template' => 'location_distance', 'arguments' => array('distance' => 0, 'units' => 'km')),
+    'location_latitude_dms' => array(
+      'variables' => array('latitude'),
+    ),
+    'location_longitude_dms' => array(
+      'variables' => array('longitude'),
+    ),
+    'location_map_link_options' => array(
+      'render element' => 'form',
+      'file' => 'location.admin.inc',
+    ),
+    'location_geocoding_options' => array(
+      'render element' => 'form',
+      'file' => 'location.admin.inc',
+    ),
+    'location_element' => array(
+      'render element' => 'element',
+    ),
+    'location_distance' => array(
+      'template' => 'location_distance',
+      'variables' => array(
+        'distance' => 0,
+        'units' => 'km',
+      ),
+    ),
   );
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function location_views_api() {
   return array(
-    'api' => 2,
-    //'path' => drupal_get_path('module', 'location') .'/includes',
+    'api' => 3,
   );
 }
 
 /**
- * Implementation of hook_ctools_plugin_directory().
+ * Implements hook_ctools_plugin_directory().
  */
 function location_ctools_plugin_directory($module, $plugin) {
   if ($module == 'ctools' && !empty($plugin)) {
@@ -213,12 +278,13 @@ function location_ctools_plugin_directory($module, $plugin) {
 /**
  * Process a location element.
  */
-function _location_expand_location($element) {
-  drupal_add_css(drupal_get_path('module', 'location') .'/location.css');
+function _location_process_location($element, $form_state) {
+  // This is TRUE if we are processing a form that already contains values, such as during an AJAX call.
+  drupal_add_css(drupal_get_path('module', 'location') . '/location.css');
   $element['#tree'] = TRUE;
 
   if (!isset($element['#title'])) {
-    $element['#title'] = t('Location');
+    $element['#title'] = t('Location', array(), array('context' => 'geolocation'));
   }
   if (empty($element['#location_settings'])) {
     $element['#location_settings'] = array();
@@ -272,14 +338,21 @@ function _location_expand_location($element) {
     if (!isset($element[$field])) {
       // @@@ Permission check hook?
       if ($fsettings[$field]['collect'] != 0) {
-        $element[$field] = location_invoke_locationapi($fdefaults[$field], 'field_expand', $field, $fsettings[$field], $fdefaults);
+        $fsettings[$field]['#parents'] = $element['#parents'];
+        $element[$field] = location_invoke_locationapi(
+          $fdefaults[$field],
+          'field_expand',
+          $field,
+          $fsettings[$field],
+          $fdefaults
+        );
         $element[$field]['#weight'] = (int) $fsettings[$field]['weight'];
       }
     }
 
     // If State/Province is using the select widget, update the element's options.
     if ($field == 'province' && $fsettings[$field]['widget'] == 'select') {
-      // We are building the element for the first time
+      // We are building the element for the first time.
       if (!isset($element['value']['country'])) {
         $country = $fdefaults['country'];
       }
@@ -289,7 +362,8 @@ function _location_expand_location($element) {
       $provinces = location_get_provinces($country);
       // The submit handler expects to find the full province name, not the
       // abbreviation. The select options should reflect this expectation.
-      $element[$field]['#options'] = array('' => t('Please select'), 'xx' => t('NOT LISTED')) + $provinces;
+      $element[$field]['#options'] = array('' => t('Select'), 'xx' => t('NOT LISTED')) + $provinces;
+      $element[$field]['#validated'] = TRUE;
     }
   }
 
@@ -306,33 +380,35 @@ function _location_expand_location($element) {
       $element['locpick']['current'] = array(
         '#type' => 'fieldset',
         '#title' => t('Current coordinates'),
-        '#attributes' => array('class' => 'location-current-coordinates-fieldset'),
+        '#attributes' => array('class' => array('location-current-coordinates-fieldset')),
       );
       $element['locpick']['current']['current_latitude'] = array(
         '#type' => 'item',
         '#title' => t('Latitude'),
-        '#value' => $defaults['latitude'],
+        '#markup' => $defaults['latitude'],
       );
       $element['locpick']['current']['current_longitude'] = array(
         '#type' => 'item',
         '#title' => t('Longitude'),
-        '#value' => $defaults['longitude'],
+        '#markup' => $defaults['longitude'],
       );
       $source = t('Unknown');
-      switch($defaults['source']) {
+      switch ($defaults['source']) {
         case LOCATION_LATLON_USER_SUBMITTED:
           $source = t('User-submitted');
           break;
+
         case LOCATION_LATLON_GEOCODED_APPROX:
           $source = t('Geocoded (Postal code level)');
           break;
+
         case LOCATION_LATLON_GEOCODED_EXACT:
           $source = t('Geocoded (Exact)');
       }
       $element['locpick']['current']['current_source'] = array(
         '#type' => 'item',
         '#title' => t('Source'),
-        '#value' => $source,
+        '#markup' => $source,
       );
     }
 
@@ -341,7 +417,7 @@ function _location_expand_location($element) {
       '#title' => t('Latitude'),
       '#default_value' => isset($element['#default_value']['locpick']['user_latitude']) ? $element['#default_value']['locpick']['user_latitude'] : '',
       '#size' => 16,
-      '#attributes' => array('class' => 'container-inline'),
+      '#attributes' => array('class' => array('container-inline')),
       '#maxlength' => 20,
       '#required' => $fsettings['locpick']['collect'] == 2,
     );
@@ -358,12 +434,14 @@ function _location_expand_location($element) {
       '#type' => 'markup',
       '#weight' => 1,
       '#prefix' => '<div class=\'description\'>',
-      '#value' => '<br /><br />' . t('If you wish to supply your own latitude and longitude, you may enter them above.  If you leave these fields blank, the system will attempt to determine a latitude and longitude for you from the entered address.  To have the system recalculate your location from the address, for example if you change the address, delete the values for these fields.'),
+      '#markup' => '<br /><br />' . t(
+        'If you wish to supply your own latitude and longitude, you may enter them above.  If you leave these fields blank, the system will attempt to determine a latitude and longitude for you from the entered address.  To have the system recalculate your location from the address, for example if you change the address, delete the values for these fields.'
+      ),
       '#suffix' => '</div>',
-      );
+    );
     if (function_exists('gmap_get_auto_mapid') && variable_get('location_usegmap', FALSE)) {
       $mapid = gmap_get_auto_mapid();
-      $map = gmap_parse_macro(variable_get('location_locpick_macro', '[gmap]'));
+      $map = array_merge(gmap_defaults(), gmap_parse_macro(variable_get('location_locpick_macro', '[gmap]')));
       $map['id'] = $mapid;
       $map['points'] = array();
       $map['pointsOverlays'] = array();
@@ -373,13 +451,13 @@ function _location_expand_location($element) {
       $map['behavior']['collapsehack'] = TRUE;
       // Use previous coordinates to center the map.
       if (location_has_coordinates($defaults, FALSE)) {
-        $map['latitude'] = (float)$defaults['latitude'];
-        $map['longitude'] = (float)$defaults['longitude'];
+        $map['latitude'] = (float) $defaults['latitude'];
+        $map['longitude'] = (float) $defaults['longitude'];
 
         $map['markers'][] = array(
           'latitude' => $defaults['latitude'],
           'longitude' => $defaults['longitude'],
-          'markername' => 'small gray', // @@@ Settable?
+          'markername' => 'small gray',
           'offset' => 0,
           'opts' => array(
             'clickable' => FALSE,
@@ -394,20 +472,27 @@ function _location_expand_location($element) {
       $element['locpick']['map'] = array(
         '#type' => 'gmap',
         '#weight' => -1,
-        '#map' => $mapid,
-        '#settings' => $map,
+        '#gmap_settings' => $map,
       );
       $element['locpick']['map_instructions'] = array(
         '#type' => 'markup',
         '#weight' => 2,
         '#prefix' => '<div class=\'description\'>',
-        '#value' => t('You may set the location by clicking on the map, or dragging the location marker.  To clear the location and cause it to be recalculated, click on the marker.'),
+        '#markup' => t(
+          'You may set the location by clicking on the map, or dragging the location marker.  To clear the location and cause it to be recalculated, click on the marker.'
+        ),
         '#suffix' => '</div>',
       );
     }
   }
 
   if (isset($defaults['lid']) && !empty($defaults['lid'])) {
+    $element['re_geocode_location'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Re geocode'),
+      '#default_value' => isset($fdefaults['re_geocode_location']) ? $fdefaults['re_geocode_location'] : FALSE,
+      '#description' => t('Check this box to re-geocode location.'),
+    );
     $element['delete_location'] = array(
       '#type' => 'checkbox',
       '#title' => t('Delete'),
@@ -416,11 +501,24 @@ function _location_expand_location($element) {
     );
   }
 
-  $element += _element_info('fieldset');
+  $fieldset_info = element_info('fieldset');
+  $element += $fieldset_info;
+  $element['#process'] = array_merge($element['#process'], $fieldset_info['#process']);
+  if (isset($fieldset_info['#process'])) {
+    foreach ($fieldset_info['#process'] as $process) {
+      $element = $process($element, $form_state, $form_state['complete form']);
+    }
+  }
+
+  drupal_alter('location_element', $element);
+
   return $element;
 }
 
-function _location_expand_location_settings(&$element) {
+/**
+ * Process location settings.
+ */
+function _location_process_location_settings(&$element) {
   // Set a value for the fieldset that doesn't interfere with rendering and doesn't generate a warning.
   $element['#tree'] = TRUE;
   $element['#theme'] = 'location_settings';
@@ -447,7 +545,6 @@ function _location_expand_location_settings(&$element) {
     $defaults[$k] = array_merge($v, $defaults[$k]);
   }
 
-
   $fields = location_field_names();
 
   // Options for fields.
@@ -455,10 +552,10 @@ function _location_expand_location_settings(&$element) {
     0 => t('Do not collect'),
     1 => t('Allow'),
     2 => t('Require'),
-    4 => t('Force Default'), // Need to consider the new "defaults" when saving.
+    // Need to consider the new "defaults" when saving.
+    4 => t('Force Default'),
   );
 
-  $dummy = array();
   foreach ($fields as $field => $title) {
     $element[$field] = array(
       '#type' => 'fieldset',
@@ -466,7 +563,7 @@ function _location_expand_location_settings(&$element) {
     );
     $element[$field]['name'] = array(
       '#type' => 'item',
-      '#value' => $title,
+      '#markup' => $title,
     );
     $element[$field]['collect'] = array(
       '#type' => 'select',
@@ -474,6 +571,7 @@ function _location_expand_location_settings(&$element) {
       '#options' => $options,
     );
 
+    $dummy = array();
     $widgets = location_invoke_locationapi($dummy, 'widget', $field);
     if (!empty($widgets)) {
       $element[$field]['widget'] = array(
@@ -495,15 +593,18 @@ function _location_expand_location_settings(&$element) {
   }
 
   // 'Street Additional' field should depend on 'Street' setting.
-  // It should never be required and should only display when the street field is 'allowed' or 'required'
-//  unset($element['additional']);
-
-  // @@@ Alter here?
+  // It should never be required and should only display when the street field is 'allowed' or 'required'.
+  // @todo Alter here.
 
   return $element;
 }
 
-function theme_location_settings($element) {
+/**
+ * Theme callback for location settings.
+ */
+function theme_location_settings($variables) {
+  $element = $variables['element'];
+
   $rows = array();
   $header = array(
     array(
@@ -521,20 +622,20 @@ function theme_location_settings($element) {
   unset($element['country']['collect']['#options'][0]);
 
   foreach (element_children($element) as $key) {
-    $element[$key]['weight']['#attributes']['class'] = 'location-settings-weight';
+    $element[$key]['weight']['#attributes']['class'] = array('location-settings-weight');
     unset($element[$key]['default']['#title']);
     $row = array();
-    $row[] = array('data' => '', 'class' => 'location-settings-drag');
+    $row[] = array('data' => '', 'class' => array('location-settings-drag'));
     $row[] = drupal_render($element[$key]['name']);
     $row[] = drupal_render($element[$key]['collect']);
     $row[] = !empty($element[$key]['widget']) ? drupal_render($element[$key]['widget']) : '';
     $row[] = drupal_render($element[$key]['default']);
-    $row[] = array('data' => drupal_render($element[$key]['weight']), 'class' => 'delta-order');
+    $row[] = array('data' => drupal_render($element[$key]['weight']), 'class' => array('delta-order'));
 
     $rows[] = array(
-      '#weight' => (int)$element[$key]['weight']['#value'],
+      '#weight' => (int) $element[$key]['weight']['#value'],
       'data' => $row,
-      'class' => 'draggable',
+      'class' => array('draggable'),
     );
   }
 
@@ -545,14 +646,25 @@ function theme_location_settings($element) {
 
   drupal_add_tabledrag('location-settings-table', 'order', 'sibling', 'location-settings-weight');
 
-  $output = theme('table', $header, $rows, array('id' => 'location-settings-table'));
-  //return theme('form_element', $element, $element['#children']);
+  $output = theme(
+    'table',
+    array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array('id' => 'location-settings-table'),
+    )
+  );
+
   return $output;
 }
 
+/**
+ * Field names.
+ */
 function location_field_names($all = FALSE) {
-  static $fields;
-  static $allfields;
+  $fields = & drupal_static(__FUNCTION__ . '_fields', array());
+  $allfields = & drupal_static(__FUNCTION__ . '_allfields', array());
+
   if ($all) {
     if (empty($allfields)) {
       $dummy = array();
@@ -560,6 +672,7 @@ function location_field_names($all = FALSE) {
       $virtual = location_invoke_locationapi($dummy, 'virtual fields');
       $allfields += $virtual;
     }
+
     return $allfields;
   }
   else {
@@ -567,18 +680,31 @@ function location_field_names($all = FALSE) {
       $dummy = array();
       $fields = location_invoke_locationapi($dummy, 'fields');
     }
+
     return $fields;
   }
 }
 
 /**
- * Implementation of hook_locationapi().
+ * Implements hook_locationapi().
  */
 function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
   switch ($op) {
+    // @codingStandardsIgnoreStart
     case 'fields':
-      return array('name' => t('Location name'), 'street' => t('Street location'), 'additional' => t('Additional'), 'city' => t('City'), 'province' => t('State/Province'), 'postal_code' => t('Postal code'), 'country' => t('Country'), 'locpick' => t('Coordinate Chooser'));
+      return array(
+        'name' => t('Location name'),
+        'street' => t('Street location'),
+        'additional' => t('Additional'),
+        'city' => t('City'),
+        'province' => t('State/Province'),
+        'postal_code' => t('Postal code'),
+        'country' => t('Country'),
+        'locpick' => t('Coordinate Chooser')
+      );
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
     case 'widget':
       switch ($a3) {
         case 'province':
@@ -589,30 +715,42 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
         default:
           return array();
       }
-    case 'virtual fields':
-      return array('province_name' => t('Province name'), 'country_name' => t('Country name'), 'map_link' => t('Map link'), 'coords' => t('Coordinates'));
+    // @codingStandardsIgnoreEnd
 
+    // @codingStandardsIgnoreStart
+    case 'virtual fields':
+      return array(
+        'province_name' => t('Province name'),
+        'country_name' => t('Country name'),
+        'map_link' => t('Map link'),
+        'coords' => t('Coordinates')
+      );
+    // @codingStandardsIgnoreEnd
+
+    // @codingStandardsIgnoreStart
     case 'defaults':
       return array(
-        'lid'         => array('default' => FALSE),
-        'name'        => array('default' => '', 'collect' => 1, 'weight' => 2),
-        'street'      => array('default' => '', 'collect' => 1, 'weight' => 4),
-        'additional'  => array('default' => '', 'collect' => 1, 'weight' => 6),
-        'city'        => array('default' => '', 'collect' => 0, 'weight' => 8),
-        'province'    => array('default' => '', 'collect' => 0, 'weight' => 10, 'widget' => 'autocomplete'),
+        'lid' => array('default' => FALSE),
+        'name' => array('default' => '', 'collect' => 1, 'weight' => 2),
+        'street' => array('default' => '', 'collect' => 1, 'weight' => 4),
+        'additional' => array('default' => '', 'collect' => 1, 'weight' => 6),
+        'city' => array('default' => '', 'collect' => 0, 'weight' => 8),
+        'province' => array('default' => '', 'collect' => 0, 'weight' => 10, 'widget' => 'autocomplete'),
         'postal_code' => array('default' => '', 'collect' => 0, 'weight' => 12),
-        'country'     => array('default' => variable_get('location_default_country', 'us'), 'collect' => 1, 'weight' => 14), // @@@ Fix weight?
-        'locpick'     => array('default' => FALSE, 'collect' => 1, 'weight' => 20, 'nodiff' => TRUE),
-        'latitude'    => array('default' => 0),
-        'longitude'   => array('default' => 0),
-        'source'      => array('default' => LOCATION_LATLON_UNDEFINED),
-        'is_primary'  => array('default' => 0), // @@@
+        'country' => array('default' => variable_get('location_default_country', 'us'), 'collect' => 1, 'weight' => 14),
+        'locpick' => array('default' => FALSE, 'collect' => 1, 'weight' => 20, 'nodiff' => TRUE),
+        'latitude' => array('default' => 0),
+        'longitude' => array('default' => 0),
+        'source' => array('default' => LOCATION_LATLON_UNDEFINED),
+        'is_primary' => array('default' => 0),
+        're_geocode_location' => array('default' => FALSE, 'nodiff' => TRUE),
         'delete_location' => array('default' => FALSE, 'nodiff' => TRUE),
       );
+    // @codingStandardsIgnoreEnd
 
     case 'validate':
       if (!empty($obj['country']) && $obj['country']['#value'] != 'xx') {
-        if (!empty($obj['province']) && !empty($obj['province']['#value'])) {
+        if (!empty($obj['province']) && !empty($obj['province']['#value']) && $obj['province']['#value'] != 'xx') {
           $provinces = location_get_provinces($obj['country']['#value']);
           $found = FALSE;
           $p = strtoupper($obj['province']['#value']);
@@ -630,12 +768,18 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
 
       if (!empty($obj['locpick']) && is_array($obj['locpick'])) {
         // Can't specify just latitude or just longitude.
-        if (_location_floats_are_equal($obj['locpick']['user_latitude'], 0) xor _location_floats_are_equal($obj['locpick']['user_longitude'], 0)) {
-          $ref = &$a3['locpick']['user_latitude'];
-          if (_location_floats_are_equal($obj['locpick']['user_longitude'], 0)) {
-            $ref = &$a3['locpick']['user_longitude'];
+        if (isset($obj['locpick']['user_latitude']) && isset($obj['locpick']['user_longitude'])) {
+          if (_location_floats_are_equal($obj['locpick']['user_latitude'], 0) xor _location_floats_are_equal(
+              $obj['locpick']['user_longitude'],
+              0
+            )
+          ) {
+            $ref = & $a3['locpick']['user_latitude'];
+            if (_location_floats_are_equal($obj['locpick']['user_longitude'], 0)) {
+              $ref = & $a3['locpick']['user_longitude'];
+            }
+            form_error($ref, t('You must fill out both latitude and longitude or you must leave them both blank.'));
           }
-          form_error($ref, t('You must fill out both latitude and longitude or you must leave them both blank.'));
         }
       }
 
@@ -648,56 +792,68 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
       else {
         // On this $op, $a4 is now expected to be an array,
         // but we make an exception for backwards compatibility.
-        $settings = array('default' => NULL, 'weight' => NULL, 'collect' => $a4, 'widget' => NULL);
+        $settings = array(
+          'default' => NULL,
+          'weight' => NULL,
+          'collect' => $a4,
+          'widget' => NULL,
+        );
       }
       switch ($a3) {
+        // @codingStandardsIgnoreStart
         case 'name':
           return array(
-            '#type'           => 'textfield',
-            '#title'          => t('Location name'),
-            '#default_value'  => $obj,
-            '#size'           => 64,
-            '#maxlength'      => 255,
-            '#description'    => t('e.g. a place of business, venue, meeting point'),
-            '#attributes'     => NULL,
-            '#required'       => ($settings['collect'] == 2),
+            '#type' => 'textfield',
+            '#title' => t('Location name'),
+            '#default_value' => $obj,
+            '#size' => 64,
+            '#maxlength' => 255,
+            '#description' => t('e.g. a place of business, venue, meeting point'),
+            '#attributes' => NULL,
+            '#required' => ($settings['collect'] == 2),
           );
+        // @codingStandardsIgnoreEnd
 
+        // @codingStandardsIgnoreStart
         case 'street':
           return array(
-            '#type'           => 'textfield',
-            '#title'          => t('Street'),
-            '#default_value'  => $obj,
-            '#size'           => 64,
-            '#maxlength'      => 255,
-            '#required'       => ($settings['collect'] == 2),
+            '#type' => 'textfield',
+            '#title' => t('Street'),
+            '#default_value' => $obj,
+            '#size' => 64,
+            '#maxlength' => 255,
+            '#required' => ($settings['collect'] == 2),
           );
+        // @codingStandardsIgnoreEnd
 
+        // @codingStandardsIgnoreStart
         // Additional is linked to street.
         case 'additional':
           return array(
-            '#type'           => 'textfield',
-            '#title'          => t('Additional'),
-            '#default_value'  => $obj,
-            '#size'           => 64,
-            '#maxlength'      => 255,
+            '#type' => 'textfield',
+            '#title' => t('Additional'),
+            '#default_value' => $obj,
+            '#size' => 64,
+            '#maxlength' => 255,
             // Required is forced OFF because this is technically part of street.
           );
+        // @codingStandardsIgnoreEnd
 
+        // @codingStandardsIgnoreStart
         case 'city':
           return array(
-            '#type'           => 'textfield',
-            '#title'          => t('City'),
-            '#default_value'  => $obj,
-            '#size'           => 64,
-            '#maxlength'      => 255,
-            '#description'    => NULL,
-            '#attributes'     => NULL,
-            '#required'       => ($settings['collect'] == 2),
+            '#type' => 'textfield',
+            '#title' => t('City'),
+            '#default_value' => $obj,
+            '#size' => 64,
+            '#maxlength' => 255,
+            '#description' => NULL,
+            '#attributes' => NULL,
+            '#required' => ($settings['collect'] == 2),
           );
+        // @codingStandardsIgnoreEnd
 
         case 'province':
-          drupal_add_js(drupal_get_path('module', 'location') .'/location_autocomplete.js');
           if (isset($a5['country']) && is_string($a5['country'])) {
             $country = $a5['country'];
           }
@@ -708,29 +864,35 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
             $country = variable_get('site_default_country', 'us');
           }
           switch ($settings['widget']) {
+            // @codingStandardsIgnoreStart
             case 'select':
-              static $js_set;
-              if (empty($js_set)) {
-                drupal_add_js(array(
-                  'location_fetch_provinces_url' => url('location/fetch_provinces'),
-                  'please_select' => t('Please Select'),
-                  'not_listed' => t('NOT LISTED'),
-                ), 'setting');
-                $js_set = TRUE;
-              }
+
               // Options are defined once during hook_element implementation.
-              // @see _location_expand_location
-              // $options = array_merge(array('' => t('Please select'), 'xx' => t('NOT LISTED')), location_get_provinces($country));
+              // @see _location_process_location
+              // $options = array_merge(array('' => t('Select'), 'xx' => t('NOT LISTED')), location_get_provinces($country));
+              if (!empty($settings['#parents'])) {
+                $wrapper_suffix = '-' . implode('-', $settings['#parents']);
+              }
+              else {
+                $wrapper_suffix = '';
+              }
+
               return array(
-                '#type'           => 'select',
-                '#title'          => t('State/Province'),
-                '#default_value'  => $obj,
-                '#description'    => NULL,
-                '#required'       => ($settings['collect'] == 2),
-                '#attributes'     => array('class' => 'location_dropdown_province'),
+                '#type' => 'select',
+                '#title' => t('State/Province'),
+                '#default_value' => $obj,
+                '#description' => NULL,
+                '#required' => ($settings['collect'] == 2),
+                '#attributes' => array('class' => array('location_dropdown_province')),
+                '#prefix' => '<div id="location-dropdown-province-wrapper' . $wrapper_suffix . '">',
+                '#suffix' => '</div>',
               );
+            // @codingStandardsIgnoreEnd
+
             case 'autocomplete':
             default:
+              drupal_add_js(drupal_get_path('module', 'location') . '/location_autocomplete.js');
+
               return array(
                 '#type' => 'textfield',
                 '#title' => t('State/Province'),
@@ -739,7 +901,7 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
                 '#size' => 64,
                 '#maxlength' => 64,
                 '#description' => NULL,
-                '#attributes' => array('class' => 'location_auto_province'),
+                '#attributes' => array('class' => array('location_auto_province')),
                 '#required' => ($settings['collect'] == 2),
               );
           }
@@ -753,28 +915,48 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
             );
           }
           else {
-            $options = array_merge(array('' => t('Please select'), 'xx' => t('NOT LISTED')), location_get_iso3166_list());
+            $options = array_merge(
+              array(
+                '' => t('Select'),
+                'xx' => t('NOT LISTED'),
+              ),
+              location_get_iso3166_list()
+            );
+            if (!empty($settings['#parents'])) {
+              $wrapper_suffix = '-' . implode('-', $settings['#parents']);
+            }
+            else {
+              $settings['#parents'] = array();
+              $wrapper_suffix = '';
+            }
+
             return array(
-              '#type'           => 'select',
-              '#title'          => t('Country'),
-              '#default_value'  => $obj,
-              '#options'        => $options,
-              '#description'    => NULL,
-              '#required'       => ($settings['collect'] == 2),
+              '#type' => 'select',
+              '#title' => t('Country'),
+              '#default_value' => $obj,
+              '#options' => $options,
+              '#description' => NULL,
+              '#required' => ($settings['collect'] == 2),
               // Used by province autocompletion js.
-              '#attributes'     => array('class' => 'location_auto_country'),
+              '#attributes' => array('class' => array('location_auto_country')),
+              '#ajax' => array(
+                'callback' => '_location_country_ajax_callback',
+                'path' => 'system/ajax/' . implode('/', $settings['#parents']),
+                'wrapper' => 'location-dropdown-province-wrapper' . $wrapper_suffix,
+                'effect' => 'fade',
+              ),
             );
           }
           break;
 
         case 'postal_code':
           return array(
-            '#type'           => 'textfield',
-            '#title'          => t('Postal code'),
-            '#default_value'  => $obj,
-            '#size'           => 16,
-            '#maxlength'      => 16,
-            '#required'       => ($settings['collect'] == 2),
+            '#type' => 'textfield',
+            '#title' => t('Postal code'),
+            '#default_value' => $obj,
+            '#size' => 16,
+            '#maxlength' => 16,
+            '#required' => ($settings['collect'] == 2),
           );
       }
       break;
@@ -787,6 +969,7 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
             return TRUE;
           }
           break;
+
         case 'latitude':
         case 'longitude':
           if (_location_floats_are_equal($obj[$a3], $a4)) {
@@ -816,22 +999,33 @@ function location_locationapi(&$obj, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
   }
 }
 
+/**
+ * Page callback.
+ */
 function location_geocoding_parameters_page($country_iso, $service) {
-  drupal_set_title(t('Configure parameters for %service geocoding', array('%service' => $service)));
+  drupal_set_title(t('Configure parameters for %service geocoding', array('%service' => $service)), PASS_THROUGH);
 
   $breadcrumbs = drupal_get_breadcrumb();
-  $breadcrumbs[] = l('location', 'admin/settings/location');
-  $breadcrumbs[] = l('geocoding', 'admin/settings/location/geocoding');
+  $breadcrumbs[] = l(t('Location'), 'admin/config/content/location');
+  $breadcrumbs[] = l(t('Geocoding'), 'admin/config/content/location/geocoding');
   $countries = location_get_iso3166_list();
-  $breadcrumbs[] = l($countries[$country_iso], 'admin/settings/location/geocoding', array('fragment' => $country_iso));
+  $breadcrumbs[] = l(
+    $countries[$country_iso],
+    'admin/config/content/location/geocoding',
+    array('fragment' => $country_iso)
+  );
   drupal_set_breadcrumb($breadcrumbs);
+
   return drupal_get_form('location_geocoding_parameters_form', $country_iso, $service);
 }
 
-function location_geocoding_parameters_form(&$form_state, $country_iso, $service) {
+/**
+ * Parameters form.
+ */
+function location_geocoding_parameters_form($form, &$form_state, $country_iso, $service) {
   location_load_country($country_iso);
-  $geocode_settings_form_function_specific = 'location_geocode_'. $country_iso .'_'. $service .'_settings';
-  $geocode_settings_form_function_general = $service .'_geocode_settings';
+  $geocode_settings_form_function_specific = 'location_geocode_' . $country_iso . '_' . $service . '_settings';
+  $geocode_settings_form_function_general = $service . '_geocode_settings';
   if (function_exists($geocode_settings_form_function_specific)) {
     return system_settings_form($geocode_settings_form_function_specific());
   }
@@ -840,19 +1034,28 @@ function location_geocoding_parameters_form(&$form_state, $country_iso, $service
     return system_settings_form($geocode_settings_form_function_general());
   }
   else {
-    return system_settings_form(array(
-      '#type' => 'markup',
-      '#value' => t('No configuration parameters are necessary, or a form to take such paramters has not been implemented.')
-    ));
+    return system_settings_form(
+      array(
+        '#type' => 'markup',
+        '#markup' => t(
+          'No configuration parameters are necessary, or a form to take such paramters has not been implemented.'
+        ),
+      )
+    );
   }
 }
 
 /**
  * Load associated locations.
  *
- * @param $id The identifier to match. (An integer.)
- * @param $key The search key for {location_instance} (usually vid or uid.)
- * @return An array of loaded locations.
+ * @param int $id
+ *   The identifier to match.
+ *
+ * @param string $key
+ *   The search key for {location_instance} (usually vid or uid.)
+ *
+ * @return array
+ *   An array of loaded locations.
  */
 function location_load_locations($id, $key = 'vid') {
   if (empty($id)) {
@@ -861,87 +1064,90 @@ function location_load_locations($id, $key = 'vid') {
     // by accident. 0 and '' are reserved for "not applicable."
     return array();
   }
-  if ($key == 'genid') {
-    $result = db_query('SELECT lid FROM {location_instance} WHERE '. db_escape_table($key) ." = '%s' ORDER BY lid", $id);
-  }
-  else {
-    $result = db_query('SELECT lid FROM {location_instance} WHERE '. db_escape_table($key) .' = %d ORDER BY lid', $id);
-  }
+  $query = db_select('location_instance', 'l');
+  $lid_field = $query->addField('l', 'lid');
+  $query->condition($key, $id);
+  $result = $query->execute();
   $locations = array();
-  while ($lid = db_fetch_object($result)) {
-    $locations[] = location_load_location($lid->lid);
+  foreach ($result as $lid) {
+    $locations[] = location_load_location($lid->{$lid_field});
   }
+
   return $locations;
 }
 
 /**
  * Save associated locations.
  *
- * @param $locations The associated locations.
+ * @param array $locations
+ *   The associated locations.
  *   You can pass an empty array to remove all location references associated
  *   with the given criteria. This is useful if you are about to delete an object,
  *   and need Location to clean up any locations that are no longer referenced.
  *
- * @param $criteria An array of instance criteria to save as.
+ * @param array $criteria
+ *   An array of instance criteria to save as.
  *   Example: array('genid' => 'my_custom_1111')
  */
 function location_save_locations(&$locations, $criteria) {
   if (isset($locations) && is_array($locations) && !empty($criteria) && is_array($criteria)) {
-    $cow = variable_get('location_copy_on_write', 1);
-
     foreach (array_keys($locations) as $key) {
-      location_save($locations[$key], $cow, $criteria);
+      location_save($locations[$key], TRUE, $criteria);
     }
-    $columns = array();
-    $placeholders = array();
-    $qfrags = array();
-    $args = array();
-    foreach (array('nid' => '%d', 'vid' => '%d', 'uid' => '%d', 'genid' => "'%s'") as $key => $placeholder) {
-      if (isset($criteria[$key])) {
-        $columns[] = $key;
-        $placeholders[] = $placeholder;
-        $args[] = $criteria[$key];
-        $qfrags[] = "$key = $placeholder";
-      }
-    }
-    $querybase = 'FROM {location_instance} WHERE '. implode(' AND ', $qfrags);
 
-    $oldlids = array();
-    $newlids = array();
     // Find affected lids.
-    $query = "SELECT lid $querybase";
-    $result = db_query($query, $args);
-    while ($t = db_fetch_object($result)) {
-      $oldlids[] = $t->lid;
+    $query = db_select('location_instance', 'l');
+    $lid_field = $query->addField('l', 'lid');
+    foreach ($criteria as $key => $value) {
+      $query->condition($key, $value);
     }
+    $oldlids = $query->execute()->fetchCol();
 
-    $query = "DELETE $querybase";
-    db_query($query, $args);
-    // Tack on the lid.
-    $columns[] = 'lid';
-    $placeholders[] = '%d';
+    // Delete current set of instances.
+    $query = db_delete('location_instance');
+    foreach ($criteria as $key => $value) {
+      $query->condition($key, $value);
+    }
+    $query->execute();
 
+    $newlids = array();
     foreach ($locations as $location) {
       // Don't save "empty" locations.
       // location_save() explicitly returns FALSE for empty locations,
       // so it should be ok to rely on the data type.
       if ($location['lid'] !== FALSE) {
-        $args[] = $location['lid'];
         $newlids[] = $location['lid'];
-        db_query('INSERT INTO {location_instance} ('. implode(', ', $columns) .') VALUES ('. implode(', ', $placeholders) .')', $args);
-        array_pop($args);
+        $instance = array(
+          'nid' => 0,
+          'vid' => 0,
+          'uid' => 0,
+          'genid' => '',
+          'lid' => $location['lid'],
+        );
+        foreach ($criteria as $key => $value) {
+          $instance[$key] = $value;
+        }
+        db_insert('location_instance')
+          ->fields($instance)
+          ->execute();
       }
     }
 
     // Check anything that dropped a reference during this operation.
     foreach (array_diff($oldlids, $newlids) as $check) {
       // An instance may have been deleted. Check reference count.
-      $count = db_result(db_query('SELECT COUNT(*) FROM {location_instance} WHERE lid = %d', $check));
+      $count = db_query(
+        'SELECT COUNT(*) FROM {location_instance} WHERE lid = :lid',
+        array(':lid' => $check)
+      )->fetchField();
+
       if ($count !== FALSE && $count == 0) {
         watchdog('location', 'Deleting unreferenced location with LID %lid.', array('%lid' => $check));
         $location = array('lid' => $check);
         location_invoke_locationapi($location, 'delete');
-        db_query('DELETE FROM {location} WHERE lid = %d', $location['lid']);
+        db_delete('location')
+          ->condition('lid', $location['lid'])
+          ->execute();
       }
     }
   }
@@ -950,11 +1156,14 @@ function location_save_locations(&$locations, $criteria) {
 /**
  * Load a single location by lid.
  *
- * @param $lid Location ID to load.
- * @return A location array.
+ * @param int $lid
+ *   Location ID to load.
+ *
+ * @return array
+ *   Location array.
  */
 function location_load_location($lid) {
-  $location = db_fetch_array(db_query('SELECT * FROM {location} WHERE lid = %d', $lid));
+  $location = db_query('SELECT * FROM {location} WHERE lid = :lid', array(':lid' => $lid))->fetchAssoc();
   // @@@ Just thought of this, but I am not certain it is a good idea...
   if (empty($location)) {
     $location = array('lid' => $lid);
@@ -972,11 +1181,16 @@ function location_load_location($lid) {
   if (isset($location['source']) && $location['source'] == LOCATION_LATLON_JIT_GEOCODING) {
     if (variable_get('location_jit_geocoding', FALSE)) {
       _location_geo_logic($location, array('street' => 1), array());
-      db_query("UPDATE {location} SET latitude = '%f', longitude = '%f', source = %d WHERE lid = %d",
-      $location['latitude'],
-      $location['longitude'],
-      $location['source'],
-      $location['lid']);
+      db_update('location')
+        ->fields(
+          array(
+            'latitude' => $location['latitude'],
+            'longitude' => $location['longitude'],
+            'source' => $location['source'],
+          )
+        )
+        ->condition('lid', $location['lid'])
+        ->execute();
     }
   }
 
@@ -999,18 +1213,20 @@ function location_load_location($lid) {
 /**
  * Create a list of states from a given country.
  *
- * @param $country
- *   String. The country code
- * @param $string
- *   String (optional). The state name typed by user
- * @return
+ * @param string $country
+ *   The country code
+ *
+ * @param string $string
+ *   The state name typed by user
+ *
+ * @return array
  *   Javascript array. List of states
  */
 function _location_autocomplete($country, $string = '') {
   $counter = 0;
-  $string   = strtolower($string);
-  $string   = '/^'. preg_quote($string) .'/';
-  $matches  = array();
+  $string = strtolower($string);
+  $string = '/^' . preg_quote($string) . '/';
+  $matches = array();
 
   if (strpos($country, ',') !== FALSE) {
     // Multiple countries specified.
@@ -1034,36 +1250,69 @@ function _location_autocomplete($country, $string = '') {
       }
     }
   }
-  drupal_json($matches);
+  drupal_json_output($matches);
 }
 
 /**
- * Ajax callback to get an array of provinces for the given country.
+ * AJAX callback for the Country select form, for cases where the province list.
  *
- * @param $country
- *   The 2 letter country code of the country to fetch the provinces for.
+ * Is also a select element and its options need to be updated. Uses the D7 Ajax
+ * Framework to do the select list updating.
+ * All we do here is select the element of the form that will be rebuilt.
  */
-function _location_fetch_provinces($country) {
-  drupal_json(location_get_provinces($country));
+function _location_country_ajax_callback($form, $form_state) {
+  // The isset() checks, ideally, wouldn't ever have to happen because, ideally,
+  // this code would never get called, because, ideally, we wouldn't add an
+  // ajax call to the country field.  Unfortunately, however, there's no easy
+  // way to check whether or not the province is being collected when putting
+  // together the country form element in location_locationapi() when that
+  // function is called with $op == 'field_expand'
+  if (arg(2) == 'locations' && isset($form['locations'][arg(3)]['province'])) {
+    return $form['locations'][arg(3)]['province'];
+  }
+  elseif (isset($form[arg(2)][arg(3)][arg(4)])) {
+    if (isset($form[arg(2)][arg(3)][arg(4)]['#entity_type']) && $form[arg(2)][arg(3)][arg(
+        4
+      )]['#entity_type'] == 'field_collection_item'
+    ) {
+      $selected_country_value = $form[arg(2)][arg(3)][arg(4)][arg(5)][arg(6)][arg(7)]['country']['#value'];
+      $form[arg(2)][arg(3)][arg(4)][arg(5)][arg(6)][arg(7)]['province']['#options'] = array(
+          '' => t('Select'),
+          'xx' => t('NOT LISTED')
+        ) + location_get_provinces($selected_country_value);
+
+      return $form[arg(2)][arg(3)][arg(4)][arg(5)][arg(6)][arg(7)]['province'];
+    }
+
+    return $form[arg(2)][arg(3)][arg(4)]['province'];
+  }
 }
 
 /**
  * Epsilon test.
+ *
  * Helper function for seeing if two floats are equal.  We could use other functions, but all
  * of them belong to libraries that do not come standard with PHP out of the box.
  */
 function _location_floats_are_equal($x, $y) {
   $x = floatval($x);
   $y = floatval($y);
+
   return (abs(max($x, $y) - min($x, $y)) < pow(10, -6));
 }
 
 /**
  * Check whether a location has coordinates or not.
  *
- * @param $location The location to check.
- * @param $canonical Is this a location that is fully saved?
+ * @param array $location
+ *   The location to check.
+ *
+ * @param array|bool $canonical
+ *   Is this a location that is fully saved?
  *   If set to TRUE, only the source will be checked.
+ *
+ * @return bool
+ *   TRUE when location has coordinates.
  */
 function location_has_coordinates($location, $canonical = FALSE) {
   // Locations that have been fully saved have an up to date source.
@@ -1072,14 +1321,17 @@ function location_has_coordinates($location, $canonical = FALSE) {
   }
 
   // Otherwise, we need to do the full checks.
-
-  // If latitude or longitude are empty / missing
+  // If latitude or longitude are empty/missing.
   if (empty($location['latitude']) || empty($location['longitude'])) {
     return FALSE;
   }
 
-  // If the latitude or longitude are zeroed (Although it could be a good idea to relax this slightly sometimes)
-  if (_location_floats_are_equal($location['latitude'], 0.0) || _location_floats_are_equal($location['longitude'], 0.0)) {
+  // If the latitude or longitude are zeroed (Although it could be a good idea to relax this slightly sometimes).
+  if (_location_floats_are_equal($location['latitude'], 0.0) || _location_floats_are_equal(
+      $location['longitude'],
+      0.0
+    )
+  ) {
     return FALSE;
   }
 
@@ -1089,28 +1341,43 @@ function location_has_coordinates($location, $canonical = FALSE) {
 /**
  * Invoke a hook_locationapi() operation on all modules.
  *
- * @param &$location A location object.
- * @param $op A string containing the name of the locationapi operation.
- * @param $a3, $a4, $a5 Arguments to pass on to the hook.
- * @return The returned value of the invoked hooks.
+ * @param array &$location
+ *   Location object.
+ *
+ * @param string $op
+ *   String containing the name of the locationapi operation.
+ *
+ * @param string|null $a3
+ *   Arguments to pass on to the hook.
+ *
+ * @param string|null $a4
+ *   Arguments to pass on to the hook.
+ *
+ * @param string|null $a5
+ *   Arguments to pass on to the hook.
+ *
+ * @return array
+ *   The returned value of the invoked hooks.
  */
 function location_invoke_locationapi(&$location, $op, $a3 = NULL, $a4 = NULL, $a5 = NULL) {
   $return = array();
   foreach (module_implements('locationapi') as $name) {
-    $function = $name .'_locationapi';
+    $function = $name . '_locationapi';
     $result = $function($location, $op, $a3, $a4, $a5);
     if (isset($result) && is_array($result)) {
       $return = array_merge($return, $result);
     }
-    else if (isset($result)) {
+    elseif (isset($result)) {
       $return[] = $result;
     }
   }
+
   return $return;
 }
 
 /**
  * Apply locpick twiddling to a location.
+ *
  * This is needed before saving and comparison.
  */
 function _location_patch_locpick(&$location) {
@@ -1126,6 +1393,7 @@ function _location_patch_locpick(&$location) {
     $location['longitude'] = $location['locpick']['user_longitude'];
     $inhibit_geocode = TRUE;
   }
+
   return $inhibit_geocode;
 }
 
@@ -1133,12 +1401,20 @@ function _location_patch_locpick(&$location) {
  * Save a location.
  *
  * This is the central function for saving a location.
- * @param $location Location array to save.
- * @param $cow Copy-on-write, i.e. whether or not to assign a new lid if something changes.
- * @param $criteria Instance criteria. If the only instances known by location match
+ *
+ * @param array $location
+ *   Location array to save.
+ *
+ * @param bool $cow
+ *   Copy-on-write, i.e. whether or not to assign a new lid if something changes.
+ *
+ * @param array $criteria
+ *   Instance criteria. If the only instances known by location match
  *   the criteria, the lid will be reused, regardless of $cow status. If no criteria
  *   is provided, there will be no attempt to reuse lids.
- * @return The lid of the saved location, or FALSE if the location is considered "empty."
+ *
+ * @return int|bool
+ *   The lid of the saved location, or FALSE if the location is considered "empty."
  */
 function location_save(&$location, $cow = TRUE, $criteria = array()) {
   // Quick settings fixup.
@@ -1156,17 +1432,24 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
     unset($location['inhibit_geocode']);
   }
 
+  $force_geocode = FALSE;
+
+  if (isset($location['re_geocode_location']) && $location['re_geocode_location']) {
+    $force_geocode = TRUE;
+  }
+
   if (isset($location['delete_location']) && $location['delete_location']) {
     // Location is being deleted.
     // Consider it empty and return early.
     $location['lid'] = FALSE;
+
     return FALSE;
   }
 
   // If there's already a lid, we're editing an old location. Load it in.
   $oldloc = location_empty_location($location['location_settings']);
   if (isset($location['lid']) && !empty($location['lid'])) {
-    $oldloc = (array)location_load_location($location['lid']);
+    $oldloc = (array) location_load_location($location['lid']);
   }
   if (_location_patch_locpick($location)) {
     $inhibit_geocode = TRUE;
@@ -1181,11 +1464,12 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
   if (location_is_empty($location, $filled)) {
     // This location was empty, we don't need to continue.
     $location['lid'] = FALSE;
+
     return FALSE;
   }
 
   $changed = array();
-  if (!location_calc_difference($oldloc, $location, $changed)) {
+  if (!location_calc_difference($oldloc, $location, $changed) && !$force_geocode) {
     // We didn't actually need to save anything.
     if (!empty($location['lid'])) {
       return $location['lid'];
@@ -1193,12 +1477,13 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
     else {
       // Unfilled location (@@@ Then how did we get here?)
       $location['lid'] = FALSE;
+
       return FALSE;
     }
   }
 
   // Perform geocoding logic, coordinate normalization, etc.
-  _location_geo_logic($location, $changed, $filled, $inhibit_geocode);
+  _location_geo_logic($location, $changed, $filled, $inhibit_geocode, $force_geocode);
 
   // If we are in COW mode, we *probabaly* need to make a new lid.
   if ($cow) {
@@ -1206,22 +1491,15 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
       if (!empty($criteria)) {
         // Check for other instances.
         // See #306171 for more information.
-        $columns = array();
-        $placeholders = array();
-        $qfrags = array();
-        $args = array();
-        foreach (array('nid' => '%d', 'vid' => '%d', 'uid' => '%d', 'genid' => "'%s'") as $key => $placeholder) {
-          if (isset($criteria[$key])) {
-            $columns[] = $key;
-            $placeholders[] = $placeholder;
-            $args[] = $criteria[$key];
-            $qfrags[] = "$key = $placeholder";
-          }
+        $query = db_select('location_instance', 'l');
+        foreach ($criteria as $key => $value) {
+          $query->condition($key, $value);
         }
-        $querybase = 'FROM {location_instance} WHERE '. implode(' AND ', $qfrags);
-
-        $associated = db_result(db_query("SELECT COUNT(*) $querybase", $args));
-        $all = db_result(db_query("SELECT COUNT(*) FROM {location_instance} WHERE lid = %d", $location['lid']));
+        $associated = $query->countQuery()->execute()->fetchField();
+        $all = db_query(
+          "SELECT COUNT(*) FROM {location_instance} WHERE lid = :lid",
+          array(':lid' => $location['lid'])
+        )->fetchField();
         if ($associated != $all) {
           // If there were a different number of instances than instances matching the criteria,
           // we need a new LID.
@@ -1237,11 +1515,30 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
 
   if (!empty($location['lid'])) {
     watchdog('location', 'Conserving lid %lid due to uniqueness.', array('%lid' => $location['lid']));
-    drupal_write_record('location', $location, array('lid'));
-    if (!db_affected_rows()) {
-      watchdog('location', 'Update location failed. Trying insert.');
-      drupal_write_record('location', $location);
+    // Using a merge query instead of drupal_write_record to prevent failing to save
+    // if the lid happens to not exist in {location}, which has been seen in the wild.
+    // Tested in mysql, sqlite, and postgresql.
+    $fields = array();
+    foreach (array(
+               'name',
+               'street',
+               'additional',
+               'city',
+               'province',
+               'postal_code',
+               'country',
+               'latitude',
+               'longitude',
+               'source'
+             ) as $key) {
+      if (isset($location[$key])) {
+        $fields[$key] = $location[$key];
+      }
     }
+    db_merge('location')
+      ->key(array('lid' => $location['lid']))
+      ->fields($fields)
+      ->execute();
   }
   else {
     unset($location['lid']);
@@ -1249,16 +1546,25 @@ function location_save(&$location, $cow = TRUE, $criteria = array()) {
   }
 
   location_invoke_locationapi($location, 'save');
+
   return $location['lid'];
 }
 
 /**
  * Computes the differences between two locations.
- * @param $oldloc Original location.
- * @param $newloc New location.
- * @param &$changes Array of changes.
+ *
+ * @param array $oldloc
+ *   Original location.
+ *
+ * @param array $newloc
+ *   New location.
+ *
+ * @param array|bool &$changes
+ *   Array of changes.
  *   The keys are field names, and the values are boolean FALSE and TRUE.
- * @return Whether or not there were any changes.
+ *
+ * @return bool
+ *   Whether or not there were any changes.
  */
 function location_calc_difference($oldloc, $newloc, &$changes) {
   location_strip($oldloc);
@@ -1271,7 +1577,7 @@ function location_calc_difference($oldloc, $newloc, &$changes) {
       $location_changed = TRUE;
       continue;
     }
-    else if ($oldloc[$k] === $v) {
+    elseif ($oldloc[$k] === $v) {
       $changes[$k] = FALSE;
       // Exact match, no change.
       continue;
@@ -1279,7 +1585,8 @@ function location_calc_difference($oldloc, $newloc, &$changes) {
 
     // It wasn't equal, but perhaps it was equivilent?
     $results = location_invoke_locationapi($newloc, 'isunchanged', $k, $oldloc[$k]);
-    $waschanged = TRUE; // First, assume changed.
+    // First, assume changed.
+    $waschanged = TRUE;
     foreach ($results as $r) {
       if ($r) {
         $waschanged = FALSE;
@@ -1295,15 +1602,21 @@ function location_calc_difference($oldloc, $newloc, &$changes) {
   if (!$location_changed) {
     return FALSE;
   }
+
   return TRUE;
 }
 
 /**
  * Checks if a location is empty, and sets up an array of filled fields.
- * @param $location The location to check.
- * @param $filled An array (Will contain the list of filled fields upon return.)
  *
- * @return TRUE if the location is empty, FALSE otherwise.
+ * @param array $location
+ *   The location to check.
+ *
+ * @param array $filled
+ *   An array (Will contain the list of filled fields upon return.)
+ *
+ * @return bool
+ *   TRUE if the location is empty, FALSE otherwise.
  */
 function location_is_empty($location, &$filled) {
   // Special case: Consider an empty array to be empty.
@@ -1346,6 +1659,7 @@ function location_empty_location($settings) {
       $location[$k] = $v['default'];
     }
   }
+
   return $location;
 }
 
@@ -1353,7 +1667,7 @@ function location_empty_location($settings) {
  * Strip junk out of a location.
  */
 function location_strip(&$location) {
-  static $tmp;
+  $tmp = & drupal_static(__FUNCTION__);
   if (!isset($tmp)) {
     $tmp = array();
     $defaults = location_invoke_locationapi($location, 'defaults');
@@ -1372,6 +1686,7 @@ function location_strip(&$location) {
 
 /**
  * Adjust a settings array.
+ *
  * This will add any missing pieces and will set up requirements.
  */
 function location_normalize_settings(&$settings, $required = TRUE) {
@@ -1410,12 +1725,16 @@ function location_normalize_settings(&$settings, $required = TRUE) {
 /**
  * Perform geocoding logic, etc., prior to storing in the database.
  */
-function _location_geo_logic(&$location, $changed, $filled, $inhibit_geocode = FALSE) {
+function _location_geo_logic(&$location, $changed, $filled, $inhibit_geocode = FALSE, $force_geocode = FALSE) {
 
   if (!$inhibit_geocode) {
     // Have any of the fields possibly affecting geocoding changed?
     // Or, was the location previously user submitted but is no longer?
-    if ($changed['street'] || $changed['additional'] || $changed['city'] || $changed['province'] || $changed['country'] || $changed['postal_code'] || $location['source'] == LOCATION_LATLON_USER_SUBMITTED) {
+    if (!empty($changed['street']) || !empty($changed['additional']) ||
+      !empty($changed['city']) || !empty($changed['province']) ||
+      !empty($changed['country']) || !empty($changed['postal_code']) ||
+      $location['source'] == LOCATION_LATLON_USER_SUBMITTED || $force_geocode
+    ) {
 
       // Attempt exact geocoding.
       if ($data = location_latlon_exact($location)) {
@@ -1425,7 +1744,7 @@ function _location_geo_logic(&$location, $changed, $filled, $inhibit_geocode = F
         $location['longitude'] = $data['lon'];
         // @@@ How about address normalization?
       }
-      // Attempt inexact geocoding against a local postcode database
+      // Attempt inexact geocoding against a local postcode database.
       elseif ($data = location_get_postalcode_data($location)) {
         $location['source'] = LOCATION_LATLON_GEOCODED_APPROX;
         $location['latitude'] = $data['lat'];
@@ -1458,11 +1777,11 @@ function _location_geo_logic(&$location, $changed, $filled, $inhibit_geocode = F
   // collected through the form, set them to whatever the postal code data
   // says they should be.
   if (!empty($location['postal_code'])) {
-    if (  empty($location['city']) ||
-          empty($location['province']) ||
-          empty($location['location_settings']['form']['fields']['city']['collect']) ||
-          empty($location['location_settings']['form']['fields']['province']['collect'])
-       ) {
+    if (empty($location['city']) ||
+      empty($location['province']) ||
+      empty($location['location_settings']['form']['fields']['city']['collect']) ||
+      empty($location['location_settings']['form']['fields']['province']['collect'])
+    ) {
       if ($data = location_get_postalcode_data($location)) {
         $location['city'] = (empty($location['city']) || empty($location['location_settings']['form']['fields']['city']['collect'])) ? $data['city'] : $location['city'];
         $location['province'] = (empty($location['province']) || empty($location['location_settings']['form']['fields']['province']['collect'])) ? $data['province'] : $location['province'];
@@ -1501,13 +1820,15 @@ function location_dd_to_dms($coord) {
   $coord -= $minutes;
   $coord *= 60;
   $seconds = round($coord, 6);
+
   return array($degrees, $minutes, $seconds, $negative);
 }
 
 /**
  * Display a coordinate.
  */
-function theme_location_latitude_dms($latitude) {
+function theme_location_latitude_dms($variables) {
+  $latitude = $variables['latitude'];
   $output = '';
   list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($latitude);
   $output .= "${degrees}° ${minutes}' ${seconds}\" ";
@@ -1517,10 +1838,15 @@ function theme_location_latitude_dms($latitude) {
   else {
     $output .= 'S';
   }
+
   return $output;
 }
 
-function theme_location_longitude_dms($longitude) {
+/**
+ * Theme callback for longtitude dms.
+ */
+function theme_location_longitude_dms($variables) {
+  $longitude = $variables['longitude'];
   $output = '';
   list($degrees, $minutes, $seconds, $negative) = location_dd_to_dms($longitude);
   $output .= "${degrees}° ${minutes}' ${seconds}\" ";
@@ -1530,37 +1856,26 @@ function theme_location_longitude_dms($longitude) {
   else {
     $output .= 'W';
   }
+
   return $output;
 }
 
 /**
- * Implementation of hook_token_values().
+ * Implements hook_token_values().
  */
 function location_token_values($type, $object = NULL) {
-  require_once(drupal_get_path('module', 'location') .'/location.token.inc');
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'location') . '/location.token.inc';
+
   return _location_token_values($type, $object);
 }
 
 /**
- * Implementation of hook_token_list().
+ * Implements hook_token_list().
  */
 function location_token_list($type = 'all') {
-  require_once(drupal_get_path('module', 'location') .'/location.token.inc');
-  return _location_token_list($type);
-}
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'location') . '/location.token.inc';
 
-/**
- * Implementation of hook_search().
- * Implemented on behalf of location_search.module to make the urls not suck.
- *
- * This function is only declared if the location_search module is enabled,
- * otherwise the search module will create a search page for location even
- * when the lcoation_search module is disabled.
- */
-if (module_exists('location_search')) {
-  function location_search($op = 'search', $keys = NULL) {
-    return _location_search($op, $keys);
-  }
+  return _location_token_list($type);
 }
 
 /**
@@ -1571,7 +1886,7 @@ function template_preprocess_location(&$variables) {
   // This will get taken back out if map links are hidden.
   $location['map_link'] = TRUE;
   if (is_array($variables['hide'])) {
-    foreach($variables['hide'] as $key) {
+    foreach ($variables['hide'] as $key) {
       unset($location[$key]);
       // Special case for coords.
       if ($key == 'coords') {
@@ -1595,7 +1910,7 @@ function template_preprocess_location(&$variables) {
   // Map link.
   $variables['map_link'] = '';
   if (!empty($location['map_link'])) {
-    // Do not use $location for generating the map link, since it will 
+    // Do not use $location for generating the map link, since it will
     // not contain the country if that field is hidden.
     $variables['map_link'] = location_map_link($variables['location']);
   }
@@ -1605,20 +1920,20 @@ function template_preprocess_location(&$variables) {
   $variables['latitude_dms'] = '';
   if (!empty($location['latitude'])) {
     $variables['latitude'] = check_plain($location['latitude']);
-    $variables['latitude_dms'] = theme('location_latitude_dms', $location['latitude']);
+    $variables['latitude_dms'] = theme('location_latitude_dms', array('latitude' => $location['latitude']));
   }
 
   $variables['longitude'] = '';
   $variables['longitude_dms'] = '';
   if (!empty($location['longitude'])) {
     $variables['longitude'] = check_plain($location['longitude']);
-    $variables['longitude_dms'] = theme('location_longitude_dms', $location['longitude']);
+    $variables['longitude_dms'] = theme('location_longitude_dms', array('longitude' => $location['longitude']));
   }
 
   // Add a country-specific template suggestion.
   if (!empty($location['country']) && location_standardize_country_code($location['country'])) {
     // $location['country'] is normalized in the previous line.
-    $variables['template_files'][] = 'location-'. $location['country'];
+    $variables['theme_hook_suggestions'][] = 'location__' . $location['country'];
   }
 
   // Display either the code or the full name for the province.
@@ -1628,9 +1943,10 @@ function template_preprocess_location(&$variables) {
   if (!isset($location['province_name'])) {
     $location['province_name'] = '';
   }
-  $variables['province_print'] = variable_get('location_use_province_abbreviation', 1) ?
-    (isset($location['province']) ? $location['province'] : '') :
-    (isset($location['province_name']) ? $location['province_name'] : '');
+  $variables['province_print'] = variable_get(
+    'location_use_province_abbreviation',
+    1
+  ) ? $location['province'] : $location['province_name'];
 }
 
 /**
@@ -1647,7 +1963,7 @@ function template_preprocess_location_distance(&$variables) {
     $variables['shortunit'] = 'mi';
     $variables['longunit'] = 'mile(s)';
   }
-  $variables['distance'] = (float)$variables['distance'];
+  $variables['distance'] = (float) $variables['distance'];
 }
 
 /**
@@ -1665,7 +1981,7 @@ function template_preprocess_locations(&$variables) {
   $variables['rawlocs'] = $locs;
 
   foreach ($locs as $location) {
-    $variables['locations'][] = theme('location', $location, $variables['hide']);
+    $variables['locations'][] = theme('location', array('location' => $location, 'hide' => $variables['hide']));
   }
 }
 
@@ -1680,16 +1996,12 @@ function location_settings($old = FALSE) {
   $form = array(
     '#type' => 'fieldset',
     '#title' => t('Locative information'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
     '#tree' => TRUE,
   );
 
   $form['multiple'] = array(
     '#type' => 'fieldset',
     '#title' => t('Number of locations'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
     '#tree' => TRUE,
     '#weight' => 2,
   );
@@ -1704,7 +2016,7 @@ function location_settings($old = FALSE) {
     '#type' => 'select',
     '#title' => t('Maximum number of locations'),
     '#options' => drupal_map_assoc(range(0, 100)),
-    '#default_value' => isset($old['multiple']['max']) ? $old['multiple']['max'] : 0,
+    '#default_value' => isset($old['multiple']['max']) ? $old['multiple']['max'] : 1,
     '#description' => t('The maximum number of locations that can be associated.'),
   );
   // @@@ Dynamic location adding via ahah?
@@ -1712,7 +2024,7 @@ function location_settings($old = FALSE) {
     '#type' => 'select',
     '#title' => t('Number of locations that can be added at once'),
     '#options' => drupal_map_assoc(range(0, 100)),
-    '#default_value' => isset($old['multiple']['add']) ? $old['multiple']['add'] : 0,
+    '#default_value' => isset($old['multiple']['add']) ? $old['multiple']['add'] : 1,
     '#description' => t('The number of empty location forms to show when editing.'),
   );
   // Thought: What about prefilled names and fixed locations that way?
@@ -1721,8 +2033,6 @@ function location_settings($old = FALSE) {
   $form['form'] = array(
     '#type' => 'fieldset',
     '#title' => t('Collection settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
     '#tree' => TRUE,
     '#weight' => 4,
   );
@@ -1731,7 +2041,9 @@ function location_settings($old = FALSE) {
     '#type' => 'weight',
     '#title' => t('Location form weight'),
     '#default_value' => isset($old['form']['weight']) ? $old['form']['weight'] : 0,
-    '#description' => t('Weight of the location box in the add / edit form. Lower values will be displayed higher in the form.'),
+    '#description' => t(
+      'Weight of the location box in the add / edit form. Lower values will be displayed higher in the form.'
+    ),
   );
   $form['form']['collapsible'] = array(
     '#type' => 'checkbox',
@@ -1755,9 +2067,6 @@ function location_settings($old = FALSE) {
   $form['display'] = array(
     '#type' => 'fieldset',
     '#title' => t('Display Settings'),
-//    '#description' => t('Here, you can change how locative data appears in nodes when viewed.'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
     '#tree' => TRUE,
     '#weight' => 6,
   );
@@ -1772,7 +2081,6 @@ function location_settings($old = FALSE) {
   $form['display']['hide'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Hide fields from display'),
-    '#collapsed' => TRUE,
     '#default_value' => isset($old['display']['hide']) ? $old['display']['hide'] : array(),
     '#options' => $fields,
   );
@@ -1797,19 +2105,24 @@ function location_form($settings, $locations) {
   // locations. (Less if we'll hit 'max' first.)
   $numforms = min($numloc + $settings['multiple']['add'], $settings['multiple']['max']);
 
-  $form = array(
-    '#type' => 'fieldset',
-    '#title' => format_plural($numforms, 'Location', 'Locations'),
-    '#tree' => TRUE,
-    '#attributes' => array('class' => 'locations'),
-    '#weight' => $settings['form']['weight'],
-    '#collapsible' => $settings['form']['collapsible'],
-    '#collapsed' => $settings['form']['collapsed'],
-  );
-
-  // If there is only one form, hide the outer fieldset.
-  if ($settings['multiple']['max'] == 1) {
-    $form['#type'] = 'markup';
+  if ($settings['multiple']['max'] == 1 || $settings['multiple']['add'] == 1) {
+    $form = array(
+      '#prefix' => '<div class="location-wrapper">',
+      '#suffix' => '</div>',
+      '#tree' => TRUE,
+      '#weight' => $settings['form']['weight'],
+    );
+  }
+  else {
+    $form = array(
+      '#type' => 'fieldset',
+      '#title' => format_plural($numforms, 'Location', 'Locations'),
+      '#tree' => TRUE,
+      '#attributes' => array('class' => array('locations')),
+      '#weight' => $settings['form']['weight'],
+      '#collapsible' => $settings['form']['collapsible'],
+      '#collapsed' => $settings['form']['collapsed'],
+    );
   }
 
   for ($i = 0; $i < $numforms; $i++) {
@@ -1820,6 +2133,8 @@ function location_form($settings, $locations) {
     }
     $form[$i] = array(
       '#type' => 'location_element',
+      '#has_garbage_value' => TRUE,
+      '#value' => '',
       '#title' => t('Location #%number', array('%number' => $i + 1)),
       '#default_value' => isset($locations[$i]) ? $locations[$i] : NULL,
       '#location_settings' => $settings,
@@ -1829,38 +2144,49 @@ function location_form($settings, $locations) {
 
   // Tidy up the form in the single location case.
   if ($numforms == 1) {
-    $form[0]['#title'] = t('Location');
+    $form[0]['#title'] = t('Location', array(), array('context' => 'geolocation'));
     // If the user had configured the form for a single location, inherit
     // the collapsible / collapsed settings.
-    $form[0]['#collapsible'] = $form['#collapsible'];
-    $form[0]['#collapsed'] = $form['#collapsed'];
+    $form[0]['#collapsible'] = $settings['form']['collapsible'];
+    $form[0]['#collapsed'] = $settings['form']['collapsed'];
   }
 
   return $form;
 }
 
+/**
+ * Location display.
+ */
 function location_display($settings, $locations) {
   if (!isset($settings['display']['hide'])) {
     // We weren't configured properly, bail.
     return array();
   }
   $hide = array_keys(array_filter($settings['display']['hide']));
-  // Show all locations
+
+  // Show all locations.
   return array(
     '#type' => 'markup',
-    '#value' => theme('locations', $locations, $hide),
+    '#theme' => 'locations',
+    '#locations' => $locations,
+    '#hide' => $hide,
     '#weight' => $settings['display']['weight'],
   );
 }
 
+/**
+ * Location RSS item.
+ */
 function location_rss_item($location, $mode = 'simple') {
-  require_once(drupal_get_path('module', 'location') .'/location.georss.inc');
+  require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'location') . '/location.georss.inc';
+
   return _location_rss_item($location, $mode);
 }
 
 /**
  * Returns a list of accuracy codes as defined by the Google Maps API.
- * See http://code.google.com/apis/maps/documentation/reference.html#GGeoAddressAccuracy.
+ *
+ * @see http://code.google.com/apis/maps/documentation/reference.html#GGeoAddressAccuracy
  */
 function location_google_geocode_accuracy_codes() {
   return array(

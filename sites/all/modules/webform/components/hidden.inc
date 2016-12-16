@@ -18,6 +18,7 @@ function _webform_defaults_hidden() {
     'extra' => array(
       'private' => FALSE,
       'hidden_type' => 'value',
+      'analysis' => FALSE,
     ),
   );
 }
@@ -28,7 +29,7 @@ function _webform_defaults_hidden() {
 function _webform_theme_hidden() {
   return array(
     'webform_display_hidden' => array(
-      'arguments' => array('element' => NULL),
+      'render element' => 'element',
       'file' => 'components/hidden.inc',
     ),
   );
@@ -43,7 +44,7 @@ function _webform_edit_hidden($component) {
     '#type' => 'textarea',
     '#title' => t('Default value'),
     '#default_value' => $component['value'],
-    '#description' => t('The default value of the field.') . theme('webform_token_help'),
+    '#description' => t('The default value of the field.') . ' ' . theme('webform_token_help'),
     '#cols' => 60,
     '#rows' => 5,
     '#weight' => 0,
@@ -67,21 +68,16 @@ function _webform_edit_hidden($component) {
 /**
  * Implements _webform_render_component().
  */
-function _webform_render_hidden($component, $value = NULL, $filter = TRUE) {
+function _webform_render_hidden($component, $value = NULL, $filter = TRUE, $submission = NULL) {
   $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
 
-  // Set filtering options for "value" types, which are not displayed to the
-  // end user so they do not need to be sanitized.
-  $strict = $component['extra']['hidden_type'] != 'value';
-  $allow_anonymous = $component['extra']['hidden_type'] == 'value';
-  $default_value = $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, $strict, $allow_anonymous) : $component['value'];
+  $default_value = $filter ? webform_replace_tokens($component['value'], $node) : $component['value'];
   if (isset($value[0])) {
     $default_value = $value[0];
   }
 
   $element = array(
-    '#type' => 'hidden',
-    '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title' => $filter ? NULL : $component['name'],
     '#weight' => $component['weight'],
     '#translatable' => array('title'),
   );
@@ -93,6 +89,12 @@ function _webform_render_hidden($component, $value = NULL, $filter = TRUE) {
   else {
     $element['#type'] = 'hidden';
     $element['#default_value'] = $default_value;
+
+    // Same-page conditionals depend on the wrapper around elements for getting
+    // values. Wrap, but hide, the wrapper around hidden elements.
+    $element['#theme_wrappers'] = array('webform_element');
+    $element['#wrapper_attributes']['class'] = array();
+    $element['#wrapper_attributes']['style'] = array('display: none');
   }
 
   return $element;
@@ -101,41 +103,49 @@ function _webform_render_hidden($component, $value = NULL, $filter = TRUE) {
 /**
  * Implements _webform_display_component().
  */
-function _webform_display_hidden($component, $value, $format = 'html') {
+function _webform_display_hidden($component, $value, $format = 'html', $submission = array()) {
   $element = array(
     '#title' => $component['name'],
-    '#value' => isset($value[0]) ? $value[0] : NULL,
+    '#markup' => isset($value[0]) ? $value[0] : NULL,
     '#weight' => $component['weight'],
     '#format' => $format,
     '#theme' => 'webform_display_hidden',
-    '#theme_wrappers' => $format == 'html' ? array('webform_element', 'webform_element_wrapper') : array('webform_element_text'),
-    '#post_render' => array('webform_element_wrapper'),
+    '#theme_wrappers' => $format == 'text' ? array('webform_element_text') : array('webform_element'),
     '#translatable' => array('title'),
   );
 
   return $element;
 }
 
-function theme_webform_display_hidden($element) {
-  return $element['#format'] == 'html' ? check_plain($element['#value']) : $element['#value'];
+function theme_webform_display_hidden($variables) {
+  $element = $variables['element'];
+
+  return $element['#format'] == 'html' ? check_plain($element['#markup']) : $element['#markup'];
 }
 
 /**
  * Implements _webform_analysis_component().
  */
-function _webform_analysis_hidden($component, $sids = array()) {
-  $placeholders = count($sids) ? array_fill(0, count($sids), "'%s'") : array();
-  $sidfilter = count($sids) ? " AND sid in (" . implode(",", $placeholders) . ")" : "";
-  $query = 'SELECT data ' .
-    ' FROM {webform_submitted_data} ' .
-    ' WHERE nid = %d ' .
-    ' AND cid = %d ' . $sidfilter;
+function _webform_analysis_hidden($component, $sids = array(), $single = FALSE, $join = NULL) {
+  $query = db_select('webform_submitted_data', 'wsd', array('fetch' => PDO::FETCH_ASSOC))
+    ->fields('wsd', array('no', 'data'))
+    ->condition('wsd.nid', $component['nid'])
+    ->condition('wsd.cid', $component['cid']);
+
+  if (count($sids)) {
+    $query->condition('wsd.sid', $sids, 'IN');
+  }
+
+  if ($join) {
+    $query->innerJoin($join, 'ws2_', 'wsd.sid = ws2_.sid');
+  }
+
   $nonblanks = 0;
   $submissions = 0;
   $wordcount = 0;
 
-  $result = db_query($query, array_merge(array($component['nid'], $component['cid']), $sids));
-  while ($data = db_fetch_array($result)) {
+  $result = $query->execute();
+  foreach ($result as $data) {
     if (strlen(trim($data['data'])) > 0) {
       $nonblanks++;
       $wordcount += str_word_count(trim($data['data']));
@@ -143,11 +153,14 @@ function _webform_analysis_hidden($component, $sids = array()) {
     $submissions++;
   }
 
-  $rows[0] = array( t('Empty'), ($submissions - $nonblanks));
-  $rows[1] = array( t('Non-empty'), $nonblanks);
-  $rows[2] = array( t('Average submission length in words (ex blanks)'),
-                    ($nonblanks !=0 ? number_format($wordcount/$nonblanks, 2) : '0'));
-  return $rows;
+  $rows[0] = array(t('Empty'), ($submissions - $nonblanks));
+  $rows[1] = array(t('Non-empty'), $nonblanks);
+  $other[0] = array(t('Average submission length in words (ex blanks)'), ($nonblanks != 0 ? number_format($wordcount/$nonblanks, 2) : '0'));
+
+  return array(
+    'table_rows' => $rows,
+    'other_data' => $other,
+  );
 }
 
 /**
@@ -158,13 +171,21 @@ function _webform_table_hidden($component, $value) {
 }
 
 /**
- * Implements _webform_csv_data_component().
+ * Implements _webform_action_set_component().
+ */
+function _webform_action_set_hidden($component, &$element, &$form_state, $value) {
+  $element['#value'] = $value;
+  form_set_value($element, $value, $form_state);
+}
+
+/**
+ * Implements _webform_csv_headers_component().
  */
 function _webform_csv_headers_hidden($component, $export_options) {
   $header = array();
   $header[0] = '';
   $header[1] = '';
-  $header[2] = $component['name'];
+  $header[2] = $export_options['header_keys'] ? $component['form_key'] : $component['name'];
   return $header;
 }
 

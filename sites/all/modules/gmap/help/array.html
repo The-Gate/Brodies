@@ -1041,5 +1041,9 @@ $gmap_encoding = gmap_polyutil_polyline($points);
 
 <pre>
 $map = array(...); // Set up your map array.
-$output = theme('gmap', array('#settings' => $map));
+$element = array( // GMap in Drupal 7 uses drupal_render().
+  '#type' => 'gmap',
+  '#gmap_settings' => $map,
+);
+$output = drupal_render($element);
 </pre>

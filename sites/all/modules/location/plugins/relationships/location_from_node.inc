@@ -15,7 +15,12 @@ function location_location_from_node_ctools_relationships() {
     'description' => t('Creates a location context from a node.'),
     'required context' => new ctools_context_required(t('Node'), 'node'),
     'context' => 'location_location_from_node_context',
-    'settings form' => 'location_location_from_node_settings_form',
+    'edit form' => 'location_location_from_node_settings_form',
+    'defaults' => array(
+      'location_cck_field_name' => '',
+      'location_cck_field_offset' => 0,
+      'location_type' => NULL,
+    ),
   );
 }
 
@@ -26,12 +31,13 @@ function location_location_from_node_ctools_relationships() {
  * dealing with a location_node field or a location_cck field, what field
  * offset to use, etc.
  *
- * @param $context
+ * @param object $context
  *   The node context we're creating a relationship context out of.
- * @param $conf
+ *
+ * @param array $conf
  *   The configuration settings for this relationship.
  *
- * @return
+ * @return object
  *   Either a valid location context object based on the given node and the
  *   currently active configuration settings, an empty context object
  *   (e.g. for configuration in the Panels admin UI), or NULL in case the
@@ -53,8 +59,8 @@ function location_location_from_node_context($context, $conf) {
     elseif ($conf['location_type'] == 'location_cck' && isset($conf['location_cck_field_name'])) {
       $field_name = $conf['location_cck_field_name'];
       $field_offset = isset($conf['location_cck_field_offset']) ? $conf['location_cck_field_offset'] : 0;
-      if (isset($context->data->{$field_name}[$field_offset]['lid'])) {
-        $location = $context->data->{$field_name}[$field_offset];
+      if (isset($context->data->{$field_name}[LANGUAGE_NONE][$field_offset]['lid'])) {
+        $location = $context->data->{$field_name}[LANGUAGE_NONE][$field_offset];
       }
     }
   }
@@ -93,14 +99,8 @@ function location_location_from_node_context($context, $conf) {
  * use for the relationship, and we use the magic of CTools #dependency to
  * conditionally show/hide the appropriate sub-settings based on the currently
  * selected radio.
- *
- * @param $conf
- *   Array of existing configuration options for this relationship.
- *
- * @return
- *   FormAPI array of settings form elements.
  */
-function location_location_from_node_settings_form($conf) {
+function location_location_from_node_settings_form($form, &$form_state) {
   ctools_include('dependent');
   $location_type_options = array();
   $offset_options = array();
@@ -116,7 +116,9 @@ function location_location_from_node_settings_form($conf) {
       '#type' => 'select',
       '#options' => $offset_options,
       '#default_value' => isset($conf['location_node_offset']) ? $conf['location_node_offset'] : 0,
-      '#description' => t('If the nodes that will be used for this relationship have multiple locations, select which location you want to use.'),
+      '#description' => t(
+        'If the nodes that will be used for this relationship have multiple locations, select which location you want to use.'
+      ),
       '#process' => array('ctools_dependent_process'),
       '#dependency' => array('radio:relationship[relationship_settings][location_type]' => array('location_node')),
       '#weight' => 4,
@@ -124,9 +126,9 @@ function location_location_from_node_settings_form($conf) {
   }
   if (module_exists('location_cck')) {
     $cck_options = array();
-    foreach (content_fields() as $field) {
+    foreach (field_info_fields() as $field) {
       if ($field['type'] == 'location') {
-        $cck_options[$field['field_name']] = t($field['widget']['label']);
+        $cck_options[$field['field_name']] = check_plain($field['field_name']);
       }
     }
     if (!empty($cck_options)) {
@@ -147,7 +149,9 @@ function location_location_from_node_settings_form($conf) {
         '#type' => 'select',
         '#options' => $offset_options,
         '#default_value' => isset($conf['location_cck_field_offset']) ? $conf['location_cck_field_offset'] : 0,
-        '#description' => t('If the nodes that will be used for this relationship have multiple locations, select which location you want to use.'),
+        '#description' => t(
+          'If the nodes that will be used for this relationship have multiple locations, select which location you want to use.'
+        ),
         '#process' => array('ctools_dependent_process'),
         '#dependency' => array('radio:relationship[relationship_settings][location_type]' => array('location_cck')),
         '#weight' => 7,
