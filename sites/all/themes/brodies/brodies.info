@@ -1,7 +1,7 @@
 name = Brodies
 description = Brodies theme.
 version = VERSION
-core = 6.x
+core = 7.x
 engine = phptemplate
 stylesheets[all][] = style.css
 stylesheets[all][] = style-override.css

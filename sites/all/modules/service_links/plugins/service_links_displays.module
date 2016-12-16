@@ -13,43 +13,42 @@
  */
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function service_links_displays_theme() {
   return array(
     'sld_group_fisheye' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_group_text' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_group_image' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_group_image_and_text' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_single_text' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_single_image' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
     'sld_single_image_and_text' => array(
-      'arguments' => array('fields' => NULL),
+      'variables' => array(),
     ),
   );
 }
 
 /**
- * Implementation of hook_ds_fields().
+ * Implements hook_ds_fields_info().
  */
-function service_links_displays_ds_fields($type_name, $build_mode, $extra) {
+function service_links_displays_ds_fields_info($entity_type) {
   $fields = array(
     'service_links_displays_group' => array(
       'title' => t('Service Links Group'),
-      'type' => DS_FIELD_TYPE_THEME,
-      'status' => DS_FIELD_STATUS_STATIC,
+      'field_type' => DS_FIELD_TYPE_THEME,
       'properties' => array(
         'formatters' => array(
           'sld_group_text' => t('Text'),
@@ -66,10 +65,10 @@ function service_links_displays_ds_fields($type_name, $build_mode, $extra) {
     $services = service_links_get_links($services);
     foreach ($services as $service_id => $service) {
       $fields['service_links_displays_'. $service_id] = array(
-        'title' => t('Service Links Field %name', array('%name' => $service['name'])),
-        'type' => DS_FIELD_TYPE_THEME,
-        'status' => DS_FIELD_STATUS_STATIC,
+        'title' => t('Service Links Field @name', array('@name' => $service['name'])),
+        'field_type' => DS_FIELD_TYPE_THEME,
         'properties' => array(
+          'key' => $service_id,
           'formatters' => array(
             'sld_single_text' => t('Text'),
             'sld_single_image' => t('Image'),
@@ -80,16 +79,18 @@ function service_links_displays_ds_fields($type_name, $build_mode, $extra) {
     }
   }
 
-  return array('nd' => $fields);
+  return array('node' => $fields);
 }
 
 /**
  * Apply the Text format to a single Service.
  */
-function theme_sld_single_text($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
-    $service_id = str_replace('service_links_displays_', '', $fields['key']);
-    $items = service_links_render_some($service_id, $fields['object'], FALSE, SERVICE_LINKS_STYLE_TEXT);
+function theme_sld_single_text($variables) {
+  $node = $variables['entity'];
+  $service_id = $variables['properties']['key'];
+
+  if (service_links_show($node) && user_access('access service links')) {
+    $items = service_links_render_some($service_id, $node, FALSE, SERVICE_LINKS_STYLE_TEXT);
     if (!empty($items)) {
       return implode($items);
     }
@@ -99,10 +100,12 @@ function theme_sld_single_text($fields) {
 /**
  * Apply the Image format to a single Service.
  */
-function theme_sld_single_image($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
-    $service_id = str_replace('service_links_displays_', '', $fields['key']);
-    $items = service_links_render_some($service_id, $fields['object'], FALSE, SERVICE_LINKS_STYLE_IMAGE);
+function theme_sld_single_image($variables) {
+  $node = $variables['entity'];
+  $service_id = $variables['properties']['key'];
+
+  if (service_links_show($node) && user_access('access service links')) {
+    $items = service_links_render_some($service_id, $node, FALSE, SERVICE_LINKS_STYLE_IMAGE);
     if (!empty($items)) {
       return implode($items);
     }
@@ -112,10 +115,12 @@ function theme_sld_single_image($fields) {
 /**
  * Apply the Image and Text format to a single Service.
  */
-function theme_sld_single_image_and_text($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
-    $service_id = str_replace('service_links_displays_', '', $fields['key']);
-    $items = service_links_render_some($service_id, $fields['object'], FALSE, SERVICE_LINKS_STYLE_IMAGE_AND_TEXT);
+function theme_sld_single_image_and_text($variables) {
+  $node = $variables['entity'];
+  $service_id = $variables['properties']['key'];
+
+  if (service_links_show($node) && user_access('access service links')) {
+    $items = service_links_render_some($service_id, $node, FALSE, SERVICE_LINKS_STYLE_IMAGE_AND_TEXT);
     if (!empty($items)) {
       return implode($items);
     }
@@ -125,65 +130,84 @@ function theme_sld_single_image_and_text($fields) {
 /**
  * Apply the FishEye format to the field Service Links Group.
  */
-function theme_sld_group_fisheye($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
+function theme_sld_group_fisheye($variables) {
+  $node = $variables['entity'];
+
+  if (service_links_show($node) && user_access('access service links')) {
     $services = array_filter(variable_get('service_links_displays', array()));
     $options = array(
       'style' => SERVICE_LINKS_STYLE_FISHEYE,
       'link_show' => $services,
     );
 
-    return theme('service_links_fisheye_format', service_links_render($fields['object'], FALSE, $options));
+    return theme('service_links_fisheye_format', array(
+      'items' => service_links_render($node, FALSE, $options),
+    ));
   }
 }
 
 /**
  * Apply the Text format to the field Service Links Group.
  */
-function theme_sld_group_text($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
+function theme_sld_group_text($variables) {
+  $node = $variables['entity'];
+
+  if (service_links_show($node) && user_access('access service links')) {
     $services = array_filter(variable_get('service_links_displays', array()));
     $options = array(
       'style' => SERVICE_LINKS_STYLE_TEXT,
       'link_show' => $services,
     );
 
-    return theme('service_links_block_format', service_links_render($fields['object'], FALSE, $options), SERVICE_LINKS_STYLE_IMAGE);
+    return theme('service_links_block_format', array(
+      'items' => service_links_render($node, FALSE, $options),
+      'style' => SERVICE_LINKS_STYLE_IMAGE,
+    ));
   }
 }
 
 /**
  * Apply the Image format to the field Service Links Group.
  */
-function theme_sld_group_image($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
+function theme_sld_group_image($variables) {
+  $node = $variables['entity'];
+
+  if (service_links_show($node) && user_access('access service links')) {
     $services = array_filter(variable_get('service_links_displays', array()));
     $options = array(
       'style' => SERVICE_LINKS_STYLE_IMAGE,
       'link_show' => $services,
     );
 
-    return theme('service_links_block_format', service_links_render($fields['object'], FALSE, $options), SERVICE_LINKS_STYLE_IMAGE);
+    return theme('service_links_block_format', array(
+      'items' => service_links_render($node, FALSE, $options),
+      'style' => SERVICE_LINKS_STYLE_IMAGE,
+    ));
   }
 }
 
 /**
  * Apply the Image and Text format to the field Service Links Group.
  */
-function theme_sld_group_image_and_text($fields) {
-  if (service_links_show($fields['object']) && user_access('access service links')) {
+function theme_sld_group_image_and_text($variables) {
+  $node = $variables['entity'];
+
+  if (service_links_show($node) && user_access('access service links')) {
     $services = array_filter(variable_get('service_links_displays', array()));
     $options = array(
       'style' => SERVICE_LINKS_STYLE_IMAGE_AND_TEXT,
       'link_show' => $services,
     );
 
-    return theme('service_links_block_format', service_links_render($fields['object'], FALSE, $options), SERVICE_LINKS_STYLE_IMAGE);
+    return theme('service_links_block_format', array(
+      'items' => service_links_render($node, FALSE, $options),
+      'style' => SERVICE_LINKS_STYLE_IMAGE,
+    ));
   }
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  */
 function service_links_displays_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'service_links_admin_services') {
@@ -207,7 +231,7 @@ function service_links_displays_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implementation of hook_sl_servicestable_alter().
+ * Implements hook_sl_servicestable_alter().
  */
 function service_links_displays_sl_servicestable_alter(&$table, $form) {
   $table['header'][] = t('Displays');
@@ -223,7 +247,7 @@ function service_links_displays_sl_servicestable_alter(&$table, $form) {
 
     $service['displays'] = array(
       '#type' => 'checkbox',
-      '#value' => $service['#default_value'],
+      '#checked' => $service['#default_value'],
       '#id' => $service['#id'],
       '#name' => $service['#name'],
       '#attributes' => $service['#attributes'],
@@ -231,9 +255,9 @@ function service_links_displays_sl_servicestable_alter(&$table, $form) {
     $col =  drupal_render($service['displays']);
 
     $table['rows'][$num_row]['data'][$col_num] = $col;
-
+      
     $num_row++;
-  }
+  } 
 }
 
 /**

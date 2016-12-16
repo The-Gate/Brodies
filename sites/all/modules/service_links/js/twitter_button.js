@@ -1,20 +1,18 @@
-if (Drupal.jsEnabled) {
-  $(document).ready(function() {
-    load_twitter_button = function() {
+(function ($) {
+  Drupal.behaviors.ws_tb ={
+    scriptadded: false,
 
-      if (load_twitter_button.scriptadded) {
+    attach: function(context, settings) {
+      if (this.scriptadded) {
         twttr.widgets.load();
       } else {
-        $('a.service-links-twitter-widget').each(function(){
+        $('a.service-links-twitter-widget', context).each(function(){
           $(this).attr('href', $(this).attr('href').replace(/((?:counturl\=|^))http[s]*\%3A\/\//g, "$1"));
         });
-        $.getScript('http://platform.twitter.com/widgets.js', function () {
-          load_twitter_button.scriptadded = true;
+        $.getScript(window.location.protocol + '//platform.twitter.com/widgets.js', function () {
+          this.scriptadded = true;
         });
       }
     }
-
-    load_twitter_button.scriptadded = false;
-    load_twitter_button();
-  });
-}
+  }
+})(jQuery);

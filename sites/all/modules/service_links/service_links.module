@@ -7,10 +7,10 @@
  * This module is the enhanced version of Service Links 1.x developed
  * by Fredrik Jonsson, rewritten and improved to fit the new purposes:
  * extend easily the number of services supported and provide APIs to
- * print services everywhere within any content.
- * More services are availaible at the @link
- * http://servicelinks.altervista.org/?q=service Home page @endlink
- * and can be selected to create a new package through a visual interface.
+ * print links everywhere within any content.
+ * At the @link http://servicelinks.altervista.org/?q=service home page
+ * @endlink a web interface helps to create a module including the
+ * services not availables in the standard package.
  *
  * @author: Fabio Mucciante (TheCrow)
  */
@@ -21,11 +21,6 @@ define('SERVICE_LINKS_STYLE_IMAGE', 2);
 define('SERVICE_LINKS_STYLE_IMAGE_AND_TEXT', 3);
 define('SERVICE_LINKS_STYLE_EMPTY', 4);
 define('SERVICE_LINKS_STYLE_FISHEYE', 5);
-
-define('SERVICE_LINKS_DISABLED', 0);
-define('SERVICE_LINKS_IN_TEASER', 1);
-define('SERVICE_LINKS_IN_FULL', 2);
-define('SERVICE_LINKS_IN_BOTH', 3);
 
 define('SERVICE_LINKS_SHORT_URL_USE_NEVER', 0);
 define('SERVICE_LINKS_SHORT_URL_USE_WHEN_REQUESTED', 1);
@@ -45,33 +40,55 @@ define('SERVICE_LINKS_VISIBILITY_ONLY_LISTED', 1);
 define('SERVICE_LINKS_VISIBILITY_PHP', 2);
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  */
 function service_links_help($path, $arg) {
   switch ($path) {
     case 'admin/help#service_links':
       return '<p>'. t('Display links to social sharing websites like Digg, del.icio.us, reddit, Technorati etc.') .'</p>';
       break;
-    case "admin/modules#description":
-      return '<p>'. t('Control which and where service links should be active.') .'</p>';
   }
 }
 
 /**
- * Implementation of hook_perm().
+ * Implements hook_hook_info().
  */
-function service_links_perm() {
-  return array('access service links', 'use PHP for service visibility');
+function service_links_hook_info() {
+  $hooks = array(
+    'service_links' => array(
+      'group' => 'service_links',
+    ),
+    'service_links_alter' => array(
+      'group' => 'service_links',
+    ),
+  );
+
+  return $hooks;
 }
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_permission().
+ */
+function service_links_permission() {
+  return array(
+    'access service links' => array(
+      'title' => t('Access to Service Links'),
+      //'description' => t('Allow users to act with the services loaded'),
+    ),
+    'use PHP for service visibility' => array(
+      'title' => t('Use PHP for Service visibility'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
  */
 function service_links_menu() {
   $items = array();
 
-  $items['admin/settings/service_links'] = array(
-    'title' => 'Service links',
+  $items['admin/config/services/service-links'] = array(
+    'title' => 'Service Links',
     'description' => 'Control which and where service links should be active.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('service_links_admin_settings'),
@@ -80,19 +97,18 @@ function service_links_menu() {
     'file' => 'service_links.admin.inc',
   );
 
-  $items['admin/settings/service_links/general'] = array(
+ $items['admin/config/services/service-links/general'] = array(
     'title' => 'General Settings',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
   );
 
-  $items['admin/settings/service_links/services'] = array(
+  $items['admin/config/services/service-links/services'] = array(
     'title' => 'Services',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('service_links_admin_services'),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
-    'parent' => 'admin/settings/service_links',
     'file' => 'service_links.admin.inc',
   );
 
@@ -100,216 +116,195 @@ function service_links_menu() {
 }
 
 /**
- * Implementation of hook_nodeapi().
+ * Implements hook_node_view().
  */
-function service_links_nodeapi(&$node, $op, $teaser, $page) {
-  switch ($op) {
-    case 'view':
-      if ((arg(2) != 'edit') && service_links_show($node) && user_access('access service links')) {
-        if ($node->build_mode == NODE_BUILD_RSS) {
-          $node->service_links = service_links_render($node, FALSE);
-          $node->service_links_rendered = theme('service_links_block_format', $node->service_links, SERVICE_LINKS_STYLE_IMAGE);
-        }
-        else {
-          $node->service_links = service_links_render($node, TRUE);
-          $node->service_links_rendered = theme('service_links_node_format', $node->service_links, variable_get('service_links_label_in_node', t('Bookmark/Search this post with')));
-        }
+function service_links_node_view($node, $view_mode) {
+  static $view_modes_allowed;
+ 
+  if (!isset($view_modes_allowed)) {
+    $view_modes_allowed = array_filter(variable_get('service_links_node_view_modes', array()));
+  }
 
-        switch (variable_get('service_links_in_node', SERVICE_LINKS_DISABLED)) {
-          case SERVICE_LINKS_IN_TEASER:
-            if ($teaser) {
-              $node->content['service_links'] = array(
-                '#value' => $node->service_links_rendered,
-                '#weight' => variable_get('service_links_weight_in_node', 10),
-              );
-            }
-            break;
-          case SERVICE_LINKS_IN_FULL:
-            if ($page) {
-              $node->content['service_links'] = array(
-                '#value' => $node->service_links_rendered,
-                '#weight' => variable_get('service_links_weight_in_node', 10),
-              );
-            }
-            break;
-          case SERVICE_LINKS_IN_BOTH:
-            if ($teaser) {
-              $node->content['service_links'] = array(
-                '#value' => $node->service_links_rendered,
-                '#weight' => variable_get('service_links_weight_in_node', 10),
-              );
-            }
-            elseif ($page) {
-              $node->content['service_links'] = array(
-                '#value' => $node->service_links_rendered,
-                '#weight' => variable_get('service_links_weight_in_node', 10),
-              );
-            }
-            break;
-        }
-      }
-      break;
+  if ((arg(2) != 'edit') && service_links_show($node) && user_access('access service links')) {
+
+    $node->service_links = service_links_render($node, TRUE);
+
+    if (!empty($view_modes_allowed) && (in_array($view_mode, $view_modes_allowed))) {
+
+      $node->service_links_rendered = theme('service_links_node_format', array(
+        'links' => $node->service_links,
+        'label' => variable_get('service_links_label_in_node', t('Bookmark/Search this post with')),
+        'view_mode' => $view_mode,
+        'node_type' => $node->type,
+      ));
+  
+      $node->content['service_links'] = array(
+        '#markup' => $node->service_links_rendered,
+        '#weight' => variable_get('service_links_weight_in_node', 10),
+      );
+    }
+
+    _service_links_link($node, $view_mode);
   }
 }
 
 /**
- * Implementation of hook_link().
+ * Create an array of links for the link section.
  */
-function service_links_link($type, $node = NULL, $teaser = FALSE) {
-  $links = array();
-
-  if ($type == 'node') {
-    switch (variable_get('service_links_in_links', SERVICE_LINKS_DISABLED)) {
-    case SERVICE_LINKS_DISABLED:
-      $show_links = FALSE;
-      break;
-    case SERVICE_LINKS_IN_TEASER:
-      $show_links = $teaser ? TRUE : FALSE;
-      break;
-    case SERVICE_LINKS_IN_FULL:
-      $show_links = $teaser ? FALSE : TRUE;
-      break;
-    case SERVICE_LINKS_IN_BOTH:
-      $show_links = TRUE;
-      break;
-    default:
-      $show_links = FALSE;
-      break;
-    }
-
-    if (service_links_show($node) && $show_links && user_access('access service links')) {
-      $links = service_links_render($node, TRUE);
-    }
+function _service_links_link($node, $view_mode) {
+  static $view_modes_allowed;
+ 
+  if (!isset($view_modes_allowed)) {
+    $view_modes_allowed = array_filter(variable_get('service_links_link_view_modes', array()));
   }
 
-  return $links;
+  if (in_array($view_mode, $view_modes_allowed)) {
+    $links = $node->service_links;
+    foreach ($links as $key => $value) {
+      $node->content['links']['node']['#links'][$key] = $value;
+    }
+  }
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_block_info().
  */
-function service_links_block($op = 'list', $delta = 0, $edit = array()) {
-  if ($op == 'list') {
-    $blocks['service_links'] = array(
-      'info' => t('Service links'),
-      'cache' => BLOCK_NO_CACHE,
-    );
-    $blocks['service_links_fisheye'] = array(
-      'info' => t('Service links with FishEye effect'),
-      'cache' => BLOCK_NO_CACHE,
-    );
-    $blocks['service_links_not_node'] = array(
-      'info' => t('Service links block for not-node pages'),
-      'cache' => BLOCK_NO_CACHE,
-    );
-    return $blocks;
-  }
-  elseif ($op == 'view') {
-    $node = menu_get_object('node');
-    $block = array();
+function service_links_block_info() {
+  $blocks['service_links'] = array(
+    'info' => t('Service links'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['service_links_fisheye'] = array(
+    'info' => t('Service links with FishEye effect'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['service_links_not_node'] = array(
+    'info' => t('Service links for not-node pages'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
-    if (user_access('access service links') && (isset($node))) {
-      if (service_links_show($node)) {
-        switch ($delta) {
-          case 'service_links':
-            $block['subject'] = t('Bookmark/Search this post');
-            $style = variable_get('service_links_block_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT);
-            $block['content'] = theme('service_links_block_format', service_links_render($node, FALSE, $style), $style);
-            break;
-          case 'service_links_fisheye':
-            $block['subject'] = t('Bookmark/Search this post');
-            $block['content'] = theme('service_links_fisheye_format', service_links_render($node, FALSE, SERVICE_LINKS_STYLE_FISHEYE));
-            break;
-        }
-      }
-      return $block;
-    }
-    elseif (user_access('access service links') && (!isset($node))) {
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function service_links_block_view($delta = '') {
+  $node = menu_get_object('node');
+  $block = array();
+
+  if (user_access('access service links') && (isset($node))) {
+    if (service_links_show($node)) {
       switch ($delta) {
-        case 'service_links_not_node':
+        case 'service_links':
           $block['subject'] = t('Bookmark/Search this post');
-          $options = array(
-            'style' => variable_get('service_links_block_not_node_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
-            'link_to_front' => variable_get('service_links_block_not_node_front', FALSE),
-          );
-          $block['content'] = theme('service_links_block_format', service_links_render(NULL, FALSE, $options), $options['style']);
+          $style = variable_get('service_links_block_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT);
+          $block['content'] = theme('service_links_block_format', array('items' => service_links_render($node, FALSE, $style), 'style' => $style));
+          break;
+        case 'service_links_fisheye':
+          $block['subject'] = t('Bookmark/Search this post');
+          $block['content'] = theme('service_links_fisheye_format', array('items' => service_links_render($node, FALSE, SERVICE_LINKS_STYLE_FISHEYE)));
           break;
       }
-      return $block;
     }
+    return $block;
   }
-  elseif ($op == 'configure') {
-    $form = array();
-
+  elseif (user_access('access service links') && (!isset($node))) {
     switch ($delta) {
-      case 'service_links':
-        $form['service_links_block_style'] = array(
-          '#type' => 'select',
-          '#title' => t('Style'),
-          '#description' => t('How the service links will appear in the block.'),
-          '#default_value' => variable_get('service_links_block_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
-          '#options' => array(
-            SERVICE_LINKS_STYLE_TEXT => t('Text'),
-            SERVICE_LINKS_STYLE_IMAGE => t('Image'),
-            SERVICE_LINKS_STYLE_IMAGE_AND_TEXT => t('Image and Text'),
-          ),
-        );
-        break;
-      case 'service_links_fisheye':
-        $form['service_links_path_fisheye'] = array(
-          '#type' => 'textfield',
-          '#title' => t('Alternative icon folder'),
-          '#size' => 60,
-          '#description' => t('If you have alternative icons write here the path without trailing slash'),
-          '#default_value' => service_links_expand_path(NULL, 'fisheye'),
-        );
-        break;
       case 'service_links_not_node':
-        $form['service_links_block_not_node_style'] = array(
-          '#type' => 'select',
-          '#title' => t('Style'),
-          '#description' => t('How the service links will appear in the block.'),
-          '#default_value' => variable_get('service_links_block_not_node_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
-          '#options' => array(
-            SERVICE_LINKS_STYLE_TEXT => t('Text'),
-            SERVICE_LINKS_STYLE_IMAGE => t('Image'),
-            SERVICE_LINKS_STYLE_IMAGE_AND_TEXT => t('Image and Text'),
-          ),
+        $block['subject'] = t('Bookmark/Search this post');
+        $options = array(
+          'style' => variable_get('service_links_block_not_node_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
+          'link_to_front' => variable_get('service_links_block_not_node_front', FALSE),
         );
-
-        $form['service_links_block_not_node_front'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Link always to the front page'),
-          '#description' => t('If selected the services will link always to the front page %front.', array('%front' => url('<front>', array('absolute' => TRUE)))),
-          '#default_value' => variable_get('service_links_block_not_node_front', FALSE),
-        );
+        $block['content'] = theme('service_links_block_format', array(
+          'items' => service_links_render(NULL, FALSE, $options),
+          'style' => $options['style'],
+        ));
         break;
     }
-    return $form;
-  }
-  elseif ($op == 'save') {
-    switch ($delta) {
-      case 'service_links':
-        variable_set('service_links_block_style', $edit['service_links_block_style']);
-        break;
-      case 'service_links_fisheye':
-        variable_set('service_links_path_fisheye', $edit['service_links_path_fisheye']);
-        break;
-      case 'service_links_not_node':
-        variable_set('service_links_block_not_node_style', $edit['service_links_block_not_node_style']);
-        variable_set('service_links_block_not_node_front', $edit['service_links_block_not_node_front']);
-        break;
-    }
+    return $block;
   }
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_block_configure().
+ */
+function service_links_block_configure($delta = '') {
+  $form = array();
+  switch ($delta) {
+    case 'service_links':
+      $form['service_links_block_style'] = array(
+        '#type' => 'select',
+        '#title' => t('Style'),
+        '#description' => t('How the service links will appear in the block.'),
+        '#default_value' => variable_get('service_links_block_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
+        '#options' => array(
+          SERVICE_LINKS_STYLE_TEXT => t('Text'),
+          SERVICE_LINKS_STYLE_IMAGE => t('Image'),
+          SERVICE_LINKS_STYLE_IMAGE_AND_TEXT => t('Image and Text'),
+        ),
+      );
+      break;
+    case 'service_links_fisheye':
+      $form['service_links_path_fisheye'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Alternative icon folder'),
+        '#size' => 60,
+        '#description' => t('If you have alternative icons write here the path without trailing slash'),
+        '#default_value' => service_links_expand_path(NULL, 'fisheye'),
+      );
+      break;
+    case 'service_links_not_node':
+      $form['service_links_block_not_node_style'] = array(
+        '#type' => 'select',
+        '#title' => t('Style'),
+        '#description' => t('How the service links will appear in the block.'),
+        '#default_value' => variable_get('service_links_block_not_node_style', SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
+        '#options' => array(
+          SERVICE_LINKS_STYLE_TEXT => t('Text'),
+          SERVICE_LINKS_STYLE_IMAGE => t('Image'),
+          SERVICE_LINKS_STYLE_IMAGE_AND_TEXT => t('Image and Text'),
+        ),
+      );
+
+      $form['service_links_block_not_node_front'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Link always to the front page'),
+        '#description' => t('If selected the services will link always to the front page %front.', array('%front' => url('<front>', array('absolute' => TRUE)))),
+        '#default_value' => variable_get('service_links_block_not_node_front', FALSE),
+      );
+      break;
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function service_links_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+    case 'service_links':
+      variable_set('service_links_block_style', $edit['service_links_block_style']);
+      break;
+    case 'service_links_fisheye':
+      variable_set('service_links_path_fisheye', $edit['service_links_path_fisheye']);
+      break;
+    case 'service_links_not_node':
+      variable_set('service_links_block_not_node_style', $edit['service_links_block_not_node_style']);
+      variable_set('service_links_block_not_node_front', $edit['service_links_block_not_node_front']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
  */
 function service_links_theme() {
   return array(
     'service_links_build_link' => array(
-      'arguments' => array(
+      'variables' => array(
         'text' => NULL,
         'url' => array(),
         'image' => NULL,
@@ -320,20 +315,24 @@ function service_links_theme() {
       'file' => 'service_links.theme.inc',
     ),
     'service_links_node_format' => array(
-      'arguments' => array('links' => NULL, 'label' => NULL),
+      'variables' => array(
+        'links' => NULL,
+        'label' => NULL,
+        'view_mode' => NULL,
+        'node_type' => NULL
+      ),
       'file' => 'service_links.theme.inc',
     ),
     'service_links_block_format' => array(
-      'arguments' => array('items' => NULL, 'style' => SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
+      'variables' => array('items' => NULL, 'style' => SERVICE_LINKS_STYLE_IMAGE_AND_TEXT),
       'file' => 'service_links.theme.inc',
     ),
     'service_links_fisheye_format' => array(
-      'arguments' => array('items' => NULL),
+      'variables' => array('items' => NULL),
       'file' => 'service_links.theme.inc',
     ),
     'service_links_drag_table' => array(
-      'arguments' => array('form' => NULL),
-      'file' => 'service_links.admin.inc',
+      'render element' => 'form',
     ),
   );
 }
@@ -370,7 +369,7 @@ function service_links_array_filter($services) {
  *   An array containing information for all the requested services.
  */
 function service_links_get_links($services = NULL, $reset = FALSE) {
-  static $links = NULL;
+  $links = &drupal_static(__FUNCTION__, NULL);
   if (!isset($links) || $reset) {
     // Retrieve the links from the cache.
     if (!$reset && ($cache = cache_get('service_links_get_links')) && !empty($cache->data)) {
@@ -396,7 +395,6 @@ function service_links_get_links($services = NULL, $reset = FALSE) {
 
   // If desired, return only the wanted services.
   if (isset($services)) {
-
     // Detect a manual request and populate the array correctly.
     if (is_numeric(key($services))) {
       $services = array_combine($services, array_fill(0, count($services), 1));
@@ -496,7 +494,7 @@ function service_links_render($node, $nodelink = FALSE, $options = NULL) {
     // Load the position.
     $links['weight'][] = isset($settings['link_weight'][$service_id]) ? $settings['link_weight'][$service_id] : 0;
 
-    // Render the Service. 
+    // Render the Service.
     $links['link'] += _service_links_render($service_id, $service, $settings, $nodelink, $node);
   }
 
@@ -552,10 +550,10 @@ function service_links_render_some($service_ids, $node = NULL, $nodelink = FALSE
   if (isset($options)) {
     if (!is_array($options)) {
       $options = array('style' => $options);
-    }
+    }  
     $settings = array_merge($settings, $options);
   }
- 
+
   _service_links_get_tags($node, $settings);
 
   $links = array();
@@ -569,23 +567,34 @@ function service_links_render_some($service_ids, $node = NULL, $nodelink = FALSE
 /**
  * The common render function used privately.
  */
-function _service_links_render($service_id, $service, $settings, $nodelink, $node) {
+function _service_links_render($service_id, $service, $settings, $nodelink, $node = NULL) {
   if (isset($service['preset'])) {
     if (function_exists($function = $service['preset'])) {
       $function($service, $settings, $node);
     }
   }
 
-  // With Clean Urls on this tag should be filled before the split otherwise will be lost.
+  // On Drupal 7 this tag should be filled before the split otherwise will be lost.
   $service['link'] = str_replace('<front-page>', $settings['subst']['front-page'], $service['link']);
 
-  $service['url'] = preg_split('/\?/', $service['link']);
-  $subst_id = isset($service['url'][1]) ? 1 : 0;
-  $service['url'][$subst_id] = str_replace($settings['tag'], $settings['subst'], $service['url'][$subst_id]);
+  if (strpos($service['link'], '=') === FALSE) {
+    $service['url'] = array($service['link']);
+  }
+  else {
+    $service['url'] = preg_split('/\?/', $service['link']);
+  }
+
+  if (count($service['url']) > 1) {
+    $service['url'][1] = service_links_get_query($service['url'][1]);
+    $service['url'][1] = str_replace($settings['tag'], $settings['subst'], $service['url'][1]);
+  }
+  else {
+    $service['url'][0] = str_replace($settings['tag'], $settings['subst'], $service['url'][0]);
+  }
 
   $service['attributes']['title'] = t($service['description']);
   $class = str_replace(array('][', '_', ' '), '-', 'service_links-'. $service_id);
-  $service['attributes']['class'] = isset($service['attributes']['class']) ? $service['attributes']['class'] . " " . $class : $class;
+  $service['attributes']['class'] = isset($service['attributes']['class']) ? array_merge($service['attributes']['class'], array($class)) : array($class);
   $service['attributes'] += $settings['attributes'];
 
   $service['icon'] = isset($service['icon']) ? $service['icon'] : "$service_id.png";
@@ -613,14 +622,14 @@ function _service_links_render($service_id, $service, $settings, $nodelink, $nod
   }
 
   // Create the HTML.
-  $link = theme('service_links_build_link',
-    t($service['name']),
-    $service['url'],
-    $service['icon'],
-    $nodelink,
-    $service['style'],
-    $service['attributes']
-  );
+  $link = theme('service_links_build_link', array(
+    'text' => t($service['name']),
+    'url' => $service['url'],
+    'image' => $service['icon'],
+    'nodelink' => $nodelink,
+    'style' => $service['style'],
+    'attributes' => $service['attributes'],
+  ));
 
   return array($service_id => $link);
 }
@@ -629,12 +638,8 @@ function _service_links_render($service_id, $service, $settings, $nodelink, $nod
  * Load correctly the needed javascripts.
  */
 function _service_links_add_js($javascript) {
-  static $is_https;
+  global $is_https;
   static $external_js;
-
-  if (!isset($is_https)) {
-    $is_https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on';
-  }
 
   if (!is_array($javascript)) {
     $javascript = array($javascript);
@@ -652,7 +657,7 @@ function _service_links_add_js($javascript) {
       }
 
       if (!in_array($js, $external_js)) {
-        drupal_set_html_head('<script type="text/javascript" src="'. $js .'"></script>');
+        drupal_add_js($js, array('type' => 'external'));
         $external_js[] = $js;
       }
     }
@@ -667,14 +672,16 @@ function _service_links_add_js($javascript) {
  */
 function _service_links_get_tags($node, &$settings) {
   if (!empty($node)) {
-    $title = _service_links_get_node_title($node, $settings);
+    $title = _service_links_get_node_title($node, $settings); 
 
     $path = _service_links_get_node_path($node);
-    $url = url($path, array('absolute' => TRUE, 'query' => $settings['text_to_append']));
+    $url = url("$path", array('absolute' => TRUE, 'query' => service_links_get_query($settings['text_to_append'])));
 
     $query = drupal_get_path_alias("node/{$node->nid}");
 
-    $teaser = empty($node->teaser) ? '' : strip_tags($node->teaser);
+    $body = field_get_items('node', $node, 'body');
+    $teaser = $body ? strip_tags(text_summary($body[0]['value'])) : '';
+
     $nid = $node->nid;
   }
   elseif (isset($settings['data'])) {
@@ -688,10 +695,10 @@ function _service_links_get_tags($node, &$settings) {
     $title = drupal_get_title();
 
     $url = _service_links_get_page_url(NULL, $settings);
-    
+
     // The query shouldn't follow the front_page alias but point the original page.
     $query = drupal_get_normal_path($_GET['q']);
-
+    
     $teaser = '';
     $nid = NULL;
   }
@@ -748,20 +755,35 @@ function _service_links_get_tags($node, &$settings) {
     'front-page' => '<front-page>',
   );
   $settings['subst'] = array(
-    'raw-encoded-title' => rawurlencode($title),
-    'raw-encoded-url' => rawurlencode($url),
-    'raw-encoded-teaser' => rawurlencode($teaser),
-    'raw-encoded-short-url' => rawurlencode($short_url),
-    'raw-encoded-long-url' => rawurlencode($long_url),
-    'raw-encoded-query' => rawurlencode($query),
-    'raw-encoded-source' => rawurlencode($source),
-    'encoded-title' => urlencode($title),
-    'encoded-url' => urlencode($url),
-    'encoded-teaser' => urlencode($teaser),
-    'encoded-short-url' => urlencode($short_url),
-    'encoded-long-url' => urlencode($long_url),
-    'encoded-query' => urlencode($query),
-    'encoded-source' => urlencode($source),
+    //'raw-encoded-title' => rawurlencode($title),
+    'raw-encoded-title' => $title,
+    //'raw-encoded-url' => rawurlencode($url),
+    'raw-encoded-url' => $url,
+    //'raw-encoded-teaser' => rawurlencode($teaser),
+    'raw-encoded-teaser' => $teaser,
+    //'raw-encoded-short-url' => rawurlencode($short_url),
+    'raw-encoded-short-url' => $short_url,
+    //'raw-encoded-long-url' => rawurlencode($long_url),
+    'raw-encoded-long-url' => $long_url,
+    //'raw-encoded-query' => rawurlencode($query),
+    'raw-encoded-query' => $query,
+    //'raw-encoded-source' => rawurlencode($source),
+    'raw-encoded-source' => $source,
+    //'encoded-title' => urlencode($title),
+    'encoded-title' => $title,
+    //'encoded-url' => urlencode($url),
+    'encoded-url' => $url,
+    //'encoded-teaser' => urlencode($teaser),
+    'encoded-teaser' => $teaser,
+    //'encoded-short-url' => urlencode($short_url),
+    'encoded-short-url' => $short_url,
+    //'encoded-long-url' => urlencode($long_url),
+    'encoded-long-url' => $long_url,
+    //'encoded-query' => urlencode($query),
+    'encoded-query' => $query,
+    //'encoded-source' => urlencode($source),
+    'encoded-source' => $source,
+    //Not needed
     'teaser' => $teaser,
     'short-url' => $short_url,
     'long-url' => $long_url,
@@ -779,10 +801,10 @@ function _service_links_get_tags($node, &$settings) {
  */
 function _service_links_get_page_url($node, $settings) {
   if ($settings['link_to_front'] || drupal_is_front_page()) {
-    $url = url('<front>', array('absolute' => TRUE, 'query' => $settings['text_to_append']));
+    $url = url('<front>', array('absolute' => TRUE, 'query' => service_links_get_query($settings['text_to_append'])));
   }
   else {
-    $url = url($_GET['q'], array('absolute' => TRUE, 'query' => $settings['text_to_append']));
+    $url = url($_GET['q'], array('absolute' => TRUE, 'query' => service_links_get_query($settings['text_to_append'])));
   }
 
   return $url; 
@@ -792,7 +814,7 @@ function _service_links_get_page_url($node, $settings) {
  * Return the properly title.
  */
 function _service_links_get_node_title($node, $settings) {
-  $title = isset($node->title) ? $node->title : ''; 
+  $title = isset($node->title) ? $node->title : '';
 
   switch ($settings['title_override']) {
     case SERVICE_LINKS_TAG_TITLE_NODE:
@@ -801,7 +823,7 @@ function _service_links_get_node_title($node, $settings) {
       $title = str_replace('<title>', $title, $settings['title_text']);
       break;
     case SERVICE_LINKS_TAG_TITLE_TOKEN:
-      $title = token_replace($settings['title_text'], 'node', $node);
+      $title = token_replace($settings['title_text'], array('node' => $node));
       break;
   }
 
@@ -820,8 +842,7 @@ function _service_links_get_node_path($node) {
   }
 
   $path = "node/$node->nid";
-  //if (($node->path == $front_page) || ($path == $front_page)) {
-  if ((isset($node->path) && ($node->path == $front_page)) || ($path == $front_page)) {
+  if (($path == $front_page) || (isset($node->uri) && ((object)$node->uri['path'] == $front_page))) {
     $path = '<front>';
   }
 
@@ -846,7 +867,7 @@ function service_links_show($node) {
   }
 
   if (variable_get('service_links_hide_for_author', FALSE) && ($user->uid == $node->uid)) {
-    return FALSE; 
+    return FALSE;
   }
 
   if (variable_get('service_links_hide_if_unpublished', FALSE) && ($node->status == '0')) {
@@ -854,12 +875,12 @@ function service_links_show($node) {
   }
 
   $node_type = in_array($node->type, variable_get('service_links_node_types', array()), TRUE);
-  if (module_exists('taxonomy')) {
-    $terms = taxonomy_node_get_terms($node);
+  if (module_exists('taxonomy') && !empty($node->field_tags)) {
     $categories_allowed = variable_get('service_links_category_types', array());
+    $language = isset($node->field_tags[$node->language]) ? $node->language : 'und';
 
-    foreach ($terms as $term) {
-      $category_type |= in_array($term->tid, $categories_allowed, FALSE);
+    foreach ($node->field_tags[$language] as $term) {
+      $category_type |= in_array($term['tid'], $categories_allowed, FALSE);
     }
   }
   if ($node_type || $category_type) {
@@ -883,8 +904,12 @@ function _service_links_match_path() {
   $pages = variable_get('service_links_page_match_for_node', '');
   $visibility = variable_get('service_links_visibility_for_node', SERVICE_LINKS_VISIBILITY_NOT_LISTED);
   if (!empty($pages)) {
+    // Convert path to lowercase. This allows comparison of the same path
+    // with different case. Ex: /Page, /page, /PAGE.
+    $pages = drupal_strtolower($pages);
+
     if ($visibility < SERVICE_LINKS_VISIBILITY_PHP) {
-      $path = drupal_get_path_alias($_GET['q']);
+      $path = drupal_strtolower(drupal_get_path_alias($_GET['q']));
       // Compare with the internal and path alias (if any).
       $page_match = drupal_match_path($path, $pages);
       if ($path != $_GET['q']) {
@@ -895,8 +920,11 @@ function _service_links_match_path() {
       // is displayed only on those pages listed in $pages.
       $page_match = !($visibility xor $page_match);
     }
+    elseif (module_exists('php')) {
+      $page_match = php_eval($pages);
+    }
     else {
-      $page_match = drupal_eval($pages);
+      $page_match = FALSE;
     }
   }
   else {
@@ -936,7 +964,7 @@ function _service_links_load_settings() {
 }
 
 /**
- * Expand the path around a filename depending from the context.
+  * Expand the path around a filename depending from the context.
  *
  * @param $filename
  *   If NULL the function return only the path with trailing slash.
@@ -1001,11 +1029,44 @@ function service_links_expand_path($filename = NULL, $context = 'icons', $defaul
 }
 
 /**
- * Implementation of hook_views_api().
+ * Split a query string in the properly array.
+ */
+function service_links_get_query($query_str) {
+  if (empty($query_str)) {
+    return NULL;
+  }
+  $result = array();
+
+  // parse_str() replaces dots and squares with underscores.
+  $query_str = explode('&', $query_str);
+  foreach($query_str as $q) {
+    $key_value = explode('=', $q);
+    $result[$key_value[0]] = isset($key_value[1]) ? $key_value[1] : '';
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_views_api().
  */
 function service_links_views_api() {
   return array(
     'api' => 2,
     'path' => drupal_get_path('module', 'service_links'),
   );
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function service_links_ctools_plugin_directory($module, $plugin) {
+  // Also Prevent PHP warnings for undefined constants.
+  if (defined('PANELS_REQUIRED_CTOOLS_API')) {
+    // Safety: go away if CTools is not at an appropriate version.
+    if (!module_invoke('ctools', 'api_version', PANELS_REQUIRED_CTOOLS_API)) {
+      return;
+    }
+    return 'plugins/' . $plugin;
+  }
 }

@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING));
 /**
  * @file
  * Drupal site-specific configuration file.
@@ -273,3 +272,7 @@ $databases = array (
   ),
 );
 $drupal_hash_salt = 'xnQ--rrCMRle4GXl7cWYkHUkiz9rVw7WFo_E-bgOlsE';
+
+$conf['locale_custom_strings_en'][''] = array(
+  'Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>' => 'Sorry, unrecognized e-mail or password. <a href="@password">Have you forgotten your password?</a>',
+);

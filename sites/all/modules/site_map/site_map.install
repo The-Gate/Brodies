@@ -1,5 +1,4 @@
 <?php
-// $Id: site_map.install,v 1.3.2.3.2.3 2010/05/07 11:16:29 frjo Exp $
 
 /**
  * @file
@@ -9,18 +8,67 @@
  */
 
 /**
- * Implementation of hook_uninstall().
+ * Implements hook_uninstall().
  */
 function site_map_uninstall() {
-  db_query("DELETE FROM {variable} WHERE name LIKE 'site_map_%'");
+  db_delete('variable')
+    ->condition('name', db_like('site_map_') . '%', 'LIKE')
+    ->execute();
 }
 
 /**
  * Delete no longer used variables.
  */
 function site_map_update_6000() {
-  $ret = array();
-  $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'site_map_message_%'");
-  $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'site_map_show_menus_%'");
-  return $ret;
+  db_delete('variable')
+    ->condition('name', db_like('site_map_message_') . '%', 'LIKE')
+    ->execute();
+  db_delete('variable')
+    ->condition('name', db_like('site_map_show_menus_') . '%', 'LIKE')
+    ->execute();
+}
+
+/**
+ * Upgrade site map message format setting.
+ */
+function site_map_update_7000() {
+
+  variable_set('site_map_message', array(
+    'value' => variable_get('site_map_message', ''),
+    'format' => variable_get('site_map_message_format', filter_default_format()),
+    )
+  );
+  variable_del('site_map_message_format');
+
+  return t('Successfully upgraded site map message format setting.');
+}
+
+/**
+ * Change block caching mode.
+ */
+function site_map_update_7001() {
+  db_update('block')
+    ->fields(array('cache' => DRUPAL_NO_CACHE))
+    ->condition('module', 'site_map')
+    ->execute();
+}
+
+/**
+ * Use vocabulary machine names instead of IDs for taxonomy settings.
+ */
+function site_map_update_7002() {
+  $vids = array_filter(variable_get('site_map_show_vocabularies', array()));
+
+  if (module_exists('taxonomy') && !empty($vids)) {
+    $vocab_options = array();
+    foreach ($vids as $vid) {
+      if (is_numeric($vid)) {
+        $vocabulary = taxonomy_vocabulary_load($vid);
+        $vocab_options[$vocabulary->machine_name] = $vocabulary->machine_name;
+      }
+    }
+    if (!empty($vocab_options)) {
+      variable_set('site_map_show_vocabularies', $vocab_options);
+    }
+  }
 }

@@ -8,7 +8,7 @@
  */
 
 /**
- * Implementation of hook_service_links().
+ * Implements hook_service_links().
  */
 function basque_services_service_links() {
   $links = array();

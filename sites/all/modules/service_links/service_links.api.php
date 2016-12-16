@@ -27,7 +27,7 @@ function hook_service_links() {
     'icon' => drupal_get_path('module', 'myservice') .'/myservice.png',
     // Any additional attributes to apply to the element.
     'attributes' => array(
-      'class' => 'myservice-special-class', // A special class.
+      'class' => array('myservice-special-class'), // A special class.
       'style' => 'text-decoration: underline;', // Apply any special inline styles.
     ),
     // JavaScript to add when this link is processed, can be a string or an array.

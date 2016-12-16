@@ -87,4 +87,3 @@ http://servicelinks.altervista.org/?q=about
 More services can be included and packed within an external module customizable
 through a web interface available at the address:
 http://servicelinks.altervista.org/?q=service
-

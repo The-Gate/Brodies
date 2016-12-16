@@ -8,7 +8,7 @@
  */
 
 /**
- * Implementation of hook_service_links().
+ * Implements hook_service_links().
  */
 function general_services_service_links() {
   $links = array();
@@ -74,6 +74,11 @@ function general_services_service_links() {
     'link' => 'http://www.google.com/bookmarks/mark?op=add&bkmk=<encoded-url>&title=<encoded-title>',
     'description' => t('Bookmark this post on Google'),
   );
+  $links['google_plus'] = array(
+    'name' => 'Google+',
+    'link' => 'https://plus.google.com/share?url=<encoded-url>',
+    'description' => t('Share this on Google+'),
+  );
   $links['yahoo'] = array(
     'name' => 'Yahoo',
     'link' => 'http://bookmarks.yahoo.com/myresults/bookmarklet?u=<encoded-url>&t=<encoded-title>',
@@ -122,7 +127,7 @@ function general_services_service_links() {
   );
   $links['identica'] = array(
     'name' => 'identi.ca',
-    'link' => 'http://identi.ca/?action=newnotice&status_textarea=<encoded-title>+<encoded-url>',
+    'link' => 'http://identi.ca/?action=newnotice&status_textarea=<encoded-title> <encoded-url>',
     'description' => t('Dent this on identi.ca'),
   );
   $links['newskicks'] = array(
@@ -134,6 +139,11 @@ function general_services_service_links() {
     'name' => 'Diigo',
     'description' => t('Post on Diigo'),
     'link' => 'http://www.diigo.com/post?url=<encoded-url>&title=<encoded-title>&desc=<encoded-teaser>',
+  );
+  $links['viadeo'] = array(
+    'name' => 'Viadeo',
+    'link' => 'http://www.viadeo.com/shareit/share/?url=<encoded-url>&title=<encoded-title>',
+    'description' => t('Share this on Viadeo'),
   );
 
   return $links;

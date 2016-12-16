@@ -14,12 +14,12 @@ Required step:
 Optional steps:
 
 2. You will probably want to change the welcome e-mail
-    (Administer › User management › User settings) and replace instances of
+    (Administer -> User Management -> User Settings) and replace instances of
     the token !username with !mailto
 
 3. This automatically generated username is still displayed name for posts,
     comments, etc. You can allow your useres to change their username by
-    going to: (Administer › User management › Permissions) and granting
+    going to: (Administer -> User Management -> Access Control) and granting
     the permission to "change own username"
     This privilege allows a user to change their username in "My Account".
 
@@ -29,13 +29,13 @@ Optional steps:
     language on the page mentions entering their E-mail. This can be easily
     overridden in your settings.php file with an entry like this:
 
-$conf['locale_custom_strings_en'] = array(
+$conf['locale_custom_strings_en'][''] = array(
   'Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>' => 'Sorry, unrecognized e-mail or password. <a href="@password">Have you forgotten your password?</a>',
 );
+
 
 BUGS, FEATURES, QUESTIONS
 =========================
 Post any bugs, features or questions to the issue queue:
 
 http://drupal.org/project/issues/email_registration
-

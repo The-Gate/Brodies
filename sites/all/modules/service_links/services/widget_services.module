@@ -8,7 +8,7 @@
  */
 
 /**
- * Implementation of hook_service_links().
+ * Implements hook_service_links().
  */
 function widget_services_service_links() {
   $links = array();
@@ -27,7 +27,7 @@ function widget_services_service_links() {
     'link' => 'http://twitter.com/share?url=<raw-encoded-short-url>&count=<data-count>&via=<data-via>&text=<raw-encoded-title>&counturl=<raw-encoded-url>',
     'icon' => 'twitter.png',
     'description' => t('Tweet This'),
-    'attributes' => array('class' => 'twitter-share-button'),
+    'attributes' => array('class' => array('twitter-share-button')),
     'javascript' => 'twitter_button.js',
     'style' => SERVICE_LINKS_STYLE_EMPTY,
     'callback' => 'ws_twitter_widget_data',
@@ -55,8 +55,8 @@ function widget_services_service_links() {
     'icon' => 'linkedin.png',
     'description' => t('Share on Linkedin'),
     'javascript' => array(
+      'http://platform.linkedin.com/in.js?async=true',
       'linkedin_share_button.js',
-      //'http://platform.linkedin.com/in.js',
     ),
     'style' => SERVICE_LINKS_STYLE_EMPTY,
     'callback' => 'ws_linkedin_share_button_data',
@@ -72,7 +72,7 @@ function widget_services_service_links() {
       //'http://assets.pinterest.com/js/pinit.js',
     ),
     'style' => SERVICE_LINKS_STYLE_EMPTY,
-    'attributes' => array('class' => 'pin-it-button'),
+    'attributes' => array('class' => array('pin-it-button')),
     'callback' => 'ws_pinterest_button_data',
     'preset' => 'ws_pinterest_button_tags',
   );
@@ -84,21 +84,16 @@ function widget_services_service_links() {
  * Callback function for Twitter Widget.
  */
 function ws_twitter_widget_data(&$service, $subst) {
-  static $vars;
+  static $params;
 
-  if (!isset($vars)) {
-    $vars['tags'] = array(
-      'count' => '<data-count>',
-      'via' => '<data-via>',
-    );
-
-    $vars['subst'] = array(
+  if (!isset($params)) {
+    $params = array(
       'count' => check_plain(variable_get('service_links_tw_data_count', 'horizontal')),
       'via' => check_plain(variable_get('service_links_tw_data_via' , '')),
     );
   }
   
-  $service['url'] = str_replace($vars['tags'], $vars['subst'], $service['url']);
+  $service['url'][1] = array_merge($service['url'][1], $params);
 }
 
 /**
@@ -124,21 +119,10 @@ function ws_facebook_share_data(&$service, $subst) {
  * Callback function for Facebook Like.
  */
 function ws_facebook_like_data(&$service, $subst) {
-  static $vars;
+  static $params;
 
-  if (!isset($vars)) {
-    $vars['tags'] = array(
-      'layout' => '<layout>',
-      'show_faces' => '<show_faces>',
-      'action' => '<action>',
-      'colorscheme' => '<colorscheme>',
-      'font' => '<font>',
-      'width' => '<width>',
-      'height' => '<height>',
-      'locale' => '<locale>',
-    );
-
-    $vars['subst'] = array(
+  if (!isset($params)) {
+    $params = array(
       'layout' => check_plain(variable_get('service_links_fl_layout', 'button_count')),
       'show_faces' => check_plain(variable_get('service_links_fl_show_faces', 'false')),
       'action' => check_plain(variable_get('service_links_fl_action', 'like')),
@@ -150,14 +134,14 @@ function ws_facebook_like_data(&$service, $subst) {
     );
 
     $fl_settings = array(
-      'width' => $vars['subst']['width'],
-      'height' => $vars['subst']['height'],
+      'width' => $params['width'],
+      'height' => $params['height'],
     );
 
     drupal_add_js(array('ws_fl' => $fl_settings), 'setting');
   }
 
-  $service['url'] = str_replace($vars['tags'], $vars['subst'], $service['url']);
+  $service['url'][1] = array_merge($service['url'][1], $params);
 }
 
 /**
@@ -168,7 +152,7 @@ function ws_google_plus_one_data(&$service, $subst) {
 
   if (!isset($gpo_settings)) {
     $gpo_settings = array(
-     'size' => check_plain(variable_get('service_links_gpo_size', '')),
+      'size' => check_plain(variable_get('service_links_gpo_size', '')),
       'annotation' => check_plain(variable_get('service_links_gpo_annotation', '')),
       'lang' => check_plain(variable_get('service_links_gpo_lang', '')),
       'callback' => check_plain(variable_get('service_links_gpo_callback', '')),
@@ -186,10 +170,6 @@ function ws_linkedin_share_button_data(&$service, $subst) {
   static $lsb_settings;
 
   if (!isset($lsb_settings)) {
-    if (!module_exists('jquery_update')) {
-      drupal_set_message(t('Linkedin Share Button requires <a href="@url">Jquery Update 2.x</a> to work correctly.', array('@url' => 'http://drupal.org/project/jquery_update')), 'warning', FALSE);
-    }
-
     $lsb_settings = array(
       'countmode' => check_plain(variable_get('service_links_lsb_countmode', 'right')),
     );
@@ -208,17 +188,17 @@ function ws_pinterest_button_tags(&$service, &$settings, $node = NULL) {
     $tokens['media'] = variable_get('service_links_pb_mediatoken', '');
     $tokens['description'] = variable_get('service_links_pb_descriptiontoken', '');
   }
-
+ 
   $settings['tag']['pinterest-media'] = '<pinterest-media>';
-  
+
   if (module_exists('token')) {
-    $settings['subst']['pinterest-media'] = rawurlencode(@token_replace($tokens['media'], 'node', $node));
+    $settings['subst']['pinterest-media'] = check_plain(@token_replace($tokens['media'], array('node' => $node)));
     if (empty($tokens['description'])) {
       $service['link'] = str_replace('pinterest-description', 'raw-encoded-teaser', $service['link']);
     }
     else {
       $settings['tag']['pinterest-description'] = '<pinterest-description>';
-      $settings['subst']['pinterest-description'] = rawurlencode(@token_replace($tokens['description'], 'node', $node));
+      $settings['subst']['pinterest-description'] = check_plain(@token_replace($tokens['description'], array('node' => $node)));
     }
   }
   else {
@@ -243,18 +223,18 @@ function ws_pinterest_button_data(&$service, $subst) {
 }
 
 /**
- * Implementation of hook_menu().
+ * Implements hook_menu().
  */
 function widget_services_menu() {
   $items = array();
 
-  $items['admin/settings/service_links/widgets'] = array(
+  $items['admin/config/services/service-links/widgets'] = array(
     'title' => 'Widgets',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('widget_services_admin'),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
-    'parent' => 'admin/settings/service_links',
+    //'parent' => 'admin/config/services/service-links',
     'file' => 'widget_services.admin.inc',
   );
 

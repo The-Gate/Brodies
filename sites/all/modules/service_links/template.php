@@ -25,7 +25,7 @@ function themename_preprocess_page(&$vars) {
   if (module_exists('service_links')) {
     // Works also for not-node pages
     if (user_access('access service links') && service_links_show($vars['node'])) {
-      $vars['service_links_rendered'] = theme('links', service_links_render($vars['node']));
+      $vars['service_links_rendered'] = theme('links', array('links' => service_links_render($vars['node'])));
     }
   }
 }
@@ -38,7 +38,7 @@ function themename_preprocess_page(&$vars) {
 function themename_preprocess_node(&$vars) {
   if (module_exists('service_links')) {
     if (user_access('access service links') && service_links_show($vars['node'])) {
-      $vars['twitter'] = theme('links', array(service_links_render_some('twitter', $vars['node'])));
+      $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
     }
   }  
 }
@@ -51,14 +51,14 @@ function themename_preprocess(&$vars, $hook) {
     case 'node':
       if (module_exists('service_links')) {
         if (user_access('access service links') && service_links_show($vars['node'])) {
-          $vars['twitter'] = theme('links', service_links_render_some('twitter', $vars['node']));
+          $vars['twitter'] = theme('links', array('links' => service_links_render_some('twitter', $vars['node'])));
         }
       }
       break;
     case 'page':
       if (module_exists('service_links')) {
         if (user_access('access service links') && service_links_show($vars['node'])) {
-          $vars['service_links'] = theme('links', service_links_render($vars['node']));
+          $vars['service_links'] = theme('links', array('links' => service_links_render($vars['node'])));
         }
       }
       break;

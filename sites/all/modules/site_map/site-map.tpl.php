@@ -1,9 +1,6 @@
 <?php
-// $Id: site-map.tpl.php,v 1.1.2.1 2010/05/22 07:42:48 frjo Exp $
-
 /**
- * @file site-map.tpl.php
- *
+ * @file
  * Theme implementation to display the site map.
  *
  * Available variables:

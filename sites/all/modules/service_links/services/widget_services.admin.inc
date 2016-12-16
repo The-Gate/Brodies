@@ -86,7 +86,7 @@ function  widget_services_admin() {
       'true' => t('Yes'),
       'false' => t('No'),
     ),
-    '#attributes' => array('class' => 'container-inline'),
+    '#attributes' => array('class' => array('container-inline')),
     '#description' => t('This works only when the standard layout is set on'),
   );
   $form['facebook_like']['service_links_fl_colorscheme'] = array(
@@ -97,7 +97,7 @@ function  widget_services_admin() {
       'light' => t('Light'),
       'dark' => t('Dark'),
     ),
-    '#attributes' => array('class' => 'container-inline'),
+    '#attributes' => array('class' => array('container-inline')),
   );
   $form['facebook_like']['service_links_fl_action'] = array(
     '#title' => t('Action'),
@@ -107,7 +107,7 @@ function  widget_services_admin() {
       'like' => t('Like'),
       'recommend' => t('Recommend'),
     ),
-    '#attributes' => array('class' => 'container-inline'),
+    '#attributes' => array('class' => array('container-inline')),
   );
   $form['facebook_like']['service_links_fl_locale'] = array(
     '#title' => t('Locale'),
@@ -115,9 +115,9 @@ function  widget_services_admin() {
     '#default_value' => variable_get('service_links_fl_locale', ''),
     '#description' => t('Enter the language code and the country code separated by an underscore (i.e. es_ES, en_GB, en_US, it_IT, fr_FR, pt_BR, pt_PT)'),
     '#size' => 5,
-    '#attributes' => array('class' => 'container-inline'),
+    '#attributes' => array('class' => array('container-inline')),
   );
-
+ 
   $form['facebook_share'] = array(
     '#type' => 'fieldset',
     '#collapsible' => TRUE,
@@ -149,7 +149,7 @@ function  widget_services_admin() {
     '#description' => t('Apply a CSS style providing a single string (i.e. %style)', array('%style' => 'text-align:left;vertical-align:top;margin-top:4px')),
     '#size' => 80,
   );
-
+ 
   $form['google_plus_one'] = array(
     '#type' => 'fieldset',
     '#collapsible' => TRUE,

@@ -1,9 +1,9 @@
 ADDING MENU BLOCKS
 ------------------
 
-To add new menu blocks, use the "Add menu block" tab (or button) on the
-administer blocks page, admin/build/block. You will then be able to configure
-your menu block before adding it.
+To add new menu blocks, use the "Add menu block" link on the administer blocks
+page, admin/structure/block. You will then be able to configure your menu block
+before adding it.
 
 
 CONFIGURING MENU BLOCKS
@@ -12,17 +12,19 @@ CONFIGURING MENU BLOCKS
 When adding or configuring a menu block, several configuration options are
 available:
 
+Basic Options:
+
 Block title
   For menu trees that start with the 1st level, the default block title will be
   the menu name. For menu trees that start with the 2nd level or deeper, the
   default block title will be the title for the parent menu item of the
   specified level.
 
-  For example, if the active menu trail for the Navigation menu is: Administer >
-  Site building > Menus > Primary links, then a menu block configured to start
-  with the 1st level of the Navigation will display a block title of
-  "Navigation". And a menu block configured to start with the 3rd level of the
-  Navigation menu will display a block title of "Site building".
+  For example, if the active menu trail for the Management menu is: Administer >
+  Structure > Menus > Main menu, then a menu block configured to start with the
+  1st level of the Management menu will display a block title of "Management".
+  And a menu block configured to start with the 3rd level of the Management menu
+  will display a block title of "Structure".
 
 Block title as link
   For menu trees that start with the 2nd level or deeper, the default block
@@ -42,15 +44,17 @@ Starting level
   with the 2nd level or deeper will only be visible when the trail to the active
   menu item is in the block's tree.
 
-Make the starting level follow the active menu item
-  If the active menu item is deeper than the level specified above, the starting
-  level will follow the active menu item. Otherwise, the starting level of the
-  tree will remain fixed.
-
 Maximum depth
   From the starting level, specify the maximum depth of the tree. Blocks with a
   maximum depth of 1 will just be a single un-nested list of links with none of
   those links' children displayed.
+
+Advanced options:
+
+Make the starting level follow the active menu item
+  If the active menu item is deeper than the level specified above, the starting
+  level will follow the active menu item. Otherwise, the starting level of the
+  tree will remain fixed.
 
 Expand
   All children of this menu will be expanded.
@@ -96,7 +100,7 @@ suggestions for that template:
 - menu-block-wrapper--[menu name].tpl.php
 
 For example, a file in your theme called
-menu-block-wrapper--primary-links.tpl.php can be used to override the <div> for
+menu-block-wrapper--main-menu.tpl.php can be used to override the <div> for
 just the "Primary links" menu blocks.
 
 Theme functions:
@@ -106,24 +110,21 @@ theme hook suggestions that can be used to override any of the theme functions
 called by it.
 
 - theme_menu_tree() can be overridden by creating one of:
+  - [theme]_menu_tree__[menu name]()
   - [theme]_menu_tree__menu_block()
   - [theme]_menu_tree__menu_block__[menu name]()
   - [theme]_menu_tree__menu_block__[block id number]()
 
-- theme_menu_item() can be overridden by creating one of:
-  - [theme]_menu_item__menu_block()
-  - [theme]_menu_item__menu_block__[menu name]()
-  - [theme]_menu_item__menu_block__[block id number]()
+- theme_menu_link() can be overridden by creating one of:
+  - [theme]_menu_link__[menu name]()
+  - [theme]_menu_link__menu_block()
+  - [theme]_menu_link__menu_block__[menu name]()
+  - [theme]_menu_link__menu_block__[block id number]()
 
-- theme_menu_item_link() can be overridden by creating one of:
-  - [theme]_menu_item_link__menu_block()
-  - [theme]_menu_item_link__menu_block__[menu name]()
-  - [theme]_menu_item_link__menu_block__[block id number]()
-
-For example, if you created a garland_menu_tree__menu_block() function, it would
+For example, if you created a bartik_menu_tree__menu_block() function, it would
 override theme_menu_tree() any time it was used by this module, but not when
-used by any other module. Similarly, a garland_menu_item__menu_block__1()
-function would override theme_menu_item(), but only for the first menu block in
+used by any other module. Similarly, a bartik_menu_link__menu_block__1()
+function would override theme_menu_link(), but only for the first menu block in
 your system (the menu block with an ID of 1).
 
 

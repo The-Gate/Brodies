@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Widget services install file.
+ * Widgets services install file.
  */
 
 /**
  * Remove unused variables.
  */
-function widget_services_update_6201(&$sandbox) {
+function widget_services_update_7201(&$sandbox) {
   // Digg Smart Button
   variable_del('service_links_dsb_type');
   variable_del('service_links_dsb_related');

@@ -18,11 +18,11 @@ define('SLS_GD_MIME', 'mime');
 define('SLS_FILENAME', 'sl_sprites');
 
 /**
- * Implementation of hook_init().
+ * Implements hook_init().
  */
 function service_links_sprites_init() {
   if (variable_get('service_links_use_internal_sprites', 0)) {
-    drupal_add_css(file_directory_path() . '/' . SLS_FILENAME . '.css');
+    drupal_add_css(variable_get('file_public_path', conf_path() . '/files') . '/' . SLS_FILENAME . '.css');
   }
 }
 
@@ -30,7 +30,7 @@ function service_links_sprites_init() {
  * Build the CSS file and images.
  */
 function sls_build_sprites($files = array()) {
-  $sprite_filename = file_directory_path() . '/' . SLS_FILENAME;
+  $sprite_filename = variable_get('file_public_path', conf_path() . '/files') . '/' . SLS_FILENAME;
   $tot_height = array();
   $images = array();
   $sizes = array();
@@ -55,7 +55,7 @@ function sls_build_sprites($files = array()) {
         $tot_height[$img_details[SLS_GD_WIDTH]] = 0;
       }
 
-      $tot_height[$img_details[SLS_GD_WIDTH]] += $img_details[SLS_GD_HEIGHT];
+      $tot_height[$img_details[SLS_GD_WIDTH]] += (int)$img_details[SLS_GD_HEIGHT];
     }
   } 
 
@@ -108,7 +108,7 @@ function sls_build_sprites($files = array()) {
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implements hook_form_alter().
  */
 function service_links_sprites_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'service_links_admin_settings') {
@@ -140,11 +140,12 @@ function service_links_sprites_validate($form, &$form_state) {
     $icon = isset($service['icon']) ? $service['icon'] : $service_id . '.png';
     $paths[$service_id] = service_links_expand_path($icon);
   }
+
   sls_build_sprites($paths);
 }
 
 /**
- * Implementation of hook_sl_styles().
+ * Implements hook_sl_styles().
  */
 function service_links_sprites_sl_styles($nodelink = FALSE) {
   return array(
@@ -154,34 +155,40 @@ function service_links_sprites_sl_styles($nodelink = FALSE) {
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function service_links_sprites_theme() {
   return array(
     'sls_style_image' => array(
-      'arguments' => array(
+      'variables' => array(
         'text' => NULL,
-        'url' => NULL,
+        'url' => array(),
         'image' => NULL,
         'nodelink' => NULL,
-        'attributes' => NULL,
+        'attributes' => array(),
       ),
     ),
     'sls_style_image_and_text' => array(
-      'arguments' => array(
+      'variables' => array(
         'text' => NULL,
-        'url' => NULL,
+        'url' => array(),
         'image' => NULL,
         'nodelink' => NULL,
-        'attributes' => NULL,
+        'attributes' => array(),
       ),
     ),
   );
 }
 
-function theme_sls_style_image($text, $url, $image, $nodelink, $attributes) {
+function theme_sls_style_image($variables) {
+  $text = $variables['text'];
+  $url = $variables['url'];
+  $image = $variables['image'];
+  $nodelink = $variables['nodelink'];
+  $attributes = $variables['attributes'];
+
   $width = sls_get_image_size(service_links_expand_path($image));
-  $attributes['class'] = empty($attributes['class']) ? "sprites service-links w$width" : $attributes['class'] . " sprites service-links w$width";
+  $attributes['class'][] = "sprites service-links w$width";
 
   if ($nodelink) {
     $query = isset($url[1]) ? $url[1] : NULL;
@@ -204,17 +211,23 @@ function theme_sls_style_image($text, $url, $image, $nodelink, $attributes) {
   }
 }
 
-function theme_sls_style_image_and_text($text, $url, $image, $nodelink, $attributes) {
+function theme_sls_style_image_and_text($variables) {
+  $text = $variables['text'];
+  $url = $variables['url'];
+  $image = $variables['image'];
+  $nodelink = $variables['nodelink'];
+  $attributes = $variables['attributes'];
+
   $width = sls_get_image_size(service_links_expand_path($image));
-  $attributes['class'] = empty($attributes['class']) ? "sprites service-links w$width" : $attributes['class'] . " sprites service-links w$width";
+  $attributes['class'][] = "sprites service-links w$width";
 
   if ($nodelink) {
     $query = isset($url[1]) ? $url[1] : NULL;
-
+    
     return array(
       'title' => $text,
       'href' => $url[0],
-      'query' => $url[1],
+      'query' => $query,
       'attributes' => $attributes,
     );
   }
@@ -222,7 +235,6 @@ function theme_sls_style_image_and_text($text, $url, $image, $nodelink, $attribu
     if (isset($url[1])) {
       $attributes['query'] = $url[1];
     }
-
     return l($text, $url[0], $attributes);
   }
 }
