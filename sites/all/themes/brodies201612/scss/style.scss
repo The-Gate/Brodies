@@ -6,3 +6,365 @@
 
 // Base-theme overrides.
 @import 'overrides';
+@import 'helpers';
+
+//@import "compass/css3";
+// compass sprites
+//@import "compass/utilities/sprites";
+
+//$icons: sprite-map("br-icons/*.png", $spacing: 20px); // define a sprite map
+
+/*
+
+// mobile only
+@media #{$mobile-max} {
+}
+// tablet an above
+@media #{$tablet} {
+}
+// up to normal
+@media #{$tablet-max} {
+}
+// normal and above
+@media #{$normal} {
+}
+// up to wide
+@media #{$normal-max} {
+}
+@media #{$wide} {
+}
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Base
+// are the defaults. They are almost exclusively single element selectors 
+// but it could include attribute selectors, pseudo-class selectors, 
+// child selectors or sibling selectors. 
+// Essentially, a base style says that wherever this element is on the page, 
+// it should look like this.
+//////////////////////////////////////////////////////////////////////////////////
+body{
+    margin: 0;
+    background: transparent;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #00235d;
+    font-size: 12px;
+}
+
+p {
+    line-height:1.4em;
+}
+
+h1,
+.page-header {
+    font-size:21px;
+    line-height: 27px;
+    padding-bottom:15px;
+}
+
+h2 {
+    margin: 0.25em 0em 0.5em;
+    font-size:1.2em;
+    line-height:1.5em;
+}
+
+h3 {
+    color:#00235d;
+    font-size:1.0em;
+}
+
+hr {
+    height: 3px;
+    border: 0;
+    background: #F69F19;
+}
+//////////////////////////////////////////////////////////////////////////////////
+// Layout
+// divide the page into sections. 
+// Layouts hold one or more modules together.
+//////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// Modules
+// are the reusable, modular parts of our design. 
+// They are the callouts, the sidebar sections, the product lists and so on.
+//////////////////////////////////////////////////////////////////////////////////
+
+// global
+.no-padding-left-sm{
+    padding-left:0 !important;  
+}
+.no-padding-left-md{
+    @media #{$normal} {
+        padding-left:0 !important;  
+    }
+}
+.no-padding-left-lg{
+    @media #{$wide} {
+        padding-left:0 !important;  
+    }
+}
+.no-padding-right-sm{
+    padding-right:0 !important;  
+}
+.no-padding-right-md{
+    @media #{$normal} {
+        padding-right:0 !important;  
+    }
+}
+.no-padding-right-lg{
+    @media #{$wide} {
+        padding-right:0 !important; 
+    }
+}
+
+
+/********************** HEADER: Background ***********************/
+.navbar-wrapper{
+    background: #FDECD8;
+    border-bottom:4px solid $colour-orange-01;
+    @media #{$tablet} {
+        height:179px;
+        .container{
+            height:179px;
+        }
+    }
+}
+.navbar-background{
+    display: none;
+    @media #{$tablet} {
+        display: block;
+    }
+    .block{
+        position: absolute;
+        left:0;
+        right:0;
+        margin:auto;
+        text-align: center;
+        max-width:100%;
+        overflow: hidden;
+    }
+}
+/********************** HEADER: LOGOS ***********************/
+.logo-wrapper-mobile{
+    @media #{$tablet} {
+        display: none;
+    }
+}
+.logo-wrapper-desktop{
+    display: none;
+    @media #{$tablet} {
+        position:absolute;
+        display: block;
+        bottom:5px;
+    }
+}
+#slogan {
+    margin: 10px 0 0 50px;
+    height: 16px;
+    width: 200px;
+    background: url("../images/slogan.png") no-repeat 0 0 transparent;  
+}
+
+/********************** HEADER: TOP MENU ***********************/
+
+@media #{$tablet} {
+    .navbar.container{
+        padding-left:0;
+        padding-right:0;
+    }
+    .navbar-collapse{
+        padding-top:38px;
+        padding-left:0;
+        padding-right:0;
+    }
+}
+.navbar{
+    .menu {
+        &.nav {
+            position:relative;
+            z-index:1;
+            ul {
+                list-style-type:none;  
+                margin:0px;
+                padding:0px;
+
+            } 
+            &>li {
+                display:inline-block;
+                &>a{  
+                    background: url("../images/menu-separator.png") no-repeat scroll left center transparent;
+                    padding:0px 11px 0px 13px;
+                    text-transform: capitalize;
+                    font-size:12px;
+                    font-weight: 700;
+                } 
+                &:first-child a {
+                    background:none;
+                    padding-left: 0px;
+                }
+            }
+        }
+    }
+}
+/********************** HEADER: SOCIAL ICONS ***********************/
+#block-block-38 {
+    text-align:right;
+    a{
+        display:inline-block;
+        width:29px;
+        height:29px;
+        background: no-repeat scroll center center transparent;
+    }
+    .li{
+        background-image: url("../images/social-li-over.png");
+        &:hover{
+            background-image: url("../images/social-li.png");
+        }
+    }
+
+    .fb{
+        background-image: url("../images/social-fb-over.png");
+        &:hover{
+            background-image: url("../images/social-fb.png");
+        }
+    }
+    .tw{
+        background-image: url("../images/social-tw-over.png");
+        &:hover{
+            background-image: url("../images/social-tw.png");
+        }
+    }
+    .gplus{
+        background-image: url("../images/social-gplus-over.png");
+        &:hover{
+            background-image: url("../images/social-gplus.png");
+        }
+    }
+    .yt{
+        background-image: url("../images/social-yt-over.png");
+        &:hover{
+            background-image: url("../images/social-yt.png");
+        }
+    }
+}
+
+/********************** HEADER: MID MENU ***********************/
+.menu-block-3 {
+    position: absolute;
+    right:0;
+    top:-46px;
+    .nav{
+        &>li{
+            display:inline-block;
+            &>a,
+            &:first-child > a{ 
+                padding:12px 14px;
+                min-width:132px;
+                display:block;
+                background-color:$colour-orange-01;
+                color:#FFF;
+                margin-left: 20px;
+                text-align: center;
+                font-size:10px;
+            }  
+        }
+
+        &>li>a:hover,
+            &>li>a.active,
+            &>li.active-trail >a{
+            background-color:$colour-blue-01;
+            text-decoration:none !important;
+        }
+    }
+}
+
+/********************** BLOCKS***********************/
+.region-sidebar-first,
+.region-sidebar-second{
+
+    .block:first-child label,
+        .block:first-child h2,
+        .block:first-child .submenu h2,
+        #block-block-15 h2,
+        #block-br-13 h2{
+        font-size:13px;
+        line-height:27px;
+        padding-top:3px;
+        padding-bottom:12px;
+        text-transform: uppercase;
+        margin-bottom:15px;
+    }
+}
+
+
+h1.page-header,
+.region-sidebar-first .block:first-child label,
+.region-sidebar-first .block h2,
+.region-sidebar-second .block .submenu h2,
+.region-sidebar-second #block-block-15 h2,
+.region-sidebar-second #block-br-13 h2{
+    border-bottom:3px solid #f7a11a;
+    width:calc(100% + 30px);
+    margin-left: -(ceil(($grid-gutter-width / 2)));
+    padding-left:ceil(($grid-gutter-width / 2));
+    padding-left:floor(($grid-gutter-width / 2));
+}
+
+
+/********************** Footer ***********************/
+.footer-wrapper{
+    margin:40px 0;
+    border-top:1px solid $colour-grey-01;
+    padding-top:35px;
+}
+.footer{
+    .block {
+        h2{
+            font-size:12px;
+            margin:0px 0px 15px;
+            text-transform: uppercase;
+            font-weight:700;
+        }
+        ul li {
+            padding:0px;
+            list-style-image: none;
+            list-style-type: none;
+        }
+        .nav>li{
+            margin:0px 0px 10px;    
+            &>a{
+                padding:0;   
+            }
+        }
+    }
+    #block-block-1 {
+        a{
+            display:block;
+            margin:0px 0px 10px;  
+        }
+    }
+    #block-block-8{
+        a{
+            color: $colour-orange-02;
+        }
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// State
+// are ways to describe how our modules or layouts will look when in a 
+// particular state. Is it hidden or expanded? Is it active or inactive? 
+// They are about describing how a module or layout looks on screens that 
+// are smaller or bigger. They are also about describing how a module might
+//  look in different views like the home page or the inside page.
+//////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////
+// Theme
+// are similar to state rules in that they describe how modules or layouts
+// might look. Most sites don't require a layer of theming but it is good to
+// be aware of it.
+//////////////////////////////////////////////////////////////////////////////////

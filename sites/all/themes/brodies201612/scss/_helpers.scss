@@ -1,0 +1,82 @@
+// Default variables.
+@import 'default-variables';
+// functions
+// conver PS tracking to letter spacing
+@function tracking($target) {
+    // 1 unit = 1/1000 em
+    @return ($target / 1000) * 1em;
+}
+
+// remove the untis from a variable
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+
+
+
+// mixins
+
+// get a specific sprite icon - required to allow icons in @media queries
+$sprite-high-res-suffix: '-2x' !default;
+@mixin get-sprite($map, $sprite, $sprite-retina: false, $repeat: no-repeat, $height: true, $width: true) {
+
+    //http://compass-style.org/reference/compass/helpers/sprites/#sprite-file
+    $sprite-image: sprite-file($map, $sprite);
+
+    // http://compass-style.org/reference/compass/helpers/sprites/#sprite-url
+    $sprite-map: sprite-url($map);
+
+    // http://compass-style.org/reference/compass/helpers/sprites/#sprite-position
+    $sprite-position: sprite-position($map, $sprite);
+
+    // Returns background
+    background: $sprite-map $sprite-position $repeat;
+
+    // http://compass-style.org/reference/compass/helpers/image-dimensions/
+    // Checks to see if the user wants height returned
+
+    @if $height == true {
+        // Gets the height of the sprite-image
+        $sprite-height: image-height($sprite-image);
+        // Returns the height
+        height: $sprite-height; 
+    } @else {
+        height: $height;
+    }
+    // http://compass-style.org/reference/compass/helpers/image-dimensions/
+    // Checks to see if the user wants height returned
+
+    @if $width == true {
+        // Gets the width of the sprite-image
+        $sprite-width: image-width($sprite-image);
+        // Returns the width
+        width: $sprite-width;
+    } @else {
+        width: $width;
+    }
+    @if $sprite-retina {
+        $sprite-high-res: #{$sprite}#{$sprite-high-res-suffix};
+        @media (-webkit-min-device-pixel-ratio: 2), 
+            (-o-min-device-pixel-ratio: 3/2), 
+            (min--moz-device-pixel-ratio: 2), 
+            (min-device-pixel-ratio: 2), (min-resolution: 144dppx) {
+
+            background-size: (image-width(sprite-path($map)) / 2) (image-height(sprite-path($map)) / 2);
+            background-position: round(nth(sprite-position($map, $sprite-high-res), 1) / 2) round(nth(sprite-position($map, $sprite-high-res), 2) / 2);
+            height: image-height(sprite-file($map, $sprite));
+            width: image-width(sprite-file($map, $sprite));
+        }
+    }
+}
+
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content}  
+}

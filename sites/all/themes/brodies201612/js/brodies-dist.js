@@ -1,0 +1,2 @@
+!function(e){Drupal.behaviors.page_helpers={attach:function(){if(e("h1.page-header").length>0){var i=e("h1.page-header").css("line-height").replace(/[^-\d\.]/g,"");e("h1.page-header").height()>i&&e("h1.page-header").height()>27&&e(".region-sidebar-first,.region-sidebar-second").css({"padding-top":e("h1.page-header").height()-i+"px"})}}}}(jQuery);
+//# sourceMappingURL=brodies-dist.js.map
