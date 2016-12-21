@@ -17,6 +17,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'News Category',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -67,6 +73,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -138,6 +150,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -206,6 +224,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'News content',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -250,6 +274,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'date',
@@ -367,6 +397,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -431,6 +467,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'This image will be visible on any list when this content is presented. Don\'t worry about dimensions . Uploaded image will be <b>automatically resized/cropped to required dimension</b>',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -515,6 +557,12 @@ function ct_news_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),

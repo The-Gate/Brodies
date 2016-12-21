@@ -133,6 +133,7 @@ function ct_news_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_related_people',
+    'global_block_settings' => 2,
     'indexes' => array(
       'nid' => array(
         0 => 'nid',
