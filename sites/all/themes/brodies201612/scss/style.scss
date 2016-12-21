@@ -79,6 +79,34 @@ hr {
     border: 0;
     background: #F69F19;
 }
+picture[data-picture-mapping="col_3"]{
+    @extend .col-md-3;
+}
+picture[data-picture-mapping="col_4"]{
+    @extend .col-md-4;
+}
+picture[data-picture-mapping="col_6"]{
+    @extend .col-md-6;
+}
+picture[data-picture-mapping="col_9"]{
+    @extend .col-md-9;
+}
+picture[data-picture-mapping="col_12"]{
+    @extend .col-md-12;
+}
+picture[data-picture-align="left"] {
+    float: left;
+}
+picture[data-picture-align="right"] {
+    float: right;
+}
+picture[data-picture-align="center"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////
 // Layout
 // divide the page into sections. 
@@ -205,6 +233,12 @@ hr {
                     background:none;
                     padding-left: 0px;
                 }
+                &.active-trail,
+                &.active{
+                    & > a{
+                        color: $colour-orange-02;  
+                    }
+                }
             }
         }
     }
@@ -317,7 +351,7 @@ h1.page-header,
 /********************** Footer ***********************/
 .footer-wrapper{
     margin:40px 0;
-    border-top:1px solid $colour-grey-01;
+    border-top:1px solid $colour-orange-01;
     padding-top:35px;
 }
 .footer{
@@ -347,6 +381,9 @@ h1.page-header,
         }
     }
     #block-block-8{
+        .col-md-3{
+            border-top:1px solid $colour-orange-01;
+        }
         a{
             color: $colour-orange-02;
         }

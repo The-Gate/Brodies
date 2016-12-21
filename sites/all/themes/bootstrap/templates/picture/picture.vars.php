@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Stub file for "picture" theme hook [pre]process functions.
@@ -16,6 +17,14 @@
 function bootstrap_preprocess_picture(&$variables) {
   // Add responsiveness, if necessary.
   if ($shape = bootstrap_setting('image_responsive')) {
-    $variables['attributes']['class'][] = 'img-responsive';
+    if (empty($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = array();
+    }
+    if (!is_array($variables['attributes']['class'])) {
+      $variables['attributes']['class'] .= ' img-responsive';
+    }
+    else {
+      $variables['attributes']['class'][] = 'img-responsive';
+    }
   }
 }
