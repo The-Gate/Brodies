@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Views: Binformed section feature.
+ */
+
+include_once 'views_binformed_section.features.inc';

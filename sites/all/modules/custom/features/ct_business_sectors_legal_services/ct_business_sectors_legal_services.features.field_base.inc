@@ -62,32 +62,6 @@ function ct_business_sectors_legal_services_field_default_field_bases() {
     'type_name' => 'service',
   );
 
-  // Exported field_base: 'field_p_v_image_3'.
-  $field_bases['field_p_v_image_3'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_p_v_image_3',
-    'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'image',
-    'settings' => array(
-      'default_image' => NULL,
-      'description_field' => 0,
-      'list_default' => 1,
-      'list_field' => 0,
-      'uri_scheme' => 'public',
-    ),
-    'translatable' => 0,
-    'type' => 'image',
-    'type_name' => 'service',
-  );
-
   // Exported field_base: 'field_p_v_image_4'.
   $field_bases['field_p_v_image_4'] = array(
     'active' => 1,
@@ -312,6 +286,64 @@ function ct_business_sectors_legal_services_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text',
     'type_name' => 'service',
+  );
+
+  // Exported field_base: 'field_related_binformed'.
+  $field_bases['field_related_binformed'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_related_binformed',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'nid' => array(
+        0 => 'nid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'node_reference',
+    'settings' => array(
+      'referenceable_types' => array(
+        'application' => 0,
+        'asub' => 0,
+        'call_to_action' => 0,
+        'career' => 0,
+        'cnews' => 0,
+        'cs' => 0,
+        'download' => 'download',
+        'event' => 0,
+        'hidden' => 0,
+        'larea' => 0,
+        'location' => 0,
+        'lpage' => 0,
+        'lpage2' => 0,
+        'lpagef' => 0,
+        'lupdate' => 'lupdate',
+        'microsite_page' => 0,
+        'microsite_wrapper' => 0,
+        'news' => 0,
+        'overview' => 0,
+        'page' => 0,
+        'parea' => 0,
+        'payment' => 0,
+        'people' => 0,
+        'publication' => 'publication',
+        'sector' => 0,
+        'service' => 0,
+        'slide' => 0,
+        'video' => 0,
+        'webform' => 0,
+        'win' => 0,
+      ),
+      'view' => array(
+        'args' => array(),
+        'display_name' => '',
+        'view_name' => '',
+      ),
+    ),
+    'translatable' => 0,
+    'type' => 'node_reference',
   );
 
   // Exported field_base: 'field_related_cs'.
@@ -602,6 +634,32 @@ function ct_business_sectors_legal_services_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text_long',
     'type_name' => 'service',
+  );
+
+  // Exported field_base: 'field_teaser_image'.
+  $field_bases['field_teaser_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_teaser_image',
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => NULL,
+      'description_field' => 0,
+      'list_default' => 1,
+      'list_field' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+    'type_name' => 'video',
   );
 
   return $field_bases;

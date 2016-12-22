@@ -132,6 +132,55 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'widget_type' => 'text_textfield',
   );
 
+  // Exported field_instance: 'node-sector-field_related_binformed'.
+  $field_instances['node-sector-field_related_binformed'] = array(
+    'bundle' => 'sector',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'node_reference',
+        'settings' => array(
+          'node_reference_view_mode' => 'teaser',
+        ),
+        'type' => 'node_reference_node',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_binformed',
+    'label' => 'Related Binformed',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'node_reference',
+      'settings' => array(
+        'autocomplete_match' => 'contains',
+        'autocomplete_path' => 'node_reference/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'node_reference_autocomplete',
+      'weight' => 53,
+    ),
+  );
+
   // Exported field_instance: 'node-sector-field_related_cs'.
   $field_instances['node-sector-field_related_cs'] = array(
     'bundle' => 'sector',
@@ -202,7 +251,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 46,
+      'weight' => 57,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -277,7 +326,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 47,
+      'weight' => 58,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -349,7 +398,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 45,
+      'weight' => 52,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -399,7 +448,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 42,
+      'weight' => 54,
     ),
   );
 
@@ -476,7 +525,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 43,
+      'weight' => 55,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -551,7 +600,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 44,
+      'weight' => 56,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -750,7 +799,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -849,7 +898,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -1822,6 +1871,55 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'widget_type' => 'text_textfield',
   );
 
+  // Exported field_instance: 'node-service-field_related_binformed'.
+  $field_instances['node-service-field_related_binformed'] = array(
+    'bundle' => 'service',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'node_reference',
+        'settings' => array(
+          'node_reference_view_mode' => 'teaser',
+        ),
+        'type' => 'node_reference_node',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_binformed',
+    'label' => 'Related Binformed',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'node_reference',
+      'settings' => array(
+        'autocomplete_match' => 'contains',
+        'autocomplete_path' => 'node_reference/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'node_reference_autocomplete',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-service-field_related_cs'.
   $field_instances['node-service-field_related_cs'] = array(
     'bundle' => 'service',
@@ -1844,7 +1942,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 9,
       ),
       'full' => array(
         'label' => 'above',
@@ -1892,7 +1990,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 15,
+      'weight' => 14,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -1922,7 +2020,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
@@ -1970,7 +2068,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 14,
+      'weight' => 9,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -2124,7 +2222,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 7,
       ),
       'full' => array(
         'label' => 'above',
@@ -2199,7 +2297,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -2269,7 +2367,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -2348,7 +2446,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 6,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -2360,6 +2458,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
   t('Display Listing Roll Over Text');
   t('Legal service content');
   t('Old path');
+  t('Related Binformed');
   t('Related case studies');
   t('Related events');
   t('Related people');
