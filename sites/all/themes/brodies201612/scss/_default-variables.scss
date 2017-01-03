@@ -19,6 +19,7 @@ $colour-orange-02: #F69F19;
 $colour-blue-01: #152B47;
 $colour-blue-02: #00235d;
 $colour-grey-01: #cecece;
+$colour-white-01: #fff;
 
 $navbar-default-bg: transparent;
 $navbar-default-border: transparent;
@@ -28,3 +29,8 @@ $navbar-default-color: $colour-blue-01;
 
 $link-color:$colour-blue-02;
 $link-hover-color: $colour-orange-02;
+
+
+$dropdown-bg:$colour-blue-01;
+$dropdown-bottom-border:$colour-white-01;
+$dropdown-bottom-border-active:$colour-blue-01;

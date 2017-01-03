@@ -293,25 +293,70 @@ picture[data-picture-align="center"] {
     .nav{
         &>li{
             display:inline-block;
-            &>a,
-            &:first-child > a{ 
-                padding:12px 14px;
-                min-width:132px;
-                display:block;
-                background-color:$colour-orange-01;
-                color:#FFF;
-                margin-left: 20px;
-                text-align: center;
-                font-size:10px;
-            }  
+            min-width:132px;
+            background-color:$colour-blue-01;
+            border-bottom:1px solid $dropdown-bottom-border;
+            color:$colour-white-01;
+            margin-left: 20px;
+            text-align: center;
+            font-size:10px;
+            &.open{
+                border-bottom:1px solid $dropdown-bottom-border-active;
+                &.active-trail{
+                    border-bottom:1px solid $colour-orange-01;
+                }
+            }
+            &>a{
+                color:$colour-white-01;
+                &:hover{
+                    color:$colour-white-01;
+                }
+            }
         }
 
         &>li>a:hover,
             &>li>a.active,
             &>li.active-trail >a{
-            background-color:$colour-blue-01;
             text-decoration:none !important;
         }
+
+        &>li>a.active,
+        &>li.active-trail >a{
+            background-color:$colour-orange-01;
+            color:$colour-blue-01;
+        }
+    }
+    .nav>li, 
+    .dropup, .dropdown {
+        position:static !important;
+    }
+}
+.dropdown-li {
+    display:inline-block !important;
+    padding-right:4px !important;
+}
+.dropdown-link {
+    display:inline-block !important; 
+    padding-right:4px !important;
+}
+.dropdown-caret {
+    display:inline-block !important; 
+    padding-left:4px !important;
+    cursor: pointer;
+}
+.dropdown-menu{
+    left:auto;
+    right:0;
+    margin:0;
+    border:0;
+    box-shadow: none;
+    border-radius: 0;
+    column-count: 3;
+    -webkit-column-rule: 1px outset $colour-orange-01; /* Chrome, Safari, Opera */
+    -moz-column-rule: 1px outset $colour-orange-01; /* Firefox */
+    column-rule: 1px outset $colour-orange-01;
+    &>li>a{
+        color: $colour-white-01;
     }
 }
 
