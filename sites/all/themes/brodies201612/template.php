@@ -1,8 +1,39 @@
 <?php
+
 /**
  * @file
  * The primary PHP file for this theme.
  */
+function brodies201612_preprocess_html(&$variables) {
+  $node = menu_get_object();
+  if ($node && $node->type) {
+    if ($node->type == 'webform') {
+      $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $node->nid . "'")->fetchField();
+      if ($mlid > 0) {
+        $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+      }
+    }
+    elseif ($node->type == 'microsite_page') {
+      // "page-microsite.tpl.php".
+      $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+    }
+  }
+}
+
+function brodies201612_process_page(&$variables) {
+  if (isset($variables['node']) && ($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
+    if ($variables['node']->type == 'webform') {
+      $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
+      if ($mlid > 0) {
+        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+      }
+    }
+    else {
+      // "page-microsite.tpl.php".
+      $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+    }
+  }
+}
 
 // remove the boostrap dropdown menu
 function brodies201612_menu_link__menu_block($variables) {
@@ -14,7 +45,6 @@ function brodies201612_menu_link__menu_block($variables) {
     return theme_menu_link($variables);
   }
 }
-
 
 function brodies201612_bootstrap_menu_link(array $variables) {
   $element = $variables['element'];

@@ -38,6 +38,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field__microsite_header_link',
+    'global_block_settings' => 1,
     'indexes' => array(
       'value' => array(
         0 => 'value',

@@ -1,0 +1,314 @@
+<?php
+
+/**
+ * @file
+ * Lets users configure the placeholders or "- Any -" options for Views filters.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function views_advanced_labels_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views_ui_config_item_form().
+ *
+ * @see _views_advanced_labels_alter_field_form()
+ * @see _views_advanced_labels_alter_filter_form()
+ */
+function views_advanced_labels_form_views_ui_config_item_form_alter(&$form, &$form_state) {
+  if ($form_state['type'] == 'field') {
+    _views_advanced_labels_alter_field_form($form, $form_state);
+  }
+  elseif ($form_state['type'] == 'filter') {
+    _views_advanced_labels_alter_filter_form($form, $form_state);
+  }
+}
+
+/**
+ * Alters Views field configuration forms.
+ *
+ * @see views_advanced_labels_form_views_ui_config_item_form_alter()
+ */
+function _views_advanced_labels_alter_field_form(array &$form, array &$form_state) {
+  $rewrites = $form_state['label_rewrites'] = views_advanced_labels_get_option($form_state['view'], 'label_rewrites');
+  $field_id = $form_state['id'];
+  $rewrites += array($field_id => array());
+  $rewrite = $rewrites[$field_id] + array(
+    'enable' => FALSE,
+    'text' => '',
+    'tokens' => FALSE,
+  );
+  $form['options']['label_rewrite'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Rewrite label'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#weight' => -101,
+  );
+  $supported_styles = array(t('Table'));
+  if (module_exists('views_flipped_table')) {
+    $supported_styles[] = t('Flipped table');
+  }
+  $form['options']['label_rewrite']['enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t("Rewrite this field's label"),
+    '#description' => t('Enable to override the label for this field with HTML or replacement tokens from the first row. This currently only works with the following style plugins: @supported.', array('@supported' => implode(', ', $supported_styles))),
+    '#default_value' => $rewrite['enable'],
+  );
+  $form['options']['label_rewrite']['text'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Text'),
+    '#description' => t('The text to display as the label for this field. You may include HTML.'),
+    '#default_value' => $rewrite['text'],
+    '#dependency' => array(
+      'edit-options-label-rewrite-enable' => array(1),
+    ),
+  );
+  $form['options']['label_rewrite']['tokens'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use replacement tokens from the first row'),
+    '#description' => t('If checked, you may enter data from the first row as per the "Replacement patterns" below.'),
+    '#default_value' => $rewrite['tokens'],
+    '#dependency' => array(
+      'edit-options-label-rewrite-enable' => array(1),
+    ),
+  );
+
+  _views_advanced_labels_add_tokens_help($form, $form_state['view']);
+
+  $form['buttons']['submit']['#submit'][] = 'views_advanced_labels_field_form_submit';
+}
+
+/**
+ * Adds the "Replacement patterns" help text to the form.
+ *
+ * Code stolen from views_handler_field::options_form().
+ */
+function _views_advanced_labels_add_tokens_help(array &$form, view $view) {
+  // Get a list of the available fields and arguments for token replacement.
+  $options = array();
+  foreach ($view->display_handler->get_handlers('field') as $field => $handler) {
+    $options[t('Fields')]["[$field]"] = $handler->ui_name();
+  }
+  $count = 0; // This lets us prepare the key as we want it printed.
+  foreach ($view->display_handler->get_handlers('argument') as $arg => $handler) {
+    $options[t('Arguments')]['%' . ++$count] = t('@argument title', array('@argument' => $handler->ui_name()));
+    $options[t('Arguments')]['!' . $count] = t('@argument input', array('@argument' => $handler->ui_name()));
+  }
+
+  // Default text.
+  $output = t('<p>You must add some additional fields to this display before using this field. These fields may be marked as <em>Exclude from display</em> if you prefer. Note that due to rendering order, you cannot use fields that come after this field; if you need a field not listed here, rearrange your fields.</p>');
+  // We have some options, so make a list.
+  if (!empty($options)) {
+    $output = t('<p>The following tokens are available for this field. Note that due to rendering order, you cannot use fields that come after this field; if you need a field not listed here, rearrange your fields.
+If you would like to have the characters \'[\' and \']\' please use the html entity codes \'%5B\' or  \'%5D\' or they will get replaced with empty space.</p>');
+    foreach (array_keys($options) as $type) {
+      if (!empty($options[$type])) {
+        $items = array();
+        foreach ($options[$type] as $key => $value) {
+          $items[] = $key . ' == ' . check_plain($value);
+        }
+        $output .= theme('item_list',
+          array(
+            'items' => $items,
+            'type' => $type
+          ));
+      }
+    }
+  }
+  // This construct uses 'fieldset' and not markup because process doesn't run.
+  // It also has an extra div because the dependency wants to hide the parent in
+  // situations like this, so we need a second div to make this work.
+  $form['options']['label_rewrite']['help'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Replacement patterns'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#value' => $output,
+    '#dependency' => array(
+      'edit-options-label-rewrite-tokens' => array(1),
+    ),
+  );
+}
+
+/**
+ * Form submission handler for views_ui_config_item_form().
+ *
+ * Used for field admin forms.
+ */
+function views_advanced_labels_field_form_submit($form, &$form_state) {
+  $rewrites = $form_state['label_rewrites'];
+  $field_id = $form_state['id'];
+
+  // Select the target display: default or overridden?
+  $display_id = isset($form_state['values']['override']) ? $form_state['values']['override']['dropdown'] : 'default';
+  /** @var view $view */
+  $view = $form_state['view'];
+  $view->set_display($display_id);
+
+  // Save the new label rewrite settings, or remove them if they are disabled.
+  if ($form_state['values']['options']['label_rewrite']['enable']) {
+    $rewrites[$field_id] = $form_state['values']['options']['label_rewrite'];
+  }
+  else {
+    unset($rewrites[$field_id]);
+  }
+
+  // Save the updated options to our display extender.
+  $form_state['view']->display_handler->set_option('label_rewrites', $rewrites);
+
+  // Write to cache.
+  views_ui_cache_set($form_state['view']);
+}
+
+/**
+ * Alters Views filter configuration forms.
+ *
+ * @see views_advanced_labels_form_views_ui_config_item_form_alter()
+ */
+function _views_advanced_labels_alter_filter_form(array &$form, array &$form_state) {
+  // Only add the option for exposed filters.
+  if (empty($form['options']['expose']) && empty($form['options']['group_info'])) {
+    return;
+  }
+
+  $labels = $form_state['select_labels'] = views_advanced_labels_get_option($form_state['view'], 'select_labels');
+  $filter_id = $form_state['id'];
+  $form['options']['expose']['select_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Select label'),
+    '#description' => t('Special label to set as a placeholder while there is no option selected. Only makes sense if some kind of select list is displayed for this filter.'),
+    '#default_value' => isset($labels[$filter_id]) ? $labels[$filter_id] : '',
+  );
+
+  $form['buttons']['submit']['#submit'][] = 'views_advanced_labels_filter_form_submit';
+}
+
+/**
+ * Form submission handler for views_ui_config_item_form().
+ *
+ * Used for filter admin forms.
+ */
+function views_advanced_labels_filter_form_submit($form, &$form_state) {
+  $labels = $form_state['select_labels'];
+  $filter_id = $form_state['id'];
+
+  // Select the target display: default or overridden?
+  $display_id = isset($form_state['values']['override']) ? $form_state['values']['override']['dropdown'] : 'default';
+  /** @var view $view */
+  $view = $form_state['view'];
+  $view->set_display($display_id);
+
+  // Save the new select label setting, or remove it if it is empty.
+  $labels[$filter_id] = $form_state['values']['options']['expose']['select_label'];
+  if ($labels[$filter_id] === '') {
+    unset($labels[$filter_id]);
+  }
+
+  // Save the updated select label option to our display extender.
+  $form_state['view']->display_handler->set_option('select_labels', $labels);
+
+  // Write to cache.
+  views_ui_cache_set($form_state['view']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views_exposed_form().
+ */
+function views_advanced_labels_form_views_exposed_form_alter(&$form, &$form_state) {
+  $labels = views_advanced_labels_get_option($form_state['view'], 'select_labels');
+  if (empty($form['#info'])) {
+    return;
+  }
+  foreach ($form['#info'] as $key => $info) {
+    list($type, $id) = explode('-', $key, 2);
+    if ($type != 'filter' || empty($labels[$id]) || empty($info['value']) || !isset($form[$info['value']])) {
+      continue;
+    }
+    $element = &$form[$info['value']];
+    // Add the "placeholder" attribute and also the special "data-placeholder"
+    // attribute used by Chosen. Also, if there are options and they include an
+    // "- Any -" option, change that option's label to ours.
+    $element['#attributes']['placeholder'] = $labels[$id];
+    $element['#attributes']['data-placeholder'] = $labels[$id];
+    if (!empty($element['#options']) && ($i = array_search(t('- Any -'), $element['#options'])) !== FALSE) {
+      $element['#options'][$i] = $labels[$id];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-flipped-table.tpl.php.
+ *
+ * @see views_advanced_labels_views_table_style_preprocess()
+ */
+function views_advanced_labels_preprocess_views_flipped_table(&$vars) {
+  views_advanced_labels_views_table_style_preprocess($vars);
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-table.tpl.php.
+ *
+ * @see views_advanced_labels_views_table_style_preprocess()
+ */
+function views_advanced_labels_preprocess_views_view_table(&$vars) {
+  views_advanced_labels_views_table_style_preprocess($vars);
+}
+
+/**
+ * Preprocesses theme variables for a Views table style template.
+ *
+ * @param array $vars
+ *   The variables to preprocess, passed by reference.
+ */
+function views_advanced_labels_views_table_style_preprocess(&$vars) {
+  $view = $vars['view'];
+  $label_rewrites = views_advanced_labels_get_option($view, 'label_rewrites');
+  foreach ($label_rewrites as $field_id => $rewrite) {
+    $rewrite += array(
+      'enable' => FALSE,
+      'text' => '',
+      'tokens' => FALSE,
+    );
+    if ($rewrite['enable'] && isset($vars['header'][$field_id])) {
+      $label = $rewrite['text'];
+      if (!empty($rewrite['tokens'])) {
+        $label = $view->style_plugin->tokenize_value($label, 0);
+      }
+      $vars['header'][$field_id] = $label;
+    }
+  }
+}
+
+/**
+ * Retrieves the specified option for a specific view.
+ *
+ * @param view $view
+ *   The view for which the option should be retrieved.
+ * @param string $name
+ *   The name of the option that should be retrieved.
+ *
+ * @return array
+ *   An array containing the given option for the different enabled handlers.
+ */
+function views_advanced_labels_get_option(view $view, $name) {
+  $option = array();
+  if (isset($view->display_handler->display->display_options['fields'])) {
+    // Fields are overridden: use this display's labels.
+    if (isset($view->display_handler->display->display_options[$name])) {
+      $option = $view->display_handler->display->display_options[$name];
+    }
+  }
+  else {
+    // Fields are default: use default display's labels.
+    if (isset($view->display['default']->display_options[$name])) {
+      $option = $view->display['default']->display_options[$name];
+    }
+  }
+  return $option;
+}

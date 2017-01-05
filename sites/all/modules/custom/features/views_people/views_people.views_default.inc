@@ -382,6 +382,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['fields']['field_people_location']['label'] = '';
   $handler->display->display_options['fields']['field_people_location']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_people_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_people_location']['type'] = 'node_reference_plain';
   /* Field: Content: Direct line */
   $handler->display->display_options['fields']['field_people_phone']['id'] = 'field_people_phone';
   $handler->display->display_options['fields']['field_people_phone']['table'] = 'field_data_field_people_phone';
@@ -423,7 +424,6 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Search by name';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
@@ -440,7 +440,6 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['field_related_sector_nid']['group'] = 1;
   $handler->display->display_options['filters']['field_related_sector_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_sector_nid']['expose']['operator_id'] = 'field_related_sector_nid_op';
-  $handler->display->display_options['filters']['field_related_sector_nid']['expose']['label'] = 'Business Sector';
   $handler->display->display_options['filters']['field_related_sector_nid']['expose']['operator'] = 'field_related_sector_nid_op';
   $handler->display->display_options['filters']['field_related_sector_nid']['expose']['identifier'] = 'field_related_sector_nid';
   $handler->display->display_options['filters']['field_related_sector_nid']['expose']['remember_roles'] = array(
@@ -457,7 +456,6 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['field_related_service_nid']['group'] = 1;
   $handler->display->display_options['filters']['field_related_service_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_service_nid']['expose']['operator_id'] = 'field_related_service_nid_op';
-  $handler->display->display_options['filters']['field_related_service_nid']['expose']['label'] = 'Legal Services';
   $handler->display->display_options['filters']['field_related_service_nid']['expose']['operator'] = 'field_related_service_nid_op';
   $handler->display->display_options['filters']['field_related_service_nid']['expose']['identifier'] = 'field_related_service_nid';
   $handler->display->display_options['filters']['field_related_service_nid']['expose']['remember_roles'] = array(
@@ -514,6 +512,11 @@ function views_people_views_default_views() {
       'operator' => 'or',
       'value' => array(),
     ),
+  );
+  $handler->display->display_options['select_labels'] = array(
+    'title' => 'Search by name',
+    'field_related_sector_nid' => 'Business Sector',
+    'field_related_service_nid' => 'Legal Services',
   );
 
   /* Display: Page */

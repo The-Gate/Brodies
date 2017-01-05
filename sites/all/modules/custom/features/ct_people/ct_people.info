@@ -1,7 +1,6 @@
 name = CT: People
 core = 7.x
 package = Brodies
-dependencies[] = ct_binformed_section
 dependencies[] = ct_shared_fields
 dependencies[] = features
 dependencies[] = field_group
@@ -39,3 +38,4 @@ features[field_instance][] = node-people-field_relation_exclude
 features[field_instance][] = node-people-field_teaser_image
 features[node][] = people
 features_exclude[dependencies][ctools] = ctools
+features_exclude[dependencies][ct_binformed_section] = ct_binformed_section

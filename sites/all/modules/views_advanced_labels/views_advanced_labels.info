@@ -1,0 +1,13 @@
+name = Views Advanced Labels
+description = Adds advanced capabilities for customizing the labels of Views fields and filters.
+package = Views
+core = 7.x
+dependencies[] = views
+files[] = views_advanced_labels_plugin_display_extender.inc
+
+; Information added by Drupal.org packaging script on 2014-12-23
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "views_advanced_labels"
+datestamp = "1419351482"
+
