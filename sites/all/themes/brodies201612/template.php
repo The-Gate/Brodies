@@ -33,6 +33,9 @@ function brodies201612_process_page(&$variables) {
       $variables['theme_hook_suggestions'][] = 'page__microsite_page';
     }
   }
+  else {
+    $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+  }
 }
 
 // remove the boostrap dropdown menu
@@ -88,4 +91,27 @@ function brodies201612_bootstrap_menu_link(array $variables) {
   }
 
   return '<li' . drupal_attributes($attributes) . '>' . l($title, $href, $options) . $sub_menu . "</li>\n";
+}
+
+function br_get_video_data($url, $thumbnail = FALSE) {
+  if (strpos($url, 'vimeo') !== FALSE) {
+    $vid = substr($url, strrpos($url, '/') + 1);
+    if (!$thumbnail) {
+      $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$vid.php"));
+      $thumbnail = $hash[0]['thumbnail_large'];
+    }
+    $embed = '<iframe src="http://player.vimeo.com/video/' . $vid . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+  }
+  else if (strpos($url, 'youtube') !== FALSE) {
+    $vid = substr($url, strrpos($url, '?v=') + 3);
+    if (!$thumbnail) {
+      $thumbnail = 'http://img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
+    }
+    $embed = '<iframe src="http://www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+  }
+
+  if ($vid) {
+    return array('vid' => $vid, 'thumbnail' => $thumbnail, 'embed' => $embed);
+  }
+  return false;
 }
