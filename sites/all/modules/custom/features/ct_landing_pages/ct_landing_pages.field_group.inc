@@ -58,11 +58,11 @@ function ct_landing_pages_field_group_info() {
     'label' => '3rd list',
     'weight' => '2',
     'children' => array(
-      0 => 'field_lp_3rd_content',
+      0 => 'field_lp_3rd_name',
       1 => 'field_lp_3rd_more',
-      2 => 'field_lp_3rd_name',
+      2 => 'field_lp_3rd_content',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -133,11 +133,11 @@ function ct_landing_pages_field_group_info() {
     'label' => 'Contact left',
     'weight' => '3',
     'children' => array(
-      0 => 'field_lp_contact_l_img',
-      1 => 'field_lp_contact_l_name',
+      0 => 'field_lp_contact_l_name',
+      1 => 'field_lp_contact_l_img',
       2 => 'field_lp_contact_l_url',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -208,11 +208,11 @@ function ct_landing_pages_field_group_info() {
     'label' => 'Contact right',
     'weight' => '4',
     'children' => array(
-      0 => 'field_lp_contact_r_img',
-      1 => 'field_lp_contact_r_name',
+      0 => 'field_lp_contact_r_name',
+      1 => 'field_lp_contact_r_img',
       2 => 'field_lp_contact_r_url',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -283,12 +283,12 @@ function ct_landing_pages_field_group_info() {
     'label' => 'Left Bottom CTA',
     'weight' => '5',
     'children' => array(
-      0 => 'field_lp_cta_l_image',
+      0 => 'field_lp_cta_l_title',
       1 => 'field_lp_cta_l_text',
-      2 => 'field_lp_cta_l_title',
+      2 => 'field_lp_cta_l_image',
       3 => 'field_lp_cta_l_url',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -361,12 +361,12 @@ function ct_landing_pages_field_group_info() {
     'label' => 'Right Bottom CTA',
     'weight' => '6',
     'children' => array(
-      0 => 'field_lp_cta_r_image',
+      0 => 'field_lp_cta_r_title',
       1 => 'field_lp_cta_r_text',
-      2 => 'field_lp_cta_r_title',
+      2 => 'field_lp_cta_r_image',
       3 => 'field_lp_cta_r_url',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -442,7 +442,7 @@ function ct_landing_pages_field_group_info() {
       0 => 'field_lp_h_image',
       1 => 'field_lp_h_style',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -511,12 +511,12 @@ function ct_landing_pages_field_group_info() {
     'label' => 'Under content',
     'weight' => '1',
     'children' => array(
-      0 => 'field_lp_blog',
-      1 => 'field_lp_blog_more',
-      2 => 'field_lp_news',
-      3 => 'field_lp_new_more',
+      0 => 'field_lp_news',
+      1 => 'field_lp_blog',
+      2 => 'field_lp_new_more',
+      3 => 'field_lp_blog_more',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),
@@ -592,7 +592,7 @@ function ct_landing_pages_field_group_info() {
       0 => 'field_lp_v_image',
       1 => 'field_lp_v_link',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'formatter' => 'collapsible',
       'instance_settings' => array(),

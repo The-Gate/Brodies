@@ -216,7 +216,7 @@ body{
         border-bottom:4px solid $colour-orange-01;
     }
 }
-body:not(.node-type-lpagef){
+body:not(.page-landing){
     .navbar-wrapper{
         background: #FDECD8;
         @media #{$tablet} {
@@ -227,7 +227,7 @@ body:not(.node-type-lpagef){
         }
     }
 }
-body.node-type-lpagef{
+body.page-landing{
     .navbar-wrapper{
         @media #{$tablet} {
             height:258px;
@@ -479,8 +479,9 @@ h1.page-header,
 
 
 .lp2-show-more{
-    margin-top: 10px;
+    margin-top: 30px;
     text-align: right;
+    position:relative;
     a{
         &:after{
             content:'';
@@ -502,7 +503,7 @@ h1.page-header,
         }
     }
 }
-.view{
+.more-link{
     color: $colour-orange-01;
     position:absolute;
     text-transform: uppercase;
@@ -598,8 +599,8 @@ h1.page-header,
 //////////////////////////////////////////////////////////////////////////////////
 
 
-// landing page
-body.node-type-lpagef{
+// landing page common elements
+body.page-landing{
     .navbar{
         .menu {
             &.nav {
@@ -627,6 +628,14 @@ body.node-type-lpagef{
 
         &.page-header{
             border-bottom:0;
+        }
+    }
+    .field-name-body{
+        font-family:Georgia;
+        h3{
+            font-size:16px;
+            font-weight: normal;
+            color:$colour-white-01;
         }
     }
     .contact {
@@ -660,7 +669,6 @@ body.node-type-lpagef{
     .col h3,
     .contact-info b{
         display:block;
-        width:100%;
         border-bottom:2px solid $colour-orange-01;
         color:$colour-white-01;  
         font-family: helvetica,arial;
@@ -683,9 +691,6 @@ body.node-type-lpagef{
         }
     }
     .col {
-        @media #{$tablet-max}{
-            margin-bottom:10px;
-        }
         h3{
             margin:8px 10px 5px;
         }
@@ -715,8 +720,53 @@ body.node-type-lpagef{
             }
         }
     }
+
     .footer-wrapper{
         margin-top:0;
         border-top:4px solid $colour-orange-01;
     }
 }
+
+// landing page
+.node-type-lpage{
+    .nav-bar-wrapper,
+    .landing-background{
+        width: 100%;
+        height: 100%;
+        background: none center top no-repeat transparent;
+        background-size: cover;
+    }
+    .col{
+        max-height:250px;
+        &.bg-col{
+            background: $colour-blue-02;
+        }
+    }
+    .cta {
+        position:relative;
+        &:first-child{
+            margin-bottom:15px;
+        }
+        &:hover {
+            opacity: 0.8;
+        }
+        a {
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            display: block;
+            color: $colour-white-01;
+            &:hover {
+                color: $colour-orange-01;
+            }
+        }
+        .cont {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            margin: 7px 10px 5px 10px;
+            z-index: 2;
+        }
+    }
+} 

@@ -3253,54 +3253,54 @@ function br_application_save($values) {
   node_save($pnode);
 }
 
-function br_landing_page($node) {
-  $feeds = '<div class="feeds">
-                <div class="feed"><h3>News</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
-                <div class="feed"><h3>Blog</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
-                <div class="ff"></div>
-          </div>';
-  $_GET['test'] = 1;
-  if ($_GET['test']) {
-    $contacts = '<div class="feed"><h3>' . $node->field_lp_3rd_name[0]['value'] . '</h3>' . $node->field_lp_3rd_content[0]['value'] . '<div class="mask"></div></div>';
-  }
-  else {
-    $contacts = '<div class="contacts">
-                <div class="contact"><a href="' . $node->field_lp_contact_l_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_l_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_l_name[0]['value'] . '</p></a></div>
-                <div class="contact"><a href="' . $node->field_lp_contact_r_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_r_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_r_name[0]['value'] . '</p></a></div>
-                <div class="ff"></div>
-          </div>';
-  }
-
-  $ctas = '<div class="ctas" ' . ($_GET['test'] ? ' style="margin-top:0px;" ' : '') . '>
-                <div class="cta" ' . ($_GET['test'] ? ' style="margin-left:4%;height:95px;overflow:hidden;margin-bottom:15px;" ' : '') . '><a href="' . $node->field_lp_cta_l_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_l_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_l_title[0]['value'] . '</b><p>' . $node->field_lp_cta_l_text[0]['value'] . '</p></div></a></div>
-                <div class="cta"><a href="' . $node->field_lp_cta_r_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_r_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_r_title[0]['value'] . '</b><p>' . $node->field_lp_cta_r_text[0]['value'] . '</p></div></a></div>
-                <div class="ff"></div>
-          </div>';
-
-  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
-  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
-  drupal_add_js("
-          $(document).ready(function(){
-            $('.vi').click(function(){                
-              var content = '';
-              eval('content = ' + $('span.video', this).html());
-                            
-              init_popup('<div class=\"video\">' + content.video + '</div>');
-              return false;              
-            });            
-          });
-          ", 'inline');
-  return '<div class="row1">
-              <div class="col-left">' . $node->body . '</div>
-              <div class="col-right">' . $video . '</div>
-              <div class="ff"></div>
-           </div>' .
-      '<div class="row2">
-              <div class="col-left">' . $feeds . '</div>
-              <div class="col-right">' . $contacts . $ctas . '</div>
-              <div class="ff"></div>
-           </div>';
-}
+//function br_landing_page($node) {
+//  $feeds = '<div class="feeds">
+//                <div class="feed"><h3>News</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
+//                <div class="feed"><h3>Blog</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
+//                <div class="ff"></div>
+//          </div>';
+//  $_GET['test'] = 1;
+//  if ($_GET['test']) {
+//    $contacts = '<div class="feed"><h3>' . $node->field_lp_3rd_name[0]['value'] . '</h3>' . $node->field_lp_3rd_content[0]['value'] . '<div class="mask"></div></div>';
+//  }
+//  else {
+//    $contacts = '<div class="contacts">
+//                <div class="contact"><a href="' . $node->field_lp_contact_l_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_l_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_l_name[0]['value'] . '</p></a></div>
+//                <div class="contact"><a href="' . $node->field_lp_contact_r_url[0]['value'] . '"><img src="/' . $node->field_lp_contact_r_img[0]['filepath'] . '"><b>Key contact</b><p>' . $node->field_lp_contact_r_name[0]['value'] . '</p></a></div>
+//                <div class="ff"></div>
+//          </div>';
+//  }
+//
+//  $ctas = '<div class="ctas" ' . ($_GET['test'] ? ' style="margin-top:0px;" ' : '') . '>
+//                <div class="cta" ' . ($_GET['test'] ? ' style="margin-left:4%;height:95px;overflow:hidden;margin-bottom:15px;" ' : '') . '><a href="' . $node->field_lp_cta_l_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_l_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_l_title[0]['value'] . '</b><p>' . $node->field_lp_cta_l_text[0]['value'] . '</p></div></a></div>
+//                <div class="cta"><a href="' . $node->field_lp_cta_r_url[0]['value'] . '"><img src="/' . $node->field_lp_cta_r_image[0]['filepath'] . '"><div class="cont"><b>' . $node->field_lp_cta_r_title[0]['value'] . '</b><p>' . $node->field_lp_cta_r_text[0]['value'] . '</p></div></a></div>
+//                <div class="ff"></div>
+//          </div>';
+//
+//  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
+//  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
+//  drupal_add_js("
+//          $(document).ready(function(){
+//            $('.vi').click(function(){                
+//              var content = '';
+//              eval('content = ' + $('span.video', this).html());
+//                            
+//              init_popup('<div class=\"video\">' + content.video + '</div>');
+//              return false;              
+//            });            
+//          });
+//          ", 'inline');
+//  return '<div class="row1">
+//              <div class="col-left">' . $node->body . '</div>
+//              <div class="col-right">' . $video . '</div>
+//              <div class="ff"></div>
+//           </div>' .
+//      '<div class="row2">
+//              <div class="col-left">' . $feeds . '</div>
+//              <div class="col-right">' . $contacts . $ctas . '</div>
+//              <div class="ff"></div>
+//           </div>';
+//}
 
 function br_landing_page2($node) {
   $contacts = '<div class="contacts">
@@ -3355,47 +3355,47 @@ function br_landing_page2($node) {
            </div>';
 }
 
-function br_landing_pagef($node) {
-  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
-  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
-  drupal_add_js("
-          $(document).ready(function(){
-            $('.vi').click(function(){                
-              var content = '';
-              eval('content = ' + $('span.video', this).html());
-                            
-              init_popup('<div class=\"video\">' + content.video + '</div>');
-              return false;              
-            });            
-          });
-          ", 'inline');
-  $col1 = (isset($node->field_lp_blk_1[0]['value'])) ? lp_update_output($node->field_lp_blk_1[0]['value']) : '';
-  $col2 = (isset($node->field_lp_blk_2[0]['value'])) ? lp_update_output($node->field_lp_blk_2[0]['value']) : '';
-  $col3 = (isset($node->field_lp_blk_3[0]['value'])) ? lp_update_output($node->field_lp_blk_3[0]['value']) : '';
-  $col4 = (isset($node->field_lp_blk_4[0]['value'])) ? lp_update_output($node->field_lp_blk_4[0]['value']) : '';
-
-  $output = '<div class="row1"><div class="col-left"><div class="text-wrapper">' . $node->body . '</div></div>';
-  $output .= '<div class="col-right">' . $video . '</div><div class="ff"></div></div>';
-  $output .= '<div class="row2"><div class="col-left"><div class="col"';
-  if (isset($node->field_lp_blk_1_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_1_colour[0]['value'] . '"';
-  }
-  $output .= '>' . $col1 . '</div><div class="col l-margin"';
-  if (isset($node->field_lp_blk_2_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_2_colour[0]['value'] . '"';
-  }
-  $output .= '>' . $col2 . '</div></div>';
-  $output .= '<div class="col-right"><div class="col"';
-  if (isset($node->field_lp_blk_3_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_3_colour[0]['value'] . '"';
-  }
-  $output .= '>' . $col3 . '</div><div class="col l-margin"';
-  if (isset($node->field_lp_blk_4_colour[0]['value'])) {
-    $output .= ' style="background-color:' . $node->field_lp_blk_4_colour[0]['value'] . '"';
-  }
-  $output .= '>' . $col4 . '</div></div><div class="ff"></div></div>';
-  return $output;
-}
+//function br_landing_pagef($node) {
+//  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
+//  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
+//  drupal_add_js("
+//          $(document).ready(function(){
+//            $('.vi').click(function(){                
+//              var content = '';
+//              eval('content = ' + $('span.video', this).html());
+//                            
+//              init_popup('<div class=\"video\">' + content.video + '</div>');
+//              return false;              
+//            });            
+//          });
+//          ", 'inline');
+//  $col1 = (isset($node->field_lp_blk_1[0]['value'])) ? lp_update_output($node->field_lp_blk_1[0]['value']) : '';
+//  $col2 = (isset($node->field_lp_blk_2[0]['value'])) ? lp_update_output($node->field_lp_blk_2[0]['value']) : '';
+//  $col3 = (isset($node->field_lp_blk_3[0]['value'])) ? lp_update_output($node->field_lp_blk_3[0]['value']) : '';
+//  $col4 = (isset($node->field_lp_blk_4[0]['value'])) ? lp_update_output($node->field_lp_blk_4[0]['value']) : '';
+//
+//  $output = '<div class="row1"><div class="col-left"><div class="text-wrapper">' . $node->body . '</div></div>';
+//  $output .= '<div class="col-right">' . $video . '</div><div class="ff"></div></div>';
+//  $output .= '<div class="row2"><div class="col-left"><div class="col"';
+//  if (isset($node->field_lp_blk_1_colour[0]['value'])) {
+//    $output .= ' style="background-color:' . $node->field_lp_blk_1_colour[0]['value'] . '"';
+//  }
+//  $output .= '>' . $col1 . '</div><div class="col l-margin"';
+//  if (isset($node->field_lp_blk_2_colour[0]['value'])) {
+//    $output .= ' style="background-color:' . $node->field_lp_blk_2_colour[0]['value'] . '"';
+//  }
+//  $output .= '>' . $col2 . '</div></div>';
+//  $output .= '<div class="col-right"><div class="col"';
+//  if (isset($node->field_lp_blk_3_colour[0]['value'])) {
+//    $output .= ' style="background-color:' . $node->field_lp_blk_3_colour[0]['value'] . '"';
+//  }
+//  $output .= '>' . $col3 . '</div><div class="col l-margin"';
+//  if (isset($node->field_lp_blk_4_colour[0]['value'])) {
+//    $output .= ' style="background-color:' . $node->field_lp_blk_4_colour[0]['value'] . '"';
+//  }
+//  $output .= '>' . $col4 . '</div></div><div class="ff"></div></div>';
+//  return $output;
+//}
 
 function lp_update_output($data) {
   if (strpos($data, 'class="view"') == TRUE) {

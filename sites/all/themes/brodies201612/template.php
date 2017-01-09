@@ -7,15 +7,21 @@
 function brodies201612_preprocess_html(&$variables) {
   $node = menu_get_object();
   if ($node && $node->type) {
-    if ($node->type == 'webform') {
-      $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $node->nid . "'")->fetchField();
-      if ($mlid > 0) {
+    switch ($node->type) {
+      case 'webform':
+        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $node->nid . "'")->fetchField();
+        if ($mlid > 0) {
+          $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+        }
+        break;
+      case 'microsite_page':
+        // "page-microsite.tpl.php".
         $variables['theme_hook_suggestions'][] = 'html__microsite_page';
-      }
-    }
-    elseif ($node->type == 'microsite_page') {
-      // "page-microsite.tpl.php".
-      $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+        break;
+      case 'lpage':
+      case 'lpagef':
+        $variables['classes_array'][] = "page-landing";
+        break;
     }
   }
 }

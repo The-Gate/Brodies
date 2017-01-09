@@ -80,14 +80,14 @@
 
 
             function readMoreSetup() {
-                if ($('.node-type-lpagef').length > 0) {
+                if ($('.page-landing').length > 0) {
                     if ($(window).width() > screen_md_min) {
                         var rheight = $('.col-md-6.col-right').height();
                         if ($('.col-md-6.col-left .text-wrapper').height() > rheight) {
                             $('.lp2-show-more').remove();
                             if ((rheight - 30) > 0) {
                                 $('.col-md-6.col-left .text-wrapper').css({'height': rheight - 30, 'overflow': 'hidden'});
-                                $('.col-md-6.col-left .text-wrapper').after('<div class="lp2-show-more"><a href="#" class="closed view">MORE</a></div>');
+                                $('.col-md-6.col-left .text-wrapper').after('<div class="lp2-show-more"><a href="#" class="closed more-link">MORE</a></div>');
                             }
                             $('.lp2-show-more a').click(function (e) {
                                 e.preventDefault();
@@ -110,14 +110,14 @@
                         $('.lp2-show-more').remove();
                     }
 
-                    if ($('.col a.view').length > 0) {
-                        $('.col a.view').each(function () {
+                    if ($('.col a.more-link').length > 0) {
+                        $('.mask').remove();
+                        $('.col a.more-link').each(function () {
                             $(this).parent().after('<div class="mask"></div>');
                         });
                     }
                 }
             }
-
             if ($('.node-type-lpagef').length > 0) {
                 readMoreSetup();
             }
