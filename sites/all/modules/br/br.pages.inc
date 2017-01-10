@@ -3301,59 +3301,59 @@ function br_application_save($values) {
 //              <div class="ff"></div>
 //           </div>';
 //}
-
-function br_landing_page2($node) {
-  $contacts = '<div class="contacts">
-                <div class="contact"><a href="' . $node->field_lp_contact_l_url[0]['value'] . '"><div class="contact-img"><img src="/' . $node->field_lp_contact_l_img[0]['filepath'] . '"></div><div class="contact-info"><b>Key contact</b><p>' . $node->field_lp_contact_l_name[0]['value'] . '</p></div></a></div>
-                <div class="contact"><a href="' . $node->field_lp_contact_r_url[0]['value'] . '"><div class="contact-img"><img src="/' . $node->field_lp_contact_r_img[0]['filepath'] . '"></div><div class="contact-info"><b>Key contact</b><p>' . $node->field_lp_contact_r_name[0]['value'] . '</p></div></a></div>
-                <div class="ff"></div>
-          </div>';
-
-  $feeds = '<div class="feeds">
-                <div class="feed"><h3>Useful Links</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
-                <div class="feed"><h3>Recent Publications</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
-                <div class="ff"></div>
-          </div>';
-
-  $ctas = '<div class="landing-download"><h3>Downloads (PDFs)</h3>';
-  if (!empty($node->field_lp_dl_file_1[0]['filepath'])) {
-    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_1[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_1[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_1[0]['value'] . '</a></div>';
-  }
-  if (!empty($node->field_lp_dl_file_2[0]['filepath'])) {
-    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_2[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_2[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_2[0]['value'] . '</a></div>';
-  }
-  if (!empty($node->field_lp_dl_file_3[0]['filepath'])) {
-    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_3[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_3[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_3[0]['value'] . '</a></div>';
-  }
-  if (!empty($node->field_lp_dl_file_4[0]['filepath'])) {
-    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_4[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_4[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_4[0]['value'] . '</a></div>';
-  }
-  $ctas .= '</div>';
-
-  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
-  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
-  drupal_add_js("
-          $(document).ready(function(){
-            $('.vi').click(function(){                
-              var content = '';
-              eval('content = ' + $('span.video', this).html());
-                            
-              init_popup('<div class=\"video\">' + content.video + '</div>');
-              return false;              
-            });            
-          });
-          ", 'inline');
-  return '<div class="row1">
-              <div class="col-left"><div class="text-wrapper">' . $node->body . '</div></div>
-              <div class="col-right">' . $video . '</div>
-              <div class="ff"></div>
-           </div>' .
-      '<div class="row2">
-              <div class="col-left">' . $ctas . $contacts . '</div>
-              <div class="col-right">' . $feeds . '</div>
-              <div class="ff"></div>
-           </div>';
-}
+//
+//function br_landing_page2($node) {
+//  $contacts = '<div class="contacts">
+//                <div class="contact"><a href="' . $node->field_lp_contact_l_url[0]['value'] . '"><div class="contact-img"><img src="/' . $node->field_lp_contact_l_img[0]['filepath'] . '"></div><div class="contact-info"><b>Key contact</b><p>' . $node->field_lp_contact_l_name[0]['value'] . '</p></div></a></div>
+//                <div class="contact"><a href="' . $node->field_lp_contact_r_url[0]['value'] . '"><div class="contact-img"><img src="/' . $node->field_lp_contact_r_img[0]['filepath'] . '"></div><div class="contact-info"><b>Key contact</b><p>' . $node->field_lp_contact_r_name[0]['value'] . '</p></div></a></div>
+//                <div class="ff"></div>
+//          </div>';
+//
+//  $feeds = '<div class="feeds">
+//                <div class="feed"><h3>Useful Links</h3>' . $node->field_lp_news[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_new_more[0]['value'] . '">More</a></div>
+//                <div class="feed"><h3>Recent Publications</h3>' . $node->field_lp_blog[0]['value'] . '<div class="mask"></div><a class="view" href="' . $node->field_lp_blog_more[0]['value'] . '">More</a></div>
+//                <div class="ff"></div>
+//          </div>';
+//
+//  $ctas = '<div class="landing-download"><h3>Downloads (PDFs)</h3>';
+//  if (!empty($node->field_lp_dl_file_1[0]['filepath'])) {
+//    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_1[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_1[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_1[0]['value'] . '</a></div>';
+//  }
+//  if (!empty($node->field_lp_dl_file_2[0]['filepath'])) {
+//    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_2[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_2[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_2[0]['value'] . '</a></div>';
+//  }
+//  if (!empty($node->field_lp_dl_file_3[0]['filepath'])) {
+//    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_3[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_3[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_3[0]['value'] . '</a></div>';
+//  }
+//  if (!empty($node->field_lp_dl_file_4[0]['filepath'])) {
+//    $ctas .= '<div class="landing-download-item item-1" style="background-image:url(\'/' . $node->field_lp_dl_img_4[0]['filepath'] . '\')"><a href="/' . $node->field_lp_dl_file_4[0]['filepath'] . '" target="_blank">' . $node->field_lp_dl_title_4[0]['value'] . '</a></div>';
+//  }
+//  $ctas .= '</div>';
+//
+//  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);
+//  $video = '<a href="' . $node->field_lp_v_link[0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_to_js(array('video' => $vdata['embed'])) . '</span><img src="/' . $node->field_lp_v_image[0]['filepath'] . '" /></a>';
+//  drupal_add_js("
+//          $(document).ready(function(){
+//            $('.vi').click(function(){                
+//              var content = '';
+//              eval('content = ' + $('span.video', this).html());
+//                            
+//              init_popup('<div class=\"video\">' + content.video + '</div>');
+//              return false;              
+//            });            
+//          });
+//          ", 'inline');
+//  return '<div class="row1">
+//              <div class="col-left"><div class="text-wrapper">' . $node->body . '</div></div>
+//              <div class="col-right">' . $video . '</div>
+//              <div class="ff"></div>
+//           </div>' .
+//      '<div class="row2">
+//              <div class="col-left">' . $ctas . $contacts . '</div>
+//              <div class="col-right">' . $feeds . '</div>
+//              <div class="ff"></div>
+//           </div>';
+//}
 
 //function br_landing_pagef($node) {
 //  $vdata = br_get_video_data($node->field_lp_v_link[0]['value']);

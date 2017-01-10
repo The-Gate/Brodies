@@ -19,6 +19,7 @@ function brodies201612_preprocess_html(&$variables) {
         $variables['theme_hook_suggestions'][] = 'html__microsite_page';
         break;
       case 'lpage':
+      case 'lpage2':
       case 'lpagef':
         $variables['classes_array'][] = "page-landing";
         break;
