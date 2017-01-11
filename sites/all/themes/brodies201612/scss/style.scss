@@ -227,18 +227,46 @@ body:not(.page-landing){
         }
     }
 }
-body.page-landing{
-    .navbar-wrapper{
-        @media #{$tablet} {
-            height:258px;
-            .container{
-                height:258px;
+body{
+    &.page-landing{
+        $landingHeight: 258px;
+        .navbar-wrapper{
+            @media #{$tablet} {
+                height:$landingHeight;
+                .container{
+                    height:$landingHeight;
+                }
+            }
+        }
+    }
+    &.node-type-overview{
+        $overviewHeight: 490px;
+        .navbar-wrapper{
+            @media #{$tablet} {
+                height:($overviewHeight+4);
+                .container{
+                    height:$overviewHeight;
+                    overflow: hidden;
+                }
+            }
+        }
+        .navbar-background{
+            position: absolute;
+            width:100%;
+            z-index:0;
+            @media #{$tablet} {
+                height:$overviewHeight;
+                .container{
+                    height:$overviewHeight;
+                }
             }
         }
     }
 }
+
 .navbar-background{
     display: none;
+    position: relative;
     @media #{$tablet} {
         display: block;
     }
@@ -471,6 +499,112 @@ h1.page-header,
 
 
 
+/********************** Header sideshow ***********************/
+body{
+    &.node-type-overview{
+        .navbar-background{
+            .block-views,
+            .block-views div:not(.contextual-links-wrapper){
+                height:100%;
+                width:100%;
+            }
+        }
+    }
+}
+.background-slide{
+    height:100%;
+    width:100%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background:  no-repeat scroll center top transparent;  
+}
+.grid__content{
+    $gridItemWidth: 160px;
+    width:$gridItemWidth;
+    margin:0 auto;
+    .item{
+        width:$gridItemWidth;
+        height:123px;
+        position:relative;
+        background: transparent none top center no-repeat;  
+        overflow:hidden;
+        cursor:pointer;
+        .teaser {
+            display:none;    
+            color:#FFF;  
+            font-size:0.8em;
+            padding:0px 10px;  
+            position:relative;
+            z-index:99;
+        }
+        .title {
+            background-color: #152B47;
+            bottom: 0px;
+            color: #FFFFFF;
+            font-size: 0.9em;
+            font-weight: bold;
+            height: 48px;
+            left: 0;
+            padding: 8px 5px;
+            position: absolute;
+            width: $gridItemWidth;
+        }
+        &:hover {
+            background:#f6a01a none -400px -400px no-repeat;
+            .teaser{
+                display:block;   
+                max-height: 70px;
+                overflow:hidden;
+            }
+            .title {
+                display:block;
+                color:#152B47;
+                background-color: transparent;
+                position:relative;
+                padding:0px;
+                width:auto;
+                height:auto;
+                padding:5px 10px;
+            }
+            a {
+                position:absolute;
+                top:0;
+                left:0;
+                bottom:0;
+                right:0;
+                z-index:200;
+                text-decoration:none !important;
+            }
+        }
+    }
+}
+
+
+/********************** slick carousel ***********************/
+.slick-prev{
+    left: -35px;
+}
+.slick-next{
+    right: -35px;
+}
+
+.slick-arrow{
+    &:before,
+        &:after {
+        opacity:1;
+        font-size:3.25rem;
+        color: $colour-blue-02;
+    }
+    &:hover{
+        &:before,
+            &:after {
+            color: $colour-orange-01;
+        }
+
+    }
+}
 /********************** Main content area ***********************/
 .main-container{
     padding-bottom:10px;   

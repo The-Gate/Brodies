@@ -1,0 +1,14 @@
+name = Views: Slideshows
+description = slideshow, overview & slick settings
+core = 7.x
+package = Brodies
+dependencies[] = slick
+dependencies[] = slick_views
+dependencies[] = views
+features[ctools][] = slick:slick_default_preset:1
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[slick_optionset][] = clone_of_default
+features[views_view][] = overview_slider_listing
+features[views_view][] = slideshow
+features_exclude[dependencies][ctools] = ctools

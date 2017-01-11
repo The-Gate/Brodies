@@ -205,22 +205,22 @@ if (isset($node->field_lp_bkg_image)) {
                           if (isset($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri'])) {
                             $style_1 = (isset($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
                             $title_1 = (isset($node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_1 . '><a href="/' . file_create_url($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_1 . '</a></div>';
+                            print '<div class="landing-download-item item-1"' . $style_1 . '><a href="' . file_create_url($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_1 . '</a></div>';
                           }
                           if (isset($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri'])) {
                             $style_2 = (isset($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
                             $title_2 = (isset($node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_2 . '><a href="/' . file_create_url($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_2 . '</a></div>';
+                            print '<div class="landing-download-item item-1"' . $style_2 . '><a href="' . file_create_url($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_2 . '</a></div>';
                           }
                           if (isset($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri'])) {
                             $style_3 = (isset($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
                             $title_3 = (isset($node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_3 . '><a href="/' . file_create_url($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_3 . '</a></div>';
+                            print '<div class="landing-download-item item-1"' . $style_3 . '><a href="' . file_create_url($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_3 . '</a></div>';
                           }
                           if (isset($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])) {
                             $style_4 = (isset($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
                             $title_4 = (isset($node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_4 . '><a href="/' . file_create_url($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_4 . '</a></div>';
+                            print '<div class="landing-download-item item-1"' . $style_4 . '><a href="' . file_create_url($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_4 . '</a></div>';
                           }
                           ?>
                       </div></div>
