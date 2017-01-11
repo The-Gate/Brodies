@@ -79,20 +79,34 @@ hr {
     border: 0;
     background: #F69F19;
 }
+.no-padding{
+    padding-left:0;
+    padding-right:0;
+}
 picture[data-picture-mapping="col_3"]{
     @extend .col-md-3;
+    @extend .no-padding;
 }
 picture[data-picture-mapping="col_4"]{
     @extend .col-md-4;
+    @extend .no-padding;
 }
 picture[data-picture-mapping="col_6"]{
     @extend .col-md-6;
+    @extend .no-padding;
 }
+picture[data-picture-mapping="col_8"]{
+    @extend .col-md-8;
+    @extend .no-padding;
+}
+
 picture[data-picture-mapping="col_9"]{
     @extend .col-md-9;
+    @extend .no-padding;
 }
 picture[data-picture-mapping="col_12"]{
     @extend .col-md-12;
+    @extend .no-padding;
 }
 picture[data-picture-align="left"] {
     float: left;
@@ -423,10 +437,6 @@ body{
             &>li>a.active,
             &>li.active-trail >a{
             text-decoration:none !important;
-        }
-
-        &>li>a.active,
-        &>li.active-trail >a{
             background-color:$colour-orange-01;
             color:$colour-blue-01;
         }
@@ -498,6 +508,104 @@ h1.page-header,
 }
 
 
+
+/********************** Individual Blocks ***********************/
+// CTA blcoks, eg homepage, business sctors & legal services
+
+#block-block-12,
+#block-block-13,
+.view-id-CTA_Blocks{
+    a:hover img{
+        opacity:.8;
+        filter:alpha(opacity=80);
+    }
+}
+.view-CTA-Blocks{
+    @media #{$tablet-max}{
+        .views-row {
+            margin-bottom:20px;
+        }
+    }
+    &.view-display-id-block_1{
+        @media #{$tablet}{
+            .cta-title{
+                position: absolute;
+                bottom: 70px;
+                width: 40%;
+                margin-left: 22px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+    }
+    &.view-display-id-block_2{
+        .views-row{
+            background: #00235d;
+            display:block;
+            position: relative;
+            margin-bottom:10px;
+            min-height: 115px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+            a{
+                color:$colour-white-01;
+                &:hover{
+                    color: $colour-orange-01;
+                    text-decoration: none;
+                }
+            }
+            .cta-title{
+                text-transform: uppercase;
+                border-bottom:3px solid $colour-orange-01;
+                padding:10px 0 5px;
+                margin-bottom:8px;
+            }
+            @media #{$tablet-max}{
+                .cta-copy{
+                    padding-bottom:10px;
+                }
+            }
+        }
+    }
+}
+
+// postscript cta blocks on business sectors & legal services homeages
+#block-block-9,
+#block-block-12,
+#block-block-13{
+    margin-bottom:15px;
+}
+// postscript news & blog blocks on homepage, business sectors & legal services homeages
+#block-block-10,
+#block-block-11{
+    margin-bottom:15px;
+    h3{
+        font-weight:bold;
+        margin:0 0 10px;
+        padding-bottom:10px;
+        text-transform: uppercase;
+        border-bottom: 3px solid #F6A01A;        
+    }
+    p{
+        font-size: 11px;
+        line-height:1.7;
+        a {
+            strong{
+               position:relative;
+               top:15px;
+               background:#00245d;
+               color: #fff;
+               padding:10px;
+               font-weight: normal;
+           }
+           &:hover strong{
+               background:#F69F19;
+               text-decoration: none;
+           }
+        }
+    }
+}
 
 /********************** Header sideshow ***********************/
 body{
@@ -715,6 +823,13 @@ body{
         }
     }
 }
+
+.postscript-wrapper{
+    background: #e7e7e8;
+    margin-bottom: -40px;
+    padding: 20px 0;
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////
 // State

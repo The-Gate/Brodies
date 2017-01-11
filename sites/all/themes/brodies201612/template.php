@@ -28,20 +28,23 @@ function brodies201612_preprocess_html(&$variables) {
 }
 
 function brodies201612_process_page(&$variables) {
-  if (isset($variables['node']) && ($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
-    if ($variables['node']->type == 'webform') {
-      $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
-      if ($mlid > 0) {
+  if (isset($variables['node'])) {
+    if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
+      if ($variables['node']->type == 'webform') {
+        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
+        if ($mlid > 0) {
+          $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+        }
+      }
+      else {
+        // "page-microsite.tpl.php".
         $variables['theme_hook_suggestions'][] = 'page__microsite_page';
       }
     }
     else {
-      // "page-microsite.tpl.php".
-      $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+
+      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     }
-  }
-  else {
-    $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
   }
 }
 

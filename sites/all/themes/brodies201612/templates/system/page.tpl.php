@@ -154,7 +154,12 @@
             ?>
             <a id="main-content"></a>
             <?php print render($title_prefix); ?>
-            <?php if (!empty($title)): ?>
+            <?php
+            if (isset($node) and ( $node->type == 'overview')) {
+              unset($title);
+            }
+            if (!empty($title)):
+              ?>
               <h1 class="page-header"><?php print $title; ?></h1>
             <?php endif; ?>
             <?php print render($title_suffix); ?>
@@ -177,9 +182,21 @@
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>
 
+
+
     </div>
 </div>
-
+<?php if (!empty($page['postscript'])): ?>
+  <div class="postscript-wrapper">
+      <div class="postscript-container <?php print $container_class; ?>">
+          <div class="row">
+              <aside class="col-sm-12" role="complementary">
+                  <?php print render($page['postscript']); ?>
+              </aside>  <!-- /#postscript -->
+          </div>    
+      </div>    
+  </div>    
+<?php endif; ?>
 <?php if (!empty($page['footer'])): ?>
   <div class="footer-wrapper">
       <footer class="footer <?php print $container_class; ?>">

@@ -21,12 +21,12 @@ function ct_overview_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Featured content',
-    'weight' => '0',
+    'weight' => '1',
     'children' => array(
       0 => 'field_over_news',
       1 => 'field_over_vop',
     ),
-    'format_type' => 'div',
+    'format_type' => 'hidden',
     'format_settings' => array(
       'label' => 'Featured content',
       'instance_settings' => array(

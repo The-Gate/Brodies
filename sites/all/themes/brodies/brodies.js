@@ -491,8 +491,12 @@ function sm(text) {
 }(jQuery));
 
 function init_popup(content) {
-    $('body').append('<div id="overlay"></div>');
-    $('body').append('<div id="popup"></div>');
+    if ('#overlay'.length == 0) {
+        $('body').append('<div id="overlay"></div>');
+    }
+    if ('#popup'.length == 0) {
+        $('body').append('<div id="popup"></div>');
+    }
     $('#popup').html(content);
     $('#popup').append('<div class="close"></div>');
     $('#overlay').click(function () {

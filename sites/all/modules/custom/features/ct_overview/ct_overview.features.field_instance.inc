@@ -28,7 +28,7 @@ function ct_overview_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -157,9 +157,8 @@ function ct_overview_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_default',
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'full' => array(
@@ -307,9 +306,8 @@ function ct_overview_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_default',
+        'type' => 'hidden',
         'weight' => -3,
       ),
       'full' => array(
