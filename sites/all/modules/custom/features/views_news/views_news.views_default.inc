@@ -322,6 +322,44 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = '0';
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Brexit Hub */
+  $handler = $view->new_display('block', 'Brexit Hub', 'block_2');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'news' => 'news',
+    'win' => 'win',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Site Section (field_site_section) */
+  $handler->display->display_options['filters']['field_site_section_tid']['id'] = 'field_site_section_tid';
+  $handler->display->display_options['filters']['field_site_section_tid']['table'] = 'field_data_field_site_section';
+  $handler->display->display_options['filters']['field_site_section_tid']['field'] = 'field_site_section_tid';
+  $handler->display->display_options['filters']['field_site_section_tid']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_site_section_tid']['value'] = array(
+    373 => '373',
+  );
+  $handler->display->display_options['filters']['field_site_section_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_section_tid']['vocabulary'] = 'section';
+  /* Filter criterion: Content: Category (field_news_category) */
+  $handler->display->display_options['filters']['field_news_category_nid']['id'] = 'field_news_category_nid';
+  $handler->display->display_options['filters']['field_news_category_nid']['table'] = 'field_data_field_news_category';
+  $handler->display->display_options['filters']['field_news_category_nid']['field'] = 'field_news_category_nid';
+  $handler->display->display_options['filters']['field_news_category_nid']['value'] = array(
+    3631 => '3631',
+  );
   $export['top_news'] = $view;
 
   return $export;

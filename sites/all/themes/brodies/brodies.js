@@ -498,11 +498,11 @@ function init_popup(content) {
         $('body').append('<div id="popup"></div>');
     }
     $('#popup').html(content);
-    $('#popup').append('<div class="close"></div>');
+    $('#popup').append('<div class="popup-close"></div>');
     $('#overlay').click(function () {
         pop_overlay();
     });
-    $('#popup .close').click(function () {
+    $('#popup .popup-close').click(function () {
         pop_overlay();
         return false;
     });

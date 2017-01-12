@@ -83,7 +83,8 @@ hr {
     padding-left:0;
     padding-right:0;
 }
-picture[data-picture-mapping="col_3"]{
+
+/*picture[data-picture-mapping="col_3"]{
     @extend .col-md-3;
     @extend .no-padding;
 }
@@ -118,7 +119,7 @@ picture[data-picture-align="center"] {
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +175,7 @@ picture[data-picture-align="center"] {
 
 /********************** Original pop up ***********************/
 
-.close {
+.popup-close {
     position:absolute;
     width:40px;
     height:40px;
@@ -182,11 +183,11 @@ picture[data-picture-align="center"] {
     top:-20px;
     cursor:pointer;
     background: url("../images/popup-close.png") no-repeat scroll center center transparent;   
+    &:hover {
+        background: url("../images/popup-close-over.png") no-repeat scroll center center transparent;   
+    }
 }
 
-.close:hover {
-    background: url("../images/popup-close-over.png") no-repeat scroll center center transparent;   
-}
 
 #overlay {
     width:100%;
@@ -412,7 +413,6 @@ body{
     .nav{
         &>li{
             display:inline-block;
-            min-width:132px;
             background-color:$colour-blue-01;
             border-bottom:1px solid $dropdown-bottom-border;
             color:$colour-white-01;
@@ -592,17 +592,17 @@ h1.page-header,
         line-height:1.7;
         a {
             strong{
-               position:relative;
-               top:15px;
-               background:#00245d;
-               color: #fff;
-               padding:10px;
-               font-weight: normal;
-           }
-           &:hover strong{
-               background:#F69F19;
-               text-decoration: none;
-           }
+                position:relative;
+                top:15px;
+                background:#00245d;
+                color: #fff;
+                padding:10px;
+                font-weight: normal;
+            }
+            &:hover strong{
+                background:#F69F19;
+                text-decoration: none;
+            }
         }
     }
 }
