@@ -39,7 +39,7 @@ $style = (isset($row->field_field_teaser_image[0]['raw']['uri'])) ? 'style="back
 
 <div class="item-wrapper"><div class="item" <?php print $style; ?>>
       <span class="title"><?php print $row->node_title; ?></span>
-      <span class="teaser"><?php print render($row->field_field_sector_teaser); ?></span>
+      <span class="teaser"><?php print $view->render_field("field_sector_teaser", $view->row_index); ?></span>
       <?php print l(' ', drupal_get_path_alias('node/' . $row->_field_data['nid']['entity']->nid), array('attributes' => array('title' => $row->node_title))); ?>
   </div>
   <?php print $field->wrapper_suffix; ?>

@@ -31,7 +31,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Related people */
+  /* Field: Content: Key Contacts */
   $handler->display->display_options['fields']['field_related_people']['id'] = 'field_related_people';
   $handler->display->display_options['fields']['field_related_people']['table'] = 'field_data_field_related_people';
   $handler->display->display_options['fields']['field_related_people']['field'] = 'field_related_people';
@@ -521,6 +521,7 @@ function views_people_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'people';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'People';

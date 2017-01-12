@@ -63,6 +63,43 @@ function ct_people_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_main_content|node|people|default';
+  $field_group->group_name = 'group_main_content';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'people';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Main Content',
+    'weight' => '1',
+    'children' => array(
+      0 => 'body',
+      1 => 'field_people_email',
+      2 => 'field_people_job',
+      3 => 'field_people_location',
+      4 => 'field_people_phone',
+      5 => 'field_people_vcard',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Main Content',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'col-md-9 col-md-pull-3',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_main_content|node|people|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_p_main|node|people|default';
   $field_group->group_name = 'group_p_main';
   $field_group->entity_type = 'node';
@@ -71,7 +108,7 @@ function ct_people_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Main details',
-    'weight' => '9',
+    'weight' => '4',
     'children' => array(
       0 => 'field_people_fname',
       1 => 'field_people_id',
@@ -167,19 +204,19 @@ function ct_people_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '7',
+    'weight' => '2',
     'children' => array(
       0 => 'group_business_sectors',
       1 => 'group_legal_services',
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'Related content',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'effect' => 'bounceslide',
         'id' => '',
+        'classes' => 'col-md-9',
+        'description' => '',
+        'effect' => 'bounceslide',
       ),
     ),
   );
@@ -235,12 +272,46 @@ function ct_people_field_group_info() {
   );
   $field_groups['group_p_related|node|people|teaser'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_side_column|node|people|default';
+  $field_group->group_name = 'group_side_column';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'people';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Side Column',
+    'weight' => '0',
+    'children' => array(
+      0 => 'field_teaser_image',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Side Column',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'col-md-3 col-md-push-9',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_side_column|node|people|default'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Business Sectors');
   t('Legal Services');
+  t('Main Content');
   t('Main details');
   t('Related content');
+  t('Side Column');
 
   return $field_groups;
 }

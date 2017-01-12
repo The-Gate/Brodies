@@ -406,6 +406,9 @@ body{
 }
 
 /********************** HEADER: MID MENU ***********************/
+.block-menu-block{
+    position: relative;
+}
 .menu-block-3 {
     position: absolute;
     right:0;
@@ -472,6 +475,9 @@ body{
     column-rule: 1px outset $colour-orange-01;
     &>li>a{
         color: $colour-white-01;
+        @media #{$tablet-max}{
+            white-space:normal;
+        }
     }
 }
 
