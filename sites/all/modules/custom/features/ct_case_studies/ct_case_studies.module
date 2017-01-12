@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the CT: Case Studies feature.
+ */
+
+include_once 'ct_case_studies.features.inc';

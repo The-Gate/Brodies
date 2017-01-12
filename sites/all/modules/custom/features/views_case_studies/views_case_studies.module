@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Views: Case Studies feature.
+ */
+
+include_once 'views_case_studies.features.inc';

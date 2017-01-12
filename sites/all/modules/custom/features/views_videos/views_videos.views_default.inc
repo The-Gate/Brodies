@@ -58,8 +58,12 @@ function views_videos_views_default_views() {
   $handler->display->display_options['fields']['field_teaser_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_teaser_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_teaser_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_teaser_image']['type'] = 'picture';
   $handler->display->display_options['fields']['field_teaser_image']['settings'] = array(
-    'image_style' => '',
+    'picture_mapping' => 'col_3_fixed',
+    'fallback_image_style' => '',
+    'lazyload' => 1,
+    'lazyload_aspect_ratio' => 1,
     'image_link' => '',
   );
   /* Field: Content: Video url */
@@ -145,6 +149,12 @@ function views_videos_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'videos';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Videos';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'menu-header';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $export['videos'] = $view;
 
   return $export;

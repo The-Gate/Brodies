@@ -15,14 +15,6 @@
             </bookmark>
         </file>
         <file>
-            <url>sites/all/modules/br/br.module</url>
-            <bookmark id="1">
-                <name/>
-                <line>790</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>sites/all/modules/br/br.pages.inc</url>
             <bookmark id="8">
                 <name/>
@@ -55,14 +47,28 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>sites/all/modules/br/br.module</url>
+            <bookmark id="1">
+                <name/>
+                <line>790</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/system/page--lpage.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/modules/br/br.pages.inc</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/system/page.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/views/views-view-fields--overview-slider-listing.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/js/brodies.js</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies/brodies.js</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/template.php</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/brodies201612.info</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/modules/br/br.module</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/scss/style.scss</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/views/views-view-fields--videos.tpl.php</file>
         </group>
     </open-files>
 </project-private>

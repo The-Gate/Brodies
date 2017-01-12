@@ -1,0 +1,7 @@
+name = Views: Case Studies
+core = 7.x
+package = Brodies
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = Case_Studies
+features_exclude[dependencies][views] = views
