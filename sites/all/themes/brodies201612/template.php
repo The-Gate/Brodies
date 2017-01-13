@@ -5,6 +5,7 @@
  * The primary PHP file for this theme.
  */
 function brodies201612_preprocess_html(&$variables) {
+   drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
   $node = menu_get_object();
   if ($node && $node->type) {
     switch ($node->type) {

@@ -58,7 +58,7 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['fields']['field_w_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_w_image']['type'] = 'picture';
   $handler->display->display_options['fields']['field_w_image']['settings'] = array(
-    'picture_mapping' => 'col_4',
+    'picture_mapping' => 'col_3',
     'fallback_image_style' => '',
     'lazyload' => 1,
     'lazyload_aspect_ratio' => 1,
@@ -93,15 +93,26 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'brodies_short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
   $handler->display->display_options['fields']['field_date']['field'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['label'] = '';
   $handler->display->display_options['fields']['field_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_date']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_date']['alter']['text'] = '<div class="date">[field_date]</div>';
   $handler->display->display_options['fields']['field_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_date']['empty'] = '<div class="date">[created]</div>';
+  $handler->display->display_options['fields']['field_date']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'brodies_short',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -133,13 +144,13 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-8 no-padding-left-md">
-<div class="views-field-title">[type]: [title]</div>
-<div class="date">[field_date]</div>
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
+<div class="views-field-title"><h2>[title]</h2></div>
+[field_date]
 <div class="views-field-body">[body]</div>
-<div class="views-field-view-node">[view_node]</div>
+<div class="read-more-block">[view_node]</div>
 </div>
-<div class="col-md-4 no-padding-right-md">
+<div class="col-md-3 no-padding-right-md">
 <div class="img">[field_teaser_image]</div>
 </div>
 <div class="clearfix"></div>';
@@ -174,7 +185,6 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
@@ -200,7 +210,6 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['filters']['field_news_category_nid_selective']['group'] = 1;
   $handler->display->display_options['filters']['field_news_category_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_news_category_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_news_category_nid_selective']['expose']['label'] = 'Category';
   $handler->display->display_options['filters']['field_news_category_nid_selective']['expose']['identifier'] = 'field_news_category_nid_selective';
   $handler->display->display_options['filters']['field_news_category_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -219,7 +228,6 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['filters']['combine']['group'] = 1;
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
-  $handler->display->display_options['filters']['combine']['expose']['label'] = 'Search for news story';
   $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
   $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'combine';
   $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
@@ -243,6 +251,11 @@ camillo.fracassini@brodies.com<br>
   );
   $handler->display->display_options['filters']['field_site_section_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_section_tid']['vocabulary'] = 'section';
+  $handler->display->display_options['select_labels'] = array(
+    'field_news_category_nid_selective' => 'News Categories',
+    'combine' => 'Search by name',
+    'type' => 'News type',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
@@ -258,7 +271,7 @@ camillo.fracassini@brodies.com<br>
   /* Display: Recent News */
   $handler = $view->new_display('block', 'Recent News', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Recent News';
+  $handler->display->display_options['title'] = 'Recent news';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
@@ -271,6 +284,7 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Teaser image */
   $handler->display->display_options['fields']['field_teaser_image']['id'] = 'field_teaser_image';
@@ -325,6 +339,7 @@ camillo.fracassini@brodies.com<br>
 
   /* Display: Brexit Hub */
   $handler = $view->new_display('block', 'Brexit Hub', 'block_2');
+  $handler->display->display_options['defaults']['footer'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */

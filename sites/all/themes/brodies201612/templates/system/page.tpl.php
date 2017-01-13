@@ -155,13 +155,25 @@
             <a id="main-content"></a>
             <?php print render($title_prefix); ?>
             <?php
-            if (isset($node) and ( $node->type == 'overview')) {
-              unset($title);
+            if (isset($node)) {
+              switch ($node->type) {
+                case 'overview':
+                  unset($title);
+                  break;
+                case 'news';
+                  $customTitle = 'News';
+                  break;
+              }
             }
-            if (!empty($title)):
+            if (isset($customTitle)) {
+              ?>
+              <h1 class="page-header"><?php print $customTitle; ?></h1>
+              <?php
+            }
+            elseif (!empty($title)) {
               ?>
               <h1 class="page-header"><?php print $title; ?></h1>
-            <?php endif; ?>
+            <?php } ?>
             <?php print render($title_suffix); ?>
             <?php print $messages; ?>
             <?php if (!empty($tabs)): ?>
@@ -173,6 +185,11 @@
             <?php if (!empty($action_links)): ?>
               <ul class="action-links"><?php print render($action_links); ?></ul>
             <?php endif; ?>
+            <?php print render($page['pre_content']); ?>
+            <?php if (isset($customTitle) and ( !empty($title))) {
+              ?>
+              <h2><?php print $title; ?></h2>
+            <?php } ?>
             <?php print render($page['content']); ?>
         </section>
 
