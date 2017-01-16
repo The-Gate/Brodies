@@ -521,11 +521,19 @@ body{
         font-weight: 400;
         font-size: $font-size-12;
         &:hover {
-            background:#F69F19;
+            background:$colour-orange-02;
             text-decoration: none;
+        }
+        .view-guides-downloads &{
+            background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-blue-02;
+            padding-right:25px;
+            &:hover {
+                background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-orange-02;
+            }
         }
     }
 }
+
 /********************** BLOCKS***********************/
 .region-sidebar-first,
 .region-sidebar-second{
@@ -862,6 +870,15 @@ body{
             padding-bottom:0;
             border-bottom:0;
         }
+    }
+}
+.views-taxonomy-list{
+    font-weight:700;
+    h3{
+        display:inline-block;
+        text-transform:uppercase;
+        font-weight:400;
+        color: $colour-orange-02;
     }
 }
 .pagination {
