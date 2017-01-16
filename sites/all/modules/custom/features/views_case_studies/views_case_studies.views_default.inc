@@ -69,6 +69,7 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'col-md-8';
@@ -78,6 +79,7 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['fields']['field_teaser_image']['table'] = 'field_data_field_teaser_image';
   $handler->display->display_options['fields']['field_teaser_image']['field'] = 'field_teaser_image';
   $handler->display->display_options['fields']['field_teaser_image']['label'] = '';
+  $handler->display->display_options['fields']['field_teaser_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_teaser_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_teaser_image']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['field_teaser_image']['element_wrapper_class'] = 'col-md-4';
@@ -85,12 +87,31 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['fields']['field_teaser_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_teaser_image']['type'] = 'picture';
   $handler->display->display_options['fields']['field_teaser_image']['settings'] = array(
-    'picture_mapping' => 'col_4',
+    'picture_mapping' => 'col_3_fixed',
     'fallback_image_style' => '',
     'lazyload' => 1,
     'lazyload_aspect_ratio' => 1,
     'image_link' => 'content',
   );
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Field: Content: Link */
+  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['label'] = '';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['view_node']['text'] = 'Read More';
   /* Field: Content: Related sector */
   $handler->display->display_options['fields']['field_related_sector']['id'] = 'field_related_sector';
   $handler->display->display_options['fields']['field_related_sector']['table'] = 'field_data_field_related_sector';
@@ -107,6 +128,21 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['fields']['field_related_service']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_related_service']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_related_service']['delta_offset'] = '0';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
+<div class="views-field-title"><h2>[title]</h2></div>
+<div class="views-field-body">[body]</div>
+<div class="read-more-block">[view_node]</div>
+</div>
+<div class="col-md-3 no-padding-right-md">
+<div class="img">[field_teaser_image]</div>
+</div>
+<div class="clearfix"></div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -128,7 +164,6 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['ui_name'] = 'Related sector (field_related_sector) (selective)';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['label'] = 'Related sector';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['identifier'] = 'field_related_sector_nid_selective';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -146,7 +181,6 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['filters']['field_related_service_nid_selective']['ui_name'] = 'Related services (field_related_service) (selective)';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['label'] = 'Related services';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['identifier'] = 'field_related_service_nid_selective';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -163,6 +197,10 @@ function views_case_studies_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'cs' => 'cs',
+  );
+  $handler->display->display_options['select_labels'] = array(
+    'field_related_sector_nid_selective' => 'Related sector',
+    'field_related_service_nid_selective' => 'Related services',
   );
   $handler->display->display_options['path'] = 'case-studies';
   $handler->display->display_options['menu']['type'] = 'normal';

@@ -259,6 +259,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
@@ -268,6 +269,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['field_p_date']['table'] = 'field_data_field_p_date';
   $handler->display->display_options['fields']['field_p_date']['field'] = 'field_p_date';
   $handler->display->display_options['fields']['field_p_date']['label'] = '';
+  $handler->display->display_options['fields']['field_p_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_p_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_p_date']['settings'] = array(
     'format_type' => 'brodies_short',
@@ -282,6 +284,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   /* Field: File: Size */
   $handler->display->display_options['fields']['filesize']['id'] = 'filesize';
@@ -296,6 +299,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['field_p_file']['table'] = 'field_data_field_p_file';
   $handler->display->display_options['fields']['field_p_file']['field'] = 'field_p_file';
   $handler->display->display_options['fields']['field_p_file']['label'] = '';
+  $handler->display->display_options['fields']['field_p_file']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_p_file']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_p_file']['alter']['text'] = '<a href="[field_p_file]" target="_blank">Download [title] document ([filesize])</a>';
   $handler->display->display_options['fields']['field_p_file']['element_label_colon'] = FALSE;
@@ -307,6 +311,19 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['field_p_area']['field'] = 'field_p_area';
   $handler->display->display_options['fields']['field_p_area']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_p_area']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
+<div class="views-field-title"><h2>[title]</h2></div>
+[field_p_date] 
+<div class="views-field-body">[body]</div>
+<div class="read-more-block">[field_p_file]</div>
+</div>
+<div class="clearfix"></div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -333,7 +350,6 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['filters']['field_p_area_nid_selective']['ui_name'] = 'Area (field_p_area) (selective)';
   $handler->display->display_options['filters']['field_p_area_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_p_area_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_p_area_nid_selective']['expose']['label'] = 'Area';
   $handler->display->display_options['filters']['field_p_area_nid_selective']['expose']['identifier'] = 'field_p_area_nid_selective';
   $handler->display->display_options['filters']['field_p_area_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -350,7 +366,6 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['filters']['field_p_date_value']['field'] = 'field_p_date_value';
   $handler->display->display_options['filters']['field_p_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_p_date_value']['expose']['operator_id'] = 'field_p_date_value_op';
-  $handler->display->display_options['filters']['field_p_date_value']['expose']['label'] = 'Publish Date';
   $handler->display->display_options['filters']['field_p_date_value']['expose']['operator'] = 'field_p_date_value_op';
   $handler->display->display_options['filters']['field_p_date_value']['expose']['identifier'] = 'field_p_date_value';
   $handler->display->display_options['filters']['field_p_date_value']['expose']['remember_roles'] = array(
@@ -362,6 +377,10 @@ function views_binformed_section_views_default_views() {
   );
   $handler->display->display_options['filters']['field_p_date_value']['granularity'] = 'year';
   $handler->display->display_options['filters']['field_p_date_value']['year_range'] = '-0:2004';
+  $handler->display->display_options['select_labels'] = array(
+    'field_p_area_nid_selective' => 'Area',
+    'field_p_date_value' => 'Publish Date',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
