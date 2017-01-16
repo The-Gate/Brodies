@@ -922,6 +922,53 @@ body{
         color: $colour-white-01;
     }
 }
+
+/********************** JQuery UI: Widgets ***********************/
+//ui-accordion
+.ui-corner-all,
+.ui-state-active{
+    border-radius: 0 !important;
+    border-top:0 !important;
+    border-left:0 !important;
+    border-right:0 !important;
+}
+.ui-widget-content,
+.ui-state-default{
+    background: transparent;
+}
+.ui-accordion {
+    .ui-accordion-header{
+        font-size: $font-size-24;
+        padding-top:0;
+        padding-bottom:0;
+        margin-top:10px;
+
+    }
+    .ui-accordion-content{
+        border-radius: 0 !important;
+        border-bottom:0 !important;
+        border-left:0 !important;
+        border-right:0 !important; 
+        padding:10px 0;
+        & > .field > .field-items > .field-item{
+            @extend .col-md-3;
+        }
+    }
+}
+
+/********************** Node reference ***********************/
+.node-reference-links{
+    background:$colour-blue-02;
+    color: $colour-white-01;
+    padding:10px;
+    min-height:54px;
+    a{
+        color: $colour-white-01;
+        font-family: $font-family-sans-serif-pt;
+        font-size:$font-size-16;
+    }
+}
+
 /********************** Footer ***********************/
 .footer-wrapper{
     margin:40px 0;

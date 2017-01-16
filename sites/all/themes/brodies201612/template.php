@@ -43,7 +43,6 @@ function brodies201612_process_page(&$variables) {
       }
     }
     else {
-
       $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     }
   }
