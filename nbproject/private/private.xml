@@ -60,7 +60,9 @@
         <group>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/system/page.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/scss/_default-variables.scss</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/js/brodies.js</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/template.php</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/node/node--node-reference--people.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/scss/style.scss</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/node/node--node-reference--service.tpl.php</file>
         </group>

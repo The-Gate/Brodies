@@ -173,21 +173,19 @@ function ct_people_field_group_info() {
       0 => 'field_people_email',
       1 => 'field_people_fname',
       2 => 'field_people_job',
-      3 => 'field_people_location',
-      4 => 'field_people_phone',
-      5 => 'field_people_sname',
+      3 => 'field_people_phone',
+      4 => 'field_people_sname',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Main details',
       'instance_settings' => array(
-        'element' => 'div',
-        'show_label' => 0,
-        'label_element' => 'div',
-        'classes' => '',
-        'attributes' => '',
-        'required_fields' => 1,
         'id' => '',
+        'classes' => 'col-md-6 text-wrapper',
+        'element' => 'div',
+        'show_label' => '0',
+        'label_element' => 'div',
+        'attributes' => '',
       ),
     ),
   );
@@ -258,7 +256,7 @@ function ct_people_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_related_sector',
       1 => 'field_related_service',

@@ -585,7 +585,7 @@ function ct_binformed_section_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -700,7 +700,7 @@ function ct_binformed_section_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -893,7 +893,7 @@ function ct_binformed_section_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -990,7 +990,7 @@ function ct_binformed_section_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
@@ -1066,7 +1066,7 @@ function ct_binformed_section_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'full' => array(
         'label' => 'above',
@@ -1140,7 +1140,7 @@ function ct_binformed_section_field_default_field_instances() {
           'node_reference_view_mode' => 'teaser',
         ),
         'type' => 'node_reference_node',
-        'weight' => 7,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',

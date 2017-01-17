@@ -34,7 +34,7 @@ function ct_people_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -252,7 +252,7 @@ function ct_people_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'token' => array(
         'label' => 'above',
@@ -329,7 +329,7 @@ function ct_people_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => -1,
       ),
       'token' => array(
         'label' => 'above',
@@ -402,10 +402,9 @@ function ct_people_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_plain',
-        'weight' => 3,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'token' => array(
         'label' => 'above',
@@ -488,7 +487,7 @@ function ct_people_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'token' => array(
         'label' => 'above',
@@ -572,7 +571,7 @@ function ct_people_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'token' => array(
         'label' => 'hidden',
@@ -656,7 +655,7 @@ function ct_people_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'token' => array(
         'label' => 'above',
@@ -809,7 +808,7 @@ function ct_people_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'token' => array(
         'label' => 'above',
@@ -1133,7 +1132,7 @@ function ct_people_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'people-list-thumb',
+          'image_style' => 'col-3--lg',
         ),
         'type' => 'image',
         'weight' => 0,

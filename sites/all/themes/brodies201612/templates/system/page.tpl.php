@@ -164,6 +164,9 @@
                 case 'win';
                   $customTitle = 'News';
                   break;
+                case 'lupdate';
+                  $customTitle = 'Legal updates';
+                  break;
               }
             }
             if (isset($customTitle)) {

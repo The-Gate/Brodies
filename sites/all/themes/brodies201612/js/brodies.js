@@ -73,12 +73,18 @@
                 return false;
             });
 
+            if ($('.field-name-field-related-people').length > 0) {
+                $('.field-name-field-related-people .field-name-field-people-email .field-item').each(function () {
+                    var emailLink = '<div class="read-more-block"><a href="mailto:'+$(this).text()+'">Email</a></div>';
+                    $(this).text('');
+                    console.log(emailLink) 
+                    $(this).append(emailLink);
+                });
+            }
 
 
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
-
-
             function readMoreSetup() {
                 if ($('.page-landing').length > 0) {
                     if ($(window).width() > screen_md_min) {
