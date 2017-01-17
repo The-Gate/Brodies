@@ -58,22 +58,28 @@ p {
 }
 
 h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family:$font-family-serif;
+    font-weight:700;
+}
+
+h1,
 .page-header {
     font-size:$font-size-h1;
     padding-bottom:5px;
-    font-family:$font-family-serif;
-    font-weight:500;
 }
 
 h2 {
     font-size:$font-size-h2;
-    font-family:$font-family-serif;
-    font-weight:500;
     margin-top:0;
+
 }
 
 h3 {
-    font-family:$font-family-serif;
     font-size:$font-size-h3;
 }
 
@@ -86,40 +92,41 @@ hr {
     padding-left:0;
     padding-right:0;
 }
+a {outline : none;}
+
 .block.col-md-12,
-.field-name-body .div:not(.box){
-    img[data-picture-mapping="col_3"],
+.field-name-body {
     picture[data-picture-mapping="col_3"]{
         @extend .col-md-3;
         @extend .no-padding;
+        float:none;
     }
-    img[data-picture-mapping="col_4"],
     picture[data-picture-mapping="col_4"]{
         @extend .col-md-4;
         @extend .no-padding;
+        float:none;
     }
-    img[data-picture-mapping="col_6"],
     picture[data-picture-mapping="col_6"]{
         @extend .col-md-6;
         @extend .no-padding;
+        float:none;
     }
-    img[data-picture-mapping="col_8"],
     picture[data-picture-mapping="col_8"]{
         @extend .col-md-8;
         @extend .no-padding;
+        float:none;
     }
 
-    img[data-picture-mapping="col_9"],
     picture[data-picture-mapping="col_9"]{
         @extend .col-md-9;
         @extend .no-padding;
+        float:none;
     }
-    img[data-picture-mapping="col_12"],
     picture[data-picture-mapping="col_12"]{
         @extend .col-md-12;
         @extend .no-padding;
+        float:none;
     }
-
     img[data-picture-align="left"],
     picture[data-picture-align="left"] {
         float: left;
@@ -137,7 +144,9 @@ hr {
         margin-right: auto;
     }
 }
-
+.box .img-responsive{
+    width:100% !important;
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Layout
@@ -554,9 +563,13 @@ body{
 
 h1.page-header,
 h2.block-title{
-    border-bottom:3px solid #f7a11a;
+    border-bottom:3px solid $colour-orange-02;
     width:100%;
+    #block-menu-menu-key-footer &{
+        border-bottom:0;
+    }
 }
+
 .region-sidebar-first .block:first-child label,
 .region-sidebar-first .block h2,
 .region-sidebar-second .block .submenu h2,
@@ -638,17 +651,8 @@ h2.block-title{
         margin-left:-15px;
         margin-right:-15px;
     }
-    .views-row{
-        .views-field-title{
-            background: $colour-blue-02;
-            padding:10px;
-            min-height:4.5em;
-            a{
-                color: $colour-white-01;
-            }
-        }
-    }
 }
+
 // postscript cta blocks on business sectors & legal services homeages
 #block-block-9,
 #block-block-12,
@@ -673,6 +677,12 @@ h2.block-title{
     }
 }
 
+// cta block - full width image
+#block-block-39{
+    img{
+        width:100%;
+    }
+}
 /********************** Header sideshow ***********************/
 body{
     &.node-type-overview{
@@ -786,6 +796,7 @@ body{
         padding-top:30px;
     }
 }
+.field-name-field-w-date,
 .field-name-field-date,
 .date{
     display:inline-block;
@@ -955,11 +966,17 @@ body{
 }
 .ui-accordion {
     .ui-accordion-header{
-        font-size: $font-size-24;
+        @extend h2;
+        @extend h2.block-title;
         padding-top:0;
         padding-bottom:0;
         margin-top:10px;
-
+        border-top:0 !important;
+        border-left:0 !important;
+        border-right:0 !important;
+        a{
+            color: $colour-blue-02;
+        }
     }
     .ui-accordion-content{
         border-radius: 0 !important;
@@ -973,15 +990,23 @@ body{
     }
 }
 
-/********************** Node reference ***********************/
+/********************** Related items links ***********************/
+
+#block-views-top-news-block-1 .views-row .views-field-title,
 .node-reference-links{
-    background:$colour-blue-02;
+    background: $colour-blue-02;
     color: $colour-white-01;
     padding:10px;
-    min-height:54px;
+    min-height:4.5em;
     a{
-        color: $colour-white-01;
         font-family: $font-family-sans-serif-pt;
+        color: $colour-white-01;
+    }
+}
+
+.node-reference-links{
+
+    a{
         font-size:$font-size-16;
     }
 }
@@ -1245,5 +1270,65 @@ body.page-landing{
                 color: #fff;
             }
         }
+    }
+}
+
+/********************** Binformed homepage blocks ***********************/
+.page-node-62{
+    .box{
+        margin-bottom:15px;
+        picture{
+            border-top: 3px solid $colour-white-01;
+        } 
+        &:nth-of-type(4n+1){
+            picture{
+                border-top-color: $colour-pink;
+            }
+            .read-more-block{
+                a{
+                    background: $colour-pink;
+                }
+            }
+        }
+        &:nth-of-type(4n+2){
+            picture{
+                border-top-color: $colour-purple;
+            }
+            .read-more-block{
+                a{
+                    background: $colour-purple;
+                }
+            }
+        }
+        &:nth-of-type(4n+3),
+            &:nth-of-type(4n+4){
+            picture{
+                border-top-color: $colour-green;
+            }
+            .read-more-block{
+                a{
+                    background: $colour-green;
+                }
+            }
+        }
+    }
+    .box-text{
+        background: $colour-grey-02;
+        padding:15px;
+    }
+    h3{
+        margin-top:0;
+        font-size:$font-size-18;
+    }
+    .read-more-block{
+        display:block;
+        height:36px;
+        a{
+            display:inline-block;
+            float:right;
+            padding-left:30px;
+            padding-right:30px;            
+        }
+
     }
 }

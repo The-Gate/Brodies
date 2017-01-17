@@ -161,6 +161,7 @@
                   unset($title);
                   break;
                 case 'news';
+                case 'win';
                   $customTitle = 'News';
                   break;
               }
