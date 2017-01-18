@@ -256,6 +256,44 @@ a {outline : none;}
         height:400px;
     }
 }
+
+/********************** Inline Video ***********************/
+.videos {
+    padding:10px;
+    margin:10px 0px;
+    background-color: #00245d;
+    background: rgb(149,164,182); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(149,164,182,1) 0%, rgba(0,36,93,1) 14%, rgba(0,36,93,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(149,164,182,1)), color-stop(14%,rgba(0,36,93,1)), color-stop(100%,rgba(0,36,93,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95a4b6', endColorstr='#00245d',GradientType=0 ); /* IE6-9 */
+    .ivideo {
+        a{
+            color: $colour-white-01;
+        }
+        cursor: pointer;  
+        img{
+            padding-top:5px;
+        }
+        &:hover {
+            color:$colour-orange-02;
+            img {
+                opacity:0.9;
+            }
+        }
+
+    }
+    .view {
+        display:inline-block;
+        background: url("../images/video-play.png") no-repeat scroll 98% center transparent;
+        padding:3px 15px 3px 3px;  
+    }
+}
+
+
 /********************** HEADER: Background ***********************/
 body{
     .navbar-wrapper{
@@ -789,7 +827,7 @@ h2.block-title{
 .field-item-expand {
     text-align:center;
     a{
-     background:$colour-pink;
+        background:$colour-pink;
         &:after{
             float:right;
             display:block;

@@ -28,7 +28,7 @@ function ct_videos_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => -1,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -36,9 +36,8 @@ function ct_videos_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
-        'weight' => -1,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
@@ -80,11 +79,13 @@ function ct_videos_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'node_reference',
-        'settings' => array(),
-        'type' => 'node_reference_default',
-        'weight' => -1,
+        'settings' => array(
+          'node_reference_view_mode' => 'teaser',
+        ),
+        'type' => 'node_reference_node',
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -109,9 +110,8 @@ function ct_videos_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_default',
+        'type' => 'hidden',
         'weight' => 6,
       ),
       'token' => array(
@@ -164,11 +164,13 @@ function ct_videos_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'node_reference',
-        'settings' => array(),
-        'type' => 'node_reference_default',
-        'weight' => 0,
+        'settings' => array(
+          'node_reference_view_mode' => 'teaser',
+        ),
+        'type' => 'node_reference_node',
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
@@ -193,9 +195,8 @@ function ct_videos_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_default',
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'token' => array(
@@ -244,11 +245,25 @@ This image will be visible on any list when this content is presented. Don\'t wo
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => -3,
+        'label' => 'hidden',
+        'module' => 'picture',
+        'settings' => array(
+          'colorbox_settings' => array(
+            'colorbox_caption' => 'auto',
+            'colorbox_caption_custom' => '',
+            'colorbox_gallery' => 'post',
+            'colorbox_gallery_custom' => '',
+            'colorbox_group' => '',
+            'colorbox_multivalue_index' => NULL,
+          ),
+          'fallback_image_style' => '',
+          'image_link' => '',
+          'lazyload' => 0,
+          'lazyload_aspect_ratio' => 0,
+          'picture_mapping' => 'col_12',
+        ),
+        'type' => 'picture',
+        'weight' => 0,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -282,13 +297,24 @@ This image will be visible on any list when this content is presented. Don\'t wo
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'image',
+        'module' => 'picture',
         'settings' => array(
+          'colorbox_settings' => array(
+            'colorbox_caption' => 'auto',
+            'colorbox_caption_custom' => '',
+            'colorbox_gallery' => 'post',
+            'colorbox_gallery_custom' => '',
+            'colorbox_group' => '',
+            'colorbox_multivalue_index' => NULL,
+          ),
+          'fallback_image_style' => '',
           'image_link' => '',
-          'image_style' => 'video-thumb',
+          'lazyload' => 0,
+          'lazyload_aspect_ratio' => 0,
+          'picture_mapping' => 'col_3_fixed',
         ),
-        'type' => 'image',
-        'weight' => -3,
+        'type' => 'picture',
+        'weight' => 1,
       ),
       'token' => array(
         'label' => 'hidden',
@@ -350,19 +376,11 @@ This image will be visible on any list when this content is presented. Don\'t wo
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'medium',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
-        ),
-        'type' => 'date_default',
-        'weight' => 11,
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'hidden',
@@ -390,7 +408,7 @@ This image will be visible on any list when this content is presented. Don\'t wo
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => -4,
+        'weight' => 0,
       ),
       'token' => array(
         'label' => 'hidden',
