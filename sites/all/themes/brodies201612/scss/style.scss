@@ -155,7 +155,11 @@ a {outline : none;}
 // Layouts hold one or more modules together.
 //////////////////////////////////////////////////////////////////////////////////
 
-
+.sidebar-first{
+    @media #{$normal} {
+        padding-right:$grid-gutter-width;
+    }
+}
 //////////////////////////////////////////////////////////////////////////////////
 // Modules
 // are the reusable, modular parts of our design. 
@@ -547,17 +551,19 @@ body{
 /********************** BLOCKS***********************/
 .region-sidebar-first,
 .region-sidebar-second{
-    .block:first-child label,
-        .block:first-child h2,
-        .block:first-child .submenu h2,
-        #block-block-15 h2,
-        #block-br-13 h2{
-        font-size:13px;
-        line-height:27px;
-        padding-top:3px;
-        padding-bottom:12px;
-        text-transform: uppercase;
-        margin-bottom:15px;
+    .block{
+        margin-bottom:30px;
+        &:first-child {
+            & label,
+            & h2{
+                font-size:13px;
+                line-height:27px;
+                padding-top:3px;
+                padding-bottom:12px;
+                text-transform: uppercase;
+                margin-bottom:15px;   
+            }
+        }
     }
 }
 
@@ -573,17 +579,54 @@ h2.block-title{
 
 .region-sidebar-first .block:first-child label,
 .region-sidebar-first .block h2,
-.region-sidebar-second .block .submenu h2,
-.region-sidebar-second #block-block-15 h2,
-.region-sidebar-second #block-br-13 h2{
+.region-sidebar-second .block .submenu h2{
     border-bottom:3px solid #f7a11a;
     width:calc(100% + 30px);
     margin-left: -(ceil(($grid-gutter-width / 2)));
     padding-left:ceil(($grid-gutter-width / 2));
-    padding-left:floor(($grid-gutter-width / 2));
+    padding-right:floor(($grid-gutter-width / 2));
 }
 
-
+.region-sidebar-first,
+.region-sidebar-second{
+    .block-menu-block{
+        padding-right:0;
+        h2.block-title{
+            padding-bottom:1px;
+        }
+        li{
+            border-bottom:1px solid $colour-grey-01;
+            a{
+                padding: 5px 0;
+                font-size:$font-size-12;
+                &.active,
+                &.active-trail{
+                    color: $colour-orange-02;
+                }
+            }
+        }
+    }
+}
+.region-sidebar-first{
+    .block-menu-block{
+        margin-right:-($grid-gutter-width);
+        ul{
+            margin-right:$grid-gutter-width;
+        }
+    }
+}
+.region-sidebar-second{
+    .block-menu-block{
+        margin-left:-(ceil(($grid-gutter-width / 2)));
+        h2.block-title{
+            padding-left:$grid-gutter-width;
+        }
+        ul{
+            margin-left:$grid-gutter-width;
+            margin-right:floor(($grid-gutter-width / 2));
+        }
+    }
+}
 
 /********************** Individual Blocks ***********************/
 // CTA blcoks, eg homepage, business sctors & legal services

@@ -5,7 +5,7 @@
  * The primary PHP file for this theme.
  */
 function brodies201612_preprocess_html(&$variables) {
-   drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
+  drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
   $node = menu_get_object();
   if ($node && $node->type) {
     switch ($node->type) {
@@ -29,6 +29,13 @@ function brodies201612_preprocess_html(&$variables) {
 }
 
 function brodies201612_process_page(&$variables) {
+  // if there is a left column, remove the gap between them
+  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+    $variables['content_column_class'] = ' class="col-sm-6 no-padding-left-md no-padding-right-md"';
+  }
+  elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
+    $variables['content_column_class'] = ' class="col-sm-9 no-padding-left-md"';
+  }
   if (isset($variables['node'])) {
     if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
       if ($variables['node']->type == 'webform') {
