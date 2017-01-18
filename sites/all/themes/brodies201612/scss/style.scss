@@ -528,7 +528,7 @@ body{
         color: $colour-white-01;
         text-transform: uppercase;
         padding:10px;
-        font-weight: 400;
+        font-weight: 700;
         font-size: $font-size-12;
         &:hover {
             background:$colour-orange-02;
@@ -715,6 +715,10 @@ h2.block-title{
         width:auto;
         font-weight: 700;
         font-size:$font-size-20;
+    }
+    .field-name-field-people-job,
+    .field-name-field-people-phone{
+        font-size: $font-size-12;
     }
 
 }
@@ -920,7 +924,7 @@ body{
 }
 /********************** Listings ***********************/
 
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-block_1){
+.view:not(.view-overview-slider-listing):not(.view-slideshow){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
@@ -1074,10 +1078,17 @@ body{
         padding:10px 0;
         & > .field > .field-items > .field-item{
             @extend .col-md-3;
+
         }
     }
 }
-
+.group-related-people.ui-accordion {
+    .ui-accordion-content{
+        & > .field > .field-items > .field-item{
+            @extend .col-md-4;
+        }
+    }
+}
 /********************** Related items links ***********************/
 
 #block-views-top-news-block-1 .views-row .views-field-title,

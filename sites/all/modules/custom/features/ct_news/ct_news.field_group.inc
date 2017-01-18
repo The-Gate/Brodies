@@ -27,10 +27,11 @@ function ct_news_field_group_info() {
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Key Contacts',
       'instance_settings' => array(
         'classes' => 'group-person-contact field-group-accordion-item',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_person_contact|node|cnews|default'] = $field_group;
@@ -52,12 +53,12 @@ function ct_news_field_group_info() {
     ),
     'format_type' => 'accordion',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'related content',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-related-content field-group-accordion',
-        'effect' => 'bounceslide',
         'id' => '',
+        'classes' => 'group-related-content field-group-accordion group-related-people',
+        'description' => '',
+        'effect' => 'bounceslide',
       ),
     ),
   );

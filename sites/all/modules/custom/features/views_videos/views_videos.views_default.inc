@@ -116,7 +116,6 @@ function views_videos_views_default_views() {
   $handler->display->display_options['filters']['field_related_service_nid_selective']['ui_name'] = 'Related services (field_related_service) (selective)';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['label'] = 'Related services';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['identifier'] = 'field_related_service_nid_selective';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -134,7 +133,6 @@ function views_videos_views_default_views() {
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['ui_name'] = 'Related sector (field_related_sector) (selective)';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['label'] = 'Related sector';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['identifier'] = 'field_related_sector_nid_selective';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['expose']['remember_roles'] = array(
     2 => '2',
@@ -145,6 +143,10 @@ function views_videos_views_default_views() {
   );
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['selective_display_field'] = 'field_related_sector';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['selective_items_limit'] = '100';
+  $handler->display->display_options['select_labels'] = array(
+    'field_related_service_nid_selective' => 'Related services',
+    'field_related_sector_nid_selective' => 'Related sector',
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

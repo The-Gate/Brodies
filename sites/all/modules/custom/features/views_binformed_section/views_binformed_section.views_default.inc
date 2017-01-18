@@ -768,7 +768,7 @@ Title Desc|Z -> A',
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
 <div class="views-field-title"><h2>[title]</h2></div>
-[field_p_date] 
+<div class="date">[field_p_date] </div>
 <div class="views-field-body">[body]</div>
 <div class="read-more-block">[field_p_file]</div>
 </div>
@@ -841,6 +841,35 @@ Title Desc|Z -> A',
   $handler->display->display_options['menu']['name'] = 'menu-sector';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Area (field_p_area) */
+  $handler->display->display_options['arguments']['field_p_area_nid']['id'] = 'field_p_area_nid';
+  $handler->display->display_options['arguments']['field_p_area_nid']['table'] = 'field_data_field_p_area';
+  $handler->display->display_options['arguments']['field_p_area_nid']['field'] = 'field_p_area_nid';
+  $handler->display->display_options['arguments']['field_p_area_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_p_area_nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_p_area_nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_p_area_nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_p_area_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'publication' => 'publication',
+  );
   $export['publications_archive'] = $view;
 
   return $export;

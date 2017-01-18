@@ -23,16 +23,16 @@
  * @ingroup views_templates
  */
 ?>
-<div class="col-sm-6">
-    <h3><?php
+<div class="col-md-9 no-padding-left-md">
+<div class="views-field-title"><h2><?php
         print $row->node_title;
-        ?></h3>
-    <div class="desc"><?php
+        ?></h2></div>
+<div class="views-field-body"><?php
         print $view->render_field("body", $view->row_index);
         ?></div>
 </div>
-<div class="col-sm-6">
-    <a target="_blank" class="vi" href="<?php echo $row->field_field_video_url[0]['raw']['safe_value']; ?>"><div class="img"><?php
+<div class="col-md-3 no-padding-right-md">
+ <a target="_blank" class="vi" href="<?php echo $row->field_field_video_url[0]['raw']['safe_value']; ?>"><div class="img"><?php
             print $view->render_field("field_teaser_image", $view->row_index);
             if (isset($row->field_field_video_url[0]['raw']['safe_value'])):
               ?>
