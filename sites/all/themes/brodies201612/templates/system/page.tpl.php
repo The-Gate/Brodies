@@ -167,6 +167,9 @@
                 case 'lupdate';
                   $customTitle = 'Legal updates';
                   break;
+                case 'larea';
+                  $title = 'Legal updates: '.$title;
+                  break;
               }
             }
             if (isset($customTitle)) {

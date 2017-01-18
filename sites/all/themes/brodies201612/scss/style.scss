@@ -1010,6 +1010,7 @@ body{
     margin-bottom:45px;
     @extend .col-md-9;
     .views-exposed-widget {
+        max-width:25%;
         .btn {
             margin-top: 0;
             border-radius:0;
@@ -1034,10 +1035,7 @@ body{
         color: $colour-white-01;
     }
 }
-// legal updates search
-#edit-field-l-area-nid-wrapper{
-    max-width:255px;
-}
+
 #edit-sort-bef-combine-wrapper{
     label{
         display:none;
@@ -1433,7 +1431,8 @@ body.page-landing{
 }
 // pink highlights:
 .page-binformed-legal-updates,
-.node-type-lupdate{
+.node-type-lupdate,
+.node-type-larea{
     h1.page-header,
     .view .views-row{
         border-bottom-color: $colour-pink !important;
