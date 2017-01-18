@@ -64,6 +64,26 @@
                     }
                 }
             }
+            // show / hide key contacts in sidebar second
+            if ($('.sidebar-second .field-name-field-related-people > .field-items > .field-item').length > 2) {
+                $('.sidebar-second .field-name-field-related-people > .field-items > .field-item').slice(2).addClass('hide');
+                $('.sidebar-second .field-name-field-related-people > .field-items > .field-item:last-child').after('<div class="field-item field-item-expand"><div class="read-more-block"><a href="#">Meet the team</a></div></div>');
+                $('.sidebar-second .field-name-field-related-people > .field-items > .field-item.field-item-expand').addClass('plus');
+            }
+            $('.sidebar-second .field-name-field-related-people .field-item-expand a').click(function (e) {
+                e.preventDefault();
+                if ($(this).parent().parent().attr('class') == 'field-item field-item-expand plus') {
+                    $('.sidebar-second .field-name-field-related-people > .field-items > .field-item').removeClass('hide');
+                    $(this).parent().parent().addClass('minus');
+                    $(this).parent().parent().removeClass('plus');
+                }
+                else if ($(this).parent().parent().attr('class') == 'field-item field-item-expand minus') {
+                    $('.sidebar-second .field-name-field-related-people > .field-items > .field-item:not(.field-item-expand)').slice(2).addClass('hide');
+                    $(this).parent().parent().addClass('plus');
+                    $(this).parent().parent().removeClass('minus');
+                }
+            });
+
             // video pop up
             $('.vi').click(function (e) {
                 e.preventDefault();
@@ -75,9 +95,9 @@
 
             if ($('.field-name-field-related-people').length > 0) {
                 $('.field-name-field-related-people .field-name-field-people-email .field-item').each(function () {
-                    var emailLink = '<div class="read-more-block"><a href="mailto:'+$(this).text()+'">Email</a></div>';
+                    var emailLink = '<div class="read-more-block"><a href="mailto:' + $(this).text() + '">Email</a></div>';
                     $(this).text('');
-                    console.log(emailLink) 
+                    //console.log(emailLink) 
                     $(this).append(emailLink);
                 });
             }

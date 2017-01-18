@@ -168,7 +168,7 @@
                   $customTitle = 'Legal updates';
                   break;
                 case 'larea';
-                  $title = 'Legal updates: '.$title;
+                  $title = 'Legal updates: ' . $title;
                   break;
               }
             }
@@ -197,11 +197,13 @@
               ?>
               <h2><?php print $title; ?></h2>
             <?php } ?>
-            <?php print render($page['content']); ?>
+            <div class="main-content">
+                <?php print render($page['content']); ?>
+            </div>
         </section>
 
         <?php if (!empty($page['sidebar_second'])): ?>
-          <aside class="col-sm-3" role="complementary">
+          <aside class="col-sm-3 sidebar-second" role="complementary">
               <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
         <?php endif; ?>

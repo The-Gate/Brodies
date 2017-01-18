@@ -515,6 +515,17 @@ body{
         @media #{$tablet-max}{
             white-space:normal;
         }
+        &:hover,
+            &:focus{
+            background-color: transparent;
+            color: $colour-orange-02;
+        }
+    }
+    & >.active>a, 
+    & >.active>a:hover, 
+        & >.active>a:focus{
+        background-color: transparent;
+        color: $colour-orange-02;
     }
 }
 
@@ -589,7 +600,7 @@ h2.block-title{
 
 .region-sidebar-first,
 .region-sidebar-second{
-    .block-menu-block{
+    .block{
         padding-right:0;
         h2.block-title{
             padding-bottom:1px;
@@ -737,7 +748,7 @@ h2.block-title{
     .field-label{
         @extend h1;
     }
-    & > .field-items > .field-item {
+    .main-content & > .field-items > .field-item {
         @extend .col-md-4;
     }
     .field-name-field-teaser-image{
@@ -759,12 +770,40 @@ h2.block-title{
         font-weight: 700;
         font-size:$font-size-20;
     }
+
     .field-name-field-people-job,
     .field-name-field-people-phone{
         font-size: $font-size-12;
     }
-
+    .region-sidebar-second &{
+        .text-wrapper{
+            padding:5px 5px 0;
+        }
+        .field-name-field-people-fname,
+        .field-name-field-people-sname{
+            font-size:$font-size-16;
+            line-height:1;
+        }
+    }
 }
+.field-item-expand {
+    text-align:center;
+    a{
+     background:$colour-pink;
+        &:after{
+            float:right;
+            display:block;
+            margin-left:10px;
+        }
+    }
+}
+.field-item-expand.plus a:after{
+    content:'+';
+}
+.field-item-expand.minus a:after{
+    content:'-';
+}
+
 /********************** Header sideshow ***********************/
 body{
     &.node-type-overview{
@@ -1137,7 +1176,8 @@ body{
     background: $colour-blue-02;
     color: $colour-white-01;
     padding:10px;
-    min-height:4.5em;
+    min-height:5.4em;
+    margin-bottom:$grid-gutter-width;
     a{
         font-family: $font-family-sans-serif-pt;
         color: $colour-white-01;
@@ -1472,23 +1512,36 @@ body.page-landing{
 
     }
 }
-// pink highlights:
-.page-binformed-legal-updates,
-.node-type-lupdate,
-.node-type-larea{
-    h1.page-header,
-    .view .views-row{
+
+
+
+
+.field-name-field-related-people .field-label,
+h2.block-title,
+h1.page-header,
+.view .views-row{
+    // pink highlights:
+    .page-binformed-legal-updates &,
+    .node-type-lupdate &,
+    .node-type-larea &{
         border-bottom-color: $colour-pink !important;
     }
-    .field-name-field-l-date,
-    .date{
+    .node-type-service &,
+    .node-type-sector &{
+        border-bottom-color: $colour-blue-03 !important;
+    }
+}
+
+.field-name-field-l-date,
+.date{
+    // pink highlights:
+    .page-binformed-legal-updates &,
+    .node-type-lupdate &,
+    .node-type-larea &{
         background: $colour-pink;
     }
-    .main-container{
-        .field-name-field-related-people .field-label,
-        .block-views h2.block-title{
-            border-bottom-color: $colour-pink;
-
-        }
+    .node-type-service &,
+    .node-type-sector &{
+        background: $colour-blue-03;
     }
 }
