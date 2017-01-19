@@ -270,7 +270,7 @@ a {outline : none;}
     background: -ms-linear-gradient(top,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom,  rgba(149,164,182,1) 0%,rgba(0,36,93,1) 14%,rgba(0,36,93,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95a4b6', endColorstr='#00245d',GradientType=0 ); /* IE6-9 */
-    .ivideo {
+    .ivideo{
         a{
             color: $colour-white-01;
         }
@@ -296,7 +296,11 @@ a {outline : none;}
         padding:3px 15px 3px 3px;  
     }
 }
-
+.node-video.node-teaser{
+    img.img-responsive{
+        width:100%;
+    }
+}
 
 /********************** HEADER: Background ***********************/
 body{
@@ -797,6 +801,11 @@ h2.block-title{
         @extend .col-md-6;
         @extend .no-padding-left-sm;
         @extend .no-padding-right-sm;
+        @media #{$tablet-max}{
+            img{
+                margin:0 auto;
+            }
+        }
     }
     .text-wrapper{
         padding-top:15px;
