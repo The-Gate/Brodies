@@ -55,7 +55,7 @@ function brodies201612_process_page(&$variables) {
   }
 }
 
-function brodies201612_process_node(&$variables) {
+function brodies201612_preprocess_node(&$variables) {
   // add inline video to content
   // replace {video} string
   if ($variables['node'] && $variables['node']->type) {
@@ -63,17 +63,20 @@ function brodies201612_process_node(&$variables) {
       case 'service':
       case 'sector':
         //check videos inline
-        $videos_html = '';
-        for ($i = 1; $i < 5; $i++) {
-          if ($variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri'] && $variables['node']->{'field_p_v_text_' . $i}['und'][0]['value'] && $variables['node']->{'field_p_v_url_' . $i}['und'][0]['value']) {
-            $vdata = br_get_video_data($variables['node']->{'field_p_v_url_' . $i}['und'][0]['value']);
-            $videos_html .= '<div class="col-md-3 ivideo video-' . $i . '"><a class="vi" href="'.$variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'].'"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . file_create_url($variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) . '"><p>' . $variables['node']->{'field_p_v_text_' . $i}['und'][0]['value'] . '</p><span class="view">PLAY VIDEO</span></a></div>';
+        if (!$variables['teaser']) {
+          // teasers get caught up in this - only put video in full page 
+          $videos_html = '';
+          for ($i = 1; $i < 5; $i++) {
+            if (isset($variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) && isset($variables['node']->{'field_p_v_text_' . $i}['und'][0]['value']) && isset($variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'])) {
+              $vdata = br_get_video_data($variables['node']->{'field_p_v_url_' . $i}['und'][0]['value']);
+              $videos_html .= '<div class="col-md-3 col-sm-6 ivideo video-' . $i . '"><a class="vi" href="' . $variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg',$variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) . '"><p>' . $variables['node']->{'field_p_v_text_' . $i}['und'][0]['value'] . '</p><span class="view">PLAY VIDEO</span></a></div>';
+            }
           }
+          if ($videos_html) {
+            $videos_html = '<div class="videos">' . $videos_html . '<div class="clearfix"></div></div>';
+          }
+          $variables['content']['body'][0]['#markup'] = str_replace('{videos}', $videos_html, $variables['content']['body'][0]['#markup']);
         }
-        if ($videos_html) {
-          $videos_html = '<div class="videos">' . $videos_html . '<div class="clearfix"></div></div>';
-        }
-        $variables['content']['body'][0]['#markup'] = str_replace('{videos}', $videos_html, $variables['body'][0]['safe_value']);
         break;
     }
   }

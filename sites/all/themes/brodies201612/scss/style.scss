@@ -274,9 +274,13 @@ a {outline : none;}
         a{
             color: $colour-white-01;
         }
+        @media #{$tablet-max}{
+            min-height:260px;
+        }
         cursor: pointer;  
         img{
             padding-top:5px;
+            width:100%;
         }
         &:hover {
             color:$colour-orange-02;

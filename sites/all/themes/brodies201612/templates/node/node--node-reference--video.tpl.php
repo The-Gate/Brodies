@@ -86,26 +86,8 @@
     hide($content['comments']);
     hide($content['links']);
     hide($content['field_tags']);
-    print render($content);
+//    print render($content);
+    $vdata = br_get_video_data($field_video_url[0]['safe_value']);
+    print ('<a class="vi" href="' . $field_video_url[0]['safe_value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $field_teaser_image[0]['uri']) . '"><div class="node-reference-links"><p>' . $title . '</p></div></a>');
     ?>
-    <div class="node-reference-links">
-        <?php 
-        if ((!$page && !empty($title)) || !empty($title_prefix) || !empty($title_suffix) || $display_submitted): ?>
-          <?php print render($title_prefix); ?>
-          <?php if (!$page && !empty($title)): ?>
-            <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-          <?php endif; ?>
-          <?php print render($title_suffix); ?>
-          <?php if ($display_submitted): ?>
-            <span class="submitted">
-                <?php print $user_picture; ?>
-                <?php print $submitted; ?>
-            </span>
-          <?php endif; ?>
-        <?php endif; ?>
-        <?php // if (!empty($content['field_tags']) || !empty($content['links'])): ?>
-          <?php // print render($content['field_tags']); ?>
-          <?php // print render($content['links']); ?>
-        <?php // endif; ?>
-    </div>
 </article>
