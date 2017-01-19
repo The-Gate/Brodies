@@ -28,7 +28,7 @@ function ct_videos_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -246,23 +246,11 @@ This image will be visible on any list when this content is presented. Don\'t wo
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'picture',
+        'module' => 'file_entity',
         'settings' => array(
-          'colorbox_settings' => array(
-            'colorbox_caption' => 'auto',
-            'colorbox_caption_custom' => '',
-            'colorbox_gallery' => 'post',
-            'colorbox_gallery_custom' => '',
-            'colorbox_group' => '',
-            'colorbox_multivalue_index' => NULL,
-          ),
-          'fallback_image_style' => '',
-          'image_link' => '',
-          'lazyload' => 0,
-          'lazyload_aspect_ratio' => 0,
-          'picture_mapping' => 'col_12',
+          'file_view_mode' => 'default',
         ),
-        'type' => 'picture',
+        'type' => 'file_rendered',
         'weight' => 0,
       ),
       'full' => array(
@@ -380,7 +368,7 @@ This image will be visible on any list when this content is presented. Don\'t wo
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'full' => array(
         'label' => 'hidden',

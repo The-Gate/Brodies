@@ -5,6 +5,7 @@ dependencies[] = ct_shared_fields
 dependencies[] = date
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = file_entity
 dependencies[] = image
 dependencies[] = node_reference
 dependencies[] = picture
