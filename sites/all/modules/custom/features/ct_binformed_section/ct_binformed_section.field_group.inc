@@ -69,14 +69,11 @@ function ct_binformed_section_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'File',
-    'weight' => '-1',
-    'children' => array(
-      0 => 'field_d_file',
-      1 => 'field_d_url',
-    ),
-    'format_type' => 'fieldset',
+    'weight' => '5',
+    'children' => array(),
+    'format_type' => 'hidden',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => '',
       'instance_settings' => array(),
     ),
   );
