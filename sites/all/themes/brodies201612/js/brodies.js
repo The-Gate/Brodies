@@ -102,7 +102,8 @@
                 });
             }
 
-
+            $('#edit-field-people-partner-value-wrapper .form-control').removeClass('form-control');
+            
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
             function readMoreSetup() {

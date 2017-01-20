@@ -101,7 +101,7 @@ function ct_people_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'token' => array(
         'label' => 'hidden',
@@ -402,9 +402,10 @@ function ct_people_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
+        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
+        'type' => 'node_reference_plain',
+        'weight' => 0,
       ),
       'token' => array(
         'label' => 'above',
@@ -571,7 +572,7 @@ function ct_people_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'token' => array(
         'label' => 'hidden',

@@ -173,8 +173,9 @@ function ct_people_field_group_info() {
       0 => 'field_people_email',
       1 => 'field_people_fname',
       2 => 'field_people_job',
-      3 => 'field_people_phone',
-      4 => 'field_people_sname',
+      3 => 'field_people_location',
+      4 => 'field_people_phone',
+      5 => 'field_people_sname',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(

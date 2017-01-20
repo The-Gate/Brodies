@@ -31,7 +31,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Key Contacts */
+  /* Field: Content: Related people */
   $handler->display->display_options['fields']['field_related_people']['id'] = 'field_related_people';
   $handler->display->display_options['fields']['field_related_people']['table'] = 'field_data_field_related_people';
   $handler->display->display_options['fields']['field_related_people']['field'] = 'field_related_people';
@@ -69,6 +69,7 @@ function views_people_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Our People';
+  $handler->display->display_options['css_class'] = 'col-md-10  col-md-offset-1';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -235,9 +236,9 @@ function views_people_views_default_views() {
       'filter_rewrite_values' => NULL,
     ),
     'field_people_partner_value' => array(
-      'bef_format' => 'default',
+      'bef_format' => 'bef',
       'more_options' => array(
-        'bef_select_all_none' => 1,
+        'bef_select_all_none' => 0,
         'bef_collapsible' => 0,
         'is_secondary' => 0,
         'any_label' => '',
@@ -312,14 +313,6 @@ function views_people_views_default_views() {
     'field_people_fname' => 'field_people_fname',
     'field_people_sname' => 'field_people_sname',
   );
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<p>Brodies is home to many of Scotland&#39;s most highly rated legal experts, who have built formidable teams across each of our core business areas and we continue to attract the brightest legal talent from the cream of the UK&#39;s law firms, embracing their experience to develop best practice at Brodies.</p>
-
-<p>However, our people are not just excellent lawyers &ndash; they are committed to going above and beyond what is normally expected of a legal adviser to understand their clients&#39; needs, provide creative solutions and build long-lasting relationships based on trust.</p>';
-  $handler->display->display_options['header']['area']['format'] = '2';
   /* Field: Content: Second Name */
   $handler->display->display_options['fields']['field_people_sname_1']['id'] = 'field_people_sname_1';
   $handler->display->display_options['fields']['field_people_sname_1']['table'] = 'field_data_field_people_sname';
@@ -403,14 +396,16 @@ function views_people_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="person-wrapper col-md-6>
-<div class="person person-image col-md-6">[field_teaser_image]</div>
-<div class="col-md-6">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="person-wrapper">
+<div class="person person-image col-sm-6 no-padding-left-sm no-padding-right-sm">[field_teaser_image]</div>
+<div class="text-wrapper col-sm-6">
 <div class="person person-name name">[field_people_fname] [field_people_sname]</div>
 <div class="person person-job">[field_people_job]</div>
 <div class="person person-location">[field_people_location]</div>
 <div class="person person-phone nr">[field_people_phone]</div>
-<div class="person person-more">[view_node]</div>
+<div class="person person-more read-more-block">[view_node]</div>
+</div>
+<div class="clearfix"></div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Second Name (field_people_sname) */
@@ -484,39 +479,49 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['field_people_partner_value']['id'] = 'field_people_partner_value';
   $handler->display->display_options['filters']['field_people_partner_value']['table'] = 'field_data_field_people_partner';
   $handler->display->display_options['filters']['field_people_partner_value']['field'] = 'field_people_partner_value';
+  $handler->display->display_options['filters']['field_people_partner_value']['value'] = array(
+    'all' => 'all',
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_people_partner_value']['group'] = 1;
   $handler->display->display_options['filters']['field_people_partner_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['operator_id'] = 'field_people_partner_value_op';
-  $handler->display->display_options['filters']['field_people_partner_value']['expose']['label'] = 'Partner (field_people_partner)';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['operator'] = 'field_people_partner_value_op';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['identifier'] = 'field_people_partner_value';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_people_partner_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_people_partner_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    3 => 0,
+    1 => 0,
+    5 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['field_people_partner_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['field_people_partner_value']['group_info']['identifier'] = 'field_people_partner_value';
   $handler->display->display_options['filters']['field_people_partner_value']['group_info']['widget'] = 'radios';
   $handler->display->display_options['filters']['field_people_partner_value']['group_info']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_people_partner_value']['group_info']['default_group_multiple'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['filters']['field_people_partner_value']['group_info']['group_items'] = array(
     1 => array(
+      'title' => '',
+      'operator' => 'empty',
+      'value' => array(),
+    ),
+    2 => array(
       'title' => 'Partners Only',
       'operator' => 'or',
       'value' => array(
         1 => '1',
       ),
     ),
-    2 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
-    3 => array(
-      'title' => '',
-      'operator' => 'or',
-      'value' => array(),
-    ),
   );
   $handler->display->display_options['select_labels'] = array(
     'title' => 'Search by name',
     'field_related_sector_nid' => 'Business Sector',
     'field_related_service_nid' => 'Legal Services',
+    'field_people_partner_value' => 'Partner only',
   );
 
   /* Display: Page */
@@ -525,6 +530,16 @@ function views_people_views_default_views() {
   $handler->display->display_options['path'] = 'people';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'People';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'menu-header';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['path'] = 'careers/profiles';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Profiles';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'menu-header';
   $handler->display->display_options['menu']['context'] = 0;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="12">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="14">
         <file>
             <url>sites/all/themes/brodies/style-master.scss</url>
             <bookmark id="5">
@@ -11,6 +11,14 @@
             <bookmark id="6">
                 <name/>
                 <line>3880</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>sites/all/modules/br/br.module</url>
+            <bookmark id="1">
+                <name/>
+                <line>790</line>
                 <key/>
             </bookmark>
         </file>
@@ -48,17 +56,24 @@
             </bookmark>
         </file>
         <file>
-            <url>sites/all/modules/br/br.module</url>
-            <bookmark id="1">
+            <url>sites/all/themes/brodies201612/scss/style.scss</url>
+            <bookmark id="14">
                 <name/>
-                <line>790</line>
+                <line>826</line>
+                <key/>
+            </bookmark>
+            <bookmark id="13">
+                <name/>
+                <line>1189</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/templates/system/page.tpl.php</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/scss/_default-variables.scss</file>
+            <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/js/brodies.js</file>
             <file>file:/D:/wamp/www/theGate/brodies/httpsdocs/sites/all/themes/brodies201612/scss/style.scss</file>
         </group>
     </open-files>
