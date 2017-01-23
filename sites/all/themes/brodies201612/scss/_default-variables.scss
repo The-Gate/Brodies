@@ -88,3 +88,13 @@ $pagination-active-border: $colour-blue-02;
 $pagination-disabled-color: $colour-blue-02;
 $pagination-disabled-bg: $colour-white-01;
 $pagination-disabled-border: $colour-blue-02;
+
+// breadcrumb
+$breadcrumb-padding-vertical:   3px;
+$breadcrumb-padding-horizontal: 0;
+//** Breadcrumb background color
+$breadcrumb-bg:                 transparent;
+//** Breadcrumb text color
+$breadcrumb-color:              $colour-blue-02;
+//** Text color of current page in the breadcrumb
+$breadcrumb-active-color:       $colour-blue-02;

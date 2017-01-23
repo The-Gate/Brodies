@@ -313,6 +313,13 @@ function views_people_views_default_views() {
     'field_people_fname' => 'field_people_fname',
     'field_people_sname' => 'field_people_sname',
   );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'Sorry, your search did not match anyone.';
+  $handler->display->display_options['empty']['area']['format'] = '2';
   /* Field: Content: Second Name */
   $handler->display->display_options['fields']['field_people_sname_1']['id'] = 'field_people_sname_1';
   $handler->display->display_options['fields']['field_people_sname_1']['table'] = 'field_data_field_people_sname';
@@ -416,6 +423,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'word';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';

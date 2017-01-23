@@ -102,8 +102,31 @@
                 });
             }
 
+            if ($('.node-type-people').length > 0) {
+                $(".related-wrapper h2 span").text(function (index, text) {
+                    return text.replace("##name##", $('.field-name-field-people-fname').text());
+                });
+                if ($('.field-name-field-people-email').length > 0) {
+                    $('.field-name-field-people-email .field-item').each(function () {
+                        var emailLink = '<a href="mailto:' + $(this).text() + '">' + $(this).text() + '</a>';
+                        $(this).text('');
+                        //console.log(emailLink) 
+                        $(this).append(emailLink);
+                    });
+                }
+                if ($('.field-name-field-people-phone').length > 0) {
+                    $('.field-name-field-people-phone .field-item').each(function () {
+                        phoneRaw = $(this).text();
+                        phoneClean = phoneRaw.replace(/\D/g,'');
+                        phoneClean = phoneClean.replace(/^(44)/,"");;
+                        var phoneLink = '<a href="tel:' +phoneClean + '">' + $(this).text() + '</a>';
+                        $(this).text('');
+                        $(this).append(phoneLink);
+                    });
+                }
+            }
             $('#edit-field-people-partner-value-wrapper .form-control').removeClass('form-control');
-            
+
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
             function readMoreSetup() {

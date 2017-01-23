@@ -20,17 +20,24 @@ function ct_people_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_p_related';
   $field_group->data = array(
-    'label' => 'Business Sectors',
-    'weight' => '9',
+    'label' => 'Business sectors',
+    'weight' => '13',
     'children' => array(
       0 => 'field_related_sector',
     ),
-    'format_type' => 'accordion-item',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Business sectors',
       'instance_settings' => array(
-        'classes' => 'group-business-sectors field-group-accordion-item',
+        'id' => '',
+        'classes' => 'related-item',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_business_sectors|node|people|default'] = $field_group;
@@ -45,17 +52,24 @@ function ct_people_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_p_related';
   $field_group->data = array(
-    'label' => 'Legal Services',
-    'weight' => '10',
+    'label' => 'Legal services',
+    'weight' => '14',
     'children' => array(
       0 => 'field_related_service',
     ),
-    'format_type' => 'accordion-item',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Legal services',
       'instance_settings' => array(
-        'classes' => 'group-legal-services field-group-accordion-item',
+        'id' => '',
+        'classes' => 'related-item',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_legal_services|node|people|default'] = $field_group;
@@ -73,19 +87,18 @@ function ct_people_field_group_info() {
     'label' => 'Main Content',
     'weight' => '1',
     'children' => array(
-      0 => 'body',
-      1 => 'field_people_email',
-      2 => 'field_people_job',
-      3 => 'field_people_location',
-      4 => 'field_people_phone',
-      5 => 'field_people_vcard',
+      0 => 'field_people_email',
+      1 => 'field_people_job',
+      2 => 'field_people_location',
+      3 => 'field_people_phone',
+      4 => 'field_people_vcard',
     ),
     'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Main Content',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-9 col-md-pull-3',
+        'classes' => 'col-md-9 clearfix',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
@@ -108,13 +121,12 @@ function ct_people_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Main details',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
-      0 => 'field_people_fname',
-      1 => 'field_people_id',
-      2 => 'field_people_partner',
-      3 => 'field_people_section',
-      4 => 'field_people_sname',
+      0 => 'field_people_id',
+      1 => 'field_people_partner',
+      2 => 'field_people_section',
+      3 => 'field_people_sname',
     ),
     'format_type' => 'hidden',
     'format_settings' => array(
@@ -202,21 +214,26 @@ function ct_people_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Related content',
-    'weight' => '2',
+    'label' => '##name##\'s areas of expertise:',
+    'weight' => '3',
     'children' => array(
-      0 => 'group_business_sectors',
-      1 => 'group_legal_services',
+      0 => 'field_people_fname',
+      1 => 'group_business_sectors',
+      2 => 'group_legal_services',
     ),
-    'format_type' => 'accordion',
+    'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Related content',
+      'label' => '##name##\'s areas of expertise:',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-9',
+        'classes' => 'related-wrapper col-md-12',
         'description' => '',
-        'effect' => 'bounceslide',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_p_related|node|people|default'] = $field_group;
@@ -291,7 +308,7 @@ function ct_people_field_group_info() {
       'label' => 'Side Column',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-3 col-md-push-9',
+        'classes' => 'col-md-3',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
@@ -305,8 +322,9 @@ function ct_people_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Business Sectors');
-  t('Legal Services');
+  t('##name##\'s areas of expertise:');
+  t('Business sectors');
+  t('Legal services');
   t('Main Content');
   t('Main details');
   t('Related content');
