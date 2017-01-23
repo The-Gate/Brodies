@@ -26,15 +26,19 @@ function ct_case_studies_field_group_info() {
       0 => 'group_related_secotrs',
       1 => 'group_related_services',
     ),
-    'format_type' => 'accordion',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'Related content',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'effect' => 'bounceslide',
         'id' => '',
+        'classes' => 'related-wrapper col-md-12',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_cs_related|node|cs|default'] = $field_group;
@@ -97,17 +101,24 @@ function ct_case_studies_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_cs_related';
   $field_group->data = array(
-    'label' => 'Related Sectors',
+    'label' => 'Business sectors',
     'weight' => '11',
     'children' => array(
       0 => 'field_related_sector',
     ),
-    'format_type' => 'accordion-item',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Business sectors',
       'instance_settings' => array(
-        'classes' => 'group-related-secotrs field-group-accordion-item',
+        'id' => '',
+        'classes' => 'related-item',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_related_secotrs|node|cs|default'] = $field_group;
@@ -122,25 +133,32 @@ function ct_case_studies_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_cs_related';
   $field_group->data = array(
-    'label' => 'Related Services',
+    'label' => 'Legal services',
     'weight' => '12',
     'children' => array(
       0 => 'field_related_service',
     ),
-    'format_type' => 'accordion-item',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Legal services',
       'instance_settings' => array(
-        'classes' => 'group-related-services field-group-accordion-item',
+        'id' => '',
+        'classes' => 'related-item',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_related_services|node|cs|default'] = $field_group;
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Related Sectors');
-  t('Related Services');
+  t('Business sectors');
+  t('Legal services');
   t('Related content');
 
   return $field_groups;

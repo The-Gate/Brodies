@@ -19,3 +19,21 @@ function views_slideshows_ctools_plugin_api($module = NULL, $api = NULL) {
 function views_slideshows_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
+
+/**
+ * Implements hook_node_info().
+ */
+function views_slideshows_node_info() {
+  $items = array(
+    'slide' => array(
+      'name' => t('Slide'),
+      'base' => 'node_content',
+      'description' => t('Home Page Slide content'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+  );
+  drupal_alter('node_info', $items);
+  return $items;
+}

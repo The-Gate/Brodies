@@ -752,13 +752,7 @@ h2.block-title{
         }
     }
 }
-// recent news
-#block-views-top-news-block-1{
-    .view-content{
-        margin-left:-15px;
-        margin-right:-15px;
-    }
-}
+
 
 // postscript cta blocks on business sectors & legal services homeages
 #block-block-9,
@@ -1085,7 +1079,7 @@ body{
 }
 /********************** Listings ***********************/
 
-.view:not(.view-overview-slider-listing):not(.view-slideshow){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-top-news.view-display-id-block_1){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
