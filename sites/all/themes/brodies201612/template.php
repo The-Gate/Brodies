@@ -6,6 +6,12 @@
  */
 function brodies201612_preprocess_html(&$variables) {
   drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
+  // slick can potentially appear on any page
+  drupal_add_css('sites/all/libraries/slick/slick/slick.css', array('type' => 'file'));
+  drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
+  drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', array('weight' => 5));
+  
+  drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', array('type' => 'file'));
   $node = menu_get_object();
   if ($node && $node->type) {
     switch ($node->type) {

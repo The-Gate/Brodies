@@ -8,6 +8,8 @@
 @import 'overrides';
 @import 'helpers';
 
+
+
 //@import "compass/css3";
 // compass sprites
 //@import "compass/utilities/sprites";
@@ -147,6 +149,44 @@ a {outline : none;}
 }
 .box .img-responsive{
     width:100% !important;
+}
+
+/********************** blockquote  ***********************/
+blockquote{
+    padding: 0;
+    margin: 0 0 20px;
+    font-size: $font-size-14;
+    text-transform: uppercase;
+    border-left: 0;
+    color:$colour-purple;
+    font-family:$font-family-serif;
+    .quote-open,
+    .quote-close{
+        display:inline-block
+    }
+    .quote-open{
+        width:35px;
+        height:19px;
+        margin-right:10px;
+    }
+    .quote-close{
+        width:34px;
+        height:18px;
+        margin-left:10px;
+    }
+}
+.quote-title-1,
+.quote-title-2{
+    text-align: right;
+}
+.quote-title-1{
+    font-size: $font-size-16;
+    color: $colour-pink;
+    margin-bottom: 0;
+}
+.quote-title-2{
+    font-size: $font-size-12;
+    color: $colour-black-01;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -981,6 +1021,44 @@ body{
 
     }
 }
+.quote-slide{
+    padding:0 2vw;
+}
+.slick-quote{
+    margin-top: 30px;
+    .slick-prev{
+        left: -45px;
+    }
+    .slick-next{
+        right: -45px;
+    }
+    .slick-prev:before, 
+        .slick-next:before { 
+        font-family: FontAwesome; 
+        line-height: 1; 
+        background:transparent;
+        color: $colour-grey-02;
+        font-size: 50px;
+        width:35px;
+        height:50px;
+    }
+    .slick-prev:before { 
+        content: "\f053"; 
+    }
+    [dir="rtl"] .slick-prev:before { 
+        content: "\f054"; 
+    }
+    .slick-next:before { 
+        content: "\f054"; 
+    }
+    [dir="rtl"] .slick-next:before { 
+        content: "\f053"; 
+    }
+}
+
+
+
+
 /********************** Main content area ***********************/
 .main-container{
     padding-bottom:10px;   

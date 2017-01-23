@@ -104,7 +104,10 @@
 
             if ($('.node-type-people').length > 0) {
                 $(".related-wrapper h2 span").text(function (index, text) {
-                    return text.replace("##name##", $('.field-name-field-people-fname').text());
+                    fname = $('.field-name-field-people-fname').text();
+                    fname = fname.replace(/\s*$/, "");
+
+                    return text.replace("##name##", fname);
                 });
                 if ($('.field-name-field-people-email').length > 0) {
                     $('.field-name-field-people-email .field-item').each(function () {
@@ -117,15 +120,35 @@
                 if ($('.field-name-field-people-phone').length > 0) {
                     $('.field-name-field-people-phone .field-item').each(function () {
                         phoneRaw = $(this).text();
-                        phoneClean = phoneRaw.replace(/\D/g,'');
-                        phoneClean = phoneClean.replace(/^(44)/,"");;
-                        var phoneLink = '<a href="tel:' +phoneClean + '">' + $(this).text() + '</a>';
+                        phoneClean = phoneRaw.replace(/\D/g, '');
+                        phoneClean = phoneClean.replace(/^(44)/, "");
+                        ;
+                        var phoneLink = '<a href="tel:' + phoneClean + '">' + $(this).text() + '</a>';
                         $(this).text('');
                         $(this).append(phoneLink);
                     });
                 }
             }
             $('#edit-field-people-partner-value-wrapper .form-control').removeClass('form-control');
+
+            // blockquote slick carousel
+            if ($('.field-name-body blockquote').length > 1) {
+                $('.field-name-body blockquote').each(function () {
+                    $(this).prepend('<img src="/sites/all/themes/brodies201612/images/quote-open.png" class="quote-open">').append('<img src="/sites/all/themes/brodies201612/images/quote-close.png" class="quote-close">');
+                    $(this)
+                            .nextUntil('blockquote', 'p')
+                            .filter(function (i) {
+                                return $(this).hasClass('quote-title-1') || $(this).hasClass('quote-title-2')
+                            })
+                            .add(this)
+                            .wrapAll('<div class="quote-slide"></div>');
+                });
+                $('.quote-slide').wrapAll('<div class="slick-quote col-md-10 col-md-offset-1"></div>');
+                $('.slick-quote').after('<div class="clearfix"></div>')
+                $('.slick-quote').slick({
+                    adaptiveHeight: true
+                });
+            }
 
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link

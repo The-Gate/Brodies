@@ -39,6 +39,8 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'Blockquote Wrapper'		, element : 'div', attributes : { 'class' : 'blockquote-wrapper' } },
             { name : 'Info Panel Wrapper'		, element : 'div', attributes : { 'class' : 'infopanel-wrapper' } },
             { name : 'Image and Caption Wrapper'		, element : 'div', attributes : { 'class' : 'imagecaption-wrapper' } },
+            { name : 'Quote Title 1'		, element : 'p', attributes : { 'class' : 'quote-title-1' } },
+            { name : 'Quote Title 2'		, element : 'p', attributes : { 'class' : 'quote-title-2' } },
 //            { name : 'Red Title'		, element : 'h3', styles : { 'color' : 'Red' } },
 
             /* Inline Styles */
