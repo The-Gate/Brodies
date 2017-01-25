@@ -357,7 +357,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '1',
+    'weight' => '5',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_service',
@@ -450,7 +450,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_sector',

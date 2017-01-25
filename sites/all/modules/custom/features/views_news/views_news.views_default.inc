@@ -269,7 +269,7 @@ camillo.fracassini@brodies.com<br>
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
   /* Display: Recent News */
-  $handler = $view->new_display('block', 'Recent News', 'block_1');
+  $handler = $view->new_display('block', 'Recent News', 'recent_news');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Recent news';
   $handler->display->display_options['defaults']['pager'] = FALSE;

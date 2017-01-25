@@ -195,9 +195,12 @@ blockquote{
 // Layouts hold one or more modules together.
 //////////////////////////////////////////////////////////////////////////////////
 
-@media #{$normal} {
-    .main-container .sidebar-first{
-        padding-right:$grid-gutter-width;
+.main-container {
+    position:relative;
+    @media #{$normal} {
+        .sidebar-first{
+            padding-right:$grid-gutter-width;
+        }
     }
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -1127,8 +1130,6 @@ body{
 }
 
 
-
-
 /********************** Main content area ***********************/
 .main-container{
     padding-bottom:10px;   
@@ -1159,6 +1160,16 @@ body{
     width:auto;
     margin-bottom:15px;
     font-family:$font-family-serif;
+}
+/********************** Title Icon ***********************/
+.title-icon{
+    position: absolute;
+    right:0;
+    margin-top:-60px;
+    .page-node-62 &,
+    .node-type-lupdate & {
+        margin-top:-13px;
+    }
 }
 /********************** ORIGINAL: show / hide block content ***********************/
 
@@ -1227,7 +1238,7 @@ body{
 }
 /********************** Listings ***********************/
 
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-top-news.view-display-id-block_1){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
@@ -1542,7 +1553,7 @@ body{
 
 /********************** Related items links ***********************/
 
-#block-views-top-news-block-1 .views-row .views-field-title,
+#block-views-top-news-recent-news .views-row .views-field-title,
 .node-reference-links{
     background: $colour-blue-02;
     color: $colour-white-01;
@@ -1894,6 +1905,7 @@ h2.block-title,
 h1.page-header,
 .view .views-row{
     // pink highlights:
+    .page-node-62 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
     .node-type-larea &{
@@ -1908,6 +1920,7 @@ h1.page-header,
 .field-name-field-l-date,
 .date{
     // pink highlights:
+    .page-node-62 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
     .node-type-larea &{

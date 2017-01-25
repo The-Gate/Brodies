@@ -72,6 +72,74 @@
  *
  * @ingroup templates
  */
+// sort out the heading & title
+
+$title_output = '';
+$title_output .= '<a id="main-content"></a>';
+$title_output .= render($title_prefix);
+
+// set up titles and title icons
+$default_icon = false;
+$title_postion = 'default';
+if (isset($node)) {
+  switch ($node->type) {
+    case 'overview':
+      unset($title);
+      break;
+    case 'news';
+    case 'win';
+      $customTitle = 'News';
+      $default_icon = 'title-icon-default-news.png';
+      break;
+    case 'lupdate';
+      $customTitle = 'Legal updates';
+      $default_icon = 'title-icon-default-binformed.png';
+      break;
+    case 'publication';
+    case 'event';
+    case 'video';
+    case 'download';
+      $default_icon = 'title-icon-default-binformed.png';
+      break;
+    case 'larea';
+      $title = 'Legal updates: ' . $title;
+      break;
+    case 'people':
+      $default_icon = 'title-icon-default-people.png';
+      break;
+    case 'sector':
+    case 'service':
+      $title_postion = 'above';
+      break;
+  }
+}
+else {
+  // views pages
+  if (isset($theme_hook_suggestions)) {
+    if (in_array('page__views__people_listing', $theme_hook_suggestions)) {
+      $default_icon = 'title-icon-default-people.png';
+    }
+    if (in_array('page__views__top_news', $theme_hook_suggestions)) {
+      $default_icon = 'title-icon-default-news.png';
+    }
+  }
+}
+if (isset($customTitle)) {
+  $title_output .= '<h1 class="page-header">' . $customTitle . '</h1>';
+}
+elseif (!empty($title)) {
+  $title_output .= '<h1 class="page-header">' . $title . '</h1>';
+}
+$title_output .= render($title_suffix);
+
+if (isset($node->field_title_icon['und'][0]['uri'])) {
+  $image = (object) $node->field_title_icon[LANGUAGE_NONE][0];
+  $image_entity = file_view($image, "page");
+  $title_output .= '<div class="title-icon">' . drupal_render($image_entity) . '</div>';
+}
+elseif (!($default_icon === false)) {
+  $title_output .= '<div class="title-icon"><img src="/' . drupal_get_path('theme', $GLOBALS['theme']) . '/images/title-icons/' . $default_icon . '"></div>';
+}
 ?>
 <?php if (!empty($page['navigation_bg'])): ?>
   <div class="navbar-background">
@@ -137,7 +205,17 @@
     </header> <!-- /#page-header -->
 
     <div class="row">
-
+        <?php if ($title_postion == 'above') { ?>
+          <div class="col-ms-12">
+              <?php echo $title_output; ?>
+              <?php
+              if (!empty($breadcrumb)): print $breadcrumb;
+              endif;
+              ?>
+          </div>
+          <?php
+        }
+        ?>
         <?php if (!empty($page['sidebar_first'])): ?>
           <aside class="col-sm-3 sidebar-first" role="complementary">
               <?php print render($page['sidebar_first']); ?>
@@ -148,38 +226,17 @@
             <?php if (!empty($page['highlighted'])): ?>
               <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
             <?php endif; ?>
-           
-            <a id="main-content"></a>
-            <?php print render($title_prefix); ?>
-            <?php
-            if (isset($node)) {
-              switch ($node->type) {
-                case 'overview':
-                  unset($title);
-                  break;
-                case 'news';
-                case 'win';
-                  $customTitle = 'News';
-                  break;
-                case 'lupdate';
-                  $customTitle = 'Legal updates';
-                  break;
-                case 'larea';
-                  $title = 'Legal updates: ' . $title;
-                  break;
-              }
-            }
-            if (isset($customTitle)) {
+
+
+            <?php if ($title_postion == 'default') { ?>
+              <?php echo $title_output; ?>
+              <?php
+              if (!empty($breadcrumb)): print $breadcrumb;
+              endif;
               ?>
-              <h1 class="page-header"><?php print $customTitle; ?></h1>
               <?php
             }
-            elseif (!empty($title)) {
-              ?>
-              <h1 class="page-header"><?php print $title; ?></h1>
-            <?php } ?>
-            <?php print render($title_suffix); ?>
-            <?php if (!empty($breadcrumb)): print $breadcrumb; endif; ?>
+            ?>
             <?php print $messages; ?>
             <?php if (!empty($tabs)): ?>
               <?php print render($tabs); ?>
@@ -190,11 +247,8 @@
             <?php if (!empty($action_links)): ?>
               <ul class="action-links"><?php print render($action_links); ?></ul>
             <?php endif; ?>
+
             <?php print render($page['pre_content']); ?>
-            <?php if (isset($customTitle) and ( !empty($title))) {
-              ?>
-              <h2><?php print $title; ?></h2>
-            <?php } ?>
             <div class="main-content">
                 <?php print render($page['content']); ?>
             </div>

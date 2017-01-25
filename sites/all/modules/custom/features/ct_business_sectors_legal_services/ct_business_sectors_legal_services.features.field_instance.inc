@@ -53,7 +53,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 0,
+      'weight' => 4,
     ),
   );
 
@@ -127,7 +127,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 14,
+      'weight' => 7,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -203,7 +203,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
@@ -278,7 +278,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -678,7 +678,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => -3,
+      'weight' => 2,
     ),
     'widget_type' => 'text_textarea',
   );
@@ -779,9 +779,73 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'image_image',
-      'weight' => -2,
+      'weight' => 3,
     ),
     'widget_type' => 'imagefield_widget',
+  );
+
+  // Exported field_instance: 'node-sector-field_title_icon'.
+  $field_instances['node-sector-field_title_icon'] = array(
+    'bundle' => 'sector',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_title_icon',
+    'label' => 'Title Icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'title-icon',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
+    ),
   );
 
   // Exported field_instance: 'node-service-body'.
@@ -827,7 +891,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -2327,7 +2391,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => 1,
+      'weight' => 2,
     ),
     'widget_type' => 'text_textarea',
   );
@@ -2433,6 +2497,74 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'widget_type' => 'imagefield_widget',
   );
 
+  // Exported field_instance: 'node-service-field_title_icon'.
+  $field_instances['node-service-field_title_icon'] = array(
+    'bundle' => 'service',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 48,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_title_icon',
+    'label' => 'Title Icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'title-icon',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
@@ -2452,6 +2584,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
   t('Text visible on sectors list on roll over state');
   t('Text visible on service list on roll over state');
   t('This image will be visible on any list when this content is presented. Don\'t worry about dimensions . Uploaded image will be <b>automatically resized/cropped to required dimension</b>');
+  t('Title Icon');
   t('Video 1 URL');
   t('Video 1 text');
   t('Video 1 thumbnail');

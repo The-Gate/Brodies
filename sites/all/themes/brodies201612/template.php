@@ -10,7 +10,7 @@ function brodies201612_preprocess_html(&$variables) {
   drupal_add_css('sites/all/libraries/slick/slick/slick.css', array('type' => 'file'));
   drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
   drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', array('weight' => 5));
-  
+
   drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', array('type' => 'file'));
   $node = menu_get_object();
   if ($node && $node->type) {
@@ -59,6 +59,11 @@ function brodies201612_process_page(&$variables) {
       $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
     }
   }
+  elseif ($the_view = views_get_page_view()) {
+    if(isset($the_view->name )) {
+      $variables['theme_hook_suggestions'][] = 'page__views__' . $the_view->name;
+    }
+  }
 }
 
 function brodies201612_preprocess_node(&$variables) {
@@ -88,7 +93,7 @@ function brodies201612_preprocess_node(&$variables) {
         if (!$variables['teaser']) {
           $vdata = br_get_video_data($variables['field_video_url'][0]['safe_value']);
           $videos_html = '<a class="vi" href="' . $variables['field_video_url'][0]['safe_value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $variables['field_teaser_image'][0]['uri']) . '"></a></div>';
-          $variables['content']['body'][0]['#markup'] = '<div class="col-md-9">'.$variables['content']['body'][0]['#markup'].'</div><div class="col-md-3">' . $videos_html .'</div>';
+          $variables['content']['body'][0]['#markup'] = '<div class="col-md-9">' . $variables['content']['body'][0]['#markup'] . '</div><div class="col-md-3">' . $videos_html . '</div>';
           $variables['content']['field_video_url'][0]['#markup'] = '';
           $variables['content']['field_teaser_image'] = '';
         }
