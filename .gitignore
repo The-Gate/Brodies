@@ -48,3 +48,4 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 /sites/all/themes/brodies201612/.sass-cache
+*.sql

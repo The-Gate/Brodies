@@ -149,7 +149,11 @@
                     adaptiveHeight: true
                 });
             }
-
+            $('#block-views-search-block .view-content').prepend($('.view-search .view-header'));
+            $('.close-results').click(function(e){
+                e.preventDefault();
+                $('#block-views-search-block .view-content, #block-views-search-block .view-header,#block-views-search-block .pager').remove();
+            });
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
             function readMoreSetup() {
