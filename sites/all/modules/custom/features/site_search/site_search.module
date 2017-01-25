@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Site Search feature.
+ */
+
+include_once 'site_search.features.inc';
