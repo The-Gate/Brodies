@@ -4,6 +4,7 @@ package = Brodies
 dependencies[] = ct_shared_fields
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = list
 dependencies[] = node_reference
 dependencies[] = options
 dependencies[] = text

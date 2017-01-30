@@ -70,41 +70,11 @@ function site_search_default_search_api_index() {
       "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
-        "author" : { "type" : "integer", "entity_type" : "user" },
-        "field_d_date" : { "type" : "date" },
-        "field_date" : { "type" : "date" },
-        "field_event_guest" : { "type" : "text", "boost" : "0.3" },
-        "field_event_l_details" : { "type" : "text", "boost" : "0.2" },
-        "field_event_location" : { "type" : "integer", "entity_type" : "node" },
-        "field_event_speakers" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "node" },
-        "field_event_type" : { "type" : "text", "boost" : "0.2" },
-        "field_l_area" : { "type" : "integer", "entity_type" : "node" },
-        "field_l_date" : { "type" : "date" },
-        "field_l_left" : { "type" : "text", "boost" : "0.5" },
-        "field_lp_cta_l_text" : { "type" : "text", "boost" : "0.2" },
-        "field_lp_cta_l_title" : { "type" : "text", "boost" : "0.2" },
-        "field_lp_cta_r_text" : { "type" : "text", "boost" : "0.2" },
-        "field_lp_cta_r_title" : { "type" : "text", "boost" : "0.2" },
-        "field_news_category" : { "type" : "integer", "entity_type" : "node" },
-        "field_p_area" : { "type" : "integer", "entity_type" : "node" },
-        "field_p_date" : { "type" : "date" },
-        "field_p_v_text_1" : { "type" : "text", "boost" : "0.2" },
-        "field_p_v_text_2" : { "type" : "text", "boost" : "0.2" },
-        "field_p_v_text_3" : { "type" : "text", "boost" : "0.2" },
-        "field_p_v_text_4" : { "type" : "text", "boost" : "0.2" },
-        "field_people_fname" : { "type" : "text" },
-        "field_people_job" : { "type" : "text" },
-        "field_people_location" : { "type" : "integer", "entity_type" : "node" },
-        "field_people_sname" : { "type" : "text", "boost" : "2.0" },
-        "field_sector_teaser" : { "type" : "text", "boost" : "0.8" },
-        "field_service_teaser" : { "type" : "text", "boost" : "0.8" },
-        "field_w_date" : { "type" : "date" },
+        "body:value" : { "type" : "text", "boost" : "21.0" },
         "nid" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_language" : { "type" : "string" },
         "status" : { "type" : "boolean" },
-        "taxonomy_vocabulary_1" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
-        "taxonomy_vocabulary_3" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "title" : { "type" : "text", "boost" : "5.0" }
       },
       "data_alter_callbacks" : {
@@ -119,7 +89,8 @@ function site_search_default_search_api_index() {
               "call_to_action" : "call_to_action",
               "hidden" : "hidden",
               "payment" : "payment",
-              "slide" : "slide"
+              "slide" : "slide",
+              "webform" : "webform"
             }
           }
         },
@@ -135,52 +106,13 @@ function site_search_default_search_api_index() {
         "search_api_case_ignore" : {
           "status" : 1,
           "weight" : "0",
-          "settings" : { "fields" : {
-              "title" : true,
-              "field_event_guest" : true,
-              "field_event_type" : true,
-              "field_event_l_details" : true,
-              "field_l_left" : true,
-              "field_people_fname" : true,
-              "field_people_job" : true,
-              "field_people_sname" : true,
-              "field_sector_teaser" : true,
-              "field_service_teaser" : true,
-              "field_p_v_text_1" : true,
-              "field_p_v_text_2" : true,
-              "field_p_v_text_3" : true,
-              "field_p_v_text_4" : true,
-              "field_lp_cta_l_title" : true,
-              "field_lp_cta_l_text" : true,
-              "field_lp_cta_r_title" : true,
-              "field_lp_cta_r_text" : true
-            }
-          }
+          "settings" : { "fields" : { "title" : true } }
         },
         "search_api_html_filter" : {
           "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : {
-              "title" : true,
-              "field_event_guest" : true,
-              "field_event_type" : true,
-              "field_event_l_details" : true,
-              "field_l_left" : true,
-              "field_people_fname" : true,
-              "field_people_job" : true,
-              "field_people_sname" : true,
-              "field_sector_teaser" : true,
-              "field_service_teaser" : true,
-              "field_p_v_text_1" : true,
-              "field_p_v_text_2" : true,
-              "field_p_v_text_3" : true,
-              "field_p_v_text_4" : true,
-              "field_lp_cta_l_title" : true,
-              "field_lp_cta_l_text" : true,
-              "field_lp_cta_r_title" : true,
-              "field_lp_cta_r_text" : true
-            },
+            "fields" : { "title" : true },
             "title" : 0,
             "alt" : 1,
             "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
@@ -189,52 +121,13 @@ function site_search_default_search_api_index() {
         "search_api_transliteration" : {
           "status" : 0,
           "weight" : "15",
-          "settings" : { "fields" : {
-              "title" : true,
-              "field_event_guest" : true,
-              "field_event_type" : true,
-              "field_event_l_details" : true,
-              "field_l_left" : true,
-              "field_people_fname" : true,
-              "field_people_job" : true,
-              "field_people_sname" : true,
-              "field_sector_teaser" : true,
-              "field_service_teaser" : true,
-              "field_p_v_text_1" : true,
-              "field_p_v_text_2" : true,
-              "field_p_v_text_3" : true,
-              "field_p_v_text_4" : true,
-              "field_lp_cta_l_title" : true,
-              "field_lp_cta_l_text" : true,
-              "field_lp_cta_r_title" : true,
-              "field_lp_cta_r_text" : true
-            }
-          }
+          "settings" : { "fields" : { "title" : true } }
         },
         "search_api_tokenizer" : {
           "status" : 1,
           "weight" : "20",
           "settings" : {
-            "fields" : {
-              "title" : true,
-              "field_event_guest" : true,
-              "field_event_type" : true,
-              "field_event_l_details" : true,
-              "field_l_left" : true,
-              "field_people_fname" : true,
-              "field_people_job" : true,
-              "field_people_sname" : true,
-              "field_sector_teaser" : true,
-              "field_service_teaser" : true,
-              "field_p_v_text_1" : true,
-              "field_p_v_text_2" : true,
-              "field_p_v_text_3" : true,
-              "field_p_v_text_4" : true,
-              "field_lp_cta_l_title" : true,
-              "field_lp_cta_l_text" : true,
-              "field_lp_cta_r_title" : true,
-              "field_lp_cta_r_text" : true
-            },
+            "fields" : { "title" : true },
             "spaces" : "[^[:alnum:]]",
             "ignorable" : "[\\u0027]"
           }
@@ -243,26 +136,7 @@ function site_search_default_search_api_index() {
           "status" : 0,
           "weight" : "30",
           "settings" : {
-            "fields" : {
-              "title" : true,
-              "field_event_guest" : true,
-              "field_event_type" : true,
-              "field_event_l_details" : true,
-              "field_l_left" : true,
-              "field_people_fname" : true,
-              "field_people_job" : true,
-              "field_people_sname" : true,
-              "field_sector_teaser" : true,
-              "field_service_teaser" : true,
-              "field_p_v_text_1" : true,
-              "field_p_v_text_2" : true,
-              "field_p_v_text_3" : true,
-              "field_p_v_text_4" : true,
-              "field_lp_cta_l_title" : true,
-              "field_lp_cta_l_text" : true,
-              "field_lp_cta_r_title" : true,
-              "field_lp_cta_r_text" : true
-            },
+            "fields" : { "title" : true },
             "file" : "",
             "stopwords" : "but\\r\\ndid\\r\\nthe this that those\\r\\netc"
           }
@@ -299,7 +173,7 @@ function site_search_default_search_api_server() {
     "class" : "search_api_db_service",
     "options" : {
       "database" : "default:default",
-      "min_chars" : "1",
+      "min_chars" : "3",
       "partial_matches" : 0,
       "indexes" : { "limited_type_index" : {
           "nid" : {
@@ -313,169 +187,6 @@ function site_search_default_search_api_server() {
             "type" : "text",
             "boost" : "5.0"
           },
-          "taxonomy_vocabulary_3" : {
-            "table" : "search_api_db_limited_type_index_taxonomy_vocabulary_3",
-            "column" : "value",
-            "type" : "list\\u003Cinteger\\u003E",
-            "boost" : "1.0"
-          },
-          "field_d_date" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_d_date",
-            "type" : "date",
-            "boost" : "1.0"
-          },
-          "taxonomy_vocabulary_1" : {
-            "table" : "search_api_db_limited_type_index_taxonomy_vocabulary_1",
-            "column" : "value",
-            "type" : "list\\u003Cinteger\\u003E",
-            "boost" : "1.0"
-          },
-          "field_date" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_date",
-            "type" : "date",
-            "boost" : "1.0"
-          },
-          "field_news_category" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_news_category",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "field_event_guest" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.3"
-          },
-          "field_event_location" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_event_location",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "field_event_speakers" : {
-            "table" : "search_api_db_limited_type_index_field_event_speakers",
-            "column" : "value",
-            "type" : "list\\u003Cinteger\\u003E",
-            "boost" : "1.0"
-          },
-          "field_event_type" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_event_l_details" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_l_area" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_l_area",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "field_l_date" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_l_date",
-            "type" : "date",
-            "boost" : "1.0"
-          },
-          "field_l_left" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.5"
-          },
-          "field_people_fname" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "1.0"
-          },
-          "field_people_job" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "1.0"
-          },
-          "field_people_location" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_people_location",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "field_people_sname" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "2.0"
-          },
-          "field_p_area" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_p_area",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "field_p_date" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_p_date",
-            "type" : "date",
-            "boost" : "1.0"
-          },
-          "field_sector_teaser" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.8"
-          },
-          "field_service_teaser" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.8"
-          },
-          "field_p_v_text_1" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_p_v_text_2" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_p_v_text_3" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_p_v_text_4" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_w_date" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "field_w_date",
-            "type" : "date",
-            "boost" : "1.0"
-          },
-          "field_lp_cta_l_title" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_lp_cta_l_text" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_lp_cta_r_title" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
-          "field_lp_cta_r_text" : {
-            "table" : "search_api_db_limited_type_index_text",
-            "type" : "text",
-            "boost" : "0.2"
-          },
           "search_api_language" : {
             "table" : "search_api_db_limited_type_index",
             "column" : "search_api_language",
@@ -488,17 +199,16 @@ function site_search_default_search_api_server() {
             "type" : "boolean",
             "boost" : "1.0"
           },
-          "author" : {
-            "table" : "search_api_db_limited_type_index",
-            "column" : "author",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
           "search_api_access_node" : {
             "table" : "search_api_db_limited_type_index_search_api_access_node",
             "column" : "value",
             "type" : "list\\u003Cstring\\u003E",
             "boost" : "1.0"
+          },
+          "body:value" : {
+            "table" : "search_api_db_limited_type_index_text",
+            "type" : "text",
+            "boost" : "21.0"
           }
         }
       }

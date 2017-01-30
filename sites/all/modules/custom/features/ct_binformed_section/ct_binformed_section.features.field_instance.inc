@@ -79,7 +79,6 @@ function ct_binformed_section_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => -4,
@@ -265,9 +264,11 @@ function ct_binformed_section_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'file_rendered',
         'weight' => 10,
       ),
       'full' => array(
@@ -500,7 +501,6 @@ function ct_binformed_section_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
@@ -1180,7 +1180,6 @@ function ct_binformed_section_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),

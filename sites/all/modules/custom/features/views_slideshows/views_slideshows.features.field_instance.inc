@@ -36,7 +36,6 @@ function views_slideshows_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
@@ -175,9 +174,14 @@ function views_slideshows_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
         'weight' => -2,
       ),
       'full' => array(

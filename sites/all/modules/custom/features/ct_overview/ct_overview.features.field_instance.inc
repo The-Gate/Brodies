@@ -36,7 +36,6 @@ function ct_overview_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
@@ -252,9 +251,9 @@ function ct_overview_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'list_default',
         'weight' => -2,
       ),
       'token' => array(

@@ -171,6 +171,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cta_imge',
+    'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -179,7 +180,7 @@ function ct_shared_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => NULL,
+      'default_image' => 0,
       'description_field' => 0,
       'list_default' => 1,
       'list_field' => 0,
@@ -197,6 +198,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_cta_link',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -643,6 +645,130 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'event',
   );
 
+  // Exported field_base: 'field_file_image_alt_text'.
+  $field_bases['field_file_image_alt_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_file_image_alt_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_file_image_title_text'.
+  $field_bases['field_file_image_title_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_file_image_title_text',
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_full_width'.
+  $field_bases['field_full_width'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_full_width',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 6,
+        1 => 12,
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
+  // Exported field_base: 'field_highlight_colour'.
+  $field_bases['field_highlight_colour'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_highlight_colour',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'pink' => 'pink',
+        'green' => 'green',
+        'blue' => 'blue',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_home_cta_block'.
+  $field_bases['field_home_cta_block'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_home_cta_block',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_l_area'.
   $field_bases['field_l_area'] = array(
     'active' => 1,
@@ -898,6 +1024,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_blk_1_colour',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1301,6 +1428,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_cta_l_text',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1326,6 +1454,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_cta_l_title',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1427,6 +1556,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_cta_r_title',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1882,6 +2012,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_title_img',
+    'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -1890,7 +2021,7 @@ function ct_shared_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => NULL,
+      'default_image' => 0,
       'description_field' => 0,
       'list_default' => 1,
       'list_field' => 0,
@@ -3871,6 +4002,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_video_url',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',

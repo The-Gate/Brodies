@@ -36,7 +36,6 @@ function ct_news_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => -2,
       ),
@@ -244,7 +243,6 @@ function ct_news_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
@@ -335,7 +333,6 @@ function ct_news_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => -4,
@@ -622,7 +619,6 @@ function ct_news_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => -3,
       ),
@@ -917,7 +913,6 @@ function ct_news_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => -4,

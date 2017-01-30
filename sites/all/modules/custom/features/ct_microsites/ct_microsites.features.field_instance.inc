@@ -36,7 +36,6 @@ function ct_microsites_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 1,
       ),
@@ -125,14 +124,9 @@ function ct_microsites_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
-        ),
-        'type' => 'number_integer',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
         'weight' => -3,
       ),
       'token' => array(
@@ -198,7 +192,6 @@ function ct_microsites_field_default_field_instances() {
         'settings' => array(
           'trim_length' => 600,
         ),
-        'trim_length' => 600,
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
       ),
@@ -238,9 +231,11 @@ function ct_microsites_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'default',
+        ),
+        'type' => 'file_rendered',
         'weight' => 8,
       ),
       'full' => array(
@@ -338,14 +333,16 @@ function ct_microsites_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'number',
+        'module' => 'date',
         'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => '',
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
-        'type' => 'number_integer',
+        'type' => 'date_default',
         'weight' => 16,
       ),
       'full' => array(
@@ -403,7 +400,6 @@ function ct_microsites_field_default_field_instances() {
           'multiple_number' => '',
           'multiple_to' => '',
           'show_remaining_days' => FALSE,
-          'show_repeat_rule' => 'show',
         ),
         'type' => 'date_default',
         'weight' => -2,
