@@ -83,7 +83,9 @@ $default_icon = false;
 $title_postion = 'default';
 if (isset($node)) {
   switch ($node->type) {
+    // don't display the title on these content types;
     case 'overview':
+    case 'homepage':
       unset($title);
       break;
     case 'news';

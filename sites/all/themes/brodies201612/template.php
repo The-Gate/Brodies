@@ -179,3 +179,13 @@ function br_get_video_data($url, $thumbnail = FALSE) {
   }
   return false;
 }
+
+/**
+ * the homepage filed collection needs the top level wrapper removed to allow for content defined width;
+ * @param type $variables
+ * @return type
+ */
+function brodies201612_field_collection_view($variables) {
+  $element = $variables['element'];
+  return $element['#children'];
+}

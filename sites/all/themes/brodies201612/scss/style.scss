@@ -381,6 +381,7 @@ body{
             }
         }
     }
+    &.node-type-homepage,
     &.node-type-overview{
         $overviewHeight: 490px;
         .navbar-wrapper{
@@ -735,8 +736,84 @@ h2.block-title{
     }
 }
 
+/********************** Homepage CTA***********************/
+.field-collection-container{
+    border-bottom:0;
+    margin-bottom:0;
+}
+.field-collection-item-field-home-cta-block{
+    margin-bottom:10px;
+    .home-cta-bg-img{
+        position:relative;
+    }
+
+    .cta-overlay-inner{
+        position: relative;
+        padding: 15px 20px;
+        overflow:auto;
+    }
+    @media #{$normal}{
+        .cta-overlay-wrapper{
+            position:absolute;
+            top:0;
+            height:100%;
+            width:100%;
+        }
+
+        .cta-overlay-inner{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &.col-md-6  .cta-overlay-inner{
+            max-width:75%;
+        }
+        &.col-md-12  .cta-overlay-inner{
+            max-width:50%;
+        }
+    }
+    .overlay-title,
+    .overlay-text,
+    .overlay-button a{
+        color: $colour-white-01;
+    }
+    .overlay-title{
+        font-size:$font-size-12;
+        text-transform:uppercase;
+        font-weight:700;
+        font-family:$font-family-sans-serif-pt;
+        &.pink{
+            border-bottom: 2px solid $colour-pink;
+        }
+        &.green{
+            border-bottom: 2px solid $colour-green;
+        }
+        &.blue{
+            border-bottom: 2px solid $colour-blue-04;
+        }
+    }
+
+    .overlay-text{
+        font-size:$font-size-20;
+        font-weight:700;
+    }
+    .overlay-button{
+        float:right;
+        @extend .read-more-block;
+        &.pink a{
+            background: $colour-pink;
+        }
+        &.green a{
+            background: $colour-green;
+        }
+        &.blue a{
+            background: $colour-blue-04;
+        }
+    }
+
+}
+
 /********************** Individual Blocks ***********************/
-// CTA blcoks, eg homepage, business sctors & legal services
+// CTA blocks, eg homepage, business sctors & legal services
 
 #block-block-12,
 #block-block-13,
@@ -920,7 +997,8 @@ h2.block-title{
 
 /********************** Header sideshow ***********************/
 body{
-    &.node-type-overview{
+    &.node-type-overview,
+    &.node-type-homepage{
         .navbar-background{
             .block-views,
             .block-views div:not(.contextual-links-wrapper){
@@ -1238,7 +1316,7 @@ body{
 }
 /********************** Listings ***********************/
 
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
@@ -1578,7 +1656,7 @@ body{
 /********************** Footer ***********************/
 .footer-wrapper{
     margin:40px 0;
-    border-top:1px solid $colour-orange-01;
+    border-top:4px solid $colour-orange-01;
     padding-top:35px;
 }
 .footer{
