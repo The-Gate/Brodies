@@ -89,7 +89,7 @@ h3 {
 hr {
     height: 3px;
     border: 0;
-    background: #F69F19;
+    background: $colour-orange-03;
 }
 .no-padding{
     padding-left:0;
@@ -678,7 +678,7 @@ body{
 .field-name-field-related-people .field-label,
 h1.page-header,
 h2.block-title{
-    border-bottom:3px solid $colour-orange-02;
+    border-bottom:3px solid $colour-orange-03;
     width:100%;
     #block-menu-menu-key-footer &{
         border-bottom:0;
@@ -688,7 +688,7 @@ h2.block-title{
 .region-sidebar-first .block:first-child label,
 .region-sidebar-first .block h2,
 .region-sidebar-second .block .submenu h2{
-    border-bottom:3px solid #f7a11a;
+    border-bottom:3px solid $colour-orange-03;
     width:calc(100% + 30px);
     margin-left: -(ceil(($grid-gutter-width / 2)));
     padding-left:ceil(($grid-gutter-width / 2));
@@ -860,7 +860,7 @@ h2.block-title{
             }
             .cta-title{
                 text-transform: uppercase;
-                border-bottom:3px solid $colour-orange-01;
+                border-bottom:3px solid $colour-orange-03;
                 padding:10px 0 5px;
                 margin-bottom:8px;
             }
@@ -889,7 +889,7 @@ h2.block-title{
         margin:0 0 10px;
         padding-bottom:10px;
         text-transform: uppercase;
-        border-bottom: 3px solid #F6A01A;        
+        border-bottom: 3px solid $colour-orange-03;        
     }
     p{
         font-size: 11px;
@@ -905,7 +905,7 @@ h2.block-title{
     }
 }
 
-// key contact & poeple listing
+// key contact & people listing
 // shared classes
 .people-text-wrapper{
     padding-top:15px;
@@ -1130,7 +1130,7 @@ body{
         overflow-y: auto;
         padding:20px;
         h3{                
-            border-bottom: 2px solid $colour-orange-02;
+            border-bottom: 2px solid $colour-orange-03;
         }
         .views-row{
             margin-bottom:15px;
@@ -1320,7 +1320,7 @@ body{
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
-        border-bottom:3px solid $colour-orange-01;
+        border-bottom:3px solid $colour-orange-03;
         &:last-child{
             padding-bottom:0;
             border-bottom:0;
@@ -1337,6 +1337,13 @@ body{
         }
     }
     .views-row{
+        border-bottom:0;
+        padding-bottom:20px;
+        margin-bottom:20px;
+        &:last-child{
+            padding-bottom:20px;
+            margin-bottom:20px;
+        }
         .text-wrapper{
             padding: 10px;
             @media #{$tablet-max}{
@@ -1912,6 +1919,80 @@ body.page-landing{
                 color: #fff;
             }
         }
+    }
+}
+
+/********************** Contact  ***********************/
+.menu-block-7{
+    margin-bottom:15px;
+    li{
+        @extend .col-md-3;
+        background:$colour-blue-01;
+        border-left:7px solid $colour-white-01;
+        border-right:7px solid $colour-white-01;
+    }
+    a{
+        color: $colour-white-01;
+        &.active-trail,
+        &.active,
+        &:hover{
+            color: $colour-orange-03;
+        }
+    }
+}
+#block-webform-client-block-9669{
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 3px solid $colour-orange-03;
+    margin-bottom: 40px;
+    .field-name-body{
+        margin-bottom:1em;
+    }
+    .panel{
+        margin-bottom:0;
+        border:0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .panel-body{
+        padding:0;
+    }
+    .form-required{
+        color: $colour-pink;
+    }
+    .form-actions{
+        @extend .col-md-1;
+        clear:none;
+        text-align: right;
+        margin-top:15px;
+    }
+    .btn-primary{
+        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+        border-radius:0;
+    }
+    .captcha{
+        @extend .col-md-4;
+        @extend .col-md-offset-7;
+        .g-recaptcha{
+            position: absolute;
+            right:0;
+        }
+    }
+}
+
+// address boxes
+
+.address-wrapper{
+    background:$colour-grey-02;
+    overflow:hidden;
+    padding:10px;
+    .address-box{
+        border-left:$colour-orange-03 solid 3px;
+        padding-left:15px;
+        margin-bottom: 15px;
+    }
+    iframe{
+        border:1px solid $colour-white-01;
     }
 }
 
