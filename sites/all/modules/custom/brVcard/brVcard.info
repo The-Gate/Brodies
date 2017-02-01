@@ -1,0 +1,4 @@
+name = Brodies - VCard Generator
+description = "Generates VCards from Content Type: Person details"
+package = "Brodies"
+core = 7.x
