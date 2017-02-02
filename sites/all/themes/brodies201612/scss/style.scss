@@ -675,6 +675,7 @@ body{
     }
 }
 
+.field-name-field-event-speakers .field-label,
 .field-name-field-related-people .field-label,
 h1.page-header,
 h2.block-title{
@@ -918,11 +919,15 @@ h2.block-title{
     font-weight: 700;
     font-size:$font-size-20;
     line-height: 1;
+    .col-sm-9 .block-system &{
+        font-size:$font-size-14;
+    }
 }
 .people-listing-details{
     font-size: $font-size-12;
 }
 
+.field-name-field-event-speakers,
 .field-name-field-related-people{
     margin-top: 20px;
     article{
@@ -1245,7 +1250,8 @@ body{
     right:0;
     margin-top:-60px;
     .page-node-62 &,
-    .node-type-lupdate & {
+    .node-type-lupdate &,
+    .node-type-event & {
         margin-top:-13px;
     }
 }
@@ -1327,6 +1333,8 @@ body{
         }
     }
 }
+// related text only boxes
+.view-id-seminars.view-display-id-block_1,
 .view-latest-legal-update.view-display-id-block_2{
     @media #{$normal}{
         &.is-table-row [class*="col-"] {
@@ -1479,6 +1487,18 @@ body{
     }
     .field-label{
         color: $colour-orange-02;
+    }
+}
+
+/********************** Events / Seminars ***********************/
+.view-seminars{
+    .views-exposed-form{
+        width:100%;
+    }
+}
+.node-type-event{
+    .field-name-body{
+        margin-top:2em;
     }
 }
 
@@ -2059,6 +2079,7 @@ body.page-landing{
 
 
 
+.field-name-field-event-speakers .field-label,
 .field-name-field-related-people .field-label,
 h2.block-title,
 h1.page-header,
@@ -2067,6 +2088,7 @@ h1.page-header,
     .page-node-62 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
+    .node-type-event &,
     .node-type-larea &{
         border-bottom-color: $colour-pink !important;
     }
@@ -2082,6 +2104,7 @@ h1.page-header,
     .page-node-62 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
+    .node-type-event &,
     .node-type-larea &{
         background: $colour-pink;
     }

@@ -80,6 +80,7 @@ $title_output .= render($title_prefix);
 
 // set up titles and title icons
 $default_icon = false;
+// where in the temaplte does this title appear: above / default
 $title_postion = 'default';
 if (isset($node)) {
   switch ($node->type) {
@@ -88,22 +89,25 @@ if (isset($node)) {
     case 'homepage':
       unset($title);
       break;
-    case 'news';
-    case 'win';
+    case 'news':
+    case 'win':
       $customTitle = 'News';
       $default_icon = 'title-icon-default-news.png';
       break;
-    case 'lupdate';
+    case 'lupdate':
       $customTitle = 'Legal updates';
       $default_icon = 'title-icon-default-binformed.png';
       break;
-    case 'publication';
-    case 'event';
-    case 'video';
-    case 'download';
+    case 'publication':
+    case 'video':
+    case 'download':
       $default_icon = 'title-icon-default-binformed.png';
       break;
-    case 'larea';
+    case 'event':
+      $customTitle = 'Seminars';
+      $default_icon = 'title-icon-default-binformed.png';
+      break;
+    case 'larea':
       $title = 'Legal updates: ' . $title;
       break;
     case 'people':
@@ -252,7 +256,14 @@ elseif (!($default_icon === false)) {
 
             <?php print render($page['pre_content']); ?>
             <div class="main-content">
-                <?php print render($page['content']); ?>
+                <?php
+                if (isset($customTitle)) {
+                  if ($title) {
+                    print '<h2>' . $title . '</h2>';
+                  }
+                }
+                print render($page['content']);
+                ?>
             </div>
         </section>
 

@@ -93,8 +93,8 @@
                 return false;
             });
 
-            if ($('.field-name-field-related-people').length > 0) {
-                $('.field-name-field-related-people .field-name-field-people-email .field-item').each(function () {
+            if ($('.field-name-field-related-people, .field-name-field-event-speakers').length > 0) {
+                $('.field-name-field-related-people .field-name-field-people-email .field-item, .field-name-field-event-speakers .field-name-field-people-email .field-item').each(function () {
                     var emailLink = '<div class="read-more-block"><a href="mailto:' + $(this).text() + '">Email</a></div>';
                     $(this).text('');
                     //console.log(emailLink) 

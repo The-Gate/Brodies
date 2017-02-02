@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Events & Seminars: CT & View feature.
+ */
+
+include_once 'events_seminars_ct_view.features.inc';
