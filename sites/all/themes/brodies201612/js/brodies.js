@@ -198,7 +198,11 @@
             if ($('.node-type-lpagef').length > 0) {
                 readMoreSetup();
             }
-
+            
+            if ($('.main-content .seminar-buttons').length > 0 && $('.main-content .custom-seminar-form').length == 0) {
+               $('.main-content .seminar-buttons').prependTo($('.region-pre-content'));
+            }
+            
             function doneResizing() {
                 readMoreSetup();
             }

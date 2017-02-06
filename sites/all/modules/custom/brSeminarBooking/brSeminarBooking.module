@@ -1,0 +1,633 @@
+<?php
+
+// set test email addresses
+define("SEMINAR_EMAIL_TEST", true);
+
+/**
+ * Implements hook_block_info().
+ */
+function brSeminarBooking_block_info() {
+  $blocks = array();
+  $blocks['seminar_checkout'] = array(
+    'info' => t('Seminars & Events : CHECKOUT'),
+  );
+  $blocks['seminar_waitinglist'] = array(
+    'info' => t('Seminars & Events : WAITING LIST'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function brSeminarBooking_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'seminar_checkout' :
+      $block['content'] = brSeminarBooking_events_checkout();
+      break;
+    case 'seminar_waitinglist' :
+      $block['content'] = brSeminarBooking_events_waitinglist();
+      break;
+  }
+
+  return $block;
+}
+
+function brSeminarBooking_menu() {
+  $items['seminars-and-events/checkout'] = array(
+    'title' => 'Seminar Checkout',
+    'page callback' => 'brSeminarBooking_page_seminars_checkout',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['seminars-and-events/waitinglist'] = array(
+    'title' => 'Add to waiting List',
+    'page callback' => 'brSeminarBooking_page_seminars_waitinglist',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+////////////////  CHECKOUT ///////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+function brSeminarBooking_book_link($data) {
+  if (!empty($_SESSION['seminars'][$data->nid])) {
+    $title = 'remove';
+  }
+  else {
+    $title = 'Add to Basket';
+  }
+  return '<div class="seminar-buttons  col-md-3"><div class="seminar-button add">' . l(
+      $title, $_GET['q'], array(
+    'attributes' => array(
+      'class' => array(
+        'book',
+      ),
+    ),
+    'query' => array(
+      'book-seminar' => $data->nid,
+      drupal_get_destination()
+    ),
+      )
+  ) . '</div></div>';
+}
+
+/**
+ * add user to the seminar list
+ * @return string
+ */
+function brSeminarBooking_events_checkout() {
+  if (isset($_GET['clear'])) {
+    unset($_SESSION['seminars']);
+    drupal_goto();
+  }
+  if (isset($_GET['book-seminar'])) {
+
+// make sure there is a seminar matching this nid
+    $query = db_select('node', 'n');
+    $query->join('content_type_event', 'e', 'e.vid = n.vid WHERE field_event_type_value = \'seminar\' AND n.nid = :nid', array(':nid' => $_GET['book-seminar']));
+    $count = $query->countQuery()->execute()->fetchField();
+
+    if ((int) $count== 1) {
+      if (isset($_SESSION['seminars'][$_GET['book-seminar']])) {
+        unset($_SESSION['seminars'][$_GET['book-seminar']]);
+      }
+      else {
+        $_SESSION['seminars'][$_GET['book-seminar']] = $_GET['book-seminar'];
+      }
+      drupal_goto();
+    }
+  }
+  $nr = isset($_SESSION['seminars']) ? count($_SESSION['seminars']) : 0;
+  $out = '<div class="seminar-button checkout"><div class="basket-title">';
+  $out .= $nr ? l('Seminar Basket', 'seminars-and-events/checkout', array('attributes' => array('class' => array('checkout')))) : 'Seminar Basket';
+  $out .= '</div><div class="basket-items"><i class="fa fa-shopping-basket" aria-hidden="true"></i><div class="item-wrapper">';
+  $out .= $nr ? l($nr, 'seminars-and-events/checkout', array('attributes' => array('class' => array('checkout')))) . 
+      l('X', $_GET['q'], array('attributes' => array('class' => array('clear')), 'query' => array('clear' => TRUE, drupal_get_destination()))) : '<div class="checkout">'.$nr.'</div>';
+  $out .= '</div></div></div>';
+  return $out;
+}
+
+function brSeminarBooking_page_seminars_checkout() {
+  $out = '<div class="node">';
+
+  if (!empty($_SESSION['seminars']) and count($_SESSION['seminars'])) {
+    $sdata = $_SESSION['seminars'];
+    $out .= '<p>You are about to book places on the following ' . format_plural(count($sdata), 'seminar', 'seminars') . '</p>';
+    $out .= '<div class="seminars">';
+    foreach ($sdata as $nid) {
+      $result = db_query("SELECT title FROM {node} n where nid = :nid", array(':nid' => $nid));
+      if ($result) {
+        while ($row = $result->fetchAssoc()) {
+          $out .= '<div class="col-sm-9"><p><strong>' . l($row['title'], 'node/' . $nid) . '</strong></p></div>' . brSeminarBooking_book_link((object) array('nid' => $nid));
+        }
+      }
+    }
+    $out .= '<div class="clearfix"></div></div>';
+    $out .= '<p>Please remove any seminars you are no longer interested in.</p>';
+    $chform = drupal_get_form('brSeminarBooking_seminars_form');
+    $out .= render($chform);
+  }
+  else {
+    $out .= 'No seminars selected yet';
+  }
+  $out .= '</div>';
+
+  return $out;
+}
+
+function brSeminarBooking_seminars_form() {
+
+  $form['intro'] = array('#markup' => '<hr><h2>Your details</h2><p>Fields marked with <span class="form-required">*</span> are required.</p>');
+  $form['#attributes'] = array('class' => 'custom-seminar-form');
+  $form['first-name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'First name',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'First name',
+  );
+
+  $form['surname'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Surname',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Surname',
+  );
+
+  $form['position'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Position',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-12">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Position',
+  );
+
+  $form['company'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Company',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-12">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Company',
+  );
+
+  $form['address-line-1'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Address Line 1',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-12">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Address Line 1',
+  );
+
+  $form['address-line-2'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Address Line 2',
+    '#prefix' => '<div class="col-md-12">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Address Line 2',
+  );
+
+  $form['address-line-3'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Address Line 3',
+    '#prefix' => '<div class="col-md-12">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Address Line 3',
+  );
+
+  $form['city'] = array(
+    '#type' => 'textfield',
+    '#title' => 'City',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'City',
+  );
+
+  $form['postcode'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Postcode',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Postcode',
+  );
+
+  $form['telephone-number'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Telephone Number',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'Telephone Number',
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email',
+    '#required' => TRUE,
+    '#prefix' => '<div class="col-md-6">',
+    '#suffix' => '</div>',
+    '#default_value' => 'test@test.com',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  return $form;
+}
+
+function brSeminarBooking_seminars_form_validate($form_state, $form_values) {
+  $email = $form_values['values']['email'];
+
+  if (!valid_email_address($email)) {
+    form_set_error('email', 'Enter valid email address');
+  }
+}
+
+function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
+  if (SEMINAR_EMAIL_TEST == true) {
+    $admin_email = 'callum@sakurabrae.co.uk';
+  }
+  else {
+    $admin_email = 'seminars@brodies.com';
+  }
+  global $user;
+  $values = $form_values['values'];
+
+//send email
+//$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
+  $from = $values['email'];
+
+  $out = $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
+  $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
+
+  foreach ($_SESSION['seminars'] as $nid) {
+    $result = db_query("SELECT n.title, field_event_date_value as timestart, field_event_date_value2 as timeend, n1.title as location FROM node n INNER join content_type_event e on n.vid = e.vid left join node n1 on n1.nid = e.field_event_location_nid where n.nid = :nid", array(':nid' => $nid));
+    if ($result) {
+      while ($row = $result->fetchAssoc()) {
+        $out .= "<tr>";
+        $out .= "<td>" . l($row['title'], 'node/' . $nid, array('absolute' => TRUE)) . "</td>";
+        $out .= "<td>" . $row['location'] . "</td>";
+        $out .= "<td>" . date('d M Y H:i', $row['timestart']);
+        if (isset($row['timeend'])) {
+          $out .= ' - ' . date('d M Y H:i', $row['timeend']);
+        }
+        $out .= "</td>";
+        $out .= "<td>1</td></tr>";
+      }
+    }
+  }
+
+
+  $out .= '</table><br><br>
+  <b>Lead Delegate</b><br>
+<br>
+<table border="1" width="100%">
+<tbody>
+<tr>
+<td width="50%">Name:</td>
+<td width="50%">' . $values['first-name'] . " " . $values['surname'] . '</td>
+</tr>
+<tr>
+<td>Email:</td>
+<td>' . $values['email'] . '</td>
+</tr>
+<tr>
+<td>Contact Telephone Number:</td>
+<td>' . $values['telephone-number'] . '</td>
+</tr>
+<tr>
+<td>Position:</td>
+<td>' . $values['position'] . '</td>
+</tr>
+<tr>
+<td>Company:</td>
+<td>' . $values['company'] . '</td>
+</tr>
+<tr>
+<td>Address Line 1:</td>
+<td>' . $values['address-line-1'] . '</td>
+</tr>
+<tr>
+<td>Address Line 2:</td>
+<td>' . $values['address-line-2'] . '</td>
+</tr>
+<tr>
+<td>Address Line 3:</td>
+<td>' . $values['address-line-3'] . '</td>
+</tr>
+<tr>
+<td>City:</td>
+<td>' . $values['city'] . '</td>
+</tr>
+<tr>
+<td>Postcode:</td>
+<td>' . $values['postcode'] . '</td>
+</tr>
+</tbody>
+</table>';
+  $params = array(
+    'body' => $out,
+    'subject' => 'Seminar Booking Request',
+  );
+
+
+
+  if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $params, $from, TRUE)) {
+    unset($_SESSION['seminars']);
+//redirect to thank you
+    $_REQUEST['destination'] = 'thank-you-checkout';
+    drupal_goto('thank-you-checkout');
+  }
+  else {
+    drupal_set_message('There was an error subscribing you. Please try again later');
+  }
+}
+
+function brSeminarBooking_seminars_form_mail($key, &$message, $params) {
+  $headers = array(
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8;',
+    'Content-Transfer-Encoding' => '8Bit',
+    'X-Mailer' => 'Drupal'
+  );
+
+  foreach ($headers as $key => $value) {
+    $message['headers'][$key] = $value;
+  }
+
+  $message['subject'] = $params['subject'];
+  $message['body'][] = check_plain(t($params['body']));
+}
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+////////////////  WAITING LIST //////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+function brSeminarBooking_waitinglist_link($data) {
+  if (!empty($_SESSION['seminars-waitinglist'][$data->nid])) {
+    $title = 'remove';
+  }
+  else {
+    $title = 'Join waiting list';
+  }
+  return '<div class="seminar-buttons col-md-6"><div class="col-md-6"><div class="seminar-button warning">Fully Booked</div></div><div class="col-md-6"><div class="seminar-button waitlist link">' . l(
+      $title, $_GET['q'], array(
+    'attributes' => array(
+      'class' => array(
+        'book',
+      ),
+    ),
+    'query' => array(
+      'seminars-waitinglist' => $data->nid,
+      drupal_get_destination()
+    ),
+      )
+  ) . '</div></div></div>';
+}
+
+/**
+ * add user to the waiting list
+ * @return string
+ */
+function brSeminarBooking_events_waitinglist() {
+  if (isset($_GET['list-clear'])) {
+    unset($_SESSION['seminars-waitinglist']);
+    drupal_goto();
+  }
+  if (isset($_GET['seminars-waitinglist'])) {
+
+// make sure there is a seminar matching this nid
+    $query = db_select('node', 'n');
+    $query->join('content_type_event', 'e', 'e.vid = n.vid WHERE field_event_type_value = \'seminar\' AND n.nid = :nid', array(':nid' => $_GET['seminars-waitinglist']));
+    $count = $query->countQuery()->execute()->fetchField();
+
+    if ((int) $count == 1) {
+      if (isset($_SESSION['seminars-waitinglist'][$_GET['seminars-waitinglist']])) {
+        unset($_SESSION['seminars-waitinglist'][$_GET['seminars-waitinglist']]);
+      }
+      else {
+        $_SESSION['seminars-waitinglist'][$_GET['seminars-waitinglist']] = $_GET['seminars-waitinglist'];
+      }
+      drupal_goto();
+    }
+  }
+  $nr = isset($_SESSION['seminars-waitinglist']) ? count($_SESSION['seminars-waitinglist']) : 0;
+  $out = '<div class="seminar-button waitlist"><div class="basket-title">';
+  
+  $out .= $nr ? l('Waiting list basket', 'seminars-and-events/waitinglist', array('attributes' => array('class' => array('checkout')))) : 'Waiting list basket';
+  $out .='</div><div class="basket-items"><i class="fa fa-shopping-basket" aria-hidden="true"></i><div class="item-wrapper">';
+  $out .= $nr ? l($nr, 'seminars-and-events/waitinglist', array('attributes' => array('class' => array('checkout')))) .
+      l('X', $_GET['q'], array('attributes' => array('class' => array('list-clear')), 'query' => array('list-clear' => TRUE, drupal_get_destination()))) : '<div class="checkout">'.$nr.'</div>';
+  $out .= '</div></div></div>';
+  return $out;
+}
+
+function brSeminarBooking_page_seminars_waitinglist() {
+
+  $out = '<div class="node">';
+  if (!empty($_SESSION['seminars-waitinglist']) and count($_SESSION['seminars-waitinglist'])) {
+    $sdata = $_SESSION['seminars-waitinglist'];
+    $out .= '<p>You are about to add to the waiting list on the following ' . format_plural(count($sdata), 'seminar', 'seminars') . '</p>';
+    $out .= '<div class="seminars">';
+    foreach ($sdata as $nid) {
+      $result = db_query("SELECT title FROM {node} n where nid = :nid", array(':nid' => $nid));
+      if ($result) {
+        while ($row = $result->fetchAssoc()) {
+          $out .= '<div class="col-sm-9"><p><strong>' . l($row['title'], 'node/' . $nid) . '</strong></p></div><div class="col-sm-3">' . brSeminarBooking_waitinglist_link((object) array('nid' => $nid)) . '</div>';
+        }
+      }
+    }
+    $out .= '<div class="clearfix"></div></div>';
+    $out .= '<p>Please remove any seminars you are no longer interested in.</p>';
+    $wlform = drupal_get_form('brSeminarBooking_waitinglist_form');
+    $out .= render($wlform);
+  }
+  else {
+    $out .= 'No seminars on the waiting list yet';
+  }
+  $out .= '</div>';
+
+  return $out;
+}
+
+function brSeminarBooking_waitinglist_form($form, &$form_state) {
+  $form['intro'] = array('#markup' => '<hr><h2>Your Details</h2><p>Please fill in the form below and we\'ll place you on our seminar waiting list. We will inform you as soon as possible if a space arises.</p><p>Fields marked with <span class="form-required">*</span> are required.</p>');
+  $form['#attributes'] = array('class' => 'custom-seminar-form');
+  $form['first-name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'First name',
+    '#default_value' => 'First name',
+    '#required' => TRUE,
+    '#weight' => 10,
+  );
+
+  $form['Surname'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Surname',
+    '#default_value' => 'Surname',
+    '#required' => TRUE,
+    '#weight' => 20,
+  );
+
+  $form['company'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Company',
+    '#default_value' => 'Company',
+    '#required' => TRUE,
+    '#weight' => 30,
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email',
+    '#default_value' => 'test@test.com',
+    '#required' => TRUE,
+    '#weight' => 40,
+  );
+
+  $form['telephone-number'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Telephone Number',
+    '#default_value' => 'Telephone Number',
+    '#required' => TRUE,
+    '#weight' => 50,
+  );
+
+//  $form['captcha'] = array(
+//    '#type' => 'captcha',
+//    '#captcha_type' => 'image_captcha/Image',
+//    '#title' => '',
+//    '#weight' => 70,
+//  );
+
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+    '#weight' => 80,
+  );
+  return $form;
+}
+
+function brSeminarBooking_waitinglist_form_validate($form_state, $form_values) {
+  $email = $form_values['values']['email'];
+
+  if (!valid_email_address($email)) {
+    form_set_error('email', 'Enter valid email address');
+  }
+}
+
+function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
+  if (SEMINAR_EMAIL_TEST == true) {
+    $admin_email = 'callum@sakurabrae.co.uk';
+  }
+  else {
+    $admin_email = 'contact@brodies.com';
+  }
+
+  global $user;
+  $values = $form_values['values'];
+
+//send email
+//$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
+  $from = $values['email'];
+
+  $out = $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " requests to be added to the following seminar waiting lists:";
+  $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
+
+  foreach ($_SESSION['seminars-waitinglist'] as $nid) {
+    $result = db_query("SELECT n.title, field_event_date_value as timestart, field_event_date_value2 as timeend, n1.title as location FROM node n INNER join content_type_event e on n.vid = e.vid left join node n1 on n1.nid = e.field_event_location_nid where n.nid = :nid", array(':nid' => $nid));
+    if ($result) {
+      while ($row = $result->fetchAssoc()) {
+        $out .= "<tr>";
+        $out .= "<td>" . l($row['title'], 'node/' . $nid, array('absolute' => TRUE)) . "</td>";
+        $out .= "<td>" . $row['location'] . "</td>";
+        $out .= "<td>" . date('d M Y H:i', $row['timestart']);
+        if (isset($row['timeend'])) {
+          $out .= ' - ' . date('d M Y H:i', $row['timeend']);
+        }
+        $out .= "</td>";
+        $out .= "<td>1</td></tr>";
+      }
+    }
+  }
+
+
+  $out .= '</table><br><br>
+  <b>Lead Delegate</b><br>
+<br>
+<table border="1" width="100%">
+<tbody>
+<tr>
+<td width="50%">Name:</td>
+<td width="50%">' . $values['first-name'] . " " . $values['surname'] . '</td>
+</tr>
+<tr>
+<td>Email:</td>
+<td>' . $values['email'] . '</td>
+</tr>
+<tr>
+<td>Contact Telephone Number:</td>
+<td>' . $values['telephone-number'] . '</td>
+</tr>
+<tr>
+<td>Company:</td>
+<td>' . $values['company'] . '</td>
+</tr>
+</tbody>
+</table>';
+  $params = array(
+    'body' => $out,
+    'subject' => 'Seminar Waiting List Request',
+  );
+
+  if (drupal_mail('brSeminarBooking_waitinglist_form', 'seminars-waitinglist-admin', $admin_email, language_default(), $params, $from, TRUE)) {
+    unset($_SESSION['seminars-waitinglist']);
+//redirect to thank you
+    $_REQUEST['destination'] = 'thank-you-waiting-list';
+    drupal_goto('thank-you-waiting-list');
+  }
+  else {
+    drupal_set_message('There was an error subscribing you. Please try again later');
+  }
+}
+
+function brSeminarBooking_waitinglist_form_mail($key, &$message, $params) {
+  $headers = array(
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8;',
+    'Content-Transfer-Encoding' => '8Bit',
+    'X-Mailer' => 'Drupal'
+  );
+
+  foreach ($headers as $key => $value) {
+    $message['headers'][$key] = $value;
+  }
+
+  $message['subject'] = $params['subject'];
+  $message['body'][] = check_plain(t($params['body']));
+}

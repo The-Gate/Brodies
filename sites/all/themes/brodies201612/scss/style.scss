@@ -1501,6 +1501,93 @@ body{
         margin-top:2em;
     }
 }
+.custom-seminar-form{
+    overflow:hidden;
+    .btn-primary{
+        float: right;
+        margin-top: 15px;
+        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+        border-radius:0;
+    }
+}
+
+.page-seminars-and-events-checkout{
+    #block-brseminarbooking-seminar-checkout{
+        display:none;
+    }
+}
+.page-seminars-and-events-waitinglist{
+    #block-brseminarbooking-seminar-waitinglist{
+        display:none;
+    }
+    .seminar-buttons.col-md-6{
+            width:100%;
+        .col-md-6{
+            width:100%;
+            &:first-of-type{
+                display:none;
+            }
+        }
+    }
+}
+.seminar-button{
+    text-transform: uppercase;
+    color: $colour-white-01;
+    font-size: $font-size-12;
+    text-align:center;
+    font-family:$font-family-sans-serif;
+    margin-bottom:10px;
+    a{
+        display:block;
+        color: $colour-white-01;
+        padding:10px 0;
+    }
+    &.warning {
+        background:$colour-pink;
+        padding:10px 0;
+    }
+    &.add,
+    &.waitlist{
+        background:$colour-purple;
+    }
+    &.checkout,
+    &.waitlist:not(.link){
+        background:$colour-blue-01;
+        padding:10px 0;
+    }
+    .basket-title,
+    .basket-items,
+    .item-wrapper{
+        display:inline-block;
+        vertical-align:middle;
+        color:$colour-white-01;
+    }
+    .basket-items{
+        margin-left:5px;
+        position:relative;
+    }
+    .item-wrapper{
+        position:absolute;
+        right:-10px;
+        top:-7px;
+        .checkout{
+            line-height:18px;
+            text-align:center;
+            width:18px;
+            height:18px;
+            border-radius: 50%;
+            background:$colour-pink;
+        }
+
+    }
+    .basket-title,
+    .item-wrapper{
+        a{
+            padding:0;
+        }
+    }
+}
+
 
 /********************** FORMS ***********************/
 
@@ -2086,6 +2173,7 @@ h1.page-header,
 .view .views-row{
     // pink highlights:
     .page-node-62 &,
+    .page-node-44 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
     .node-type-event &,
@@ -2102,6 +2190,7 @@ h1.page-header,
 .date{
     // pink highlights:
     .page-node-62 &,
+    .page-node-44 &,
     .page-binformed-legal-updates &,
     .node-type-lupdate &,
     .node-type-event &,
@@ -2114,3 +2203,12 @@ h1.page-header,
     }
 }
 
+// seminars - make sure region-pre-content does not get caught up in the icon
+.page-node-44,
+.node-type-event{
+    .region-pre-content{
+        max-width:calc(100% - 106px);
+        padding-bottom:30px;
+        overflow:hidden;
+    }
+}

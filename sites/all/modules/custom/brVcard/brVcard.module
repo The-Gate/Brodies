@@ -23,10 +23,6 @@ function brVcard_form_alter(&$form, $form_state, $form_id) {
           $vc->download();
           exit();
         }
-        $options = array(
-          'attributes' => array('class' => 'fancybox btn'),
-          'query' => array('popup' => TRUE)
-        );
         $form['#prefix'] = l(t('Generate vCard file from details below'), $_GET['q'], array('query' => array('vcard' => TRUE)));
       }
       break;

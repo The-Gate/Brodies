@@ -1,0 +1,4 @@
+name = Brodiss Seminar Booking
+package = "Brodies"
+description = "Seminar booking system"
+core = 7.x

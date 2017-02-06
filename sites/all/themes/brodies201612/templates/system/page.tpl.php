@@ -255,6 +255,7 @@ elseif (!($default_icon === false)) {
             <?php endif; ?>
 
             <?php print render($page['pre_content']); ?>
+              <div class="clearfix"></div>
             <div class="main-content">
                 <?php
                 if (isset($customTitle)) {
