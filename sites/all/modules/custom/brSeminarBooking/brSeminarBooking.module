@@ -1,7 +1,7 @@
 <?php
 
 // set test email addresses
-define("SEMINAR_EMAIL_TEST", true);
+define("SEMINAR_EMAIL_TEST", false);
 
 /**
  * Implements hook_block_info().
@@ -156,7 +156,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'First name',
+//    '#default_value' => 'First name',
   );
 
   $form['surname'] = array(
@@ -165,7 +165,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'Surname',
+//    '#default_value' => 'Surname',
   );
 
   $form['position'] = array(
@@ -174,7 +174,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-12">',
     '#suffix' => '</div>',
-    '#default_value' => 'Position',
+//    '#default_value' => 'Position',
   );
 
   $form['company'] = array(
@@ -183,7 +183,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-12">',
     '#suffix' => '</div>',
-    '#default_value' => 'Company',
+//    '#default_value' => 'Company',
   );
 
   $form['address-line-1'] = array(
@@ -192,7 +192,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-12">',
     '#suffix' => '</div>',
-    '#default_value' => 'Address Line 1',
+//    '#default_value' => 'Address Line 1',
   );
 
   $form['address-line-2'] = array(
@@ -200,7 +200,7 @@ function brSeminarBooking_seminars_form() {
     '#title' => 'Address Line 2',
     '#prefix' => '<div class="col-md-12">',
     '#suffix' => '</div>',
-    '#default_value' => 'Address Line 2',
+//    '#default_value' => 'Address Line 2',
   );
 
   $form['address-line-3'] = array(
@@ -208,7 +208,7 @@ function brSeminarBooking_seminars_form() {
     '#title' => 'Address Line 3',
     '#prefix' => '<div class="col-md-12">',
     '#suffix' => '</div>',
-    '#default_value' => 'Address Line 3',
+//    '#default_value' => 'Address Line 3',
   );
 
   $form['city'] = array(
@@ -217,7 +217,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'City',
+//    '#default_value' => 'City',
   );
 
   $form['postcode'] = array(
@@ -226,7 +226,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'Postcode',
+//    '#default_value' => 'Postcode',
   );
 
   $form['telephone-number'] = array(
@@ -235,7 +235,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'Telephone Number',
+//    '#default_value' => 'Telephone Number',
   );
 
   $form['email'] = array(
@@ -244,7 +244,7 @@ function brSeminarBooking_seminars_form() {
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',
-    '#default_value' => 'test@test.com',
+//    '#default_value' => 'test@test.com',
   );
 
   $form['submit'] = array(
@@ -480,7 +480,7 @@ function brSeminarBooking_waitinglist_form($form, &$form_state) {
   $form['first-name'] = array(
     '#type' => 'textfield',
     '#title' => 'First name',
-    '#default_value' => 'First name',
+   // '#default_value' => 'First name',
     '#required' => TRUE,
     '#weight' => 10,
   );
@@ -488,7 +488,7 @@ function brSeminarBooking_waitinglist_form($form, &$form_state) {
   $form['Surname'] = array(
     '#type' => 'textfield',
     '#title' => 'Surname',
-    '#default_value' => 'Surname',
+  //  '#default_value' => 'Surname',
     '#required' => TRUE,
     '#weight' => 20,
   );
@@ -496,7 +496,7 @@ function brSeminarBooking_waitinglist_form($form, &$form_state) {
   $form['company'] = array(
     '#type' => 'textfield',
     '#title' => 'Company',
-    '#default_value' => 'Company',
+  //  '#default_value' => 'Company',
     '#required' => TRUE,
     '#weight' => 30,
   );
@@ -504,7 +504,7 @@ function brSeminarBooking_waitinglist_form($form, &$form_state) {
   $form['email'] = array(
     '#type' => 'textfield',
     '#title' => 'Email',
-    '#default_value' => 'test@test.com',
+//    '#default_value' => 'test@test.com',
     '#required' => TRUE,
     '#weight' => 40,
   );
@@ -512,7 +512,7 @@ function brSeminarBooking_waitinglist_form($form, &$form_state) {
   $form['telephone-number'] = array(
     '#type' => 'textfield',
     '#title' => 'Telephone Number',
-    '#default_value' => 'Telephone Number',
+//    '#default_value' => 'Telephone Number',
     '#required' => TRUE,
     '#weight' => 50,
   );
