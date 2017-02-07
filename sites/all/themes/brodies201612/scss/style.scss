@@ -497,42 +497,24 @@ body{
 }
 /********************** HEADER: SOCIAL ICONS ***********************/
 #block-block-38 {
-    text-align:right;
-    a{
-        display:inline-block;
-        width:29px;
-        height:29px;
-        background: no-repeat scroll center center transparent;
-    }
-    .li{
-        background-image: url("../images/social-li-over.png");
-        &:hover{
-            background-image: url("../images/social-li.png");
-        }
-    }
-
-    .fb{
-        background-image: url("../images/social-fb-over.png");
-        &:hover{
-            background-image: url("../images/social-fb.png");
-        }
-    }
-    .tw{
-        background-image: url("../images/social-tw-over.png");
-        &:hover{
-            background-image: url("../images/social-tw.png");
-        }
-    }
-    .gplus{
-        background-image: url("../images/social-gplus-over.png");
-        &:hover{
-            background-image: url("../images/social-gplus.png");
-        }
-    }
-    .yt{
-        background-image: url("../images/social-yt-over.png");
-        &:hover{
-            background-image: url("../images/social-yt.png");
+    .social-links{
+        text-align:right;
+        a{
+            display:inline-block;
+            width:22px;
+            height:22px;
+            background: $colour-blue-01;
+            font-size:$font-size-12;
+            line-height:22px;
+            text-align: center;
+            color: $colour-white-01;
+            border-radius: 50%;
+            margin:0 1px;
+            &:hover{
+                background:$colour-orange-01;
+                color: $colour-blue-01;
+            }
+                
         }
     }
 }
@@ -1521,7 +1503,7 @@ body{
         display:none;
     }
     .seminar-buttons.col-md-6{
-            width:100%;
+        width:100%;
         .col-md-6{
             width:100%;
             &:first-of-type{
