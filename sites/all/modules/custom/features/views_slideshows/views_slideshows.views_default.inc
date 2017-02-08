@@ -108,6 +108,36 @@ function views_slideshows_views_default_views() {
 
   /* Display: Legal Services */
   $handler = $view->new_display('block', 'Legal Services', 'block_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Teaser text */
+  $handler->display->display_options['fields']['field_service_teaser']['id'] = 'field_service_teaser';
+  $handler->display->display_options['fields']['field_service_teaser']['table'] = 'field_data_field_service_teaser';
+  $handler->display->display_options['fields']['field_service_teaser']['field'] = 'field_service_teaser';
+  $handler->display->display_options['fields']['field_service_teaser']['label'] = '';
+  $handler->display->display_options['fields']['field_service_teaser']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_service_teaser']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_service_teaser']['type'] = 'text_plain';
+  /* Field: Content: Teaser image */
+  $handler->display->display_options['fields']['field_teaser_image']['id'] = 'field_teaser_image';
+  $handler->display->display_options['fields']['field_teaser_image']['table'] = 'field_data_field_teaser_image';
+  $handler->display->display_options['fields']['field_teaser_image']['field'] = 'field_teaser_image';
+  $handler->display->display_options['fields']['field_teaser_image']['label'] = '';
+  $handler->display->display_options['fields']['field_teaser_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_teaser_image']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_teaser_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_teaser_image']['settings'] = array(
+    'image_style' => 'scroller-display-list',
+    'image_link' => 'content',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Menu children */
   $handler->display->display_options['arguments']['menu_children_filter']['id'] = 'menu_children_filter';
