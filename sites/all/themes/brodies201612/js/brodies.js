@@ -64,6 +64,20 @@
                     }
                 }
             }
+
+            if ($('.field-name-body img.media-element').length > 0) {
+                $('.field-name-body img.media-element').each(function () {
+                    var picAlign = $(this).data('picture-align');
+                    var picAlignClass = '';
+
+                    if (typeof picAlign !== typeof undefined) {
+                        picAlignClass = 'pull-' + picAlign;
+                        $(this).parent().addClass(picAlignClass);
+                    }
+                });
+            }
+
+
             // show / hide key contacts in sidebar second
             if ($('.sidebar-second .field-name-field-related-people > .field-items > .field-item').length > 2) {
                 $('.sidebar-second .field-name-field-related-people > .field-items > .field-item').slice(2).addClass('hide');

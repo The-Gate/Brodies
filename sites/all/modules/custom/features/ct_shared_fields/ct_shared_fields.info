@@ -13,6 +13,7 @@ dependencies[] = text
 features[features_api][] = api:2
 features[field_base][] = body
 features[field_base][] = comment_body
+features[field_base][] = field_2_column_text
 features[field_base][] = field__microsite_header_link
 features[field_base][] = field_as_app
 features[field_base][] = field_as_completed

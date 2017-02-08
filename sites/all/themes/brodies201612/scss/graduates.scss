@@ -1,4 +1,22 @@
 body.page-graduate{
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5{
+        color: $colour-pink;
+        font-family: $font-family-sans-serif;
+        border: 0;
+    }
+
+    .page-header,
+    h1,
+    h2{
+        font-size: $font-size-18;
+    }
+
+
     .navbar-wrapper{
         border-bottom-color:$colour-pink;
         background: $colour-blue-01;
@@ -27,6 +45,8 @@ body.page-graduate{
                     padding:0 10px;
                     & > a{
                         padding:0;
+                        color: $colour-white-01;
+                        background: none;
                         &:hover{
                             border-bottom:1px solid $colour-orange-01;
                         }
@@ -96,12 +116,6 @@ body.page-graduate{
         }
 
         &.field-collection-item-field-graduate-cta{
-            .cta-overlay-inner{
-                top:auto;
-                bottom:20px;
-                position: absolute;
-                transform:translateY(0);
-            }
             .overlay-title{
                 font-size: $font-size-18;
             }
@@ -180,7 +194,23 @@ body.page-graduate{
             }
         }
     }
-
+    &.node-type-graduate-homepage .cta-overlay.field-collection-item-field-graduate-cta{
+        .cta-overlay-inner{
+            top:auto;
+            bottom:20px;
+            position: absolute;
+            transform:translateY(0);
+        }
+    }
+    &.node-type-graduate-content .cta-overlay.field-collection-item-field-graduate-cta{
+        .cta-overlay-inner{
+            max-width:90%;
+            .overlay-title{
+                border-color: $colour-pink;
+                display: inline-block;
+            }
+        }
+    }
 
     .field-name-field-graduate-slideshow-bottom {
         .slick-prev, 
@@ -226,8 +256,52 @@ body.page-graduate{
         }
 
     }
+
+    @media #{$tablet}{
+        .multi_col_text{
+            .field-name-body{
+                -webkit-column-count: $col-count; /* Chrome, Safari, Opera */
+                -moz-column-count: $col-count; /* Firefox */
+                column-count: $col-count;
+
+                -webkit-column-gap: $col-gap; /* Chrome, Safari, Opera */
+                -moz-column-gap: $col-gap; /* Firefox */
+                column-gap: $col-gap;
+                p,h2,h3,h4,h5,h6,ul,ol{
+                    display:inline-block;
+                    width:100%;
+                }
+                .no-split{
+                    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+                    page-break-inside: avoid;           /* Theoretically FF 20+ */
+                    break-inside: avoid-column;         /* IE 11 */
+                }
+            }
+        }
+    }
+    @media #{$mobile-max}{
+        .no-split{
+            clear:both;
+            margin-bottom:1em;
+            overflow:hidden;
+        }
+    }
+
+    .field-name-field-postscript{
+        margin-bottom:2em;
+        h2:last-child{
+            margin-top:2em;
+            margin-bottom:-1em;
+        }
+    }
     .postscript-wrapper{
         background: none;
+    }
+
+
+    /********************** Forms ***********************/
+    .webform-client-form{
+        margin-top:20px;
     }
     /********************** Footer ***********************/
     .footer-wrapper{

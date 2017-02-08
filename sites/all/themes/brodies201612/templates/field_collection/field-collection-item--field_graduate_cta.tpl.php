@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation for field collection items.
@@ -32,13 +31,22 @@
 // set up the CTA width
 switch ($content['field_full_width'][0]['#markup']) {
   case '6':
-    $picture_name = 'col_6';
-    break;
+    $node_type = $variables['field_collection_item']->hostEntity();
+    switch ($node_type->type) {
+      case 'graduate_content':
+        $picture_name = 'col_3';
+        $col = 'col-md-3';
+        break 2;
+      default:
+        $picture_name = 'col_6';
+        $col = 'col-md-' . $content['field_full_width'][0]['#markup'];
+        break;
+    }
   case '12':
     $picture_name = 'col_12';
+    $col = 'col-md-' . $content['field_full_width'][0]['#markup'];
     break;
 }
-$col = 'col-md-' . $content['field_full_width'][0]['#markup'];
 
 // overlay
 $overlay_title = '';
@@ -97,7 +105,7 @@ if (!empty($content['field_cta_imge'][0])) {
     '#timestamp' => $image['#item']['timestamp'],
   );
   if (strlen($overlay_output) > 0) {
-    $img_open = '<div class="home-cta-bg-img">' . render($picture) ;
+    $img_open = '<div class="home-cta-bg-img">' . render($picture);
     $img_close = '</div>';
   }
   else {

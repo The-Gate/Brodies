@@ -41,6 +41,11 @@ if(typeof(CKEDITOR) !== 'undefined') {
             { name : 'Image and Caption Wrapper'		, element : 'div', attributes : { 'class' : 'imagecaption-wrapper' } },
             { name : 'Quote Title 1'		, element : 'p', attributes : { 'class' : 'quote-title-1' } },
             { name : 'Quote Title 2'		, element : 'p', attributes : { 'class' : 'quote-title-2' } },
+            { name : 'No  Column Split'		, element : 'div', attributes : { 'class' : 'no-split' } },
+            
+            
+            { name : 'Quote Title 1 - Inline'		, element : 'span', attributes : { 'class' : 'quote-title-1' } },
+            { name : 'Quote Title 2 - Inline'		, element : 'span', attributes : { 'class' : 'quote-title-2' } },
 //            { name : 'Red Title'		, element : 'h3', styles : { 'color' : 'Red' } },
 
             /* Inline Styles */

@@ -151,6 +151,15 @@ a {outline : none;}
     width:100% !important;
 }
 
+@media #{$tablet} {
+    .pull-left-sm {
+        float: left;
+    }
+    .pull-right-sm {
+        float: right;
+    }
+}
+
 /********************** blockquote  ***********************/
 blockquote{
     padding: 0;
@@ -1488,15 +1497,7 @@ body{
         margin-top:2em;
     }
 }
-.custom-seminar-form{
-    overflow:hidden;
-    .btn-primary{
-        float: right;
-        margin-top: 15px;
-        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
-        border-radius:0;
-    }
-}
+
 
 .page-seminars-and-events-checkout{
     #block-brseminarbooking-seminar-checkout{
@@ -1576,6 +1577,19 @@ body{
 }
 
 
+/********************** Content Styles ***********************/
+
+.field-name-body{
+    .media-element-container{
+        margin-top:0;
+    }
+    span{
+        &.quote-title-1,
+        &.quote-title-2{
+            text-align: left;
+        }
+    }
+}
 /********************** FORMS ***********************/
 
 .views-exposed-form{
@@ -1612,6 +1626,16 @@ body{
 #edit-sort-bef-combine-wrapper{
     label{
         display:none;
+    }
+}
+
+.webform-client-form{
+    overflow:hidden;
+    .btn-primary{
+        float: right;
+        margin-top: 15px;
+        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+        border-radius:0;
     }
 }
 /********************** JQuery UI: Widgets ***********************/
@@ -2061,10 +2085,6 @@ body.page-landing{
         clear:none;
         text-align: right;
         margin-top:15px;
-    }
-    .btn-primary{
-        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
-        border-radius:0;
     }
     .captcha{
         @extend .col-md-4;

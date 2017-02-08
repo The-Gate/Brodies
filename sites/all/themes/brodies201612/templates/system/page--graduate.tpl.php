@@ -75,11 +75,22 @@
 // sort out the heading & title
 if (isset($node)) {
   switch ($node->type) {
-        // don't display the title on these content types;
+    // don't display the title on these content types;
     case 'graduate_homepage':
       unset($title);
       break;
   }
+  switch ($node->nid) {
+    // don't display the title on these content types;
+    case '9678':
+      unset($title);
+      break;
+  }
+  
+}
+$multi_col_text_class = '';
+if (!empty($node) and ! empty($node->field_2_column_text['und'][0]['value'])) {
+  $multi_col_text_class = ' multi_col_text ';
 }
 ?>
 <?php if (!empty($page['navigation_bg'])): ?>
@@ -138,7 +149,7 @@ if (isset($node)) {
         </div>
     </header>
 </div>
-<div class="main-container <?php print $container_class; ?>">
+<div class="main-container <?php print $container_class; ?><?php echo $multi_col_text_class; ?>">
 
     <header role="banner" id="page-header">
         <?php print render($page['header']); ?>
