@@ -122,7 +122,6 @@
                         phoneRaw = $(this).text();
                         phoneClean = phoneRaw.replace(/\D/g, '');
                         phoneClean = phoneClean.replace(/^(44)/, "");
-                        ;
                         var phoneLink = '<a href="tel:' + phoneClean + '">' + $(this).text() + '</a>';
                         $(this).text('');
                         $(this).append(phoneLink);
@@ -149,8 +148,45 @@
                     adaptiveHeight: true
                 });
             }
+
+
+
+            if ($('.field-name-field-graduate-slideshow .field-item .grad-slide').length > 1) {
+                $('.field-name-field-graduate-slideshow .field-item .grad-slide').wrapAll('<div class="slick-grad mod-quote"></div>');
+                $('.field-name-field-graduate-slideshow .field-item .slick-grad').after('<div class="clearfix"></div>')
+                $('.field-name-field-graduate-slideshow .field-item .slick-grad').slick({
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    fade: true,
+                    dots: true,
+                    speed: 500,
+                    infinite: true,
+                    prevArrow: false,
+                    nextArrow: false,
+                    cssEase: 'ease-in-out'
+
+                });
+            }
+
+            if ($('.field-name-field-graduate-slideshow-bottom .field-item .grad-slide').length > 1) {
+                $('.field-name-field-graduate-slideshow-bottom .field-item .grad-slide').wrapAll('<div class="slick-grad-quote mod-quote"></div>');
+                $('.field-name-field-graduate-slideshow-bottom .field-item .slick-grad-quote').after('<div class="clearfix"></div>')
+                $('.field-name-field-graduate-slideshow-bottom .field-item .slick-grad-quote').slick({
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    fade: true,
+                    dots: true,
+                    speed: 500,
+                    infinite: true,
+                    cssEase: 'ease-in-out'
+
+                });
+            }
+
+
+
             $('#block-views-search-block .view-content').prepend($('.view-search .view-header'));
-            $('.close-results').click(function(e){
+            $('.close-results').click(function (e) {
                 e.preventDefault();
                 $('#block-views-search-block .view-content, #block-views-search-block .view-header,#block-views-search-block .pager').remove();
             });
@@ -198,11 +234,11 @@
             if ($('.node-type-lpagef').length > 0) {
                 readMoreSetup();
             }
-            
+
             if ($('.main-content .seminar-buttons').length > 0 && $('.main-content .custom-seminar-form').length == 0) {
-               $('.main-content .seminar-buttons').prependTo($('.region-pre-content'));
+                $('.main-content .seminar-buttons').prependTo($('.region-pre-content'));
             }
-            
+
             function doneResizing() {
                 readMoreSetup();
             }

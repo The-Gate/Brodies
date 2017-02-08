@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Graduate Section feature.
+ */
+
+include_once 'graduate_section.features.inc';

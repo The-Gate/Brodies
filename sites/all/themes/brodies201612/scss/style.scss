@@ -514,7 +514,7 @@ body{
                 background:$colour-orange-01;
                 color: $colour-blue-01;
             }
-                
+
         }
     }
 }
@@ -723,8 +723,12 @@ h2.block-title{
 .field-collection-container{
     border-bottom:0;
     margin-bottom:0;
+    .field-items .field-item{
+        margin-bottom:0;
+
+    }
 }
-.field-collection-item-field-home-cta-block{
+.cta-overlay{
     margin-bottom:10px;
     .home-cta-bg-img{
         position:relative;
@@ -1121,6 +1125,7 @@ body{
         }
         .views-row{
             margin-bottom:15px;
+            border-bottom:0;
             .views-field-search-api-excerpt{
                 color:$colour-blue-01;
             }
@@ -1782,8 +1787,10 @@ body{
         }
     }
     #block-block-8{
+        margin-top:10px;
         .col-md-3{
             border-top:1px solid $colour-orange-01;
+            padding-top:20px;
         }
         a{
             color: $colour-orange-02;
@@ -1792,7 +1799,7 @@ body{
 }
 
 .postscript-wrapper{
-    background: #e7e7e8;
+    background: $colour-grey-03;
     margin-bottom: -40px;
     padding: 20px 0;
 }
@@ -2194,3 +2201,6 @@ h1.page-header,
         overflow:hidden;
     }
 }
+
+// graduates section overrides
+@import 'graduates';

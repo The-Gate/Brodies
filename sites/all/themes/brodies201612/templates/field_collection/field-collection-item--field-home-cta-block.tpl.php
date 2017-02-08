@@ -139,7 +139,7 @@ if (!empty($content['field_cta_imge'][0])) {
   }
 }
 ?>
-<div class="<?php print $classes; ?> <?php echo $col; ?>"<?php print $attributes; ?>>
+<div class="<?php print $classes; ?> <?php echo $col; ?> cta-overlay"<?php print $attributes; ?>>
     <div class="content"<?php print $content_attributes; ?>>
         <?php print $img_open; ?>
         <?php print $overlay_output; ?>

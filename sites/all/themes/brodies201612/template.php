@@ -30,39 +30,75 @@ function brodies201612_preprocess_html(&$variables) {
       case 'lpagef':
         $variables['classes_array'][] = "page-landing";
         break;
+      case 'graduate_homepage':
+      case 'graduate_content':
+        $variables['classes_array'][] = "page-graduate";
+        break;
     }
   }
 }
 
 function brodies201612_process_page(&$variables) {
-  // if there is a left column, remove the gap between them
-  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-    $variables['content_column_class'] = ' class="col-sm-6 no-padding-left-md no-padding-right-md"';
-  }
-  elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
-    $variables['content_column_class'] = ' class="col-sm-9 no-padding-left-md"';
-  }
+  $col_double = 'col-sm-6';
+  $col_single = 'col-sm-9';
   if (isset($variables['node'])) {
-    if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
-      if ($variables['node']->type == 'webform') {
+    switch ($variables['node']->type) {
+      case 'microsite_page':
+        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+        break;
+      case 'webform':
         $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
         if ($mlid > 0) {
           $variables['theme_hook_suggestions'][] = 'page__microsite_page';
         }
-      }
-      else {
-        // "page-microsite.tpl.php".
-        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
-      }
+        else {
+          $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+        }
+
+        break;
+
+      case 'graduate_homepage':
+      case 'graduate_content':
+
+        $col_double = 'col-sm-4';
+        $col_single = 'col-sm-8';
+        $variables['theme_hook_suggestions'][] = 'page__graduate';
+
+      default:
+        $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+        break;
     }
-    else {
-      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
-    }
+
+
+//    if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
+//      if ($variables['node']->type == 'webform') {
+//        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
+//        if ($mlid > 0) {
+//          $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+//        }
+//      }
+//      else {
+//        // "page-microsite.tpl.php".
+//        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+//      }
+//    }
+//    else {     
+//      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+//    }
   }
   elseif ($the_view = views_get_page_view()) {
-    if(isset($the_view->name )) {
+    if (isset($the_view->name)) {
       $variables['theme_hook_suggestions'][] = 'page__views__' . $the_view->name;
     }
+  }
+
+
+  // if there is a left column, remove the gap between them
+  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+    $variables['content_column_class'] = ' class="'.$col_double.' no-padding-left-md no-padding-right-md"';
+  }
+  elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
+    $variables['content_column_class'] = ' class="'.$col_single.' no-padding-left-md"';
   }
 }
 

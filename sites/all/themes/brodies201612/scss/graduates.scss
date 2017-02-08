@@ -1,0 +1,253 @@
+body.page-graduate{
+    .navbar-wrapper{
+        border-bottom-color:$colour-pink;
+        background: $colour-blue-01;
+        @media #{$tablet} {
+            $navbar-height:120px;
+            height:$navbar-height;
+            .container{
+                height:$navbar-height;
+            }
+        }
+    }
+
+
+    /********************** HEADER: TOP MENU ***********************/
+
+    @media #{$tablet} {
+        .navbar-collapse{
+            padding-top:85px;
+        }
+    }
+
+    .navbar{
+        .menu {
+            &.nav {
+                &>li {
+                    padding:0 10px;
+                    & > a{
+                        padding:0;
+                        &:hover{
+                            border-bottom:1px solid $colour-orange-01;
+                        }
+
+                    }
+                    &.active-trail,
+                    &.active{
+                        & > a{
+                            color: $colour-white-01;
+                            border-bottom:1px solid $colour-orange-01;
+                            font-weight:700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /********************** HEADER: SOCIAL ICONS ***********************/
+    #block-block-38 {
+        .social-links{
+            text-align:right;
+            a{
+                background: $colour-white-01;
+                color: $colour-blue-01;
+                &:hover{
+                    background:$colour-orange-01;
+                }
+            }
+        }
+    }
+    /********************** BANNER OVERLAY***********************/
+
+    .cta-overlay{
+        position:relative;
+        .cta-overlay-inner{
+            background:rgba(0,35,93,0.8);
+        }
+
+        .overlay-title{
+            border-bottom: 2px solid $colour-white-01;
+            font-size: $font-size-20;
+        }
+        .title-icon{
+            margin-top:-35px;
+            right:10px;
+        }
+        .overlay-text{
+            font-size:$font-size-12;
+            font-weight:400;
+        }
+        &.field-collection-item-field-graduate-banner{
+            .overlay-title{
+                text-transform: none;
+            }
+            .overlay-title,
+            .overlay-text{
+                max-width:calc(100% - 63px);
+            }
+            .overlay-button{
+                float:none;
+                a{
+                    background: $colour-pink;
+                }
+            }
+
+        }
+
+        &.field-collection-item-field-graduate-cta{
+            .cta-overlay-inner{
+                top:auto;
+                bottom:20px;
+                position: absolute;
+                transform:translateY(0);
+            }
+            .overlay-title{
+                font-size: $font-size-18;
+            }
+            a{
+                color: $colour-white-01;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+        }
+
+
+        .slide-header{
+            position: absolute;
+            top:15px;
+            background:rgba(0,35,93,0.8);
+            display: inline-block;
+            a{
+                display:block;
+                color: $colour-white-01;
+                padding:10px;
+                font-weight:700;
+                text-transform:uppercase;
+            }
+        }
+
+
+    }
+    .mod-quote{
+        .cta-overlay{
+            .overlay-title{
+                color: $colour-pink;
+                font-size: $font-size-14;
+                text-transform: uppercase;
+                border:0;
+                font-weight: 400;
+            }
+            blockquote{
+                text-transform: none;
+                margin-bottom:10px;
+                font-family: $font-family-sans-serif;
+            }
+            .overlay-subtitle{
+                color: $colour-black-01;
+                font-size:$font-size-12;
+            }
+        }
+    }
+    .field-name-field-graduate-slideshow {
+        .cta-overlay{
+            .cta-overlay-inner{
+                top:auto;
+                bottom:0;
+                position: absolute;
+                transform:translateY(0);
+                background:rgba(255,255,255,0.8);
+                @media #{$mobile-max}{
+                    width:100%;
+                }
+            }
+
+        }
+        .slick-dots{
+            li{
+                border:0;
+            }
+        }
+        @media #{$normal}{
+            .slick-dots{
+                bottom:0;
+                text-align: left;
+                left:0;
+                li{
+                    display:block;
+                }
+            }
+        }
+    }
+
+
+    .field-name-field-graduate-slideshow-bottom {
+        .slick-prev, 
+        .slick-next{
+            &:before{
+                font-family: FontAwesome; 
+                font-size: 40px; 
+                line-height: 1; 
+                color: $colour-grey-01; 
+                opacity: 0.75; 
+                -webkit-font-smoothing: antialiased; 
+                -moz-osx-font-smoothing: grayscale;
+            }   
+            &:hover{
+                &:before{
+                    color: $colour-orange-01; 
+
+                }  
+            }
+        }   
+
+        .slick-prev{
+            left:10px;
+            &:before { 
+                content: "\f053"; 
+            }
+        }
+
+        .slick-next{
+            right:10px;
+            &:before { 
+                content: "\f054"; 
+            }
+        }
+
+        @media #{$tablet}{
+            .is-table-row [class*="col-"] {
+                vertical-align: middle;
+            }
+        }
+        .slick-list{
+            margin:0 60px;
+        }
+
+    }
+    .postscript-wrapper{
+        background: none;
+    }
+    /********************** Footer ***********************/
+    .footer-wrapper{
+        border-top:0;
+        background: $colour-blue-01;
+        margin-bottom:0;
+        padding-bottom:20px;
+        h2,
+        a,
+        p{
+            color: $colour-white-01;   
+        }
+        h2{
+            display:inline-block;
+            border-bottom:1px solid $colour-pink;
+        }
+        #block-block-8{
+            .col-md-3{
+                border-top-color:$colour-pink;
+            }
+        }
+    }
+}
