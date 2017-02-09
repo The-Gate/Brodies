@@ -672,9 +672,6 @@ h1.page-header,
 h2.block-title{
     border-bottom:3px solid $colour-orange-03;
     width:100%;
-    #block-menu-menu-key-footer &{
-        border-bottom:0;
-    }
 }
 
 .region-sidebar-first .block:first-child label,
@@ -1791,6 +1788,9 @@ body{
             margin:0px 0px 15px;
             text-transform: uppercase;
             font-weight:700;
+            &.block-title{
+                border-bottom:0;
+            }
         }
         ul li {
             padding:0px;
@@ -1818,6 +1818,18 @@ body{
         }
         a{
             color: $colour-orange-02;
+        }
+    }
+    .menu-block-8 {
+        .menu.nav{
+            @media #{$tablet}{
+                column-count: 3;
+                column-gap: 10px;
+            }
+            ul{
+                display:inline-block;
+                width:100%;
+            }
         }
     }
 }

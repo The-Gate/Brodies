@@ -1,0 +1,4 @@
+name = Brodies - Payments
+description = "Online Payment System"
+package = "Brodies"
+core = 7.x

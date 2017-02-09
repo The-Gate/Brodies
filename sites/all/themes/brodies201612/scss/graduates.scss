@@ -323,5 +323,33 @@ body.page-graduate{
                 border-top-color:$colour-pink;
             }
         }
+        .media-element-container{
+            display:inline-block;
+        }
+        #block-menu-block-8{
+            h2.block-title{
+                border-bottom:1px solid $colour-pink;
+                display:inline-block;
+                width:auto;
+            }
+        }
+        .block .nav>li{
+            margin-bottom:1px;
+        }
+        @media #{$tablet}{
+            #block-block-41{
+                margin-right: 8.33333333%;
+            }
+            #block-block-41,
+            #block-block-42{
+                padding-top:20px;
+            }
+            #block-block-42{
+                text-align: right;
+                .media{
+                    margin-left:10px;
+                }
+            }
+        }
     }
 }
