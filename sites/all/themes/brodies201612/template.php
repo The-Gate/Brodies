@@ -16,10 +16,19 @@ function brodies201612_preprocess_html(&$variables) {
   if ($node && $node->type) {
     switch ($node->type) {
       case 'webform':
-        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $node->nid . "'")->fetchField();
-        if ($mlid > 0) {
-          $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+        $result = db_query("select plid,menu_name from {menu_links} where link_path = 'node/" . $node->nid . "'")->fetchAll();
+        if (isset($result[0]->plid)) {
+          switch ($result[0]->menu_name) {
+            case 'menu-microsites':
+              $variables['theme_hook_suggestions'][] = 'html__microsite_page';
+              break;
+            case 'menu-graduate-main-menu':
+
+              $variables['classes_array'][] = "page-graduate";
+              break;
+          }
         }
+
         break;
       case 'microsite_page':
         // "page-microsite.tpl.php".
@@ -47,9 +56,19 @@ function brodies201612_process_page(&$variables) {
         $variables['theme_hook_suggestions'][] = 'page__microsite_page';
         break;
       case 'webform':
-        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
-        if ($mlid > 0) {
-          $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+        $result = db_query("select plid,menu_name from {menu_links} where link_path = 'node/" . $variables['node']->nid . "'")->fetchAll();
+        if (isset($result[0]->plid)) {
+          switch ($result[0]->menu_name) {
+            case 'menu-microsites':
+              $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+              break;
+            case 'menu-graduate-main-menu':
+
+              $col_double = 'col-sm-4';
+              $col_single = 'col-sm-8';
+              $variables['theme_hook_suggestions'][] = 'page__graduate';
+              break;
+          }
         }
         else {
           $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
@@ -63,6 +82,7 @@ function brodies201612_process_page(&$variables) {
         $col_double = 'col-sm-4';
         $col_single = 'col-sm-8';
         $variables['theme_hook_suggestions'][] = 'page__graduate';
+
 
       default:
         $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
@@ -95,10 +115,10 @@ function brodies201612_process_page(&$variables) {
 
   // if there is a left column, remove the gap between them
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-    $variables['content_column_class'] = ' class="'.$col_double.' no-padding-left-md no-padding-right-md"';
+    $variables['content_column_class'] = ' class="' . $col_double . ' no-padding-left-md no-padding-right-md"';
   }
   elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
-    $variables['content_column_class'] = ' class="'.$col_single.' no-padding-left-md"';
+    $variables['content_column_class'] = ' class="' . $col_single . ' no-padding-left-md"';
   }
 }
 
