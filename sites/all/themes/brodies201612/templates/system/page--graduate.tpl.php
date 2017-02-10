@@ -79,6 +79,14 @@ if (isset($node)) {
     case 'graduate_homepage':
       unset($title);
       break;
+    case 'webform':
+      if (isset($node->field_require_login_['und'][0]['value']) and $node->field_require_login_['und'][0]['value'] == '1') {
+        global $user;
+        if ($user->uid == 0) {
+          $page['content'] =  l("Login","user/login",array('query' => drupal_get_destination()));;
+        }
+      }
+      break;
   }
   switch ($node->nid) {
     // don't display the title on these content types;
@@ -86,7 +94,6 @@ if (isset($node)) {
       unset($title);
       break;
   }
-  
 }
 $multi_col_text_class = '';
 if (!empty($node) and ! empty($node->field_2_column_text['und'][0]['value'])) {

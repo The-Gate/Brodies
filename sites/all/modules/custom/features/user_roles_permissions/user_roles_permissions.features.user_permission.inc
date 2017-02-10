@@ -2199,7 +2199,7 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['edit webform components'] = array(
     'name' => 'edit webform components',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
     ),
     'module' => 'webform',
   );

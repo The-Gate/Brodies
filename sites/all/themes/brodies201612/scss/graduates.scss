@@ -353,3 +353,83 @@ body.page-graduate{
         }
     }
 }
+// application form
+.node-type-webform.page-graduate{
+    .panel-default{
+        border:0;
+        box-shadow: none;
+        &>.panel-heading{
+            border:0;
+            background: transparent;
+        }
+    }
+    .panel-body{
+        padding:0;
+    }
+    .webform-client-form fieldset:first-of-type{
+        &>.panel-heading{
+            background:rgba(0,35,93,1);
+            @extend .col-sm-6;
+            color: $colour-white-01;
+            padding:30px 20px 20px;
+            min-height:100px;
+            margin-bottom:40px;
+            .title-icon{
+                right:20px;
+            }
+        }
+        .panel-title{
+            font-size: $font-size-20;
+            font-weight:700;
+        }
+        fieldset>.panel-heading{
+            background: transparent;
+            color: $colour-blue-01;
+            padding:0;
+            margin-bottom:1em;
+            min-height:auto;
+            width:100%;
+        }
+
+    }
+    fieldset fieldset{
+        padding: 1px;
+    }
+    .webform-progressbar{
+        width:auto;
+        text-align: left;
+        .webform-progressbar-number{
+            font-size:$font-size-12;
+        }
+    }
+
+    .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11){
+        @extend .col-md-12;
+    }
+    .webform-component-fieldset .webform-component-fieldset .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11){
+        padding-left:0;
+        padding-right:0;
+    }
+    .form-inline button{
+        margin-bottom:1em;
+    }
+    .btn.webform-draft{
+        background: $colour-purple;
+    }
+    .radio,
+    .checkbox{
+        display: inline-block;
+        margin-right:10px;
+    }
+    .webform-previous,
+    .webform-next,
+    .btn-primary.form-submit{
+        float:none;
+    }
+    .webform-previous{
+        margin-right:10px;
+        
+        @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
+    }
+        
+}

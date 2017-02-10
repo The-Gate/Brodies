@@ -4009,6 +4009,33 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'people',
   );
 
+  // Exported field_base: 'field_require_login_'.
+  $field_bases['field_require_login_'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_require_login_',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_sector_teaser'.
   $field_bases['field_sector_teaser'] = array(
     'active' => 1,

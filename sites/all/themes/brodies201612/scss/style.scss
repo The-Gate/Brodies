@@ -1628,11 +1628,15 @@ body{
 
 .webform-client-form{
     overflow:hidden;
-    .btn-primary{
-        float: right;
-        margin-top: 15px;
-        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+    .btn{
         border-radius:0;
+        margin-top: 15px;
+        border:0;
+    }
+    .btn-primary,
+    .btn-default{
+        float: right;
+        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
     }
 }
 /********************** JQuery UI: Widgets ***********************/

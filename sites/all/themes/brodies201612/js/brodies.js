@@ -1,6 +1,6 @@
 (function ($) {
     Drupal.behaviors.page_helpers = {
-        attach: function (context) {
+        attach: function (context, settings) {
             //breakpoints
             var screen_xs_min = 480;
             // Small screen / tablet
@@ -196,7 +196,15 @@
 
                 });
             }
-
+            
+            // application form - over the progress bar to the first field set heading
+            if($('.node-type-webform.page-graduate .webform-progressbar').length > 0){
+                $(".webform-progressbar .webform-progressbar-number").text($(".webform-progressbar .webform-progressbar-number").text().replace("Page", "Step"));
+                $('.node-type-webform.page-graduate .webform-progressbar').appendTo($('.node-type-webform.page-graduate form > div > fieldset:first > legend'));
+                $('.node-type-webform.page-graduate  form > div > fieldset:first > legend').append('<div class="title-icon"><img src="/sites/all/themes/brodies201612/images/title-icons/title-icon-graduates.png"></div>');
+                $('.glyphicon-ok').addClass('glyphicon-floppy-save').removeClass('glyphicon-ok');
+                $('.webform-previous, .webform-next,.btn-primary.form-submit').wrapAll('<div class="pull-right"></div>')
+            }
 
 
             $('#block-views-search-block .view-content').prepend($('.view-search .view-header'));

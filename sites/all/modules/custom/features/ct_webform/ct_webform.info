@@ -1,0 +1,15 @@
+name = CT: Webform
+core = 7.x
+package = Brodies
+dependencies[] = ct_shared_fields
+dependencies[] = features
+dependencies[] = list
+dependencies[] = number
+dependencies[] = options
+dependencies[] = text
+features[features_api][] = api:2
+features[field_instance][] = node-webform-body
+features[field_instance][] = node-webform-field__microsite_header_link
+features[field_instance][] = node-webform-field_postscript
+features[field_instance][] = node-webform-field_require_login_
+features[node][] = webform

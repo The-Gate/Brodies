@@ -152,6 +152,7 @@ features[field_base][] = field_related_sector
 features[field_base][] = field_related_service
 features[field_base][] = field_related_video
 features[field_base][] = field_relation_exclude
+features[field_base][] = field_require_login_
 features[field_base][] = field_sector_teaser
 features[field_base][] = field_service_teaser
 features[field_base][] = field_slide_image
