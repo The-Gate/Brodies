@@ -43,12 +43,14 @@ body.page-graduate{
             &.nav {
                 &>li {
                     padding:0 10px;
-                    & > a{
+                    & a{
                         padding:0;
                         color: $colour-white-01;
                         background: none;
-                        &:hover{
-                            border-bottom:1px solid $colour-orange-01;
+                        @media #{$tablet} {
+                            &:hover{
+                                border-bottom:1px solid $colour-orange-01;
+                            }
                         }
 
                     }
@@ -56,8 +58,10 @@ body.page-graduate{
                     &.active{
                         & > a{
                             color: $colour-white-01;
-                            border-bottom:1px solid $colour-orange-01;
                             font-weight:700;
+                            @media #{$tablet} {
+                                border-bottom:1px solid $colour-orange-01;
+                            }
                         }
                     }
                 }
@@ -65,6 +69,11 @@ body.page-graduate{
         }
     }
 
+    @media #{$mobile-max}{
+        .caret{
+            top:-10px;
+        }
+    }
     /********************** HEADER: SOCIAL ICONS ***********************/
     #block-block-38 {
         .social-links{
@@ -428,8 +437,8 @@ body.page-graduate{
     }
     .webform-previous{
         margin-right:10px;
-        
+
         @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
     }
-        
+
 }

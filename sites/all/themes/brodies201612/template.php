@@ -160,7 +160,7 @@ function brodies201612_preprocess_node(&$variables) {
 
 // remove the boostrap dropdown menu
 function brodies201612_menu_link__menu_block($variables) {
-  $keep_bootstrap_array = array('menu_link__menu_block__3');
+  $keep_bootstrap_array = array('menu_link__menu_block__3','menu_link__menu_block__10','menu_link__menu_block__11','menu_link__menu_block__12');
   if (in_array($variables['element']['#theme'][0], $keep_bootstrap_array)) {
     return brodies201612_bootstrap_menu_link($variables);
   }

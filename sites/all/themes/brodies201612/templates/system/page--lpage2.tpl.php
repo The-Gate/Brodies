@@ -165,10 +165,6 @@ if (isset($node->field_lp_bkg_image)) {
             <?php if (!empty($page['highlighted'])): ?>
               <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
             <?php endif; ?>
-            <?php
-            if (!empty($breadcrumb)): print $breadcrumb;
-            endif;
-            ?>
             <a id="main-content"></a>
 
             <?php print $messages; ?>

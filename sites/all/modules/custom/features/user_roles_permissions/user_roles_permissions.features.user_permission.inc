@@ -56,7 +56,7 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['access comments'] = array(
     'name' => 'access comments',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
     ),
     'module' => 'comment',
   );
@@ -84,14 +84,18 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'access contextual links'.
   $permissions['access contextual links'] = array(
     'name' => 'access contextual links',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'contextual',
   );
 
   // Exported permission: 'access media browser'.
   $permissions['access media browser'] = array(
     'name' => 'access media browser',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'media',
   );
 
@@ -172,6 +176,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'system',
   );
 
+  // Exported permission: 'administer autoassignrole'.
+  $permissions['administer autoassignrole'] = array(
+    'name' => 'administer autoassignrole',
+    'roles' => array(),
+    'module' => 'autoassignrole',
+  );
+
   // Exported permission: 'administer block classes'.
   $permissions['administer block classes'] = array(
     'name' => 'administer block classes',
@@ -198,16 +209,16 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'administer ckeditor'.
   $permissions['administer ckeditor'] = array(
     'name' => 'administer ckeditor',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'ckeditor',
   );
 
   // Exported permission: 'administer comments'.
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'comment',
   );
 
@@ -223,10 +234,15 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'administer features'.
   $permissions['administer features'] = array(
     'name' => 'administer features',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'features',
+  );
+
+  // Exported permission: 'administer field collections'.
+  $permissions['administer field collections'] = array(
+    'name' => 'administer field collections',
+    'roles' => array(),
+    'module' => 'field_collection',
   );
 
   // Exported permission: 'administer fieldgroups'.
@@ -253,7 +269,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'administer files'.
   $permissions['administer files'] = array(
     'name' => 'administer files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -267,9 +285,7 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'administer google analytics'.
   $permissions['administer google analytics'] = array(
     'name' => 'administer google analytics',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'googleanalytics',
   );
 
@@ -301,6 +317,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'menu',
+  );
+
+  // Exported permission: 'administer menu attributes'.
+  $permissions['administer menu attributes'] = array(
+    'name' => 'administer menu attributes',
+    'roles' => array(),
+    'module' => 'menu_attributes',
   );
 
   // Exported permission: 'administer menu positions'.
@@ -338,9 +361,7 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'administer pathauto'.
   $permissions['administer pathauto'] = array(
     'name' => 'administer pathauto',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'pathauto',
   );
 
@@ -487,7 +508,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'bypass file access'.
   $permissions['bypass file access'] = array(
     'name' => 'bypass file access',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -514,6 +537,22 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'clone node'.
+  $permissions['clone node'] = array(
+    'name' => 'clone node',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'clone',
+  );
+
+  // Exported permission: 'clone own nodes'.
+  $permissions['clone own nodes'] = array(
+    'name' => 'clone own nodes',
+    'roles' => array(),
+    'module' => 'clone',
   );
 
   // Exported permission: 'create application content'.
@@ -592,13 +631,42 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'create files'.
   $permissions['create files'] = array(
     'name' => 'create files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'create graduate_content content'.
+  $permissions['create graduate_content content'] = array(
+    'name' => 'create graduate_content content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create graduate_homepage content'.
+  $permissions['create graduate_homepage content'] = array(
+    'name' => 'create graduate_homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: 'create hidden content'.
   $permissions['create hidden content'] = array(
     'name' => 'create hidden content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create homepage content'.
+  $permissions['create homepage content'] = array(
+    'name' => 'create homepage content',
     'roles' => array(
       'admin' => 'admin',
     ),
@@ -840,7 +908,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete any audio files'.
   $permissions['delete any audio files'] = array(
     'name' => 'delete any audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -884,7 +954,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete any document files'.
   $permissions['delete any document files'] = array(
     'name' => 'delete any document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -906,6 +978,24 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any graduate_content content'.
+  $permissions['delete any graduate_content content'] = array(
+    'name' => 'delete any graduate_content content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete any graduate_homepage content'.
+  $permissions['delete any graduate_homepage content'] = array(
+    'name' => 'delete any graduate_homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any hidden content'.
   $permissions['delete any hidden content'] = array(
     'name' => 'delete any hidden content',
@@ -915,10 +1005,21 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any homepage content'.
+  $permissions['delete any homepage content'] = array(
+    'name' => 'delete any homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any image files'.
   $permissions['delete any image files'] = array(
     'name' => 'delete any image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1096,7 +1197,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete any video files'.
   $permissions['delete any video files'] = array(
     'name' => 'delete any video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1139,7 +1242,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete own audio files'.
   $permissions['delete own audio files'] = array(
     'name' => 'delete own audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1182,7 +1287,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete own document files'.
   $permissions['delete own document files'] = array(
     'name' => 'delete own document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1204,6 +1311,24 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own graduate_content content'.
+  $permissions['delete own graduate_content content'] = array(
+    'name' => 'delete own graduate_content content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'delete own graduate_homepage content'.
+  $permissions['delete own graduate_homepage content'] = array(
+    'name' => 'delete own graduate_homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own hidden content'.
   $permissions['delete own hidden content'] = array(
     'name' => 'delete own hidden content',
@@ -1213,10 +1338,21 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own homepage content'.
+  $permissions['delete own homepage content'] = array(
+    'name' => 'delete own homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own image files'.
   $permissions['delete own image files'] = array(
     'name' => 'delete own image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1394,7 +1530,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'delete own video files'.
   $permissions['delete own video files'] = array(
     'name' => 'delete own video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1466,8 +1604,7 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['diff view changes'] = array(
     'name' => 'diff view changes',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
     ),
     'module' => 'diff',
   );
@@ -1484,56 +1621,72 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'download any audio files'.
   $permissions['download any audio files'] = array(
     'name' => 'download any audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download any document files'.
   $permissions['download any document files'] = array(
     'name' => 'download any document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download any image files'.
   $permissions['download any image files'] = array(
     'name' => 'download any image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download any video files'.
   $permissions['download any video files'] = array(
     'name' => 'download any video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download own audio files'.
   $permissions['download own audio files'] = array(
     'name' => 'download own audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download own document files'.
   $permissions['download own document files'] = array(
     'name' => 'download own document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download own image files'.
   $permissions['download own image files'] = array(
     'name' => 'download own image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'download own video files'.
   $permissions['download own video files'] = array(
     'name' => 'download own video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1567,7 +1720,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit any audio files'.
   $permissions['edit any audio files'] = array(
     'name' => 'edit any audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1611,7 +1766,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit any document files'.
   $permissions['edit any document files'] = array(
     'name' => 'edit any document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1633,6 +1790,24 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any graduate_content content'.
+  $permissions['edit any graduate_content content'] = array(
+    'name' => 'edit any graduate_content content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit any graduate_homepage content'.
+  $permissions['edit any graduate_homepage content'] = array(
+    'name' => 'edit any graduate_homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any hidden content'.
   $permissions['edit any hidden content'] = array(
     'name' => 'edit any hidden content',
@@ -1643,10 +1818,21 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any homepage content'.
+  $permissions['edit any homepage content'] = array(
+    'name' => 'edit any homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any image files'.
   $permissions['edit any image files'] = array(
     'name' => 'edit any image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1824,7 +2010,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit any video files'.
   $permissions['edit any video files'] = array(
     'name' => 'edit any video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1849,7 +2037,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit meta tags'.
   $permissions['edit meta tags'] = array(
     'name' => 'edit meta tags',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'metatag',
   );
 
@@ -1874,7 +2064,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit own audio files'.
   $permissions['edit own audio files'] = array(
     'name' => 'edit own audio files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1908,7 +2100,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit own comments'.
   $permissions['edit own comments'] = array(
     'name' => 'edit own comments',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'comment',
   );
 
@@ -1924,7 +2118,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit own document files'.
   $permissions['edit own document files'] = array(
     'name' => 'edit own document files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -1946,6 +2142,24 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own graduate_content content'.
+  $permissions['edit own graduate_content content'] = array(
+    'name' => 'edit own graduate_content content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'edit own graduate_homepage content'.
+  $permissions['edit own graduate_homepage content'] = array(
+    'name' => 'edit own graduate_homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own hidden content'.
   $permissions['edit own hidden content'] = array(
     'name' => 'edit own hidden content',
@@ -1955,10 +2169,21 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own homepage content'.
+  $permissions['edit own homepage content'] = array(
+    'name' => 'edit own homepage content',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own image files'.
   $permissions['edit own image files'] = array(
     'name' => 'edit own image files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -2136,7 +2361,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'edit own video files'.
   $permissions['edit own video files'] = array(
     'name' => 'edit own video files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -2221,9 +2448,7 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'features',
   );
 
@@ -2237,9 +2462,7 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'opt-in or out of tracking'.
   $permissions['opt-in or out of tracking'] = array(
     'name' => 'opt-in or out of tracking',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'googleanalytics',
   );
 
@@ -2247,7 +2470,7 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['post comments'] = array(
     'name' => 'post comments',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
     ),
     'module' => 'comment',
   );
@@ -2304,7 +2527,7 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['skip comment approval'] = array(
     'name' => 'skip comment approval',
     'roles' => array(
-      'authenticated user' => 'authenticated user',
+      'admin' => 'admin',
     ),
     'module' => 'comment',
   );
@@ -2316,12 +2539,19 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'location',
   );
 
-  // Exported permission: 'use PHP for tracking visibility'.
-  $permissions['use PHP for tracking visibility'] = array(
-    'name' => 'use PHP for tracking visibility',
+  // Exported permission: 'use PHP for settings'.
+  $permissions['use PHP for settings'] = array(
+    'name' => 'use PHP for settings',
     'roles' => array(
       'admin' => 'admin',
     ),
+    'module' => 'php',
+  );
+
+  // Exported permission: 'use PHP for tracking visibility'.
+  $permissions['use PHP for tracking visibility'] = array(
+    'name' => 'use PHP for tracking visibility',
+    'roles' => array(),
     'module' => 'googleanalytics',
   );
 
@@ -2342,7 +2572,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'use media wysiwyg'.
   $permissions['use media wysiwyg'] = array(
     'name' => 'use media wysiwyg',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'media_wysiwyg',
   );
 
@@ -2350,7 +2582,6 @@ function user_roles_permissions_user_default_permissions() {
   $permissions['use text format 1'] = array(
     'name' => 'use text format 1',
     'roles' => array(
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'filter',
@@ -2364,6 +2595,13 @@ function user_roles_permissions_user_default_permissions() {
       'Emergency-Page-Login' => 'Emergency-Page-Login',
       'admin' => 'admin',
     ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format php_code'.
+  $permissions['use text format php_code'] = array(
+    'name' => 'use text format php_code',
+    'roles' => array(),
     'module' => 'filter',
   );
 
@@ -2425,14 +2663,18 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'view own files'.
   $permissions['view own files'] = array(
     'name' => 'view own files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
   // Exported permission: 'view own private files'.
   $permissions['view own private files'] = array(
     'name' => 'view own private files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 
@@ -2448,7 +2690,9 @@ function user_roles_permissions_user_default_permissions() {
   // Exported permission: 'view private files'.
   $permissions['view private files'] = array(
     'name' => 'view private files',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'file_entity',
   );
 

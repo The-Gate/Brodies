@@ -106,3 +106,6 @@ $breadcrumb-active-color:       $colour-blue-02;
 // css columns
 $col-count: 2;
 $col-gap:  7.4vw;
+
+// prevent content getting caught up in the icons
+$avoid-title-icon: calc(100% - 125px);

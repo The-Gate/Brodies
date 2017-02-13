@@ -16,6 +16,7 @@ features[field_instance][] = node-slide-field_slide_order
 features[node][] = slide
 features[slick_optionset][] = clone_of_default
 features[views_view][] = overview_slider_listing
+features[views_view][] = overview_slider_listing_mobile
 features[views_view][] = slideshow
 features_exclude[dependencies][ctools] = ctools
 features_exclude[dependencies][features] = features

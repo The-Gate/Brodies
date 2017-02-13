@@ -196,9 +196,9 @@
 
                 });
             }
-            
+
             // application form - over the progress bar to the first field set heading
-            if($('.node-type-webform.page-graduate .webform-progressbar').length > 0){
+            if ($('.node-type-webform.page-graduate .webform-progressbar').length > 0) {
                 $(".webform-progressbar .webform-progressbar-number").text($(".webform-progressbar .webform-progressbar-number").text().replace("Page", "Step"));
                 $('.node-type-webform.page-graduate .webform-progressbar').appendTo($('.node-type-webform.page-graduate form > div > fieldset:first > legend'));
                 $('.node-type-webform.page-graduate  form > div > fieldset:first > legend').append('<div class="title-icon"><img src="/sites/all/themes/brodies201612/images/title-icons/title-icon-graduates.png"></div>');
@@ -206,12 +206,21 @@
                 $('.webform-previous, .webform-next,.btn-primary.form-submit').wrapAll('<div class="pull-right"></div>')
             }
 
-
+            // search
             $('#block-views-search-block .view-content').prepend($('.view-search .view-header'));
             $('.close-results').click(function (e) {
                 e.preventDefault();
                 $('#block-views-search-block .view-content, #block-views-search-block .view-header,#block-views-search-block .pager').remove();
             });
+            // search on mobile - move the search input to screen top to give room for results
+            $("#edit-search-api-views-fulltext-wrapper #edit-search-api-views-fulltext").focusin(function () {
+//                console.log('start scrollin');
+                if ($(window).width() < screen_sm_min) {
+                    $('html,body').animate({scrollTop: ($(this).offset().top - ($(this).height() * 2))}, 800);
+                }
+            });
+
+
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
             function readMoreSetup() {
