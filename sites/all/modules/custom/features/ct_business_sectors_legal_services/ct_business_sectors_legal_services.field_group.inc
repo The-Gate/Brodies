@@ -277,14 +277,11 @@ function ct_business_sectors_legal_services_field_group_info() {
     'children' => array(
       0 => 'field_related_video',
     ),
-    'format_type' => 'accordion',
+    'format_type' => 'accordion-item',
     'format_settings' => array(
-      'formatter' => '',
+      'formatter' => 'closed',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-related-video field-group-accordion',
-        'effect' => 'bounceslide',
-        'id' => '',
+        'classes' => '',
       ),
     ),
   );

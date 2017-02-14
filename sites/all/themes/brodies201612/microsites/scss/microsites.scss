@@ -305,11 +305,11 @@ h4{
         box-shadow: none;
         border-radius: 0;
         &.form-select{
-          width:95%;  
+            width:95%;  
         }
     }
     .form-required{
-            color: #f00;
+        color: #f00;
     }
     form {
         input{
@@ -344,7 +344,7 @@ h4{
                 padding-left:0;
             }
         }
-        
+
         .radio input[type="radio"],
         .radio-inline input[type="radio"],
         .checkbox input[type="checkbox"],
@@ -353,25 +353,27 @@ h4{
             margin-left:0;
             margin-right:5px;
         }
-        
+
         .form-item{
             margin-bottom: 13px;
         }
         .form-actions {
-            text-align: right;
-            .form-submit{
-                text-align: center;
-                display:inline-block;
-                width:auto;
-                background-color:#039;
-                color:white;
-                text-transform:uppercase;
-                padding:10px;
-                font-weight:bolder;	
-                border:none;
-                border-radius: 0;
-                margin:10px 30px 10px 10px;
-            }
+            width:100px !important;
+            margin-bottom:20px;
+            /*            text-align: right;
+                        .form-submit{
+                            text-align: center;
+                            display:inline-block;
+                            width:auto;
+                            background-color:#039;
+                            color:white;
+                            text-transform:uppercase;
+                            padding:10px;
+                            font-weight:bolder;	
+                            border:none;
+                            border-radius: 0;
+                            margin:10px 30px 10px 10px;
+                        }*/
         }
     }
 }
@@ -734,4 +736,16 @@ a.homeReg{
         }
     }
 
+}
+
+.menu-block-8 {
+    .menu.nav{
+        column-count: 3;
+        column-gap: 10px;
+
+        ul{
+            display:inline-block;
+            width:100%;
+        }
+    }
 }

@@ -4142,6 +4142,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_teaser_image',
+    'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -4150,7 +4151,7 @@ function ct_shared_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => NULL,
+      'default_image' => 0,
       'description_field' => 0,
       'list_default' => 1,
       'list_field' => 0,

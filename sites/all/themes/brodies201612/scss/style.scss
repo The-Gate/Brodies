@@ -1385,7 +1385,7 @@ body{
 /********************** content fade mask ***********************/
 .mask{
     position:absolute;
-    bottom:0px;
+    bottom:5px;
     left:ceil(($grid-gutter-width / 2));
     height:50px;
     width:calc(100% - 30px);
@@ -1998,7 +1998,7 @@ body.page-landing{
         @media #{$tablet}{
             position:absolute;
             left:0px;
-            bottom:60px;
+            bottom:80px;
             width:30%; 
         }
         font-family:georgia;
@@ -2110,6 +2110,12 @@ body.page-landing{
     .footer-wrapper{
         margin-top:0;
         border-top:4px solid $colour-orange-01;
+    }
+
+    @media #{$normal} {
+        .is-table-row [class*="col-"] {
+            height:250px
+        }
     }
 }
 .node-type-lpage,

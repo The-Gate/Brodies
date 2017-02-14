@@ -3,6 +3,7 @@ description = slideshow, overview & slick settings
 core = 7.x
 package = Brodies
 dependencies[] = ct_shared_fields
+dependencies[] = media
 dependencies[] = slick
 dependencies[] = slick_views
 dependencies[] = text

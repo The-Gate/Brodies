@@ -21,7 +21,7 @@ function ct_case_studies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -76,7 +76,7 @@ function ct_case_studies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -155,7 +155,7 @@ function ct_case_studies_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -226,7 +226,7 @@ function ct_case_studies_field_default_field_instances() {
     'description' => 'This image will be visible on any list when this content is presented. Don\'t worry about dimensions . Uploaded image will be <b>automatically resized/cropped to required dimension</b>',
     'display' => array(
       'cck_blocks' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
@@ -303,21 +303,32 @@ function ct_case_studies_field_default_field_instances() {
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
-      'max_resolution' => 0,
-      'min_resolution' => 0,
+      'max_resolution' => '',
+      'min_resolution' => '',
       'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'weight' => -3,
     'widget' => array(
-      'active' => 0,
-      'module' => 'image',
+      'active' => 1,
+      'module' => 'media',
       'settings' => array(
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'bar',
-        'use_default_image' => 0,
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => -3,
     ),
     'widget_type' => 'imagefield_widget',

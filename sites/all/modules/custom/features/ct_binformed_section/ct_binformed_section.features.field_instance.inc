@@ -341,13 +341,20 @@ function ct_binformed_section_field_default_field_instances() {
     'weight' => -2,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => -2,
     ),
     'widget_type' => 'imagefield_widget',

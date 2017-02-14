@@ -5,6 +5,7 @@ dependencies[] = ct_shared_fields
 dependencies[] = features
 dependencies[] = field_group
 dependencies[] = image
+dependencies[] = media
 dependencies[] = node_reference
 dependencies[] = picture
 dependencies[] = text

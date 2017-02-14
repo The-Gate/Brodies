@@ -772,13 +772,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => -2,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 3,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1044,13 +1051,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => 36,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 36,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1130,13 +1144,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => 39,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 39,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1216,13 +1237,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => 42,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 42,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1302,13 +1330,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => 45,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 45,
     ),
     'widget_type' => 'imagefield_widget',
@@ -2485,13 +2520,20 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     'weight' => 6,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 6,
     ),
     'widget_type' => 'imagefield_widget',

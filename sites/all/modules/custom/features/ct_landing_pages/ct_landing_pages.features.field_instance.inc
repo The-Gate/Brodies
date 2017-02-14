@@ -387,13 +387,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => -2,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => -2,
     ),
     'widget_type' => 'imagefield_widget',
@@ -636,13 +643,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 9,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 9,
     ),
     'widget_type' => 'imagefield_widget',
@@ -878,13 +892,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 10,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 10,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1120,13 +1141,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 12,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 12,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1438,13 +1466,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 15,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 15,
     ),
     'widget_type' => 'imagefield_widget',
@@ -1756,13 +1791,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 5,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 5,
     ),
     'widget_type' => 'imagefield_widget',
@@ -2081,13 +2123,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 6,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 6,
     ),
     'widget_type' => 'imagefield_widget',
@@ -2297,13 +2346,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => -3,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => -3,
     ),
     'widget_type' => 'imagefield_widget',
@@ -2547,13 +2603,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 11,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 11,
     ),
     'widget_type' => 'imagefield_widget',
@@ -2789,13 +2852,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 14,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 14,
     ),
     'widget_type' => 'imagefield_widget',
@@ -3357,13 +3427,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 24,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 24,
     ),
     'widget_type' => 'imagefield_widget',
@@ -3457,13 +3534,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 27,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 27,
     ),
     'widget_type' => 'imagefield_widget',
@@ -3557,13 +3641,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 30,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 30,
     ),
     'widget_type' => 'imagefield_widget',
@@ -3657,13 +3748,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 33,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 33,
     ),
     'widget_type' => 'imagefield_widget',
@@ -4239,13 +4337,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => 9,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 9,
     ),
     'widget_type' => 'imagefield_widget',
@@ -4455,13 +4560,20 @@ function ct_landing_pages_field_default_field_instances() {
     'weight' => -2,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 2,
     ),
     'widget_type' => 'imagefield_widget',
@@ -5225,13 +5337,20 @@ Leave blank for clear background',
     'weight' => -4,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 1,
     ),
     'widget_type' => 'imagefield_widget',
@@ -5315,13 +5434,20 @@ Leave blank for clear background',
     'weight' => 37,
     'widget' => array(
       'active' => 0,
-      'module' => 'image',
+      'module' => 'media',
       'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'image' => 'image',
+        ),
+        'browser_plugins' => array(),
         'preview_image_style' => 'thumbnail',
         'progress_indicator' => 'bar',
         'use_default_image' => 0,
       ),
-      'type' => 'image_image',
+      'type' => 'media_generic',
       'weight' => 16,
     ),
     'widget_type' => 'imagefield_widget',

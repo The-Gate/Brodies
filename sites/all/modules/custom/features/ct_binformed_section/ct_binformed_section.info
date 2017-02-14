@@ -9,6 +9,7 @@ dependencies[] = field_group
 dependencies[] = file
 dependencies[] = file_entity
 dependencies[] = image
+dependencies[] = media
 dependencies[] = node_reference
 dependencies[] = number
 dependencies[] = options

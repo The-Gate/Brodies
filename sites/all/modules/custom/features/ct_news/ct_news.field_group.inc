@@ -25,11 +25,17 @@ function ct_news_field_group_info() {
     'children' => array(
       0 => 'field_related_people',
     ),
-    'format_type' => 'accordion-item',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Key Contacts',
       'instance_settings' => array(
-        'classes' => 'group-person-contact field-group-accordion-item',
+        'id' => '',
+        'classes' => 'related-item',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
       'formatter' => 'open',
     ),
@@ -51,15 +57,19 @@ function ct_news_field_group_info() {
     'children' => array(
       0 => 'group_person_contact',
     ),
-    'format_type' => 'accordion',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'related content',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'group-related-content field-group-accordion group-related-people',
+        'classes' => 'related-wrapper col-md-12',
         'description' => '',
-        'effect' => 'bounceslide',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_related_content|node|cnews|default'] = $field_group;
