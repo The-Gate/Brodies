@@ -718,7 +718,12 @@ body{
         }
     }
 }
-
+.inline-read-more{
+    display: inline;
+    font-weight:700;
+    text-transform:uppercase;
+    color:$colour-black-01;
+}
 /********************** BLOCKS***********************/
 .region-sidebar-first,
 .region-sidebar-second{

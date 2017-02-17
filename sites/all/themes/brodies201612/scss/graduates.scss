@@ -140,6 +140,7 @@ body.page-graduate{
         .slide-header{
             position: absolute;
             top:15px;
+            left:0;
             background:rgba(0,35,93,0.8);
             display: inline-block;
             a{
@@ -173,6 +174,7 @@ body.page-graduate{
             }
         }
     }
+    .view-graduate-news,
     .field-name-field-graduate-slideshow {
         .cta-overlay{
             .cta-overlay-inner{
@@ -195,14 +197,41 @@ body.page-graduate{
         @media #{$normal}{
             .slick-dots{
                 bottom:0;
-                text-align: left;
-                left:0;
                 li{
                     display:block;
                 }
             }
         }
     }
+
+    .field-name-field-graduate-slideshow {
+        @media #{$normal}{
+            .slick-dots{
+                text-align: left;
+                left:0;
+            }
+        }
+    }
+
+    .view-graduate-news{
+        @media #{$normal}{
+            .slick-dots{
+                right:0;
+                width:auto;
+            }
+        }
+        .mod-quote .cta-overlay{
+            .overlay-title {
+                font-size:$font-size-18;
+                font-family:$font-family-sans-serif;
+                text-transform:none;
+                a{
+                    color: $colour-pink;
+                }
+            }
+        }
+    }
+
     &.node-type-graduate-homepage .cta-overlay.field-collection-item-field-graduate-cta{
         .cta-overlay-inner{
             top:auto;
@@ -360,6 +389,13 @@ body.page-graduate{
                 }
             }
         }
+    }
+}
+// home news feed
+#block-views-graduate-news-block{
+    margin-top:0;
+    .slick-slider{
+        margin-bottom:0;
     }
 }
 // application form
