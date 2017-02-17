@@ -99,6 +99,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'media',
   );
 
+  // Exported permission: 'access news feeds'.
+  $permissions['access news feeds'] = array(
+    'name' => 'access news feeds',
+    'roles' => array(),
+    'module' => 'aggregator',
+  );
+
   // Exported permission: 'access own webform results'.
   $permissions['access own webform results'] = array(
     'name' => 'access own webform results',
@@ -296,6 +303,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'image',
   );
 
+  // Exported permission: 'administer imagecache external'.
+  $permissions['administer imagecache external'] = array(
+    'name' => 'administer imagecache external',
+    'roles' => array(),
+    'module' => 'imagecache_external',
+  );
+
   // Exported permission: 'administer imce'.
   $permissions['administer imce'] = array(
     'name' => 'administer imce',
@@ -347,6 +361,13 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'administer modules',
     'roles' => array(),
     'module' => 'system',
+  );
+
+  // Exported permission: 'administer news feeds'.
+  $permissions['administer news feeds'] = array(
+    'name' => 'administer news feeds',
+    'roles' => array(),
+    'module' => 'aggregator',
   );
 
   // Exported permission: 'administer nodes'.
@@ -402,13 +423,6 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'administer scheduler',
     'roles' => array(),
     'module' => 'scheduler',
-  );
-
-  // Exported permission: 'administer search'.
-  $permissions['administer search'] = array(
-    'name' => 'administer search',
-    'roles' => array(),
-    'module' => 'search',
   );
 
   // Exported permission: 'administer search_api'.
@@ -2500,13 +2514,6 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'scheduler',
   );
 
-  // Exported permission: 'search content'.
-  $permissions['search content'] = array(
-    'name' => 'search content',
-    'roles' => array(),
-    'module' => 'search',
-  );
-
   // Exported permission: 'select account cancellation method'.
   $permissions['select account cancellation method'] = array(
     'name' => 'select account cancellation method',
@@ -2553,13 +2560,6 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'use PHP for tracking visibility',
     'roles' => array(),
     'module' => 'googleanalytics',
-  );
-
-  // Exported permission: 'use advanced search'.
-  $permissions['use advanced search'] = array(
-    'name' => 'use advanced search',
-    'roles' => array(),
-    'module' => 'search',
   );
 
   // Exported permission: 'use ctools import'.

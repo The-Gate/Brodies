@@ -70,6 +70,7 @@ function site_search_default_search_api_index() {
       "index_directly" : 0,
       "cron_limit" : "50",
       "fields" : {
+        "author" : { "type" : "integer", "entity_type" : "user" },
         "body:value" : { "type" : "text", "boost" : "21.0" },
         "nid" : { "type" : "integer" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
@@ -209,6 +210,12 @@ function site_search_default_search_api_server() {
             "table" : "search_api_db_limited_type_index_text",
             "type" : "text",
             "boost" : "21.0"
+          },
+          "author" : {
+            "table" : "search_api_db_limited_type_index",
+            "column" : "author",
+            "type" : "integer",
+            "boost" : "1.0"
           }
         }
       }
