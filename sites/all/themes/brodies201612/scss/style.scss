@@ -53,6 +53,9 @@ body{
     color: $colour-blue-02;
     font-size: $font-size-base;
     line-height:1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased
 }
 
 p {
@@ -709,13 +712,13 @@ body{
             background:$colour-orange-02;
             text-decoration: none;
         }
-        .view-guides-downloads &{
-            background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-blue-02;
-            padding-right:25px;
-            &:hover {
-                background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-orange-02;
-            }
-        }
+        /*        .view-guides-downloads &{
+                    background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-blue-02;
+                    padding-right:25px;
+                    &:hover {
+                        background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-orange-02;
+                    }
+                }*/
     }
 }
 .inline-read-more{
@@ -1423,8 +1426,8 @@ body{
     @media #{$normal}{
         &.is-table-row [class*="col-"] {
             background:$colour-blue-01;
-            border-left:15px solid white;
-            border-right:15px solid white;
+            border-left:5px solid white;
+            border-right:5px solid white;
             border-bottom:0 !important;
         }
     }
@@ -1451,10 +1454,15 @@ body{
         .views-field-body{
             color: $colour-white-01;
         }
+        .date,
+        .views-field-body{
+            font-size: $font-size-12;
+        }
         .date{
             background: transparent !important;
             color: $colour-orange-01;
             padding-left:0;
+            margin-bottom:1em;
         }
     }
 }
@@ -1592,9 +1600,19 @@ body{
     }
     .field-name-field-people-vcard{
         @extend .read-more-block;
+        font-family: $font-family-sans-serif-pt;
     }
     .field-label{
         color: $colour-orange-02;
+        font-family:$font-family-serif;
+    }
+    .node-people{
+        .col-md-9{
+            .field{
+                margin-top:13px !important;
+                font-family:$font-family-serif;
+            }
+        }
     }
 }
 
@@ -1603,6 +1621,56 @@ body{
     .views-exposed-form{
         width:100%;
     }
+    .view-content{
+        clear:both;
+    }
+    .views-row:not(.col-md-3) {
+        border-color: transparent !important;
+        .views-field-title{
+            background: $colour-blue-01;
+            h2{
+                margin-bottom:0;
+                a{
+                    display:block;
+                    padding:10px 18px;
+                    font-size: $font-size-18;
+                    color: $colour-white-01;
+                    font-family: $font-family-sans-serif-pt;
+                }
+            }
+        }
+    }
+    .views-row.col-md-3 {
+        .views-field-title{
+            h2{
+                font-family: $font-family-sans-serif-pt;
+            }
+        }
+    }
+    .row-content-wrapper{
+        padding:15px;
+        border-left: 3px solid  $colour-grey-02;
+        border-right: 3px solid  $colour-grey-02;
+        border-bottom: 3px solid  $colour-grey-02;
+        overflow:hidden;
+        .views-label{
+            font-weight:700;
+        }
+        .views-field-body{
+            margin:2em 0;
+        }
+        .date-display-range{
+            display:inline;
+        }
+        .seminar-button{
+            margin-top:15px;
+        }
+        .read-more-block{
+            display: block;
+            text-align: center;
+        }
+    }
+
 }
 .node-type-event{
     .field-name-body{
@@ -1646,7 +1714,9 @@ body{
         background:$colour-pink;
         padding:10px 0;
     }
-    &.add,
+    &.add{
+        background:$colour-green;
+    }
     &.waitlist{
         background:$colour-purple;
     }
@@ -1758,6 +1828,41 @@ body{
     .btn-default{
         float: right;
         @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+    }
+}
+
+/********************** Exposed Filters Mods ***********************/
+// people filter
+#block-views-exp-people-listing-page {
+    label{
+        font-weight: 400;
+    }
+    div#edit-field-people-partner-value-wrapper *{
+        display:inline
+    }
+    div#edit-field-people-partner-value-wrapper .bef-checkboxes{
+        label{
+            display:none;
+        }
+    }
+}
+// guides & downloads
+// news
+@media #{$wide}{
+    #views-exposed-form-top-news-page-1,
+    .view-guides-downloads{
+        #edit-combine-wrapper{
+            max-width:50%;
+            width:50%;
+        }
+    }
+}
+
+// news
+
+@media #{$tablet-max}{
+    #views-exposed-form-top-news-page-1{
+        margin-top:40px;   
     }
 }
 /********************** JQuery UI: Widgets ***********************/
@@ -1885,7 +1990,10 @@ body{
     padding:10px;
     margin-bottom:$grid-gutter-width;
     @media #{$normal}{
-        min-height:5.4em;
+        min-height:4.4em;
+    }
+    @media #{$wide}{
+        min-height:4em;
     }
     a{
         font-family: $font-family-sans-serif-pt;
@@ -1894,9 +2002,14 @@ body{
 }
 
 .node-reference-links{
-
+    h2{
+        font-weight:400;
+        line-height:0.7;
+    }
     a{
         font-size:$font-size-16;
+        line-height:0.7;
+        font-weight:400;
     }
 }
 
@@ -2328,8 +2441,8 @@ h1.page-header,
 .view .views-row{
     // pink highlights:
     .page-node-62 &,
-    .page-node-44 &,
     .page-binformed-legal-updates &,
+    .page-binformed-guides-and-downloads &,
     .node-type-lupdate &,
     .node-type-event &,
     .node-type-larea &{
@@ -2341,12 +2454,24 @@ h1.page-header,
     }
 }
 
+
+h2.block-title,
+h1.page-header{
+    // pink highlights:
+    .page-node-44 &{
+        border-bottom-color: $colour-pink !important;
+    }
+}
+
+
+
 .field-name-field-l-date,
 .date{
     // pink highlights:
     .page-node-62 &,
     .page-node-44 &,
     .page-binformed-legal-updates &,
+    .page-binformed-guides-and-downloads &,
     .node-type-lupdate &,
     .node-type-event &,
     .node-type-larea &{

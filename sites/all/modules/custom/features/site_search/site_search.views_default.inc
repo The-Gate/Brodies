@@ -138,7 +138,6 @@ function site_search_views_default_views() {
   $handler->display->display_options['filters']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
   $handler->display->display_options['filters']['search_api_views_fulltext']['table'] = 'search_api_index_limited_type_index';
   $handler->display->display_options['filters']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
-  $handler->display->display_options['filters']['search_api_views_fulltext']['operator'] = 'OR';
   $handler->display->display_options['filters']['search_api_views_fulltext']['exposed'] = TRUE;
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator_id'] = 'search_api_views_fulltext_op';
   $handler->display->display_options['filters']['search_api_views_fulltext']['expose']['operator'] = 'search_api_views_fulltext_op';
@@ -150,7 +149,9 @@ function site_search_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
+  $handler->display->display_options['filters']['search_api_views_fulltext']['min_length'] = '3';
   $handler->display->display_options['select_labels'] = array(
     'search_api_views_fulltext' => 'search',
   );

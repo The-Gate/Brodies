@@ -351,6 +351,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['field_people_partner_value']['group'] = 1;
   $handler->display->display_options['filters']['field_people_partner_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['operator_id'] = 'field_people_partner_value_op';
+  $handler->display->display_options['filters']['field_people_partner_value']['expose']['label'] = 'Partners only';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['operator'] = 'field_people_partner_value_op';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['identifier'] = 'field_people_partner_value';
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['multiple'] = TRUE;
@@ -360,6 +361,7 @@ function views_people_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_people_partner_value']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['field_people_partner_value']['group_info']['identifier'] = 'field_people_partner_value';
@@ -386,7 +388,6 @@ function views_people_views_default_views() {
     'title' => 'Search by name',
     'field_related_sector_nid' => 'Business Sector',
     'field_related_service_nid' => 'Legal Services',
-    'field_people_partner_value' => 'Partner only',
   );
 
   /* Display: Page */

@@ -47,28 +47,37 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['field_event_date']['id'] = 'field_event_date';
   $handler->display->display_options['fields']['field_event_date']['table'] = 'field_data_field_event_date';
   $handler->display->display_options['fields']['field_event_date']['field'] = 'field_event_date';
-  $handler->display->display_options['fields']['field_event_date']['label'] = '';
-  $handler->display->display_options['fields']['field_event_date']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_event_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_date']['label'] = 'Date';
+  $handler->display->display_options['fields']['field_event_date']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_date']['element_label_type'] = 'span';
   $handler->display->display_options['fields']['field_event_date']['settings'] = array(
-    'format_type' => 'long',
+    'format_type' => 'brodies_date_only_long_',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="date">[field_event_date]</div>';
-  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
+  /* Field: Content: When */
+  $handler->display->display_options['fields']['field_event_date_2']['id'] = 'field_event_date_2';
+  $handler->display->display_options['fields']['field_event_date_2']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['fields']['field_event_date_2']['field'] = 'field_event_date';
+  $handler->display->display_options['fields']['field_event_date_2']['label'] = 'Time';
+  $handler->display->display_options['fields']['field_event_date_2']['element_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_date_2']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_date_2']['settings'] = array(
+    'format_type' => 'brodies_time_only',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Field: Content: Where */
   $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
   $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
   $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['label'] = 'Location';
   $handler->display->display_options['fields']['field_event_location']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_event_location']['element_label_type'] = 'span';
   $handler->display->display_options['fields']['field_event_location']['type'] = 'node_reference_plain';
@@ -100,6 +109,13 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="read-more-block">[view_node]</div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Fully booked */
+  $handler->display->display_options['fields']['field_event_full']['id'] = 'field_event_full';
+  $handler->display->display_options['fields']['field_event_full']['table'] = 'field_data_field_event_full';
+  $handler->display->display_options['fields']['field_event_full']['field'] = 'field_event_full';
+  $handler->display->display_options['fields']['field_event_full']['label'] = '';
+  $handler->display->display_options['fields']['field_event_full']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_full']['element_label_colon'] = FALSE;
   /* Field: Content: Related sector */
   $handler->display->display_options['fields']['field_related_sector']['id'] = 'field_related_sector';
   $handler->display->display_options['fields']['field_related_sector']['table'] = 'field_data_field_related_sector';
@@ -223,6 +239,7 @@ function events_seminars_ct_view_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['selective_display_field'] = 'field_related_sector';
   $handler->display->display_options['filters']['field_related_sector_nid_selective']['selective_items_limit'] = '100';
@@ -241,19 +258,20 @@ function events_seminars_ct_view_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_related_service_nid_selective']['selective_display_field'] = 'field_related_service';
   $handler->display->display_options['filters']['field_related_service_nid_selective']['selective_items_limit'] = '100';
   $handler->display->display_options['select_labels'] = array(
     'field_event_l_details_value_selective' => 'Location',
-    'field_related_sector_nid_selective' => 'sector',
+    'field_related_sector_nid_selective' => 'Sector',
     'field_event_date_value_selective' => 'Date',
-    'field_related_service_nid_selective' => 'services ',
+    'field_related_service_nid_selective' => 'Services ',
     'field_event_location_nid_selective' => 'Location',
   );
 
   /* Display: Main Seminar Listing */
-  $handler = $view->new_display('block', 'Main Seminar Listing', 'block');
+  $handler = $view->new_display('block', 'Main Seminar Listing', 'main_seminar_listing');
 
   /* Display: Related Seminars */
   $handler = $view->new_display('block', 'Related Seminars', 'block_1');
@@ -297,6 +315,14 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_type'] = 'h2';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Where */
+  $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['label'] = '';
+  $handler->display->display_options['fields']['field_event_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_event_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_location']['type'] = 'node_reference_plain';
   /* Field: Content: When */
   $handler->display->display_options['fields']['field_event_date']['id'] = 'field_event_date';
   $handler->display->display_options['fields']['field_event_date']['table'] = 'field_data_field_event_date';
@@ -333,7 +359,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['label'] = '';
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="text-wrapper">
 <div class="views-field-title"><h2>[title]</h2></div>
-<div class="date">[field_event_date]</div>
+<div class="date">[field_event_location]  [field_event_date]</div>
 <div class="views-field-body">[body]</div>
 </div>';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;

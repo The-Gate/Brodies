@@ -829,13 +829,13 @@ function ct_people_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => '',
+      'file_extensions' => 'vcf',
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
     'weight' => 4,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'file',
       'settings' => array(
         'progress_indicator' => 'bar',

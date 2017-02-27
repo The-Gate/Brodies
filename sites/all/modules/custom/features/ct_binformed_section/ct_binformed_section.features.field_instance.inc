@@ -691,11 +691,7 @@ function ct_binformed_section_field_default_field_instances() {
   // Exported field_instance: 'node-lupdate-field_l_area'.
   $field_instances['node-lupdate-field_l_area'] = array(
     'bundle' => 'lupdate',
-    'default_value' => array(
-      0 => array(
-        'nid' => '',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -748,13 +744,9 @@ function ct_binformed_section_field_default_field_instances() {
     ),
     'weight' => -3,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'autocomplete_match' => 'contains',
-        'default_value_php' => NULL,
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'options_select',
       'weight' => 2,
     ),

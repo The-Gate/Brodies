@@ -1637,6 +1637,7 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'download any audio files',
     'roles' => array(
       'admin' => 'admin',
+      'anonymous user' => 'anonymous user',
     ),
     'module' => 'file_entity',
   );
@@ -1646,6 +1647,7 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'download any document files',
     'roles' => array(
       'admin' => 'admin',
+      'anonymous user' => 'anonymous user',
     ),
     'module' => 'file_entity',
   );
@@ -1655,6 +1657,7 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'download any image files',
     'roles' => array(
       'admin' => 'admin',
+      'anonymous user' => 'anonymous user',
     ),
     'module' => 'file_entity',
   );
@@ -1664,6 +1667,7 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'download any video files',
     'roles' => array(
       'admin' => 'admin',
+      'anonymous user' => 'anonymous user',
     ),
     'module' => 'file_entity',
   );

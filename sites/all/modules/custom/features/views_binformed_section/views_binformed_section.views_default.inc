@@ -119,7 +119,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
 <div class="views-field-title"><h2>[title]</h2></div>
-[field_d_date]
+<div class="date">[field_d_date]</div>
 <div class="views-field-body">[body]</div>
 <div class="views-taxonomy-list"><h3>Categories:</h2> [taxonomy_vocabulary_3] </div>
 <div class="read-more-block">[field_d_file]</div>
@@ -401,13 +401,14 @@ Title Desc|Z -> A',
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
   $handler->display->display_options['filters']['combine']['expose']['operator'] = 'combine_op';
-  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'combine';
+  $handler->display->display_options['filters']['combine']['expose']['identifier'] = 'legal-updates-combine';
   $handler->display->display_options['filters']['combine']['expose']['remember_roles'] = array(
     2 => '2',
     3 => 0,
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['combine']['fields'] = array(
     'title' => 'title',
@@ -421,13 +422,14 @@ Title Desc|Z -> A',
   $handler->display->display_options['filters']['field_l_area_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_l_area_nid']['expose']['operator_id'] = 'field_l_area_nid_op';
   $handler->display->display_options['filters']['field_l_area_nid']['expose']['operator'] = 'field_l_area_nid_op';
-  $handler->display->display_options['filters']['field_l_area_nid']['expose']['identifier'] = 'field_l_area_nid';
+  $handler->display->display_options['filters']['field_l_area_nid']['expose']['identifier'] = 'legal-updates-field_l_area_nid';
   $handler->display->display_options['filters']['field_l_area_nid']['expose']['remember_roles'] = array(
     2 => '2',
     3 => 0,
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   /* Filter criterion: Content: Date (field_l_date) */
   $handler->display->display_options['filters']['field_l_date_value']['id'] = 'field_l_date_value';
@@ -436,13 +438,14 @@ Title Desc|Z -> A',
   $handler->display->display_options['filters']['field_l_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_l_date_value']['expose']['operator_id'] = 'field_l_date_value_op';
   $handler->display->display_options['filters']['field_l_date_value']['expose']['operator'] = 'field_l_date_value_op';
-  $handler->display->display_options['filters']['field_l_date_value']['expose']['identifier'] = 'field_l_date_value';
+  $handler->display->display_options['filters']['field_l_date_value']['expose']['identifier'] = 'legal-updates-field_l_date_value';
   $handler->display->display_options['filters']['field_l_date_value']['expose']['remember_roles'] = array(
     2 => '2',
     3 => 0,
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_l_date_value']['granularity'] = 'year';
   $handler->display->display_options['filters']['field_l_date_value']['year_range'] = '2006:+0';
