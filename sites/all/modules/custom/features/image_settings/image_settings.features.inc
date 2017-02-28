@@ -8,6 +8,12 @@
  * Implements hook_ctools_plugin_api().
  */
 function image_settings_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "breakpoints" && $api == "default_breakpoint_group") {
+    return array("version" => "1");
+  }
+  if ($module == "breakpoints" && $api == "default_breakpoints") {
+    return array("version" => "1");
+  }
   if ($module == "picture" && $api == "default_picture_mapping") {
     return array("version" => "2");
   }
@@ -209,6 +215,22 @@ function image_settings_image_default_styles() {
     ),
   );
 
+  // Exported image style: col-8--lg.
+  $styles['col-8--lg'] = array(
+    'label' => 'col-8--lg',
+    'effects' => array(
+      42 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 760,
+          'height' => '',
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: col-9--lg.
   $styles['col-9--lg'] = array(
     'label' => 'col-9--lg',
@@ -221,6 +243,31 @@ function image_settings_image_default_styles() {
           'upscale' => 1,
         ),
         'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: col-9--lg-max-h300.
+  $styles['col-9--lg-max-h300'] = array(
+    'label' => 'col-9--lg-MAX-H300',
+    'effects' => array(
+      43 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 770,
+          'height' => '',
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+      44 => array(
+        'name' => 'image_crop',
+        'data' => array(
+          'width' => 770,
+          'height' => 300,
+          'anchor' => 'center-top',
+        ),
+        'weight' => 2,
       ),
     ),
   );
