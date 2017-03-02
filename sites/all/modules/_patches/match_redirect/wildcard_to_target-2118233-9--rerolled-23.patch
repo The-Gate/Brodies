@@ -1,0 +1,15 @@
+diff --git a/match_redirect.module b/match_redirect.module
+index 24a0af4..26ab409 100644
+--- a/match_redirect.module
++++ b/match_redirect.module
+@@ -93,6 +93,10 @@ function match_redirect_init() {
+           $options['query'] = drupal_get_query_parameters();
+         }
+         // Do the redirect.
++        $wildcardPos = strrpos($patterns, '*');
++        if (isset($wildcardPos) && $wildcardPos !== FALSE) {
++          $redirect = substr($redirect, 0, -1) . substr($current_alias, $wildcardPos);
++        }
+         drupal_goto($redirect, $options, $code);
+         break;
+       }

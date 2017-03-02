@@ -221,19 +221,29 @@
             });
 
 
-           if ($('.ckeditor-tabber').length > 0) {
+            if ($('.ckeditor-tabber').length > 0) {
                 var all_content = $('.ckeditor-tabber dd').hide();
-                $('.ckeditor-tabber dt').on( "click", function() {
+                $('.ckeditor-tabber dt').each(function () {
+                    $(this).prepend('<span class="ui-tabber-header-icon"></span>');
+                });
+                $('.ckeditor-tabber dt').on("click", function () {
                     all_content.hide('fast');
-                    $(this).next('dd').slideToggle('fast', function () {
-                        //console.log('start check');
-                        if ($(this).offset().top < $(window).scrollTop()) {
-                            //console.log('this offset: ' + $(this).offset().top + ' scroll window: ' + $(window).scrollTop());
-                            var scrollTo = ($(this).offset().top) - 100;
-                            $(window).scrollTop(scrollTo);
-                            //console.log('this offset: ' + scrollTo + ' scroll window: ' + $(window).scrollTop());
-                        }
-                    })
+                    if ($(this).hasClass('active')) {
+                        $('.ckeditor-tabber dt').removeClass('active');
+                    } else {
+                        $('.ckeditor-tabber dt').removeClass('active');
+                        $(this).addClass('active');
+                        $(this).next('dd').slideToggle('fast', function () {
+                            //console.log('start check');
+                            if ($(this).offset().top < $(window).scrollTop()) {
+                                //console.log('this offset: ' + $(this).offset().top + ' scroll window: ' + $(window).scrollTop());
+                                var scrollTo = ($(this).offset().top) - 100;
+                                $(window).scrollTop(scrollTo);
+                                //console.log('this offset: ' + scrollTo + ' scroll window: ' + $(window).scrollTop());
+                            }
+                        })
+                    }
+
                 });
             }
 
