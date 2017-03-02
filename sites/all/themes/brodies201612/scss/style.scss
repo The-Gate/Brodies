@@ -98,7 +98,12 @@ hr {
     padding-left:0;
     padding-right:0;
 }
-a {outline : none;}
+a {
+    outline : none;
+    #block-system-main .field-name-body  &{
+        text-decoration: underline;
+    }
+}
 
 .block.col-md-12,
 .field-name-body {
@@ -334,29 +339,79 @@ blockquote{
 /********************** TAbber ***********************/
 /* dl.ckeditor-tabber */
 dl.ckeditor-tabber{
-    border-bottom:1px solid #000;
     dt,
     dd{
         border:none;
     }
     dt{
-        border-top:1px solid #000;
-        position:relative;
-        font-size:$font-size-22 !important;
-        font-weight:700;
-        background:transparent;
+        position: relative;
+        border: 0;
+        background: $colour-grey-02;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 10px;
+        font-family:$font-family-sans-serif-pt;
+        font-size: $font-size-22;
         width:100%;
-        text-align:left;
         cursor: pointer;
-        padding:5px 0;
+        color: $colour-blue-02;
+        &.active{
+            background:$colour-blue-02;
+            color: $colour-white-01;
+
+        }
     }
     dd{
+        padding-left:0;
+        padding-right:0;
         font-size: $font-size-14;
         font-style:normal;
+        h3{
+            font-family:$font-family-sans-serif-pt;
+            font-size: $font-size-22;
+            color: $colour-blue-02;
+        }
         &.hide{
             display:none;
         }
     }
+
+
+
+    .ui-tabber-header-icon{
+        right: .5em;
+        text-indent: 0;
+        background: none;
+        position: absolute;
+        top: 50%;
+        margin-top: -16px;
+        width: 16px;
+        height: 24px;
+        display: block;
+        overflow: hidden;
+        text-align: center;
+        &:after{
+            display: inline-block;
+            content: '+';
+            position: relative;
+            font-size: 24px;
+            margin-top: -12px;
+            height: 20px;
+            line-height: 1;
+        }
+    }
+    .active{
+        .ui-tabber-header-icon{
+            &:after{
+                content: '-';
+                margin-top: -24px;
+            }
+        }
+
+    }
+
+
+
 }
 
 /********************** Inline Video ***********************/
@@ -1269,6 +1324,11 @@ body{
         }
     }
 }
+#block-views-exp-search-page{
+    .views-exposed-form{
+        background: transparent;
+    }
+}
 
 /********************** slick carousel ***********************/
 .slick-prev{
@@ -1802,7 +1862,14 @@ body{
     }
 }
 /********************** FORMS ***********************/
-input{
+input:not([type]), 
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="text"],
+select{
     -webkit-appearance: none !important;
     border-radius: 0 !important;
 }
@@ -2029,10 +2096,10 @@ input{
     padding:10px;
     margin-bottom:$grid-gutter-width;
     @media #{$normal}{
-        min-height:4.4em;
+        min-height:5.8em;
     }
     @media #{$wide}{
-        min-height:4em;
+        min-height:4.7em;
     }
     a{
         font-family: $font-family-sans-serif-pt;
