@@ -2032,10 +2032,15 @@ select{
         border-radius:0;
         margin-top: 15px;
         border:0;
+        @media #{$tablet-max}{
+            width:100%;
+        }
     }
     .btn-primary,
     .btn-default{
-        float: right;
+        @media #{$normal}{
+            float: right;
+        }
         @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
     }
 }
@@ -2527,7 +2532,13 @@ body.page-landing{
 /********************** Contact  ***********************/
 .menu-block-7{
     margin-bottom:15px;
-    @extend .col-md-10;
+    @extend .col-sm-10;
+    @media #{$tablet}{
+        max-width: $avoid-title-icon;
+        li{
+            margin-bottom:10px;
+        }
+    }
     li{
         @extend .col-md-3;
         background:$colour-blue-01;
@@ -2558,6 +2569,9 @@ body.page-landing{
         border:0;
         border-radius: 0;
         box-shadow: none;
+        @media #{$tablet-max}{
+            margin-bottom:15px;
+        }
     }
     .panel-body{
         padding:0;
@@ -2567,9 +2581,11 @@ body.page-landing{
     }
     .form-actions{
         @extend .col-md-1;
-        clear:none;
-        text-align: right;
         margin-top:15px;
+        @media #{$normal}{
+            clear:none;
+            text-align: right;
+        }
     }
     .captcha{
         @extend .col-md-4;
