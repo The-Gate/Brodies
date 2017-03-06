@@ -80,14 +80,19 @@ $title_output .= render($title_prefix);
 
 // set up titles and title icons
 $default_icon = false;
-// where in the temaplte does this title appear: above / default
+// where in the template does this title appear: above / default
 $title_postion = 'default';
+// show title ONLY on mobile
+$mobile_only = false;
+$mobile_only_class = ' visible-xs';
 if (isset($node)) {
   switch ($node->type) {
     // don't display the title on these content types;
-    case 'overview':
     case 'homepage':
       unset($title);
+      break;
+    case 'overview':
+      $mobile_only = true;
       break;
     case 'news':
     case 'win':
@@ -130,11 +135,12 @@ else {
     }
   }
 }
+$title_class = $mobile_only ? 'page-header' . $mobile_only_class : 'page-header';
 if (isset($customTitle)) {
-  $title_output .= '<h1 class="page-header">' . $customTitle . '</h1>';
+  $title_output .= '<h1 class="' . $title_class . '">' . $customTitle . '</h1>';
 }
 elseif (!empty($title)) {
-  $title_output .= '<h1 class="page-header">' . $title . '</h1>';
+  $title_output .= '<h1 class="' . $title_class . '">' . $title . '</h1>';
 }
 $title_output .= render($title_suffix);
 
@@ -255,7 +261,7 @@ elseif (!($default_icon === false)) {
             <?php endif; ?>
 
             <?php print render($page['pre_content']); ?>
-              <div class="clearfix"></div>
+            <div class="clearfix"></div>
             <div class="main-content">
                 <?php
                 if (isset($customTitle)) {
