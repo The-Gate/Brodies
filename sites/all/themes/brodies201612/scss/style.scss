@@ -1948,6 +1948,9 @@ select{
             background-color: $colour-blue-02;
             color: $colour-white-01;
             border-color: $colour-blue-02;
+            @media #{$tablet-max}{
+                width:100%;
+            }
         }
     }
 
