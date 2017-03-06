@@ -1543,8 +1543,7 @@ body{
 
 }
 /********************** Listings ***********************/
-
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-search.view-display-id-page){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-id-search){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
