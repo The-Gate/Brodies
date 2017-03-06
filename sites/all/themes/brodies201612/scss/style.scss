@@ -1410,6 +1410,10 @@ body{
 }
 .slick-quote{
     margin-top: 30px;
+    @media #{$tablet-max}{
+        width:calc(100% - 140px);
+        margin-left:55px;
+    }
     .slick-prev{
         left: -45px;
     }
@@ -1709,7 +1713,7 @@ body{
     }
     .page-node-62{
         .field-name-body{
-            p.col-md-9{
+            p.col-sm-9{
                 max-width:$avoid-title-icon;
             }
         }
