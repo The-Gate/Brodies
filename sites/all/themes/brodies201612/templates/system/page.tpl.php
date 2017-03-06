@@ -122,6 +122,17 @@ if (isset($node)) {
     case 'service':
       $title_postion = 'above';
       break;
+    default:
+      // check fr page tempaltes in specific sections
+      if (isset($node->nid)) {
+        switch ($node->nid) {
+          // seminars homepage;
+          case 44;
+            $default_icon = 'title-icon-default-binformed.png';
+            break;
+        }
+      }
+      break;
   }
 }
 else {
@@ -132,6 +143,14 @@ else {
     }
     if (in_array('page__views__top_news', $theme_hook_suggestions)) {
       $default_icon = 'title-icon-default-news.png';
+    }
+    // binformed section
+    if (in_array('page__views__videos', $theme_hook_suggestions) or
+        in_array('page__views__latest_legal_update', $theme_hook_suggestions) or
+        in_array('page__views__publications_archive', $theme_hook_suggestions) or
+        in_array('page__views__guides_downloads', $theme_hook_suggestions)
+    ) {
+      $default_icon = 'title-icon-default-binformed.png';
     }
   }
 }

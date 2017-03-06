@@ -459,6 +459,14 @@ dl.ckeditor-tabber{
     }
 }
 
+// video listing
+@media #{$tablet-max}{
+    .page-videos{
+        .views-field-body{
+            margin-bottom:15px;
+        }
+    }
+}
 /********************** HEADER: Background ***********************/
 body{
     .navbar-wrapper{
@@ -1490,6 +1498,9 @@ body{
     right:0;
     margin-top:-60px;
     .page-node-62 &,
+    .page-node-44, &,
+    .page-binformed &,
+    .page-videos &,
     .node-type-lupdate &,
     .node-type-event & {
         margin-top:-13px;
@@ -2689,9 +2700,11 @@ h1.page-header,
     .page-node-62 &,
     .page-binformed-legal-updates &,
     .page-binformed-guides-and-downloads &,
+    .page-binformed-publications-archive &,
     .node-type-lupdate &,
     .node-type-event &,
-    .node-type-larea &{
+    .node-type-larea &,
+    .page-videos &{
         border-bottom-color: $colour-pink !important;
     }
     .node-type-service &,
@@ -2718,6 +2731,7 @@ h1.page-header{
     .page-node-44 &,
     .page-binformed-legal-updates &,
     .page-binformed-guides-and-downloads &,
+    .page-binformed-publications-archive &,
     .node-type-lupdate &,
     .node-type-event &,
     .node-type-larea &{
@@ -2733,9 +2747,23 @@ h1.page-header{
 .page-node-44,
 .node-type-event{
     .region-pre-content{
-        max-width:calc(100% - 106px);
+        max-width: $avoid-title-icon;
         padding-bottom:30px;
         overflow:hidden;
+    }
+}
+
+// binformed section - exposed filters
+@media #{$tablet-max}{
+    .node-type-lupdate,
+    .page-videos,
+    .page-binformed{
+        .views-exposed-form{
+            max-width: $avoid-title-icon;
+        }
+        .views-exposed-widgets{
+            margin-top:0;
+        }
     }
 }
 
