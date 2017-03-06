@@ -1446,7 +1446,7 @@ body{
     padding-bottom:10px;   
     & > .row{
         padding-top:30px;
-        
+
         @media #{$tablet-max}{
             padding-left:($grid-gutter-width / 2);
             padding-right:($grid-gutter-width / 2);
@@ -1625,8 +1625,10 @@ body{
     > li {
         > a,
         > span {
+            float:none !important;
             border-top:0 !important;
             border-bottom:0 !important;
+            border-left:0 !important;
             padding: 0 $padding-base-horizontal;
         }
         &:first-child {
@@ -1644,7 +1646,29 @@ body{
             }
         }
     }
-
+    @media #{$tablet-max}{
+        .pager-first,
+        .prev,
+        .next,
+        .pager-last{
+            display:block;
+            width:100%;
+            a{
+                border:0;
+                float:none;
+                width:100%;
+                display:block;
+            }
+        }
+        .pager-first,
+        .prev{
+            padding-bottom: 10px;
+        }
+        .next,
+        .pager-last{
+            padding-top: 10px;
+        }
+    }
 }
 
 // views grouping title
@@ -1943,6 +1967,12 @@ select{
     .views-exposed-widget {
         @media #{$tablet-max}{
             width:100%;
+            &:last-of-type{
+                padding-bottom: .5em;
+            }
+            .container-inline-date *{
+                width:100%;
+            }
         }
         @media #{$normal}{
             max-width:25%;
