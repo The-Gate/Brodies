@@ -639,6 +639,9 @@ body{
 }
 /********************** HEADER: SOCIAL ICONS ***********************/
 #block-block-38 {
+    @media #{$tablet-max}{
+        margin-top:15px;
+    }
     .social-links{
         text-align:center;
         @media #{$tablet}{
@@ -1246,6 +1249,9 @@ body{
 /********************** site search ***********************/
 #block-views-search-block{
     padding-top:10px;
+    @media #{$tablet-max}{
+        margin-bottom:15px;
+    }
     z-index:1400;
     position: relative;
     clear:both;
@@ -2171,6 +2177,9 @@ select{
     padding-top:35px;
 }
 .footer{
+    @media #{$tablet-max}{
+        padding-bottom:0;
+    }
     .block {
         h2{
             font-size:12px;
@@ -2222,6 +2231,12 @@ select{
                 display:inline-block;
                 width:100%;
             }
+        }
+    }
+    @media #{$tablet-max}{
+        .block-menu,
+        .block-menu-block{
+            margin-bottom:2em;
         }
     }
 }
