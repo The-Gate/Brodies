@@ -1329,7 +1329,31 @@ body{
         background: transparent;
     }
 }
-
+.page-search{
+    @media #{$normal}{
+        .close-results{
+            display:none;
+        }
+        #block-views-exp-search-page{
+            width:100%;
+            &.visible-xs{
+                display: block !important;
+            }
+            .views-exposed-form{
+                width:100%;
+                .views-exposed-widgets{
+                    float:right;
+                }
+                .views-exposed-widget{
+                    max-width: inherit !important;
+                    &.views-submit-button{
+                        padding-right:0;
+                    }
+                }
+            }
+        }
+    }
+}
 /********************** search page - for mobile ***********************/
 
 .page-search{
