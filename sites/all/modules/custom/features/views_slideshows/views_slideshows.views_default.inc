@@ -221,6 +221,16 @@ function views_slideshows_views_default_views() {
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Contextual filter: Content: Menu children */
+  $handler->display->display_options['arguments']['menu_children_filter']['id'] = 'menu_children_filter';
+  $handler->display->display_options['arguments']['menu_children_filter']['table'] = 'node';
+  $handler->display->display_options['arguments']['menu_children_filter']['field'] = 'menu_children_filter';
+  $handler->display->display_options['arguments']['menu_children_filter']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['menu_children_filter']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['menu_children_filter']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['menu_children_filter']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['menu_children_filter']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['menu_children_filter']['target_menu'] = 'menu-sector';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';

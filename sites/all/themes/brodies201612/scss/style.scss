@@ -1410,10 +1410,6 @@ body{
 }
 .slick-quote{
     margin-top: 30px;
-    @media #{$tablet-max}{
-        width:calc(100% - 140px);
-        margin-left:55px;
-    }
     .slick-prev{
         left: -45px;
     }
@@ -1445,6 +1441,13 @@ body{
 }
 
 
+@media #{$tablet-max}{
+    .view-overview-slider-listing,
+    .slick-quote{
+        width:calc(100% - 140px);
+        margin-left:55px;
+    }
+}
 /********************** Main content area ***********************/
 .main-container{
     padding-bottom:10px;   
@@ -1622,6 +1625,13 @@ body{
         text-transform:uppercase;
         font-weight:400;
         color: $colour-orange-02;
+    }
+}
+@media #{$tablet-max}{
+    .view-overview-slider-listing-mobile{
+        .img-responsive{
+            margin-bottom:10px;
+        }
     }
 }
 .pagination {
