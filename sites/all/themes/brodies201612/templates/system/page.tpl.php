@@ -85,6 +85,8 @@ $title_postion = 'default';
 // show title ONLY on mobile
 $mobile_only = false;
 $mobile_only_class = ' visible-xs';
+$show_breadcrumb_filler = true;
+
 if (isset($node)) {
   switch ($node->type) {
     // don't display the title on these content types;
@@ -93,6 +95,7 @@ if (isset($node)) {
       break;
     case 'overview':
       $mobile_only = true;
+      $show_breadcrumb_filler = false;
       break;
     case 'news':
     case 'win':
@@ -153,6 +156,10 @@ if (isset($node)) {
               // careers
               case 1004;
                 $default_icon = 'title-icon-default-careers.png';
+                break;
+              // contact
+              case 823;
+                $show_breadcrumb_filler = false;
                 break;
             }
           }
@@ -282,7 +289,9 @@ elseif (!($default_icon === false)) {
                 print $breadcrumb;
               }
               else {
-                print '<div class="breadcrumb"></div>';
+                if ($show_breadcrumb_filler) {
+                  print '<div class="breadcrumb"></div>';
+                }
               }
               ?>
           </div>
@@ -293,7 +302,7 @@ elseif (!($default_icon === false)) {
         <section<?php print $content_column_class; ?>>
             <?php if (!empty($page['highlighted'])): ?>
               <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
-<?php endif; ?>
+            <?php endif; ?>
 
 
             <?php if ($title_postion == 'default') { ?>
@@ -303,7 +312,9 @@ elseif (!($default_icon === false)) {
                 print $breadcrumb;
               }
               else {
-                print '<div class="breadcrumb"></div>';
+                if ($show_breadcrumb_filler) {
+                  print '<div class="breadcrumb"></div>';
+                }
               }
               ?>
               <?php
@@ -320,7 +331,7 @@ elseif (!($default_icon === false)) {
               <ul class="action-links"><?php print render($action_links); ?></ul>
             <?php endif; ?>
 
-                <?php print render($page['pre_content']); ?>
+            <?php print render($page['pre_content']); ?>
             <div class="clearfix"></div>
             <div class="main-content">
                 <?php
@@ -333,16 +344,16 @@ elseif (!($default_icon === false)) {
                 ?>
             </div>
         </section>
-            <?php if (!empty($page['sidebar_first'])): ?>
+        <?php if (!empty($page['sidebar_first'])): ?>
           <aside <?php print $sidebar_first_column_class; ?> role="complementary">
-          <?php print render($page['sidebar_first']); ?>
+              <?php print render($page['sidebar_first']); ?>
           </aside>  <!-- /#sidebar-first -->
-<?php endif; ?>
-            <?php if (!empty($page['sidebar_second'])): ?>
+        <?php endif; ?>
+        <?php if (!empty($page['sidebar_second'])): ?>
           <aside class="col-md-3 sidebar-second" role="complementary">
-          <?php print render($page['sidebar_second']); ?>
+              <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
-<?php endif; ?>
+        <?php endif; ?>
 
 
 
@@ -353,16 +364,16 @@ elseif (!($default_icon === false)) {
       <div class="postscript-container <?php print $container_class; ?>">
           <div class="row">
               <aside class="col-sm-12" role="complementary">
-  <?php print render($page['postscript']); ?>
+                  <?php print render($page['postscript']); ?>
               </aside>  <!-- /#postscript -->
           </div>    
       </div>    
   </div>    
 <?php endif; ?>
-        <?php if (!empty($page['footer'])): ?>
+<?php if (!empty($page['footer'])): ?>
   <div class="footer-wrapper">
       <footer class="footer <?php print $container_class; ?>">
-  <?php print render($page['footer']); ?>
+          <?php print render($page['footer']); ?>
       </footer>
   </div>
 <?php endif; ?>

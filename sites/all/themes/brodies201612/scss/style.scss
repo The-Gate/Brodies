@@ -865,7 +865,7 @@ h2.block-title{
 .region-sidebar-first .block h2,
 .region-sidebar-second .block .submenu h2{
     border-bottom:3px solid $colour-orange-03;
-    @media #{$tablet}{
+    @media #{$normal}{
         width:calc(100% + 30px);
         margin-left: -(ceil(($grid-gutter-width / 2)));
         padding-left:ceil(($grid-gutter-width / 2));
@@ -2565,7 +2565,7 @@ body.page-landing{
 .menu-block-7{
     margin-bottom:15px;
     @extend .col-sm-10;
-    @media #{$tablet}{
+    @media #{$tablet-max}{
         max-width: $avoid-title-icon;
         li{
             margin-bottom:10px;
