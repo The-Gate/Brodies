@@ -77,6 +77,10 @@ h1,
     font-size:$font-size-h1;
     padding-bottom:5px;
     margin-bottom:5px;
+    .text-wrapper{
+        display:block;
+        max-width: $avoid-title-icon;
+    }
 }
 
 h2 {
@@ -220,6 +224,12 @@ blockquote{
         }
     }
 }
+@media #{$tablet-max}{
+    .sidebar-first,
+    .sidebar-second{
+        margin-top:2em;   
+    }
+}
 //////////////////////////////////////////////////////////////////////////////////
 // Modules
 // are the reusable, modular parts of our design. 
@@ -325,6 +335,8 @@ blockquote{
 
 /**********************  Breadcrumb  ***********************/
 .breadcrumb{
+    min-height:40px;
+    margin-bottom:1em;
     @media #{$mobile-max}{
         max-width: $avoid-title-icon;
         & > li{
@@ -1498,7 +1510,7 @@ body{
     right:0;
     margin-top:-60px;
     .page-node-62 &,
-    .page-node-44, &,
+    .page-node-44 &,
     .page-binformed &,
     .page-videos &,
     .node-type-lupdate &,

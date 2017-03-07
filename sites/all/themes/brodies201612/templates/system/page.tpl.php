@@ -99,6 +99,12 @@ if (isset($node)) {
       $customTitle = 'News';
       $default_icon = 'title-icon-default-news.png';
       break;
+    case 'cs':
+      $default_icon = 'title-icon-default-case-studies.png';
+      break;
+    case 'cnews':
+      $default_icon = 'title-icon-default-news.png';
+      break;
     case 'lupdate':
       $customTitle = 'Legal updates';
       $default_icon = 'title-icon-default-binformed.png';
@@ -119,18 +125,44 @@ if (isset($node)) {
       $default_icon = 'title-icon-default-people.png';
       break;
     case 'sector':
+      $title_postion = 'above';
+      $default_icon = 'title-icon-default-business-sectors.png';
+      break;
     case 'service':
+      $default_icon = 'title-icon-default-legal-services.png';
       $title_postion = 'above';
       break;
     default:
       // check fr page tempaltes in specific sections
       if (isset($node->nid)) {
-        switch ($node->nid) {
-          // seminars homepage;
-          case 44;
-            $default_icon = 'title-icon-default-binformed.png';
-            break;
+        $this_menu_trail = menu_get_active_trail();
+        if (is_array($this_menu_trail)) {
+          $this_menu = end($this_menu_trail);
+          $parent_id = ((int) $this_menu['p1'] > 0) ? $this_menu['p1'] : $this_menu['mlid'];
+          if ($parent_id > 0) {
+            switch ($parent_id) {
+              // seminars / binformed
+              case 248;
+              case 1042;
+                $default_icon = 'title-icon-default-binformed.png';
+                break;
+              // about us
+              case 231;
+                $default_icon = 'title-icon-default-about.png';
+                break;
+              // careers
+              case 1004;
+                $default_icon = 'title-icon-default-careers.png';
+                break;
+            }
+          }
         }
+//        switch ($node->nid) {
+//          // seminars homepage;
+//          case 44;
+//            $default_icon = 'title-icon-default-binformed.png';
+//            break;
+//        }
       }
       break;
   }
@@ -138,11 +170,17 @@ if (isset($node)) {
 else {
   // views pages
   if (isset($theme_hook_suggestions)) {
+    // people listing
     if (in_array('page__views__people_listing', $theme_hook_suggestions)) {
       $default_icon = 'title-icon-default-people.png';
     }
+    // news
     if (in_array('page__views__top_news', $theme_hook_suggestions)) {
       $default_icon = 'title-icon-default-news.png';
+    }
+    // case study listing
+    if (in_array('page__views__Case_Studies', $theme_hook_suggestions)) {
+      $default_icon = 'title-icon-default-case-studies.png';
     }
     // binformed section
     if (in_array('page__views__videos', $theme_hook_suggestions) or
@@ -156,10 +194,10 @@ else {
 }
 $title_class = $mobile_only ? 'page-header' . $mobile_only_class : 'page-header';
 if (isset($customTitle)) {
-  $title_output .= '<h1 class="' . $title_class . '">' . $customTitle . '</h1>';
+  $title_output .= '<h1 class="' . $title_class . '"><span class="text-wrapper">' . $customTitle . '</span></h1>';
 }
 elseif (!empty($title)) {
-  $title_output .= '<h1 class="' . $title_class . '">' . $title . '</h1>';
+  $title_output .= '<h1 class="' . $title_class . '"><span class="text-wrapper">' . $title . '</span></h1>';
 }
 $title_output .= render($title_suffix);
 
@@ -240,30 +278,33 @@ elseif (!($default_icon === false)) {
           <div class="col-ms-12">
               <?php echo $title_output; ?>
               <?php
-              if (!empty($breadcrumb)): print $breadcrumb;
-              endif;
+              if (!empty($breadcrumb)) {
+                print $breadcrumb;
+              }
+              else {
+                print '<div class="breadcrumb"></div>';
+              }
               ?>
           </div>
           <?php
         }
         ?>
-        <?php if (!empty($page['sidebar_first'])): ?>
-          <aside class="col-sm-3 sidebar-first" role="complementary">
-              <?php print render($page['sidebar_first']); ?>
-          </aside>  <!-- /#sidebar-first -->
-        <?php endif; ?>
 
         <section<?php print $content_column_class; ?>>
             <?php if (!empty($page['highlighted'])): ?>
               <div class="highlighted jumbotron"><?php print render($page['highlighted']); ?></div>
-            <?php endif; ?>
+<?php endif; ?>
 
 
             <?php if ($title_postion == 'default') { ?>
               <?php echo $title_output; ?>
               <?php
-              if (!empty($breadcrumb)): print $breadcrumb;
-              endif;
+              if (!empty($breadcrumb)) {
+                print $breadcrumb;
+              }
+              else {
+                print '<div class="breadcrumb"></div>';
+              }
               ?>
               <?php
             }
@@ -279,7 +320,7 @@ elseif (!($default_icon === false)) {
               <ul class="action-links"><?php print render($action_links); ?></ul>
             <?php endif; ?>
 
-            <?php print render($page['pre_content']); ?>
+                <?php print render($page['pre_content']); ?>
             <div class="clearfix"></div>
             <div class="main-content">
                 <?php
@@ -292,12 +333,16 @@ elseif (!($default_icon === false)) {
                 ?>
             </div>
         </section>
-
-        <?php if (!empty($page['sidebar_second'])): ?>
-          <aside class="col-sm-3 sidebar-second" role="complementary">
-              <?php print render($page['sidebar_second']); ?>
+            <?php if (!empty($page['sidebar_first'])): ?>
+          <aside <?php print $sidebar_first_column_class; ?> role="complementary">
+          <?php print render($page['sidebar_first']); ?>
+          </aside>  <!-- /#sidebar-first -->
+<?php endif; ?>
+            <?php if (!empty($page['sidebar_second'])): ?>
+          <aside class="col-md-3 sidebar-second" role="complementary">
+          <?php print render($page['sidebar_second']); ?>
           </aside>  <!-- /#sidebar-second -->
-        <?php endif; ?>
+<?php endif; ?>
 
 
 
@@ -308,16 +353,16 @@ elseif (!($default_icon === false)) {
       <div class="postscript-container <?php print $container_class; ?>">
           <div class="row">
               <aside class="col-sm-12" role="complementary">
-                  <?php print render($page['postscript']); ?>
+  <?php print render($page['postscript']); ?>
               </aside>  <!-- /#postscript -->
           </div>    
       </div>    
   </div>    
 <?php endif; ?>
-<?php if (!empty($page['footer'])): ?>
+        <?php if (!empty($page['footer'])): ?>
   <div class="footer-wrapper">
       <footer class="footer <?php print $container_class; ?>">
-          <?php print render($page['footer']); ?>
+  <?php print render($page['footer']); ?>
       </footer>
   </div>
 <?php endif; ?>

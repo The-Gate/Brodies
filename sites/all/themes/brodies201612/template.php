@@ -48,8 +48,8 @@ function brodies201612_preprocess_html(&$variables) {
 }
 
 function brodies201612_process_page(&$variables) {
-  $col_double = 'col-sm-6';
-  $col_single = 'col-sm-9';
+  $col_double = 'col-md-6 col-md-push-3';
+  $col_single = 'col-md-9 col-md-push-3';
   if (isset($variables['node'])) {
     switch ($variables['node']->type) {
       case 'microsite_page':
@@ -64,8 +64,8 @@ function brodies201612_process_page(&$variables) {
               break;
             case 'menu-graduate-main-menu':
 
-              $col_double = 'col-sm-4';
-              $col_single = 'col-sm-8';
+              $col_double = 'col-md-4';
+              $col_single = 'col-md-8';
               $variables['theme_hook_suggestions'][] = 'page__graduate';
               break;
           }
@@ -79,8 +79,8 @@ function brodies201612_process_page(&$variables) {
       case 'graduate_homepage':
       case 'graduate_content':
 
-        $col_double = 'col-sm-4';
-        $col_single = 'col-sm-8';
+        $col_double = 'col-md-4';
+        $col_single = 'col-md-8';
         $variables['theme_hook_suggestions'][] = 'page__graduate';
 
 
@@ -116,9 +116,11 @@ function brodies201612_process_page(&$variables) {
   // if there is a left column, remove the gap between them
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['content_column_class'] = ' class="' . $col_double . ' no-padding-left-md no-padding-right-md"';
+    $variables['sidebar_first_column_class'] = ' class="col-md-3 sidebar-first col-md-pull-6"';
   }
   elseif (!empty($variables['page']['sidebar_first']) || !empty($variables['page']['sidebar_second'])) {
     $variables['content_column_class'] = ' class="' . $col_single . ' no-padding-left-md"';
+    $variables['sidebar_first_column_class'] = ' class="col-md-3 sidebar-first col-md-pull-9"';
   }
 }
 
