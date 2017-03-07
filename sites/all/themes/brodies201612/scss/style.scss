@@ -225,9 +225,18 @@ blockquote{
     }
 }
 @media #{$tablet-max}{
-    .sidebar-first,
-    .sidebar-second{
-        margin-top:2em;   
+    .row{
+        .sidebar-first,
+        .sidebar-second{
+            margin-top:2em;   
+        }
+    }
+}
+.main-content{
+    img,
+    iframe{
+        max-width:100%;
+        height:auto !important;
     }
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -345,7 +354,7 @@ blockquote{
     }
     a{       
         font-weight: 700;
-    }   
+    }
 }
 
 /********************** TAbber ***********************/
@@ -1430,6 +1439,13 @@ body{
 }
 .slick-quote{
     margin-top: 30px;
+
+
+    .slick-next,
+    .slick-prev{
+        width:35px;
+        height:50px;
+    }
     .slick-prev{
         left: -45px;
     }

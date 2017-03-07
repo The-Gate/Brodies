@@ -246,8 +246,19 @@
 
                 });
             }
-
-
+            if ($('.ui-accordion-header').length > 0) {
+                $('.ui-accordion-header').click(function () {
+                    if ($(window).width() < screen_md_min) {
+                        var currentId = this.id;
+                        currentId = "#" + currentId;
+                        setTimeout(function () { //<-- delayed animation to solve conflicts with others "scrollto" 
+                            $('html, body').animate({
+                                scrollTop: $(currentId).offset().top
+                            }, 1000);
+                        }, 500);
+                    }
+                });
+            }
             // landing page
             // if the main content is longer than the right video image, hide under a 'more' link
             function readMoreSetup() {
