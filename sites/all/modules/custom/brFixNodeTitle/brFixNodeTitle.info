@@ -1,0 +1,4 @@
+name = Brodies - Fix Node Title
+description = "Fix warning: Trying to get property of non-object in node_page_title() "
+package = "Brodies"
+core = 7.x
