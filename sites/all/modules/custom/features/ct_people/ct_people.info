@@ -18,6 +18,7 @@ features[features_api][] = api:2
 features[field_group][] = group_business_sectors|node|people|default
 features[field_group][] = group_legal_services|node|people|default
 features[field_group][] = group_main_content|node|people|default
+features[field_group][] = group_outer_wrapper|node|people|teaser
 features[field_group][] = group_p_main|node|people|default
 features[field_group][] = group_p_main|node|people|form
 features[field_group][] = group_p_main|node|people|teaser

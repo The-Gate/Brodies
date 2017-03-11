@@ -113,6 +113,38 @@ function ct_people_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_outer_wrapper|node|people|teaser';
+  $field_group->group_name = 'group_outer_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'people';
+  $field_group->mode = 'teaser';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Main Details Outer Wrapper',
+    'weight' => '1',
+    'children' => array(
+      0 => 'group_p_main',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Main Details Outer Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'col-md-6 text-wrapper-container',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_outer_wrapper|node|people|teaser'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_p_main|node|people|default';
   $field_group->group_name = 'group_p_main';
   $field_group->entity_type = 'node';
@@ -177,29 +209,30 @@ function ct_people_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'people';
   $field_group->mode = 'teaser';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_outer_wrapper';
   $field_group->data = array(
     'label' => 'Main details',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
       0 => 'field_people_email',
       1 => 'field_people_fname',
       2 => 'field_people_job',
-      3 => 'field_people_location',
-      4 => 'field_people_phone',
-      5 => 'field_people_sname',
+      3 => 'field_people_phone',
+      4 => 'field_people_sname',
     ),
-    'format_type' => 'html-element',
+    'format_type' => 'div',
     'format_settings' => array(
       'label' => 'Main details',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-6 text-wrapper',
-        'element' => 'div',
+        'classes' => 'text-wrapper',
+        'description' => '',
         'show_label' => '0',
-        'label_element' => 'div',
-        'attributes' => '',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'none',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_p_main|node|people|teaser'] = $field_group;
@@ -326,6 +359,7 @@ function ct_people_field_group_info() {
   t('Business sectors');
   t('Legal services');
   t('Main Content');
+  t('Main Details Outer Wrapper');
   t('Main details');
   t('Related content');
   t('Side Column');

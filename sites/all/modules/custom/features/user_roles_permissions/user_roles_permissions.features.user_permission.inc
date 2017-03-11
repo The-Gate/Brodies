@@ -245,6 +245,20 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'administer feeds'.
+  $permissions['administer feeds'] = array(
+    'name' => 'administer feeds',
+    'roles' => array(),
+    'module' => 'feeds',
+  );
+
+  // Exported permission: 'administer feeds_tamper'.
+  $permissions['administer feeds_tamper'] = array(
+    'name' => 'administer feeds_tamper',
+    'roles' => array(),
+    'module' => 'feeds_tamper',
+  );
+
   // Exported permission: 'administer field collections'.
   $permissions['administer field collections'] = array(
     'name' => 'administer field collections',
@@ -315,6 +329,13 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'administer imce',
     'roles' => array(),
     'module' => 'imce',
+  );
+
+  // Exported permission: 'administer matchredirect'.
+  $permissions['administer matchredirect'] = array(
+    'name' => 'administer matchredirect',
+    'roles' => array(),
+    'module' => 'match_redirect',
   );
 
   // Exported permission: 'administer media browser'.
@@ -551,6 +572,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'clear payments_import feeds'.
+  $permissions['clear payments_import feeds'] = array(
+    'name' => 'clear payments_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
   );
 
   // Exported permission: 'clone node'.
@@ -2463,6 +2491,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'import payments_import feeds'.
+  $permissions['import payments_import feeds'] = array(
+    'name' => 'import payments_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
+  );
+
   // Exported permission: 'manage features'.
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -2548,6 +2583,20 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'submit latitude/longitude',
     'roles' => array(),
     'module' => 'location',
+  );
+
+  // Exported permission: 'tamper payments_import'.
+  $permissions['tamper payments_import'] = array(
+    'name' => 'tamper payments_import',
+    'roles' => array(),
+    'module' => 'feeds_tamper',
+  );
+
+  // Exported permission: 'unlock payments_import feeds'.
+  $permissions['unlock payments_import feeds'] = array(
+    'name' => 'unlock payments_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
   );
 
   // Exported permission: 'use PHP for settings'.

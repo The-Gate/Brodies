@@ -403,10 +403,9 @@ function ct_people_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'hidden',
-        'module' => 'node_reference',
         'settings' => array(),
-        'type' => 'node_reference_plain',
-        'weight' => 0,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'token' => array(
         'label' => 'above',

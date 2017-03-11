@@ -1100,9 +1100,36 @@ h2.block-title{
 
 // key contact & people listing
 // shared classes
+
+@media #{$tablet}{
+    .text-wrapper-container{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 50%;
+    }
+}
 .people-text-wrapper{
-    padding-top:15px;
-    text-align: center;
+    text-align: center;    
+    @media #{$tablet-max}{
+        padding:15px;
+    }
+    @media #{$tablet}{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        padding:10px;
+        transform: translate(-50%,60%);
+    }
+    @media #{$normal}{
+        transform: translate(-50%,10%);
+
+    }
+    @media #{$wide}{
+        transform: translate(-50%,35%);
+
+    }
 }
 .people-listing-name{
     font-family:$font-family-serif;
@@ -1111,6 +1138,7 @@ h2.block-title{
     font-weight: 700;
     font-size:$font-size-20;
     line-height: 1;
+    margin-bottom:10px;
     .col-sm-9 .block-system &{
         font-size:$font-size-14;
     }
@@ -1144,6 +1172,13 @@ h2.block-title{
     }
     .text-wrapper{
         @extend .people-text-wrapper;
+        padding:5px 5px 0;
+        transform: none;
+        top:0;
+        left:0;
+        @media #{$tablet-max}{
+            position:relative;
+        }
     }
     .field-name-field-people-fname{
         padding-right:.3em;
@@ -1151,21 +1186,65 @@ h2.block-title{
     .field-name-field-people-fname,
     .field-name-field-people-sname{
         @extend .people-listing-name;
+        @media #{$tablet-max}{
+            font-size:$font-size-16;
+        }
+        @media #{$normal}{
+            font-size:$font-size-12;
+        }
+        @media #{$wide}{
+            font-size:$font-size-16;
+        }
+    }
+
+    .field-name-field-people-fname{
+        margin-top:5px;
+        margin-bottom:0;
     }
 
     .field-name-field-people-job,
     .field-name-field-people-phone,
     .field-name-field-people-location{
         @extend .people-listing-details;
+        @media #{$tablet-max}{
+            font-size:$font-size-12;
+        }
+        @media #{$normal}{
+            font-size:$font-size-10;
+        }
+        @media #{$wide}{
+            font-size:$font-size-12;
+        }
+    }
+    @media #{$tablet-max}{
+        .text-wrapper-container{
+            width:100%;
+        }
     }
     .region-sidebar-second &{
+
         .text-wrapper{
             @extend .people-text-wrapper;
             padding:5px 5px 0;
+            transform: none;
+            top:0;
+            left:0;
+            @media #{$tablet-max}{
+                position:relative;
+            }
+
         }
         .field-name-field-people-fname,
         .field-name-field-people-sname{
-            font-size:$font-size-16;
+            @media #{$tablet-max}{
+                font-size:$font-size-16;
+            }
+            @media #{$normal}{
+                font-size:$font-size-12;
+            }
+            @media #{$wide}{
+                font-size:$font-size-16;
+            }
         }
     }
     .field-name-field-people-email{
@@ -1756,8 +1835,8 @@ body{
 }
 @media #{$mobile-max}{
     .page-people{
-        #block-block-40 p:first-of-type{
-            max-width:$avoid-title-icon;
+        .views-exposed-widgets{
+            margin-top:0;
         }
     }
     .page-node-62{
@@ -2036,6 +2115,8 @@ select{
             background-color: $colour-blue-02;
             color: $colour-white-01;
             border-color: $colour-blue-02;
+            text-transform: uppercase;
+            font-weight:700;
             @media #{$tablet-max}{
                 width:100%;
             }
@@ -2056,6 +2137,8 @@ select{
         background-color: $colour-blue-02;
         border-color: $colour-blue-02;
         color: $colour-white-01;
+        text-transform: uppercase;
+        font-weight:700;
     }
 }
 

@@ -31,7 +31,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Related people */
+  /* Field: Content: Key Contacts */
   $handler->display->display_options['fields']['field_related_people']['id'] = 'field_related_people';
   $handler->display->display_options['fields']['field_related_people']['table'] = 'field_data_field_related_people';
   $handler->display->display_options['fields']['field_related_people']['field'] = 'field_related_people';
@@ -262,12 +262,13 @@ function views_people_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="person-wrapper">
 <div class="person person-image col-sm-6 no-padding-left-sm no-padding-right-sm">[field_teaser_image]</div>
-<div class="text-wrapper col-sm-6">
+<div class="text-wrapper-container col-sm-6">
+<div class="text-wrapper">
 <div class="person person-name name">[field_people_fname] [field_people_sname]</div>
 <div class="person person-job">[field_people_job]</div>
-<div class="person person-location">[field_people_location]</div>
 <div class="person person-phone nr">[field_people_phone]</div>
 <div class="person person-more read-more-block">[view_node]</div>
+</div>
 </div>
 <div class="clearfix"></div>
 </div>';
@@ -297,6 +298,25 @@ function views_people_views_default_views() {
   $handler->display->display_options['filters']['field_related_sector_nid']['id'] = 'field_related_sector_nid';
   $handler->display->display_options['filters']['field_related_sector_nid']['table'] = 'field_data_field_related_sector';
   $handler->display->display_options['filters']['field_related_sector_nid']['field'] = 'field_related_sector_nid';
+  $handler->display->display_options['filters']['field_related_sector_nid']['value'] = array(
+    6 => '6',
+    7 => '7',
+    8 => '8',
+    9 => '9',
+    10 => '10',
+    11 => '11',
+    12 => '12',
+    18 => '18',
+    13 => '13',
+    14 => '14',
+    16 => '16',
+    15 => '15',
+    17 => '17',
+    1869 => '1869',
+    2006 => '2006',
+    19 => '19',
+    20 => '20',
+  );
   $handler->display->display_options['filters']['field_related_sector_nid']['group'] = 1;
   $handler->display->display_options['filters']['field_related_sector_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_sector_nid']['expose']['operator_id'] = 'field_related_sector_nid_op';
@@ -308,11 +328,35 @@ function views_people_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
+  $handler->display->display_options['filters']['field_related_sector_nid']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Related services (field_related_service) */
   $handler->display->display_options['filters']['field_related_service_nid']['id'] = 'field_related_service_nid';
   $handler->display->display_options['filters']['field_related_service_nid']['table'] = 'field_data_field_related_service';
   $handler->display->display_options['filters']['field_related_service_nid']['field'] = 'field_related_service_nid';
+  $handler->display->display_options['filters']['field_related_service_nid']['value'] = array(
+    3297 => '3297',
+    22 => '22',
+    3453 => '3453',
+    143 => '143',
+    23 => '23',
+    9673 => '9673',
+    144 => '144',
+    5586 => '5586',
+    145 => '145',
+    152 => '152',
+    147 => '147',
+    148 => '148',
+    149 => '149',
+    1887 => '1887',
+    150 => '150',
+    151 => '151',
+    154 => '154',
+    153 => '153',
+    1903 => '1903',
+    157 => '157',
+  );
   $handler->display->display_options['filters']['field_related_service_nid']['group'] = 1;
   $handler->display->display_options['filters']['field_related_service_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_related_service_nid']['expose']['operator_id'] = 'field_related_service_nid_op';
@@ -324,7 +368,9 @@ function views_people_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
+  $handler->display->display_options['filters']['field_related_service_nid']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -386,7 +432,7 @@ function views_people_views_default_views() {
   );
   $handler->display->display_options['select_labels'] = array(
     'title' => 'Search by name',
-    'field_related_sector_nid' => 'Business Sector',
+    'field_related_sector_nid' => 'Business Sectors',
     'field_related_service_nid' => 'Legal Services',
   );
 
