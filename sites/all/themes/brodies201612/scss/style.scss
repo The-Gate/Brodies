@@ -2878,5 +2878,68 @@ h1.page-header{
     }
 }
 
+
+/********************** Payments ***********************/
+.page-payments{
+    .payment-intro {
+        margin:0px auto; 
+        .option {
+            display:block;
+            color:#FFF;
+            background-color: #00245d;
+            text-decoration: none;
+            text-align:center;
+            padding: 15px;
+            font-weight: bold;
+            margin-bottom:10px;
+        }
+        a.option:hover{
+            background-color: #F6A01A;
+            text-decoration: none !important;
+        }
+        h2 {
+            color:#00245d;
+            font-size:1.4em;
+            margin:10px 0px 40px 0px;
+            text-align: center;
+        }
+        p {
+            text-align: left;
+            margin:35px 0px 20px 0px;
+            font-size:0.9em;
+            color:#00245d;
+        }
+    }
+    .payment-form{
+        overflow: hidden;
+    }
+    .btn {
+        margin-top: 0;
+        border-radius:0;
+        background-color: $colour-blue-02;
+        color: $colour-white-01;
+        border-color: $colour-blue-02;
+        text-transform: uppercase;
+        font-weight:700;
+        @media #{$normal}{
+            float: right;
+        }
+        @include button-variant($colour-white-01, $colour-blue-01, $colour-blue-01);
+        @media #{$tablet-max}{
+            width:100%;
+        }
+    }
+
+    #cards {
+        background: url("../images/world-pay-icons.png") no-repeat scroll center center transparent;
+        height: 100px;
+        margin-bottom:20px;
+    }
+    #trustwaveSealImage{
+        display:block;
+        margin:20px auto;
+    }
+
+}
 // graduates section overrides
 @import 'graduates';

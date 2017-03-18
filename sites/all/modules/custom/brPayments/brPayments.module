@@ -33,7 +33,7 @@ function brPayments_payments($stage = '', $id = '', $key = '') {
 
   switch ($stage) {
     default:
-      $out = '<div class="payment-intro"><h2>Please select what type of invoice you would like to pay</h2><a class="option first" href="/payments/invoice">PAY A BRODIES INVOICE</a><a class="option" href="/payments/dart">DART ONLINE PAYMENT<br />(DEBT & ASSET RECOVERY TEAM)</a><div class="ff"></div>
+      $out = '<div class="col-sm-8 col-sm-offset-2"><div class="payment-intro"><h2>Please select what type of invoice you would like to pay</h2><div class="col-sm-6"><a class="option first" href="/payments/invoice">PAY A BRODIES INVOICE<br>&nbsp;</a></div><div class="col-sm-6"><a class="option" href="/payments/dart">DART ONLINE PAYMENT<br />(DEBT & ASSET RECOVERY TEAM)</a></div><div class="clearfix"></div>
       <p>The transfer of the payment details from the Brodies web site to WorldPay are encapsulated using their own encrypted and digitally-signed protocol. This ensures that the information passed is both secure and tamper-proof.<br /><br />A 2% surcharge for payments made by credit card is applied at the payment confirmation page. There will be no charge for debit card transactions.</p></div><div id="cards"></div>';
       break;
     case 'invoice':
@@ -60,29 +60,37 @@ function brPayments_payments($stage = '', $id = '', $key = '') {
       return brPayments_worldpay_response();
       break;
   }
-  return $out . '<script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?code=3236d3088f5746ea8c7de2d8bf7af319"></script>';
+  return $out . '<script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?code=3236d3088f5746ea8c7de2d8bf7af319"></script></div>';
 }
 
 function brPayments_payment_form($form_init, $stage) {
   $form = array();
 
-  $result = db_query("SELECT i.field_name, label, required FROM content_node_field_instance i left join content_node_field f on f.field_name = i.field_name where i.type_name = 'payment' order by i.weight");
+  $result = db_query("SELECT * FROM field_config_instance WHERE bundle = 'payment'");
 
   $count = 0;
   foreach ($result as $data) {
-    if (array_search($data->field_name, array('field_pay_status', 'field_pay_data', 'field_pay_card')) !== FALSE) {
+    $data_details = unserialize($data->data);
+    if (array_search($data->field_name, array('body', 'field_pay_status', 'field_pay_data', 'field_pay_card')) !== FALSE) {
       continue;
     }
 
     $form[$data->field_name] = array(
       '#type' => 'textfield',
-      '#title' => $data->label,
-      '#required' => $data->required,
+      '#title' => $data_details['label'],
+      '#required' => $data_details['required'],
       '#prefix' => '<div class="' . ($count % 2 == 1 ? 'odd' : 'even') . '">',
       '#suffix' => '</div>',
     );
     if ($data->field_name == 'field_pay_type') {
-      $form[$data->field_name]['#value'] = $stage == 'invoice' ? 1 : 2;
+      $typeValue = '';
+      if (is_array($stage) and isset($stage['build_info']['args'][0])) {
+        $typeValue = $stage['build_info']['args'][0] == 'invoice' ? 1 : 2;
+      }
+      elseif (is_string($stage)) {
+        $typeValue = $stage == 'invoice' ? 1 : 2;
+      }
+      $form[$data->field_name]['#value'] = $typeValue;
       $form[$data->field_name]['#type'] = 'value';
       continue;
     }
@@ -93,8 +101,15 @@ function brPayments_payment_form($form_init, $stage) {
     }
 
     if ($data->field_name == 'field_pay_reference') {
+      $typeValue = '';
+      if (is_array($stage) and isset($stage['build_info']['args'][0])) {
+        $typeValue = $stage['build_info']['args'][0] == 'invoice' ? 'Brodies Invoice Reference number' : 'DART Reference number';
+      }
+      elseif (is_string($stage)) {
+        $typeValue = $stage == 'invoice' ? 'Brodies Invoice Reference number' : 'DART Reference number';
+      }
       $form[$data->field_name]['#description'] = 'Can be found on our correspondence';
-      $form[$data->field_name]['#title'] = $stage == 'invoice' ? 'Brodies Invoice Reference number' : 'DART Reference number';
+      $form[$data->field_name]['#title'] = $typeValue;
       if ($stage != 'invoice') {
         //$form[$data->field_name]['#description'] = 'Can be found on our correspondence';
       }
@@ -122,7 +137,7 @@ function brPayments_payment_form($form_init, $stage) {
     '#title' => 'I accept the <a href="/legal-statement" target="_blank">(online payment terms and conditions)</a>',
   );
 
-  $form['suffix'] = array('#value' => '<div class="ff"></div><div class="label"><span title="This field is required." class="form-required">*</span> Denotes mandatory fields</div>');
+  $form['suffix'] = array('#value' => '<div class="label"><span title="This field is required." class="form-required">*</span> Denotes mandatory fields</div>');
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -208,6 +223,7 @@ function brPayments_payment_card_form_submit($form_state, $form_values) {
   $vals['field_pay_card'] = $form_values['values']['card-type'];
   $new_node = (object) NULL;
   $new_node->type = 'payment';
+  node_object_prepare($new_node);
   $new_node->title = 'Payment - ' . ($vals['field_pay_type'] == 1 ? 'Invoice' : 'Dart') . ' - ' . $vals['field_pay_reference'];
   $new_node->uid = 1; //saved as superadmin
   $new_node->created = time();
@@ -218,14 +234,15 @@ function brPayments_payment_card_form_submit($form_state, $form_values) {
   $new_node->moderate = 0;
   $new_node->sticky = 0;
   $new_node->body = '';
+  $new_node->language = LANGUAGE_NONE;
 
-  $new_node->field_l_left[0]['value'] = $row->strDisplayName;
   foreach ($vals as $key => $value) {
     if (strpos($key, 'field_') === 0) {
-      $new_node->{$key}[0]['value'] = $value;
+      $new_node->{$key}[$new_node->language][0]['value'] = $value;
     }
   }
-  $new_node->{'field_pay_status'}[0]['value'] = 1;
+  $new_node->{'field_pay_status'}[$new_node->language][0]['value'] = 1;
+  $new_node = node_submit($new_node); // Prepare node for saving
   node_save($new_node);
 
   drupal_goto(brPayments_payment_url($new_node));
@@ -241,15 +258,12 @@ function brPayments_admin_payments_list() {
   //$order = $out = $joins = $thumb = $filters = $filter_text = '';
   // $filter_names = $args = array();
   $rpp = 20;
-
 //  switch ($type) {
 //    default:
 //      $sql = "SELECT n.changed, n.nid, n.title, p.* FROM {node} n LEFT join content_type_payment p on p.vid = n.vid WHERE type='payment' ORDER BY n.changed DESC";
 //      break;
 //  }
-
 //  $result = pager_query($sql, $rpp, 0, NULL, $args);
-  
 //  $query = db_select('node', 'n');
 //  $query->join('content_type_payment', 'p', 'p.vid = n.vid');
 //  $query
@@ -261,7 +275,6 @@ function brPayments_admin_payments_list() {
 //      ->extend('PagerDefault')
 //      ->limit($rpp)
 //      ->execute();
-      
   // get an array of appropriate node ids:;
   $query = db_select('node', 'n');
   $query
@@ -273,15 +286,11 @@ function brPayments_admin_payments_list() {
       ->limit($rpp)
       ->execute();
   $nidArray = $result->fetchCol();
-
-
-
   $nodeArray = node_load_multiple($nidArray);
   $count = 0;
 
   foreach ($nodeArray as $data) {
     $count++;
-
     $temp = array();
     $contact = array('Name' => $data->field_pay_name[LANGUAGE_NONE][0]['safe_value'], 'Landline' => $data->field_pay_phone[LANGUAGE_NONE][0]['safe_value'], 'Mobile' => $data->field_pay_number[LANGUAGE_NONE][0]['safe_value'], 'Address 1' => $data->field_pay_address1[LANGUAGE_NONE][0]['safe_value'], 'Address 2' => $data->field_pay_address2[LANGUAGE_NONE][0]['safe_value'], 'City' => $data->field_pay_city[LANGUAGE_NONE][0]['safe_value'], 'Postcode' => $data->field_pay_postcode[LANGUAGE_NONE][0]['safe_value'], 'Email' => $data->field_pay_email[LANGUAGE_NONE][0]['safe_value']);
 
@@ -294,28 +303,23 @@ function brPayments_admin_payments_list() {
     $statuses = array(1 => 'Started', 2 => 'Completed', 3 => 'Cancelled', 4 => 'Pending');
     $rows[] = array(
       date('jS M Y H:i:s', $data->changed),
-      ((int)$data->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'Invoice' : 'DART'),
+      ((int) $data->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'Invoice' : 'DART'),
       array('data' => $data->field_pay_reference[LANGUAGE_NONE][0]['safe_value']),
       $data->field_pay_company[LANGUAGE_NONE][0]['safe_value'],
       implode('<br />', $contact),
       $data->field_pay_comments[LANGUAGE_NONE][0]['safe_value'],
-      '&pound;'.$data->field_pay_amount[LANGUAGE_NONE][0]['value'],
-      '<b>' . $statuses[(int)$data->field_pay_status[LANGUAGE_NONE][0]['value']] . '</b>',
+      '&pound;' . $data->field_pay_amount[LANGUAGE_NONE][0]['value'],
+      '<b>' . $statuses[(int) $data->field_pay_status[LANGUAGE_NONE][0]['value']] . '</b>',
       array('data' => l('Pay', brPayments_payment_url((object) array('title' => $data->title, 'nid' => $data->nid))), 'style' => 'text-align:center')
     );
   }
 
   if ($count) {
-
-
 // Show the appropriate items from the list
     $header = array('time', 'type', 'reference', 'company', 'contact', 'comments', 'amount', 'status', 'payment page');
 // Show the pager
     $page_out = theme('pager');
     $out = $page_out . theme('table', array('header' => $header, 'rows' => $rows)) . $page_out;
-
-
-
 //    $out = theme_pager('pager', NULL, $rpp, 0) . theme('table', array('time', 'type', 'reference', 'company', 'contact', 'comments', 'amount', 'status', 'payment page'), $rows);
   }
   else {
@@ -402,7 +406,6 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
   $data = array();
   if (variable_get('payment_worldpay_test', TRUE)) { //test mode
     $worldpay_name = variable_get('payment_worldpay_test_result', 'AUTHORISED');
-    ;
     $data = array(
       'testMode' => '100',
     );
@@ -411,25 +414,25 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
     $worldpay_name = $payment_node->field_pay_name[0]['value'];
   }
 
-  $amount = $payment_node->field_pay_amount[0]['value'];
-  $amount = $payment_node->field_pay_card[0]['value'] == 1 ? $amount * 1.02 : $amount;
+  $amount = $payment_node['build_info']['args'][0]->field_pay_amount['und'][0]['value'];
+  $amount = $payment_node['build_info']['args'][0]->field_pay_card['und'][0]['value'] == 1 ? $amount * 1.02 : $amount;
 
   $data += array(
-    'instId' => $payment_node->field_pay_type[0]['value'] == 1 ? 233770 : 298854,
+    'instId' => $payment_node['build_info']['args'][0]->field_pay_type['und'][0]['value'] == 1 ? 233770 : 298854,
     'amount' => $amount,
-    'cartId' => $payment_node->nid,
+    'cartId' => $payment_node['build_info']['args'][0]->nid,
     'currency' => 'GBP',
     'name' => $worldpay_name, //cardholder name
-    'address' => ($payment_node->field_pay_address1[0]['value'] ? $payment_node->field_pay_address1[0]['value'] . ',' : "\n")
-    . ($payment_node->field_pay_address2[0]['value'] ? $payment_node->field_pay_address2[0]['value'] . ',' : "\n")
-    . ($payment_node->field_pay_city[0]['value'] ? $payment_node->field_pay_city[0]['value'] . '' : "\n")
+    'address' => ($payment_node['build_info']['args'][0]->field_pay_address1['und'][0]['value'] ? $payment_node['build_info']['args'][0]->field_pay_address1['und'][0]['value'] . ',' : "\n")
+    . ($payment_node['build_info']['args'][0]->field_pay_address2['und'][0]['value'] ? $payment_node['build_info']['args'][0]->field_pay_address2['und'][0]['value'] . ',' : "\n")
+    . ($payment_node['build_info']['args'][0]->field_pay_city['und'][0]['value'] ? $payment_node['build_info']['args'][0]->field_pay_city['und'][0]['value'] . '' : "\n")
     ,
     'state' => '', //uc_get_zone_code($order->billing_zone),
-    'postcode' => $payment_node->field_pay_postcode[0]['value'],
+    'postcode' => $payment_node['build_info']['args'][0]->field_pay_postcode['und'][0]['value'],
     'country' => 'GB',
-    'email' => $payment_node->field_pay_email[0]['value'],
-    'tel' => $payment_node->field_pay_phone[0]['value'],
-    'M_uc_cart_id' => $payment_node->nid,
+    'email' => $payment_node['build_info']['args'][0]->field_pay_email['und'][0]['value'],
+    'tel' => $payment_node['build_info']['args'][0]->field_pay_phone['und'][0]['value'],
+    'M_uc_cart_id' => $payment_node['build_info']['args'][0]->nid,
     'lang' => variable_get('payment_worldpay_lang', 'en-GB'),
     'M_http_host' => $_SERVER['HTTP_HOST'],
   );
@@ -437,12 +440,12 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
   $uc_worldpay_md5 = variable_get('uc_worldpay_md5', '');
   if (!empty($uc_worldpay_md5)) {
     $data += array('signatureFields' => 'currency:cartId:amount');
-    $data += array('signature' => md5($uc_worldpay_md5 . ':GBP:' . $payment_node->nid . ':' . $amount));
+    $data += array('signature' => md5($uc_worldpay_md5 . ':GBP:' . $payment_node['build_info']['args'][0]->nid . ':' . $amount));
   }
 
   if (variable_get('payment_worldpay_desc', FALSE)) {
     $data += array(
-      'desc' => ($payment_node->field_pay_type[0]['value'] == 1 ? 'Invoice Payment' : 'DART Payment') . ' : reference - ' . $payment_node->field_pay_reference[0]['value']
+      'desc' => ($payment_node['build_info']['args'][0]->field_pay_type['und'][0]['value'] == 1 ? 'Invoice Payment' : 'DART Payment') . ' : reference - ' . $payment_node['build_info']['args'][0]->field_pay_reference['und'][0]['value']
     );
   }
 
@@ -474,7 +477,7 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
     '#type' => 'submit',
     '#name' => '',
     '#value' => t('Proceed with payment'),
-    '#suffix' => '<script>document.forms["br-worldpay-payment-form"].submit();</script>'
+    '#suffix' => '<script>document.forms["brpayments-worldpay-payment-form"].submit();</script>'
   );
 
   return $form;
@@ -487,12 +490,11 @@ function brPayments_worldpay_response($cart_id = 0) {
   $card_type = $_POST['cardType'];
   $uc_cart_id = $_POST['M_uc_cart_id'];
   global $base_url;
-  drupal_set_html_head("<base href=\"$base_url/\" />\n");
+  drupal_add_html_head("<base href=\"$base_url/\" />\n");
 
   // Stop orders being processed for orders from different hosts.
-  if ($_SERVER['HTTP_HOST'] != $_POST['M_http_host']) {
-    print theme('page', t('There was an error with the transaction. The host did not match.'));
-    return;
+  if (!isset($_POST['M_http_host']) or ( $_SERVER['HTTP_HOST'] != $_POST['M_http_host'])) {
+    return 'There was an error with the transaction. The host did not match.';
   }
 
   // Log a new order notification to watchdog.
@@ -507,12 +509,12 @@ function brPayments_worldpay_response($cart_id = 0) {
   }
   watchdog('uc_worldpay', $log_entry);
 
+  // output is not used and shows a warning message!
   // If debug mode is set appropriately, print the returned parameters to the
   // screen.
-  if ($debug == 'screen' || $debug == 'both') {
-    $output .= $message;
-  }
-
+  //if ($debug == 'screen' || $debug == 'both') {
+  //$output .= $message;
+  //}
   // If the order could not be loaded print an error message and exit.
   if (!$order = node_load($cart_id)) {
 
@@ -522,46 +524,59 @@ function brPayments_worldpay_response($cart_id = 0) {
   }
 
   // If the status of the order is not 'in_checkout' print an error and exit.
-  if ($order->field_pay_status[0]['value'] == 2 || $order->field_pay_status[0]['value'] == 4) {
+  if ($order->field_pay_status[LANGUAGE_NONE][0]['value'] == 2 || $order->field_pay_status[LANGUAGE_NONE][0]['value'] == 4) {
     $page_title = t('Payment already completed');
     $title = t('This payment was already completed, please add another payment.');
   }
   else {
-    $order->field_pay_data[0]['value'] = serialize($_POST);
+    $order->field_pay_data[LANGUAGE_NONE][0]['value'] = serialize($_POST);
 
     if (is_numeric($amount)) {
       switch ($trans_status) {
         case 'Y':
           $page_title = t('Payment Complete');
           $title = t('Your payment is complete and confirmed.');
-          $order->field_pay_status[0]['value'] = 2;
+          $order->field_pay_status[LANGUAGE_NONE][0]['value'] = 2;
           break;
 
         case 'C':
           $page_title = t('Payment Cancelled');
           $title = t('Your payment has been cancelled.');
           drupal_set_message(t('Your order has been cancelled.'));
-          $order->field_pay_status[0]['value'] = 3;
+          $order->field_pay_status[LANGUAGE_NONE][0]['value'] = 3;
           break;
 
         default:
           $page_title = t('Payment Pending');
           $title = t('Your order is pending.');
-          $order->field_pay_status[0]['value'] = 4;
+          $order->field_pay_status[LANGUAGE_NONE][0]['value'] = 4;
           break;
       }
     }
 
     node_save($order);
-    $admin_email = 'cashroom@brodies.com';
-    $params['payment_details'] = brPayments_payment_details_content($order);
-    $params['stage'] = $order->field_pay_type[0]['value'];
-    if ($order->field_pay_status[0]['value'] == 2) {
-      drupal_mail('br', 'payment-complete', $admin_email, language_default(), $params);
+    //$admin_email = 'cashroom@brodies.com';
+    $admin_email = 'callum@sakurabrae.co.uk';
+    $from = $order->field_pay_email['und'][0]['value'];
+
+    $emailBody = brPayments_payment_details_content($order);
+
+
+    if ($order->field_pay_status[LANGUAGE_NONE][0]['value'] == 2) {
+      $params = array(
+        'body' => $emailBody,
+        'subject' => $order->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'Invoice: Payment Complete' : 'DART: Payment Complete'
+      );
+      drupal_mail('brPayments', 'payment-complete', $admin_email, language_default(), $params, $from, TRUE);
     }
 
-    if ($order->field_pay_status[0]['value'] == 4) {
-      drupal_mail('br', 'payment-pending', $admin_email, language_default(), $params);
+    if ($order->field_pay_status[LANGUAGE_NONE][0]['value'] == 4) {
+      $params = array(
+        'body' => $emailBody,
+        'subject' => $order->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'Invoice: Payment Pending' : 'DART: Payment Pending'
+      );
+
+      drupal_mail('brPayments', 'payment-pending', $admin_email, language_default(), $params, $from, TRUE);
     }
   }
 
@@ -570,39 +585,54 @@ function brPayments_worldpay_response($cart_id = 0) {
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
     <title>' . $page_title . ' - Payments | Brodies LLP</title>    
-  </head><body><div style="text-align:center;margin-bottom:20px;"><a href="http://brodies2.gate-demo.co.uk"><img src="https://secure-test.worldpay.com/i/233770/header.png" alt="Payment gateway" /></a></div><div style="width:400px;margin:30px auto;"><h1 style="font-family:arial;color: #00245D;font-size: 1.4em;">' . $title . '</h1><WPDISPLAY ITEM=banner></div></body></html>';
+  </head><body><div style="text-align:center;margin-bottom:20px;"><a href="http://brodies.thegateinteractive.com"><img src="https://secure-test.worldpay.com/i/233770/header.png" alt="Payment gateway" /></a></div><div style="width:400px;margin:30px auto;"><h1 style="font-family:arial;color: #00245D;font-size: 1.4em;">' . $title . '</h1><WPDISPLAY ITEM=banner></div></body></html>';
   exit();
 }
 
 function brPayments_payment_details_content($order) {
   $out = '';
 
-  $form = brPayments_payment_form('', $order->field_pay_type[0]['value'] == 1 ? 'invoice' : 'dart');
+  $form = brPayments_payment_form('', $order->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'invoice' : 'dart');
   foreach ($form as $fname => $data) {
-    if (array_search($fname, array('suffix', 'submit')) !== FALSE)
-      continue;
-    $val = $order->{$fname}[0]['value'];
-    $label = $data['#title'];
-    if ($fname == 'field_pay_type') {
-      $val = $order->field_pay_type[0]['value'] == 1 ? 'invoice' : 'dart';
-      $label = 'Payment type';
-    }
+    if (!($fname == 'field_pay_email_check') and ! ($fname == 'terms')) {
+      if (array_search($fname, array('suffix', 'submit')) !== FALSE)
+        continue;
+      $val = $order->{$fname}[LANGUAGE_NONE][0]['value'];
+      $label = $data['#title'];
+      if ($fname == 'field_pay_type') {
+        $val = $order->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'invoice' : 'dart';
+        $label = 'Payment type';
+      }
 
-    $out .= '<div><b>' . $label . '</b>: ' . $val . '</div>';
-    if ($fname == 'field_pay_type') {
-      $out .= '<div><b>Payment time</b>: ' . date('H:i:s d/m/Y', $order->changed) . '</div><br />';
-    }
+      $out .= '<div><b>' . $label . '</b>: ' . $val . '</div>';
+      if ($fname == 'field_pay_type') {
+        $out .= '<div><b>Payment time</b>: ' . date('H:i:s d/m/Y', $order->changed) . '</div><br />';
+      }
 
-    if ($fname == 'field_pay_email') {
-      $out .= '<br />';
-    }
+      if ($fname == 'field_pay_email') {
+        $out .= '<br />';
+      }
 
-    if ($fname == 'field_pay_amount') {
-      $out .= '<br />';
+      if ($fname == 'field_pay_amount') {
+        $out .= '<br />';
+      }
     }
   }
-
-
-
   return $out;
+}
+
+function brPayments_mail($key, &$message, $params) {
+  $headers = array(
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8;',
+    'Content-Transfer-Encoding' => '8Bit',
+    'X-Mailer' => 'Drupal'
+  );
+
+  foreach ($headers as $key => $value) {
+    $message['headers'][$key] = $value;
+  }
+
+  $message['subject'] = $params['subject'];
+  $message['body'][] = check_plain(t($params['body']));
 }
