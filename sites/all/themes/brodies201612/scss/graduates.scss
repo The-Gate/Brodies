@@ -34,6 +34,11 @@ body.page-graduate{
 
     @media #{$tablet} {
         .navbar-collapse{
+            padding-top:50px;
+        }
+    }
+    @media #{$normal} {
+        .navbar-collapse{
             padding-top:85px;
         }
     }
@@ -47,6 +52,10 @@ body.page-graduate{
                         padding:0;
                         color: $colour-white-01;
                         background: none;
+                        @media #{$mobile-max} {
+                            padding:15px 0;
+                        }
+
                         @media #{$tablet} {
                             &:hover{
                                 border-bottom:1px solid $colour-orange-01;
@@ -92,11 +101,15 @@ body.page-graduate{
     .cta-overlay{
         position:relative;
         .cta-overlay-inner{
-            background:rgba(0,35,93,0.8);
+            background:rgb(0,35,93);
+            @media #{$normal}{
+                background:rgba(0,35,93,0.8);
+            }
         }
 
         .overlay-title{
             border-bottom: 2px solid $colour-white-01;
+            margin-bottom: 5px;
             font-size: $font-size-20;
         }
         .title-icon{
@@ -127,12 +140,16 @@ body.page-graduate{
         &.field-collection-item-field-graduate-cta{
             .overlay-title{
                 font-size: $font-size-18;
+                border-bottom: 2px solid $colour-pink;
             }
             a{
                 color: $colour-white-01;
                 &:hover{
                     text-decoration: none;
                 }
+            }
+            .overlay-text{
+                min-height:50px;
             }
         }
 
@@ -159,7 +176,6 @@ body.page-graduate{
             .overlay-title{
                 color: $colour-pink;
                 font-size: $font-size-14;
-                text-transform: uppercase;
                 border:0;
                 font-weight: 400;
             }
@@ -242,7 +258,10 @@ body.page-graduate{
     }
     &.node-type-graduate-content .cta-overlay.field-collection-item-field-graduate-cta{
         .cta-overlay-inner{
-            max-width:90%;
+            max-width:100%;
+            @media #{$normal}{
+                max-width:90%;
+            }
             .overlay-title{
                 border-color: $colour-pink;
                 display: inline-block;
@@ -339,7 +358,7 @@ body.page-graduate{
 
     /********************** Forms ***********************/
     .webform-client-form{
-        margin-top:20px;
+        margin-top:40px;
     }
     /********************** Footer ***********************/
     .footer-wrapper{
@@ -363,6 +382,7 @@ body.page-graduate{
         }
         .media-element-container{
             display:inline-block;
+            max-width:100%;
         }
         #block-menu-block-8{
             h2.block-title{
@@ -370,17 +390,41 @@ body.page-graduate{
                 display:inline-block;
                 width:auto;
             }
+
+            @media #{$mobile-max}{
+                a{
+                    padding:10px 0;
+                }
+                .nav{
+                    -webkit-column-count: $col-count; /* Chrome, Safari, Opera */
+                    -moz-column-count: $col-count; /* Firefox */
+                    column-count: $col-count;
+
+                    -webkit-column-gap: $col-gap; /* Chrome, Safari, Opera */
+                    -moz-column-gap: $col-gap; /* Firefox */
+                    column-gap: $col-gap;
+                }
+            }
         }
         .block .nav>li{
             margin-bottom:1px;
         }
+        #block-block-41{
+            @media #{$mobile-max}{
+                margin-bottom:20px;
+                img{
+                    max-width:214px;
+                    margin-bottom:20px;
+                }
+            }
+        }
         @media #{$tablet}{
             #block-block-41{
                 margin-right: 8.33333333%;
-            }
-            #block-block-41,
-            #block-block-42{
-                padding-top:20px;
+                img{
+                    max-width:214px;
+                    margin-bottom:20px;
+                }
             }
             #block-block-42{
                 text-align: right;
@@ -389,8 +433,48 @@ body.page-graduate{
                 }
             }
         }
+
+        @media #{$normal}{
+            #block-block-41,
+            #block-block-42{
+                padding-top:20px;
+            }
+
+            #block-block-41{
+                img{
+                    max-width:100%;
+                    margin-bottom:0;
+                }
+            }
+        }
     }
 }
+
+.field-name-body{
+    margin-bottom:3em;
+    .no-split{
+        span{
+            position:relative;
+            &.quote-title-1,
+            &.quote-title-2{
+                top:30px;
+            }
+        }
+    }
+}
+// contact page
+.page-node-9678 {
+    .col-sm-4.rtecenter{
+        img{
+            margin-bottom:15px;
+            @media #{$mobile-max}{
+                margin-top:15px;
+            }
+        }
+
+    }
+}
+
 // home news feed
 #block-views-graduate-news-block{
     margin-top:0;

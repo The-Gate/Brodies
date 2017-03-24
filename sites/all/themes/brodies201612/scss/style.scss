@@ -171,6 +171,14 @@ a {
         float: right;
     }
 }
+@media #{$normal} {
+    .pull-left-md {
+        float: left;
+    }
+    .pull-right-md {
+        float: right;
+    }
+}
 
 /********************** blockquote  ***********************/
 blockquote{
@@ -189,6 +197,7 @@ blockquote{
         width:35px;
         height:19px;
         margin-right:10px;
+        margin-top:-10px;
     }
     .quote-close{
         width:34px;
@@ -698,7 +707,17 @@ body{
                 margin-left: calc((100% - 240px) / 12);
                 margin-right: calc((100% - 240px) / 12);
             }
-            margin:0 1px;
+            @media #{$tablet}{
+                margin:0 6px 2px;
+            }
+            @media #{$normal}{
+                margin:0 2px;
+
+            }
+            @media #{$wide}{
+                margin:0 4px;
+
+            }
             &:hover{
                 background:$colour-orange-01;
                 color: $colour-blue-01;
@@ -2067,9 +2086,10 @@ body{
         margin-top:0;
     }
     span{
+        position:relative;
         &.quote-title-1,
         &.quote-title-2{
-            text-align: left;
+            text-align: left;           
         }
     }
 }
