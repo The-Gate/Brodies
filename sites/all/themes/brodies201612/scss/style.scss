@@ -619,6 +619,13 @@ body{
 }
 #slogan {
     margin: 5px 0 0 35px;
+    @media #{$tablet} {
+        margin-top: 20px;
+        margin-bottom: -20px;
+    }
+    @media #{$normal} {
+        margin-top: 5px;
+    }
     height: 16px;
     width: 200px;
     background: url("../images/slogan.png") no-repeat 0 0 transparent;  
@@ -638,6 +645,11 @@ body{
         padding-left:0;
         padding-right:0;
     }
+    .navbar-btn{
+        margin:0 0 20px;
+    }
+}
+@media #{$normal} {
     .navbar-btn{
         margin:0;
     }
