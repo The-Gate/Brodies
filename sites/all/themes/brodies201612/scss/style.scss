@@ -1311,8 +1311,7 @@ h2.block-title{
     a{
         background:$colour-pink;
         &:after{
-            float:right;
-            display:block;
+            display:inline-block;
             margin-left:10px;
         }
     }
