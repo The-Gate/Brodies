@@ -92,6 +92,7 @@ if (isset($node)) {
     // don't display the title on these content types;
     case 'homepage':
       unset($title);
+      $show_breadcrumb_filler = false;
       break;
     case 'overview':
       $mobile_only = true;

@@ -471,10 +471,10 @@ Title Desc|Z -> A',
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
 
-  /* Display: Recent Updates */
-  $handler = $view->new_display('block', 'Recent Updates', 'block_2');
+  /* Display: Recent updates */
+  $handler = $view->new_display('block', 'Recent updates', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Recent Updates';
+  $handler->display->display_options['title'] = 'Recent updates';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'is-table-row';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -537,6 +537,7 @@ Title Desc|Z -> A',
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['sorts']['created']['expose']['label'] = 'Date';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;

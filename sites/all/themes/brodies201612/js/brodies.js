@@ -145,7 +145,8 @@
             $('#edit-field-people-partner-value-wrapper .form-control').removeClass('form-control');
 
             // blockquote slick carousel
-            if ($('.field-name-body blockquote').length > 1) {
+            var blockQuoteCount = $('.field-name-body blockquote').length;
+            if (blockQuoteCount > 0) {
                 $('.field-name-body blockquote').each(function () {
                     $(this).prepend('<img src="/sites/all/themes/brodies201612/images/quote-open.png" class="quote-open">').append('<img src="/sites/all/themes/brodies201612/images/quote-close.png" class="quote-close">');
                     $(this)
@@ -156,11 +157,14 @@
                             .add(this)
                             .wrapAll('<div class="quote-slide"></div>');
                 });
-                $('.quote-slide').wrapAll('<div class="slick-quote col-md-10 col-md-offset-1"></div>');
-                $('.slick-quote').after('<div class="clearfix"></div>')
-                $('.slick-quote').slick({
-                    adaptiveHeight: true
-                });
+                if (blockQuoteCount > 1) {
+
+                    $('.quote-slide').wrapAll('<div class="slick-quote col-md-10 col-md-offset-1"></div>');
+                    $('.slick-quote').after('<div class="clearfix"></div>')
+                    $('.slick-quote').slick({
+                        adaptiveHeight: true
+                    });
+                }
             }
 
 

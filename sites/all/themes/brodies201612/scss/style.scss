@@ -182,8 +182,8 @@ a {
 
 /********************** blockquote  ***********************/
 blockquote{
-    padding: 0;
-    margin: 0 0 20px;
+    padding:10px 0;
+    margin: 0;
     font-size: $font-size-14;
     text-transform: uppercase;
     border-left: 0;
@@ -293,7 +293,7 @@ blockquote{
 }
 
 /********************** Original pop up ***********************/
-
+#popup .close,
 .popup-close {
     position:absolute;
     width:40px;
@@ -301,6 +301,7 @@ blockquote{
     right:-20px;
     top:-20px;
     cursor:pointer;
+    opacity:1;
     background: url("../images/popup-close.png") no-repeat scroll center center transparent;   
     &:hover {
         background: url("../images/popup-close-over.png") no-repeat scroll center center transparent;   
@@ -516,8 +517,10 @@ body:not(.page-landing){
     }
 }
 body{
+    $landingHeight: 258px;
+    $overviewHeight: 490px;
+    &.node-type-homepage,
     &.page-landing{
-        $landingHeight: 258px;
         .navbar-wrapper{
             @media #{$tablet} {
                 height:$landingHeight;
@@ -527,9 +530,26 @@ body{
             }
         }
     }
-    &.node-type-homepage,
+    &.node-type-homepage{
+        .navbar-wrapper{
+            @media #{$tablet} {
+                height:($landingHeight+4);
+                .container{
+                    height:$landingHeight;
+                    overflow: hidden;
+                }
+            }
+        }
+        .navbar-background{
+            @media #{$tablet} {
+                height:$landingHeight;
+                .container{
+                    height:$landingHeight;
+                }
+            }
+        }
+    }
     &.node-type-overview{
-        $overviewHeight: 490px;
         .navbar-wrapper{
             @media #{$tablet} {
                 height:($overviewHeight+4);
@@ -540,15 +560,20 @@ body{
             }
         }
         .navbar-background{
-            position: absolute;
-            width:100%;
-            z-index:0;
             @media #{$tablet} {
                 height:$overviewHeight;
                 .container{
                     height:$overviewHeight;
                 }
             }
+        }
+    }
+    &.node-type-homepage,
+    &.node-type-overview{
+        .navbar-background{
+            position: absolute;
+            width:100%;
+            z-index:0;
         }
     }
 }
@@ -583,11 +608,11 @@ body{
     @media #{$tablet} {
         position:absolute;
         display: block;
-        bottom:5px;
+        bottom:0;
     }
 }
 #slogan {
-    margin: 10px 0 0 40px;
+    margin: 5px 0 0 35px;
     height: 16px;
     width: 200px;
     background: url("../images/slogan.png") no-repeat 0 0 transparent;  
@@ -606,6 +631,9 @@ body{
         padding-top:38px;
         padding-left:0;
         padding-right:0;
+    }
+    .navbar-btn{
+        margin:0;
     }
 }
 .navbar{
@@ -734,7 +762,7 @@ body{
 .menu-block-3 {
     position: absolute;
     right:0;
-    top:-46px;
+    top:-41px;
     font-family:$font-family-sans-serif;
     .nav{
         &>li{
@@ -744,7 +772,7 @@ body{
             color:$colour-white-01;
             margin-left: 20px;
             text-align: center;
-            font-size:10px;
+            font-size:11px;
             &.open{
                 border-bottom:1px solid $dropdown-bottom-border-active;
                 &.active-trail{
@@ -754,6 +782,11 @@ body{
             &>a{
                 text-transform: uppercase;
                 color:$colour-white-01;
+                &:first-of-type{
+                    min-width:130px;
+                    font-weight:bold;
+                    text-align: center;
+                }
                 &:hover{
                     color:$colour-white-01;
                 }
@@ -809,6 +842,7 @@ body{
     &>li>a{
         @media #{$tablet}{
             color: $colour-white-01;
+            padding:10px 20px;
         }
         @media #{$tablet-max}{
             white-space:normal;
@@ -1310,7 +1344,7 @@ body{
     right:0;
     top:0;
     bottom:0;
-    background:  no-repeat scroll center top transparent;  
+    background:  no-repeat scroll center center transparent;  
 }
 .grid__content{
     $gridItemWidth: 160px;
@@ -1411,6 +1445,12 @@ body{
         input{
             @media #{$tablet}{
                 max-width:190px;
+            }
+            @media #{$normal}{
+                max-width:200px;
+            }
+            @media #{$wide}{
+                max-width:100%;
             }
         }
     }
