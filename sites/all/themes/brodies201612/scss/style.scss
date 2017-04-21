@@ -2275,8 +2275,8 @@ select{
     #views-exposed-form-top-news-page-1,
     .view-guides-downloads{
         #edit-combine-wrapper{
-            max-width:50%;
-            width:50%;
+            max-width:49.7%;
+            width:49.7%;
         }
     }
 }
@@ -2960,6 +2960,12 @@ h1.page-header{
 }
 
 
+/********************** News homepage  ***********************/
+.page-news{
+    .breadcrumb{
+        display:none;
+    }
+}
 /********************** Payments ***********************/
 .page-payments{
     .payment-intro {
