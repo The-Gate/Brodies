@@ -231,6 +231,12 @@ blockquote{
         .sidebar-first{
             padding-right:$grid-gutter-width;
         }
+
+    }
+}
+@media #{$normal} {
+    .one-sidebar #block-system-main{
+        padding-right:20px;
     }
 }
 @media #{$tablet-max}{
