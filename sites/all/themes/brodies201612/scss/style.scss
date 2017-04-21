@@ -368,6 +368,9 @@ blockquote{
             display:inline;
         }
     }
+    @media #{$normal}{
+        min-height:2em;
+    }
     a{       
         font-weight: 700;
     }
@@ -1655,6 +1658,11 @@ body{
         margin-top:20px;
         &:first-of-type{
             margin-top:30px;
+        }
+    }
+    .region-pre-content{
+        .block-views{
+            margin-top:0;
         }
     }
 }
