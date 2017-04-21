@@ -43,10 +43,10 @@ function views_news_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area']['content'] = '<p>For further information or for media enquiries please contact:<br>
-Camillo Fracassini, Head of Communications<br>
-camillo.fracassini@brodies.com<br>
-0131 656 0292 or 07980 731 302</p>';
+  $handler->display->display_options['footer']['area']['content'] = '<hr><p>For further information or for media enquiries please contact:</p>
+<p>Camillo Fracassini,<br>Head of Communications</p>
+<p>camillo.fracassini@brodies.com</p>
+<p>0131 656 0292 or 07980 731 302</p><hr>';
   $handler->display->display_options['footer']['area']['format'] = '2';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_w_image']['id'] = 'field_w_image';
