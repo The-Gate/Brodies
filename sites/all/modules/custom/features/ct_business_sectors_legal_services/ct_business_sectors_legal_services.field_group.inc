@@ -122,17 +122,18 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_related';
   $field_group->data = array(
-    'label' => 'Binformed - sharing our knowledge',
+    'label' => 'BInformed - sharing our knowledge',
     'weight' => '12',
     'children' => array(
       0 => 'field_related_binformed',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'BInformed - sharing our knowledge',
       'instance_settings' => array(
         'classes' => 'group-related-binformed field-group-accordion-item',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_related_binformed|node|sector|default'] = $field_group;
@@ -147,17 +148,18 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_service_related';
   $field_group->data = array(
-    'label' => 'Binformed - sharing our knowledge',
+    'label' => 'BInformed - sharing our knowledge',
     'weight' => '2',
     'children' => array(
       0 => 'field_related_binformed',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'BInformed - sharing our knowledge',
       'instance_settings' => array(
         'classes' => 'group-related-binformed field-group-accordion-item',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_related_binformed|node|service|default'] = $field_group;
@@ -492,7 +494,7 @@ function ct_business_sectors_legal_services_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Binformed - sharing our knowledge');
+  t('BInformed - sharing our knowledge');
   t('Inline Videos');
   t('Related Sectors');
   t('Related Services');
