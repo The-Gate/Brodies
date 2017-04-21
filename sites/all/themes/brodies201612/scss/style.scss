@@ -508,6 +508,9 @@ dl.ckeditor-tabber{
     }
 }
 /********************** HEADER: Background ***********************/
+$landingHeight: 258px;
+$navbar-height:265px;
+$overviewHeight: 490px;
 body{
     .navbar-wrapper{
         border-bottom:4px solid $colour-orange-01;
@@ -517,7 +520,6 @@ body:not(.page-landing){
     .navbar-wrapper{
         background: $colour-peach-01;
         @media #{$tablet} {
-            $navbar-height:265px;
             height:$navbar-height;
             .container{
                 height:$navbar-height;
@@ -526,8 +528,6 @@ body:not(.page-landing){
     }
 }
 body{
-    $landingHeight: 258px;
-    $overviewHeight: 490px;
     &.node-type-homepage,
     &.page-landing{
         .navbar-wrapper{
@@ -542,18 +542,18 @@ body{
     &.node-type-homepage{
         .navbar-wrapper{
             @media #{$tablet} {
-                height:($landingHeight+4);
+                height:$navbar-height;
                 .container{
-                    height:$landingHeight;
+                    height:$navbar-height;
                     overflow: hidden;
                 }
             }
         }
         .navbar-background{
             @media #{$tablet} {
-                height:$landingHeight;
+                height:$navbar-height - 4px;
                 .container{
-                    height:$landingHeight;
+                    height:$navbar-height - 4px;
                 }
             }
         }
@@ -617,7 +617,7 @@ body{
     @media #{$tablet} {
         position:absolute;
         display: block;
-        bottom:0;
+        bottom:4px;
     }
 }
 #slogan {
