@@ -224,8 +224,16 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sort';
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => '2',
+        ),
+      ),
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
     ),
     'sort' => array(
       'bef_format' => 'default',
@@ -241,11 +249,13 @@ Title Desc|Z -> A',
         'reset' => 1,
         'reset_label' => 'Reset Sort',
         'is_secondary' => 0,
+        'autosubmit' => 0,
       ),
     ),
     'combine' => array(
       'bef_format' => 'default',
       'more_options' => array(
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -264,6 +274,7 @@ Title Desc|Z -> A',
       'more_options' => array(
         'bef_select_all_none' => FALSE,
         'bef_collapsible' => 0,
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -280,6 +291,7 @@ Title Desc|Z -> A',
     'field_l_date_value' => array(
       'bef_format' => 'default',
       'more_options' => array(
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -291,6 +303,7 @@ Title Desc|Z -> A',
         'rewrite' => array(
           'filter_rewrite_values' => '',
         ),
+        'datepicker_options' => '',
       ),
     ),
   );
@@ -448,7 +461,7 @@ Title Desc|Z -> A',
     6 => 0,
   );
   $handler->display->display_options['filters']['field_l_date_value']['granularity'] = 'year';
-  $handler->display->display_options['filters']['field_l_date_value']['year_range'] = '2006:+0';
+  $handler->display->display_options['filters']['field_l_date_value']['year_range'] = '-0:2006';
   $handler->display->display_options['select_labels'] = array(
     'combine' => 'Search by name',
     'field_l_area_nid' => 'Area',

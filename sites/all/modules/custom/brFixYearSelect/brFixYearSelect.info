@@ -1,0 +1,4 @@
+name = Brodies - Fix Year select
+description = "removes the dash - in a views date filter"
+package = "Brodies"
+core = 7.x

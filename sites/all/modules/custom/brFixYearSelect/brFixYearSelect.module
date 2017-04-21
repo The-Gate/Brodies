@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements  hook_date_select_process_alter() within date.api.php
+ */
+function brFixYearSelect_date_select_process_alter(&$element, &$form_state, $context) {
+  // Tweak the -Year filter to remove the -
+  if (empty($element['year'])) return;
+  foreach ($element['year']['#options'] as $key => $value) {
+    if ($value == '-Year') {
+      $element['year']['#options'][$key] = 'Year';
+      break;
+    }
+  }
+}
