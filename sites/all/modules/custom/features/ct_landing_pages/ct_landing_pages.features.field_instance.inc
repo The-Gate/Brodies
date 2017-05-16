@@ -2268,6 +2268,65 @@ function ct_landing_pages_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-lpage2-field_block_reference'.
+  $field_instances['node-lpage2-field_block_reference'] = array(
+    'bundle' => 'lpage2',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_block_reference',
+    'label' => 'Block Reference',
+    'required' => 0,
+    'settings' => array(
+      'blockreference_modules' => array(
+        'aggregator' => 0,
+        'block' => 0,
+        'brSeminarBooking' => 0,
+        'cck_blocks' => 0,
+        'comment' => 0,
+        'diff' => 0,
+        'gmap_location' => 0,
+        'menu' => 0,
+        'menu_block' => 0,
+        'node' => 0,
+        'site_map' => 0,
+        'system' => 0,
+        'user' => 0,
+        'views' => 0,
+        'webform' => 'webform',
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 41,
+    ),
+  );
+
   // Exported field_instance: 'node-lpage2-field_lp_bkg_image'.
   $field_instances['node-lpage2-field_lp_bkg_image'] = array(
     'bundle' => 'lpage2',
@@ -2285,7 +2344,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => -2,
+        'weight' => 3,
       ),
       'full' => array(
         'label' => 'above',
@@ -2388,7 +2447,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 7,
       ),
       'full' => array(
         'label' => 'above',
@@ -2464,7 +2523,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 11,
       ),
       'full' => array(
         'label' => 'above',
@@ -2542,7 +2601,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -2644,7 +2703,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 10,
       ),
       'full' => array(
         'label' => 'above',
@@ -2720,7 +2779,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -2791,7 +2850,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'full' => array(
         'label' => 'above',
@@ -2893,7 +2952,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => -2,
+        'weight' => 2,
       ),
       'full' => array(
         'label' => 'above',
@@ -2969,7 +3028,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 4,
       ),
       'full' => array(
         'label' => 'above',
@@ -3040,7 +3099,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 17,
       ),
       'full' => array(
         'label' => 'above',
@@ -3119,7 +3178,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 20,
       ),
       'full' => array(
         'label' => 'above',
@@ -3198,7 +3257,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 32,
+        'weight' => 23,
       ),
       'full' => array(
         'label' => 'above',
@@ -3277,7 +3336,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 15,
       ),
       'full' => array(
         'label' => 'above',
@@ -3356,7 +3415,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 18,
       ),
       'full' => array(
         'label' => 'above',
@@ -3463,7 +3522,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 30,
+        'weight' => 21,
       ),
       'full' => array(
         'label' => 'above',
@@ -3570,7 +3629,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 33,
+        'weight' => 24,
       ),
       'full' => array(
         'label' => 'above',
@@ -3677,7 +3736,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'above',
@@ -3789,7 +3848,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 16,
       ),
       'full' => array(
         'label' => 'above',
@@ -3872,7 +3931,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 19,
       ),
       'full' => array(
         'label' => 'above',
@@ -3955,7 +4014,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 31,
+        'weight' => 22,
       ),
       'full' => array(
         'label' => 'above',
@@ -4038,7 +4097,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
@@ -4121,7 +4180,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -4205,7 +4264,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 5,
       ),
       'full' => array(
         'label' => 'above',
@@ -4276,7 +4335,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 37,
+        'weight' => 25,
       ),
       'full' => array(
         'label' => 'above',
@@ -4378,7 +4437,7 @@ function ct_landing_pages_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 38,
+        'weight' => 26,
       ),
       'full' => array(
         'label' => 'above',
@@ -5542,6 +5601,7 @@ Leave blank for clear background',
   t('Block 3 BG Colour');
   t('Block 4');
   t('Block 4 BG Colour');
+  t('Block Reference');
   t('Blog list');
   t('Blog list more link url');
   t('Body');

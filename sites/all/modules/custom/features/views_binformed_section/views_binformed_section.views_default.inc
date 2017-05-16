@@ -153,6 +153,7 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
   $handler->display->display_options['filters']['combine']['field'] = 'combine';
+  $handler->display->display_options['filters']['combine']['operator'] = 'word';
   $handler->display->display_options['filters']['combine']['group'] = 1;
   $handler->display->display_options['filters']['combine']['exposed'] = TRUE;
   $handler->display->display_options['filters']['combine']['expose']['operator_id'] = 'combine_op';
@@ -164,6 +165,7 @@ function views_binformed_section_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['combine']['fields'] = array(
     'title' => 'title',

@@ -240,6 +240,7 @@ function views_news_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_news_category_nid_selective']['selective_display_field'] = 'field_news_category';
   $handler->display->display_options['filters']['field_news_category_nid_selective']['selective_items_limit'] = '100';
@@ -255,7 +256,7 @@ function views_news_views_default_views() {
   $handler->display->display_options['filters']['field_site_section_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_section_tid']['vocabulary'] = 'section';
   $handler->display->display_options['select_labels'] = array(
-    'field_news_category_nid_selective' => 'News Categories',
+    'field_news_category_nid_selective' => 'News Category',
     'combine' => 'Search by name',
     'type' => 'News type',
   );

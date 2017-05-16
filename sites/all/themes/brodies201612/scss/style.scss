@@ -69,7 +69,7 @@ h4,
 h5,
 h6{
     font-family:$font-family-serif;
-    font-weight:700;
+    font-weight:400;
 }
 
 h1,
@@ -86,7 +86,9 @@ h1,
 h2 {
     font-size:$font-size-h2;
     margin-top:0;
-
+    .region-content &.block-title{
+        margin-bottom:15px;
+    }
 }
 
 h3 {
@@ -511,12 +513,12 @@ dl.ckeditor-tabber{
 $landingHeight: 258px;
 $navbar-height:265px;
 $overviewHeight: 490px;
-body{
+body:not(.node-type-lpage2){
     .navbar-wrapper{
         border-bottom:4px solid $colour-orange-01;
     }
 }
-body:not(.page-landing){
+body:not(.page-landing):not(.node-type-lpage2){
     .navbar-wrapper{
         background: $colour-peach-01;
         @media #{$tablet} {
@@ -943,6 +945,11 @@ h1.page-header,
 h2.block-title{
     border-bottom:3px solid $colour-orange-03;
     width:100%;
+    padding-bottom:5px;
+}
+.field-name-field-event-speakers .field-label,
+.field-name-field-related-people .field-label{
+    margin-bottom:15px;
 }
 
 .region-sidebar-first .block:first-child label,
@@ -1111,7 +1118,7 @@ h2.block-title{
     }
     &.view-display-id-block_2{
         .views-row{
-            background: #00235d;
+            background: $colour-blue-02;
             display:block;
             position: relative;
             margin-bottom:10px;
@@ -1666,6 +1673,12 @@ body{
         }
     }
 }
+@media #{$mobile-max}{
+    #block-views-exp-case-studies-page-1,
+    #block-views-exp-case-studies-page-1 .views-exposed-widgets{
+        margin-top:0;
+    }
+}
 .field-name-field-d-date,
 .field-name-field-p-date,
 .field-name-field-w-date,
@@ -1764,7 +1777,7 @@ body{
 
 }
 /********************** Listings ***********************/
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-id-search){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-id-search):not(.view-seminars.view-display-id-block_1){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
@@ -2062,8 +2075,19 @@ body{
     .field-name-body{
         margin-top:2em;
     }
+    .main-content > h2{
+        margin-bottom:24px;
+    }
 }
-
+.field-name-body{
+    ul{
+        padding-left:1.4em;
+    }
+    img{
+        max-width:100%;
+        height:auto;
+    }
+}
 
 .page-seminars-and-events-checkout{
     #block-brseminarbooking-seminar-checkout{
@@ -2194,6 +2218,9 @@ select{
         }
         @media #{$normal}{
             max-width:25%;
+            #views-exposed-form-seminars-main-seminar-listing &{
+                max-width:22.6%;
+            }
         }
         .btn {
             margin-top: 0;
@@ -2679,8 +2706,7 @@ body.page-landing{
         }
     }
 }
-.node-type-lpage,
-.node-type-lpage2{
+.node-type-lpage{
     .col{
         max-height:250px;
     }
@@ -2728,21 +2754,160 @@ body.page-landing{
 
 // landing page v2
 .node-type-lpage2{
-    .landing-download {
-        .landing-download-item {
-            padding:0 15px;
-            a {
-                display: block;
-                font-family: helvetica,arial;
-                font-size: 12px;
-                height: 24px;
-                width: 100%;
-                overflow: hidden;
-                padding: 9px 52px 9px 12px;
-                text-decoration: none;
-                color: #fff;
+    .landing-background{
+        max-height:200px;
+        height:20vw;
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        margin-top:20px;
+    }
+        .main-content{
+            margin-bottom:30px;
+        }
+    @media #{$normal}{
+        .main-content{
+            margin-bottom:65px;
+        }
+    }
+    h1{
+        text-align: center;
+        font-size: $font-size-28;
+        margin-bottom: 20px;
+
+    }
+    p,
+    .main-container{
+        font-family: georgia;
+        font-size:16px;
+        line-height:1.4;
+        color:#000;
+    }
+    p{
+        margin:1em auto;
+    }
+    .col-left p:first-of-type{
+        font-weight:700;
+    }
+    .video-thumb{
+        width:100%;
+        margin-bottom:1em;
+    }
+    .cta{
+        h3{
+            border-bottom:2px solid #fc9e34;
+            padding:0 0 5px 12px;
+            font-weight:400;
+            font-size:20px;
+            color: #000;
+        }
+    }
+    .contact{
+        margin-bottom:10px;
+        background:$colour-blue-02;
+        a{
+            color: $colour-white-01;
+        }
+    }
+    .contact-img,
+    .contact-info{
+        float:none;
+        display:inline-block;
+        vertical-align: top;
+    }
+    .contact-img{
+        width:120px;
+        margin-right:-3px;
+        img{
+            width:120px;
+            height:auto;
+            display:block;
+        }
+    }
+
+    .contact-info{
+        width:calc(100% - 121px);
+        border-top:4px solid $colour-blue-04;
+        padding: 0 15px;
+    }
+
+    .landing-download{
+        position: relative;
+        padding:15px 30px;
+        background-color: $colour-blue-02;
+        .landing-download-item{
+            background-repeat:no-repeat;
+            background-position:  100% 50% ;
+            display: flex;
+            justify-content:center;
+            align-content:center;
+            flex-direction:column;
+            a{
+                font-size: 16px;
+                font-family: georgia;
+                font-weight:400;
+                margin-right:50px;
+                display:block;
+                width:100%;
+                height:100%;
+                text-decoration:none;
+                color:$colour-white-01;
             }
         }
+    }
+
+    .feeds{
+        ul{
+            list-style-type:none;
+            padding-left:12px;
+        }
+        li{
+            margin:5px 0;
+            img{
+                width:100%;
+            }
+        }
+        a{
+            color: #000;
+            display:block;
+        }
+    }
+    .block-wrapper{
+        background:$colour-blue-02;
+        padding:15px 40px;
+        color:$colour-white-01;
+        h3{
+            color:$colour-white-01;
+            text-align:center;
+            font-size:$font-size-24;
+            font-weight:400;
+        }
+        textarea,
+        input{
+            width:100%;
+            max-width:100%;
+            border:0;
+            margin: 0 0 15px; 
+            font-size:$font-size-16;
+            line-height:1.3;
+        }
+        .form-submit{
+            color: $colour-blue-02;
+            border-radius: 5px;
+            background: $colour-blue-04;
+            line-height:2;
+            width:100%;
+            font-size:$font-size-16;
+        }
+
+        label{
+            font-weight:400;
+            margin:0 0 3px;
+        }
+        .form-required{
+            color: #fc9e34;
+        }
+
     }
 }
 
@@ -2950,6 +3115,14 @@ h1.page-header{
         max-width: $avoid-title-icon;
         padding-bottom:30px;
         overflow:hidden;
+    }
+}
+.node-type-event{
+    .field-label-inline .field-label{
+        margin-bottom:5px;
+        &:last-of-type{
+            margin-bottom:0;
+        }
     }
 }
 

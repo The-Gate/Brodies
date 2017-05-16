@@ -63,6 +63,9 @@ else {
     case 'title':
       $title_content = $storeContent;
       break;
+    case 'field_event_date_2':
+      $main_content .= str_replace(' to ', ' - ', $storeContent);
+      break;
     default:
       if ($id == 'nothing') {
         // the read more button is in the global text field: 'nothing'

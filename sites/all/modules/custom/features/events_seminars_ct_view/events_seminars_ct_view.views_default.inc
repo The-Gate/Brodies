@@ -29,8 +29,12 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -101,7 +105,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['text'] = 'Read More';
+  $handler->display->display_options['fields']['view_node']['text'] = 'More info';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -134,7 +138,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['field_event_date_1']['field'] = 'field_event_date';
   $handler->display->display_options['fields']['field_event_date_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_event_date_1']['settings'] = array(
-    'format_type' => 'short',
+    'format_type' => 'brodies_date_only_long_',
     'fromto' => 'value',
     'multiple_number' => '',
     'multiple_from' => '',

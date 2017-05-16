@@ -73,18 +73,6 @@
  * @ingroup templates
  */
 ?>
-<?php
-$landingBGOpen = $landingBGClose = null;
-// landing pages have a custom background set up
-if (isset($node->field_lp_bkg_image)) {
-  $landingBGOpen = '<div id ="landing-background" class = "landing-background clearfix" style = "background-image:url(\'' . file_create_url($node->field_lp_bkg_image[LANGUAGE_NONE][0]['uri']) . '\')">';
-  $landingBGClose = '</div>';
-}
-?>
-
-<?php if (isset($landingBGOpen)): ?>
-  <?php print $landingBGOpen; ?>
-<?php endif; ?>
 <div class="navbar-wrapper">
     <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
         <div class="<?php print $container_class; ?>">
@@ -92,7 +80,7 @@ if (isset($node->field_lp_bkg_image)) {
                 <?php if ($logo): ?>
                   <div class="logo-wrapper-mobile">
                       <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                          <img src="/sites/all/themes/brodies201612/images/logo-landing.png" alt="<?php print t('Home'); ?>"/>
                       </a>
                   </div>
                 <?php endif; ?>
@@ -129,27 +117,23 @@ if (isset($node->field_lp_bkg_image)) {
             <?php if ($logo): ?>
               <div class="logo-wrapper-desktop">
                   <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                      <img src="/sites/all/themes/brodies201612/images/logo-landing.png" alt="<?php print t('Home'); ?>"/>
                   </a>
               </div>
             <?php endif; ?>
-            <?php
-            if ($title) {
-              if (isset($node->field_lp_title_img[LANGUAGE_NONE][0]['uri'])) {
-                print '<h1 class="page-header"><img src="' . file_create_url($node->field_lp_title_img[LANGUAGE_NONE][0]['uri']) . '" alt="' . $title . '"></h1>';
-              }
-              else {
-                print '<h1 class="page-header">' . $title . '</h1>';
-              }
-            }
-            ?>
         </div>
+
+
     </header>
+    <?php
+    if (isset($node->field_lp_bkg_image)) {
+      print('<div id ="landing-background" class = "landing-background clearfix" style = "background-image:url(\'' . file_create_url($node->field_lp_bkg_image[LANGUAGE_NONE][0]['uri']) . '\')"></div>');
+    }
+    ?>
 </div>
 <div class="main-container <?php print $container_class; ?>">
 
     <header role="banner" id="page-header">
-        <div id="slogan" class="clearfix"><span></span></div>
         <?php print render($page['header']); ?>
     </header> <!-- /#page-header -->
 
@@ -177,106 +161,122 @@ if (isset($node->field_lp_bkg_image)) {
             <?php if (!empty($action_links)): ?>
               <ul class="action-links"><?php print render($action_links); ?></ul>
             <?php endif; ?>
-            <div class="col-md-6 col-left">
-                <div class="text-wrapper">
-                    <?php
-                    print render($page['content']);
-                    ?>
-                </div>
-            </div>
-            <div class="col-md-6 col-right"><?php
-                $vdata = br_get_video_data($node->field_lp_v_link[LANGUAGE_NONE][0]['value']);
-                $video = '<a href="' . $node->field_lp_v_link[LANGUAGE_NONE][0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive"src="' . file_create_url($node->field_lp_v_image[LANGUAGE_NONE][0]['uri']) . '" /></a>';
-                print $video;
+            <div class="col-md-12">
+                <?php
+                if ($title) {
+                  if (isset($node->field_lp_title_img[LANGUAGE_NONE][0]['uri'])) {
+                    print '<h1 class="page-header"><img src="' . file_create_url($node->field_lp_title_img[LANGUAGE_NONE][0]['uri']) . '" alt="' . $title . '"></h1>';
+                  }
+                  else {
+                    print '<h1 class="page-header">' . $title . '</h1>';
+                  }
+                }
                 ?>
             </div>
-            <div class="clearfix"></div>
-            <div class="is-table-row">
+            <div class="col-md-8 col-left main-content">
                 <?php
-                //////  block 1
+                $vdata = br_get_video_data($node->field_lp_v_link[LANGUAGE_NONE][0]['value']);
+                $video = '<a href="' . $node->field_lp_v_link[LANGUAGE_NONE][0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="video-thumb img-responsive"src="' . file_create_url($node->field_lp_v_image[LANGUAGE_NONE][0]['uri']) . '" /></a>';
+                print $video;
+                print render($page['content']);
+                if (isset($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri'])) {
+                  $style_1 = '';
+                  if ($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) {
+                    $dlih1 = image_get_info($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']);
+                    $dlih1S = (!empty($dlih1['height'])) ? ';min-height:' . $dlih1['height'] . 'px;' : '';
+                    $style_1 = ' style="background-image:url(\'' . file_create_url($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) . '\');' . $dlih1S . '"';
+                  }
+                  $title_1 = (isset($node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'] : "Download File";
+                  print '<div class="landing-download"><div class="landing-download-item item-1"' . $style_1 . '><a href="' . file_create_url($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_1 . '</a></div></div>';
+                }
+                ?>
+            </div>
+            <div class="col-md-4 col-right">
+                <?php
+                // included webform
+                if (isset($node->field_block_reference[LANGUAGE_NONE][0][moddelta])) {
+                  $blockDetails = explode(':', $node->field_block_reference[LANGUAGE_NONE][0][moddelta]);
+                  $block = module_invoke($blockDetails[0], 'block_view', $blockDetails[1]);
+                  if (!empty($block['content'])) {
+                    print ('<div class="block-wrapper">' . $block['content'] . '</div>');
+                  }
+                }
 
-                if (isset($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) or isset($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) or isset($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) or isset($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])):
-                  ?>
-                  <div class="col-md-3"><div class="col landing-download"><h3>Downloads (PDFs)</h3><?php
-                          if (isset($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri'])) {
-                            $style_1 = (isset($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
-                            $title_1 = (isset($node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_1 . '><a href="' . file_create_url($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_1 . '</a></div>';
-                          }
-                          if (isset($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri'])) {
-                            $style_2 = (isset($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
-                            $title_2 = (isset($node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_2 . '><a href="' . file_create_url($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_2 . '</a></div>';
-                          }
-                          if (isset($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri'])) {
-                            $style_3 = (isset($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
-                            $title_3 = (isset($node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_3 . '><a href="' . file_create_url($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_3 . '</a></div>';
-                          }
-                          if (isset($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])) {
-                            $style_4 = (isset($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri'])) ? ' style="background-image:url(\'/' . file_create_url($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri']) . '\')"' : "";
-                            $title_4 = (isset($node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'] : "Download File";
-                            print '<div class="landing-download-item item-1"' . $style_4 . '><a href="' . file_create_url($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_4 . '</a></div>';
-                          }
-                          ?>
-                      </div></div>
-                <?php endif; ?>
-                <?php
-                //////  block 2
+                //////  Key Contacts
                 if (isset($node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']) or isset($node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value'])):
                   ?>
-                  <div class="col-md-3"><div class="col">
-                          <?php if (isset($node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value'])) :
-                            ?>
-                            <div class="contact">
-                                <div class="contact-image"><a href="<?php print $node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']; ?>"><img alt="<?php print $node->field_lp_contact_l_name[LANGUAGE_NONE][0]['value']; ?>" src="<?php print file_create_url($node->field_lp_contact_l_img[LANGUAGE_NONE][0]['uri']); ?>"></a></div>
-                                <div class="contact-info">
-                                    <p><a href="<?php print $node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']; ?>"><b>Key contact</b></a></p>
-                                    <p><a href="<?php print $node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']; ?>"><?php print $node->field_lp_contact_l_name[LANGUAGE_NONE][0]['value']; ?></a></p>
-                                </div>
+                  <div class="cta contacts">
+                      <h3>Key Contacts</h3>
+                      <?php if (isset($node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value'])) :
+                        ?>
+                        <div class="contact">
+                            <div class="contact-img"><a href="<?php print $node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']; ?>"><img alt="<?php print $node->field_lp_contact_l_name[LANGUAGE_NONE][0]['value']; ?>" src="<?php print file_create_url($node->field_lp_contact_l_img[LANGUAGE_NONE][0]['uri']); ?>"></a></div>
+                            <div class="contact-info">
+                                <p><a href="<?php print $node->field_lp_contact_l_url[LANGUAGE_NONE][0]['value']; ?>"><?php print $node->field_lp_contact_l_name[LANGUAGE_NONE][0]['value']; ?></a></p>
                             </div>
-                          <?php endif; ?>
-                          <?php if (isset($node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value'])) : ?>
-                            <div class="contact">
-                                <div class="contact-image"><a href="<?php print $node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value']; ?>"><img alt="<?php print $node->field_lp_contact_r_name[LANGUAGE_NONE][0]['value']; ?>" src="<?php print file_create_url($node->field_lp_contact_r_img[LANGUAGE_NONE][0]['uri']); ?>"></a></div>
-                                <div class="contact-info">
-                                    <p><a href="<?php print $node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value']; ?>"><b>Key contact</b></a></p>
-                                    <p><a href="<?php print $node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value']; ?>"><?php print $node->field_lp_contact_r_name[LANGUAGE_NONE][0]['value']; ?></a></p>
-                                </div>
+                        </div>
+                      <?php endif; ?>
+                      <?php if (isset($node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value'])) : ?>
+                        <div class="contact">
+                            <div class="contact-img"><a href="<?php print $node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value']; ?>"><img alt="<?php print $node->field_lp_contact_r_name[LANGUAGE_NONE][0]['value']; ?>" src="<?php print file_create_url($node->field_lp_contact_r_img[LANGUAGE_NONE][0]['uri']); ?>"></a></div>
+                            <div class="contact-info">
+                                <p><a href="<?php print $node->field_lp_contact_r_url[LANGUAGE_NONE][0]['value']; ?>"><?php print $node->field_lp_contact_r_name[LANGUAGE_NONE][0]['value']; ?></a></p>
                             </div>
-                          <?php endif; ?>
-                      </div></div>
+                        </div
+                      <?php endif; ?>>
+                  </div>
                   <?php
                 endif;
                 ?>
-                <?php
-                //////  block 3
-                if (isset($node->field_lp_news[LANGUAGE_NONE][0]['value'])):
-                  ?>
-                  <div class="col-md-3"><div class="col bg-col"><h3>Useful Links</h3><?= $node->field_lp_news[LANGUAGE_NONE][0]['value']; ?><?php if (isset($node->field_lp_new_more[LANGUAGE_NONE][0]['value'])): ?>
-                            <a class="more-link" href="<?php print $node->field_lp_new_more[LANGUAGE_NONE][0]['value']; ?>">More</a>
-                          <?php endif; ?></div></div>
-                <?php endif; ?>
-                <?php
-                //////  block 4
-                if (isset($node->field_lp_blog[LANGUAGE_NONE][0]['value'])):
-                  ?>
-                  <div class="col-md-3"><div class="col bg-col"><h3>Recent Publications</h3><?= $node->field_lp_blog[LANGUAGE_NONE][0]['value']; ?><?php if (isset($node->field_lp_blog_more[LANGUAGE_NONE][0]['value'])): ?>
-                            <a class="more-link" href="<?php print $node->field_lp_blog_more[LANGUAGE_NONE][0]['value']; ?>">More</a>
-                          <?php endif; ?></div></div>
-                <?php endif; ?>
             </div>
-        </section>
+            <div class="clearfix"></div>
+            <?php
+            //////  block 1
 
+            $blockClass = " col-md-8";
+            if (isset($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) or isset($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) or isset($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])):
+              ?>
+              <div class="col-md-4"><div class="cta feeds"><h3>Associated downloads</h3><ul><?php
+                          if (!empty($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri'])) {
+                            $title_1 = (isset($node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'] : "Download File";
+                            $linkContent1 = (!empty($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri']) . '" />' : $title_1;
+                            print('<li><a href="/' . $node->field_lp_dl_file_2[0]['filepath'] . '" target="_blank">' . $linkContent1 . '</a></li>');
+                          }
+                          if (!empty($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri'])) {
+                            $title_2 = (isset($node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'] : "Download File";
+                            $linkContent2 = (!empty($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri']) . '" />' : $title_2;
+                            print('<li><a href="/' . $node->field_lp_dl_file_3[0]['filepath'] . '" target="_blank">' . $linkContent2 . '</a></li>');
+                          }
+                          if (!empty($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])) {
+                            $title_3 = (isset($node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'] : "Download File";
+                            $linkContent3 = (!empty($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri']) . '" />' : $title_1;
+                            print('<li><a href="/' . $node->field_lp_dl_file_4[0]['filepath'] . '" target="_blank">' . $linkContent3 . '</a></li>');
+                          }
+                          ?></ul>
+                  </div></div>
+              <?php
+              $blockClass = " col-md-4";
+            endif;
+            ?>
+
+
+            <?php
+            //////  block 4
+            if (isset($node->field_lp_blog[LANGUAGE_NONE][0]['value'])):
+              ?>
+              <div class="<?php echo $blockClass; ?>"><div class="cta feeds"><h3>Recent Publications</h3><?= $node->field_lp_blog[LANGUAGE_NONE][0]['value']; ?><?php if (isset($node->field_lp_blog_more[LANGUAGE_NONE][0]['value'])): ?>
+
+                      <?php endif; ?></div></div>
+            <?php endif; ?>
+
+            <?php
+//////  block 3
+            if (isset($node->field_lp_news[LANGUAGE_NONE][0]['value'])):
+              ?>
+              <div class="col-md-4"><div class="cta feeds"><h3>Useful Links</h3><?= $node->field_lp_news[LANGUAGE_NONE][0]['value']; ?><?php if (isset($node->field_lp_new_more[LANGUAGE_NONE][0]['value'])): ?>
+                      <?php endif; ?></div></div>
+                    <?php endif; ?>
+
+        </section>
     </div>
 </div>
-<?php if (isset($landingBGClose)): ?>
-  <?php print $landingBGClose; ?>
-<?php endif; ?>
-<?php if (!empty($page['footer'])): ?>
-  <div class="footer-wrapper">
-      <footer class="footer <?php print $container_class; ?>">
-          <?php print render($page['footer']); ?>
-      </footer>
-  </div>
-<?php endif; ?>
