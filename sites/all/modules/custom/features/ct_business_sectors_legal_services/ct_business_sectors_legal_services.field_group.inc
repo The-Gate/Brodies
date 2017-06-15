@@ -21,7 +21,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Inline Videos',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_p_v_image_1',
       1 => 'field_p_v_text_1',
@@ -55,7 +55,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Inline Videos',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
       0 => 'field_p_v_image_1',
       1 => 'field_p_v_text_1',
@@ -327,9 +327,9 @@ function ct_business_sectors_legal_services_field_group_info() {
     'label' => 'Related content',
     'weight' => '1',
     'children' => array(
-      0 => 'group_related_secotrs',
-      1 => 'group_related_services',
-      2 => 'group_related_binformed',
+      0 => 'group_related_binformed',
+      1 => 'group_related_secotrs',
+      2 => 'group_related_services',
       3 => 'group_related_video',
     ),
     'format_type' => 'accordion',
@@ -356,7 +356,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_service',
@@ -420,9 +420,9 @@ function ct_business_sectors_legal_services_field_group_info() {
     'label' => 'Related content',
     'weight' => '1',
     'children' => array(
-      0 => 'group_related_secotrs',
-      1 => 'group_related_services',
-      2 => 'group_related_binformed',
+      0 => 'group_related_binformed',
+      1 => 'group_related_secotrs',
+      2 => 'group_related_services',
       3 => 'group_related_video',
     ),
     'format_type' => 'accordion',
@@ -449,7 +449,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_sector',

@@ -17,6 +17,7 @@ features[field_base][] = field_2_column_text
 features[field_base][] = field__microsite_header_link
 features[field_base][] = field_as_app
 features[field_base][] = field_as_completed
+features[field_base][] = field_banner_image
 features[field_base][] = field_cta_imge
 features[field_base][] = field_cta_link
 features[field_base][] = field_cta_text

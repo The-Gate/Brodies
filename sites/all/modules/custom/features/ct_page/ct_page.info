@@ -1,0 +1,17 @@
+name = CT: Page
+core = 7.x
+package = Brodies
+dependencies[] = ct_shared_fields
+dependencies[] = features
+dependencies[] = image
+dependencies[] = media
+dependencies[] = text
+features[features_api][] = api:2
+features[field_instance][] = node-page-body
+features[field_instance][] = node-page-field_banner_image
+features[field_instance][] = node-page-field_old_path
+features[field_instance][] = node-page-field_teaser_image
+features[field_instance][] = node-page-field_title_icon
+features[node][] = page
+features_exclude[dependencies][ct_business_sectors_legal_services] = ct_business_sectors_legal_services
+features_exclude[field_base][field_banner_image] = field_banner_image
