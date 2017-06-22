@@ -218,11 +218,7 @@ elseif (!($default_icon === false)) {
   $title_output .= '<div class="title-icon"><img src="/' . drupal_get_path('theme', $GLOBALS['theme']) . '/images/title-icons/' . $default_icon . '"></div>';
 }
 ?>
-<?php if (!empty($page['navigation_bg'])): ?>
-  <div class="navbar-background">
-      <?php print render($page['navigation_bg']); ?>
-  </div>
-<?php endif; ?>
+
 <div class="navbar-wrapper">
     <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
         <div class="<?php print $container_class; ?>">
@@ -264,16 +260,27 @@ elseif (!($default_icon === false)) {
                   </nav>
               </div>
             <?php endif; ?>
-            <?php if ($logo): ?>
-              <div class="logo-wrapper-desktop">
-                  <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-                  </a>
-              </div>
-            <?php endif; ?>
+
         </div>
     </header>
 </div>
+<?php if (!empty($page['navigation_bg'])): ?>
+  <div class="navbar-background">
+      <?php print render($page['navigation_bg']); ?>
+      <?php if ($logo): ?>
+
+
+        <div class="logo-wrapper-desktop-container">
+            <div class="logo-wrapper-desktop">
+                <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+                    <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                </a>
+            </div>
+        </div>
+      <?php endif; ?>
+
+  </div>
+<?php endif; ?>
 <div class="main-container <?php print $container_class; ?>">
 
     <header role="banner" id="page-header">

@@ -460,70 +460,6 @@ Purple: 8c5d9f',
     ),
   );
 
-  // Exported field_instance: 'node-homepage-field_banner_image'.
-  $field_instances['node-homepage-field_banner_image'] = array(
-    'bundle' => 'homepage',
-    'deleted' => 0,
-    'description' => 'images MUST be 1400x262',
-    'display' => array(
-      'cck_blocks' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_banner_image',
-    'label' => 'Banner Image',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'header-banner',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '1400x262',
-      'min_resolution' => '1400x262',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'media',
-      'settings' => array(
-        'allowed_schemes' => array(
-          'public' => 'public',
-        ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
-          'upload' => 0,
-        ),
-      ),
-      'type' => 'media_generic',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'node-homepage-field_home_cta_block'.
   $field_instances['node-homepage-field_home_cta_block'] = array(
     'bundle' => 'homepage',
@@ -576,7 +512,6 @@ Purple: 8c5d9f',
   // Translatables
   // Included for use with string extractors like potx.
   t('BG Colour');
-  t('Banner Image');
   t('Body');
   t('Button Title');
   t('Full Width');
@@ -591,7 +526,6 @@ Purple: 8c5d9f',
 Blue: 00235d<br>
 Purple: 8c5d9f');
   t('Video url');
-  t('images MUST be 1400x262');
 
   return $field_instances;
 }

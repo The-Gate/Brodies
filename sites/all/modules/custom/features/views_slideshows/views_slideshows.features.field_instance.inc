@@ -56,7 +56,7 @@ function views_slideshows_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 0,
+      'weight' => 4,
     ),
   );
 
@@ -155,7 +155,7 @@ function views_slideshows_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 32,
+      'weight' => 2,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -258,9 +258,52 @@ function views_slideshows_field_default_field_instances() {
         'default_value_php' => NULL,
       ),
       'type' => 'number',
-      'weight' => 31,
+      'weight' => 3,
     ),
     'widget_type' => 'number',
+  );
+
+  // Exported field_instance: 'node-slide-field_which_slideshow'.
+  $field_instances['node-slide-field_which_slideshow'] = array(
+    'bundle' => 'slide',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_which_slideshow',
+    'label' => 'Which slideshow',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 1,
+    ),
   );
 
   // Translatables
@@ -269,6 +312,7 @@ function views_slideshows_field_default_field_instances() {
   t('Home Page Slide content');
   t('Image');
   t('Order');
+  t('Which slideshow');
 
   return $field_instances;
 }

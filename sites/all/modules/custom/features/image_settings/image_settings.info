@@ -19,6 +19,7 @@ features[features_api][] = api:2
 features[image][] = CTA_Large
 features[image][] = CTA_small
 features[image][] = News-featured
+features[image][] = banner_image
 features[image][] = case-study-listing
 features[image][] = col-12-lg--full
 features[image][] = col-12-sm-full

@@ -411,9 +411,58 @@ function views_slideshows_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'slide' => 'slide',
   );
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    374 => '374',
+  );
+  $handler->display->display_options['filters']['tid']['type'] = 'select';
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'slideshow_type';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
+  /* Display: Sector / Services */
+  $handler = $view->new_display('block', 'Sector / Services', 'block');
+
+  /* Display: Homepage */
+  $handler = $view->new_display('block', 'Homepage', 'block_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Image */
+  $handler->display->display_options['fields']['field_slide_image']['id'] = 'field_slide_image';
+  $handler->display->display_options['fields']['field_slide_image']['table'] = 'field_data_field_slide_image';
+  $handler->display->display_options['fields']['field_slide_image']['field'] = 'field_slide_image';
+  $handler->display->display_options['fields']['field_slide_image']['label'] = '';
+  $handler->display->display_options['fields']['field_slide_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_slide_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_slide_image']['settings'] = array(
+    'image_style' => 'banner_image',
+    'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'slide' => 'slide',
+  );
+  /* Filter criterion: Content: Has taxonomy term */
+  $handler->display->display_options['filters']['tid']['id'] = 'tid';
+  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
+  $handler->display->display_options['filters']['tid']['field'] = 'tid';
+  $handler->display->display_options['filters']['tid']['value'] = array(
+    375 => '375',
+  );
+  $handler->display->display_options['filters']['tid']['type'] = 'select';
+  $handler->display->display_options['filters']['tid']['vocabulary'] = 'slideshow_type';
   $export['slideshow'] = $view;
 
   return $export;

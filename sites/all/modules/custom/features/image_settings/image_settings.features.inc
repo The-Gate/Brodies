@@ -70,6 +70,21 @@ function image_settings_image_default_styles() {
     ),
   );
 
+  // Exported image style: banner_image.
+  $styles['banner_image'] = array(
+    'label' => 'Banner Image',
+    'effects' => array(
+      45 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 1400,
+          'height' => 262,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: case-study-listing.
   $styles['case-study-listing'] = array(
     'label' => 'case-study-listing',
