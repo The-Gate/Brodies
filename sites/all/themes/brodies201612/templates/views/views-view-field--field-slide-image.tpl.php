@@ -23,5 +23,5 @@
  */
 ?>
 <div class="background-slide" style = "background-image:url('<?php 
-print file_create_url($row->field_field_slide_image[0]['raw']['uri']); 
+print image_style_url('banner_image', $row->field_field_slide_image[0]['raw']['uri']); 
 ?>')"></div>

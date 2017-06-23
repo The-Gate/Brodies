@@ -74,13 +74,23 @@ function image_settings_image_default_styles() {
   $styles['banner_image'] = array(
     'label' => 'Banner Image',
     'effects' => array(
-      45 => array(
-        'name' => 'image_scale_and_crop',
+      46 => array(
+        'name' => 'image_scale',
         'data' => array(
-          'width' => 1400,
-          'height' => 262,
+          'width' => 1920,
+          'height' => '',
+          'upscale' => 1,
         ),
-        'weight' => 1,
+        'weight' => 2,
+      ),
+      47 => array(
+        'name' => 'image_crop',
+        'data' => array(
+          'width' => 1920,
+          'height' => 262,
+          'anchor' => 'center-center',
+        ),
+        'weight' => 3,
       ),
     ),
   );

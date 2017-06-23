@@ -83,9 +83,7 @@ switch (arg(0)) {
         default:
           // check if this page has a banner set
           if (isset($node->field_banner_image['und'][0]['uri'])) {
-            $url = file_create_url($node->field_banner_image['und'][0]['uri']);
-            $url = parse_url($url);
-            $image_src = $url['path'];
+            $image_src = image_style_url('banner_image', $node->field_banner_image['und'][0]['uri']);
           }
           break;
       }
@@ -104,7 +102,7 @@ switch (arg(0)) {
     <?php print render($title_suffix); ?>
 
     <div class="content"<?php print $content_attributes; ?>>
-        <div style="background:url('<?php echo $image_src; ?>') top center no-repeat;width: 1401px; height: 261px; margin:0 auto;"></div>
+        <div style="background:url('<?php echo $image_src; ?>') top center no-repeat;width: 100%; height: 261px; margin:0; background-size:cover"></div>
     </div>
 </div>
 

@@ -157,7 +157,6 @@ features[field_base][] = field_require_login_
 features[field_base][] = field_sector_teaser
 features[field_base][] = field_service_teaser
 features[field_base][] = field_slide_image
-features[field_base][] = field_slide_order
 features[field_base][] = field_teaser_image
 features[field_base][] = field_video_url
 features[field_base][] = field_w_date

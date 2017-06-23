@@ -4135,6 +4135,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_slide_image',
+    'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -4143,7 +4144,7 @@ function ct_shared_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => NULL,
+      'default_image' => 0,
       'description_field' => 0,
       'list_default' => 1,
       'list_field' => 0,
@@ -4151,29 +4152,6 @@ function ct_shared_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
-    'type_name' => 'slide',
-  );
-
-  // Exported field_base: 'field_slide_order'.
-  $field_bases['field_slide_order'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_slide_order',
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'number',
-    'settings' => array(
-      'allowed_values' => array(),
-      'allowed_values_php' => '',
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'number_integer',
     'type_name' => 'slide',
   );
 

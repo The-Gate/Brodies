@@ -528,7 +528,7 @@ body:not(.page-landing):not(.node-type-lpage2){
         display: none;
         position:relative;
         @media #{$tablet} {
-            background: $colour-peach-01;
+            //background: $colour-peach-01;
             display: block;
             height:$navbar-height;
             .container{
@@ -550,9 +550,11 @@ body:not(.page-landing):not(.node-type-lpage2):not(.node-type-overview){
             position: absolute;
             left:0;
             right:0;
-            margin:auto;
+            /*margin:auto;*/
+            margin:0;
             text-align: center;
-            max-width:1400px;
+            width:100%;
+            //max-width:1400px;
             overflow: hidden;
         }
     }
@@ -1414,6 +1416,7 @@ body{
     top:0;
     bottom:0;
     background:  no-repeat scroll center center transparent;  
+    background-size: cover;
 }
 #block-views-overview-slider-listing-block,
 #block-views-overview-slider-listing-block-1{
