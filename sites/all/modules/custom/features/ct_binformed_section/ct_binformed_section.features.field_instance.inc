@@ -1135,7 +1135,7 @@ function ct_binformed_section_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_related_people',
-    'label' => 'Key Contacts',
+    'label' => 'Key contacts',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1715,7 +1715,7 @@ function ct_binformed_section_field_default_field_instances() {
   t('Download File');
   t('Download Url');
   t('Downloads categories');
-  t('Key Contacts');
+  t('Key contacts');
   t('Legal Update Area');
   t('Legal Update Content');
   t('Legal left');
