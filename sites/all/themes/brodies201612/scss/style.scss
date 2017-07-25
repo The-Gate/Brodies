@@ -1243,7 +1243,7 @@ h2.block-title{
         position: relative;
         display:inline-block;
         vertical-align: top;
-        width: calc(50% - 4px);
+        width:50%;
     }
 }
 .people-text-wrapper{
@@ -1342,10 +1342,8 @@ h2.block-title{
     .region-sidebar-second &{
         .text-wrapper{
             @extend .people-text-wrapper;
-            padding:5px 5px 0;
+            padding:5px;
             transform: none;
-            top:0;
-            left:0;
             @media #{$tablet-max}{
                 position:relative;
             }
