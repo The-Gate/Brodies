@@ -41,7 +41,7 @@ else {
     $basket_title = 'remove';
   }
   else {
-    $basket_title = 'Add to Basket';
+    $basket_title = 'Book Now';
   }
   $event_controls = '<div class="col-md-4"><div class="seminar-button add"><a href="' . $path_alias . '?book-seminar=' . $row->nid . '&amp;destination=' . $path . '" class="book active">' . $basket_title . '</a></div></div>';
   $col_offset = '6';

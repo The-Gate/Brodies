@@ -65,7 +65,7 @@ function brSeminarBooking_book_link($data) {
     $title = 'remove';
   }
   else {
-    $title = 'Add to Basket';
+    $title = 'Book Now';
   }
   return '<div class="seminar-buttons  col-md-3"><div class="seminar-button add">' . l(
           $title, $_GET['q'], array(
