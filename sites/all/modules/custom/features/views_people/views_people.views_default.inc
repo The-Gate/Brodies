@@ -31,7 +31,7 @@ function views_people_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Field: Content: Key Contacts */
+  /* Field: Content: Related people */
   $handler->display->display_options['fields']['field_related_people']['id'] = 'field_related_people';
   $handler->display->display_options['fields']['field_related_people']['table'] = 'field_data_field_related_people';
   $handler->display->display_options['fields']['field_related_people']['field'] = 'field_related_people';
@@ -76,14 +76,24 @@ function views_people_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => '2',
+        ),
+      ),
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
+      'secondary_collapse_override' => '0',
     ),
     'title' => array(
       'bef_format' => 'default',
       'more_options' => array(
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -102,6 +112,7 @@ function views_people_views_default_views() {
       'more_options' => array(
         'bef_select_all_none' => FALSE,
         'bef_collapsible' => 0,
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -120,6 +131,7 @@ function views_people_views_default_views() {
       'more_options' => array(
         'bef_select_all_none' => FALSE,
         'bef_collapsible' => 0,
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
@@ -138,6 +150,7 @@ function views_people_views_default_views() {
       'more_options' => array(
         'bef_select_all_none' => 0,
         'bef_collapsible' => 0,
+        'autosubmit' => 0,
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
