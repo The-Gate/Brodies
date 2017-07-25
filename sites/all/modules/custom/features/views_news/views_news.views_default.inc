@@ -173,15 +173,6 @@ function views_news_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
-  $handler->display->display_options['filters']['type_1']['table'] = 'node';
-  $handler->display->display_options['filters']['type_1']['field'] = 'type';
-  $handler->display->display_options['filters']['type_1']['value'] = array(
-    'news' => 'news',
-    'win' => 'win',
-  );
-  $handler->display->display_options['filters']['type_1']['group'] = 1;
   /* Filter criterion: Global: Combine fields filter */
   $handler->display->display_options['filters']['combine']['id'] = 'combine';
   $handler->display->display_options['filters']['combine']['table'] = 'views';
@@ -213,7 +204,6 @@ function views_news_views_default_views() {
     'win' => 'win',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
@@ -257,7 +247,7 @@ function views_news_views_default_views() {
   $handler->display->display_options['filters']['field_site_section_tid']['vocabulary'] = 'section';
   $handler->display->display_options['select_labels'] = array(
     'field_news_category_nid_selective' => 'News Category',
-    'combine' => 'Search by name',
+    'combine' => ' ',
     'type' => 'News type',
   );
 

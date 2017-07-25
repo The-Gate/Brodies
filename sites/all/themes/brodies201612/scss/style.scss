@@ -970,6 +970,11 @@ body{
                     }
                 }*/
     }
+    #block-block-44 &{
+        width:100%;
+        text-align: center;
+        margin-bottom:15px;
+    }
 }
 .inline-read-more{
     display: inline;
@@ -2094,6 +2099,7 @@ body{
 }
 
 /********************** Events / Seminars ***********************/
+
 .view-seminars{
     .views-exposed-form{
         width:100%;
@@ -2190,6 +2196,12 @@ body{
     text-transform: uppercase;
     color: $colour-white-01;
     font-size: $font-size-12;
+    @media #{$normal}{
+        font-size: $font-size-10;
+    }
+    @media #{$wide}{
+        font-size: $font-size-12;
+    }
     text-align:center;
     font-family:$font-family-sans-serif;
     margin-bottom:10px;
@@ -2297,7 +2309,7 @@ select{
         @media #{$normal}{
             max-width:25%;
             #views-exposed-form-seminars-main-seminar-listing &{
-                max-width:22.6%;
+                max-width:21.6%;
             }
         }
         .btn {
