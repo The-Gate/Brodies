@@ -130,7 +130,7 @@ function ct_people_field_group_info() {
       'label' => 'Main Details Outer Wrapper',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-6 text-wrapper-container',
+        'classes' => 'text-wrapper-container',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
