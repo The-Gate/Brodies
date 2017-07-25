@@ -29,7 +29,7 @@ body.page-graduate{
         }
     }
     .logo-wrapper-desktop{
-        bottom:14px;
+        bottom:8px;
     }
 
     /********************** HEADER: TOP MENU ***********************/
@@ -180,6 +180,7 @@ body.page-graduate{
                 font-size: $font-size-14;
                 border:0;
                 font-weight: 400;
+                text-transform: none;
             }
             blockquote{
                 text-transform: none;

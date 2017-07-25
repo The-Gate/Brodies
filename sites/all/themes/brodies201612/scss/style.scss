@@ -1026,7 +1026,10 @@ h2.block-title{
     .block{
         padding-right:0;
         h2.block-title{
-            padding-bottom:3px;
+            padding-bottom:4px;
+            @media screen and (-webkit-min-device-pixel-ratio:0) {
+                padding-bottom:3px;
+            }
         }
         li{
             border-bottom:1px solid $colour-grey-01;
@@ -2300,9 +2303,9 @@ select{
         .btn {
             margin-top: 0;
             border-radius:0;
-            background-color: $colour-blue-02;
+            background-color: $colour-orange-01;
             color: $colour-white-01;
-            border-color: $colour-blue-02;
+            border-color: $colour-orange-01;
             text-transform: uppercase;
             font-weight:700;
             @media #{$tablet-max}{
@@ -2384,8 +2387,8 @@ select{
     #views-exposed-form-top-news-page-1,
     .view-guides-downloads{
         #edit-combine-wrapper{
-            max-width:49.7%;
-            width:49.7%;
+            max-width:47%;
+            width:47%;
         }
     }
 }
@@ -2537,7 +2540,8 @@ select{
 .node-reference-links{
     h2{
         font-weight:400;
-        line-height:0.7;
+        line-height:1.1;
+        margin-bottom:0;
     }
     a{
         font-size:$font-size-16;
@@ -2993,7 +2997,7 @@ body.page-landing{
     @media #{$tablet-max}{
         max-width: $avoid-title-icon;
         li{
-            margin-bottom:10px;
+            margin-top:10px;
         }
     }
     li{
