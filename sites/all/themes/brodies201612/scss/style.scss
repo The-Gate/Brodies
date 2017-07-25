@@ -611,7 +611,7 @@ body{
     @media #{$tablet} {
         position:absolute;
         display: block;
-        bottom:4px;
+        bottom:15px;
     }
 
 } 
@@ -638,13 +638,13 @@ body{
     }
 }
 #slogan {
-    margin: 5px 0 0 35px;
+    margin: 5px 0 0 65px;
     @media #{$tablet} {
         margin-top: 20px;
         margin-bottom: -20px;
     }
     @media #{$normal} {
-        margin-top: 5px;
+        margin-top: 11px;
         margin-bottom: 0;
     }
     height: 16px;
@@ -653,8 +653,22 @@ body{
 }
 
 /********************** HEADER: TOP MENU ***********************/
-.navbar-toggle{
-    background: $colour-white-01;
+.navbar-default .navbar-toggle{
+    background: $colour-blue-02;
+    border-color: $colour-blue-02;
+    &:focus,
+    &:hover{
+    background: $colour-blue-02;
+    }
+    .icon-bar{
+        background-color: $colour-orange-01;
+    }
+    .menu-block{
+        display:inline-block;
+        vertical-align: middle;
+        color: $colour-white-01;
+        font-size:12px;
+    }
 }
 @media #{$tablet} {
     .navbar{
@@ -814,7 +828,7 @@ body{
 .menu-block-3 {
     position: absolute;
     right:0;
-    top:-41px;
+    top:-47px;
     font-family:$font-family-sans-serif;
     .nav{
         &>li{
@@ -2238,7 +2252,7 @@ input[type="tel"],
 input[type="url"],
 input[type="text"],
 select{
-    -webkit-appearance: none !important;
+/*    -webkit-appearance: none !important;*/
     border-radius: 0 !important;
 }
 @media #{$tablet-max}{

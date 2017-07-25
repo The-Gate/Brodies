@@ -123,10 +123,10 @@ if (!empty($node) and ! empty($node->field_2_column_text['und'][0]['value'])) {
 
                 <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                      <span class="sr-only"><?php print t('Toggle navigation'); ?></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
+                      <div class="menu-block"><?php print t('Menu'); ?></div>
+                      <div class="menu-block"><span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span></div>
                   </button>
                 <?php endif; ?>
             </div>
