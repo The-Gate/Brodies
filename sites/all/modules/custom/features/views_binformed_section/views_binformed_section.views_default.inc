@@ -117,14 +117,14 @@ function views_binformed_section_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-9 no-padding-left-md">
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="col-md-8 no-padding-left-md">
 <div class="views-field-title"><h2>[title]</h2></div>
 <div class="date">[field_d_date]</div>
 <div class="views-field-body">[body]</div>
 <div class="views-taxonomy-list"><h3>Categories:</h2> [taxonomy_vocabulary_3] </div>
 <div class="read-more-block">[field_d_file]</div>
 </div>
-<div class="col-md-3 no-padding-right-md">
+<div class="col-md-3 col-md-offset-1 no-padding-right-md">
 <div class="img">[field_d_thumbail]</div>
 </div>
 <div class="clearfix"></div>';
