@@ -1291,19 +1291,16 @@ h2.block-title{
     .main-content & > .field-items > .field-item {
         @extend .col-md-4;
     }
+    .text-wrapper-container,
     .field-name-field-teaser-image{
         /*        @extend .col-md-6;
                 @extend .no-padding-left-sm;
                 @extend .no-padding-right-sm;*/
         width:50%;
         display:inline-block;
-        margin-bottom:-4px;
-        @media #{$tablet-max}{
-            img{
-                margin:0 auto;
-            }
-        }
+        vertical-align: middle;
     }
+
     .text-wrapper{
         @extend .people-text-wrapper;
         padding:5px;
@@ -1342,11 +1339,6 @@ h2.block-title{
         }
         @media #{$wide}{
             font-size:$font-size-12;
-        }
-    }
-    @media #{$tablet-max}{
-        .text-wrapper-container{
-            width:100%;
         }
     }
     .region-sidebar-second &{
