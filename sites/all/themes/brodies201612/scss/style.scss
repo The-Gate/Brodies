@@ -1527,11 +1527,6 @@ body{
         right:0;
         top:0;
     }
-    .views-exposed-form{
-        background: transparent;
-        margin:0;
-        //overflow: hidden;
-    }
     .view-filters{
         clear:both; 
         @media #{$tablet}{
@@ -1543,6 +1538,9 @@ body{
 
     }
     .views-exposed-form{
+        background: transparent;
+        margin:0;
+        width:70%;
         @media #{$tablet}{
             float:right;
         }
