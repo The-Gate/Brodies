@@ -334,10 +334,10 @@ blockquote{
 }
 
 #popup {
-    width:100%;
-    top:0px;
-    left:0;
+    width:90%;
     margin-left:0;
+    top:0px;
+    left:5%;
     @media #{$tablet}{
         width:50%;
         top:100px;
@@ -1856,7 +1856,7 @@ body{
 
 }
 /********************** Listings ***********************/
-.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-id-search){
+.view:not(.view-overview-slider-listing):not(.view-slideshow):not(.view-display-id-recent_news):not(.view-CTA-Blocks):not(.view-id-search):not(.view-videos){
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
@@ -1865,6 +1865,21 @@ body{
             padding-bottom:0;
             border-bottom:0;
         }
+    }
+}
+.view-videos{
+    .view-content{
+        clear:both;
+        overflow: hidden;
+    }
+    .views-row{
+        margin-bottom:30px;
+        &:nth-of-type(4n+1){
+            clear:left;
+        }
+    }
+    .views-field-title{
+        margin-top:20px;
     }
 }
 // related text only boxes
@@ -3206,6 +3221,7 @@ h1.page-header{
         padding-bottom:30px;
         overflow:hidden;
     }
+
 }
 .node-type-event{
     .field-label-inline .field-label{
@@ -3215,7 +3231,15 @@ h1.page-header{
         }
     }
 }
-
+.block.cta-overlay{
+    margin-top:20px;
+    img{
+        width:100%;
+    }
+    .cta-overlay-inner{
+        background:rgba(0,35,93,0.8);
+    }
+}
 // binformed section - exposed filters
 @media #{$tablet-max}{
     .node-type-lupdate,
