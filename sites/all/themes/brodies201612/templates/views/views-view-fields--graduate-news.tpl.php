@@ -37,6 +37,11 @@
                 'style_name' => 'col-9--lg-max-h300',
               ));
             }
+            else {
+              ?>
+              <img class="img-responsive" src="/sites/all/themes/brodies201612/images/grad-blog-default.jpg" width="770" height="300" alt="">
+              <?php
+            }
             ?>
 
             <div class="cta-overlay-wrapper">
@@ -50,7 +55,7 @@
                         $min_wordsafe_length = 1;
                         $intro = strip_tags($row->aggregator_item_description);
 
-                        print '<div>' . truncate_utf8($intro, $max_length, $wordsafe, $add_ellipsis, $min_wordsafe_length) . ' <a class="inline-read-more" href="' .$row->aggregator_item_link .'">Read More &#187;</a></div>';
+                        print '<div>' . truncate_utf8($intro, $max_length, $wordsafe, $add_ellipsis, $min_wordsafe_length) . ' <a class="inline-read-more" href="' . $row->aggregator_item_link . '">Read More &#187;</a></div>';
                         ?> </div>
                 </div>
 

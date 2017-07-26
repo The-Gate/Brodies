@@ -281,7 +281,7 @@ function image_settings_image_default_styles() {
         'data' => array(
           'width' => 770,
           'height' => '',
-          'upscale' => 0,
+          'upscale' => 1,
         ),
         'weight' => 1,
       ),
