@@ -300,6 +300,12 @@ blockquote{
         vertical-align: top;
     }
 }
+// mobile: views filters only shown on section homepage
+.page-binformed #block-views-exp-latest-legal-update-page-1.hidden-xs,
+.page-news #block-views-exp-top-news-page-1.hidden-xs{
+    display:block !important;
+}
+
 
 /********************** Original pop up ***********************/
 #popup .close,
