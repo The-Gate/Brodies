@@ -370,6 +370,10 @@ blockquote{
 /**********************  Breadcrumb  ***********************/
 .breadcrumb{
     min-height:40px;
+    .page-node-7947 &,
+    .page-node-7945 &{
+        min-height:60px;
+    }
     margin-bottom:1em;
     font-family: $font-family-serif;
     @media #{$mobile-max}{
@@ -1788,6 +1792,8 @@ body{
     position: absolute;
     right:0;
     margin-top:-60px;
+    .page-node-7947 &,
+    .page-node-7945 &,
     .page-node-62 &,
     .page-node-44 &,
     .page-binformed &,
@@ -3180,6 +3186,8 @@ h1.page-header,
 .view .views-row{
     // pink highlights:
     .page-node-62 &,
+    .page-node-7947 &,
+    .page-node-7945 &,
     .page-binformed-legal-updates &,
     .page-binformed-guides-and-downloads &,
     .page-binformed-publications-archive &,
