@@ -2221,6 +2221,9 @@ body{
         color: $colour-white-01;
         padding:10px 0;
     }
+    &.calendar-link{
+        background:$colour-orange-01;
+    }
     &.warning {
         background:$colour-pink;
         padding:10px 0;
@@ -2268,7 +2271,9 @@ body{
         }
     }
 }
-
+#block-brseminarbooking-seminar-calendar{
+    margin-bottom:30px;
+}
 
 /********************** Content Styles ***********************/
 

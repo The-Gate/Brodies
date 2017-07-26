@@ -64,7 +64,6 @@
                     }
                 }
             }
-
             if ($('.field-name-body img.media-element').length > 0) {
                 $('.field-name-body img.media-element').each(function () {
                     var picAlign = $(this).data('picture-align');
@@ -312,6 +311,10 @@
                 $('.main-content .seminar-buttons').prependTo($('.region-pre-content'));
             }
 
+            // move the add to calendar to more useful place
+            if ($('.node-type-event #block-brseminarbooking-seminar-calendar').length > 0) {
+                 $('#block-brseminarbooking-seminar-calendar').insertAfter($('#block-system-main .field-name-body'));
+            }
             function doneResizing() {
                 readMoreSetup();
             }

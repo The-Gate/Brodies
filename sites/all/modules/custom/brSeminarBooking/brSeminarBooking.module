@@ -14,6 +14,9 @@ function brSeminarBooking_block_info() {
   $blocks['seminar_waitinglist'] = array(
     'info' => t('Seminars & Events : WAITING LIST'),
   );
+  $blocks['seminar_calendar'] = array(
+    'info' => t('Seminars & Events : Calendar Links'),
+  );
   return $blocks;
 }
 
@@ -29,6 +32,9 @@ function brSeminarBooking_block_view($delta = '') {
       break;
     case 'seminar_waitinglist' :
       $block['content'] = brSeminarBooking_events_waitinglist();
+      break;
+    case 'seminar_calendar' :
+      $block['content'] = brSeminarBooking_calendar_links();
       break;
   }
 
@@ -623,4 +629,84 @@ function brSeminarBooking_waitinglist_form_mail($key, &$message, $params) {
 
   $message['subject'] = $params['subject'];
   $message['body'][] = check_plain(t($params['body']));
+}
+
+function brSeminarBooking_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'event' && $view_mode=='full') {
+    if (!empty($_GET['calendar'])) {
+      $cal_dtstart = brSeminar_dateToCal($node->field_event_date[LANGUAGE_NONE][0]['value']);
+      $cal_dtend = brSeminar_dateToCal($node->field_event_date[LANGUAGE_NONE][0]['value2']);
+      $cal_uid = $node->uid;
+      $cal_location = brSeminar_escapeString(strip_tags(nl2br($node->field_event_l_details[LANGUAGE_NONE][0]['value'])));
+      //$cal_description = brSeminar_escapeString(strip_tags(nl2br($node->teaser)));
+      $cal_description = '';
+      $cal_url = brSeminar_escapeString(url($_GET['q'], array('absolute' => TRUE)));
+      $cal_summary = brSeminar_escapeString(strip_tags(nl2br($node->title)));
+      if ($_GET['calendar'] == 'ical') {
+        header('Content-type: text/calendar; charset=utf-8');
+        header('Content-Disposition: attachment; filename=ical.ics');
+        print
+            'BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTART:' . $cal_dtstart . '
+DTEND:' . $cal_dtend . '
+UID:' . $cal_uid . '
+DTSTAMP:' . $cal_dtstart . '
+LOCATION:' . $cal_location . '
+DESCRIPTION:' . $cal_description . '
+URL;VALUE=URI:' . $cal_url . '
+SUMMARY:' . $cal_summary . '
+END:VEVENT
+END:VCALENDAR';
+        exit();
+      }
+
+      if ($_GET['calendar'] == 'vcal') {
+        header("Content-Type: text/x-vCalendar");
+        header("Content-Disposition: inline; filename=vcal.vcs");
+        print
+            'BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTART:' . $cal_dtstart . '
+DTEND:' . $cal_dtend . '
+UID:' . $cal_uid . '
+DTSTAMP:' . $cal_dtstart . '
+LOCATION:' . $cal_location . '
+DESCRIPTION:' . $cal_description . '
+URL;VALUE=URI:' . $cal_url . '
+SUMMARY:' . $cal_summary . '
+END:VEVENT
+END:VCALENDAR';
+        exit();
+      }
+    }
+  }
+}
+
+function brSeminar_dateToCal($timestamp) {
+  //return date('Ymd\THis\Z', $timestamp);
+  return date('Ymd\THis', $timestamp);
+}
+
+function brSeminar_escapeString($string) {
+  return preg_replace('/([\,;])/', '\\\$1', $string);
+}
+
+function brSeminarBooking_calendar_links() {
+  $calendar_links = '';
+  $calendar_links .= '<div class="calendars seminar-buttons col-md-3 no-padding-left-sm">'
+      . '<div class="seminar-button calendar-link">'
+      . l('iCalendar', $_GET['q'], array('query' => array('calendar' => 'ical')))
+      . '</div></div>'
+      . '<div class="calendars seminar-buttons col-md-3 no-padding-right-sm">'
+      . '<div class="seminar-button calendar-link">'
+      . l('vCalendar', $_GET['q'], array('query' => array('calendar' => 'vcal')))
+      . '</div></div>';
+  return $calendar_links;
 }
