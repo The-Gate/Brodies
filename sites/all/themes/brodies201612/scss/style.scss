@@ -866,13 +866,21 @@ body{
                 }
             }
         }
-
-        &>li>a:hover,
+        &>li:hover>a,
+            &>li>a:hover,
             &>li>a.active,
             &>li.active-trail >a{
             text-decoration:none !important;
             background-color:$colour-orange-01;
             color:$colour-blue-01;
+        }
+        @media #{$tablet}{
+            .dropdown-caret{
+                display:none !important;
+            }
+            &>li:hover > ul.dropdown-menu {
+                display: block;    
+            }
         }
     }
     .nav>li, 
@@ -895,7 +903,6 @@ body{
 }
 .dropdown-li {
     display:inline-block !important;
-    padding-right:4px !important;
 }
 .dropdown-link {
     display:inline-block !important; 
