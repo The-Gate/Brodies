@@ -25,19 +25,13 @@ function events_seminars_ct_view_field_group_info() {
     'children' => array(
       0 => 'field_related_sector',
     ),
-    'format_type' => 'hidden',
+    'format_type' => 'accordion-item',
     'format_settings' => array(
       'label' => 'Business Sectors',
       'instance_settings' => array(
-        'id' => '',
-        'classes' => 'group-business-sectors field-group-div related-item',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h2',
-        'effect' => 'none',
-        'speed' => 'none',
+        'classes' => 'group-related-secotrs field-group-accordion-item',
       ),
-      'formatter' => 'open',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_business_sectors|node|event|default'] = $field_group;
@@ -113,24 +107,20 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '11',
+    'weight' => '6',
     'children' => array(
       0 => 'group_business_sectors',
       1 => 'group_legal_services',
     ),
-    'format_type' => 'hidden',
+    'format_type' => 'accordion',
     'format_settings' => array(
-      'label' => 'Related content',
+      'formatter' => '',
       'instance_settings' => array(
-        'id' => '',
-        'classes' => 'related-wrapper col-md-12',
         'description' => '',
-        'show_label' => '0',
-        'label_element' => 'h2',
-        'effect' => 'none',
-        'speed' => 'none',
+        'classes' => '',
+        'effect' => 'bounceslide',
+        'id' => '',
       ),
-      'formatter' => 'open',
     ),
   );
   $field_groups['group_e_related|node|event|default'] = $field_group;
@@ -198,19 +188,13 @@ function events_seminars_ct_view_field_group_info() {
     'children' => array(
       0 => 'field_related_service',
     ),
-    'format_type' => 'hidden',
+    'format_type' => 'accordion-item',
     'format_settings' => array(
       'label' => 'Legal Services',
       'instance_settings' => array(
-        'id' => '',
-        'classes' => 'group-legal-services field-group-div related-item',
-        'description' => '',
-        'show_label' => '1',
-        'label_element' => 'h2',
-        'effect' => 'none',
-        'speed' => 'none',
+        'classes' => 'group-related-services field-group-accordion-item',
       ),
-      'formatter' => 'open',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_legal_services|node|event|default'] = $field_group;

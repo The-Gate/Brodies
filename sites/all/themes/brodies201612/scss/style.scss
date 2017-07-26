@@ -2462,6 +2462,7 @@ select{
 }
 
 // custom accordion on these sections
+.node-type-event,
 .node-type-service,
 .node-type-sector{
     .ui-accordion {
@@ -2499,7 +2500,9 @@ select{
     }
 }
 
-
+.node-type-event .field-group-accordion-wrapper{
+    clear:both;
+}
 .related-wrapper{
     margin:40px 0 0;
     & > h2{
