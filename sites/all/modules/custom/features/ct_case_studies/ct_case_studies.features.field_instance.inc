@@ -247,7 +247,7 @@ function ct_case_studies_field_default_field_instances() {
           'image_link' => '',
           'lazyload' => 1,
           'lazyload_aspect_ratio' => 1,
-          'picture_mapping' => 'col_12',
+          'picture_mapping' => 'col_9_max_h300',
         ),
         'type' => 'picture',
         'weight' => 0,

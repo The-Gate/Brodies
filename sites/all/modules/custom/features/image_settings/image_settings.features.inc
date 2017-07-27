@@ -276,7 +276,7 @@ function image_settings_image_default_styles() {
   $styles['col-9--lg-max-h300'] = array(
     'label' => 'col-9--lg-MAX-H300',
     'effects' => array(
-      43 => array(
+      1 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 770,
@@ -285,12 +285,12 @@ function image_settings_image_default_styles() {
         ),
         'weight' => 1,
       ),
-      44 => array(
+      2 => array(
         'name' => 'image_crop',
         'data' => array(
           'width' => 770,
           'height' => 300,
-          'anchor' => 'center-top',
+          'anchor' => 'center-center',
         ),
         'weight' => 2,
       ),

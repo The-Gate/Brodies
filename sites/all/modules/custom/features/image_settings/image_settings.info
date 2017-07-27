@@ -54,3 +54,4 @@ features[picture_mapping][] = col_4
 features[picture_mapping][] = col_6
 features[picture_mapping][] = col_8
 features[picture_mapping][] = col_9
+features[picture_mapping][] = col_9_max_h300

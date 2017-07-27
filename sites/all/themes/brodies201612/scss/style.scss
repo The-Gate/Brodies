@@ -2299,6 +2299,18 @@ body{
     margin-bottom:30px;
 }
 
+/********************** Case Study ***********************/
+.node-type-cs{
+    .field-name-field-teaser-image{
+        @extend .col-md-9;
+        @extend .no-padding-left-sm;
+        @extend .no-padding-right-sm;
+        margin-bottom:30px;
+    }
+    .field-name-body{
+        @extend .col-md-12;
+    }
+}
 /********************** Content Styles ***********************/
 
 .field-name-body{
@@ -2356,7 +2368,7 @@ select{
             margin-top: 0;
             border-radius:0;
             background-color: $colour-orange-01;
-            color: $colour-white-01;
+            color: $colour-blue-02;
             border-color: $colour-orange-01;
             text-transform: uppercase;
             font-weight:700;
