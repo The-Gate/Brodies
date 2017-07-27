@@ -44,12 +44,19 @@ body.page-graduate{
             padding-top:85px;
         }
     }
-
+    @media #{$tablet} {
+        .navbar-btn{
+            margin-bottom:0;
+        }
+    }
     .navbar{
         .menu {
             &.nav {
                 &>li {
-                    padding:0 10px;
+                    padding:0 6px;
+                    @media #{$normal} {
+                        padding:0 10px;
+                    }
                     & a{
                         padding:0;
                         color: $colour-white-01;
@@ -87,6 +94,10 @@ body.page-graduate{
     }
     /********************** HEADER: SOCIAL ICONS ***********************/
     #block-block-38 {
+        float:right;
+        @media #{$normal}{
+            float:right;
+        }
         .social-links{
             text-align:right;
             a{
