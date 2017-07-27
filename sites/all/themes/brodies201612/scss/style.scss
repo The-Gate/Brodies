@@ -987,6 +987,7 @@ body{
         font-size: $font-size-12;
         &:hover {
             background:$colour-orange-02;
+            color:$colour-blue-02;
             text-decoration: none;
         }
         /*        .view-guides-downloads &{
@@ -1788,7 +1789,7 @@ body{
     display:inline-block;
     background:$colour-orange-01;
     padding:2px 7px;
-    color: $colour-white-01;
+    color: $colour-blue-02;
     margin-bottom:15px;
 }
 .views-field-l-left{
@@ -2300,7 +2301,7 @@ body{
 
 /********************** Case Study ***********************/
 .node-type-cs{
-    .field-name-field-teaser-image{
+    .node-cs > .field-name-field-teaser-image{
         @extend .col-md-9;
         @extend .no-padding-left-sm;
         @extend .no-padding-right-sm;
@@ -3248,6 +3249,7 @@ h1.page-header{
     .node-type-event &,
     .node-type-larea &{
         background: $colour-pink;
+        color: $colour-white-01;
     }
     .node-type-service &,
     .node-type-sector &{
