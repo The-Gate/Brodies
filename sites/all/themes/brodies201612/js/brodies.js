@@ -318,7 +318,10 @@
             // move the add to calendar to more useful place
             if ($('.node-type-event #block-brseminarbooking-seminar-calendar').length > 0) {
                 $('#block-brseminarbooking-seminar-calendar').insertAfter($('#block-system-main .field-name-body'));
-            }
+            }            
+            if ($('.page-node-44 .block-brseminarbooking').length > 0) {
+                $('.block-brseminarbooking').insertAfter($('#block-system-main .field-name-body'));
+            }            
             function doneResizing() {
                 readMoreSetup();
             }

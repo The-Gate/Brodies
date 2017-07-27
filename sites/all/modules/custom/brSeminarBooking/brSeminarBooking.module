@@ -440,7 +440,7 @@ function brSeminarBooking_events_waitinglist() {
   $nr = isset($_SESSION['seminars-waitinglist']) ? count($_SESSION['seminars-waitinglist']) : 0;
   $out = '<div class="seminar-button waitlist"><div class="basket-title">';
 
-  $out .= $nr ? l('Waiting list basket', 'seminars-and-events/waitinglist', array('attributes' => array('class' => array('checkout')))) : 'Waiting list basket';
+  $out .= $nr ? l('Waiting list', 'seminars-and-events/waitinglist', array('attributes' => array('class' => array('checkout')))) : 'Waiting list';
   $out .='</div><div class="basket-items"><i class="fa fa-shopping-basket" aria-hidden="true"></i><div class="item-wrapper">';
   $out .= $nr ? l($nr, 'seminars-and-events/waitinglist', array('attributes' => array('class' => array('checkout')))) .
       l('X', $_GET['q'], array('attributes' => array('class' => array('list-clear')), 'query' => array('list-clear' => TRUE, drupal_get_destination()))) : '<div class="checkout">' . $nr . '</div>';
