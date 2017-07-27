@@ -668,6 +668,8 @@ body{
 .navbar-default .navbar-toggle{
     background: $colour-blue-02;
     border-color: $colour-blue-02;
+    margin-top:30px;
+    padding:4px 10px;
     &:focus,
         &:hover{
         background: $colour-blue-02;
@@ -685,9 +687,6 @@ body{
 @media #{$mobile-max}{
     .navbar{
         margin-bottom:0;
-    }
-    .navbar-btn{
-        margin-top:17px;
     }
 }
 @media #{$tablet} {
