@@ -840,7 +840,10 @@ body{
 .menu-block-3 {
     position: absolute;
     right:0;
-    top:-47px;
+    top:-38px;
+    @media #{$normal}{
+        top:-47px;
+    }
     font-family:$font-family-sans-serif;
     .nav{
         &>li{
