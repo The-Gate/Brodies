@@ -237,7 +237,9 @@ body.page-graduate{
             }
         }
     }
-
+    .slick-grad-quote{
+        overflow:hidden;
+    }
     .field-name-field-graduate-slideshow {
         @media #{$normal}{
             .slick-dots{
@@ -248,6 +250,17 @@ body.page-graduate{
     }
 
     .view-graduate-news{
+        @media #{$mobile-max}{
+            .home-cta-bg-img{
+                min-height:260px;
+            }
+            .cta-overlay .slide-header{
+                top:0;
+            }
+            .cta-overlay-inner{
+                top:40px !important;
+            }
+        }
         @media #{$normal}{
             .slick-dots{
                 right:0;
