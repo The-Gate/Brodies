@@ -28,7 +28,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 4,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -275,7 +275,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -507,7 +507,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 11,
       ),
       'full' => array(
         'label' => 'above',
@@ -585,7 +585,7 @@ function events_seminars_ct_view_field_default_field_instances() {
           'node_reference_view_mode' => 'teaser',
         ),
         'type' => 'node_reference_node',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -660,7 +660,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -728,7 +728,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'full' => array(
         'label' => 'above',
@@ -842,11 +842,9 @@ function events_seminars_ct_view_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'node_reference',
-        'settings' => array(
-          'node_reference_view_mode' => 'teaser',
-        ),
-        'type' => 'node_reference_node',
-        'weight' => 24,
+        'settings' => array(),
+        'type' => 'node_reference_plain',
+        'weight' => 26,
       ),
       'full' => array(
         'label' => 'above',
@@ -921,10 +919,8 @@ function events_seminars_ct_view_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'node_reference',
-        'settings' => array(
-          'node_reference_view_mode' => 'teaser',
-        ),
-        'type' => 'node_reference_node',
+        'settings' => array(),
+        'type' => 'node_reference_plain',
         'weight' => 25,
       ),
       'full' => array(

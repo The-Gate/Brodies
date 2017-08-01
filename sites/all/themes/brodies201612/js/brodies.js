@@ -14,6 +14,11 @@
                     e.preventDefault();
                 });
             }
+            if ($(window).width() < screen_sm_min) {
+                $('.menu-block-12 li.dropdown > a.dropdown-li').on('click', function (e) {
+                    e.preventDefault();
+                });
+            }
 
             function init_popup(content) {
                 $('body').append('<div id="overlay"></div>');
@@ -318,10 +323,10 @@
             // move the add to calendar to more useful place
             if ($('.node-type-event #block-brseminarbooking-seminar-calendar').length > 0) {
                 $('#block-brseminarbooking-seminar-calendar').insertAfter($('#block-system-main .field-name-body'));
-            }            
+            }
             if ($('.page-node-44 .block-brseminarbooking').length > 0) {
                 $('.block-brseminarbooking').insertAfter($('#block-system-main .field-name-body'));
-            }            
+            }
             function doneResizing() {
                 readMoreSetup();
             }

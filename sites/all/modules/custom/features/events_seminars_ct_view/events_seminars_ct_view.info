@@ -9,6 +9,7 @@ features[ctools][] = field_group:field_group:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[field_group][] = group_business_sectors|node|event|default
+features[field_group][] = group_e_details|node|event|default
 features[field_group][] = group_e_details|node|event|form
 features[field_group][] = group_e_details|node|event|teaser
 features[field_group][] = group_e_related|node|event|default
