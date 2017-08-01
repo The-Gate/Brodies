@@ -1009,6 +1009,7 @@ body{
                     }
                 }*/
     }
+    #block-block-47 &,
     #block-block-44 &{
         width:100%;
         text-align: center;
@@ -1109,6 +1110,31 @@ h2.block-title{
             }
         }
     }
+}
+// careers inpage navigation
+.menu-block-13{
+    li{
+        background:none;
+        @media #{$normal}{
+            padding:120px 0 0;
+            border:5px solid $colour-white-01;
+            background:url('../images/generic.png') no-repeat 50% 0;
+        }
+    }
+    .nav>li>a{
+        background: $colour-blue-02;
+        color: $colour-white-01;
+        padding:10px;
+        margin-bottom:$grid-gutter-width;
+        font-family: $font-family-sans-serif;
+        &:hover{
+            color: $colour-white-01;
+            background: $colour-blue-02;
+            text-decoration: underline;
+
+        }
+    }
+
 }
 /********************** Homepage CTA***********************/
 .field-collection-container{
@@ -2623,7 +2649,12 @@ select{
         color: $colour-white-01;
     }
 }
-
+.field-name-field-related-binformed{
+    .field-name-field-l-left {
+        margin-top:10px;
+        font-size:$font-size-12;
+    }
+}
 .node-reference-links{
     h2{
         font-weight:400;
