@@ -1063,9 +1063,6 @@ h2.block-title{
             @media screen and (-webkit-min-device-pixel-ratio:0) {
                 padding-bottom:3px;
             }
-            @supports (-ms-ime-align: auto) {
-            padding-bottom:4px;
-            }
         }
         li{
             border-bottom:1px solid $colour-grey-01;
@@ -3386,3 +3383,30 @@ h1.page-header{
 }
 // graduates section overrides
 @import 'graduates';
+
+
+// maintanance page
+.maintenance-page {
+    #header{
+
+        background-color:$colour-blue-01;
+    } 
+    #header,
+    #container{
+        padding:20px;
+    }
+}
+
+// edge bugfix
+
+@supports (-ms-ime-align: auto) {
+    .region-sidebar-first,
+    .region-sidebar-second{
+        .block{
+            h2.block-title{
+                padding-bottom:4px;
+            }
+        }
+
+    }
+}
