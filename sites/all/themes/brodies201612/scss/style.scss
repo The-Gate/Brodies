@@ -650,10 +650,9 @@ body{
     }
 }
 #slogan {
-    margin: 5px 0 0 65px;
+    margin: 5px 0 0 53px;
     @media #{$tablet} {
-        margin-top: 20px;
-        margin-bottom: -20px;
+        margin: 20px 0 -20px 65px;
     }
     @media #{$normal} {
         margin-top: 11px;
