@@ -941,8 +941,7 @@ body{
     padding-left:4px !important;
     cursor: pointer;
 }
-.dropdown-menu{
-
+.dropdown-menu{             /* Actually FF 20+ */
     @media #{$mobile-max}{
         position:relative;
         background:transparent;
@@ -965,6 +964,10 @@ body{
         @media #{$tablet}{
             color: $colour-white-01;
             padding:10px 20px;
+            display:block;
+            -webkit-column-break-inside: avoid; /* Chrome, Safari */
+            page-break-inside: avoid;           /* Theoretically FF 20+ */
+            break-inside: avoid-column;         /* IE 11 */
         }
         @media #{$tablet-max}{
             white-space:normal;
