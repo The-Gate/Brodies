@@ -1,0 +1,4 @@
+#AuthType Basic
+#AuthName "Brodies Food and Drink Secure Site"
+#AuthUserFile \websites\brodies\food-and-drink/.htpasswd
+#Require valid-user

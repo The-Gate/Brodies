@@ -369,7 +369,10 @@ blockquote{
 
 /**********************  Breadcrumb  ***********************/
 .breadcrumb{
-    min-height:40px;
+    min-height:50px;
+    .node-type-lupdate &{
+        min-height:80px;
+    }
     .page-node-7947 &,
     .page-node-7945 &{
         min-height:60px;
@@ -2435,19 +2438,19 @@ select{
         border-color:$colour-grey-01;        
     }
     &.form-select {
+        padding:6px 25px 6px 12px;
         background-color: $colour-blue-02;
         border-color: $colour-blue-02;
         color: $colour-white-01;
-        font-weight:700;
-        
-        
+        font-weight:400;
         -webkit-appearance: none;
         -webkit-border-radius: 0px;
         -moz-appearance: none;
         appearance: none;
         background: url(../images/select-arrow.png) no-repeat 97% 50% $colour-blue-02;
-        
-
+        &::-ms-expand {
+            display: none;
+        }
     }
 }
 
