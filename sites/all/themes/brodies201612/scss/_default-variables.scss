@@ -43,12 +43,7 @@ $font-size-h6:            $font-size-10;
 
 // colours:
 $colour-orange-01: #F6A01A;
-$colour-orange-02: #F69F19;
-$colour-orange-03: #f7a11a;
-$colour-blue-01: #152B47;
-$colour-blue-02: #00235d;
-$colour-blue-03: #132b48;
-$colour-blue-04: #13b5ea;
+$colour-blue-01: #162b48;
 $colour-peach-01: #FDECD8;
 $colour-grey-01: #cecece;
 $colour-grey-02: #f4f4f4;
@@ -66,8 +61,8 @@ $nav-link-hover-bg: transparent;
 
 $navbar-default-color: $colour-blue-01;
 
-$link-color:$colour-blue-02;
-$link-hover-color: $colour-orange-02;
+$link-color:$colour-blue-01;
+$link-hover-color: $colour-orange-01;
 
 $grid-gutter-width: 10px;
 
@@ -78,21 +73,21 @@ $dropdown-bottom-border-active:$colour-blue-01;
 
 
 // pagination
-$pagination-color: $colour-blue-02;
+$pagination-color: $colour-blue-01;
 $pagination-bg: $colour-white-01;
-$pagination-border: $colour-blue-02;
+$pagination-border: $colour-blue-01;
 
 $pagination-hover-color: $colour-orange-01;
 $pagination-hover-bg: $colour-white-01;
-$pagination-hover-border: $colour-blue-02;
+$pagination-hover-border: $colour-blue-01;
 
 $pagination-active-color: $colour-orange-01;
 $pagination-active-bg: $colour-white-01;
-$pagination-active-border: $colour-blue-02;
+$pagination-active-border: $colour-blue-01;
 
-$pagination-disabled-color: $colour-blue-02;
+$pagination-disabled-color: $colour-blue-01;
 $pagination-disabled-bg: $colour-white-01;
-$pagination-disabled-border: $colour-blue-02;
+$pagination-disabled-border: $colour-blue-01;
 
 // breadcrumb
 $breadcrumb-padding-vertical:   3px;
@@ -100,9 +95,9 @@ $breadcrumb-padding-horizontal: 0;
 //** Breadcrumb background color
 $breadcrumb-bg:                 transparent;
 //** Breadcrumb text color
-$breadcrumb-color:              $colour-blue-02;
+$breadcrumb-color:              $colour-blue-01;
 //** Text color of current page in the breadcrumb
-$breadcrumb-active-color:       $colour-blue-02;
+$breadcrumb-active-color:       $colour-blue-01;
 
 // css columns
 $col-count: 2;

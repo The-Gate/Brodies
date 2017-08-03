@@ -50,7 +50,7 @@ body{
     margin: 0;
     background: transparent;
     font-family: $font-family-sans-serif;
-    color: $colour-blue-02;
+    color: $colour-blue-01;
     font-size: $font-size-base;
     line-height:1.4;
     -webkit-font-smoothing: antialiased;
@@ -99,7 +99,7 @@ h3 {
 hr {
     height: 3px;
     border: 0;
-    background: $colour-orange-03;
+    background: $colour-orange-01;
 }
 .no-padding{
     padding-left:0;
@@ -411,9 +411,9 @@ dl.ckeditor-tabber{
         font-size: $font-size-22;
         width:100%;
         cursor: pointer;
-        color: $colour-blue-02;
+        color: $colour-blue-01;
         &.active{
-            background:$colour-blue-02;
+            background:$colour-blue-01;
             color: $colour-white-01;
 
         }
@@ -426,7 +426,7 @@ dl.ckeditor-tabber{
         h3{
             font-family:$font-family-sans-serif;
             font-size: $font-size-22;
-            color: $colour-blue-02;
+            color: $colour-blue-01;
         }
         &.hide{
             display:none;
@@ -497,7 +497,7 @@ dl.ckeditor-tabber{
             width:100%;
         }
         &:hover {
-            color:$colour-orange-02;
+            color:$colour-orange-01;
             img {
                 opacity:0.9;
             }
@@ -668,13 +668,13 @@ body{
 
 /********************** HEADER: TOP MENU ***********************/
 .navbar-default .navbar-toggle{
-    background: $colour-blue-02;
-    border-color: $colour-blue-02;
+    background: $colour-blue-01;
+    border-color: $colour-blue-01;
     margin-top:30px;
     padding:4px 10px;
     &:focus,
         &:hover{
-        background: $colour-blue-02;
+        background: $colour-blue-01;
     }
     .icon-bar{
         background-color: $colour-orange-01;
@@ -758,7 +758,7 @@ body{
                 &.active-trail,
                 &.active{
                     & > a{
-                        color: $colour-orange-02;  
+                        color: $colour-orange-01;  
                     }
                 }
             }
@@ -972,14 +972,14 @@ body{
         &:hover,
             &:focus{
             background-color: transparent;
-            color: $colour-orange-02;
+            color: $colour-orange-01;
         }
     }
     & >.active>a, 
     & >.active>a:hover, 
         & >.active>a:focus{
         background-color: transparent;
-        color: $colour-orange-02;
+        color: $colour-orange-01;
     }
 }
 
@@ -993,22 +993,22 @@ body{
     a{
         position:relative;
         display:block;
-        background:$colour-blue-02;
+        background:$colour-blue-01;
         color: $colour-white-01;
         text-transform: uppercase;
         padding:10px;
         font-weight: 700;
         font-size: $font-size-12;
         &:hover {
-            background:$colour-orange-02;
-            color:$colour-blue-02;
+            background:$colour-orange-01;
+            color:$colour-blue-01;
             text-decoration: none;
         }
         /*        .view-guides-downloads &{
-                    background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-blue-02;
+                    background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-blue-01;
                     padding-right:25px;
                     &:hover {
-                        background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-orange-02;
+                        background: url("../images/download-guide.jpg") no-repeat scroll 94% center $colour-orange-01;
                     }
                 }*/
     }
@@ -1048,7 +1048,7 @@ body{
 .field-name-field-related-people .field-label,
 h1.page-header,
 h2.block-title{
-    border-bottom:3px solid $colour-orange-03;
+    border-bottom:3px solid $colour-orange-01;
     width:100%;
     padding-bottom:5px;
 }
@@ -1060,7 +1060,7 @@ h2.block-title{
 .region-sidebar-first .block:first-child label,
 .region-sidebar-first .block h2,
 .region-sidebar-second .block .submenu h2{
-    border-bottom:3px solid $colour-orange-03;
+    border-bottom:3px solid $colour-orange-01;
     @media #{$normal}{
         width:calc(100% + 30px);
         margin-left: -(ceil(($grid-gutter-width / 2)));
@@ -1086,7 +1086,7 @@ h2.block-title{
                 font-size:$font-size-12;
                 &.active,
                 &.active-trail{
-                    color: $colour-orange-02;
+                    color: $colour-orange-01;
                 }
             }
         }
@@ -1125,14 +1125,14 @@ h2.block-title{
         }
     }
     .nav>li>a{
-        background: $colour-blue-02;
+        background: $colour-blue-01;
         color: $colour-white-01;
         padding:10px;
         margin-bottom:$grid-gutter-width;
         font-family: $font-family-sans-serif;
         &:hover{
             color: $colour-white-01;
-            background: $colour-blue-02;
+            background: $colour-blue-01;
             text-decoration: underline;
 
         }
@@ -1196,7 +1196,7 @@ h2.block-title{
             border-bottom: 2px solid $colour-green;
         }
         &.blue{
-            border-bottom: 2px solid $colour-blue-04;
+            border-bottom: 2px solid $colour-blue-01;
         }
     }
 
@@ -1214,7 +1214,7 @@ h2.block-title{
             background: $colour-green;
         }
         &.blue a{
-            background: $colour-blue-04;
+            background: $colour-blue-01;
         }
     }
 
@@ -1251,7 +1251,7 @@ h2.block-title{
     }
     &.view-display-id-block_2{
         .views-row{
-            background: $colour-blue-02;
+            background: $colour-blue-01;
             display:block;
             position: relative;
             margin-bottom:10px;
@@ -1268,7 +1268,7 @@ h2.block-title{
             }
             .cta-title{
                 text-transform: uppercase;
-                border-bottom:3px solid $colour-orange-03;
+                border-bottom:3px solid $colour-orange-01;
                 padding:10px 0 5px;
                 margin-bottom:8px;
             }
@@ -1297,7 +1297,7 @@ h2.block-title{
         margin:0 0 10px;
         padding-bottom:10px;
         text-transform: uppercase;
-        border-bottom: 3px solid $colour-orange-03;        
+        border-bottom: 3px solid $colour-orange-01;        
     }
     p{
         font-size: 11px;
@@ -1624,7 +1624,7 @@ body{
         }
     }
     .has-error .form-control{
-        border-color: $colour-blue-02;
+        border-color: $colour-blue-01;
         box-shadow: none;
     }
     .view-empty,
@@ -1647,7 +1647,7 @@ body{
         overflow-y: auto;
         padding:20px;
         h3{                
-            border-bottom: 2px solid $colour-orange-03;
+            border-bottom: 2px solid $colour-orange-01;
         }
         .views-row{
             margin-bottom:15px;
@@ -1709,7 +1709,7 @@ body{
     }
     .view-content{
         h3{
-            border-bottom: 2px solid $colour-orange-03;
+            border-bottom: 2px solid $colour-orange-01;
         }
     }
     .pager li>a, .pager li>span{
@@ -1731,7 +1731,7 @@ body{
         &:after {
         opacity:1;
         font-size:3.25rem;
-        color: $colour-blue-02;
+        color: $colour-blue-01;
     }
     &:hover{
         &:before,
@@ -1829,7 +1829,7 @@ body{
     display:inline-block;
     background:$colour-orange-01;
     padding:2px 7px;
-    color: $colour-blue-02;
+    color: $colour-blue-01;
     margin-bottom:15px;
 }
 .views-field-l-left{
@@ -1924,7 +1924,7 @@ body{
     .views-row{
         padding-bottom:20px;
         margin-bottom:20px;
-        border-bottom:3px solid $colour-orange-03;
+        border-bottom:3px solid $colour-orange-01;
         &:last-child{
             padding-bottom:0;
             border-bottom:0;
@@ -1998,7 +1998,7 @@ body{
         display:inline-block;
         text-transform:uppercase;
         font-weight:400;
-        color: $colour-orange-02;
+        color: $colour-orange-01;
     }
 }
 @media #{$tablet-max}{
@@ -2066,7 +2066,7 @@ body{
         &:before{
             content:'';
             display:block;
-            border-top:1px solid $colour-orange-02;
+            border-top:1px solid $colour-orange-01;
             width:60vw;
             max-width:60%;
             margin:0 auto -1em;
@@ -2076,7 +2076,7 @@ body{
             height:2em;
             line-height:2em;
             text-align: center;
-            border:1px solid $colour-orange-02;
+            border:1px solid $colour-orange-01;
             border-radius: 50%;
             background:$colour-white-01;
             margin:0 auto;
@@ -2160,7 +2160,7 @@ body{
         font-family: $font-family-sans-serif;
     }
     .field-label{
-        color: $colour-orange-02;
+        color: $colour-orange-01;
         font-family:$font-family-serif;
     }
     .node-people{
@@ -2417,7 +2417,7 @@ select{
             margin-top: 0;
             border-radius:0;
             background-color: $colour-orange-01;
-            color: $colour-blue-02;
+            color: $colour-blue-01;
             border-color: $colour-orange-01;
             text-transform: uppercase;
             font-weight:700;
@@ -2432,22 +2432,22 @@ select{
     border-radius:0;
     box-shadow: none;
     border-color:$colour-grey-01;
-    color: $colour-blue-02;
+    color: $colour-blue-01;
     &:focus{
         box-shadow: none;
         border-color:$colour-grey-01;        
     }
     &.form-select {
         padding:6px 25px 6px 12px;
-        background-color: $colour-blue-02;
-        border-color: $colour-blue-02;
+        background-color: $colour-blue-01;
+        border-color: $colour-blue-01;
         color: $colour-white-01;
         font-weight:400;
         -webkit-appearance: none;
         -webkit-border-radius: 0px;
         -moz-appearance: none;
         appearance: none;
-        background: url(../images/select-arrow.png) no-repeat 97% 50% $colour-blue-02;
+        background: url(../images/select-arrow.png) no-repeat 97% 50% $colour-blue-01;
         &::-ms-expand {
             display: none;
         }
@@ -2547,7 +2547,7 @@ select{
         border-left:0 !important;
         border-right:0 !important;
         a{
-            color: $colour-blue-02;
+            color: $colour-blue-01;
         }
     }
     .ui-accordion-content{
@@ -2646,7 +2646,7 @@ select{
 
 #block-views-top-news-recent-news .views-row .views-field-title,
 .node-reference-links{
-    background: $colour-blue-02;
+    background: $colour-blue-01;
     color: $colour-white-01;
     padding:10px;
     margin-bottom:$grid-gutter-width;
@@ -2728,7 +2728,7 @@ select{
             padding-top:20px;
         }
         a{
-            color: $colour-orange-02;
+            color: $colour-orange-01;
         }
     }
     .menu-block-8 {
@@ -2820,7 +2820,7 @@ body.page-landing{
         }
     }
     .contact {
-        background-color: $colour-blue-02;
+        background-color: $colour-blue-01;
         margin-bottom:17px;
     }
 
@@ -2883,7 +2883,7 @@ body.page-landing{
             color: $colour-white-01;
         }
         &.bg-col{
-            background: $colour-blue-02;
+            background: $colour-blue-01;
         }
         @media #{$tablet-max}{
             img{
@@ -3013,7 +3013,7 @@ body.page-landing{
     }
     .contact{
         margin-bottom:10px;
-        background:$colour-blue-02;
+        background:$colour-blue-01;
         a{
             color: $colour-white-01;
         }
@@ -3036,14 +3036,14 @@ body.page-landing{
 
     .contact-info{
         width:calc(100% - 121px);
-        border-top:4px solid $colour-blue-04;
+        border-top:4px solid $colour-blue-01;
         padding: 0 15px;
     }
 
     .landing-download{
         position: relative;
         padding:15px 30px;
-        background-color: $colour-blue-02;
+        background-color: $colour-blue-01;
         .landing-download-item{
             background-repeat:no-repeat;
             background-position:  100% 50% ;
@@ -3082,7 +3082,7 @@ body.page-landing{
         }
     }
     .block-wrapper{
-        background:$colour-blue-02;
+        background:$colour-blue-01;
         padding:15px 40px;
         color:$colour-white-01;
         h3{
@@ -3101,9 +3101,9 @@ body.page-landing{
             line-height:1.3;
         }
         .form-submit{
-            color: $colour-blue-02;
+            color: $colour-blue-01;
             border-radius: 5px;
-            background: $colour-blue-04;
+            background: $colour-blue-01;
             line-height:2;
             width:100%;
             font-size:$font-size-16;
@@ -3141,14 +3141,14 @@ body.page-landing{
         &.active-trail,
         &.active,
         &:hover{
-            color: $colour-orange-03;
+            color: $colour-orange-01;
         }
     }
 }
 #block-webform-client-block-9669{
     margin-top: 1em;
     padding-top: 1em;
-    border-top: 3px solid $colour-orange-03;
+    border-top: 3px solid $colour-orange-01;
     margin-bottom: 40px;
     .field-name-body{
         margin-bottom:1em;
@@ -3190,7 +3190,7 @@ body.page-landing{
     overflow:hidden;
     padding:10px;
     .address-box{
-        border-left:$colour-orange-03 solid 3px;
+        border-left:$colour-orange-01 solid 3px;
         padding-left:15px;
         margin-bottom: 15px;
     }
@@ -3285,7 +3285,7 @@ h1.page-header,
     }
     .node-type-service &,
     .node-type-sector &{
-        border-bottom-color: $colour-blue-03 !important;
+        border-bottom-color: $colour-blue-01 !important;
     }
 }
 
@@ -3316,7 +3316,7 @@ h1.page-header{
     }
     .node-type-service &,
     .node-type-sector &{
-        background: $colour-blue-03;
+        background: $colour-blue-01;
     }
 }
 
@@ -3416,9 +3416,9 @@ h1.page-header{
     .btn {
         margin-top: 0;
         border-radius:0;
-        background-color: $colour-blue-02;
+        background-color: $colour-blue-01;
         color: $colour-white-01;
-        border-color: $colour-blue-02;
+        border-color: $colour-blue-01;
         text-transform: uppercase;
         font-weight:700;
         @media #{$normal}{
