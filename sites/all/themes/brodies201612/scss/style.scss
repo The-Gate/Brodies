@@ -1476,15 +1476,12 @@ h2.block-title{
 
 /********************** Header sideshow ***********************/
 body{
-    &.node-type-overview,
-    &.node-type-homepage{
-        .navbar-background{
-            #block-views-slideshow-block,
-            #block-views-slideshow-block-1{
-                div:not(.contextual-links-wrapper){
-                    height:100%;
-                    width:100%;
-                }
+    .navbar-background{
+        #block-views-slideshow-block,
+        #block-views-slideshow-block-1{
+            div:not(.contextual-links-wrapper){
+                height:100%;
+                width:100%;
             }
         }
     }
