@@ -2255,6 +2255,14 @@ body{
     }
 }
 .node-type-event{
+    .services-group{
+        ul{
+            margin-bottom:0;
+            &:last-of-type{
+                margin-bottom:10px;
+            }
+        }
+    }
     .field-name-body{
         margin-top:2em;
     }
