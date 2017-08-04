@@ -962,7 +962,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -1100,7 +1100,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -2662,7 +2662,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 7,
+      'weight' => 4,
     ),
     'widget_type' => 'imagefield_widget',
   );

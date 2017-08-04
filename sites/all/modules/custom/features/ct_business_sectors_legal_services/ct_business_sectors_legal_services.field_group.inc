@@ -55,7 +55,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Inline Videos',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(
       0 => 'field_p_v_image_1',
       1 => 'field_p_v_text_1',
@@ -449,7 +449,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '5',
+    'weight' => '7',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_sector',
