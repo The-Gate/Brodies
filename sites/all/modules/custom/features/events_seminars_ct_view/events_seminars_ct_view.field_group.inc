@@ -122,7 +122,7 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Services:',
+    'label' => 'Categories:',
     'weight' => '4',
     'children' => array(
       0 => 'field_related_sector',
@@ -130,7 +130,7 @@ function events_seminars_ct_view_field_group_info() {
     ),
     'format_type' => 'div',
     'format_settings' => array(
-      'label' => 'Services:',
+      'label' => 'Categories:',
       'instance_settings' => array(
         'id' => '',
         'classes' => 'services-group',
@@ -217,10 +217,10 @@ function events_seminars_ct_view_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Business Sectors');
+  t('Categories:');
   t('Legal Services');
   t('Main details');
   t('Related content');
-  t('Services:');
 
   return $field_groups;
 }

@@ -369,6 +369,9 @@ blockquote{
 
 /**********************  Breadcrumb  ***********************/
 .breadcrumb{
+    .page-case-studies &{
+        display:none;
+    }
     min-height:50px;
     .node-type-lupdate &{
         min-height:80px;
@@ -735,6 +738,10 @@ body{
                 @media #{$tablet}{
                     display:inline-block;
                 }
+                &>span{
+                    padding: 10px 15px;
+                }
+                &>span,
                 &>a{  
                     @media #{$tablet}{
                         background: url("../images/menu-separator.png") no-repeat scroll left center transparent;
@@ -757,7 +764,8 @@ body{
                 }
                 &.active-trail,
                 &.active{
-                    & > a{
+                    & > a,
+                    & > span{
                         color: $colour-orange-01;  
                     }
                 }
@@ -881,7 +889,8 @@ body{
                     border-bottom:1px solid $colour-orange-01;
                 }
             }
-            &>a{
+            &>a,
+            &>span{
                 text-transform: uppercase;
                 color:$colour-white-01;
                 &:first-of-type{
@@ -893,8 +902,15 @@ body{
                     color:$colour-white-01;
                 }
             }
+            &>span{
+                padding: 10px 15px;
+            }
         }
-        &>li:hover>a,
+        &>li:hover>span,
+            &>li>span:hover,
+            &>li>span.active,
+            &>li.active-trail >span,
+            &>li:hover>a,
             &>li>a:hover,
             &>li>a.active,
             &>li.active-trail >a{
@@ -3122,8 +3138,9 @@ body.page-landing{
 
 /********************** Contact  ***********************/
 .menu-block-7{
+    margin-top:15px;
     margin-bottom:15px;
-    @extend .col-sm-10;
+    @extend .col-sm-12;
     @media #{$tablet-max}{
         max-width: $avoid-title-icon;
         li{
@@ -3132,16 +3149,45 @@ body.page-landing{
     }
     li{
         @extend .col-md-3;
-        background:$colour-blue-01;
+        padding-left:0;
+        padding-right:0;
         border-left:7px solid $colour-white-01;
         border-right:7px solid $colour-white-01;
+        @media #{$normal}{
+            padding-top:145px;
+            background-size:contain !important;
+            &.menu-mlid-824{
+                //edinburgh
+                background: url("../images/contact-edinburgh.jpg") no-repeat center top transparent;
+            }
+            &.menu-mlid-1527{
+                //aberdeen
+                background: url("../images/contact-aberdeen.jpg") no-repeat center top transparent;
+
+            }
+            &.menu-mlid-1528{
+                //glasgow
+                background: url("../images/contact-glasgow.jpg") no-repeat center top transparent;
+
+            }
+            &.menu-mlid-1529{
+                //brussels
+                background: url("../images/contact-brussels.jpg") no-repeat center top transparent;
+
+            }
+        }
+        @media #{$wide}{
+            padding-top:179px;
+        }
     }
     a{
+        background:$colour-blue-01;
         color: $colour-white-01;
         &.active-trail,
         &.active,
         &:hover{
             color: $colour-orange-01;
+            background:$colour-blue-01 !important;
         }
     }
 }
