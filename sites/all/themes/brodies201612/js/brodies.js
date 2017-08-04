@@ -325,7 +325,7 @@
                 $('#block-brseminarbooking-seminar-calendar').insertAfter($('#block-system-main .field-name-body'));
             }
             if ($('.page-node-44 .block-brseminarbooking').length > 0) {
-                $('.block-brseminarbooking').insertAfter($('#block-system-main .field-name-body'));
+                $('.block-brseminarbooking').insertAfter($('.view-seminars .view-filters'));
             }
             function doneResizing() {
                 readMoreSetup();

@@ -1105,7 +1105,7 @@ function ct_people_field_default_field_instances() {
           'image_link' => '',
           'lazyload' => 1,
           'lazyload_aspect_ratio' => 1,
-          'picture_mapping' => 'col_3_fixed',
+          'picture_mapping' => 'col_3',
         ),
         'type' => 'picture',
         'weight' => 1,
