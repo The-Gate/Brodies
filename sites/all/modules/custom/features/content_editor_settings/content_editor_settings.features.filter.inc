@@ -70,7 +70,9 @@ function content_editor_settings_filter_default_formats() {
       'media_filter_paragraph_fix' => array(
         'weight' => 1,
         'status' => 1,
-        'settings' => array(),
+        'settings' => array(
+          'replace' => 0,
+        ),
       ),
       'media_filter' => array(
         'weight' => 2,
@@ -79,34 +81,6 @@ function content_editor_settings_filter_default_formats() {
       ),
       'filter_htmlcorrector' => array(
         'weight' => 10,
-        'status' => 1,
-        'settings' => array(),
-      ),
-    ),
-  );
-
-  // Exported format: Plain text.
-  $formats[3] = array(
-    'format' => 3,
-    'name' => 'Plain text',
-    'cache' => 1,
-    'status' => 1,
-    'weight' => 1,
-    'filters' => array(
-      'filter_html_escape' => array(
-        'weight' => 0,
-        'status' => 1,
-        'settings' => array(),
-      ),
-      'filter_url' => array(
-        'weight' => 1,
-        'status' => 1,
-        'settings' => array(
-          'filter_url_length' => 72,
-        ),
-      ),
-      'filter_autop' => array(
-        'weight' => 2,
         'status' => 1,
         'settings' => array(),
       ),

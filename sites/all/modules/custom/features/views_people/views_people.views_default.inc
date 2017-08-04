@@ -443,6 +443,13 @@ function views_people_views_default_views() {
       ),
     ),
   );
+  /* Filter criterion: Content: Section (field_people_section) */
+  $handler->display->display_options['filters']['field_people_section_value']['id'] = 'field_people_section_value';
+  $handler->display->display_options['filters']['field_people_section_value']['table'] = 'field_data_field_people_section';
+  $handler->display->display_options['filters']['field_people_section_value']['field'] = 'field_people_section_value';
+  $handler->display->display_options['filters']['field_people_section_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['select_labels'] = array(
     'title' => 'Search by name',
     'field_related_sector_nid' => 'Business Sectors',

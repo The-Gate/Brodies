@@ -66,7 +66,8 @@ function content_editor_settings_ckeditor_profile_defaults() {
         'theme_config_js' => 'f',
         'js_conf' => 'config.allowedContent = true;
 config.extraAllowedContent = \'p(*)[*]{*};div(*)[*]{*};li(*)[*]{*};ul(*)[*]{*}\';
-CKEDITOR.dtd.$removeEmpty.i = 0;',
+CKEDITOR.dtd.$removeEmpty.i = 0;
+CKEDITOR.config.forcePasteAsPlainText = true;',
         'loadPlugins' => array(
           'drupalbreaks' => array(
             'name' => 'drupalbreaks',
