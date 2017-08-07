@@ -3148,8 +3148,17 @@ body.page-landing{
 
 /********************** Contact  ***********************/
 .menu-block-7{
-    margin-top:15px;
+    margin-top:-40px;
+    .page-node-29 &{
+        margin-top:15px;
+        @media #{$normal}{
+            margin-top:60px;
+        }
+    }
     margin-bottom:15px;
+    @media #{$normal}{
+        margin-top:0;
+    }
     @extend .col-sm-12;
     @media #{$tablet-max}{
         max-width: $avoid-title-icon;
@@ -3195,7 +3204,8 @@ body.page-landing{
         color: $colour-white-01;
         &.active-trail,
         &.active,
-        &:hover{
+        &:hover,
+            &:focus{
             color: $colour-orange-01;
             background:$colour-blue-01 !important;
         }
