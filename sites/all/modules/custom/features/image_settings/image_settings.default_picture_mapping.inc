@@ -403,6 +403,84 @@ function image_settings_default_picture_mapping() {
   $picture_mapping = new PictureMapping();
   $picture_mapping->disabled = FALSE; /* Edit this to true to make a default picture_mapping disabled initially */
   $picture_mapping->api_version = 2;
+  $picture_mapping->label = 'Col 4 - H599';
+  $picture_mapping->machine_name = 'col_4_h599';
+  $picture_mapping->breakpoint_group = 'bootstrap';
+  $picture_mapping->mapping = array(
+    'breakpoints.theme.bootstrap.screen-xs-max' => array(
+      '1x' => array(
+        'mapping_type' => 'image_style',
+        'image_style' => 'col-12-sm-full',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+    'breakpoints.theme.bootstrap.screen-sm-min' => array(
+      '1x' => array(
+        'mapping_type' => 'image_style',
+        'image_style' => 'col-4--lg-max-h559',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+    'breakpoints.theme.bootstrap.screen-sm-max' => array(
+      '1x' => array(
+        'mapping_type' => '_none',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+    'breakpoints.theme.bootstrap.screen-md-min' => array(
+      '1x' => array(
+        'mapping_type' => '_none',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+    'breakpoints.theme.bootstrap.screen-md-max' => array(
+      '1x' => array(
+        'mapping_type' => '_none',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+    'breakpoints.theme.bootstrap.screen-lg-min' => array(
+      '1x' => array(
+        'mapping_type' => '_none',
+      ),
+      '1.5x' => array(
+        'mapping_type' => '_none',
+      ),
+      '2x' => array(
+        'mapping_type' => '_none',
+      ),
+    ),
+  );
+  $export['col_4_h599'] = $picture_mapping;
+
+  $picture_mapping = new PictureMapping();
+  $picture_mapping->disabled = FALSE; /* Edit this to true to make a default picture_mapping disabled initially */
+  $picture_mapping->api_version = 2;
   $picture_mapping->label = 'Col 6';
   $picture_mapping->machine_name = 'col_6';
   $picture_mapping->breakpoint_group = 'bootstrap';

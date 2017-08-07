@@ -224,6 +224,31 @@ function image_settings_image_default_styles() {
     ),
   );
 
+  // Exported image style: col-4--lg-max-h559.
+  $styles['col-4--lg-max-h559'] = array(
+    'label' => 'col-4--lg-MAX-H559',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => '',
+          'height' => 559,
+          'upscale' => 1,
+        ),
+        'weight' => 1,
+      ),
+      3 => array(
+        'name' => 'image_crop',
+        'data' => array(
+          'width' => 375,
+          'height' => 559,
+          'anchor' => 'center-center',
+        ),
+        'weight' => 2,
+      ),
+    ),
+  );
+
   // Exported image style: col-6--lg.
   $styles['col-6--lg'] = array(
     'label' => 'col-6--lg',
@@ -543,6 +568,22 @@ function image_settings_image_default_styles() {
           'anchor' => 'center-top',
         ),
         'weight' => -9,
+      ),
+    ),
+  );
+
+  // Exported image style: square_thumbnail.
+  $styles['square_thumbnail'] = array(
+    'label' => 'square_thumbnail',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 100,
+          'height' => 100,
+          'weight' => 0,
+        ),
+        'weight' => 0,
       ),
     ),
   );

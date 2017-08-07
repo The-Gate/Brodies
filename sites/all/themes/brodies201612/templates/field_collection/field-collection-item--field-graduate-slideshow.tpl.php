@@ -73,7 +73,7 @@ if (strlen($overlay_title) > 0 or strlen($overlay_text) > 0 or strlen($overlay_b
 $img_open = '';
 $img_close = '';
 $fallback_image_style = 'col-12-sm-full';
-$picture_name = 'col_12';
+$picture_name = 'col_4_h599';
 if (!empty($content['field_cta_imge'][0])) {
   $image = $content['field_cta_imge'][0];
   $picture_mappings = picture_mapping_load($picture_name);

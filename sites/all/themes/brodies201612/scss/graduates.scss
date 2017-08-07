@@ -188,6 +188,8 @@ body.page-graduate{
 
 
     }
+    .field-name-field-graduate-slideshow,
+    .field-name-field-graduate-slideshow-bottom,
     .mod-quote{
         .cta-overlay{
             .overlay-title{
@@ -597,4 +599,21 @@ body.page-graduate{
         @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
     }
 
+}
+
+// graduate home page - remove left / right padding on CTA
+.page-node-9672{
+    .field-item.even .col-md-6{
+        @extend .no-padding-left-md;
+    }
+    .field-item.odd .col-md-6{
+        @extend .no-padding-right-md;
+    }
+    @media #{$tablet}{
+        .region-sidebar-second{
+            .block{
+                margin-bottom:0;
+            }
+        }
+    }
 }
