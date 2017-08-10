@@ -695,11 +695,11 @@ function brSeminar_escapeString($string) {
 
 function brSeminarBooking_calendar_links() {
   $calendar_links = '';
-  $calendar_links .= '<div class="calendars seminar-buttons col-md-3 no-padding-left-sm">'
+  $calendar_links .= '<div class="calendars seminar-buttons col-md-3 no-padding-left-md">'
       . '<div class="seminar-button calendar-link">'
       . l('iCalendar', $_GET['q'], array('query' => array('calendar' => 'ical')))
       . '</div></div>'
-      . '<div class="calendars seminar-buttons col-md-3 no-padding-right-sm">'
+      . '<div class="calendars seminar-buttons col-md-3 no-padding-right-md">'
       . '<div class="seminar-button calendar-link">'
       . l('vCalendar', $_GET['q'], array('query' => array('calendar' => 'vcal')))
       . '</div></div>';
