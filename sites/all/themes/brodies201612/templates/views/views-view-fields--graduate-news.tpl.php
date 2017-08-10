@@ -27,23 +27,13 @@
     <div class="content cta-overlay">
         <div class="home-cta-bg-img">
             <?php
-            preg_match_all('/src="([^"]+)"/', $row->aggregator_item_description, $images);
-//print('<img '.$images[0][0].'>');
-
-            if (!empty($images[0][0])) {
-              $externalpath = str_replace(array('"', 'src='), '', $images[0][0]);
-              print theme('imagecache_external', array(
-                'path' => $externalpath,
-                'style_name' => 'col-9--lg-max-h300',
-              ));
-            }
-            else {
-              ?>
-              <img class="img-responsive" src="/sites/all/themes/brodies201612/images/grad-blog-default.jpg" width="770" height="300" alt="">
-              <?php
+            foreach ($view->result as $imgkeyid => $result){
+              if ($row->iid == $result->iid){
+                $imgkey = $imgkeyid;
+              }
             }
             ?>
-
+            <img class="img-responsive" src="/sites/all/themes/brodies201612/images/grad-blog-<?php echo $imgkey; ?>.jpg" width="770" height="300" alt="">
             <div class="cta-overlay-wrapper">
                 <div class="slide-header"><a href="http://www.brodies.com/blog/category/traineeships/" tabindex="-1">Latest News</a></div>
                 <div class="cta-overlay-inner col-sm-12 col-md-11">
