@@ -371,10 +371,10 @@ blockquote{
 
 /**********************  Breadcrumb  ***********************/
 .breadcrumb{
-    .page-case-studies &{
-        display:none;
-    }
     min-height:50px;
+    .page-case-studies &{
+        min-height:13px;
+    }
     .node-type-lupdate &{
         min-height:80px;
     }
@@ -385,10 +385,22 @@ blockquote{
     margin-bottom:1em;
     font-family: $font-family-serif;
     @media #{$mobile-max}{
+        .page-case-studies &{
+            min-height:40px;
+        }
         max-width: $avoid-title-icon;
         & > li{
             display:inline;
         }
+    }
+    @media #{$tablet-max}{
+        .node-type-lupdate &,
+        .page-videos &,
+        .page-binformed &,
+        .page-node-44 &{
+            min-height:90px;
+        }
+
     }
     /*    @media #{$normal}{
             min-height:2em;
@@ -804,6 +816,9 @@ body{
                 bottom:0;
                 left:0;
                 right: 10px;
+            }
+            .caret{
+                top:20px;
             }
         }
     }
@@ -3422,21 +3437,15 @@ h1.page-header{
         background:rgba(0,35,93,0.8);
     }
 }
-// binformed section - exposed filters
-@media #{$tablet-max}{
-    .node-type-lupdate,
-    .page-videos,
-    .page-binformed{
-        .views-exposed-form{
-            max-width: $avoid-title-icon;
-        }
-        .views-exposed-widgets{
+@media #{$mobile-max}{
+    .views-exposed-widgets{
+        .node-type-lupdate &,
+        .page-videos &,
+        .page-binformed &{
             margin-top:0;
         }
     }
 }
-
-
 /********************** News homepage  ***********************/
 .page-news{
     .breadcrumb{
