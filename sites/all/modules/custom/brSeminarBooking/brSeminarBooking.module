@@ -280,8 +280,9 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $from = $values['email'];
-
-  $out = $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
+  $out = '';
+  $out .= '<!DOCTYPE html><html><head><title>Seminar Booking Request</title></head><body>';
+  $out .= $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
   $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
 
   $nodes = node_load_multiple($_SESSION['seminars']);
@@ -343,7 +344,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 <td>' . $values['postcode'] . '</td>
 </tr>
 </tbody>
-</table>';
+</table></body></html>';
   $params = array(
     'body' => $out,
     'subject' => 'Seminar Booking Request',
@@ -375,7 +376,7 @@ function brSeminarBooking_seminars_form_mail($key, &$message, $params) {
   }
 
   $message['subject'] = $params['subject'];
-  $message['body'][] = check_plain(t($params['body']));
+  $message['body'][] = $params['body'];
 }
 
 //////////////////////////////////////////////////////
@@ -457,7 +458,7 @@ function brSeminarBooking_page_seminars_waitinglist() {
       $location = node_load($node->field_event_location[LANGUAGE_NONE][0]['nid']);
       $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $location->title . '<br>Date: ' . format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_') . '</p></div><div class="col-sm-3">' . brSeminarBooking_waitinglist_link((object) array('nid' => $nid)) . '</div>';
     }
-        
+
     $out .= '<div class="clearfix"></div></div>';
     $out .= '<p>Please remove any seminars you are no longer interested in.</p>';
     $wlform = drupal_get_form('brSeminarBooking_waitinglist_form');
@@ -552,8 +553,9 @@ function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $from = $values['email'];
-
-  $out = $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " requests to be added to the following seminar waiting lists:";
+  $out = '';
+  $out .= '<!DOCTYPE html><html><head><title>Seminar Waiting List</title></head><body>';
+  $out .= $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " requests to be added to the following seminar waiting lists:";
   $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
 
   $nodes = node_load_multiple($_SESSION['seminars-waitinglist']);
@@ -593,7 +595,7 @@ function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
 <td>' . $values['company'] . '</td>
 </tr>
 </tbody>
-</table>';
+</table></body></html>';
   $params = array(
     'body' => $out,
     'subject' => 'Seminar Waiting List Request',
@@ -621,9 +623,8 @@ function brSeminarBooking_waitinglist_form_mail($key, &$message, $params) {
   foreach ($headers as $key => $value) {
     $message['headers'][$key] = $value;
   }
-
   $message['subject'] = $params['subject'];
-  $message['body'][] = check_plain(t($params['body']));
+  $message['body'][] = $params['body'];
 }
 
 function brSeminarBooking_node_view($node, $view_mode, $langcode) {
