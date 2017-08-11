@@ -582,6 +582,7 @@ body.page-graduate{
     }
     .btn.webform-draft{
         background: $colour-purple;
+        display:block;
     }
     .radio,
     .checkbox{
@@ -597,6 +598,9 @@ body.page-graduate{
         margin-right:10px;
 
         @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
+    }
+    .form-actions{
+        @extend .col-md-12;
     }
 
 }
