@@ -179,14 +179,14 @@
                 $video = '<a href="' . $node->field_lp_v_link[LANGUAGE_NONE][0]['value'] . '" class="vi"><span class="video" style="display:none">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="video-thumb img-responsive"src="' . file_create_url($node->field_lp_v_image[LANGUAGE_NONE][0]['uri']) . '" /></a>';
                 print $video;
                 print render($page['content']);
-                if (isset($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri'])) {
+                if (!empty($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri'])) {
                   $style_1 = '';
-                  if ($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) {
+                  if (!empty($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri'])) {
                     $dlih1 = image_get_info($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']);
                     $dlih1S = (!empty($dlih1['height'])) ? ';min-height:' . $dlih1['height'] . 'px;' : '';
                     $style_1 = ' style="background-image:url(\'' . file_create_url($node->field_lp_dl_img_1[LANGUAGE_NONE][0]['uri']) . '\');' . $dlih1S . '"';
                   }
-                  $title_1 = (isset($node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'] : "Download File";
+                  $title_1 = (!empty($node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_1[LANGUAGE_NONE][0]['value'] : "Download File";
                   print '<div class="landing-download"><div class="landing-download-item item-1"' . $style_1 . '><a href="' . file_create_url($node->field_lp_dl_file_1[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $title_1 . '</a></div></div>';
                 }
                 ?>
@@ -194,8 +194,8 @@
             <div class="col-md-4 col-right">
                 <?php
                 // included webform
-                if (isset($node->field_block_reference[LANGUAGE_NONE][0][moddelta])) {
-                  $blockDetails = explode(':', $node->field_block_reference[LANGUAGE_NONE][0][moddelta]);
+                if (isset($node->field_block_reference[LANGUAGE_NONE][0]['moddelta'])) {
+                  $blockDetails = explode(':', $node->field_block_reference[LANGUAGE_NONE][0]['moddelta']);
                   $block = module_invoke($blockDetails[0], 'block_view', $blockDetails[1]);
                   if (!empty($block['content'])) {
                     print ('<div class="block-wrapper">' . $block['content'] . '</div>');
