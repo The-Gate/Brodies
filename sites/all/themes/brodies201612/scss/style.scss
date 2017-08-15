@@ -194,6 +194,7 @@ blockquote{
     border-left: 0;
     color:$colour-purple;
     font-family:$font-family-serif;
+    max-width:calc(100% - 92px);
     .quote-open,
     .quote-close{
         display:inline-block
@@ -302,6 +303,11 @@ blockquote{
         float: none;
         display: table-cell;
         vertical-align: top;
+    }
+}
+@media #{$mobile-max}{
+    .hidden-sm{
+        display:none;
     }
 }
 // mobile: views filters only shown on section homepage
@@ -981,6 +987,10 @@ body{
         position:relative;
         background:transparent;
         float:none;
+        &>li>a{
+            font-size:16px;
+            padding:10px 20px;
+        }
     }
     left:auto;
     right:0;
@@ -1197,6 +1207,9 @@ h2.block-title{
         padding: 15px 20px;
         overflow:auto;
         overflow-y:hidden;
+        @media #{$tablet-max}{
+            opacity:1 !important;
+        }
     }
     @media #{$normal}{
         .cta-overlay-wrapper{
@@ -1236,6 +1249,9 @@ h2.block-title{
         &.blue{
             border-bottom: 2px solid $colour-blue-02;
         }
+        &.purple{
+            border-bottom: 2px solid $colour-purple;
+        }
     }
 
     .overlay-text{
@@ -1253,6 +1269,9 @@ h2.block-title{
         }
         &.blue a{
             background: $colour-blue-02;
+        }
+        &.purple a{
+            background: $colour-purple;
         }
     }
 
@@ -3566,6 +3585,7 @@ h1.page-header{
     }
     .seminar-buttons{
         margin-bottom:45px;
+        width:calc(25% - 9px);
     }
 }
 // edge bugfix

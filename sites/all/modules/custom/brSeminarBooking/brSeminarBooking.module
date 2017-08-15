@@ -138,7 +138,7 @@ function brSeminarBooking_page_seminars_checkout() {
       $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $location->title . '<br>Date: ' . format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_') . '</p></div>' . brSeminarBooking_book_link((object) array('nid' => $nid));
     }
     $out .= '<div class="clearfix"></div></div>';
-    $out .= '<p>Please remove any seminars you are no longer interested in.</p>';
+    $out .= '<p>Please remove any seminars that you are no longer interested in and complete the form below to book your ' . format_plural(count($sdata), 'place', 'places') . '.</p>';
     $chform = drupal_get_form('brSeminarBooking_seminars_form');
     $out .= render($chform);
   }
@@ -236,6 +236,7 @@ function brSeminarBooking_seminars_form() {
   $form['telephone-number'] = array(
     '#type' => 'textfield',
     '#title' => 'Telephone Number',
+    '#description' => 'For text alerts regarding your seminar booking, please enter your mobile number.',
     '#required' => TRUE,
     '#prefix' => '<div class="col-md-6">',
     '#suffix' => '</div>',

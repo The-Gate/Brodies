@@ -895,6 +895,7 @@ function ct_shared_fields_field_default_field_bases() {
         'pink' => 'pink',
         'green' => 'green',
         'blue' => 'blue',
+        'purple' => 'purple',
       ),
       'allowed_values_function' => '',
       'allowed_values_php' => '',
