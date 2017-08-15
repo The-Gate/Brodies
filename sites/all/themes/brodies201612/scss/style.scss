@@ -1982,6 +1982,33 @@ body{
     }
 }
 // related text only boxes
+.node-reference-links{
+    h2 {
+        font-size: $font-size-12;
+        min-height:60px;
+        a{
+            font-size: $font-size-12;
+            text-transform: uppercase;
+            line-height:1.1;
+        }
+    }
+    .field-type-datestamp,
+    .field-name-field-l-left{
+        font-size: $font-size-12;
+    }
+    .field-type-datestamp{
+        background: transparent !important;
+        color: $colour-orange-01;
+        padding-left:0;
+        margin-top:10px;
+        margin-bottom:1em;
+    }
+    .field-name-field-l-left{
+        margin-top:0 !important;
+        min-height:30px;
+    }
+}
+
 .view-id-seminars.view-display-id-block_1,
 .view-latest-legal-update.view-display-id-block_2{
     @media #{$normal}{
