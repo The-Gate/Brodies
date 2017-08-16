@@ -555,8 +555,8 @@ function brPayments_worldpay_response($cart_id = 0) {
     }
 
     node_save($order);
-    //$admin_email = 'cashroom@brodies.com';
-    $admin_email = 'callum@sakurabrae.co.uk';
+    $admin_email = 'cashroom@brodies.com';
+    //$admin_email = 'callum@sakurabrae.co.uk';
     $from = $order->field_pay_email['und'][0]['value'];
 
     $emailBody = brPayments_payment_details_content($order);
@@ -591,6 +591,7 @@ function brPayments_worldpay_response($cart_id = 0) {
 
 function brPayments_payment_details_content($order) {
   $out = '';
+  $out .= '<!DOCTYPE html><html><head><title>Payment Details</title></head><body>';
 
   $form = brPayments_payment_form('', $order->field_pay_type[LANGUAGE_NONE][0]['value'] == 1 ? 'invoice' : 'dart');
   foreach ($form as $fname => $data) {
@@ -618,6 +619,7 @@ function brPayments_payment_details_content($order) {
       }
     }
   }
+  $out .='</body></html>';
   return $out;
 }
 
@@ -634,5 +636,5 @@ function brPayments_mail($key, &$message, $params) {
   }
 
   $message['subject'] = $params['subject'];
-  $message['body'][] = check_plain(t($params['body']));
+  $message['body'][] = $params['body'];
 }
