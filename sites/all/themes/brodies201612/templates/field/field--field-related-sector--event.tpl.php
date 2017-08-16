@@ -45,16 +45,14 @@
  * @ingroup themeable
  */
 ?>
-
 <?php
+
 $output = '';
-foreach ($items as $delta => $item):
-
-  $item_array = explode(',', $item['#markup']);
-  foreach ($item_array as $li) {
-    $output .= '<li>' . trim($li) . '</li>';
-  }
-  ?>
-
-  <ul><?php print $output; ?></ul>
-<?php endforeach; ?>
+foreach ($items as $delta => $item) {
+  $output .= '<li>' . $item['#markup'] . '</li>';
+}
+if (strlen($output) > 0) {
+  $output = '<ul>' . $output . '</ul>';
+}
+?>
+<?php print $output; ?>

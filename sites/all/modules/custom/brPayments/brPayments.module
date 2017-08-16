@@ -204,7 +204,7 @@ function brPayments_payment_card_form($form_state, $form_values) {
   $form['card-type'] = array(
     '#type' => 'select',
     '#title' => 'Payment method',
-    '#options' => array('' => 'Please select', '1' => 'Visa/Mastercard (2% charge)', '2' => 'Visa Debit/Electron/Maestro/Solo'),
+    '#options' => array('' => 'Please select', '1' => 'Visa Credit/Mastercard Credit (2% charge)', '2' => 'Visa Debit/Mastercard Debit/Electron/Maestro/Solo'),
     '#required' => TRUE
   );
 
