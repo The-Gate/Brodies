@@ -194,7 +194,9 @@ blockquote{
     border-left: 0;
     color:$colour-purple;
     font-family:$font-family-serif;
-    max-width:calc(100% - 92px);
+    @media #{tablet}{
+        max-width:calc(100% - 92px);
+    }
     .quote-open,
     .quote-close{
         display:inline-block
@@ -652,6 +654,9 @@ body{
         position:absolute;
         display: block;
         bottom:15px;
+        .node-type-lpage2 &{
+            bottom:0;
+        }
     }
 
 } 
@@ -958,8 +963,10 @@ body{
     }
 }
 .node-type-lpage2{
+    #block-views-search-block,
+    #block-block-38,
     .menu-block-3{
-        display:none;
+        display:none !important;
     }
     @media #{$tablet} {
         .navbar-collapse{
@@ -2115,7 +2122,7 @@ body{
             }
         }
     }
-    @media #{$tablet-max}{
+    @media #{$mobile-max}{
         .pager-first,
         .prev,
         .next,
@@ -2227,9 +2234,15 @@ body{
 
 /*************** People details page ****************/
 .node-type-people{
+    @media #{$mobile-max}{
+        .field-name-field-teaser-image{
+            margin-bottom:2em;
+        }
+    }
     .field-name-body{
         @extend .col-md-12;
-        margin-top:2em;
+        padding-top:2em;
+        clear:both;
     }
     .file-icon,
     .file-size,
@@ -3192,7 +3205,7 @@ body.page-landing{
         .form-submit{
             color: $colour-blue-01;
             border-radius: 5px;
-            background: $colour-blue-01;
+            background: $colour-white-01;
             line-height:2;
             width:100%;
             font-size:$font-size-16;
@@ -3584,8 +3597,9 @@ h1.page-header{
         margin-bottom:20px;
     }
     .seminar-buttons{
-        margin-bottom:45px;
-        width:calc(25% - 9px);
+        &#block-brseminarbooking-seminar-waitinglist{
+            margin-bottom:45px;
+        }
     }
 }
 // edge bugfix

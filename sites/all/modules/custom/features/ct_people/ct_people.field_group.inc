@@ -98,7 +98,7 @@ function ct_people_field_group_info() {
       'label' => 'Main Content',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-9 clearfix',
+        'classes' => 'col-sm-9 clearfix',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
@@ -341,7 +341,7 @@ function ct_people_field_group_info() {
       'label' => 'Side Column',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'col-md-3',
+        'classes' => 'col-sm-3',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',
