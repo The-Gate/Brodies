@@ -130,7 +130,7 @@ function brSeminarBooking_page_seminars_checkout() {
 
   if (!empty($_SESSION['seminars']) and count($_SESSION['seminars'])) {
     $sdata = $_SESSION['seminars'];
-    $out .= '<p>You are about to book places on the following ' . format_plural(count($sdata), 'seminar', 'seminars') . '</p>';
+    $out .= '<p>You are about to book ' . format_plural(count($sdata), 'a place', 'places') . ' on the following ' . format_plural(count($sdata), 'seminar', 'seminars') . '</p>';
     $out .= '<div class="seminars" style="margin-bottom:30px;">';
     $nodes = node_load_multiple($sdata);
     foreach ($nodes as $nid => $node) {

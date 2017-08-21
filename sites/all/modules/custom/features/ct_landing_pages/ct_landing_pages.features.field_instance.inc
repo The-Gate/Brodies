@@ -2264,7 +2264,7 @@ function ct_landing_pages_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'weight' => 1,
     ),
   );
 
@@ -2323,7 +2323,7 @@ function ct_landing_pages_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 41,
+      'weight' => 27,
     ),
   );
 
@@ -2419,7 +2419,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => -3,
+      'weight' => 2,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -2496,7 +2496,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => 17,
+      'weight' => 13,
     ),
     'widget_type' => 'text_textarea',
   );
@@ -2579,7 +2579,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 18,
+      'weight' => 14,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -2676,7 +2676,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 11,
+      'weight' => 6,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -2752,7 +2752,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 5,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -2828,7 +2828,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 12,
+      'weight' => 7,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -2925,7 +2925,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 14,
+      'weight' => 9,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -3001,7 +3001,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 13,
+      'weight' => 8,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -3077,7 +3077,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 15,
+      'weight' => 10,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -3156,7 +3156,7 @@ function ct_landing_pages_field_default_field_instances() {
         'progress_indicator' => 'bar',
       ),
       'type' => 'file_generic',
-      'weight' => 23,
+      'weight' => 16,
     ),
     'widget_type' => 'filefield_widget',
   );
@@ -3235,7 +3235,7 @@ function ct_landing_pages_field_default_field_instances() {
         'progress_indicator' => 'bar',
       ),
       'type' => 'file_generic',
-      'weight' => 26,
+      'weight' => 19,
     ),
     'widget_type' => 'filefield_widget',
   );
@@ -3314,7 +3314,7 @@ function ct_landing_pages_field_default_field_instances() {
         'progress_indicator' => 'bar',
       ),
       'type' => 'file_generic',
-      'weight' => 29,
+      'weight' => 22,
     ),
     'widget_type' => 'filefield_widget',
   );
@@ -3393,7 +3393,7 @@ function ct_landing_pages_field_default_field_instances() {
         'progress_indicator' => 'bar',
       ),
       'type' => 'file_generic',
-      'weight' => 32,
+      'weight' => 25,
     ),
     'widget_type' => 'filefield_widget',
   );
@@ -3500,7 +3500,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 24,
+      'weight' => 17,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -3607,7 +3607,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 27,
+      'weight' => 20,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -3714,7 +3714,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 30,
+      'weight' => 23,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -3821,7 +3821,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 33,
+      'weight' => 26,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -3904,7 +3904,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 22,
+      'weight' => 15,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -3987,7 +3987,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 25,
+      'weight' => 18,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -4070,7 +4070,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 28,
+      'weight' => 21,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -4153,7 +4153,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 31,
+      'weight' => 24,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -4236,7 +4236,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 16,
+      'weight' => 12,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -4313,7 +4313,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textarea',
-      'weight' => 15,
+      'weight' => 11,
     ),
     'widget_type' => 'text_textarea',
   );
@@ -4410,7 +4410,7 @@ function ct_landing_pages_field_default_field_instances() {
         'use_default_image' => 0,
       ),
       'type' => 'media_generic',
-      'weight' => 9,
+      'weight' => 3,
     ),
     'widget_type' => 'imagefield_widget',
   );
@@ -4486,7 +4486,7 @@ function ct_landing_pages_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 4,
     ),
     'widget_type' => 'text_textfield',
   );

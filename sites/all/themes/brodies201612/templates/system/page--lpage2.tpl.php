@@ -240,17 +240,17 @@
                           if (!empty($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri'])) {
                             $title_1 = (isset($node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_2[LANGUAGE_NONE][0]['value'] : "Download File";
                             $linkContent1 = (!empty($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_2[LANGUAGE_NONE][0]['uri']) . '" />' : $title_1;
-                            print('<li><a href="/' . $node->field_lp_dl_file_2[0]['filepath'] . '" target="_blank">' . $linkContent1 . '</a></li>');
+                            print('<li><a href="' . file_create_url($node->field_lp_dl_file_2[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $linkContent1 . '</a></li>');
                           }
                           if (!empty($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri'])) {
                             $title_2 = (isset($node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_3[LANGUAGE_NONE][0]['value'] : "Download File";
                             $linkContent2 = (!empty($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_3[LANGUAGE_NONE][0]['uri']) . '" />' : $title_2;
-                            print('<li><a href="/' . $node->field_lp_dl_file_3[0]['filepath'] . '" target="_blank">' . $linkContent2 . '</a></li>');
+                            print('<li><a href="' . file_create_url($node->field_lp_dl_file_3[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $linkContent2 . '</a></li>');
                           }
                           if (!empty($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri'])) {
                             $title_3 = (isset($node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'])) ? $node->field_lp_dl_title_4[LANGUAGE_NONE][0]['value'] : "Download File";
                             $linkContent3 = (!empty($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri'])) ? '<img src="' . file_create_url($node->field_lp_dl_img_4[LANGUAGE_NONE][0]['uri']) . '" />' : $title_1;
-                            print('<li><a href="/' . $node->field_lp_dl_file_4[0]['filepath'] . '" target="_blank">' . $linkContent3 . '</a></li>');
+                            print('<li><a href="' . file_create_url($node->field_lp_dl_file_4[LANGUAGE_NONE][0]['uri']) . '" target="_blank">' . $linkContent3 . '</a></li>');
                           }
                           ?></ul>
                   </div></div>

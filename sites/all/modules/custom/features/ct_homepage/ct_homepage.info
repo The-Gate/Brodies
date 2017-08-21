@@ -26,6 +26,7 @@ features[field_instance][] = field_collection_item-field_home_cta_block-field_lp
 features[field_instance][] = field_collection_item-field_home_cta_block-field_lp_title_img
 features[field_instance][] = field_collection_item-field_home_cta_block-field_video_url
 features[field_instance][] = node-homepage-body
+features[field_instance][] = node-homepage-field_banner_image
 features[field_instance][] = node-homepage-field_home_cta_block
 features[node][] = homepage
 features[taxonomy][] = slideshow_type

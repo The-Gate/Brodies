@@ -199,7 +199,7 @@
                 $('.field-name-field-graduate-slideshow-bottom .field-item .slick-grad-quote').after('<div class="clearfix"></div>')
                 $('.field-name-field-graduate-slideshow-bottom .field-item .slick-grad-quote').slick({
                     autoplay: true,
-                    autoplaySpeed: 2000,
+                    autoplaySpeed: 7000,
                     fade: true,
                     dots: true,
                     speed: 500,

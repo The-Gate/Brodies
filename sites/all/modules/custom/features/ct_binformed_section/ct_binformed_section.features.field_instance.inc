@@ -1618,8 +1618,7 @@ function ct_binformed_section_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => array(
       0 => array(
-        'value' => '',
-        '_error_element' => 'default_value_widget][field_p_id][0][value',
+        'value' => 0,
       ),
     ),
     'deleted' => 0,
@@ -1695,9 +1694,7 @@ function ct_binformed_section_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'number',
-      'settings' => array(
-        'default_value_php' => NULL,
-      ),
+      'settings' => array(),
       'type' => 'number',
       'weight' => 8,
     ),
