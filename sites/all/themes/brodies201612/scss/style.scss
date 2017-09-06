@@ -2658,6 +2658,7 @@ select{
         border-left:0 !important;
         border-right:0 !important; 
         padding:10px 0;
+        & > .field-collection-container > .field-name-field-related-content > .field-items > .field-item,
         & > .field > .field-items > .field-item{
             @extend .col-md-3;
             &:nth-child(4n+1){

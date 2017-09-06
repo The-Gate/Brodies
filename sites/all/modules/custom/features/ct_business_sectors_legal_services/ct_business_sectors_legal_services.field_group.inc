@@ -126,6 +126,7 @@ function ct_business_sectors_legal_services_field_group_info() {
     'weight' => '12',
     'children' => array(
       0 => 'field_related_binformed',
+      1 => 'field_related_content',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -152,6 +153,7 @@ function ct_business_sectors_legal_services_field_group_info() {
     'weight' => '2',
     'children' => array(
       0 => 'field_related_binformed',
+      1 => 'field_related_content',
     ),
     'format_type' => 'accordion-item',
     'format_settings' => array(
@@ -356,7 +358,7 @@ function ct_business_sectors_legal_services_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Related content',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_related_people',
       1 => 'field_related_service',
@@ -365,6 +367,7 @@ function ct_business_sectors_legal_services_field_group_info() {
       4 => 'field_related_video',
       5 => 'field_related_sector',
       6 => 'field_related_binformed',
+      7 => 'field_related_content',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -457,6 +460,7 @@ function ct_business_sectors_legal_services_field_group_info() {
       3 => 'field_related_video',
       4 => 'field_related_service',
       5 => 'field_related_binformed',
+      6 => 'field_related_content',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

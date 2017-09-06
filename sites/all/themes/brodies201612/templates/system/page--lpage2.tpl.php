@@ -276,7 +276,27 @@
               <div class="col-md-4"><div class="cta feeds"><h3>Useful Links</h3><?= $node->field_lp_news[LANGUAGE_NONE][0]['value']; ?><?php if (isset($node->field_lp_new_more[LANGUAGE_NONE][0]['value'])): ?>
                       <?php endif; ?></div></div>
                     <?php endif; ?>
-
+                    <?php
+                    ////// related content
+                    if (isset($node->field_related_content[LANGUAGE_NONE][0])):
+                      echo('<div class="col-md-12 clearfix">');
+                      echo('<h2 class="block-title">Related content</h2>');
+                      $relatedContentData = entity_load('node', array($node->nid));
+                      $node_data = $relatedContentData[$node->nid];
+                      $wrapper = entity_metadata_wrapper('node', $node_data);
+                      $relatedContentCollection = field_get_items('node', $node_data, 'field_related_content');
+                      if ($relatedContentCollection) {
+                        foreach ($relatedContentCollection as $delta => $collection) {
+                          if ($field_collection = field_collection_field_get_entity($collection)) {
+                            echo('<div class="views-row col-md-3">');
+                            print render($field_collection->view('full'));
+                            echo('</div>');
+                          }
+                        }
+                      }
+                      echo('</div>');
+                    endif;
+                    ?>
         </section>
     </div>
 </div>

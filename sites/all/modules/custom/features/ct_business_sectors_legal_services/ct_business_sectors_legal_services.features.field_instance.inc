@@ -10,6 +10,173 @@
 function ct_business_sectors_legal_services_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance:
+  // 'field_collection_item-field_related_content-field_cta_imge'.
+  $field_instances['field_collection_item-field_related_content-field_cta_imge'] = array(
+    'bundle' => 'field_related_content',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'col-3--lg--thumb-fixed',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cta_imge',
+    'label' => 'Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'related-content',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_related_content-field_cta_link'.
+  $field_instances['field_collection_item-field_related_content-field_cta_link'] = array(
+    'bundle' => 'field_related_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cta_link',
+    'label' => 'Link',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_related_content-field_cta_text'.
+  $field_instances['field_collection_item-field_related_content-field_cta_text'] = array(
+    'bundle' => 'field_related_content',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_cta_text',
+    'label' => 'CTA Text',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_related_content-field_open_in_new_tab_'.
+  $field_instances['field_collection_item-field_related_content-field_open_in_new_tab_'] = array(
+    'bundle' => 'field_related_content',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'default_value_function' => '',
+    'default_value_php' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_open_in_new_tab_',
+    'label' => 'Open in New Tab?',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'node-sector-body'.
   $field_instances['node-sector-body'] = array(
     'bundle' => 'sector',
@@ -191,7 +358,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 10,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -241,7 +408,56 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 53,
+      'weight' => 66,
+    ),
+  );
+
+  // Exported field_instance: 'node-sector-field_related_content'.
+  $field_instances['node-sector-field_related_content'] = array(
+    'bundle' => 'sector',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 59,
     ),
   );
 
@@ -315,7 +531,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 57,
+      'weight' => 64,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -390,7 +606,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 58,
+      'weight' => 65,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -462,7 +678,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 52,
+      'weight' => 60,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -512,7 +728,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 54,
+      'weight' => 61,
     ),
   );
 
@@ -589,7 +805,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 55,
+      'weight' => 62,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -667,7 +883,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 56,
+      'weight' => 63,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -2126,6 +2342,55 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-service-field_related_content'.
+  $field_instances['node-service-field_related_content'] = array(
+    'bundle' => 'service',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_related_content',
+    'label' => 'Related Content',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-service-field_related_cs'.
   $field_instances['node-service-field_related_cs'] = array(
     'bundle' => 'service',
@@ -2196,7 +2461,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -2352,7 +2617,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 11,
+      'weight' => 12,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -2402,7 +2667,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 12,
+      'weight' => 13,
     ),
   );
 
@@ -2479,7 +2744,7 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 13,
+      'weight' => 14,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -2736,10 +3001,15 @@ function ct_business_sectors_legal_services_field_default_field_instances() {
   t('Banner Image');
   t('Body');
   t('Business Sector content');
+  t('CTA Text');
   t('Display Listing Roll Over Text');
+  t('Image');
   t('Legal service content');
+  t('Link');
   t('Old path');
+  t('Open in New Tab?');
   t('Related Binformed');
+  t('Related Content');
   t('Related case studies');
   t('Related events');
   t('Related people');
