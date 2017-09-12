@@ -389,7 +389,8 @@ blockquote{
         min-height:80px;
     }
     .page-node-7947 &,
-    .page-node-7945 &{
+    .page-node-7945 &,
+    .page-node-11280 &{
         min-height:60px;
     }
     margin-bottom:1em;
@@ -1906,6 +1907,7 @@ body{
     margin-top:-60px;
     .page-node-7947 &,
     .page-node-7945 &,
+    .page-node-11280 &,
     .page-node-62 &,
     .page-node-44 &,
     .page-binformed &,
@@ -2658,6 +2660,7 @@ select{
         border-left:0 !important;
         border-right:0 !important; 
         padding:10px 0;
+        & > .field-collection-container > .field-name-field-related-content > .field-items > .field-item,
         & > .field > .field-items > .field-item{
             @extend .col-md-3;
             &:nth-child(4n+1){
@@ -3416,6 +3419,7 @@ h1.page-header,
     .page-node-62 &,
     .page-node-7947 &,
     .page-node-7945 &,
+    .page-node-11280 &,
     .page-binformed-legal-updates &,
     .page-binformed-guides-and-downloads &,
     .page-binformed-publications-archive &,
