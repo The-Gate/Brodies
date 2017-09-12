@@ -4,137 +4,150 @@
 <!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="">
-<!--<![endif]-->
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overview</title>
-<link href="boilerplate.css" rel="stylesheet" type="text/css">
-<link href="css/brodies-food-drink.css" rel="stylesheet" type="text/css">
-<!-- 
-To learn more about the conditional comments around the html tags at the top of the file:
-paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+    <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Overview</title>
+        <link href="boilerplate.css" rel="stylesheet" type="text/css">
+        <link href="css/brodies-food-drink.css" rel="stylesheet" type="text/css">
+        <!-- 
+        To learn more about the conditional comments around the html tags at the top of the file:
+        paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+        
+        Do the following if you're using your customized build of modernizr (http://www.modernizr.com/):
+        * insert the link to your js here
+        * remove the link below to the html5shiv
+        * add the "no-js" class to the html tags at the top
+        * you can also remove the link to respond.min.js if you included the MQ Polyfill in your modernizr build 
+        -->
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="respond.min.js"></script>
+        <script type="text/javascript">
+            function MM_jumpMenu(targ, selObj, restore) { //v3.0
+                eval(targ + ".location='" + selObj.options[selObj.selectedIndex].value + "'");
+                if (restore)
+                    selObj.selectedIndex = 0;
+            }
+        </script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-Do the following if you're using your customized build of modernizr (http://www.modernizr.com/):
-* insert the link to your js here
-* remove the link below to the html5shiv
-* add the "no-js" class to the html tags at the top
-* you can also remove the link to respond.min.js if you included the MQ Polyfill in your modernizr build 
--->
-<!--[if lt IE 9]>
-<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<script src="respond.min.js"></script>
-<script type="text/javascript">
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-2774438-9', 'auto');
+            ga('send', 'pageview');
 
-  ga('create', 'UA-2774438-9', 'auto');
-  ga('send', 'pageview');
+        </script>
 
-</script>
+    </head>
+    <body>
+        <div class="gridContainer clearfix">
+            <div id="header">
+                <div id="HeaderTop">
+                    <div id="headerTopButton"><a href="http://www.brodies.com" target="_blank">Main Brodies site</a></div>
+                    <div id="headerTopSocial"><span><a href="https://www.facebook.com/BrodiesLLP"><img src="images/social-fb-over.png" width="29" height="29" border="0" alt="Facebook"></a><a href="https://plus.google.com/+brodies/posts"><img src="images/social-gplus-over.png" width="29" height="29" alt="GooglePlus"></a><a href="http://www.linkedin.com/company/brodies-llp"><img src="images/social-li-over.png" width="29" height="29" alt="LinkedIn"></a><a href="https://twitter.com/BrodiesLLP"><img src="images/social-tw-over.png" width="29" height="29" alt="Twitter"></a><a href="https://www.youtube.com/BrodiesLLP"><img src="images/social-yt-over.png" width="29" height="29" alt="YouTube"></a></span></div>     
+                </div>
+                <div id="headerBanner"></div>
 
-</head>
-<body>
-<div class="gridContainer clearfix">
-    <div id="header">
-      <div id="HeaderTop">
-        <div id="headerTopButton"><a href="http://www.brodies.com" target="_blank">Main Brodies site</a></div>
-        <div id="headerTopSocial"><span><a href="https://www.facebook.com/BrodiesLLP"><img src="images/social-fb-over.png" width="29" height="29" border="0" alt="Facebook"></a><a href="https://plus.google.com/+brodies/posts"><img src="images/social-gplus-over.png" width="29" height="29" alt="GooglePlus"></a><a href="http://www.linkedin.com/company/brodies-llp"><img src="images/social-li-over.png" width="29" height="29" alt="LinkedIn"></a><a href="https://twitter.com/BrodiesLLP"><img src="images/social-tw-over.png" width="29" height="29" alt="Twitter"></a><a href="https://www.youtube.com/BrodiesLLP"><img src="images/social-yt-over.png" width="29" height="29" alt="YouTube"></a></span></div>     
-	 </div>
-      <div id="headerBanner"></div>
-      
-      <div id="headerMenu">
-        <div id="headerMenuRight"><a href="mailto:events@brodies.com?subject=Register my place at Brodies Food and Drink Conference 2017">Register</a><a href="speakers.html">Speakers</a><a href="index.html">Overview </a></div>
-      </div>
-    </div>
-    
-    <div id="pageContent">
-    <div id="mobileMenu">
-        <ul>
-           <li> <a href="Brodies_Rich Pickings.ics">Add to calendar</a></li>
-           <!--<li> <a href="programme.html">Conference programme</a></li>-->
-           <li> <a href="key-contacts.html">Key contacts</a></li>
-          <li>  <a href="http://www.perth-races.co.uk/location.asp">Location</a></li>
-          <li>  <a href="index.html">Overview</a></li>
-           <li> <a href="seminars.html">Seminars</a></li>
-          <li>  <a href="speakers.html">Speakers</a></li>
-        </ul>
-      </div>
-<div id="fullCol"><img src="images/overview.jpg" alt="Mushrooms" style="float:left; max-width:357px; height:auto; margin-right:20px;">
-    	<h1 class="home-h1">The Brodies Food & Drink Conference returns to Perth in November 2017.</h1>
-        <h3>Join us to hear from businesses within the sector on how they have managed change to drive success.</h3>
-      <p>Lawyers from departments across our firm will also be on hand throughout the conference to answer questions relevant to your business in one-to-one advice sessions.</p>
-  <p>We look forward to welcoming you in Perth.</p>
-        <p>Please contact <a href="mailto:chloe.richardson@brodies.com">Chloé Richardson</a> if you have any queries about the conference T: 0131 656 0054</p>
-        <!--<p><a href="register.html">Please register for our conference here</a>. We look forward to welcoming you in Perth.</p>
-		<p>Please contact <a href="mailto:chloe.richardson@brodies.com">Chloé Richardson</a> if you have any queries about the conference T: 0131 656 0054</p>-->
-      <!-- The event will look at various issues, from a legal and a business perspective, with a view to expanding the industry in Scotland and beyond. By exploring, discussing and debating important topics attendees will leave with fresh ideas and an open mind to new opportunities.</p>
-      <p><strong>The conference registration form has now closed. Please email Rachel Osborne directly to register your place <a href="mailto:rachel.osborne@brodies.com">rachel.osborne@brodies.com.</a></strong> -->
-    </div>
-    <div id="rightCol"><ul><li><a href="Brodies_Food_and_Drink.ics">Add to calendar</a></li>
-    <li><a href="programme.html">Conference programme</a></li><li><a href="key-contacts.html">Key contact</a></li><li><a href="http://www.perth-races.co.uk/location.asp" target="_blank">Location</a></li>
-      <li><a href="index.html">Overview</a></li>
-      <!--<li><a href="seminars.html">Seminars</a></li>-->
-      <li><a href="speakers.html">Speakers</a></li>
-      <li><a href="*"></a></li></ul></div> 
-    </div>
- 
-  	<div id="footer">
-    	<div id="footerRight">
-    		<h2>KEY LINKS</h2>
-    		<ul class="menu"><li class="leaf first"><a href="http://www.brodies.com/accessibility" title="Accessibility">Accessibility</a></li>
-				<li class="leaf"><a href="http://www.brodies.com/anti-bribary-statement" title="Anti-bribery statement">Anti-bribery statement</a></li>
-				<li class="leaf"><a href="http://www.brodies.com/cookie-information" title="Cookie information">Cookie information</a></li>
-				<li class="leaf"><a href="http://brodies.com/legal-statement" title="Legal and privacy policies">Legal and privacy policies</a></li>
-				<li class="leaf last"><a href="http://www.brodies.com/sitemap" title="">Sitemap</a></li>
-			</ul>
+                <div id="headerMenu">
+                    <div id="headerMenuRight"><a href="mailto:events@brodies.com?subject=Register my place at Brodies Food and Drink Conference 2017">Register</a><a href="speakers.html">Speakers</a><a href="index.html">Overview </a></div>
+                </div>
+            </div>
+
+            <div id="pageContent">
+                <div id="mobileMenu">
+                    <ul>
+                        <li> <a href="Brodies_Rich Pickings.ics">Add to calendar</a></li>
+                        <!--<li> <a href="programme.html">Conference programme</a></li>-->
+                        <li> <a href="key-contacts.html">Key contacts</a></li>
+                        <li>  <a href="http://www.perth-races.co.uk/location.asp">Location</a></li>
+                        <li>  <a href="index.html">Overview</a></li>
+                        <li> <a href="seminars.html">Seminars</a></li>
+                        <li>  <a href="speakers.html">Speakers</a></li>
+                    </ul>
+                </div>
+                <div id="fullCol"><img src="images/overview.jpg" alt="Mushrooms" style="float:left; max-width:357px; height:auto; margin-right:20px;">
+                    <h1 class="home-h1">The Brodies Food & Drink Conference returns to Perth in November 2017.</h1>
+                    <h3>Join us at our annual food and drink conference at Perth Racecourse.</h3>
+
+                    <p>This year's conference theme will be growth. We are witnessing a period of unprecedented prosperity in the Scottish food and drink sector, with exports valued at £1.2 billion for the first three months of 2017 - a year-on-year increase of £124 million. 2016 was a record year for food and drink and this trend shows every sign of continuing.</p><p>Our conference will provide an opportunity to hear from industry experts on how they have grown their businesses and plan further expansion, whether by achieving their own strategic objectives or through greater industry collaboration.</p>
+                    <p>Further speakers and the full conference programme will be announced in due course, but in the meantime we are delighted to confirm the following industry experts:</p>
+                    <ul>
+                        <li>James Withers, Chief Executive – Scotland Food & Drink</li>
+                        <li>Ton Christiaanse, UK Chief Executive – Brakes Group</li>
+                        <li>Dougal Sharp, Founder & Chief Brewer – Innis & Gunn</li>
+                        <li>Tony Lamb, Head of Food & Drink – Department for International Trade</li>
+                    </ul>
+
+                    <p>To register your free place at the conference please email <a href="mailto:events@brodies.com">events@brodies.com</a> or call T: 0131 656 0054 if you have any queries.</p>
+                    <p>We look forward to welcoming you to Perth.</p>
+                </div>
+                <div id="rightCol"><ul><li><a href="Brodies_Food_and_Drink.ics">Add to calendar</a></li>
+                        <li><a href="programme.html">Conference programme</a></li><li><a href="key-contacts.html">Key contacts</a></li><li><a href="http://www.perth-races.co.uk/location.asp" target="_blank">Location</a></li>
+                        <li><a href="index.html">Overview</a></li>
+                        <!--<li><a href="seminars.html">Seminars</a></li>-->
+                        <li><a href="speakers.html">Speakers</a></li>
+                        <li><a href="*"></a></li></ul></div> 
+            </div>
+
+            <div id="footer">
+                <div id="footerRight">
+                    <h2>KEY LINKS</h2>
+                    <ul class="menu"><li class="leaf first"><a href="http://www.brodies.com/accessibility" title="Accessibility">Accessibility</a></li>
+                        <li class="leaf"><a href="http://www.brodies.com/anti-bribary-statement" title="Anti-bribery statement">Anti-bribery statement</a></li>
+                        <li class="leaf"><a href="http://www.brodies.com/cookie-information" title="Cookie information">Cookie information</a></li>
+                        <li class="leaf"><a href="http://brodies.com/legal-statement" title="Legal and privacy policies">Legal and privacy policies</a></li>
+                        <li class="leaf last"><a href="http://www.brodies.com/sitemap" title="">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div id="footerLeft">
+                    <h2>USEFUL LINKS</h2>
+                    <div id="footerCol1">
+                        <ul>
+                            <li><a href="http://www.brodies.com/about">About</a></li>
+                            <li><a href="http://www.brodies.com/about/great-causes-charity-partner">Charity partner</a></li>
+                            <li><a href="http://www.brodies.com/about/positive-impact">Positive Impact</a></li>
+                            <li><a href="http://www.brodies.com/about/prime-initiative">PRIME initiative</a></li>
+                        </ul>
+                    </div>
+                    <div id="footerCol2">
+                        <ul>
+                            <li><a href="http://www.brodies.com/careers">Careers</a></li>
+                            <li><a href="http://www.brodies.com/careers/current-opportunities">Opportunities</a></li>
+                            <li><a href="http://www.brodies.com/careers/traineeship">Traineeships</a></li>
+                            <li><a href="http://www.brodies.com/careers/traineeship-faqs">Traineeship FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div id="footerCol3">
+                        <ul>
+                            <li><a href="http://www.brodies.com/people">People</a></li>
+                            <li><a href="http://www.brodies.com/knowledge">Knowledge bank</a></li>
+                            <li><a href="http://www.brodies.com/knowledge-bank/legal-updates">Legal updates</a></li>
+                            <li><a href="http://brodies.com/knowledge-bank/publications-archive">Publications archive</a></li>
+                        </ul>
+                    </div>
+                    <div id="footerCol4">
+                        <ul>
+                            <li><a href="http://www.brodies.com/contact/aberdeen/">Aberdeen</a></li>
+                            <li><a href="http://www.brodies.com/contact/brussels">Brussels</a></li>
+                            <li><a href="http://www.brodies.com/contact/edinburgh">Edinburgh</a></li>
+                            <li><a href="http://www.brodies.com/contact/glasgow">Glasgow</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="footerLeft">
-    		<h2>USEFUL LINKS</h2>
-	    	<div id="footerCol1">
-	    		<ul>
-	            	<li><a href="http://www.brodies.com/about">About</a></li>
-	            	<li><a href="http://www.brodies.com/about/great-causes-charity-partner">Charity partner</a></li>
-	            	<li><a href="http://www.brodies.com/about/positive-impact">Positive Impact</a></li>
-	            	<li><a href="http://www.brodies.com/about/prime-initiative">PRIME initiative</a></li>
-	            </ul>
-	        </div>
-	        <div id="footerCol2">
-	            <ul>
-	            	<li><a href="http://www.brodies.com/careers">Careers</a></li>
-	            	<li><a href="http://www.brodies.com/careers/current-opportunities">Opportunities</a></li>
-	            	<li><a href="http://www.brodies.com/careers/traineeship">Traineeships</a></li>
-	            	<li><a href="http://www.brodies.com/careers/traineeship-faqs">Traineeship FAQs</a></li>
-	            </ul>
-	        </div>
-	        <div id="footerCol3">
-	            <ul>
-	            	<li><a href="http://www.brodies.com/people">People</a></li>
-	            	<li><a href="http://www.brodies.com/knowledge">Knowledge bank</a></li>
-	            	<li><a href="http://www.brodies.com/knowledge-bank/legal-updates">Legal updates</a></li>
-	            	<li><a href="http://brodies.com/knowledge-bank/publications-archive">Publications archive</a></li>
-	            </ul>
-	        </div>
-	        <div id="footerCol4">
-	            <ul>
-	            	<li><a href="http://www.brodies.com/contact/aberdeen/">Aberdeen</a></li>
-	            	<li><a href="http://www.brodies.com/contact/brussels">Brussels</a></li>
-	            	<li><a href="http://www.brodies.com/contact/edinburgh">Edinburgh</a></li>
-	            	<li><a href="http://www.brodies.com/contact/glasgow">Glasgow</a></li>
-	            </ul>
-			</div>
-	    </div>
-	</div>
-</div>
-<p>&nbsp;</p>
-</body>
+        <p>&nbsp;</p>
+    </body>
 </html>
