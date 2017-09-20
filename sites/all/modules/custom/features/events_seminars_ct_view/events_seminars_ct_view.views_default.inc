@@ -207,8 +207,10 @@ function events_seminars_ct_view_views_default_views() {
     1 => 0,
     5 => 0,
     4 => 0,
+    6 => 0,
   );
   $handler->display->display_options['filters']['field_event_date_value_selective']['selective_display_field'] = 'field_event_date_1';
+  $handler->display->display_options['filters']['field_event_date_value_selective']['selective_display_sort'] = 'KASC';
   $handler->display->display_options['filters']['field_event_date_value_selective']['selective_items_limit'] = '100';
   /* Filter criterion: Where (field_event_location) (selective) */
   $handler->display->display_options['filters']['field_event_location_nid_selective']['id'] = 'field_event_location_nid_selective';
@@ -283,6 +285,10 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['title'] = 'Related seminars';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'is-table-row';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
