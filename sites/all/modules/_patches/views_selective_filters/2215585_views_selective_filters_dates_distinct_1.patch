@@ -1,0 +1,44 @@
+diff --git b/docroot/sites/all/modules/contrib/views_selective_filters/views_handler_filter_selective.inc a/docroot/sites/all/modules/contrib/views_selective_filters/views_handler_filter_selective.inc
+index c379436..71fe3d6 100644
+--- b/docroot/sites/all/modules/contrib/views_selective_filters/views_handler_filter_selective.inc
++++ a/docroot/sites/all/modules/contrib/views_selective_filters/views_handler_filter_selective.inc
+@@ -220,11 +220,15 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
+     $ui_name = $this->options['ui_name'];
+     $signature = $this->GetSignature();
+ 
+-    // Prevent same filters from being recalculated.
+-    if (empty(self::$results[$signature])) {
+-      // We don't want a badly configured selective filter
+-      // to return thousands of possible values.
+-      $max_items = 100;
++     if (empty(self::$results[$signature])) {
++       // We don't want a badly configured selective filter
++       // to return thousands of possible values.
++       // if this is a date field, it needs to not limit the number of results.
++       $base_field_info = field_info_field($base_field);
++       if ($base_field_info['type'] == "datestamp") {
++         $max_items = 1000;
++       } else {
++         $max_items = 100;
++       }
+ 
+       // Clone the view (so it works while editting) and get all results.
+       $view_copy = $this->view->clone_view();
+@@ -389,6 +393,17 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
+         drupal_set_message(t('Selective filter "@field" has limited the amount of total results. Please, review you query configuration.', array('@field' => $ui_name)), 'warning');
+       }
+ 
++      // detect if this is a date field and do a distinct on the values.
++      if ($base_field == "field_content_date") {
++        $oids = array_unique($oids);
++        $newoids = array();
++        foreach ($oids as $key => $oid) {
++          $year = date("Y",$key);
++          $newoids[$year] = $year;
++        }
++        $oids = $newoids;
++      }
++
+       self::$results[$signature] = $oids;
+       $view_copy->destroy();
+     }
