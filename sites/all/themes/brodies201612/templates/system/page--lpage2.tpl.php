@@ -280,7 +280,7 @@
                     ////// related content
                     if (isset($node->field_related_content[LANGUAGE_NONE][0])):
                       echo('<div class="col-md-12 clearfix">');
-                      echo('<h2 class="block-title">Related content</h2>');
+                      echo('<h2 class="block-title">Guides and Downloads</h2>');
                       $relatedContentData = entity_load('node', array($node->nid));
                       $node_data = $relatedContentData[$node->nid];
                       $wrapper = entity_metadata_wrapper('node', $node_data);
