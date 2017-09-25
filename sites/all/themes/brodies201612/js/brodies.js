@@ -152,6 +152,10 @@
             }
             $('#edit-field-people-partner-value-wrapper .form-control').removeClass('form-control');
 
+            // move addtoany to end of body copy
+            if ($('#block-addtoany-addtoany-button').length > 0) {
+                $('.field-name-body').after($('#block-addtoany-addtoany-button'));
+            }
             // blockquote slick carousel
             var blockQuoteCount = $('.field-name-body blockquote').length;
             if (blockQuoteCount > 0) {
