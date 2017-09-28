@@ -167,6 +167,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_as_completed',
+    'global_block_settings' => 1,
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -212,6 +213,60 @@ function ct_shared_fields_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
+  );
+
+  // Exported field_base: 'field_block_wrapper'.
+  $field_bases['field_block_wrapper'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_block_wrapper',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
+  // Exported field_base: 'field_columns_per_row'.
+  $field_bases['field_columns_per_row'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_columns_per_row',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        2 => 2,
+        3 => 3,
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_cta_imge'.
@@ -931,6 +986,33 @@ function ct_shared_fields_field_default_field_bases() {
     'type' => 'field_collection',
   );
 
+  // Exported field_base: 'field_is_webform'.
+  $field_bases['field_is_webform'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_is_webform',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_l_area'.
   $field_bases['field_l_area'] = array(
     'active' => 1,
@@ -1072,6 +1154,22 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'lupdate',
   );
 
+  // Exported field_base: 'field_layout_blocks'.
+  $field_bases['field_layout_blocks'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_layout_blocks',
+    'global_block_settings' => 1,
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'paragraphs',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'paragraphs',
+  );
+
   // Exported field_base: 'field_lp_3rd_content'.
   $field_bases['field_lp_3rd_content'] = array(
     'active' => 1,
@@ -1180,6 +1278,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_blk_1',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -1431,6 +1530,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_contact_l_img',
+    'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -1439,7 +1539,7 @@ function ct_shared_fields_field_default_field_bases() {
     'locked' => 0,
     'module' => 'image',
     'settings' => array(
-      'default_image' => NULL,
+      'default_image' => 0,
       'description_field' => 0,
       'list_default' => 1,
       'list_field' => 0,
@@ -3649,6 +3749,33 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'people',
   );
 
+  // Exported field_base: 'field_person_wrapper'.
+  $field_bases['field_person_wrapper'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_person_wrapper',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_postscript'.
   $field_bases['field_postscript'] = array(
     'active' => 1,
@@ -3673,6 +3800,33 @@ function ct_shared_fields_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text_long',
     'type_name' => 'webform',
+  );
+
+  // Exported field_base: 'field_quote_wrapper'.
+  $field_bases['field_quote_wrapper'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_quote_wrapper',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
   );
 
   // Exported field_base: 'field_related_binformed'.
@@ -3740,7 +3894,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_related_content',
-    'global_block_settings' => 2,
+    'global_block_settings' => 1,
     'indexes' => array(
       'revision_id' => array(
         0 => 'revision_id',
@@ -3866,7 +4020,11 @@ function ct_shared_fields_field_default_field_bases() {
         'cs' => 0,
         'download' => 0,
         'event' => 0,
+        'graduate_content' => 0,
+        'graduate_homepage' => 0,
         'hidden' => 0,
+        'homepage' => 0,
+        'landing_page' => 0,
         'larea' => 0,
         'location' => 0,
         'lpage' => 0,
