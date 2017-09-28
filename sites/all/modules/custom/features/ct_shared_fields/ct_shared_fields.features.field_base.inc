@@ -214,6 +214,28 @@ function ct_shared_fields_field_default_field_bases() {
     'type' => 'image',
   );
 
+  // Exported field_base: 'field_block_reference'.
+  $field_bases['field_block_reference'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_block_reference',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'moddelta' => array(
+        0 => 'moddelta',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'blockreference',
+    'settings' => array(
+      'referenceable_modules' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'blockreference',
+  );
+
   // Exported field_base: 'field_cta_imge'.
   $field_bases['field_cta_imge'] = array(
     'active' => 1,
@@ -1072,6 +1094,22 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'lupdate',
   );
 
+  // Exported field_base: 'field_layout_blocks'.
+  $field_bases['field_layout_blocks'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_layout_blocks',
+    'global_block_settings' => 1,
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'paragraphs',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'paragraphs',
+  );
+
   // Exported field_base: 'field_lp_3rd_content'.
   $field_bases['field_lp_3rd_content'] = array(
     'active' => 1,
@@ -1180,6 +1218,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_lp_blk_1',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -3675,6 +3714,33 @@ function ct_shared_fields_field_default_field_bases() {
     'type_name' => 'webform',
   );
 
+  // Exported field_base: 'field_quote_wrapper'.
+  $field_bases['field_quote_wrapper'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_quote_wrapper',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'hide_initial_item' => 0,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_related_binformed'.
   $field_bases['field_related_binformed'] = array(
     'active' => 1,
@@ -3740,7 +3806,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_related_content',
-    'global_block_settings' => 2,
+    'global_block_settings' => 1,
     'indexes' => array(
       'revision_id' => array(
         0 => 'revision_id',
