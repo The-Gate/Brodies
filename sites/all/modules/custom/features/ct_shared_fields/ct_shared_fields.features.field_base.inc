@@ -1136,6 +1136,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_l_left',
+    'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
         0 => 'format',

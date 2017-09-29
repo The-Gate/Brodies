@@ -428,6 +428,183 @@ Select to create a button to open a webform on this page.',
     ),
   );
 
+  // Exported field_instance: 'node-landing_page-field_banner_image'.
+  $field_instances['node-landing_page-field_banner_image'] = array(
+    'bundle' => 'landing_page',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => 'banner_image',
+        ),
+        'type' => 'image',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_banner_image',
+    'label' => 'Banner Image',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'landing-page',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-landing_page-field_block_reference'.
+  $field_instances['node-landing_page-field_block_reference'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'blockreference',
+        'settings' => array(
+          'show_empty_blocks' => FALSE,
+        ),
+        'type' => 'blockreference_without_title',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_block_reference',
+    'label' => 'Block Reference',
+    'required' => 0,
+    'settings' => array(
+      'blockreference_modules' => array(
+        'addtoany' => 0,
+        'aggregator' => 0,
+        'block' => 0,
+        'brSeminarBooking' => 0,
+        'cck_blocks' => 0,
+        'comment' => 0,
+        'diff' => 0,
+        'gmap_location' => 0,
+        'menu' => 0,
+        'menu_block' => 0,
+        'node' => 0,
+        'site_map' => 0,
+        'system' => 0,
+        'user' => 0,
+        'views' => 0,
+        'webform' => 0,
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-landing_page-field_cta_link'.
+  $field_instances['node-landing_page-field_cta_link'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_cta_link',
+    'label' => 'Content Link',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-landing_page-field_cta_text'.
   $field_instances['node-landing_page-field_cta_text'] = array(
     'bundle' => 'landing_page',
@@ -442,11 +619,11 @@ Select to create a button to open a webform on this page.',
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -488,13 +665,13 @@ Select to create a button to open a webform on this page.',
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'paragraphs',
         'settings' => array(
           'view_mode' => 'full',
         ),
         'type' => 'paragraphs_view',
-        'weight' => 2,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -537,7 +714,53 @@ Select to create a button to open a webform on this page.',
       'module' => 'paragraphs',
       'settings' => array(),
       'type' => 'paragraphs_embed',
-      'weight' => 2,
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-landing_page-field_lp_cta_l_title'.
+  $field_instances['node-landing_page-field_lp_cta_l_title'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lp_cta_l_title',
+    'label' => 'Banner Sub Title',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
     ),
   );
 
@@ -578,189 +801,6 @@ Select to create a button to open a webform on this page.',
       ),
       'type' => 'text_textfield',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'paragraphs_item-hero_banner-field_banner_image'.
-  $field_instances['paragraphs_item-hero_banner-field_banner_image'] = array(
-    'bundle' => 'hero_banner',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 0,
-      ),
-      'paragraphs_editor_preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'paragraphs_item',
-    'field_name' => 'field_banner_image',
-    'label' => 'Banner Image',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'landing-page',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'media',
-      'settings' => array(
-        'allowed_schemes' => array(
-          'public' => 'public',
-        ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
-          'upload' => 0,
-        ),
-      ),
-      'type' => 'media_generic',
-      'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'paragraphs_item-hero_banner-field_cta_link'.
-  $field_instances['paragraphs_item-hero_banner-field_cta_link'] = array(
-    'bundle' => 'hero_banner',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'if text is added here, it will be used to create a link to jump to the bottom of the hero banner. If empty, no link will be created.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 3,
-      ),
-      'paragraphs_editor_preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'paragraphs_item',
-    'field_name' => 'field_cta_link',
-    'label' => 'Content Link',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'paragraphs_item-hero_banner-field_cta_text'.
-  $field_instances['paragraphs_item-hero_banner-field_cta_text'] = array(
-    'bundle' => 'hero_banner',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 1,
-      ),
-      'paragraphs_editor_preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'paragraphs_item',
-    'field_name' => 'field_cta_text',
-    'label' => 'Title',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'paragraphs_item-hero_banner-field_lp_cta_l_title'.
-  $field_instances['paragraphs_item-hero_banner-field_lp_cta_l_title'] = array(
-    'bundle' => 'hero_banner',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 2,
-      ),
-      'paragraphs_editor_preview' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'paragraphs_item',
-    'field_name' => 'field_lp_cta_l_title',
-    'label' => 'Sub Title',
-    'required' => 0,
-    'settings' => array(
-      'text_processing' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 6,
     ),
   );
 
@@ -984,10 +1024,10 @@ Select to create a button to open a webform on this page.',
     'bundle' => 'video_block',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'youtube url',
+    'description' => 'youtube embed url. Should be in the format of: http://www.youtube.com/embed/XXXXXXXX',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1022,6 +1062,8 @@ Select to create a button to open a webform on this page.',
   // Translatables
   // Included for use with string extractors like potx.
   t('Banner Image');
+  t('Banner Sub Title');
+  t('Block Reference');
   t('Block Wrapper');
   t('Columns per row');
   t('Contact image 1');
@@ -1044,12 +1086,10 @@ Select to create a button to open a webform on this page.');
   t('Person Wrapper');
   t('Quote');
   t('Quote Wrapper');
-  t('Sub Title');
   t('Title');
   t('Video url');
   t('Webform item reference');
-  t('if text is added here, it will be used to create a link to jump to the bottom of the hero banner. If empty, no link will be created.');
-  t('youtube url');
+  t('youtube embed url. Should be in the format of: http://www.youtube.com/embed/XXXXXXXX');
 
   return $field_instances;
 }

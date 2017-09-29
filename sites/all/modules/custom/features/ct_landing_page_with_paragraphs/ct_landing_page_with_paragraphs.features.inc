@@ -32,11 +32,6 @@ function ct_landing_page_with_paragraphs_paragraphs_info() {
       'bundle' => 'header_title',
       'locked' => '1',
     ),
-    'hero_banner' => array(
-      'name' => 'Hero Banner',
-      'bundle' => 'hero_banner',
-      'locked' => '1',
-    ),
     'multi_column' => array(
       'name' => 'Multi-Column',
       'bundle' => 'multi_column',
