@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation for a single paragraph item.
@@ -26,6 +25,29 @@
  * @see template_process()
  */
 ?>
-<?php if (isset($variables['field_video_url'][0]['safe_value'])): ?>
-  <iframe class="youtubeframe" width="375" height="195" src="<?php echo $variables['field_video_url'][0]['safe_value']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-<?php endif; ?>
+<?php
+// get the number of items per row
+$col_count = $content['field_columns_per_row']['#items'][0]['value'];
+switch ($col_count) {
+  case '2':
+    $col_class = "col-sm-6";
+    break;
+  case '3':
+    $col_class = "col-sm-4";
+    break;
+}
+?>
+<div class="multiblock">
+    <?php
+    $total_blocks = count($content['field_block_wrapper']['#items']);
+    $i = 0;
+    while ($i < $total_blocks) {
+      echo '<div class="' . $col_class . '">';
+      echo render($content['field_block_wrapper'][$i]);
+      echo '<div class="clearfix"></div>';
+      echo '</div>';
+      $i++;
+    }
+    ?>
+</div>
+<div class="clearfix"></div>

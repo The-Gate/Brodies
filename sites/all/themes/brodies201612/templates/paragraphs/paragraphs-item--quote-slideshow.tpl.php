@@ -26,6 +26,9 @@
  * @see template_process()
  */
 ?>
-<?php if (isset($variables['field_video_url'][0]['safe_value'])): ?>
-  <iframe class="youtubeframe" width="375" height="195" src="<?php echo $variables['field_video_url'][0]['safe_value']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
-<?php endif; ?>
+<div class="col-md-10 col-md-offset-1 cta-quote-slick slick-quote <?php print $classes; ?>"<?php print $attributes; ?>>
+  <div class="content"<?php print $content_attributes; ?>>
+    <?php print render($content); ?>
+  </div>
+</div>
+<div class="clearfix"></div>

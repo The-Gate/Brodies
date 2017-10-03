@@ -18,7 +18,7 @@ function ct_landing_page_with_paragraphs_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
@@ -77,7 +77,7 @@ function ct_landing_page_with_paragraphs_field_default_field_instances() {
 If \'is webform\' IS selected, then add the text to show in the link to open the webform',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -109,10 +109,11 @@ If \'is webform\' IS selected, then add the text to show in the link to open the
     'bundle' => 'field_block_wrapper',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'If you have a webfrm on this page and want THIS link to preselect an input element, please add the form input element id here.',
+    'description' => 'If \'is webform\' is NOT selected, this is the text for the link<br>
+If \'is webform\' IS selected, and you want THIS link to preselect an input element, please add the form input element id here.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -121,7 +122,7 @@ If \'is webform\' IS selected, then add the text to show in the link to open the
     ),
     'entity_type' => 'field_collection_item',
     'field_name' => 'field_cta_text',
-    'label' => 'Webform item reference',
+    'label' => 'Link Text / Item Reference',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -154,7 +155,7 @@ If \'is webform\' IS selected, then add the text to show in the link to open the
 Select to create a button to open a webform on this page.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -188,7 +189,7 @@ Select to create a button to open a webform on this page.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -226,10 +227,10 @@ Select to create a button to open a webform on this page.',
     'default_value_function' => '',
     'default_value_php' => '',
     'deleted' => 0,
-    'description' => 'If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' this will have no effect.',
+    'description' => 'If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' or it is a webform link, this will have no effect.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
@@ -247,7 +248,7 @@ Select to create a button to open a webform on this page.',
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'display_label' => 0,
+        'display_label' => 1,
       ),
       'type' => 'options_onoff',
       'weight' => 8,
@@ -772,7 +773,7 @@ Select to create a button to open a webform on this page.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -900,7 +901,7 @@ Select to create a button to open a webform on this page.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'field_collection',
         'settings' => array(
           'add' => 'Add',
@@ -944,7 +945,7 @@ Select to create a button to open a webform on this page.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'field_collection',
         'settings' => array(
           'add' => 'Add',
@@ -987,7 +988,7 @@ Select to create a button to open a webform on this page.',
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -1073,8 +1074,9 @@ Select to create a button to open a webform on this page.',
   t('Header CTA Text');
   t('If \'is webform\' is NOT selected, add the full link to another page / site / download [including the http:// part]<br>
 If \'is webform\' IS selected, then add the text to show in the link to open the webform');
-  t('If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' this will have no effect.');
-  t('If you have a webfrm on this page and want THIS link to preselect an input element, please add the form input element id here.');
+  t('If \'is webform\' is NOT selected, this is the text for the link<br>
+If \'is webform\' IS selected, and you want THIS link to preselect an input element, please add the form input element id here.');
+  t('If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' or it is a webform link, this will have no effect.');
   t('Image');
   t('Is Webform');
   t('Key Contacts');
@@ -1082,13 +1084,13 @@ If \'is webform\' IS selected, then add the text to show in the link to open the
   t('Leave blank to add an external link in the \'Link\' field<br>
 Select to create a button to open a webform on this page.');
   t('Link');
+  t('Link Text / Item Reference');
   t('Open in New Tab?');
   t('Person Wrapper');
   t('Quote');
   t('Quote Wrapper');
   t('Title');
   t('Video url');
-  t('Webform item reference');
   t('youtube embed url. Should be in the format of: http://www.youtube.com/embed/XXXXXXXX');
 
   return $field_instances;

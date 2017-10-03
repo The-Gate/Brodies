@@ -73,63 +73,19 @@
  * @ingroup templates
  */
 ?>
-<div class="navbar-wrapper">
-    <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
-        <div class="<?php print $container_class; ?>">
-            <div class="navbar-header">
-                <?php if ($logo): ?>
-                  <div class="logo-wrapper-mobile">
-                      <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                          <img src="/sites/all/themes/brodies201612/logo-blue.png" alt="<?php print t('Home'); ?>" />
-                      </a>
-                  </div>
-                <?php endif; ?>
-
-                <?php if (!empty($site_name)): ?>
-                  <a class="name navbar-brand" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"><?php print $site_name; ?></a>
-                <?php endif; ?>
-
-                <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                      <div class="menu-block"><?php print t('Menu'); ?></div>
-                      <div class="menu-block"><span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span></div>
-                  </button>
-                <?php endif; ?>
-            </div>
-
-            <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-              <div class="navbar-collapse collapse" id="navbar-collapse">
-                  <nav role="navigation">
-                      <?php if (!empty($primary_nav)): ?>
-                        <?php print render($primary_nav); ?>
-                      <?php endif; ?>
-                      <?php if (!empty($secondary_nav)): ?>
-                        <?php print render($secondary_nav); ?>
-                      <?php endif; ?>
-                      <?php if (!empty($page['navigation'])): ?>
-                        <?php print render($page['navigation']); ?>
-                      <?php endif; ?>
-                  </nav>
-              </div>
-            <?php endif; ?>
-
-        </div>
-    </header>
-</div>
-<?php if (!empty($page['navigation_bg'])): ?>
-  <?php
+<?php
+if (!empty($page['navigation_bg'])):
   // remove the header slideshow for this content type;
   if (!empty($page['navigation_bg']['views_slideshow-block_1'])) {
     unset($page['navigation_bg']['views_slideshow-block_1']);
   }
   if (isset($variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_text'])) {
-    $page['navigation_bg']['field_cta_text'] = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_text'];
+    //$page['navigation_bg']['field_cta_text'] = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_text'];
+    $header_cta = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_text'];
     unset($page['content']['system_main']['nodes'][$node->nid]['field_cta_text']);
   }
   if (isset($variables['page']['content']['system_main']['nodes'][$node->nid]['field_banner_image'])) {
-    $page['navigation_bg']['field_banner_image'] = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_banner_image'];
+    $background_img = image_style_url($variables['page']['content']['system_main']['nodes'][$node->nid]['field_banner_image'][0]['#image_style'], $variables['page']['content']['system_main']['nodes'][$node->nid]['field_banner_image'][0]['#item']['uri']);
     unset($page['content']['system_main']['nodes'][$node->nid]['field_banner_image']);
   }
   if (isset($variables['page']['content']['system_main']['nodes'][$node->nid]['field_lp_cta_l_title'])) {
@@ -141,37 +97,92 @@
     unset($page['content']['system_main']['nodes'][$node->nid]['field_lp_cta_l_title']);
   }
   if (isset($variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_link'])) {
-    $page['navigation_bg']['field_cta_link'] = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_link'];
+    $cta_link = $variables['page']['content']['system_main']['nodes'][$node->nid]['field_cta_link'];
     unset($page['content']['system_main']['nodes'][$node->nid]['field_cta_link']);
   }
-  ?>
-  <div class="navbar-background">
-      <?php
-      if ($title) {
-        print '<h2>' . $title . '</h2>';
-      }
-      ?>
-      <?php print render($page['navigation_bg']); ?>
-      <?php if ($logo): ?>
-        <div class="logo-wrapper-desktop-container">
-            <div class="logo-wrapper-desktop">
-                <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                    <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-                </a>
+endif;
+?>
+<div class="navbar-wrapper">
+    <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
+        <div class="<?php print $container_class; ?>">
+            <div class="navbar-header">
+                <?php if (isset($header_cta['#items'][0]['safe_value'])): ?>
+                  <div class="header-cta"><p><?php echo $header_cta['#items'][0]['safe_value']; ?></p></div>
+                <?php endif; ?>
+                <div class="search_block"><a href="/search"><i class="fa fa-search" aria-hidden="true"></i></a></div>
+                <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                      <div class="menu-block"><?php print t('Menu'); ?></div>
+                      <div class="menu-block"><span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span></div>
+                  </button>
+                <?php endif; ?>
             </div>
-        </div>
-      <?php endif; ?>
+            <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
+              <div class="navbar-collapse collapse" id="navbar-collapse">
+                  <nav role="navigation">
+                      <?php if (!empty($primary_nav)): ?>
+                        <?php print render($primary_nav); ?>
+                      <?php endif; ?>
+                      <?php if (!empty($secondary_nav)): ?>
+                        <?php print render($secondary_nav); ?>
+                      <?php endif; ?>
+                      <?php
+                      if (!empty($page['navigation'])):
+                        if (isset($page['navigation']['views_search-block'])) {
+                          unset($page['navigation']['views_search-block']);
+                        }
+                        if (isset($page['navigation']['views_-exp-search-page'])) {
+                          unset($page['navigation']['views_-exp-search-page']);
+                        }
+                        ?>
+                        <?php print render($page['navigation']); ?>
+                    </nav>
+                  <?php endif; ?>
+              </div>
+            <?php endif; ?>
 
+        </div>
+    </header>
+</div>
+<?php if (!empty($page['navigation_bg'])): ?>
+  <div class="navbar-background" style="background:url('<?php echo $background_img; ?>');">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12">
+                  <?php if ($logo): ?>
+                    <a class="logo navbar-btn" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+                        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                    </a>
+                  <?php endif;
+                  ?>
+                  <?php
+                  if ($title) {
+                    print '<h1>' . $title . '</h1>';
+                  }
+                  ?>
+                  <?php print render($page['navigation_bg']); ?>
+                  <div class="header-cta-link"><?php
+                      if (isset($cta_link['#items'][0]['safe_value'])):
+                        ?><a href="#main-content"><?php
+                            echo $cta_link['#items'][0]['safe_value'];
+                            ?></a><?php endif;
+                          ?><i class="fa fa-angle-double-down" aria-hidden="true"></i></div>
+              </div>
+          </div>
+      </div>
   </div>
 <?php endif; ?>
+<a name="main-content"></a>
 <div class="main-container <?php print $container_class; ?>">
+    <?php
+    // remove subnavigation bar;
+    if (!empty($page['header']['menu_block_3'])) {
+      unset($page['header']['menu_block_3']);
+    }
+    ?>
     <?php if (!empty($page['header'])): ?>
-      <?php
-      // remove subnavigation bar;
-      if (!empty($page['header']['menu_block_3'])) {
-        unset($page['header']['menu_block_3']);
-      }
-      ?>
       <header role="banner" id="page-header">
           <?php print render($page['header']); ?>
       </header> <!-- /#page-header -->

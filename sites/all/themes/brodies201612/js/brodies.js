@@ -160,6 +160,10 @@
             var blockQuoteCount = $('.field-name-body blockquote').length;
             if (blockQuoteCount > 0) {
                 $('.field-name-body blockquote').each(function () {
+                    var text = $(this).text();
+                    text = text.replace("<p>", "");
+                    text = text.replace("</p>", "");
+                    $(this).text(text);
                     $(this).prepend('<img src="/sites/all/themes/brodies201612/images/quote-open.png" class="quote-open">').append('<img src="/sites/all/themes/brodies201612/images/quote-close.png" class="quote-close">');
                     $(this)
                             .nextUntil('blockquote', 'p')
@@ -170,7 +174,6 @@
                             .wrapAll('<div class="quote-slide"></div>');
                 });
                 if (blockQuoteCount > 1) {
-
                     $('.quote-slide').wrapAll('<div class="slick-quote col-md-10 col-md-offset-1"></div>');
                     $('.slick-quote').after('<div class="clearfix"></div>')
                     $('.slick-quote').slick({
@@ -178,8 +181,6 @@
                     });
                 }
             }
-
-
 
             if ($('.field-name-field-graduate-slideshow .field-item .grad-slide').length > 1) {
                 $('.field-name-field-graduate-slideshow .field-item .grad-slide').wrapAll('<div class="slick-grad mod-quote"></div>');
@@ -210,6 +211,12 @@
                     infinite: true,
                     cssEase: 'ease-in-out'
 
+                });
+            }
+
+            if ($('.cta-quote-slick').length > 0) {
+                $('.cta-quote-slick .field-items').slick({
+                    adaptiveHeight: true
                 });
             }
 
