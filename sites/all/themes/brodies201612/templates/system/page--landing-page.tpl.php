@@ -106,6 +106,12 @@ endif;
     <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
         <div class="<?php print $container_class; ?>">
             <div class="navbar-header">
+                <?php if ($logo): ?>
+                  <a class="logo navbar-btn" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+                      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+                  </a>
+                <?php endif;
+                ?>
                 <?php if (isset($header_cta['#items'][0]['safe_value'])): ?>
                   <div class="header-cta"><p><?php echo $header_cta['#items'][0]['safe_value']; ?></p></div>
                 <?php endif; ?>
@@ -151,12 +157,6 @@ endif;
       <div class="container">
           <div class="row">
               <div class="col-sm-12">
-                  <?php if ($logo): ?>
-                    <a class="logo navbar-btn" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-                        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-                    </a>
-                  <?php endif;
-                  ?>
                   <?php
                   if ($title) {
                     print '<h1>' . $title . '</h1>';

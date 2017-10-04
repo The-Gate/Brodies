@@ -169,7 +169,7 @@ body{
 .search_block{
     position:absolute;
     right:62px;
-    margin-top:45px;
+    top:45px;
     .fa-search{
         font-size:$font-size-22;
         color: #fff;
@@ -181,7 +181,7 @@ body{
         display: block;
         position:absolute;
         right:100px;
-        margin-top:48px;
+        top:48px;
         color: #fff;
         text-align:right;
     }
