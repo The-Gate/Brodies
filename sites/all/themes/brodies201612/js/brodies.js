@@ -115,6 +115,22 @@
                 return false;
             });
 
+
+            // webform pop up
+            $('.wf').click(function (e) {
+                e.preventDefault();
+                var thisFormEl = $(this).data('inputElement');
+                if (!(thisFormEl == undefined)) {
+                    $('#webform #' +thisFormEl).attr('checked', 'checked');
+                }
+                var content = $('#webform').html();
+                if (!(content == undefined)) {
+                    init_popup($('#webform').html());
+                } else {
+                    init_popup('<p>Sorry, there has been an error</p>');
+                }
+            });
+
             if ($('.field-name-field-related-people, .field-name-field-event-speakers').length > 0) {
                 $('.field-name-field-related-people .field-name-field-people-email .field-item, .field-name-field-event-speakers .field-name-field-people-email .field-item').each(function () {
                     var emailLink = '<div class="read-more-block"><a href="mailto:' + $(this).text() + '">Email</a></div>';

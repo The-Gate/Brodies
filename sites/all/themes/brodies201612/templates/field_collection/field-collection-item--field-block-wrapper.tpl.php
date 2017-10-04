@@ -61,7 +61,7 @@ if (isset($link)) {
     $link_output .= '<a href="' . $link . '"'.$new_tab.'>' . $linktext . '</a>';
   }
   else {
-    $link_output .= '<a class="openpopup ' . $linktext . '">' . $link . '</a>';
+    $link_output .= '<a href="#" class="wf" data-input-element="' . $linktext . '">' . $link . '</a>';
   }
   $link_output .="</div>";
 }

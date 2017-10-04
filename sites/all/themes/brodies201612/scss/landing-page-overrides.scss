@@ -466,5 +466,19 @@ body:not(.admin-menu){
         font-family: $font-family-serif;
         z-index:50;
     }
+}
 
+
+////////////////////////////////////////////////
+///// WEBFORM
+////////////////////////////////////////////////
+.webform-block{
+    .intro{
+        text-align: center;
+    }
+    a{
+        color: #fff;
+        background: $colour-orange-01;
+        padding:5px 15px;
+    }
 }
