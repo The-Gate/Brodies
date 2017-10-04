@@ -234,8 +234,25 @@ endif;
 <?php endif; ?>
 <?php if (!empty($page['footer'])): ?>
   <div class="footer-wrapper">
-      <footer class="footer <?php print $container_class; ?>">
-          <?php print render($page['footer']); ?>
+      <footer class="footer">
+
+          <div class="footer-blue">
+              <?php
+              if (isset($page['navigation']['block_38'])) {
+                print render($page['navigation']['block_38']);
+              }
+              if (!empty($page['footer']['block_8'])) {
+                print render($page['footer']['block_8']);
+              }
+              ?>
+          </div>
+          <div class="footer-clear">
+              <?php
+              if (!empty($page['footer']['block_1'])) {
+                print render($page['footer']['block_1']);
+              }
+              ?>
+          </div>
       </footer>
   </div>
 <?php endif; ?>

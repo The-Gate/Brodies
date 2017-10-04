@@ -24,9 +24,8 @@ function ct_landing_page_with_paragraphs_field_group_info() {
     'weight' => '2',
     'children' => array(
       0 => 'field_banner_image',
-      1 => 'field_l_left',
-      2 => 'field_lp_cta_l_title',
-      3 => 'field_cta_link',
+      1 => 'field_lp_cta_l_title',
+      2 => 'field_cta_link',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

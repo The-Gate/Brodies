@@ -277,4 +277,4 @@ $conf['locale_custom_strings_en'][''] = array(
   'Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>' => 'Sorry, unrecognized e-mail or password. <a href="@password">Have you forgotten your password?</a>',
 );
 
-$conf['theme_debug'] = TRUE;
+#$conf['theme_debug'] = TRUE;

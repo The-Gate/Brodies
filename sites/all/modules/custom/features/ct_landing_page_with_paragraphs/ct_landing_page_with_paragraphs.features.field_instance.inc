@@ -517,7 +517,7 @@ Select to create a button to open a webform on this page.',
           'show_empty_blocks' => FALSE,
         ),
         'type' => 'blockreference_without_title',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -556,7 +556,7 @@ Select to create a button to open a webform on this page.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 4,
     ),
   );
 
@@ -578,7 +578,7 @@ Select to create a button to open a webform on this page.',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -652,6 +652,51 @@ Select to create a button to open a webform on this page.',
     ),
   );
 
+  // Exported field_instance: 'node-landing_page-field_l_left'.
+  $field_instances['node-landing_page-field_l_left'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please add the webform default item option id',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_l_left',
+    'label' => 'Item Reference',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'node-landing_page-field_layout_blocks'.
   $field_instances['node-landing_page-field_layout_blocks'] = array(
     'bundle' => 'landing_page',
@@ -672,7 +717,7 @@ Select to create a button to open a webform on this page.',
           'view_mode' => 'full',
         ),
         'type' => 'paragraphs_view',
-        'weight' => 5,
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -715,7 +760,7 @@ Select to create a button to open a webform on this page.',
       'module' => 'paragraphs',
       'settings' => array(),
       'type' => 'paragraphs_embed',
-      'weight' => 6,
+      'weight' => 3,
     ),
   );
 
@@ -737,7 +782,7 @@ Select to create a button to open a webform on this page.',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_plain',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1079,6 +1124,7 @@ If \'is webform\' IS selected, and you want THIS link to preselect an input elem
   t('If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' or it is a webform link, this will have no effect.');
   t('Image');
   t('Is Webform');
+  t('Item Reference');
   t('Key Contacts');
   t('Layout Blocks');
   t('Leave blank to add an external link in the \'Link\' field<br>
@@ -1087,6 +1133,7 @@ Select to create a button to open a webform on this page.');
   t('Link Text / Item Reference');
   t('Open in New Tab?');
   t('Person Wrapper');
+  t('Please add the webform default item option id');
   t('Quote');
   t('Quote Wrapper');
   t('Title');
