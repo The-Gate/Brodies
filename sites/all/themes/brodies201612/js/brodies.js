@@ -121,7 +121,9 @@
                 e.preventDefault();
                 var thisFormEl = $(this).data('inputElement');
                 if (!(thisFormEl == undefined)) {
-                    $('#webform #' +thisFormEl).attr('checked', 'checked');
+                    var radiogroup = $('#webform #' + thisFormEl).attr('name');
+                    $('#webform input[name="'+ radiogroup+'"]').attr('checked', false);
+                    $('#webform #' + thisFormEl).attr('checked', 'checked');
                 }
                 var content = $('#webform').html();
                 if (!(content == undefined)) {
