@@ -345,6 +345,10 @@ body:not(.admin-menu){
     }
 }
 .multiblock{
+    .col-sm-6,
+    .col-sm-4{
+        margin-bottom:20px;
+    }
     @media #{$tablet}{
         .col-sm-6,
         .col-sm-4{
@@ -408,6 +412,10 @@ body:not(.admin-menu){
             font-family: $font-family-serif;
             padding:5px 15px;
             margin-top:10px;
+            @media #{$mobile-max}{
+                display:block;
+                text-align:center;
+            }
         }
     }
 }
@@ -487,6 +495,11 @@ body:not(.admin-menu){
         color: #fff;
         background: $colour-orange-01;
         padding:5px 15px;
+
+        @media #{$mobile-max}{
+            display:block;
+            text-align:center;
+        }
     }
 }
 
