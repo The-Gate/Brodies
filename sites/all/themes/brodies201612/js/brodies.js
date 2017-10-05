@@ -122,7 +122,7 @@
                 var thisFormEl = $(this).data('inputElement');
                 if (!(thisFormEl == undefined)) {
                     var radiogroup = $('#webform #' + thisFormEl).attr('name');
-                    $('#webform input[name="'+ radiogroup+'"]').attr('checked', false);
+                    $('#webform input[name="' + radiogroup + '"]').attr('checked', false);
                     $('#webform #' + thisFormEl).attr('checked', 'checked');
                 }
                 var content = $('#webform').html();
@@ -355,6 +355,12 @@
             }
             if ($('.page-node-44 .block-brseminarbooking').length > 0) {
                 $('.block-brseminarbooking').insertAfter($('.view-seminars .view-filters'));
+            }
+
+            // landing page - paragraphs version
+            // if the first content block is a video, move hte <a name. below it
+            if ($('body.node-type-landing-page').length > 0) {
+                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtubeframe').closest('.field-item').after($('#main-content-marker'));
             }
             function doneResizing() {
                 readMoreSetup();

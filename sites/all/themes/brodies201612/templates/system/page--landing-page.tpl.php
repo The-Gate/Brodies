@@ -174,7 +174,7 @@ endif;
       </div>
   </div>
 <?php endif; ?>
-<a name="main-content"></a>
+<a name="main-content" id="main-content-marker"></a>
 <div class="main-container <?php print $container_class; ?>">
     <?php
     // remove subnavigation bar;
