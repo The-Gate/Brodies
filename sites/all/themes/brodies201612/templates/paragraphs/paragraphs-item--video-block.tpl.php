@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation for a single paragraph item.
@@ -27,5 +26,10 @@
  */
 ?>
 <?php if (isset($variables['field_video_url'][0]['safe_value'])): ?>
-  <iframe class="youtubeframe" width="375" height="195" src="<?php echo $variables['field_video_url'][0]['safe_value']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+  <div class="col-sm-offset-1 col-sm-10">
+      <div class="embed-responsive embed-responsive-16by9 youtubeframe">
+          <iframe class="embed-responsive-item" src="<?php echo $variables['field_video_url'][0]['safe_value']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+  </div>
+  <div class="clearfix"></div>
 <?php endif; ?>
