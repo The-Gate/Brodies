@@ -26,7 +26,7 @@
  */
 ?>
 <?php if (isset($variables['field_video_url'][0]['safe_value'])): ?>
-  <div class="col-sm-offset-1 col-sm-10">
+  <div class="col-sm-offset-2 col-sm-8">
       <div class="embed-responsive embed-responsive-16by9 youtubeframe">
           <iframe class="embed-responsive-item" src="<?php echo $variables['field_video_url'][0]['safe_value']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
       </div>

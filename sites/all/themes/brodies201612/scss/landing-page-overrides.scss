@@ -174,23 +174,20 @@ body{
 }
 
 .search_block{
-    position:absolute;
-    right:62px;
-    top:45px;
-    .fa-search{
-        font-size:$font-size-22;
-        color: #fff;
-    }
+    display:none;
 }
 .header-cta{
     display: none;
     @media #{$tablet}{
         display: block;
         position:absolute;
-        right:100px;
+        right:60px;
         top:48px;
         color: #fff;
         text-align:right;
+        p{
+            font-size:$font-size-16;
+        }
     }
 }
 .navbar-background{
@@ -215,7 +212,7 @@ body{
         color:#fff;
     }
     .field-name-field-lp-cta-l-title{
-        max-width:370px;
+        max-width:400px;
         margin-left:auto;
         margin-right:auto;
     }
@@ -230,7 +227,7 @@ h1{
     }
 }
 .field-name-field-lp-cta-l-title{
-    font-size:$font-size-12;
+    font-size:$font-size-16;
     margin-top:10px;
     @media #{$tablet}{
         margin-top: 25px;
@@ -458,7 +455,7 @@ body:not(.admin-menu){
 
     }
     .quote-title-1{
-        font-size: $font-size-10;
+        font-size: $font-size-16;
         margin-bottom: 0;
     }
 }
@@ -517,8 +514,8 @@ body:not(.admin-menu){
     a{
         color: #fff;
         background: $colour-orange-01;
-        padding:5px 15px;
-
+        padding:7px 15px;
+        font-size:$font-size-18;
         @media #{$mobile-max}{
             display:block;
             text-align:center;
