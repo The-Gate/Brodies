@@ -360,7 +360,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'weight' => 0,
       ),
       'default' => array(
-        'label' => 'hidden',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -397,7 +397,7 @@ function events_seminars_ct_view_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_event_guest',
-    'label' => 'Guest speaker details',
+    'label' => 'Guest speaker(s)',
     'required' => 0,
     'settings' => array(
       'text_processing' => 1,
@@ -981,7 +981,7 @@ function events_seminars_ct_view_field_default_field_instances() {
   t('Body');
   t('Event / Seminar content');
   t('Fully booked');
-  t('Guest speaker details');
+  t('Guest speaker(s)');
   t('Location');
   t('Related sector');
   t('Related services');
