@@ -463,45 +463,57 @@ body:not(.admin-menu){
 ///// MULTIBLOCK
 ////////////////////////////////////////////////
 .paragraphs-item-people{
-    @media #{$tablet}{
-        .field-item {
-            .col-sm-4{
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-            &:nth-child(3n+1){
+    article{
+        background:$colour-blue-01;
+    }
+    .text-wrapper-container,
+    .field-name-field-teaser-image{
+        width:49%;
+    }
+    .text-wrapper-container{
+        .field{
+            color: $colour-white-01;
+        }
+    }
+    /*    @media #{$tablet}{
+            .field-item {
                 .col-sm-4{
-                    padding-left:0px;
+                    padding-left: 15px;
+                    padding-right: 15px;
                 }
-            }
-            &:nth-child(3n+3){
-                .col-sm-4{
-                    padding-right:0px;
-
+                &:nth-child(3n+1){
+                    .col-sm-4{
+                        padding-left:0px;
+                    }
+                }
+                &:nth-child(3n+3){
+                    .col-sm-4{
+                        padding-right:0px;
+    
+                    }
                 }
             }
         }
-    }
-    .cta-title-wrapper{
-        position: relative;
-        top: 100%;
-        transform: translateY(-100%);
-    }
-    .cta-img{
-        position: relative;
-        width:33.333333%;
-        max-width:94px;
-        z-index:100;
-    }
-    .cta-title-wrapper{
-        padding: 5px 10px;
-        padding-left:calc(33.333333% + 10px);
-        background:$colour-blue-01;
-        color: #fff;
-        font-weight:700;
-        font-family: $font-family-serif;
-        z-index:50;
-    }
+        .cta-title-wrapper{
+            position: relative;
+            top: 100%;
+            transform: translateY(-100%);
+        }
+        .cta-img{
+            position: relative;
+            width:33.333333%;
+            max-width:94px;
+            z-index:100;
+        }
+        .cta-title-wrapper{
+            padding: 5px 10px;
+            padding-left:calc(33.333333% + 10px);
+            background:$colour-blue-01;
+            color: #fff;
+            font-weight:700;
+            font-family: $font-family-serif;
+            z-index:50;
+        }*/
 }
 
 

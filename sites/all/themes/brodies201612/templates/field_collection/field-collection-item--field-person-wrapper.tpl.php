@@ -29,16 +29,21 @@
 ?>
 <?php
 $person_node = node_load($content['field_related_people'][0]['#markup']);
-$person_name = $person_node->title;
-$person_job = $person_node->field_people_job[LANGUAGE_NONE][0]['safe_value'];
-$img = render($content['field_lp_contact_l_img']);
+$person_path = drupal_get_path_alias('node/' . $person_node->nid);
+$img = image_style_url('col-3--lg', $person_node->field_teaser_image[LANGUAGE_NONE][0]['uri']);
 ?>
-<div class="col-sm-4">
-    <div class="content">
-        <div class="cta-img"><?php echo $img; ?></div>
-        <div class="cta-title-wrapper">
-            <div class="cta-title"><?php echo $person_name; ?></div>
-            <div class="cta-title"><?php echo $person_job; ?></div>
+<div class="col-sm-6 col-md-4 field-name-field-related-people">
+    <article>
+        <div class="field field-name-field-teaser-image"><a href="<?php echo $person_path; ?>"><img class="img-responsive" src="<?php echo $img; ?>"></a>
         </div>
-    </div>
+        <div class="text-wrapper-container">
+            <div class="text-wrapper">
+                <div class="field field-name-field-people-fname"><?php echo $person_node->field_people_fname[LANGUAGE_NONE][0]['safe_value']; ?></div><div class="field field-name-field-people-sname"><?php echo $person_node->field_people_sname[LANGUAGE_NONE][0]['safe_value']; ?></div>
+                <div class="field field-name-field-people-job"><?php echo $person_node->field_people_job[LANGUAGE_NONE][0]['safe_value']; ?></div>
+                <div class="field field-name-field-people-phone"><?php echo $person_node->field_people_phone[LANGUAGE_NONE][0]['safe_value']; ?></div>
+                <div class="field field-name-field-people-email"><div class="read-more-block"><a href="mailto:<?php echo $person_node->field_people_email[LANGUAGE_NONE][0]['safe_value'];; ?>">Email</a></div></div>
+            </div>
+        </div>
+    </article>
 </div>
+

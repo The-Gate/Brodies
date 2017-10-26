@@ -256,74 +256,6 @@ Select to create a button to open a webform on this page.',
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_person_wrapper-field_lp_contact_l_img'.
-  $field_instances['field_collection_item-field_person_wrapper-field_lp_contact_l_img'] = array(
-    'bundle' => 'field_person_wrapper',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'picture',
-        'settings' => array(
-          'colorbox_settings' => array(
-            'colorbox_caption' => 'auto',
-            'colorbox_caption_custom' => '',
-            'colorbox_gallery' => 'post',
-            'colorbox_gallery_custom' => '',
-            'colorbox_group' => '',
-            'colorbox_multivalue_index' => NULL,
-          ),
-          'fallback_image_style' => '',
-          'image_link' => '',
-          'lazyload' => '',
-          'lazyload_aspect_ratio' => '',
-          'picture_mapping' => 'col_3',
-        ),
-        'type' => 'picture',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_lp_contact_l_img',
-    'label' => 'Contact image 1',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => 'people',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'media',
-      'settings' => array(
-        'allowed_schemes' => array(
-          'public' => 'public',
-        ),
-        'allowed_types' => array(
-          'audio' => 0,
-          'document' => 0,
-          'image' => 'image',
-          'video' => 0,
-        ),
-        'browser_plugins' => array(
-          'media_default--media_browser_1' => 0,
-          'media_default--media_browser_my_files' => 0,
-          'upload' => 0,
-        ),
-      ),
-      'type' => 'media_generic',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_person_wrapper-field_related_people'.
   $field_instances['field_collection_item-field_person_wrapper-field_related_people'] = array(
     'bundle' => 'field_person_wrapper',
@@ -1112,7 +1044,6 @@ Select to create a button to open a webform on this page.',
   t('Block Reference');
   t('Block Wrapper');
   t('Columns per row');
-  t('Contact image 1');
   t('Content');
   t('Content Link');
   t('Custom text to show in the header area, for example a contact phone number.');
