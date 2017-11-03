@@ -10,7 +10,6 @@ function brodies201612_preprocess_html(&$variables) {
   drupal_add_css('sites/all/libraries/slick/slick/slick.css', array('type' => 'file'));
   drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
   drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', array('weight' => 5));
-
   drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', array('type' => 'file'));
   $node = menu_get_object();
   if ($node && $node->type) {
@@ -41,6 +40,9 @@ function brodies201612_preprocess_html(&$variables) {
       case 'graduate_homepage':
       case 'graduate_content':
         $variables['classes_array'][] = "page-graduate";
+        break;
+      case 'landing_page':
+        drupal_add_css('sites/all/themes/brodies201612/css/landing-page-overrides.css', array('group' =>CSS_THEME, 'type' => 'file','weight' => 500));
         break;
     }
   }

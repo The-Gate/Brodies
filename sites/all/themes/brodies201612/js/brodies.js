@@ -115,6 +115,24 @@
                 return false;
             });
 
+
+            // webform pop up
+            $('.wf').click(function (e) {
+                e.preventDefault();
+                var thisFormEl = $(this).data('inputElement');
+                if (!(thisFormEl == undefined)) {
+                    var radiogroup = $('#webform #' + thisFormEl).attr('name');
+                    $('#webform input[name="' + radiogroup + '"]').attr('checked', false);
+                    $('#webform #' + thisFormEl).attr('checked', 'checked');
+                }
+                var content = $('#webform').html();
+                if (!(content == undefined)) {
+                    init_popup($('#webform').html());
+                } else {
+                    init_popup('<p>Sorry, there has been an error</p>');
+                }
+            });
+
             if ($('.field-name-field-related-people, .field-name-field-event-speakers').length > 0) {
                 $('.field-name-field-related-people .field-name-field-people-email .field-item, .field-name-field-event-speakers .field-name-field-people-email .field-item').each(function () {
                     var emailLink = '<div class="read-more-block"><a href="mailto:' + $(this).text() + '">Email</a></div>';
@@ -160,6 +178,10 @@
             var blockQuoteCount = $('.field-name-body blockquote').length;
             if (blockQuoteCount > 0) {
                 $('.field-name-body blockquote').each(function () {
+                    var text = $(this).text();
+                    text = text.replace("<p>", "");
+                    text = text.replace("</p>", "");
+                    $(this).text(text);
                     $(this).prepend('<img src="/sites/all/themes/brodies201612/images/quote-open.png" class="quote-open">').append('<img src="/sites/all/themes/brodies201612/images/quote-close.png" class="quote-close">');
                     $(this)
                             .nextUntil('blockquote', 'p')
@@ -170,7 +192,6 @@
                             .wrapAll('<div class="quote-slide"></div>');
                 });
                 if (blockQuoteCount > 1) {
-
                     $('.quote-slide').wrapAll('<div class="slick-quote col-md-10 col-md-offset-1"></div>');
                     $('.slick-quote').after('<div class="clearfix"></div>')
                     $('.slick-quote').slick({
@@ -178,8 +199,6 @@
                     });
                 }
             }
-
-
 
             if ($('.field-name-field-graduate-slideshow .field-item .grad-slide').length > 1) {
                 $('.field-name-field-graduate-slideshow .field-item .grad-slide').wrapAll('<div class="slick-grad mod-quote"></div>');
@@ -210,6 +229,12 @@
                     infinite: true,
                     cssEase: 'ease-in-out'
 
+                });
+            }
+
+            if ($('.cta-quote-slick').length > 0) {
+                $('.cta-quote-slick .field-items').slick({
+                    adaptiveHeight: true
                 });
             }
 
@@ -330,6 +355,12 @@
             }
             if ($('.page-node-44 .block-brseminarbooking').length > 0) {
                 $('.block-brseminarbooking').insertAfter($('.view-seminars .view-filters'));
+            }
+
+            // landing page - paragraphs version
+            // if the first content block is a video, move hte <a name. below it
+            if ($('body.node-type-landing-page').length > 0) {
+                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtubeframe').closest('.field-item').after($('#main-content-marker'));
             }
             function doneResizing() {
                 readMoreSetup();
