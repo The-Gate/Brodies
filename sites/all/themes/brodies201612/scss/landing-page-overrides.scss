@@ -425,13 +425,13 @@ body:not(.admin-menu){
         font-size: $font-size-28;
     }
     .cta-link{
+        padding-top:10px;
         a{
             display:inline-block;
             color: #fff;
             background: $colour-orange-01;
             font-family: $font-family-serif;
             padding:5px 15px;
-            margin-top:10px;
             @media #{$mobile-max}{
                 display:block;
                 text-align:center;
