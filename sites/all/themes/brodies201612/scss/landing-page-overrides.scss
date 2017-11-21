@@ -381,8 +381,8 @@ body:not(.admin-menu){
         }
     }
     @media #{$normal}{
-        $full-margin: 15vw;
-        $half-margin: 7vw;
+        $full-margin: 10vw;
+        $half-margin: 5vw;
 
         .col-sm-6{
             padding-left: $half-margin;
@@ -430,8 +430,8 @@ body:not(.admin-menu){
             display:inline-block;
             color: #fff;
             background: $colour-orange-01;
-            font-family: $font-family-serif;
             padding:5px 15px;
+            font-size:$font-size-18;
             @media #{$mobile-max}{
                 display:block;
                 text-align:center;

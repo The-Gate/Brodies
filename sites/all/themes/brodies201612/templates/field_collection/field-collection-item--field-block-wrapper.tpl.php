@@ -60,7 +60,8 @@ if (isset($content['field_title_icon']['#items'][0])) {
   $width = $content['field_title_icon']['#items'][0]['width'];
   $img_url = file_create_url($content['field_title_icon']['#items'][0]['uri']);
   $backgroundImageStyle = 'background-image: url(\'' . $img_url . '\')';
-  $backgroundImageDimensionsStyle = 'padding-left: ' . ($width + 20) . 'px;width:calc(100vw - 40px); max-width:100%; height:' . ($height + 20) . 'px; background-position:10px 10px; display:table-cell; vertical-align:middle; ';
+  $button_height = (($height + 20) > 60) ? ($height + 20) : 60;
+  $backgroundImageDimensionsStyle = 'padding-left: ' . ($width + 20) . 'px;width:calc(100vw - 40px); max-width:100%; height:' . $button_height . 'px; background-position:10px 50%; display:table-cell; vertical-align:middle; ';
 
   unset($content['field_title_icon']);
 }
