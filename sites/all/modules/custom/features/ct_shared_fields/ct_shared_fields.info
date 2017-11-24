@@ -152,6 +152,7 @@ features[field_base][] = field_people_sname
 features[field_base][] = field_people_vcard
 features[field_base][] = field_person_wrapper
 features[field_base][] = field_postscript
+features[field_base][] = field_quote_text_colour
 features[field_base][] = field_quote_wrapper
 features[field_base][] = field_related_binformed
 features[field_base][] = field_related_content
