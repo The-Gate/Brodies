@@ -63,7 +63,7 @@ function ct_landing_page_with_paragraphs_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 2,
+      'weight' => 0,
     ),
   );
 
@@ -99,7 +99,7 @@ If \'is webform\' IS selected, then add the text to show in the link to open the
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 2,
     ),
   );
 
@@ -135,7 +135,7 @@ If \'is webform\' IS selected, and you want THIS link to preselect an input elem
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 11,
+      'weight' => 7,
     ),
   );
 
@@ -176,7 +176,7 @@ Select to create a button to open a webform on this page.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 9,
+      'weight' => 6,
     ),
   );
 
@@ -211,7 +211,46 @@ Select to create a button to open a webform on this page.',
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 4,
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_block_wrapper-field_lp_blk_1_colour'.
+  $field_instances['field_collection_item-field_block_wrapper-field_lp_blk_1_colour'] = array(
+    'bundle' => 'field_block_wrapper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Leave blank to use the default orange.<br>
+Add a single hex colour for a flat field, for a gradient, add 2 hex colours. First colour the top gradient colour, second colour the bottom. Leave a space between the two colours.
+E.G<br>
+single colour: #4fb5b1<br>
+gradient: #4fb5b1 #67b75e',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_lp_blk_1_colour',
+    'label' => 'Link BG Colour',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
     ),
   );
 
@@ -251,7 +290,64 @@ Select to create a button to open a webform on this page.',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 8,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_block_wrapper-field_title_icon'.
+  $field_instances['field_collection_item-field_block_wrapper-field_title_icon'] = array(
+    'bundle' => 'field_block_wrapper',
+    'deleted' => 0,
+    'description' => 'If there is an icon to display as part of the link, please add here. Please note that this image MUST be uploaded at the correct size.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_title_icon',
+    'label' => 'Link Icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'landing-page',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 4,
     ),
   );
 
@@ -358,6 +454,43 @@ Select to create a button to open a webform on this page.',
       ),
       'type' => 'text_textarea',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'field_collection_item-field_quote_wrapper-field_quote_text_colour'.
+  $field_instances['field_collection_item-field_quote_wrapper-field_quote_text_colour'] = array(
+    'bundle' => 'field_quote_wrapper',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'For a custom quote text colour, please add the hex value of the colour including the \'#\' mark<br>
+For Example, red: \'#e5114d\'<br>
+leave blank to use the default site text colour;',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_quote_text_colour',
+    'label' => 'Quote Text Colour',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
     ),
   );
 
@@ -488,7 +621,7 @@ Select to create a button to open a webform on this page.',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -601,7 +734,7 @@ Select to create a button to open a webform on this page.',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -625,7 +758,7 @@ Select to create a button to open a webform on this page.',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -696,6 +829,55 @@ Select to create a button to open a webform on this page.',
     ),
   );
 
+  // Exported field_instance: 'node-landing_page-field_lp_blk_1_colour'.
+  $field_instances['node-landing_page-field_lp_blk_1_colour'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Leave blank to use the default orange.<br>
+Add a single hex colour for a flat field, for a gradient, add 2 hex colours. First colour the top gradient colour, second colour the bottom. Leave a space between the two colours.
+E.G<br>
+single colour: #4fb5b1<br>
+gradient: #4fb5b1 #67b75e',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lp_blk_1_colour',
+    'label' => 'Link BG Colour',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-landing_page-field_lp_cta_l_title'.
   $field_instances['node-landing_page-field_lp_cta_l_title'] = array(
     'bundle' => 'landing_page',
@@ -739,6 +921,70 @@ Select to create a button to open a webform on this page.',
       ),
       'type' => 'text_textfield',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-landing_page-field_title_icon'.
+  $field_instances['node-landing_page-field_title_icon'] = array(
+    'bundle' => 'landing_page',
+    'deleted' => 0,
+    'description' => 'If there is an icon to display as part of the link, please add here. Please note that this image MUST be uploaded at the correct size.',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_title_icon',
+    'label' => 'Link Icon',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 8,
     ),
   );
 
@@ -1047,12 +1293,16 @@ Select to create a button to open a webform on this page.',
   t('Content');
   t('Content Link');
   t('Custom text to show in the header area, for example a contact phone number.');
+  t('For a custom quote text colour, please add the hex value of the colour including the \'#\' mark<br>
+For Example, red: \'#e5114d\'<br>
+leave blank to use the default site text colour;');
   t('Header CTA Text');
   t('If \'is webform\' is NOT selected, add the full link to another page / site / download [including the http:// part]<br>
 If \'is webform\' IS selected, then add the text to show in the link to open the webform');
   t('If \'is webform\' is NOT selected, this is the text for the link<br>
 If \'is webform\' IS selected, and you want THIS link to preselect an input element, please add the form input element id here.');
   t('If the \'Content Link\' is to open in a new tab, check this. If there is no \'Content Link\' or it is a webform link, this will have no effect.');
+  t('If there is an icon to display as part of the link, please add here. Please note that this image MUST be uploaded at the correct size.');
   t('Image');
   t('Is Webform');
   t('Item Reference');
@@ -1060,12 +1310,20 @@ If \'is webform\' IS selected, and you want THIS link to preselect an input elem
   t('Layout Blocks');
   t('Leave blank to add an external link in the \'Link\' field<br>
 Select to create a button to open a webform on this page.');
+  t('Leave blank to use the default orange.<br>
+Add a single hex colour for a flat field, for a gradient, add 2 hex colours. First colour the top gradient colour, second colour the bottom. Leave a space between the two colours.
+E.G<br>
+single colour: #4fb5b1<br>
+gradient: #4fb5b1 #67b75e');
   t('Link');
+  t('Link BG Colour');
+  t('Link Icon');
   t('Link Text / Item Reference');
   t('Open in New Tab?');
   t('Person Wrapper');
   t('Please add the webform default item option id');
   t('Quote');
+  t('Quote Text Colour');
   t('Quote Wrapper');
   t('Title');
   t('Video url');
