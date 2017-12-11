@@ -3253,7 +3253,8 @@ body.page-landing{
         border-left:7px solid $colour-white-01;
         border-right:7px solid $colour-white-01;
         @media #{$normal}{
-            padding-top:145px;
+            width:20%;
+            padding-top:114px;
             background-size:contain !important;
             &.menu-mlid-824{
                 //edinburgh
@@ -3274,9 +3275,14 @@ body.page-landing{
                 background: url("../images/contact-brussels.jpg") no-repeat center top transparent;
 
             }
+            &.menu-mlid-5318{
+                //dingwall
+                background: url("../images/contact-dingwall.jpg") no-repeat center top transparent;
+
+            }
         }
         @media #{$wide}{
-            padding-top:179px;
+            padding-top:141px;
         }
     }
     a{
