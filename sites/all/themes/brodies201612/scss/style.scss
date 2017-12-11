@@ -389,7 +389,8 @@ blockquote{
         min-height:80px;
     }
     .page-node-7947 &,
-    .page-node-7945 &{
+    .page-node-7945 &,
+    .page-node-11280 &{
         min-height:60px;
     }
     margin-bottom:1em;
@@ -1907,6 +1908,7 @@ body{
     margin-top:-60px;
     .page-node-7947 &,
     .page-node-7945 &,
+    .page-node-11280 &,
     .page-node-62 &,
     .page-node-44 &,
     .page-binformed &,
@@ -3251,7 +3253,8 @@ body.page-landing{
         border-left:7px solid $colour-white-01;
         border-right:7px solid $colour-white-01;
         @media #{$normal}{
-            padding-top:145px;
+            width:20%;
+            padding-top:114px;
             background-size:contain !important;
             &.menu-mlid-824{
                 //edinburgh
@@ -3272,9 +3275,14 @@ body.page-landing{
                 background: url("../images/contact-brussels.jpg") no-repeat center top transparent;
 
             }
+            &.menu-mlid-5318{
+                //dingwall
+                background: url("../images/contact-dingwall.jpg") no-repeat center top transparent;
+
+            }
         }
         @media #{$wide}{
-            padding-top:179px;
+            padding-top:141px;
         }
     }
     a{
@@ -3418,6 +3426,7 @@ h1.page-header,
     .page-node-62 &,
     .page-node-7947 &,
     .page-node-7945 &,
+    .page-node-11280 &,
     .page-binformed-legal-updates &,
     .page-binformed-guides-and-downloads &,
     .page-binformed-publications-archive &,
