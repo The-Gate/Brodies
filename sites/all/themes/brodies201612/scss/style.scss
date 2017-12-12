@@ -870,18 +870,18 @@ body{
             border-radius: 50%;
 
             @media #{$mobile-max}{
-                margin-left: calc((100% - 240px) / 12);
-                margin-right: calc((100% - 240px) / 12);
+                margin-left: calc((100% - 240px) / 18);
+                margin-right: calc((100% - 240px) / 18);
             }
             @media #{$tablet}{
                 margin:0 6px 2px;
             }
             @media #{$normal}{
-                margin:0 2px;
+                margin:0;
 
             }
             @media #{$wide}{
-                margin:0 4px;
+                margin:0 2px;
 
             }
             &:hover{
