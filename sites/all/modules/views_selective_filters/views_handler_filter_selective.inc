@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Views Filter Selective Handler Overrides.
@@ -16,8 +15,8 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
    * @var array|false
    */
   protected $originalOptions;
-  protected static $results;
 
+  protected static $results;
 
   /**
    * Override set_default_options.
@@ -103,7 +102,7 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
       'warning' => array(
         '#type' => 'markup',
         '#markup' => '<div class="messages warning">' . t('This filter is always exposed to users.') . '</div>',
-    )));
+      )));
     // Remove option to unexpose filter. Tried to disable, but did not work.
     $form['expose_button']['checkbox']['checkbox']['#type'] = 'hidden';
     unset($form['expose_button']['button']);
@@ -200,7 +199,7 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
     if (is_array($this->value)) {
       $this->value = array_map('urldecode', $this->value);
     }
-    elseif (is_string($this->value)) {
+    elseif (is_string($this->value)){
       $this->value = urldecode($this->value);
     }
     parent::query();
@@ -330,9 +329,11 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
 
       // Check to see if the user remembered to add the field.
       if (empty($display_options_fields)) {
-        drupal_set_message(t('Selective query filter must have corresponding field added to view with Administrative Name set to "@name" and Base Type "@type"', array(
-          '@name' => $ui_name,
-          '@type' => $base_field)), 'error');
+        drupal_set_message(t('Selective query filter must have corresponding field added to view with Administrative Name set to "@name" and Base Type "@type"',
+          array(
+            '@name' => $ui_name,
+            '@type' => $base_field)),
+            'error');
         return array();
       }
 
@@ -345,13 +346,16 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
       // Check that relationships are coherent between Field and Filter.
       $no_display_field_relationship = empty($display_field['relationship']) || $display_field['relationship'] === 'none';
       $no_filter_relationship = empty($this->options['relationship']) || $this->options['relationship'] === 'none';
-      $equal = (($no_display_field_relationship === TRUE) && ($no_filter_relationship === TRUE)) ||
-          ($display_field['relationship'] === $this->options['relationship']);
+      $equal
+        = (($no_display_field_relationship === TRUE) && ($no_filter_relationship === TRUE)) ||
+        ($display_field['relationship'] === $this->options['relationship']);
 
       if (!$equal) {
-        drupal_set_message(t('Selective filter "@name": relationship of field and filter must match.', array(
-          '@name' => $ui_name,
-          '@type' => $base_field)), 'error');
+        drupal_set_message(t('Selective filter "@name": relationship of field and filter must match.',
+          array(
+            '@name' => $ui_name,
+            '@type' => $base_field)),
+            'error');
         return array();
       }
 
@@ -426,7 +430,7 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
 
       // Sort values.
       $sort_option = $this->options['selective_display_sort'];
-      switch ($sort_option) {
+      switch($sort_option) {
         case 'ASC':
           asort($oids);
           break;
@@ -451,16 +455,6 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
       // If limit exceeded this field is not good for being "selective".
       if (!empty($max_items) && count($oids) == $max_items) {
         drupal_set_message(t('Selective filter "@field" has limited the amount of total results. Please, review you query configuration.', array('@field' => $ui_name)), 'warning');
-      }
-      // detect if this is a date field and do a distinct on the values.
-      if ($base_field == "field_event_date") {
-        $oids = array_unique($oids);
-        $newoids = array();
-        foreach ($oids as $key => $oid) {
-          $date = date("l j F Y", $key);
-          $newoids[$key] = $date;
-        }
-        $oids = $newoids;
       }
 
       self::$results[$signature] = $oids;
@@ -528,31 +522,4 @@ class views_handler_filter_selective extends views_handler_filter_in_operator {
     return $this->originalOptions;
   }
 
-  /**
-   * Override op_simple.
-   */
-  function op_simple() {
-    if (empty($this->value)) {
-      return;
-    }
-    $this->ensure_my_table();
-
-    // The content date has special filtering needs
-    if ($this->real_field == 'field_event_date_value') {
-      //$timestamp = strtotime($this->value[0]);
-
-      // First day of the month.
-      $min = strtotime(date('Y-m-d 00:00:00', $this->value[0]));
-
-      // Last day of the month.
-      $max = strtotime(date('Y-m-d 23:59:59', $this->value[0]));
-
-      $this->query->add_where_expression($this->options['group'], "$this->table_alias.$this->real_field BETWEEN '$min' AND '$max'");
-    }
-    else {
-      // We use array_values() because the checkboxes keep keys and that can cause
-      // array addition problems.
-      $this->query->add_where($this->options['group'], "$this->table_alias.$this->real_field", array_values($this->value), $this->operator);
-    }
-  }
 }
