@@ -34,7 +34,7 @@ function brPayments_payments($stage = '', $id = '', $key = '') {
   switch ($stage) {
     default:
       $out = '<div class="col-sm-8 col-sm-offset-2"><div class="payment-intro"><h2>Please select what type of invoice you would like to pay</h2><div class="col-sm-6"><a class="option first" href="/payments/invoice">PAY A BRODIES INVOICE<br>&nbsp;</a></div><div class="col-sm-6"><a class="option" href="/payments/dart">DART ONLINE PAYMENT<br />(DEBT & ASSET RECOVERY TEAM)</a></div><div class="clearfix"></div>
-      <p>The transfer of the payment details from the Brodies web site to WorldPay are encapsulated using their own encrypted and digitally-signed protocol. This ensures that the information passed is both secure and tamper-proof.<br /><br />A 2% surcharge for payments made by credit card is applied at the payment confirmation page. There will be no charge for debit card transactions.</p></div><div id="cards"></div>';
+      <p>The transfer of the payment details from the Brodies web site to WorldPay are encapsulated using their own encrypted and digitally-signed protocol. This ensures that the information passed is both secure and tamper-proof.</p></div><div id="cards"></div>';
       break;
     case 'invoice':
     case 'dart':
@@ -113,9 +113,6 @@ function brPayments_payment_form($form_init, $stage) {
       if ($stage != 'invoice') {
         //$form[$data->field_name]['#description'] = 'Can be found on our correspondence';
       }
-    }
-    if ($data->field_name == 'field_pay_amount') {
-      $form[$data->field_name]['#description'] = '- 2% surcharge for payments made by credit card, there will be no charge for debit card transactions.';
     }
 
     if ($data->field_name == 'field_pay_email') {
@@ -204,7 +201,7 @@ function brPayments_payment_card_form($form_state, $form_values) {
   $form['card-type'] = array(
     '#type' => 'select',
     '#title' => 'Payment method',
-    '#options' => array('' => 'Please select', '1' => 'Visa Credit/Mastercard Credit (2% charge)', '2' => 'Visa Debit/Mastercard Debit/Electron/Maestro/Solo'),
+    '#options' => array('' => 'Please select', '1' => 'Visa Credit/Mastercard Credit', '2' => 'Visa Debit/Mastercard Debit/Electron/Maestro/Solo'),
     '#required' => TRUE
   );
 
@@ -415,7 +412,7 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
   }
 
   $amount = $payment_node['build_info']['args'][0]->field_pay_amount['und'][0]['value'];
-  $amount = $payment_node['build_info']['args'][0]->field_pay_card['und'][0]['value'] == 1 ? $amount * 1.02 : $amount;
+ // $amount = $payment_node['build_info']['args'][0]->field_pay_card['und'][0]['value'] == 1 ? $amount * 1.02 : $amount;
 
   $data += array(
     'instId' => $payment_node['build_info']['args'][0]->field_pay_type['und'][0]['value'] == 1 ? 233770 : 298854,
