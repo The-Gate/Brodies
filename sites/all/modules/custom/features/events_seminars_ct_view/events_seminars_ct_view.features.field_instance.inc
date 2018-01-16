@@ -132,7 +132,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 12,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -275,7 +275,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'full' => array(
         'label' => 'above',
@@ -341,7 +341,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'display_label' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 12,
+      'weight' => 7,
     ),
     'widget_type' => 'optionwidgets_onoff',
   );
@@ -411,7 +411,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 9,
+      'weight' => 11,
     ),
     'widget_type' => 'text_textarea',
   );
@@ -481,7 +481,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 9,
     ),
     'widget_type' => 'text_textfield',
   );
@@ -507,7 +507,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'full' => array(
         'label' => 'above',
@@ -555,7 +555,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 8,
     ),
     'widget_type' => 'nodereference_select',
   );
@@ -634,7 +634,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'node_reference_autocomplete',
-      'weight' => 8,
+      'weight' => 10,
     ),
     'widget_type' => 'nodereference_autocomplete',
   );
@@ -660,7 +660,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'full' => array(
         'label' => 'above',
@@ -716,7 +716,7 @@ function events_seminars_ct_view_field_default_field_instances() {
   $field_instances['node-event-field_event_visibility'] = array(
     'bundle' => 'event',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Date and time after which this seminar will not be shown in the seminar listings.',
     'display' => array(
       'cck_blocks' => array(
         'label' => 'above',
@@ -728,7 +728,7 @@ function events_seminars_ct_view_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 10,
       ),
       'full' => array(
         'label' => 'above',
@@ -803,22 +803,76 @@ function events_seminars_ct_view_field_default_field_instances() {
     ),
     'weight' => 11,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'd/m/Y - H:i',
+        'input_format' => 'd/m/Y - H:i:s',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'repeat_collapsed' => '',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 11,
+      'weight' => 6,
     ),
     'widget_type' => 'date_popup',
+  );
+
+  // Exported field_instance: 'node-event-field_filter_date'.
+  $field_instances['node-event-field_filter_date'] = array(
+    'bundle' => 'event',
+    'deleted' => 0,
+    'description' => 'date used for dropdown filter - should match the \'when\' dates',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 7,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_filter_date',
+    'label' => 'Filter Date',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'display_all_day' => 0,
+        'increment' => 1,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-0:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 5,
+    ),
   );
 
   // Exported field_instance: 'node-event-field_related_sector'.
@@ -979,7 +1033,9 @@ function events_seminars_ct_view_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Audience');
   t('Body');
+  t('Date and time after which this seminar will not be shown in the seminar listings.');
   t('Event / Seminar content');
+  t('Filter Date');
   t('Fully booked');
   t('Guest speaker(s)');
   t('Location');
@@ -990,6 +1046,7 @@ function events_seminars_ct_view_field_default_field_instances() {
   t('Visibility time');
   t('When');
   t('Where');
+  t('date used for dropdown filter - should match the \'when\' dates');
 
   return $field_instances;
 }
