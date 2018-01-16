@@ -26,6 +26,7 @@ features[field_instance][] = node-event-field_event_location
 features[field_instance][] = node-event-field_event_speakers
 features[field_instance][] = node-event-field_event_type
 features[field_instance][] = node-event-field_event_visibility
+features[field_instance][] = node-event-field_filter_date
 features[field_instance][] = node-event-field_related_sector
 features[field_instance][] = node-event-field_related_service
 features[node][] = event

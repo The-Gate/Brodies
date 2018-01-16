@@ -145,6 +145,19 @@ function events_seminars_ct_view_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
+  /* Field: Content: Filter Date */
+  $handler->display->display_options['fields']['field_filter_date']['id'] = 'field_filter_date';
+  $handler->display->display_options['fields']['field_filter_date']['table'] = 'field_data_field_filter_date';
+  $handler->display->display_options['fields']['field_filter_date']['field'] = 'field_filter_date';
+  $handler->display->display_options['fields']['field_filter_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_filter_date']['settings'] = array(
+    'format_type' => 'brodies_date_only_long_',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
   /* Sort criterion: Content: When -  start date (field_event_date) */
   $handler->display->display_options['sorts']['field_event_date_value']['id'] = 'field_event_date_value';
   $handler->display->display_options['sorts']['field_event_date_value']['table'] = 'field_data_field_event_date';
@@ -192,16 +205,16 @@ function events_seminars_ct_view_views_default_views() {
     'seminar' => 'seminar',
   );
   $handler->display->display_options['filters']['field_event_type_value']['group'] = 1;
-  /* Filter criterion: When -  start date (field_event_date) (selective) */
-  $handler->display->display_options['filters']['field_event_date_value_selective']['id'] = 'field_event_date_value_selective';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['table'] = 'field_data_field_event_date';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['field'] = 'field_event_date_value_selective';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['ui_name'] = 'When -  start date (field_event_date) (selective)';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['group'] = 1;
-  $handler->display->display_options['filters']['field_event_date_value_selective']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_event_date_value_selective']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['expose']['identifier'] = 'field_event_date_value_selective';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['expose']['remember_roles'] = array(
+  /* Filter criterion: Filter Date -  start date (field_filter_date) (selective) */
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['id'] = 'field_filter_date_value_selective';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['table'] = 'field_data_field_filter_date';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['field'] = 'field_filter_date_value_selective';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['ui_name'] = 'Filter Date -  start date (field_filter_date) (selective)';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['group'] = 1;
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['expose']['identifier'] = 'field_filter_date_value_selective';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['expose']['remember_roles'] = array(
     2 => '2',
     3 => 0,
     1 => 0,
@@ -209,9 +222,8 @@ function events_seminars_ct_view_views_default_views() {
     4 => 0,
     6 => 0,
   );
-  $handler->display->display_options['filters']['field_event_date_value_selective']['selective_display_field'] = 'field_event_date_1';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['selective_display_sort'] = 'KASC';
-  $handler->display->display_options['filters']['field_event_date_value_selective']['selective_items_limit'] = '100';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['selective_display_field'] = 'field_filter_date';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['selective_items_limit'] = '100';
   /* Filter criterion: Where (field_event_location) (selective) */
   $handler->display->display_options['filters']['field_event_location_nid_selective']['id'] = 'field_event_location_nid_selective';
   $handler->display->display_options['filters']['field_event_location_nid_selective']['table'] = 'field_data_field_event_location';
@@ -274,6 +286,7 @@ function events_seminars_ct_view_views_default_views() {
     'field_event_date_value_selective' => 'Date',
     'field_related_service_nid_selective' => 'Services ',
     'field_event_location_nid_selective' => 'Location',
+    'field_filter_date_value_selective' => 'Date',
   );
 
   /* Display: Main Seminar Listing */
