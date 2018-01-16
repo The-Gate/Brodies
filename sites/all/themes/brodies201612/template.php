@@ -11,6 +11,8 @@ function brodies201612_preprocess_html(&$variables) {
   drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
   drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', array('weight' => 5));
   drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', array('type' => 'file'));
+  drupal_add_js('//cdn.jsdelivr.net/youtube-google-analytics/8.0.2/lunametrics-youtube.gtm.min.js',array('type' => 'external', 'scope' => 'header', 'weight'=> 5000));
+  //drupal_add_js('sites/all/themes/brodies201612/js/lunametrics-youtube.gtm.js',array('type' => 'file'));
   $node = menu_get_object();
   if ($node && $node->type) {
     switch ($node->type) {
@@ -42,7 +44,7 @@ function brodies201612_preprocess_html(&$variables) {
         $variables['classes_array'][] = "page-graduate";
         break;
       case 'landing_page':
-        drupal_add_css('sites/all/themes/brodies201612/css/landing-page-overrides.css', array('group' =>CSS_THEME, 'type' => 'file','weight' => 500));
+        drupal_add_css('sites/all/themes/brodies201612/css/landing-page-overrides.css', array('group' => CSS_THEME, 'type' => 'file', 'weight' => 500));
         break;
     }
   }
@@ -252,4 +254,22 @@ function br_get_video_data($url, $thumbnail = FALSE) {
 function brodies201612_field_collection_view($variables) {
   $element = $variables['element'];
   return $element['#children'];
+}
+
+function brodies201612_form_webform_client_form_alter(&$form, &$form_state, $form_id) {
+  $form['#attributes'] = array('OnSubmit' => 'customGAIntegration();');
+  $js = "
+    function customGAIntegration(){
+      if (jQuery('.node-type-landing-page').length >0){
+        if (typeof ga === 'function') {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Form',
+            eventAction: 'submit',
+            eventLabel: '".$form['#node']->title."'
+          });
+        }
+      }
+    }";
+  drupal_add_js($js, array('type' => 'inline', 'scope' => 'header', 'weight'=> 5000));
 }

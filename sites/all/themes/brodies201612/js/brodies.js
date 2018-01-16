@@ -105,7 +105,6 @@
                     $(this).parent().parent().removeClass('minus');
                 }
             });
-
             // video pop up
             $('.vi').click(function (e) {
                 e.preventDefault();
@@ -132,12 +131,10 @@
                     init_popup('<p>Sorry, there has been an error</p>');
                 }
             });
-
             if ($('.field-name-field-related-people, .field-name-field-event-speakers').length > 0) {
                 $('.field-name-field-related-people .field-name-field-people-email .field-item, .field-name-field-event-speakers .field-name-field-people-email .field-item').each(function () {
                     var emailLink = '<div class="read-more-block"><a href="mailto:' + $(this).text() + '">Email</a></div>';
-                    $(this).text('');
-                    //console.log(emailLink) 
+                    $(this).text('');                     //console.log(emailLink) 
                     $(this).append(emailLink);
                 });
             }
@@ -184,10 +181,9 @@
                     $(this).text(text);
                     $(this).prepend('<img src="/sites/all/themes/brodies201612/images/quote-open.png" class="quote-open">').append('<img src="/sites/all/themes/brodies201612/images/quote-close.png" class="quote-close">');
                     $(this)
-                            .nextUntil('blockquote', 'p')
-                            .filter(function (i) {
-                                return $(this).hasClass('quote-title-1') || $(this).hasClass('quote-title-2')
-                            })
+                            .nextUntil('blockquote', 'p').filter(function (i) {
+                        return $(this).hasClass('quote-title-1') || $(this).hasClass('quote-title-2')
+                    })
                             .add(this)
                             .wrapAll('<div class="quote-slide"></div>');
                 });
@@ -255,7 +251,7 @@
             });
             // search on mobile - move the search input to screen top to give room for results
             $("#edit-search-api-views-fulltext-wrapper #edit-search-api-views-fulltext").focusin(function () {
-//                console.log('start scrollin');
+                //                console.log('start scrollin');
                 if ($(window).width() < screen_sm_min) {
                     $('html,body').animate({scrollTop: ($(this).offset().top - ($(this).height() * 2))}, 800);
                 }
@@ -274,8 +270,7 @@
                     } else {
                         $('.ckeditor-tabber dt').removeClass('active');
                         $(this).addClass('active');
-                        $(this).next('dd').slideToggle('fast', function () {
-                            //console.log('start check');
+                        $(this).next('dd').slideToggle('fast', function () {                             //console.log('start check');
                             if ($(this).offset().top < $(window).scrollTop()) {
                                 //console.log('this offset: ' + $(this).offset().top + ' scroll window: ' + $(window).scrollTop());
                                 var scrollTo = ($(this).offset().top) - 100;
@@ -327,7 +322,6 @@
                                 }
                             });
                         }
-
                     } else {
                         $('.col-md-6.col-left .text-wrapper').css({'height': '', 'overflow': ''});
                         $('.lp2-show-more').remove();
@@ -360,7 +354,7 @@
             // landing page - paragraphs version
             // if the first content block is a video, move hte <a name. below it
             if ($('body.node-type-landing-page').length > 0) {
-                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtubeframe').closest('.field-item').after($('#main-content-marker'));
+                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtu beframe').closest('.field-item').after($('#main-content-marker'));
             }
             function doneResizing() {
                 readMoreSetup();
@@ -370,9 +364,6 @@
                 clearTimeout(resizeId);
                 resizeId = setTimeout(doneResizing, 500);
             });
-
         }
     }
 }(jQuery))
-
-       
