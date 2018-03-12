@@ -289,7 +289,8 @@
                         foreach ($relatedContentCollection as $delta => $collection) {
                           if ($field_collection = field_collection_field_get_entity($collection)) {
                             echo('<div class="views-row col-md-3">');
-                            print render($field_collection->view('full'));
+                            $output = $field_collection->view('full');
+                            print render($output);
                             echo('</div>');
                           }
                         }
