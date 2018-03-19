@@ -55,13 +55,12 @@ if (isset($element['#object']->field_l_left[LANGUAGE_NONE][0]['safe_value'])) {
 }
 
 $linkBackgroundStyle = '';
-$backgroundImageStyle = null;
+$linkWrapperBackgroundStyle = '';
 if (isset($element['#object']->field_title_icon[LANGUAGE_NONE][0])) {
   $height = $element['#object']->field_title_icon[LANGUAGE_NONE][0]['height'];
   $width = $element['#object']->field_title_icon[LANGUAGE_NONE][0]['width'];
   $img_url = file_create_url($element['#object']->field_title_icon[LANGUAGE_NONE][0]['uri']);
-  $backgroundImageStyle = 'background-image: url(\'' . $img_url . '\')';
-  $backgroundImageDimensionsStyle = 'padding-left: ' . ($width + 20) . 'px;height:' . ($height + 20) . 'px; background-position:10px 10px; display:table-cell; vertical-align:middle; ';
+  $linkBackgroundStyle = ' style="background: url(\'' . $img_url . '\');padding-left: ' . ($width + 20) . 'px;height:' . ($height + 20) . 'px; background-position:10px 10px; display:table-cell; vertical-align:middle; background-repeat:no-repeat;" ';
 
   unset($element['#object']->field_title_icon[LANGUAGE_NONE]);
 }
@@ -69,31 +68,22 @@ if (isset($element['#object']->field_title_icon[LANGUAGE_NONE][0])) {
 if (isset($element['#object']->field_lp_blk_1_colour[LANGUAGE_NONE][0]['safe_value'])) {
   $colour_raw = trim($element['#object']->field_lp_blk_1_colour[LANGUAGE_NONE][0]['safe_value']);
   if (strlen($colour_raw) == 7) {
-    $linkBackgroundStyle = 'style="background: ' . $colour_raw . ';';
-    if (isset($backgroundImageStyle)) {
-      $linkBackgroundStyle.= $backgroundImageDimensionsStyle . $backgroundImageStyle . '; background-repeat:no-repeat;';
-    }
-    $linkBackgroundStyle .= '"';
+    $linkWrapperBackgroundStyle = ' background: ' . $colour_raw . ';';
   }
   elseif (strlen($colour_raw) > 7) {
     $colour_array = explode(' ', $colour_raw);
     if (count($colour_array) == 2) {
-      $linkBackgroundStyle = ' style="background: ' . $colour_array[0] . ';';
-      if (isset($backgroundImageStyle)) {
-        $linkBackgroundStyle .= $backgroundImageDimensionsStyle . $backgroundImageStyle . '; background-repeat:no-repeat;' . $backgroundImageStyle . ',';
-      }
-      else {
-        $linkBackgroundStyle .='background:';
-      }
-      $linkBackgroundStyle .='linear-gradient(' . $colour_array[0] . ',' . $colour_array[1] . ');" ';
+      $linkWrapperBackgroundStyle = ' background: ' . $colour_array[0] . ';background: linear-gradient(' . $colour_array[0] . ',' . $colour_array[1] . '); ';
     }
   }
-
+  if ((strlen($linkWrapperBackgroundStyle) > 0) && (strlen($linkBackgroundStyle)==0)) {
+    $linkBackgroundStyle = 'style="background:transparent;"';
+  }
   unset($element['#object']->field_lp_blk_1_colour[LANGUAGE_NONE]);
 }
 
 $link_output = '<p>If you would like further information</p>';
-$link_output .= '<p style="display:inline-block; margin:1em auto;"><a class="wf" href="' . $link . '"' . $linkBackgroundStyle . $inputEl . '>' . $linktext . '</a></p>';
+$link_output .= '<p style="display:inline-block; margin:1em auto;' . $linkWrapperBackgroundStyle . '"><a class="wf" href="' . $link . '"' . $linkBackgroundStyle . $inputEl . '>' . $linktext . '</a></p>';
 ?>
 
 

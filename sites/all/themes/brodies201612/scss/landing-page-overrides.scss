@@ -262,15 +262,24 @@ h1{
 ////////////////////////////////////////////////
 
 .paragraphs-items{
+    .img-border-wrapper img,
     .youtubeframe{
-        margin:0 auto 15px;
-        display:block;
         @media #{$tablet}{
             border:10px solid #fff;
             border-radius: 10px;
             -webkit-box-shadow: 1px 1px 6px 0px rgba(0,0,0,1);
             -moz-box-shadow: 1px 1px 6px 0px rgba(0,0,0,1);
             box-shadow: 1px 1px 6px 0px rgba(0,0,0,1);
+        }
+    }
+    .youtubeframe{
+        margin:0 auto 15px;
+        display:block;
+    }
+    .img-border-wrapper{
+        p,
+        .media{
+            padding:10px;
         }
     }
 }
@@ -381,7 +390,7 @@ body:not(.admin-menu){
         }
     }
     @media #{$normal}{
-        $full-margin: 10vw;
+        $full-margin: 9vw;
         $half-margin: 5vw;
 
         .col-sm-6{
@@ -425,7 +434,7 @@ body:not(.admin-menu){
         font-size: $font-size-28;
     }
     .cta-link{
-        padding-top:10px;
+        padding:0 10px;
         a{
             display:inline-block;
             color: #fff;
@@ -448,16 +457,16 @@ body:not(.admin-menu){
         color: $colour-grey-04;
         text-align: center;
     }
-    blockquote{
-        font-size: $font-size-22;
-        text-transform: none;
-        font-family:$font-family-serif;
 
-    }
     .quote-title-1{
         font-size: $font-size-16;
         margin-bottom: 0;
     }
+}
+blockquote{
+    font-size: $font-size-22;
+    text-transform: none;
+    font-family:$font-family-serif;
 }
 ////////////////////////////////////////////////
 ///// MULTIBLOCK
@@ -580,6 +589,79 @@ body:not(.admin-menu){
         img{
             display:inline-block;
             margin:0 8px;
+        }
+    }
+}
+
+//////////////////////////////
+//////// PAGE SPECIFIC //////
+//////////////////////////////
+
+// /BeingBrodies
+
+.page-node-12221,
+.page-node-13419{
+    .hr-title{
+        font-size: $font-size-24;
+        font-family: $font-family-serif;
+        color: #012c45;
+        line-height:1;
+    }
+    .hr-job{
+        font-size: $font-size-16;
+        font-family: $font-family-sans-serif;
+        color: #52565a;
+    }
+    .blockquote-wrapper{
+        @media #{$tablet}{
+            padding-top:90px;
+        }
+    }
+    .img-pad-40 {
+        margin-bottom:40px;
+        img{
+            margin-bottom:40px;
+        }
+    }
+    .paragraphs-items{
+        .paragraphs-item-header-title{
+            .field-item {
+                @media #{$tablet}{
+                    padding:50px 0;
+                    margin:0;
+                }
+            }
+        }
+    }
+
+
+    .field-item.odd{
+        .multiblock .col-sm-6{
+            padding:0;
+            margin:0 auto;
+            float:none;
+            max-width:300px;
+        }
+    }
+    .field-type-paragraphs > .field-items >.field-item.even:last-child{
+        max-width:850px;
+        margin:0 auto;
+        .multiblock .cta-link a{
+            display:block;
+            width:100%;
+            text-align: center;
+        }
+    }
+}
+body.page-node-12221:not(.admin-menu),
+body.page-node-13419:not(.admin-menu){
+    .paragraphs-items{
+        .field-items{
+            .field-item:first-child{
+                @media #{$tablet}{
+                    margin-top:-33px;
+                }
+            }
         }
     }
 }

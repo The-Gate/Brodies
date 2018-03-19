@@ -54,14 +54,13 @@ if (isset($content['field_open_in_new_tab_']['#items'][0]['value'])) {
   unset($content['field_open_in_new_tab_']);
 }
 $linkBackgroundStyle = '';
-$backgroundImageStyle = null;
+$linkWrapperBackgroundStyle = '';
 if (isset($content['field_title_icon']['#items'][0])) {
   $height = $content['field_title_icon']['#items'][0]['height'];
   $width = $content['field_title_icon']['#items'][0]['width'];
   $img_url = file_create_url($content['field_title_icon']['#items'][0]['uri']);
-  $backgroundImageStyle = 'background-image: url(\'' . $img_url . '\')';
   $button_height = (($height + 20) > 60) ? ($height + 20) : 60;
-  $backgroundImageDimensionsStyle = 'padding-left: ' . ($width + 20) . 'px;width:calc(100vw - 40px); max-width:100%; height:' . $button_height . 'px; background-position:10px 50%; display:table-cell; vertical-align:middle; ';
+  $linkBackgroundStyle = 'style="background: url(\'' . $img_url . '\'); padding-left: ' . ($width + 20) . 'px;width:calc(100vw - 40px); max-width:100%; height:' . $button_height . 'px; background-position:0 50%; display:table-cell; vertical-align:middle; background-repeat:no-repeat;"';
 
   unset($content['field_title_icon']);
 }
@@ -69,31 +68,23 @@ if (isset($content['field_title_icon']['#items'][0])) {
 if (isset($content['field_lp_blk_1_colour'][0]['#markup'])) {
   $colour_raw = trim($content['field_lp_blk_1_colour'][0]['#markup']);
   if (strlen($colour_raw) == 7) {
-    $linkBackgroundStyle = 'style="background: ' . $colour_raw . ';';
-    if (isset($backgroundImageStyle)) {
-      $linkBackgroundStyle.= $backgroundImageDimensionsStyle . $backgroundImageStyle . '; background-repeat:no-repeat;';
-    }
-    $linkBackgroundStyle .= '"';
+    $linkWrapperBackgroundStyle = 'style="background: ' . $colour_raw . ';"';
   }
   elseif (strlen($colour_raw) > 7) {
     $colour_array = explode(' ', $colour_raw);
     if (count($colour_array) == 2) {
-      $linkBackgroundStyle = ' style="background: ' . $colour_array[0] . ';';
-      if (isset($backgroundImageStyle)) {
-        $linkBackgroundStyle .= $backgroundImageDimensionsStyle . $backgroundImageStyle . '; background-repeat:no-repeat;' . $backgroundImageStyle . ',';
-      }
-      else {
-        $linkBackgroundStyle .='background:';
-      }
-      $linkBackgroundStyle .='linear-gradient(' . $colour_array[0] . ',' . $colour_array[1] . ');" ';
+      $linkWrapperBackgroundStyle = ' style="background: ' . $colour_array[0] . ';background: linear-gradient(' . $colour_array[0] . ',' . $colour_array[1] . ');" ';
     }
   }
 
+  if ((strlen($linkWrapperBackgroundStyle) > 0) && (strlen($linkBackgroundStyle) == 0)) {
+    $linkBackgroundStyle = 'style="background:transparent;"';
+  }
   unset($content['field_lp_blk_1_colour']);
 }
 // build link
 if (isset($link)) {
-  $link_output = '<div class="cta-link">';
+  $link_output = '<div class="cta-link"' . $linkWrapperBackgroundStyle . '>';
   if (!$is_webform_link) {
     $new_tab = ($open_in_new_link) ? ' target="_blank"' : '';
     $link_output .= '<a href="' . $link . '"' . $new_tab . $linkBackgroundStyle . '>' . $linktext . '</a>';
