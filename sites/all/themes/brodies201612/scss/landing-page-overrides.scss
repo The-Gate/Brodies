@@ -598,7 +598,6 @@ blockquote{
 //////////////////////////////
 
 // /BeingBrodies
-
 .page-node-12221,
 .page-node-13419,
 .page-node-13561{
@@ -665,5 +664,15 @@ body.page-node-13561:not(.admin-menu){
                 }
             }
         }
+    }
+}
+
+// BOrganised
+.page-node-12225{
+    .multiblock .col-sm-6{
+        padding:0;
+        margin:0 auto;
+        float:none;
+        max-width:300px;       
     }
 }

@@ -114,12 +114,11 @@
                 return false;
             });
 
-
             // webform pop up
             $('.wf').click(function (e) {
                 e.preventDefault();
                 var thisFormEl = $(this).data('inputElement');
-                if (!(thisFormEl == undefined)) {
+                if (!(thisFormEl == undefined) && !(thisFormEl == '')){
                     var radiogroup = $('#webform #' + thisFormEl).attr('name');
                     $('#webform input[name="' + radiogroup + '"]').attr('checked', false);
                     $('#webform #' + thisFormEl).attr('checked', 'checked');
@@ -354,7 +353,7 @@
             // landing page - paragraphs version
             // if the first content block is a video, move hte <a name. below it
             if ($('body.node-type-landing-page').length > 0) {
-                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtu beframe').closest('.field-item').after($('#main-content-marker'));
+                $('.paragraphs-items-field-layout-blocks > .field-name-field-layout-blocks > .field-items > .field-item:first-child').find('.youtubeframe').closest('.field-item').after($('#main-content-marker'));
             }
             function doneResizing() {
                 readMoreSetup();
