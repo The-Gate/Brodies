@@ -703,6 +703,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_type',
+    'global_block_settings' => 1,
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -713,6 +714,7 @@ function ct_shared_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'seminar' => 'Seminar',
+        'webinar' => 'Webinar',
         'event' => 'Event',
       ),
       'allowed_values_function' => '',
