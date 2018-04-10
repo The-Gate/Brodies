@@ -5,6 +5,7 @@ package = Brodies
 dependencies[] = blockreference
 dependencies[] = ct_shared_fields
 dependencies[] = features
+dependencies[] = field_collection
 dependencies[] = field_group
 dependencies[] = file
 dependencies[] = image
