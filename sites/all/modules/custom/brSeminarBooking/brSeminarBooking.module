@@ -101,7 +101,7 @@ function brSeminarBooking_events_checkout() {
 
 // make sure there is a seminar matching this nid
     $query = db_select('node', 'n');
-    $query->join('field_data_field_event_type', 'e', 'e.revision_id = n.vid WHERE field_event_type_value = \'seminar\' AND n.nid = :nid', array(':nid' => $_GET['book-seminar']));
+    $query->join('field_data_field_event_type', 'e', 'e.revision_id = n.vid WHERE (field_event_type_value = \'seminar\' OR field_event_type_value = \'webinar\') AND n.nid = :nid', array(':nid' => $_GET['book-seminar']));
 
     $count = $query->countQuery()->execute()->fetchField();
 
@@ -134,8 +134,11 @@ function brSeminarBooking_page_seminars_checkout() {
     $out .= '<div class="seminars" style="margin-bottom:30px;">';
     $nodes = node_load_multiple($sdata);
     foreach ($nodes as $nid => $node) {
-      $location = node_load($node->field_event_location[LANGUAGE_NONE][0]['nid']);
-      $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $location->title . '<br>Date: ' . format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_') . '</p></div>' . brSeminarBooking_book_link((object) array('nid' => $nid));
+      //set location
+      $locationTitle = _getLocation($node->field_event_location[LANGUAGE_NONE][0]['nid']);
+      // set date
+      $dateTitle = _getDate($node->field_event_date[LANGUAGE_NONE][0]['value']);
+      $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $locationTitle . '<br>Date: ' . $dateTitle . '</p></div>' . brSeminarBooking_book_link((object) array('nid' => $nid));
     }
     $out .= '<div class="clearfix"></div></div>';
     $out .= '<p>Please remove any seminars that you are no longer interested in and complete the form below to book your ' . format_plural(count($sdata), 'place', 'places') . '.</p>';
@@ -283,16 +286,20 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $from = $values['email'];
   $out = '';
   $out .= '<!DOCTYPE html><html><head><title>Seminar Booking Request</title></head><body>';
-  $out .= $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . "on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
+  $out .= $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
   $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
 
   $nodes = node_load_multiple($_SESSION['seminars']);
   foreach ($nodes as $row) {
-    $location = node_load($row->field_event_location[LANGUAGE_NONE][0]['nid']);
+    //set location
+    $locationTitle = _getLocation($row->field_event_location[LANGUAGE_NONE][0]['nid']);
+    // set date
+    $dateTitle = _getDate($row->field_event_date[LANGUAGE_NONE][0]['value']);
+
     $out .= "<tr>";
     $out .= "<td>" . l($row->title, 'node/' . $row->nid, array('absolute' => TRUE)) . "</td>";
-    $out .= "<td>" . $location->title . "</td>";
-    $out .= "<td>" . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value']);
+    $out .= "<td>" . $locationTitle . "</td>";
+    $out .= "<td>" . $dateTitle;
     if (isset($row->field_event_date[LANGUAGE_NONE][0]['value2'])) {
       $out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
     }
@@ -423,7 +430,7 @@ function brSeminarBooking_events_waitinglist() {
 
 // make sure there is a seminar matching this nid
     $query = db_select('node', 'n');
-    $query->join('field_data_field_event_type', 'e', 'e.revision_id = n.vid WHERE field_event_type_value = \'seminar\' AND n.nid = :nid', array(':nid' => $_GET['seminars-waitinglist']));
+    $query->join('field_data_field_event_type', 'e', 'e.revision_id = n.vid WHERE (field_event_type_value = \'seminar\' OR field_event_type_value = \'webinar\')AND n.nid = :nid', array(':nid' => $_GET['seminars-waitinglist']));
     $count = $query->countQuery()->execute()->fetchField();
 
     if ((int) $count == 1) {
@@ -456,8 +463,12 @@ function brSeminarBooking_page_seminars_waitinglist() {
     $out .= '<div class="seminars" style="margin-bottom:30px;">';
     $nodes = node_load_multiple($sdata);
     foreach ($nodes as $nid => $node) {
-      $location = node_load($node->field_event_location[LANGUAGE_NONE][0]['nid']);
-      $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $location->title . '<br>Date: ' . format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_') . '</p></div><div class="col-sm-3">' . brSeminarBooking_waitinglist_link((object) array('nid' => $nid)) . '</div>';
+      //set location
+      $locationTitle = _getLocation($node->field_event_location[LANGUAGE_NONE][0]['nid']);
+      // set date
+      $dateTitle = _getDate($node->field_event_date[LANGUAGE_NONE][0]['value']);
+
+      $out .= '<div class="col-sm-9"><p><strong>' . l($node->title, 'node/' . $nid) . '</strong><br>Location: ' . $locationTitle . '<br>Date: ' . $dateTitle . '</p></div><div class="col-sm-3">' . brSeminarBooking_waitinglist_link((object) array('nid' => $nid)) . '</div>';
     }
 
     $out .= '<div class="clearfix"></div></div>';
@@ -561,11 +572,15 @@ function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
 
   $nodes = node_load_multiple($_SESSION['seminars-waitinglist']);
   foreach ($nodes as $row) {
-    $location = node_load($row->field_event_location[LANGUAGE_NONE][0]['nid']);
+    //set location
+    $locationTitle = _getLocation($row->field_event_location[LANGUAGE_NONE][0]['nid']);
+    // set date
+    $dateTitle = _getDate($row->field_event_date[LANGUAGE_NONE][0]['value']);
+
     $out .= "<tr>";
     $out .= "<td>" . l($row->title, 'node/' . $row->nid, array('absolute' => TRUE)) . "</td>";
-    $out .= "<td>" . $location->title . "</td>";
-    $out .= "<td>" . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value']);
+    $out .= "<td>" . $locationTitle . "</td>";
+    $out .= "<td>" . $dateTitle;
     if (isset($row->field_event_date[LANGUAGE_NONE][0]['value2'])) {
       $out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
     }
@@ -629,7 +644,7 @@ function brSeminarBooking_waitinglist_form_mail($key, &$message, $params) {
 }
 
 function brSeminarBooking_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'event' && $view_mode == 'full') {
+  if ($node->type == 'event' && $view_mode == 'full' && !(empty($node->field_event_date[LANGUAGE_NONE][0]['value']))) {
     if (!empty($_GET['calendar'])) {
       $cal_dtstart = brSeminar_dateToCal($node->field_event_date[LANGUAGE_NONE][0]['value']);
       $cal_dtend = brSeminar_dateToCal($node->field_event_date[LANGUAGE_NONE][0]['value2']);
@@ -706,4 +721,23 @@ function brSeminarBooking_calendar_links() {
       . l('vCalendar', $_GET['q'], array('query' => array('calendar' => 'vcal')))
       . '</div></div>';
   return $calendar_links;
+}
+
+function _getLocation($locationInput) {
+  $locationOut = 'TBC';
+  if (!(empty($locationInput))) {
+    $location = node_load($node->field_event_location[LANGUAGE_NONE][0]['nid']);
+    if (!$location == false) {
+      $locationOut = $location->title;
+    }
+  }
+  return $locationOut;
+}
+
+function _getDate($dateInput) {
+  $dateOut = 'TBC';
+  if (!(empty($dateInput))) {
+    $dateTitle = format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_');
+  }
+  return $dateOut;
 }
