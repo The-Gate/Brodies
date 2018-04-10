@@ -203,6 +203,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['filters']['field_event_type_value']['field'] = 'field_event_type_value';
   $handler->display->display_options['filters']['field_event_type_value']['value'] = array(
     'seminar' => 'seminar',
+    'webinar' => 'webinar',
   );
   $handler->display->display_options['filters']['field_event_type_value']['group'] = 1;
   /* Filter criterion: Filter Date -  start date (field_filter_date) (selective) */
