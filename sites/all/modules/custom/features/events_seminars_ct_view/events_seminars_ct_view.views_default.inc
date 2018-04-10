@@ -54,6 +54,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['field_event_date']['label'] = 'Date';
   $handler->display->display_options['fields']['field_event_date']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_event_date']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_date']['empty'] = 'TBC';
   $handler->display->display_options['fields']['field_event_date']['settings'] = array(
     'format_type' => 'brodies_date_only_long_',
     'fromto' => 'both',
@@ -69,6 +70,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['field_event_date_2']['label'] = 'Time';
   $handler->display->display_options['fields']['field_event_date_2']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_event_date_2']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_date_2']['empty'] = 'TBC';
   $handler->display->display_options['fields']['field_event_date_2']['settings'] = array(
     'format_type' => 'brodies_time_only',
     'fromto' => 'both',
@@ -84,6 +86,7 @@ function events_seminars_ct_view_views_default_views() {
   $handler->display->display_options['fields']['field_event_location']['label'] = 'Location';
   $handler->display->display_options['fields']['field_event_location']['element_type'] = 'span';
   $handler->display->display_options['fields']['field_event_location']['element_label_type'] = 'span';
+  $handler->display->display_options['fields']['field_event_location']['empty'] = 'TBC';
   $handler->display->display_options['fields']['field_event_location']['type'] = 'node_reference_plain';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
@@ -702,6 +705,65 @@ function events_seminars_ct_view_views_default_views() {
     'event' => 'event',
   );
   $handler->display->display_options['filters']['field_event_type_value']['group'] = 1;
+
+  /* Display: Main Seminar Listing - TBC */
+  $handler = $view->new_display('block', 'Main Seminar Listing - TBC', 'block_4');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Seminars coming soon';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'event' => 'event',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Visibility time (field_event_visibility) */
+  $handler->display->display_options['filters']['field_event_visibility_value']['id'] = 'field_event_visibility_value';
+  $handler->display->display_options['filters']['field_event_visibility_value']['table'] = 'field_data_field_event_visibility';
+  $handler->display->display_options['filters']['field_event_visibility_value']['field'] = 'field_event_visibility_value';
+  $handler->display->display_options['filters']['field_event_visibility_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_event_visibility_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_event_visibility_value']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['field_event_visibility_value']['default_date'] = 'now';
+  /* Filter criterion: Content: When -  start date (field_event_date) */
+  $handler->display->display_options['filters']['field_event_date_value']['id'] = 'field_event_date_value';
+  $handler->display->display_options['filters']['field_event_date_value']['table'] = 'field_data_field_event_date';
+  $handler->display->display_options['filters']['field_event_date_value']['field'] = 'field_event_date_value';
+  $handler->display->display_options['filters']['field_event_date_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_event_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_event_date_value']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['field_event_date_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Type (field_event_type) */
+  $handler->display->display_options['filters']['field_event_type_value']['id'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['table'] = 'field_data_field_event_type';
+  $handler->display->display_options['filters']['field_event_type_value']['field'] = 'field_event_type_value';
+  $handler->display->display_options['filters']['field_event_type_value']['value'] = array(
+    'seminar' => 'seminar',
+    'webinar' => 'webinar',
+  );
+  $handler->display->display_options['filters']['field_event_type_value']['group'] = 1;
+  $handler->display->display_options['select_labels'] = array(
+    'field_event_l_details_value_selective' => 'Location',
+    'field_related_sector_nid_selective' => 'Sector',
+    'field_event_date_value_selective' => 'Date',
+    'field_related_service_nid_selective' => 'Services ',
+    'field_event_location_nid_selective' => 'Location',
+    'field_filter_date_value_selective' => 'Date',
+  );
   $export['seminars'] = $view;
 
   return $export;
