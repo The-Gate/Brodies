@@ -403,6 +403,12 @@ body:not(.admin-menu){
                 padding-right:$full-margin;
             }
         }
+        .col-sm-6:only-of-type{
+            padding:0;
+            margin:0 auto;
+            float:none;
+            max-width:300px;       
+        }
     }
     .field-name-field-cta-imge{
         padding-bottom:25px;
@@ -598,7 +604,6 @@ blockquote{
 //////////////////////////////
 
 // /BeingBrodies
-
 .page-node-12221,
 .page-node-13419,
 .page-node-13561{
@@ -635,15 +640,6 @@ blockquote{
         }
     }
 
-
-    .field-item.odd{
-        .multiblock .col-sm-6{
-            padding:0;
-            margin:0 auto;
-            float:none;
-            max-width:300px;
-        }
-    }
     .field-type-paragraphs > .field-items >.field-item.even:last-child{
         max-width:850px;
         margin:0 auto;
