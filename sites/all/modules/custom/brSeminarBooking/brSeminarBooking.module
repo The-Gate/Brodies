@@ -71,7 +71,13 @@ function brSeminarBooking_book_link($data) {
     $title = 'remove';
   }
   else {
-    $title = 'Book Now';
+    // if no date, change button title
+    if (isset($data->field_event_date[LANGUAGE_NONE][0]['value'])) {
+      $title = 'Book Now';
+    }
+    else {
+      $title = 'Register Interest';
+    }
   }
   return '<div class="seminar-buttons  col-md-3"><div class="seminar-button add">' . l(
           $title, $_GET['q'], array(
@@ -712,14 +718,18 @@ function brSeminar_escapeString($string) {
 
 function brSeminarBooking_calendar_links() {
   $calendar_links = '';
-  $calendar_links .= '<div class="calendars seminar-buttons col-md-3 no-padding-left-md">'
-      . '<div class="seminar-button calendar-link">'
-      . l('iCalendar', $_GET['q'], array('query' => array('calendar' => 'ical')))
-      . '</div></div>'
-      . '<div class="calendars seminar-buttons col-md-3 no-padding-right-md">'
-      . '<div class="seminar-button calendar-link">'
-      . l('vCalendar', $_GET['q'], array('query' => array('calendar' => 'vcal')))
-      . '</div></div>';
+  $nidArray = explode('/', $_GET['q']);
+  $node = node_load($nidArray[1]);
+  if (!empty($node->field_event_date[LANGUAGE_NONE][0]['value'])) {
+    $calendar_links .= '<div class="calendars seminar-buttons col-md-3 no-padding-left-md">'
+        . '<div class="seminar-button calendar-link">'
+        . l('iCalendar', $_GET['q'], array('query' => array('calendar' => 'ical')))
+        . '</div></div>'
+        . '<div class="calendars seminar-buttons col-md-3 no-padding-right-md">'
+        . '<div class="seminar-button calendar-link">'
+        . l('vCalendar', $_GET['q'], array('query' => array('calendar' => 'vcal')))
+        . '</div></div>';
+  }
   return $calendar_links;
 }
 
