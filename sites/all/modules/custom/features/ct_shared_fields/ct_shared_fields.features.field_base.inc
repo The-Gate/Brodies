@@ -508,10 +508,13 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_date',
+    'global_block_settings' => 1,
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
     'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
       'granularity' => array(
         'day' => 'day',
         'hour' => 'hour',
@@ -619,6 +622,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_location',
+    'global_block_settings' => 1,
     'indexes' => array(
       'nid' => array(
         0 => 'nid',
@@ -703,6 +707,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_type',
+    'global_block_settings' => 1,
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -713,6 +718,7 @@ function ct_shared_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'seminar' => 'Seminar',
+        'webinar' => 'Webinar',
         'event' => 'Event',
       ),
       'allowed_values_function' => '',
@@ -4398,6 +4404,33 @@ function ct_shared_fields_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text_long',
     'type_name' => 'service',
+  );
+
+  // Exported field_base: 'field_show_title'.
+  $field_bases['field_show_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_show_title',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_slide_image'.
