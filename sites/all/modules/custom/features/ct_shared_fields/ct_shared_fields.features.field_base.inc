@@ -269,6 +269,34 @@ function ct_shared_fields_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_columns_per_row_full'.
+  $field_bases['field_columns_per_row_full'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_columns_per_row_full',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        12 => 'Full Width',
+        6 => 'Two Per Row',
+        4 => 'Three Per row',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_cta_imge'.
   $field_bases['field_cta_imge'] = array(
     'active' => 1,

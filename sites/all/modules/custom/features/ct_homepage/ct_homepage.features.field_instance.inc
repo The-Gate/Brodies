@@ -11,6 +11,44 @@ function ct_homepage_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
+  // 'field_collection_item-field_home_cta_block-field_columns_per_row_full'.
+  $field_instances['field_collection_item-field_home_cta_block-field_columns_per_row_full'] = array(
+    'bundle' => 'field_home_cta_block',
+    'default_value' => array(
+      0 => array(
+        'value' => 12,
+      ),
+    ),
+    'default_value_function' => '',
+    'default_value_php' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_columns_per_row_full',
+    'label' => 'Columns per Row',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_home_cta_block-field_cta_imge'.
   $field_instances['field_collection_item-field_home_cta_block-field_cta_imge'] = array(
     'bundle' => 'field_home_cta_block',
@@ -63,7 +101,7 @@ function ct_homepage_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -99,46 +137,6 @@ function ct_homepage_field_default_field_instances() {
       ),
       'type' => 'text_textfield',
       'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_home_cta_block-field_full_width'.
-  $field_instances['field_collection_item-field_home_cta_block-field_full_width'] = array(
-    'bundle' => 'field_home_cta_block',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'default_value_function' => '',
-    'default_value_php' => '',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'hidden',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'field_name' => 'field_full_width',
-    'label' => 'Full Width',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 0,
     ),
   );
 
@@ -406,7 +404,7 @@ Purple: 8c5d9f',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -629,7 +627,7 @@ Purple: 8c5d9f',
   t('Banner Image');
   t('Body');
   t('Button Title');
-  t('Full Width');
+  t('Columns per Row');
   t('Highlight Colour');
   t('Home CTA Block');
   t('Link');

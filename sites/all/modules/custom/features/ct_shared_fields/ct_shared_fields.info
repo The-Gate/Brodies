@@ -21,6 +21,7 @@ features[field_base][] = field_as_completed
 features[field_base][] = field_banner_image
 features[field_base][] = field_block_wrapper
 features[field_base][] = field_columns_per_row
+features[field_base][] = field_columns_per_row_full
 features[field_base][] = field_cta_imge
 features[field_base][] = field_cta_link
 features[field_base][] = field_cta_text

@@ -29,7 +29,14 @@
 ?>
 <?php
 // set up the CTA width
-switch ($content['field_full_width'][0]['#markup']) {
+
+$col_count = $content['field_columns_per_row_full']['#items'][0]['value'];
+
+
+switch ($col_count) {
+  case '4':
+    $picture_name = 'col_4';
+    break;
   case '6':
     $picture_name = 'col_6';
     break;
@@ -37,7 +44,7 @@ switch ($content['field_full_width'][0]['#markup']) {
     $picture_name = 'col_12';
     break;
 }
-$col = 'col-md-' . $content['field_full_width'][0]['#markup'];
+$col = 'col-md-' . $col_count;
 
 // overlay
 $overlay_title = '';
