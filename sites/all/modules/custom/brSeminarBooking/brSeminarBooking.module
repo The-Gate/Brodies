@@ -284,36 +284,59 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   else {
     $admin_email = 'seminars@brodies.com';
   }
-  global $user;
   $values = $form_values['values'];
+  $seminarBooking = false;
+  $webinarBooking = false;
+  $emailtxtSeminarOnly = "<p>Seminar only text.</p>";
+  $emailtxtWebinarOnly = "<p>Webinar only text.</p>";
+  $emailtxtSeminarWebinar = "<p>Webinar and Seminar text.</p>";
 
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $from = $values['email'];
-  $out = '';
-  $out .= '<!DOCTYPE html><html><head><title>Seminar Booking Request</title></head><body>';
-  $out .= $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " on " . date("Y-m-d H:i", time()) . " booked the following seminars:";
-  $out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
+  // email content to Brodies admin
+  $admin_out = '';
+  // email content to the user
+  $client_out = '';
+  // table data used in both
+  $table_out = '';
+
+  $admin_out .= '<!DOCTYPE html><html><head><title>Seminar Booking Request</title></head><body>';
+  $client_out .= '<!DOCTYPE html><html><head><title>Seminar Booking</title></head><body>';
+
+  $admin_out .= '<p>' . $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " on " . date("Y-m-d H:i", time()) . " booked the following seminars:</p>";
+  $client_out .= '<p>Hi '. $values['first-name'] . " " . $values['surname'] . ",</p>";
+
+  $table_out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
 
   $nodes = node_load_multiple($_SESSION['seminars']);
   foreach ($nodes as $row) {
+    // get type
+    switch ($row->field_event_type[LANGUAGE_NONE][0]['value']) {
+      case 'seminar':
+        $seminarBooking = true;
+        break;
+
+      case 'webinar':
+        $webinarBooking = true;
+        break;
+    }
     //set location
     $locationTitle = _getLocation($row->field_event_location[LANGUAGE_NONE][0]['nid']);
     // set date
     $dateTitle = _getDate($row->field_event_date[LANGUAGE_NONE][0]['value']);
 
-    $out .= "<tr>";
-    $out .= "<td>" . l($row->title, 'node/' . $row->nid, array('absolute' => TRUE)) . "</td>";
-    $out .= "<td>" . $locationTitle . "</td>";
-    $out .= "<td>" . $dateTitle;
+    $table_out .= "<tr>";
+    $table_out .= "<td>" . l($row->title, 'node/' . $row->nid, array('absolute' => TRUE)) . "</td>";
+    $table_out .= "<td>" . $locationTitle . "</td>";
+    $table_out .= "<td>" . $dateTitle;
     if (isset($row->field_event_date[LANGUAGE_NONE][0]['value2'])) {
-      $out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
+      $table_out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
     }
-    $out .= "</td>";
-    $out .= "<td>1</td></tr>";
+    $table_out .= "</td>";
+    $table_out .= "<td>1</td></tr></table><br><br>";
   }
-  $out .= '</table><br><br>
-  <b>Lead Delegate</b><br>
+  $table_out .= '<b>Lead Delegate</b><br>
 <br>
 <table border="1" width="100%">
 <tbody>
@@ -359,15 +382,30 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 </tr>
 </tbody>
 </table></body></html>';
-  $params = array(
-    'body' => $out,
+
+  $admin_out .= $table_out;
+  if ($seminarBooking and $webinarBooking) {
+    $client_out .= $emailtxtSeminarWebinar;
+  }
+  elseif ($seminarBooking and ! $webinarBooking) {
+    $client_out .= $emailtxtSeminarOnly;
+  }
+  elseif (!$seminarBooking and $webinarBooking) {
+    $client_out .= $emailtxtWebinarOnly;
+  }
+
+  $client_out .= $table_out;
+  $admin_params = array(
+    'body' => $admin_out,
     'subject' => 'Seminar Booking Request',
   );
-
-
-
-  if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $params, $from, TRUE)) {
-    unset($_SESSION['seminars']);
+  $client_params = array(
+    'body' => $client_out,
+    'subject' => 'Seminar Bookings',
+  );
+  if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
+      drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
+     unset($_SESSION['seminars']);
 //redirect to thank you
     $_REQUEST['destination'] = 'thank-you-checkout';
     drupal_goto('thank-you-checkout');
@@ -736,7 +774,7 @@ function brSeminarBooking_calendar_links() {
 function _getLocation($locationInput) {
   $locationOut = 'TBC';
   if (!(empty($locationInput))) {
-    $location = node_load($node->field_event_location[LANGUAGE_NONE][0]['nid']);
+    $location = node_load($locationInput);
     if (!$location == false) {
       $locationOut = $location->title;
     }
@@ -747,7 +785,7 @@ function _getLocation($locationInput) {
 function _getDate($dateInput) {
   $dateOut = 'TBC';
   if (!(empty($dateInput))) {
-    $dateTitle = format_date($node->field_event_date[LANGUAGE_NONE][0]['value'], 'brodies_date_only_long_');
+    $dateOut = format_date($dateInput, 'brodies_date_only_long_');
   }
   return $dateOut;
 }
