@@ -31,3 +31,5 @@ features[field_instance][] = node-homepage-field_home_cta_block
 features[node][] = homepage
 features[taxonomy][] = slideshow_type
 features_exclude[dependencies][ctools] = ctools
+features_exclude[field_base][field_show_title] = field_show_title
+features_exclude[field_instance][node-homepage-field_show_title] = node-homepage-field_show_title
