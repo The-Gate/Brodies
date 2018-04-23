@@ -165,7 +165,38 @@ a {
 .box .img-responsive{
     width:100% !important;
 }
+.cta-wrapper{
+    .cta-overlay-wrapper{
+        padding:20px;
+        background: rgb(22,43,72);
+        text-align: center;
+        @media #{$normal}{
+            position: absolute;  
+            left: 50%;                       
+            top: 50%;                          
+            width: 75%;                       
+            transform: translate(-50%, -50%); 
+            background: rgba(22,43,72,.8);
+        }
 
+        @media #{$wide}{                   
+            width: 44%;    
+        }
+        .cta-overlay-inner{
+            position: relative;  
+            background: $colour-white-01;
+            padding:10px 20px;
+            color: $colour-blue-01;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight:700;
+            @media #{$normal}{
+                width:60%;
+                margin-left:20%;
+            }
+        }
+    }
+}
 @media #{$tablet} {
     .pull-left-sm {
         float: left;
