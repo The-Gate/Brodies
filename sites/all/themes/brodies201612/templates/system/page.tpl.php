@@ -91,7 +91,9 @@ if (isset($node)) {
   switch ($node->type) {
     // don't display the title on these content types;
     case 'homepage':
-      unset($title);
+      if (!isset($node->field_show_title) or $node->field_show_title[LANGUAGE_NONE][0]['value'] == 0) {
+        unset($title);
+      }
       $show_breadcrumb_filler = false;
       break;
     case 'overview':

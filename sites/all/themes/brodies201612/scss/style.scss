@@ -101,6 +101,34 @@ hr {
     border: 0;
     background: $colour-orange-01;
 }
+
+table{
+    @media #{$mobile-max}{
+        min-width:450px;
+    }
+    th{
+        padding:10px;
+        color:$colour-white-01;
+        background:$colour-blue-01;
+        font-weight: 400;
+        border-right: 1px solid $colour-white-01;
+        &:last-of-type{
+            border-right: 0;
+        }
+
+    }    
+    tr{
+        background: rgba(0,43,68,0.15);
+    }
+    td{
+        padding:15px 10px;
+        border-right: 1px solid $colour-blue-01;
+        &:last-of-type{
+            border-right: 0;
+        }
+
+    }
+}
 .no-padding{
     padding-left:0;
     padding-right:0;
@@ -164,6 +192,17 @@ a {
 }
 .box .img-responsive{
     width:100% !important;
+}
+.infopanel-wrapper-outer{
+    background:$colour-blue-01;
+    color: $colour-white-01;
+    padding:20px;
+    margin:2em auto;
+    .infopanel-wrapper{
+        padding:1em 0;
+        border-top:1px solid $colour-white-01;
+        border-bottom:1px solid $colour-white-01;
+    }
 }
 .cta-wrapper{
     .cta-overlay-wrapper{
@@ -1227,6 +1266,9 @@ h2.block-title{
 
 }
 /********************** Homepage CTA***********************/
+.node-type-homepage .field-name-body{
+    margin-top:1em;
+}
 .field-collection-container{
     border-bottom:0;
     margin-bottom:0;
