@@ -31,19 +31,7 @@
 // set up the CTA width
 
 $col_count = $content['field_columns_per_row_full']['#items'][0]['value'];
-
-
-switch ($col_count) {
-  case '4':
-    $picture_name = 'col_4';
-    break;
-  case '6':
-    $picture_name = 'col_6';
-    break;
-  case '12':
-    $picture_name = 'col_12';
-    break;
-}
+$picture_name = 'col_' . $col_count;
 $col = 'col-md-' . $col_count;
 
 // overlay

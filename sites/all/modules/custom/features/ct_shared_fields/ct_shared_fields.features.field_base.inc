@@ -289,6 +289,7 @@ function ct_shared_fields_field_default_field_bases() {
         12 => 'Full Width',
         6 => 'Two Per Row',
         4 => 'Three Per row',
+        3 => 'Four Per row',
       ),
       'allowed_values_function' => '',
       'allowed_values_php' => '',
