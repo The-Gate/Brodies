@@ -305,7 +305,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $client_out .= '<!DOCTYPE html><html><head><title>Seminar Booking</title></head><body>';
 
   $admin_out .= '<p>' . $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " on " . date("Y-m-d H:i", time()) . " booked the following seminars:</p>";
-  $client_out .= '<p>Hi '. $values['first-name'] . " " . $values['surname'] . ",</p>";
+  $client_out .= '<p>Hi ' . $values['first-name'] . " " . $values['surname'] . ",</p>";
 
   $table_out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
 
@@ -334,8 +334,10 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
       $table_out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
     }
     $table_out .= "</td>";
-    $table_out .= "<td>1</td></tr></table><br><br>";
+    $table_out .= "<td>1</td></tr>";
   }
+
+  $table_out .= "</table><br><br>";
   $table_out .= '<b>Lead Delegate</b><br>
 <br>
 <table border="1" width="100%">
@@ -405,7 +407,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   );
   if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
       drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
-     unset($_SESSION['seminars']);
+   // unset($_SESSION['seminars']);
 //redirect to thank you
     $_REQUEST['destination'] = 'thank-you-checkout';
     drupal_goto('thank-you-checkout');
