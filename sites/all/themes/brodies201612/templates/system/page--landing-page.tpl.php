@@ -256,3 +256,21 @@ endif;
       </footer>
   </div>
 <?php endif; ?>
+<?php if (isset($node->nid) && $node->nid == 13652) { ?>
+  <script type="text/javascript">
+    var capterra_vkey = 'ec8cd8fc5f2e036509fd174bd7f963cb',
+            capterra_vid = '2109318',
+            capterra_prefix = (('https:' == document.location.protocol) ? 'https://ct.capterra.com' : 'http://ct.capterra.com');
+
+    (function () {
+        var ct = document.createElement('script');
+      ct.type = 'text/javascript';
+      ct.async = true;
+        ct.src = capterra_prefix + '/capterra_tracker.js?vid=' + capterra_vid + '&vkey=' + capterra_vkey;
+        var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ct, s);
+    })();
+  </script>
+  <?php
+}
+?>

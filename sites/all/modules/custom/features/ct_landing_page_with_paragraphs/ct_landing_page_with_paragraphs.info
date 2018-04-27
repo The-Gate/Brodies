@@ -42,6 +42,7 @@ features[field_instance][] = node-landing_page-field_l_left
 features[field_instance][] = node-landing_page-field_layout_blocks
 features[field_instance][] = node-landing_page-field_lp_blk_1_colour
 features[field_instance][] = node-landing_page-field_lp_cta_l_title
+features[field_instance][] = node-landing_page-field_lp_cta_r_title
 features[field_instance][] = node-landing_page-field_title_icon
 features[field_instance][] = paragraphs_item-header_title-field_cta_text
 features[field_instance][] = paragraphs_item-multi_column-field_block_wrapper
