@@ -1943,6 +1943,12 @@ body{
         &:first-of-type{
             margin-top:30px;
         }
+
+        @media #{$normal}{
+            &#block-views-seminars-main-seminar-listing{
+                margin-top:40px;
+            }
+        }
     }
     .region-pre-content{
         .block-views{

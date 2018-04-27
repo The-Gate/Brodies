@@ -226,7 +226,7 @@ function events_seminars_ct_view_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_event_date',
     'label' => 'When',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',
@@ -236,15 +236,15 @@ function events_seminars_ct_view_field_default_field_instances() {
     ),
     'weight' => 4,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'date',
       'settings' => array(
         'display_all_day' => 0,
         'increment' => 1,
-        'input_format' => 'd/m/Y - H:i',
+        'input_format' => 'site-wide',
         'input_format_custom' => '',
         'label_position' => 'above',
-        'repeat_collapsed' => '',
+        'no_fieldset' => 0,
         'text_parts' => array(),
         'year_range' => '-0:+3',
       ),
@@ -489,11 +489,7 @@ function events_seminars_ct_view_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_event_location'.
   $field_instances['node-event-field_event_location'] = array(
     'bundle' => 'event',
-    'default_value' => array(
-      0 => array(
-        'nid' => '',
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -541,19 +537,15 @@ function events_seminars_ct_view_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_event_location',
     'label' => 'Where',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'weight' => 6,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'autocomplete_match' => 'contains',
-        'default_value_php' => NULL,
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'options_select',
       'weight' => 8,
     ),
@@ -642,11 +634,9 @@ function events_seminars_ct_view_field_default_field_instances() {
   // Exported field_instance: 'node-event-field_event_type'.
   $field_instances['node-event-field_event_type'] = array(
     'bundle' => 'event',
-    'default_value' => array(
-      0 => array(
-        'value' => '',
-      ),
-    ),
+    'default_value' => NULL,
+    'default_value_function' => '',
+    'default_value_php' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -701,11 +691,9 @@ function events_seminars_ct_view_field_default_field_instances() {
     ),
     'weight' => -3,
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'default_value_php' => NULL,
-      ),
+      'settings' => array(),
       'type' => 'options_select',
       'weight' => -3,
     ),
@@ -849,7 +837,7 @@ function events_seminars_ct_view_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_filter_date',
     'label' => 'Filter Date',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
       'default_value2' => 'same',

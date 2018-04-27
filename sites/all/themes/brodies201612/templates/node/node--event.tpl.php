@@ -79,10 +79,9 @@
  * @ingroup templates
  */
 $book = '';
-if ($node->field_event_type[LANGUAGE_NONE][0]['value'] == 'seminar') {
+if ($node->field_event_type[LANGUAGE_NONE][0]['value'] == 'seminar' or $node->field_event_type[LANGUAGE_NONE][0]['value'] == 'webinar') {
   if ($node->field_event_full[LANGUAGE_NONE][0]['value']) {
-      $book = brSeminarBooking_waitinglist_link($node);
-          
+      $book = brSeminarBooking_waitinglist_link($node);  
   }
   else {
     $book = brSeminarBooking_book_link($node);

@@ -1,0 +1,4 @@
+name = Brodies - Form Customisations
+description = "Custom validation for content type: seminar"
+package = "Brodies"
+core = 7.x
