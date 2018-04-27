@@ -287,9 +287,9 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $values = $form_values['values'];
   $seminarBooking = false;
   $webinarBooking = false;
-  $emailtxtSeminarOnly = "<p>Seminar only text.</p>";
-  $emailtxtWebinarOnly = "<p>Webinar only text.</p>";
-  $emailtxtSeminarWebinar = "<p>Webinar and Seminar text.</p>";
+  $emailtxtSeminarOnly = "<p>Thank you for booking the following:</p>";
+  $emailtxtWebinarOnly = "<p>Thank you for booking the following:</p>";
+  $emailtxtSeminarWebinar = "<p>Thank you for booking the following:</p>";
 
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
@@ -407,7 +407,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   );
   if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
       drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
-   // unset($_SESSION['seminars']);
+    unset($_SESSION['seminars']);
 //redirect to thank you
     $_REQUEST['destination'] = 'thank-you-checkout';
     drupal_goto('thank-you-checkout');
