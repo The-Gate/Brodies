@@ -47,6 +47,11 @@
 ?>
 <?php
 $linktext = 'Start the conversation';
+
+if (isset($element['#object']->field_lp_cta_r_title[LANGUAGE_NONE][0]['safe_value'])) {
+  $linktext = $element['#object']->field_lp_cta_r_title[LANGUAGE_NONE][0]['safe_value'];
+}
+
 $link = '#';
 
 $inputEl = '';

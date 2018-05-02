@@ -84,7 +84,18 @@
                     }
                 });
             }
-
+            if($('.field-name-body table').length >0){
+                $('.field-name-body table').each(function (){
+                    $(this).addClass('table-striped').wrap('<div class="table-responsive"></div>');
+                    
+                });
+            }
+            if($('.infopanel-wrapper').length >0){
+                $('.infopanel-wrapper').each(function (){
+                    $(this).wrap('<div class="infopanel-wrapper-outer"></div>');
+                    
+                });
+            }
 
             // show / hide key contacts in sidebar second
             if ($('.sidebar-second .field-name-field-related-people > .field-items > .field-item').length > 2) {

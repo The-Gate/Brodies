@@ -269,6 +269,35 @@ function ct_shared_fields_field_default_field_bases() {
     'type' => 'list_integer',
   );
 
+  // Exported field_base: 'field_columns_per_row_full'.
+  $field_bases['field_columns_per_row_full'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_columns_per_row_full',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        12 => 'Full Width',
+        6 => 'Two Per Row',
+        4 => 'Three Per row',
+        3 => 'Four Per row',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_cta_imge'.
   $field_bases['field_cta_imge'] = array(
     'active' => 1,
@@ -508,15 +537,19 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_date',
+    'global_block_settings' => 1,
     'indexes' => array(),
     'locked' => 0,
     'module' => 'date',
     'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
       'granularity' => array(
         'day' => 'day',
         'hour' => 'hour',
         'minute' => 'minute',
         'month' => 'month',
+        'second' => 0,
         'year' => 'year',
       ),
       'repeat' => 0,
@@ -619,6 +652,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_location',
+    'global_block_settings' => 1,
     'indexes' => array(
       'nid' => array(
         0 => 'nid',
@@ -628,18 +662,40 @@ function ct_shared_fields_field_default_field_bases() {
     'module' => 'node_reference',
     'settings' => array(
       'referenceable_types' => array(
+        'application' => 0,
+        'asub' => 0,
+        'call_to_action' => 0,
+        'career' => 0,
+        'cnews' => 0,
         'cs' => 0,
+        'download' => 0,
         'event' => 0,
+        'graduate_content' => 0,
+        'graduate_homepage' => 0,
+        'hidden' => 0,
+        'homepage' => 0,
+        'landing_page' => 0,
+        'larea' => 0,
         'location' => 'location',
+        'lpage' => 0,
+        'lpage2' => 0,
+        'lpagef' => 0,
+        'lupdate' => 0,
+        'microsite_page' => 0,
+        'microsite_wrapper' => 0,
         'news' => 0,
         'overview' => 0,
         'page' => 0,
+        'parea' => 0,
+        'payment' => 0,
         'people' => 0,
+        'publication' => 0,
         'sector' => 0,
         'service' => 0,
         'slide' => 0,
-        'story' => 0,
         'video' => 0,
+        'webform' => 0,
+        'win' => 0,
       ),
       'view' => array(
         'args' => array(
@@ -703,6 +759,7 @@ function ct_shared_fields_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_event_type',
+    'global_block_settings' => 1,
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -713,6 +770,7 @@ function ct_shared_fields_field_default_field_bases() {
     'settings' => array(
       'allowed_values' => array(
         'seminar' => 'Seminar',
+        'webinar' => 'Webinar',
         'event' => 'Event',
       ),
       'allowed_values_function' => '',
@@ -4398,6 +4456,33 @@ function ct_shared_fields_field_default_field_bases() {
     'translatable' => 0,
     'type' => 'text_long',
     'type_name' => 'service',
+  );
+
+  // Exported field_base: 'field_show_title'.
+  $field_bases['field_show_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_show_title',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => '',
+        1 => '',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_slide_image'.

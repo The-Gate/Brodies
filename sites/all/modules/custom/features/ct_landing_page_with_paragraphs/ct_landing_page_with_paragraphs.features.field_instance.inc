@@ -734,7 +734,7 @@ leave blank to use the default site text colour;',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -850,7 +850,7 @@ gradient: #4fb5b1 #67b75e',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -874,7 +874,7 @@ gradient: #4fb5b1 #67b75e',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -924,6 +924,51 @@ gradient: #4fb5b1 #67b75e',
     ),
   );
 
+  // Exported field_instance: 'node-landing_page-field_lp_cta_r_title'.
+  $field_instances['node-landing_page-field_lp_cta_r_title'] = array(
+    'bundle' => 'landing_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_lp_cta_r_title',
+    'label' => 'Link Title',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 7,
+    ),
+  );
+
   // Exported field_instance: 'node-landing_page-field_title_icon'.
   $field_instances['node-landing_page-field_title_icon'] = array(
     'bundle' => 'landing_page',
@@ -940,7 +985,7 @@ gradient: #4fb5b1 #67b75e',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -984,7 +1029,7 @@ gradient: #4fb5b1 #67b75e',
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1319,6 +1364,7 @@ gradient: #4fb5b1 #67b75e');
   t('Link BG Colour');
   t('Link Icon');
   t('Link Text / Item Reference');
+  t('Link Title');
   t('Open in New Tab?');
   t('Person Wrapper');
   t('Please add the webform default item option id');

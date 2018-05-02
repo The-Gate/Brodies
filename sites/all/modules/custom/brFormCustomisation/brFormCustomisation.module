@@ -1,0 +1,31 @@
+<?php
+
+function brFormCustomisation_form_event_node_form_alter(&$form, &$form_state, $form_id) {
+  // There will already be some validate handlers added so you need to add to the
+  // array rather than overwrite it.
+  $form['#validate'][] = 'brFormCustomisation_event_form_validate';
+}
+
+function brFormCustomisation_event_form_validate($form, &$form_state) {
+  // check if a date has been set
+  if ((!($form_state['values']['field_event_date'][LANGUAGE_NONE][0]['value'] == '')) or ( !($form_state['values']['field_event_visibility'][LANGUAGE_NONE][0]['value'] == '')) or ( !($form_state['values']['field_filter_date'][LANGUAGE_NONE][0]['value'] == ''))) {
+    if ($form_state['values']['field_event_date'][LANGUAGE_NONE][0]['value'] == '') {
+      form_set_error('field_event_date', 'Please add event date');
+    }
+    if ($form_state['values']['field_event_visibility'][LANGUAGE_NONE][0]['value'] == '') {
+      form_set_error('field_event_visibility', 'Please add visibility time');
+    }
+    if ($form_state['values']['field_filter_date'][LANGUAGE_NONE][0]['value'] == '') {
+      form_set_error('field_filter_date', 'Please add filter date');
+    }
+  }
+
+  if ((!($form_state['values']['field_event_location'][LANGUAGE_NONE][0]['nid'] == '')) or ( !($form_state['values']['field_event_l_details'][LANGUAGE_NONE][0]['value'] == ''))) {
+    if ($form_state['values']['field_event_location'][LANGUAGE_NONE][0]['nid'] == '') {
+      form_set_error('field_event_location', 'Please select where this event is');
+    }
+    if ($form_state['values']['field_event_l_details'][LANGUAGE_NONE][0]['value'] == '') {
+      form_set_error('field_event_l_details', 'Please add the location');
+    }
+  }
+}

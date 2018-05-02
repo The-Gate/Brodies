@@ -57,6 +57,7 @@ function ct_landing_page_with_paragraphs_field_group_info() {
       1 => 'field_l_left',
       2 => 'field_lp_blk_1_colour',
       3 => 'field_title_icon',
+      4 => 'field_lp_cta_r_title',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
