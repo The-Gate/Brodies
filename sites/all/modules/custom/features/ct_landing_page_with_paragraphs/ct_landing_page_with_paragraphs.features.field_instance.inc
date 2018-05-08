@@ -494,6 +494,52 @@ leave blank to use the default site text colour;',
     ),
   );
 
+  // Exported field_instance: 'node-homepage-field_postscript'.
+  $field_instances['node-homepage-field_postscript'] = array(
+    'bundle' => 'homepage',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_postscript',
+    'label' => 'Postscript',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'node-landing_page-field_banner_image'.
   $field_instances['node-landing_page-field_banner_image'] = array(
     'bundle' => 'landing_page',
@@ -734,7 +780,7 @@ leave blank to use the default site text colour;',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -850,7 +896,7 @@ gradient: #4fb5b1 #67b75e',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -874,7 +920,7 @@ gradient: #4fb5b1 #67b75e',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 7,
     ),
   );
 
@@ -985,7 +1031,7 @@ gradient: #4fb5b1 #67b75e',
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -1029,7 +1075,7 @@ gradient: #4fb5b1 #67b75e',
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 9,
+      'weight' => 8,
     ),
   );
 
@@ -1368,6 +1414,7 @@ gradient: #4fb5b1 #67b75e');
   t('Open in New Tab?');
   t('Person Wrapper');
   t('Please add the webform default item option id');
+  t('Postscript');
   t('Quote');
   t('Quote Text Colour');
   t('Quote Wrapper');
