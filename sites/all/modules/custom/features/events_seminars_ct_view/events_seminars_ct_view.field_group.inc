@@ -21,7 +21,7 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Business Sectors',
-    'weight' => '8',
+    'weight' => '9',
     'children' => array(),
     'format_type' => 'hidden',
     'format_settings' => array(
@@ -42,7 +42,7 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Main details',
-    'weight' => '9',
+    'weight' => '10',
     'children' => array(),
     'format_type' => 'hidden',
     'format_settings' => array(
@@ -74,6 +74,7 @@ function events_seminars_ct_view_field_group_info() {
       6 => 'field_event_full',
       7 => 'field_event_l_details',
       8 => 'field_filter_date',
+      9 => 'field_map_location',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -124,7 +125,7 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Categories:',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_related_sector',
       1 => 'field_related_service',
@@ -205,7 +206,7 @@ function events_seminars_ct_view_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Legal Services',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(),
     'format_type' => 'hidden',
     'format_settings' => array(

@@ -278,6 +278,8 @@ function brSeminarBooking_seminars_form_validate($form_state, $form_values) {
 }
 
 function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+  $clearGif = $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/1px.gif';
   if (SEMINAR_EMAIL_TEST == true) {
     $admin_email = 'callum@sakurabrae.co.uk';
   }
@@ -294,21 +296,23 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $from = $values['email'];
+  
+  $nodes = node_load_multiple($_SESSION['seminars']);
+  
+  $total_events = count($nodes);
+  $event_txt = format_plural($total_events , 'event', 'events');
+  
   // email content to Brodies admin
-  $admin_out = '';
+  $admin_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">';
   // email content to the user
-  $client_out = '';
+  $client_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td colspan="4" bgcolor="#0e2c46"><img src="' . $clearGif . '" width="1" height="50" /></td></tr><tr><td colspan="4"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/seminar-header.jpg" width="600" height="130" /></td></tr>';
   // table data used in both
+  $table_start = '<tr><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td><td width="200"><img src="' . $clearGif . '" width="200" height="40" /></td><td width="360"><img src="' . $clearGif . '" width="360" height="40" /></td><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td></tr>';
+
+  $admin_out .= $table_start . '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['first-name'] . ' ' . $values['surname'] . ' from IP address ' . $_SERVER['REMOTE_ADDR'] . ' on ' . date("Y-m-d H:i", time()) . ' booked the following seminars:</p></td><td>&nbsp;</td></tr>';
+  $client_out .= $table_start . '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Hi ' . $values['first-name'] . ' ' . $values['surname'] . ',</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking to attend the following Brodies '.$event_txt.':</p></td><td>&nbsp;</td></tr>';
+
   $table_out = '';
-
-  $admin_out .= '<!DOCTYPE html><html><head><title>Seminar Booking Request</title></head><body>';
-  $client_out .= '<!DOCTYPE html><html><head><title>Seminar Booking</title></head><body>';
-
-  $admin_out .= '<p>' . $values['first-name'] . " " . $values['surname'] . " from IP address " . $_SERVER['REMOTE_ADDR'] . " on " . date("Y-m-d H:i", time()) . " booked the following seminars:</p>";
-  $client_out .= '<p>Hi ' . $values['first-name'] . " " . $values['surname'] . ",</p>";
-
-  $table_out .= "<table border='1'><tr><td>Name</td><td>Location</td><td>Time & Date</td><td>Places</td></tr>";
-
   $nodes = node_load_multiple($_SESSION['seminars']);
   foreach ($nodes as $row) {
     // get type
@@ -322,92 +326,86 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
         break;
     }
     //set location
-    $locationTitle = _getLocation($row->field_event_location[LANGUAGE_NONE][0]['nid']);
+    $locationTitle = _getLocation($row->field_event_location[LANGUAGE_NONE][0]['nid'], $row->field_event_l_details[LANGUAGE_NONE][0]['safe_value']);
+
     // set date
     $dateTitle = _getDate($row->field_event_date[LANGUAGE_NONE][0]['value']);
 
-    $table_out .= "<tr>";
-    $table_out .= "<td>" . l($row->title, 'node/' . $row->nid, array('absolute' => TRUE)) . "</td>";
-    $table_out .= "<td>" . $locationTitle . "</td>";
-    $table_out .= "<td>" . $dateTitle;
-    if (isset($row->field_event_date[LANGUAGE_NONE][0]['value2'])) {
-      $table_out .= ' - ' . date('d M Y H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
+
+    $table_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr><tr><td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td><td height="1" colspan="2"><hr noshade color="#b6bfc6" width="100%" size="1" style="padding:0; margin:0; border:none; width:100%; height: 1px; color:#b6bfc6; background-color: #b6bfc6" /></td><td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td></tr><tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr><tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 18px;"><strong>';
+    $title_alias = drupal_get_path_alias('node/' . $row->nid);
+    $table_out .= '<a href="' . $title_alias . '" style="color:#F6A01A; text-decoration:none;">' . $row->title . '</a>';
+    $table_out .= '</strong></p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Where: <strong>';
+    $table_out .= $locationTitle;
+    $table_out .= '</strong> ';
+
+    $this_location_instance = location_load_locations($row->nid);
+    if (!(empty($this_location_instance))) {
+      $this_location_instance_link = location_map_link_google($this_location_instance[0]);
+      $table_out .= '<a href="' . $this_location_instance_link . '" style="color:#F6A01A; text-decoration:none;"><strong>Map Link</strong></a>';
     }
-    $table_out .= "</td>";
-    $table_out .= "<td>1</td></tr>";
+    $table_out .= '</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">When: <strong>';
+    $table_out .= $dateTitle;
+    if (isset($row->field_event_date[LANGUAGE_NONE][0]['value2'])) {
+      $table_out .= ' - ' . date('H:i', $row->field_event_date[LANGUAGE_NONE][0]['value2']);
+    }
+    $table_out .= '</strong> ';
+    $alias = drupal_get_path_alias('node/' . $row->nid);
+    $table_out .= '<a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $alias . '?calendar=ical" style="color:#F6A01A; text-decoration:none;"><strong>iCalendar</strong></a> | <a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $alias . '?calendar=vcal" style="color:#F6A01A; text-decoration:none;"><strong>vCalendar</strong></a>';
+    $table_out .= '</p></td><td>&nbsp;</td></tr>';
   }
-
-  $table_out .= "</table><br><br>";
-  $table_out .= '<b>Lead Delegate</b><br>
-<br>
-<table border="1" width="100%">
-<tbody>
-<tr>
-<td width="50%">Name:</td>
-<td width="50%">' . $values['first-name'] . " " . $values['surname'] . '</td>
-</tr>
-<tr>
-<td>Email:</td>
-<td>' . $values['email'] . '</td>
-</tr>
-<tr>
-<td>Contact Telephone Number:</td>
-<td>' . $values['telephone-number'] . '</td>
-</tr>
-<tr>
-<td>Position:</td>
-<td>' . $values['position'] . '</td>
-</tr>
-<tr>
-<td>Company:</td>
-<td>' . $values['company'] . '</td>
-</tr>
-<tr>
-<td>Address Line 1:</td>
-<td>' . $values['address-line-1'] . '</td>
-</tr>
-<tr>
-<td>Address Line 2:</td>
-<td>' . $values['address-line-2'] . '</td>
-</tr>
-<tr>
-<td>Address Line 3:</td>
-<td>' . $values['address-line-3'] . '</td>
-</tr>
-<tr>
-<td>City:</td>
-<td>' . $values['city'] . '</td>
-</tr>
-<tr>
-<td>Postcode:</td>
-<td>' . $values['postcode'] . '</td>
-</tr>
-</tbody>
-</table></body></html>';
-
   $admin_out .= $table_out;
-  if ($seminarBooking and $webinarBooking) {
-    $client_out .= $emailtxtSeminarWebinar;
-  }
-  elseif ($seminarBooking and ! $webinarBooking) {
-    $client_out .= $emailtxtSeminarOnly;
-  }
-  elseif (!$seminarBooking and $webinarBooking) {
-    $client_out .= $emailtxtWebinarOnly;
-  }
+  $admin_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr>';
+  $admin_out .= '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Lead Delegate:</p></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Name:</p></td><td>';
+  $admin_out .=$values['first-name'] . " " . $values['surname'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Email:</p></td><td>';
+  $admin_out .=$values['email'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Contact Telephone Number:</p></td><td>';
+  $admin_out .= $values['telephone-number'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Position:</p></td><td>';
+  $admin_out .= $values['position'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Company:</p></td><td>';
+  $admin_out .= $values['company'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 1:</p></td><td>';
+  $admin_out .= $values['address-line-1'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 2:</p></td><td>';
+  $admin_out .= $values['address-line-2'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 3:</p></td><td>';
+  $admin_out .= $values['address-line-3'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">City:</p></td><td>';
+  $admin_out .= $values['city'];
+  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Postcode:</p></td><td>';
+  $admin_out .= $values['postcode'];
+  $admin_out .= '</td><td>&nbsp;</td></tr>';
+
+//  if ($seminarBooking and $webinarBooking) {
+//    $client_out .= $emailtxtSeminarWebinar;
+//  }
+//  elseif ($seminarBooking and ! $webinarBooking) {
+//    $client_out .= $emailtxtSeminarOnly;
+//  }
+//  elseif (!$seminarBooking and $webinarBooking) {
+//    $client_out .= $emailtxtWebinarOnly;
+//  }
 
   $client_out .= $table_out;
+  $client_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="60" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="60" /></td><td><img src="' . $clearGif . '" width="20" height="60" /></td></tr><tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">We look forward to seeing you there.</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you have any queries, please contact a member of our events team on <a href="mailto:seminars@brodies.com" style="color:#F6A01A; text-decoration:none;"><strong>seminars@brodies.com</strong></a></p></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-logo.gif" width="155" height="39" /></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center" valign="middle"><p><a href="http://www.linkedin.com/company/brodies-llp" target="_blank" title="LinkedIn"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-linkedin.gif" alt="LinedIn" width="22" height="22" hspace="2" border="0" /></a><a href="https://www.facebook.com/BrodiesLLP" target="_blank" title="Facebook"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-facebook.gif" alt="Facebook" width="22" height="22" hspace="2" border="0" /></a><a href="https://twitter.com/BrodiesLLP" target="_blank" title="Twitter"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-twitter.gif" alt="Twitter" width="22" height="22" hspace="2" border="0" /></a><a href="https://plus.google.com/+brodies/" target="_blank" title="Google Plus"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-googleplus.gif" alt="Google Plus" width="22" height="22" hspace="2" border="0" /></a><a href="https://youtube.com/BrodiesLLP" target="_blank" title="Youtube"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-youtube.gif" alt="Youtube" width="22" height="22" hspace="2" border="0" /></a><a href="https://www.instagram.com/brodiesllp" target="_blank" title="Instagram"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-instagram.gif" alt="Instagram" width="22" height="22" hspace="2" border="0" /></a></p></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center" valign="middle"><a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/general-terms-of-use" style="font-family: Helvetica,Arial,sans-serif; color:#F6A01A;font-size: 12px; text-decoration:none;">Terms  &amp; Conditions</a></td><td>&nbsp;</td></tr>';
+
+  // close email
+  $admin_out .= '</table></body></html>';
+  $client_out .= '</table></body></html>';
+
   $admin_params = array(
     'body' => $admin_out,
     'subject' => 'Seminar Booking Request',
   );
   $client_params = array(
     'body' => $client_out,
-    'subject' => 'Seminar Bookings',
+    'subject' => 'Seminar Booking Confirmation',
   );
   if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
       drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
-    unset($_SESSION['seminars']);
+    // unset($_SESSION['seminars']);
 //redirect to thank you
     $_REQUEST['destination'] = 'thank-you-checkout';
     drupal_goto('thank-you-checkout');
@@ -773,12 +771,15 @@ function brSeminarBooking_calendar_links() {
   return $calendar_links;
 }
 
-function _getLocation($locationInput) {
+function _getLocation($locationInput, $addressInput) {
   $locationOut = 'TBC';
   if (!(empty($locationInput))) {
     $location = node_load($locationInput);
     if (!$location == false) {
       $locationOut = $location->title;
+    }
+    if (!(empty($addressInput)) && (!($addressInput == "Webinar"))) {
+      $locationOut.= ' - ' . $addressInput;
     }
   }
   return $locationOut;
@@ -787,7 +788,7 @@ function _getLocation($locationInput) {
 function _getDate($dateInput) {
   $dateOut = 'TBC';
   if (!(empty($dateInput))) {
-    $dateOut = format_date($dateInput, 'brodies_date_only_long_');
+    $dateOut = date('D, d F Y  H:i', $dateInput);
   }
   return $dateOut;
 }

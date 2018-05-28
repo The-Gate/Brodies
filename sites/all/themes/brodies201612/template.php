@@ -273,3 +273,16 @@ function brodies201612_form_webform_client_form_alter(&$form, &$form_state, $for
     }";
   drupal_add_js($js, array('type' => 'inline', 'scope' => 'header', 'weight'=> 5000));
 }
+
+// provide location template name options.
+function brodies201612_preprocess_location(&$variables) {
+    $query = db_select('location_instance', 'n');
+    $nid_field = $query->addField('n', 'nid');
+    $query->condition('lid', $variables['location']['lid']);
+    $result = $query->execute();
+    foreach($result as $n){
+        $node = node_load($n->nid);
+        $variables['theme_hook_suggestions'][] = 'location__node__' . $node->type;      
+        $variables['theme_hook_suggestions'][] = 'location__node_' . $n->nid;       
+    }
+}

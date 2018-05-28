@@ -2475,6 +2475,11 @@ body{
         color: $colour-white-01;
         padding:10px 0;
     }
+    &.map-link{
+        padding-left:1em;
+        padding-right:1em;
+    }
+    &.map-link,
     &.calendar-link{
         background:$colour-orange-01;
     }
