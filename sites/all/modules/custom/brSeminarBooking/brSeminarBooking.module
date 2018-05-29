@@ -1,7 +1,7 @@
 <?php
 
 // set test email addresses
-define("SEMINAR_EMAIL_TEST", false);
+define("SEMINAR_EMAIL_TEST", true);
 
 /**
  * Implements hook_block_info().
@@ -281,7 +281,8 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
   $clearGif = $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/1px.gif';
   if (SEMINAR_EMAIL_TEST == true) {
-    $admin_email = 'callum@sakurabrae.co.uk';
+    #$admin_email = 'callum@sakurabrae.co.uk';
+    $admin_email = 'craig.fairgrieve@thegateworldwide.com';
   }
   else {
     $admin_email = 'seminars@brodies.com';
@@ -296,12 +297,12 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
   $from = $values['email'];
-  
+
   $nodes = node_load_multiple($_SESSION['seminars']);
-  
+
   $total_events = count($nodes);
-  $event_txt = format_plural($total_events , 'event', 'events');
-  
+  $event_txt = format_plural($total_events, 'event', 'events');
+
   // email content to Brodies admin
   $admin_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">';
   // email content to the user
@@ -310,7 +311,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $table_start = '<tr><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td><td width="200"><img src="' . $clearGif . '" width="200" height="40" /></td><td width="360"><img src="' . $clearGif . '" width="360" height="40" /></td><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td></tr>';
 
   $admin_out .= $table_start . '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['first-name'] . ' ' . $values['surname'] . ' from IP address ' . $_SERVER['REMOTE_ADDR'] . ' on ' . date("Y-m-d H:i", time()) . ' booked the following seminars:</p></td><td>&nbsp;</td></tr>';
-  $client_out .= $table_start . '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Hi ' . $values['first-name'] . ' ' . $values['surname'] . ',</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking to attend the following Brodies '.$event_txt.':</p></td><td>&nbsp;</td></tr>';
+  $client_out .= $table_start . '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Hi ' . $values['first-name'] . ' ' . $values['surname'] . ',</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking to attend the following Brodies ' . $event_txt . ':</p></td><td>&nbsp;</td></tr>';
 
   $table_out = '';
   $nodes = node_load_multiple($_SESSION['seminars']);
@@ -405,7 +406,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   );
   if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
       drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
-    // unset($_SESSION['seminars']);
+    unset($_SESSION['seminars']);
 //redirect to thank you
     $_REQUEST['destination'] = 'thank-you-checkout';
     drupal_goto('thank-you-checkout');
@@ -597,7 +598,8 @@ function brSeminarBooking_waitinglist_form_validate($form_state, $form_values) {
 
 function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
   if (SEMINAR_EMAIL_TEST == true) {
-    $admin_email = 'callum@sakurabrae.co.uk';
+    #$admin_email = 'callum@sakurabrae.co.uk';
+    $admin_email = 'craig.fairgrieve@thegateworldwide.com';
   }
   else {
     $admin_email = 'contact@brodies.com';
