@@ -347,7 +347,11 @@ elseif (!($default_icon === false)) {
                 <?php
                 if (isset($customTitle)) {
                   if ($title) {
-                    print '<h2>' . $title . '</h2>';
+                    $title_class = "";
+                    if ($node->type == 'lupdate') {
+                      $title_class = ' class="section-header"';
+                    }
+                    print '<h2' . $title_class . '>' . $title . '</h2>';
                   }
                 }
                 print render($page['content']);
