@@ -90,6 +90,12 @@ h2 {
     .region-content &.block-title{
         margin-bottom:15px;
     }
+    &.section-header{
+        font-size:$font-size-24;
+        @media #{$normal} {
+            font-size:$font-size-h1;
+        }
+    }
 }
 
 h3 {
