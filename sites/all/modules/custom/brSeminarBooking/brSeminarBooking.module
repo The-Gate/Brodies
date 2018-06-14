@@ -306,7 +306,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   // email content to Brodies admin
   $admin_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">';
   // email content to the user
-  $client_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td colspan="4"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/seminar-header.jpg" width="600" height="130" /></td></tr>';
+  $client_out = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td colspan="4"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/seminar-header.jpg" width="600" height="156" /></td></tr>';
   // table data used in both
   $table_start = '<tr><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td><td width="200"><img src="' . $clearGif . '" width="200" height="40" /></td><td width="360"><img src="' . $clearGif . '" width="360" height="40" /></td><td width="20"><img src="' . $clearGif . '" width="20" height="40" /></td></tr>';
 
