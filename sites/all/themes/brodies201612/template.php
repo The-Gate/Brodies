@@ -227,17 +227,17 @@ function br_get_video_data($url, $thumbnail = FALSE) {
   if (strpos($url, 'vimeo') !== FALSE) {
     $vid = substr($url, strrpos($url, '/') + 1);
     if (!$thumbnail) {
-      $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$vid.php"));
+      $hash = unserialize(file_get_contents("//vimeo.com/api/v2/video/$vid.php"));
       $thumbnail = $hash[0]['thumbnail_large'];
     }
-    $embed = '<iframe src="http://player.vimeo.com/video/' . $vid . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+    $embed = '<iframe src="//player.vimeo.com/video/' . $vid . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
   }
   else if (strpos($url, 'youtube') !== FALSE) {
     $vid = substr($url, strrpos($url, '?v=') + 3);
     if (!$thumbnail) {
-      $thumbnail = 'http://img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
+      $thumbnail = '//img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
     }
-    $embed = '<iframe src="http://www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+    $embed = '<iframe src="//www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
   }
 
   if ($vid) {

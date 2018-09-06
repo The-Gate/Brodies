@@ -395,7 +395,7 @@ body.page-graduate{
 
 
     /********************** Forms ***********************/
-    .webform-client-form{
+    form{
         margin-top:40px;
     }
     /********************** Footer ***********************/
@@ -533,7 +533,7 @@ body.page-graduate{
     .panel-body{
         padding:0;
     }
-    .webform-client-form fieldset:first-of-type{
+    form fieldset:first-of-type{
         &>.panel-heading{
             background:rgba(0,35,93,1);
             @extend .col-sm-6;
