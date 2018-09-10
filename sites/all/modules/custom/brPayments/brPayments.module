@@ -466,8 +466,8 @@ function brPayments_worldpay_payment_form($form_state, $payment_node) {
     );
   }
 
-  $test_server = 'https://select-test.worldpay.com/wcc/purchase';
-  $live_server = 'https://select.worldpay.com/wcc/purchase';
+  $test_server = 'https://secure-test.worldpay.com/wcc/purchase';
+  $live_server = 'https://secure.worldpay.com/wcc/purchase';
   $form['#action'] = variable_get('payment_worldpay_test', TRUE) ? $test_server : $live_server;
 
   $form['submit'] = array(

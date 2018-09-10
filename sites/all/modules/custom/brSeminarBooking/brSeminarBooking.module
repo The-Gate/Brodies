@@ -1,7 +1,7 @@
 <?php
 
 // set test email addresses
-define("SEMINAR_EMAIL_TEST", false);
+define("SEMINAR_EMAIL_TEST", true);
 
 /**
  * Implements hook_block_info().
@@ -282,7 +282,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $clearGif = $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/1px.gif';
   if (SEMINAR_EMAIL_TEST == true) {
     #$admin_email = 'callum@sakurabrae.co.uk';
-    $admin_email = 'craig.fairgrieve@thegateworldwide.com';
+    $admin_email = 'Seonaid.Baird@thegateworldwide.com';
   }
   else {
     $admin_email = 'seminars@brodies.com';
@@ -333,7 +333,25 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
     $dateTitle = _getDate($row->field_event_date[LANGUAGE_NONE][0]['value']);
 
 
-    $table_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr><tr><td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td><td height="1" colspan="2"><hr noshade color="#b6bfc6" width="100%" size="1" style="padding:0; margin:0; border:none; width:100%; height: 1px; color:#b6bfc6; background-color: #b6bfc6" /></td><td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td></tr><tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr><tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 18px;"><strong>';
+    $table_out .= ''
+        . '<tr>'
+        . '<td><img src="' . $clearGif . '" width="20" height="24" /></td>'
+        . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td>'
+        . '<td><img src="' . $clearGif . '" width="20" height="24" /></td>'
+        . '</tr>'
+        . '<tr>'
+        . '<td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td>'
+        . '<td height="1" colspan="2"><hr noshade color="#b6bfc6" width="100%" size="1" style="padding:0; margin:0; border:none; width:100%; height: 1px; color:#b6bfc6; background-color: #b6bfc6" /></td>'
+        . '<td height="1"><img src="' . $clearGif . '" width="20" height="1" /></td>'
+        . '</tr>'
+        . '<tr>'
+        . '<td><img src="' . $clearGif . '" width="20" height="24" /></td>'
+        . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td>'
+        . '<td><img src="' . $clearGif . '" width="20" height="24" /></td>'
+        . '</tr>'
+        . '<tr>'
+        . '<td>&nbsp;</td>'
+        . '<td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 18px;"><strong>';
     $title_alias = drupal_get_path_alias('node/' . $row->nid);
     $table_out .= '<a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $title_alias . '" style="color:#F6A01A; text-decoration:none;">' . $row->title . '</a>';
     $table_out .= '</strong></p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Where: <strong>';
@@ -353,31 +371,80 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
     $table_out .= '</strong> ';
     $alias = drupal_get_path_alias('node/' . $row->nid);
     $table_out .= '<a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $alias . '?calendar=ical" style="color:#F6A01A; text-decoration:none;"><strong>iCalendar</strong></a> | <a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/' . $alias . '?calendar=vcal" style="color:#F6A01A; text-decoration:none;"><strong>vCalendar</strong></a>';
-    $table_out .= '</p></td><td>&nbsp;</td></tr>';
+    $table_out .= '</p></td>'
+        . '<td>&nbsp;</td>'
+        . '</tr>';
   }
   $admin_out .= $table_out;
-  $admin_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td><td><img src="' . $clearGif . '" width="20" height="24" /></td></tr>';
-  $admin_out .= '<tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Lead Delegate:</p></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Name:</p></td><td>';
-  $admin_out .=$values['first-name'] . " " . $values['surname'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Email:</p></td><td>';
-  $admin_out .=$values['email'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Contact Telephone Number:</p></td><td>';
-  $admin_out .= $values['telephone-number'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Position:</p></td><td>';
-  $admin_out .= $values['position'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Company:</p></td><td>';
-  $admin_out .= $values['company'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 1:</p></td><td>';
-  $admin_out .= $values['address-line-1'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 2:</p></td><td>';
-  $admin_out .= $values['address-line-2'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 3:</p></td><td>';
-  $admin_out .= $values['address-line-3'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">City:</p></td><td>';
-  $admin_out .= $values['city'];
-  $admin_out .= '</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Postcode:</p></td><td>';
-  $admin_out .= $values['postcode'];
-  $admin_out .= '</td><td>&nbsp;</td></tr>';
+  $admin_out .= '<tr>'
+      . '<td><img src="' . $clearGif . '" width="20" height="24" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="24" /></td>'
+      . '<td><img src="' . $clearGif . '" width="20" height="24" /></td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Lead Delegate:</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Name:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['first-name'] . " " . $values['surname'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Email:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['email'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Contact Telephone Number:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['telephone-number'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Position:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['position'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Company:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['company'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 1:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['address-line-1'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 2:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['address-line-2'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Address Line 3:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['address-line-3'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">City:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['city'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
+  $admin_out .= '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Postcode:</p></td>'
+      . '<td><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">' . $values['postcode'] . '</p></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
 
 //  if ($seminarBooking and $webinarBooking) {
 //    $client_out .= $emailtxtSeminarWebinar;
@@ -390,7 +457,55 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
 //  }
 
   $client_out .= $table_out;
-  $client_out .= '<tr><td><img src="' . $clearGif . '" width="20" height="60" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="60" /></td><td><img src="' . $clearGif . '" width="20" height="60" /></td></tr><tr><td>&nbsp;</td><td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">We look forward to seeing you there.</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you have any queries, please contact a member of our events team on <a href="mailto:seminars@brodies.com" style="color:#F6A01A; text-decoration:none;"><strong>seminars@brodies.com</strong></a></p></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-logo.gif" width="155" height="39" /></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center" valign="middle"><p><a href="http://www.linkedin.com/company/brodies-llp" target="_blank" title="LinkedIn"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-linkedin.gif" alt="LinedIn" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://www.facebook.com/BrodiesLLP" target="_blank" title="Facebook"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-facebook.gif" alt="Facebook" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://twitter.com/BrodiesLLP" target="_blank" title="Twitter"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-twitter.gif" alt="Twitter" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://plus.google.com/+brodies/" target="_blank" title="Google Plus"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-googleplus.gif" alt="Google Plus" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://youtube.com/BrodiesLLP" target="_blank" title="Youtube"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-youtube.gif" alt="Youtube" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://www.instagram.com/brodiesllp" target="_blank" title="Instagram"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-instagram.gif" alt="Instagram" width="22" height="22" border="0" /></a></p></td><td>&nbsp;</td></tr><tr><td><img src="' . $clearGif . '" width="20" height="30" /></td><td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td><td><img src="' . $clearGif . '" width="20" height="30" /></td></tr><tr><td>&nbsp;</td><td colspan="2" align="center" valign="middle"><a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/general-terms-of-use" style="font-family: Helvetica,Arial,sans-serif; color:#F6A01A;font-size: 12px; text-decoration:none;">Terms  &amp; Conditions</a></td><td>&nbsp;</td></tr>';
+  $client_out .= ''
+      . '<tr>'
+      . '<td><img src="' . $clearGif . '" width="20" height="60" /></td>'
+      . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="60" /></td>'
+      . '<td><img src="' . $clearGif . '" width="20" height="60" /></td>'
+      . '</tr>';
+  $client_out .= ''
+      . '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td colspan="2">'
+      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">We look forward to seeing you there.</p>'
+      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you have any queries, please contact a member of our events team on <a href="mailto:seminars@brodies.com" style="color:#F6A01A; text-decoration:none;"><strong>seminars@brodies.com</strong></a></p>'
+      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you would like to hear more about upcoming Brodies seminars and events, and keep up-to-date with blogs and legal updates – you can log into <a href="https://protect-eu.mimecast.com/s/pMk5C76y4uA7gX7F81R2y?domain=brodiespm.concep.com" target="_blank" style="color:#F6A01A; text-decoration:none;">Preference Manager</a> and tell us which topics are of most interest and useful to you!</p>'
+      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Any questions, please get in touch at <a href="mailto:bintouch@brodies.com" style="color:#F6A01A; text-decoration:none;">bintouch@brodies.com</a></p>'
+      . '</td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td colspan="2" align="center"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-logo.gif" width="155" height="39" /></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td colspan="2" align="center" valign="middle">'
+      . '<p><a href="http://www.linkedin.com/company/brodies-llp" target="_blank" title="LinkedIn"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-linkedin.gif" alt="LinedIn" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://www.facebook.com/BrodiesLLP" target="_blank" title="Facebook"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-facebook.gif" alt="Facebook" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://twitter.com/BrodiesLLP" target="_blank" title="Twitter"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-twitter.gif" alt="Twitter" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://plus.google.com/+brodies/" target="_blank" title="Google Plus"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-googleplus.gif" alt="Google Plus" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://youtube.com/BrodiesLLP" target="_blank" title="Youtube"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-youtube.gif" alt="Youtube" width="22" height="22" border="0" /></a><img src="' . $clearGif . '" width="4" height="1" /><a href="https://www.instagram.com/brodiesllp" target="_blank" title="Instagram"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-instagram.gif" alt="Instagram" width="22" height="22" border="0" /></a></p>'
+      . '</td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '<td colspan="2"><img src="' . $clearGif . '" width="560" height="30" /></td>'
+      . '<td><img src="' . $clearGif . '" width="20" height="30" /></td>'
+      . '</tr>'
+      . '<tr>'
+      . '<td>&nbsp;</td>'
+      . '<td colspan="2" align="center" valign="middle"><a href="' . $protocol . $_SERVER['HTTP_HOST'] . '/general-terms-of-use" style="font-family: Helvetica,Arial,sans-serif; color:#F6A01A;font-size: 12px; text-decoration:none;">Terms  &amp; Conditions</a>&nbsp;|&nbsp;<a href="https://protect-eu.mimecast.com/s/pMk5C76y4uA7gX7F81R2y?domain=brodiespm.concep.com" style="font-family: Helvetica,Arial,sans-serif; color:#F6A01A;font-size: 12px; text-decoration:none;">Preference Manager</a>&nbsp;|&nbsp;<a href="https://protect-eu.mimecast.com/s/PNJ6C8qz4u64G54U1LTsS?domain=brodies.com" style="font-family: Helvetica,Arial,sans-serif; color:#F6A01A;font-size: 12px; text-decoration:none;">Privacy Notice</a></td>'
+      . '<td>&nbsp;</td>'
+      . '</tr>';
 
   // close email
   $admin_out .= '</table></body></html>';
@@ -599,7 +714,7 @@ function brSeminarBooking_waitinglist_form_validate($form_state, $form_values) {
 function brSeminarBooking_waitinglist_form_submit($form_state, $form_values) {
   if (SEMINAR_EMAIL_TEST == true) {
     #$admin_email = 'callum@sakurabrae.co.uk';
-    $admin_email = 'craig.fairgrieve@thegateworldwide.com';
+    $admin_email = 'Seonaid.Baird@thegateworldwide.com';
   }
   else {
     $admin_email = 'contact@brodies.com';
