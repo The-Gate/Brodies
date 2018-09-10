@@ -227,6 +227,7 @@ function events_seminars_ct_view_views_default_views() {
     6 => 0,
   );
   $handler->display->display_options['filters']['field_filter_date_value_selective']['selective_display_field'] = 'field_filter_date';
+  $handler->display->display_options['filters']['field_filter_date_value_selective']['selective_display_sort'] = 'KASC';
   $handler->display->display_options['filters']['field_filter_date_value_selective']['selective_items_limit'] = '100';
   /* Filter criterion: Where (field_event_location) (selective) */
   $handler->display->display_options['filters']['field_event_location_nid_selective']['id'] = 'field_event_location_nid_selective';
