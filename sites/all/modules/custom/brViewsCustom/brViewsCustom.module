@@ -1,0 +1,15 @@
+<?php
+
+function brViewsCustom_views_query_alter(&$view, &$query) {
+  if ($view->name == 'brexit_hub' && $view->current_display == 'block') {
+    $query->orderby = array(
+	  array(
+        'field' => 'CASE '
+      . 'WHEN field_data_field_date.field_date_value '
+      . 'THEN field_data_field_date.field_date_value '
+      . 'ELSE node.created END',
+        'direction' => 'DESC',
+      )
+    );
+  }
+}
