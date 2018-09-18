@@ -731,6 +731,7 @@ body{
         position:absolute;
         display: block;
         bottom:15px;
+        .node-type-brexit-hub &,
         .node-type-lpage2 &{
             bottom:0;
         }
@@ -1039,6 +1040,8 @@ body{
         position:static !important;
     }
 }
+
+.node-type-brexit-hub,
 .node-type-lpage2{
     #block-views-search-block,
     #block-block-38,
@@ -3158,6 +3161,9 @@ body.page-landing{
 } 
 
 // landing page v2
+// brexit hub
+
+.node-type-brexit-hub,
 .node-type-lpage2{
     .landing-background{
         max-height:200px;
@@ -3709,6 +3715,82 @@ h1.page-header{
 }
 // edge bugfix
 
+// brexit-hub
+.node-type-brexit-hub{
+    .paragraphs-item-people{
+        &:before{
+            content:'Key People';
+            display:block;
+            border-bottom:3px solid #F6A01A;
+        }
+        .field-name-field-related-people{
+            width:100%;
+            .field-name-field-teaser-image{
+                @extend .col-sm-4;
+                padding-left:0;
+            }
+            .text-wrapper-container{
+                @extend .col-sm-8;
+            }
+        }
+        article{
+            background: #162b48;
+            overflow: hidden;
+        }
+        .text-wrapper{
+            padding-top:2em;
+            text-align:left;
+        }
+        .field-name-field-people-fname,
+        .field-name-field-people-sname{
+            display:inline-block;
+            width:auto;
+        }
+        .field-name-field-people-fname,
+        .field-name-field-people-sname,
+        .field-name-field-people-job{
+            color:#fff;
+            margin:0;
+            padding:0;
+        }
+        .field-name-field-people-fname{
+
+            margin-right:.5em;
+        }
+        .field-name-field-people-job{
+            text-align:left;
+        }
+        .field-name-field-people-phone,
+        .field-name-field-people-email{
+            display:none;
+        }
+    }
+    .paragraph-wrapper{
+        .entity-paragraphs-item{
+                @extend .container;
+            .content{
+                @extend .row;
+            }
+            .field {
+                @extend .col-sm-12;
+            }
+        }
+    }
+}
+.block-jquery-countdown-timer{
+    &:before{
+        content:'Countdown to Brexit';
+        display:block;
+        border-bottom:3px solid #F6A01A;
+    }
+    .countdownHolder{
+        max-width:100%;
+        font-size:28px;
+    }
+    #jquery-countdown-timer-note{
+        max-width:100%;
+    }
+}
 @supports (-ms-ime-align: auto) {
     .region-sidebar-first,
     .region-sidebar-second{
