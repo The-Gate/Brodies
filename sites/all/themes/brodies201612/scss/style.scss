@@ -3716,12 +3716,16 @@ h1.page-header{
 // edge bugfix
 
 // brexit-hub
+.brexit-block-titles{
+    display:block;
+    border-bottom:3px solid #F6A01A;
+
+}
 .node-type-brexit-hub{
     .paragraphs-item-people{
         &:before{
             content:'Key People';
-            display:block;
-            border-bottom:3px solid #F6A01A;
+            @extend .brexit-block-titles;
         }
         .field-name-field-related-people{
             width:100%;
@@ -3767,7 +3771,7 @@ h1.page-header{
     }
     .paragraph-wrapper{
         .entity-paragraphs-item{
-                @extend .container;
+            @extend .container;
             .content{
                 @extend .row;
             }
@@ -3776,12 +3780,44 @@ h1.page-header{
             }
         }
     }
+
+    .view-brexit-hub{
+        &:before{
+            content:'Latest';
+            @extend .brexit-block-titles;
+        }
+    }
+    .view-nodequeue-2{
+        &:before{
+            content:'Brexit Events';
+            @extend .brexit-block-titles;
+        }
+    }
+    .view-nodequeue-1{
+        &:before{
+            content:'Brexit Videos';
+            @extend .brexit-block-titles;
+        }
+    }
+    .view-brexit-paginated-related-content{
+        &:before{
+            content:'Guides and Downloads';
+            @extend .brexit-block-titles;
+        }
+    }
+    .view{
+        .views-row{
+            border-bottom:0 !important;
+        }
+    }
+    .pager{
+        clear:both;
+    }
 }
 .block-jquery-countdown-timer{
     &:before{
         content:'Countdown to Brexit';
-        display:block;
-        border-bottom:3px solid #F6A01A;
+        @extend .brexit-block-titles;
     }
     .countdownHolder{
         max-width:100%;
