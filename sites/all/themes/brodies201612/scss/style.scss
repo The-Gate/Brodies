@@ -731,6 +731,7 @@ body{
         position:absolute;
         display: block;
         bottom:15px;
+        .node-type-brexit-hub &,
         .node-type-lpage2 &{
             bottom:0;
         }
@@ -1039,6 +1040,8 @@ body{
         position:static !important;
     }
 }
+
+.node-type-brexit-hub,
 .node-type-lpage2{
     #block-views-search-block,
     #block-block-38,
@@ -2080,6 +2083,7 @@ body{
         }
     }
 }
+.view-nodequeue-1,
 .view-videos{
     .view-content{
         clear:both;
@@ -3158,6 +3162,9 @@ body.page-landing{
 } 
 
 // landing page v2
+// brexit hub
+
+.node-type-brexit-hub,
 .node-type-lpage2{
     .landing-background{
         max-height:200px;
@@ -3709,6 +3716,372 @@ h1.page-header{
 }
 // edge bugfix
 
+// brexit-hub
+.brexit-block-main-titles{
+    display:block;
+    border-bottom: 2px solid #fc9e34;
+    padding: 0 0 5px 0;
+    @media #{$normal} {
+        padding: 0 0 5px 12px;
+    }
+    font-weight: 400;
+    color: $colour-black-01;
+    font-size: 20px;
+}
+.brexit-block-sub-titles{
+    display:block;
+    border-bottom: 2px solid #fc9e34;
+    padding: 0 0 5px 0;
+    font-weight: 400;
+    color: $colour-black-01;
+    font-size: 18px;
+    margin-bottom:10px;
+}
+.node-type-brexit-hub{
+    h1.page-header{
+        margin-bottom:30px;
+    }
+    .main-content{
+        margin-bottom:10px;
+    }
+    .field-name-body{
+        margin-bottom:0;
+
+        @media #{$normal} {
+            p{
+                &:first-of-type{
+                    margin-top:35px;
+                }
+            }
+        }
+        p, ul{
+            max-width:700px;
+            margin-left:0;
+        }
+    }
+
+    @media #{$tablet-max} {
+        .col-md-12,
+        .col-md-8,
+        .col-md-4,
+        .col-md-4 > .col-sm-12{
+            padding-left:0;
+            padding-right:0;
+        }
+        .img-responsive{
+            width:100%;
+        }
+    }
+    .paragraphs-item-people{
+        &:before{
+            content:'Key People';
+            @extend .brexit-block-main-titles;
+        }
+        .field-name-field-related-people{
+            @media #{$wide} {
+                max-height:85px;
+                overflow:hidden;
+            }
+            clear:both;
+            width:100%;
+            margin-top:10px;
+            padding-left:0;
+            padding-right:0;
+            .field-name-field-teaser-image{
+                @extend .col-sm-4;
+                padding-left:0;
+                @media #{$wide} {
+                    img{
+                        height:85px;
+                        width:120px;
+                        object-fit:cover;
+                    }
+                }
+            }
+            .text-wrapper-container{
+                @extend .col-sm-8;
+                @media #{$tablet-max} {
+                    width:calc(50% - 10px);
+                }
+            }
+        }
+        article{
+            background: $colour-blue-01;
+            overflow: hidden;
+            margin-bottom:0;
+        }
+        .text-wrapper{
+            padding-top:1.5em;
+            text-align:left;
+        }
+        .field-name-field-people-fname,
+        .field-name-field-people-sname{
+            display:inline-block;
+            width:auto;
+        }
+        .field-name-field-people-fname,
+        .field-name-field-people-sname,
+        .field-name-field-people-job{
+            color:#fff;
+            margin:0;
+            padding:0;
+        }
+        .field-name-field-people-fname{
+            margin-right:.5em;
+        }
+        .field-name-field-people-job{
+            text-align:left;
+        }
+        .field-name-field-people-phone,
+        .field-name-field-people-email{
+            display:none;
+        }
+    }
+    .paragraph-wrapper{
+        .entity-paragraphs-item{
+            @extend .container;
+            .content{
+                @extend .row;
+            }
+            .field:not(.field-name-field-cta-imge) {
+                @extend .col-sm-12;
+            }
+        }
+    }
+
+    .view-brexit-hub{
+        &:before{
+            content:'Latest';
+            @extend .brexit-block-sub-titles;
+        }
+        .icon {
+            position:absolute;
+            color:$colour-white-01;
+            font-size:12px;
+            text-transform:uppercase;
+            top:0;
+            left:5px;
+            right:5px;
+            padding-left:10px;
+            padding-top:15px;
+            padding-bottom:15px;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a2849+0,7db9e8+100&1+0,0+100 */
+            background: -moz-linear-gradient(top, rgba(26,40,73,1) 0%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(26,40,73,1) 0%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(26,40,73,1) 0%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2849', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+            .icon-img{
+                width:25px;
+                height:13px;
+                background-repeat: no-repeat;
+                display:inline-block;
+                vertical-align:middle;
+                background-postition:0 0;
+            }
+            .blog{
+                background-image:url('../images/brexit-hub/icon-blog.png');
+            }
+            .legal{
+                background-image:url('../images/brexit-hub/icon-legal.png');
+            }
+            .news{
+                background-image:url('../images/brexit-hub/icon-news.png');
+            }
+        }
+        .bg-wrap{
+            background-color: $colour-blue-01;
+            color:$colour-white-01;
+            padding:10px 10px 42px;
+            h2{
+                font-weight:400;
+                text-transform:uppercase;
+                @media #{$normal} {
+                    min-height:4.5em;
+                }
+                @media #{$wide} {
+                    min-height:3.5em;
+                }
+            }
+            .date{
+                font-size:12px;
+                background: none;
+                padding:0;
+                margin-bottom: 0;
+            }
+            .abstract,
+            .date{
+                color: $colour-white-01;
+                font-family:$font-family-sans-serif;
+            }
+            .abstract{
+                margin-top: 10px;
+                font-size:14px;
+                @media #{$normal} {
+                min-height:5.5em;
+                }
+            }
+            .read-more{
+                display:inline-block;
+                font-weight:700;
+                margin:0;
+                text-transform:uppercase;
+                float:right;
+                a{
+                    display:block;
+                    padding:5px 20px;
+                    color:$colour-white-01;
+                    font-family:$font-family-sans-serif;
+                }
+                &.blog{
+                    background: $colour-purple;
+                }
+                &.legal{
+                    background: $colour-green;
+                }
+                &.news{
+                    background: $colour-pink;
+                }
+            }
+        }
+    }
+    .view-nodequeue-2{
+        &:before{
+            content:'Brexit Events';
+            @extend .brexit-block-sub-titles;
+        }
+        .bg-wrap{
+            background:#c8c9c7;
+            padding:10px;
+        }
+        .views-label,
+        .field-content{
+            display:inline-block;
+            vertical-align: top;
+            font-size:12px;
+        }
+        .views-label{
+            font-weight:700;
+            text-transform: uppercase;
+            width:6em;
+        }
+        .views-field-title{
+            .field-content{
+                font-size:18px !important;
+            }
+            padding-left:25px;
+            background:url('../images/brexit-hub/icon-event.png') 0 0 no-repeat;
+            min-height:4.5em;
+            border-bottom:1px solid #6b6b6a;
+            padding-bottom:10px;
+            margin-bottom:15px;
+            font-weight:300;
+            text-transform:uppercase;
+
+        }
+        .views-field-body{
+            font-size:14px;
+            margin:1em 0;
+        }
+        .views-field-view-node{
+            a{
+                display:block;
+                padding:5px 20px;
+                text-transform: uppercase;
+                color:$colour-white-01;
+                background: $colour-blue-02;
+                font-weight:700;
+            }
+        }
+    }
+    .view-nodequeue-1{
+        &:before{
+            content:'Brexit Videos';
+            @extend .brexit-block-sub-titles;
+        }
+        .views-field-body{
+            p{
+                font-family:$font-family-sans-serif;
+                font-size:14px;
+            }
+        }
+    }
+    .view-brexit-paginated-related-content{
+        &:before{
+            content:'Guides and Downloads';
+            @extend .brexit-block-sub-titles;
+        }
+    }
+    .view{
+        .views-row{
+            border-bottom:0 !important;
+            padding-bottom:0 !important;
+            margin-bottom:10px !important;
+
+            @media #{$tablet-max} {
+                padding-left:0;
+                padding-right:0;
+            }
+        }
+    }
+    .pager{
+        clear:both;
+    }
+}
+.block-jquery-countdown-timer{
+    margin-top:10px;
+    &:before{
+        content:'Countdown to Brexit';
+        @extend .brexit-block-main-titles;
+        margin-bottom:15px;
+    }
+    .countdownHolder{
+        max-width:100%;
+        @media #{$tablet} {
+            font-size:22px;
+        }
+        @media #{$wide} {
+            font-size:28px;
+        }
+    }
+    .digit{
+        background:#ea9900;
+        &.static{
+            box-shadow: none;
+            background:#ea9900;
+        }
+    }
+    .countWeeks,
+    .countDays,
+    .countHours,
+    .countMinutes,
+    .countSeconds{
+        height:1.6em;
+        background:#ea9900;
+        border-radius: .2em;
+        display:inline-block;
+        .position{
+            width:1em;
+            &:first-of-type{
+                .digit{
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    text-align:right;
+                }
+            }
+        }
+        .position:last-of-type{
+            .digit{
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                text-align:left;
+
+            }
+        }
+    }
+}
+#jquery-countdown-timer-note{
+    display:none;
+}
 @supports (-ms-ime-align: auto) {
     .region-sidebar-first,
     .region-sidebar-second{

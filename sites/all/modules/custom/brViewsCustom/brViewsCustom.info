@@ -1,0 +1,4 @@
+name = Brodies - Views customisations
+description = "Views customisations"
+package = "Brodies"
+core = 7.x
