@@ -55,7 +55,7 @@ switch ($row->node_type) {
     $raw_date = $row->node_created;
     break;
 }
-echo '<div class="icon ' . $nt_class . '">' . $nt_title . '</div>';
+echo '<div class="icon"><span class="icon-img ' . $nt_class . '"></span>' . $nt_title . '</div>';
 ?>
 <?php
 //image: col-3--lg--thumb-fixed
@@ -85,7 +85,9 @@ else {
   echo('<img class="img-responsive" src="/sites/default/files/styles/col-3--lg--thumb-fixed/public/externals/345cd1785a97c27926fa76c395a1a86e.jpg?itok=fg9_UBLu" width="290" height="120" alt="">');
 }
 ?>
+<div class="bg-wrap">
 <h2><?php print truncate_utf8($row->node_title, 60, TRUE, TRUE); ?></h2>
 <p class="date"><?php echo format_date($raw_date, 'brodies_date_only_long_'); ?></p>
-<p><?php echo truncate_utf8(filter_xss($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], array()), 120, TRUE, TRUE); ?></p>
-<p class="read-more"><a href="<?php echo $link; ?>">Read more</a></p>
+<p class="abstract"><?php echo truncate_utf8(filter_xss($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], array()), 110, TRUE, TRUE); ?></p>
+<p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>">Read more</a></p>
+</div>
