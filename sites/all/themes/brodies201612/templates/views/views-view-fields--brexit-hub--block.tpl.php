@@ -86,7 +86,7 @@ else {
 }
 ?>
 <div class="bg-wrap">
-<h2><?php print truncate_utf8($row->node_title, 60, TRUE, TRUE); ?></h2>
+<h2><?php print truncate_utf8($row->node_title, 55, TRUE, TRUE); ?></h2>
 <p class="date"><?php echo format_date($raw_date, 'brodies_date_only_long_'); ?></p>
 <p class="abstract"><?php echo truncate_utf8(filter_xss($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], array()), 110, TRUE, TRUE); ?></p>
 <p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>">Read more</a></p>

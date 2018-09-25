@@ -25,7 +25,7 @@ function brexit_hub_feeds_importer_default() {
         'designated_hub' => '',
         'request_timeout' => '',
         'auto_scheme' => 'https://brodies.com/blog/feed/brodiesbrexit',
-        'accept_invalid_cert' => 0,
+        'accept_invalid_cert' => 1,
       ),
     ),
     'parser' => array(

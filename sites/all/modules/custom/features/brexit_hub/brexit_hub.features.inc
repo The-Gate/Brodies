@@ -25,6 +25,14 @@ function brexit_hub_views_api($module = NULL, $api = NULL) {
  */
 function brexit_hub_node_info() {
   $items = array(
+    'brexit_hub' => array(
+      'name' => t('Brexit Hub'),
+      'base' => 'node_content',
+      'description' => t('Template for the Brexit Hub'),
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'feed_import' => array(
       'name' => t('Feed Import'),
       'base' => 'node_content',
@@ -35,5 +43,19 @@ function brexit_hub_node_info() {
     ),
   );
   drupal_alter('node_info', $items);
+  return $items;
+}
+
+/**
+ * Implements hook_paragraphs_info().
+ */
+function brexit_hub_paragraphs_info() {
+  $items = array(
+    'block_content' => array(
+      'name' => 'Block Content',
+      'bundle' => 'block_content',
+      'locked' => '1',
+    ),
+  );
   return $items;
 }

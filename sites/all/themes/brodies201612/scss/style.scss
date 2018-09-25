@@ -3917,7 +3917,7 @@ h1.page-header{
                 margin-top: 10px;
                 font-size:14px;
                 @media #{$normal} {
-                min-height:5.5em;
+                    min-height:5.5em;
                 }
             }
             .read-more{
@@ -3970,7 +3970,12 @@ h1.page-header{
             }
             padding-left:25px;
             background:url('../images/brexit-hub/icon-event.png') 0 0 no-repeat;
-            min-height:4.5em;
+            @media #{$normal} {
+                min-height:7em;
+            }
+            @media #{$wide} {
+                min-height:6em;
+            }
             border-bottom:1px solid #6b6b6a;
             padding-bottom:10px;
             margin-bottom:15px;
@@ -4010,6 +4015,16 @@ h1.page-header{
             content:'Guides and Downloads';
             @extend .brexit-block-sub-titles;
         }
+        .pager li>a {
+            display: inline-block;
+            padding: 5px 20px;
+            text-transform: uppercase;
+            color: #fff;
+            background: #13b5ea;
+            font-weight: 700;
+            border-radius:0;
+            border:0;
+        }
     }
     .view{
         .views-row{
@@ -4023,6 +4038,7 @@ h1.page-header{
             }
         }
     }
+    .text-center,
     .pager{
         clear:both;
     }
@@ -4059,6 +4075,7 @@ h1.page-header{
         background:#ea9900;
         border-radius: .2em;
         display:inline-block;
+        position:relative;
         .position{
             width:1em;
             &:first-of-type{
@@ -4079,6 +4096,55 @@ h1.page-header{
         }
     }
 }
+.timeLables{
+    display:block;
+    font-size: 10px;
+    width:44px;
+    @media #{$tablet} {
+        font-size: 10px;
+        width:44px;
+    }
+    @media #{$wide} {
+        font-size: 11px;
+        width:56px;
+    }
+    color: #1a2849;
+    text-transform:uppercase;
+    position: absolute;
+    letter-spacing:0;
+    bottom:-18px;
+}
+.countWeeks{
+    &:after{
+        content:'weeks';
+        @extend .timeLables;
+    }
+}
+.countDays{
+    &:after{
+        content:'days';
+        @extend .timeLables;
+    }
+}
+.countHours{
+    &:after{
+        content:'hours';
+        @extend .timeLables;
+    }
+}
+.countMinutes{
+    &:after{
+        content:'minutes';
+        @extend .timeLables;
+    }
+}
+.countSeconds{
+    &:after{
+        content:'seconds';
+        @extend .timeLables;
+    }
+}
+
 #jquery-countdown-timer-note{
     display:none;
 }
