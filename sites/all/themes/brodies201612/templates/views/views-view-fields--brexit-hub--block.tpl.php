@@ -60,7 +60,7 @@ echo '<div class="icon"><span class="icon-img ' . $nt_class . '"></span>' . $nt_
 ?>
 <?php
 //image: col-3--lg--thumb-fixed
-$img_style = 'col-3--lg--thumb-fixed';
+$img_style = 'col-3--lg--thumb-fixed-mod-height';
 // feed import - external image
 if (!(empty($row->field_field_d_url[0]['raw']))) {
   $html = trim($row->field_field_d_url[0]['raw']['value']);

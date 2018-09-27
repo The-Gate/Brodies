@@ -137,7 +137,7 @@ function brexit_hub_views_default_views() {
   $handler->display->display_options['filters']['field_l_area_nid']['table'] = 'field_data_field_l_area';
   $handler->display->display_options['filters']['field_l_area_nid']['field'] = 'field_l_area_nid';
   $handler->display->display_options['filters']['field_l_area_nid']['value'] = array(
-    14533 => '14533',
+    15032 => '15032',
   );
   $handler->display->display_options['filters']['field_l_area_nid']['group'] = 1;
   /* Filter criterion: Content: Published */
