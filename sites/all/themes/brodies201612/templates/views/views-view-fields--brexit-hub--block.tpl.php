@@ -83,7 +83,7 @@ if (isset($img)) {
   echo($img);
 }
 else {
-  echo('<img class="img-responsive" src="/sites/default/files/styles/col-3--lg--thumb-fixed/public/externals/345cd1785a97c27926fa76c395a1a86e.jpg?itok=fg9_UBLu" width="290" height="120" alt="">');
+  echo('<img class="img-responsive" src="/sites/all/themes/brodies201612/images/brexit-hub/bgimg-legalupdate.jpg" width="290" height="120" alt="">');
 }
 ?>
 <div class="bg-wrap">

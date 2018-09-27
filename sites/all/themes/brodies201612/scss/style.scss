@@ -3778,10 +3778,10 @@ h1.page-header{
             @extend .brexit-block-main-titles;
         }
         .field-name-field-related-people{
-            @media #{$wide} {
+/*            @media #{$wide} {
                 max-height:85px;
                 overflow:hidden;
-            }
+            }*/
             clear:both;
             width:100%;
             margin-top:10px;
@@ -3790,13 +3790,13 @@ h1.page-header{
             .field-name-field-teaser-image{
                 @extend .col-sm-4;
                 padding-left:0;
-                @media #{$wide} {
+/*                @media #{$wide} {
                     img{
                         height:85px;
                         width:120px;
                         object-fit:cover;
                     }
-                }
+                }*/
             }
             .text-wrapper-container{
                 @extend .col-sm-8;
@@ -3811,7 +3811,7 @@ h1.page-header{
             margin-bottom:0;
         }
         .text-wrapper{
-            padding-top:1.5em;
+            padding-top:2em;
             text-align:left;
         }
         .field-name-field-people-fname,
@@ -3982,7 +3982,7 @@ h1.page-header{
             font-weight:300;
             text-transform:uppercase;
             a:hover{
-                color:$colour-white-01;
+                color:$colour-blue-01;
             }
         }
         .views-field-body{
