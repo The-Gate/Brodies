@@ -817,7 +817,7 @@ body{
         margin:0 0 20px;
     }
 }
-@media #{$normal} {
+@media #{$wide} {
     .navbar-btn{
         margin:0;
     }
@@ -3981,7 +3981,9 @@ h1.page-header{
             margin-bottom:15px;
             font-weight:300;
             text-transform:uppercase;
-
+            a:hover{
+                color:$colour-white-01;
+            }
         }
         .views-field-body{
             font-size:14px;
