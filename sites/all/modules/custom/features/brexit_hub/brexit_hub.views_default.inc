@@ -70,7 +70,7 @@ function brexit_hub_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '10';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Download Url */
+  /* Field: Content: Image URL */
   $handler->display->display_options['fields']['field_d_url']['id'] = 'field_d_url';
   $handler->display->display_options['fields']['field_d_url']['table'] = 'field_data_field_d_url';
   $handler->display->display_options['fields']['field_d_url']['field'] = 'field_d_url';
@@ -86,7 +86,7 @@ function brexit_hub_views_default_views() {
   $handler->display->display_options['fields']['field_teaser_image']['field'] = 'field_teaser_image';
   $handler->display->display_options['fields']['field_teaser_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_teaser_image']['settings'] = array(
-    'image_style' => 'col-3--lg--thumb-fixed',
+    'image_style' => 'col-3--lg--thumb-fixed-mod-height',
     'image_link' => '',
   );
   /* Field: Content: Path */

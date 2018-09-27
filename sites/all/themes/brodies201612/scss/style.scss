@@ -3778,10 +3778,10 @@ h1.page-header{
             @extend .brexit-block-main-titles;
         }
         .field-name-field-related-people{
-/*            @media #{$wide} {
-                max-height:85px;
-                overflow:hidden;
-            }*/
+            /*            @media #{$wide} {
+                            max-height:85px;
+                            overflow:hidden;
+                        }*/
             clear:both;
             width:100%;
             margin-top:10px;
@@ -3790,13 +3790,13 @@ h1.page-header{
             .field-name-field-teaser-image{
                 @extend .col-sm-4;
                 padding-left:0;
-/*                @media #{$wide} {
-                    img{
-                        height:85px;
-                        width:120px;
-                        object-fit:cover;
-                    }
-                }*/
+                /*                @media #{$wide} {
+                                    img{
+                                        height:85px;
+                                        width:120px;
+                                        object-fit:cover;
+                                    }
+                                }*/
             }
             .text-wrapper-container{
                 @extend .col-sm-8;
@@ -3811,7 +3811,15 @@ h1.page-header{
             margin-bottom:0;
         }
         .text-wrapper{
-            padding-top:2em;
+            @media #{$tablet}{
+                padding-top:4em;
+            }
+            @media #{$normal}{
+                padding-top:1.5em;
+            }
+            @media #{$wide}{
+                padding-top:2em;
+            }
             text-align:left;
         }
         .field-name-field-people-fname,
@@ -3860,8 +3868,12 @@ h1.page-header{
             font-size:12px;
             text-transform:uppercase;
             top:0;
-            left:5px;
-            right:5px;
+            left:0;
+            right:0;
+            @media #{$normal}{
+                left:5px;
+                right:5px;
+            }
             padding-left:10px;
             padding-top:15px;
             padding-bottom:15px;
@@ -4033,16 +4045,47 @@ h1.page-header{
             border-bottom:0 !important;
             padding-bottom:0 !important;
             margin-bottom:10px !important;
-
             @media #{$tablet-max} {
                 padding-left:0;
                 padding-right:0;
             }
         }
     }
+    @media #{$normal}{
+        .view-brexit-paginated-related-content,
+        .view-nodequeue-1,
+        .view-brexit-hub{
+            .views-row:nth-of-type(4n+1){
+                clear:left;            
+            }
+            .views-row:nth-of-type(4n+4){
+                clear:right;            
+            }
+        }
+        view-nodequeue-2 {
+            .views-row:nth-of-type(3n+1){
+                clear:left;            
+            }
+            .views-row:nth-of-type(3n+3){
+                clear:right;            
+            }
+
+        }
+    }
+
+
     .text-center,
     .pager{
         clear:both;
+    }
+    #block-block-8 p{
+        font-family: $font-family-sans-serif;
+        color: $colour-blue-01;
+        font-size: $font-size-base;
+        line-height:1.4;
+    }
+    .footer-wrapper img{
+        width:auto;
     }
 }
 .block-jquery-countdown-timer{

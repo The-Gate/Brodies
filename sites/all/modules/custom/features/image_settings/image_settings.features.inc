@@ -215,8 +215,8 @@ function image_settings_image_default_styles() {
       2 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => 290,
-          'height' => 120,
+          'width' => 720,
+          'height' => 298,
         ),
         'weight' => 1,
       ),
