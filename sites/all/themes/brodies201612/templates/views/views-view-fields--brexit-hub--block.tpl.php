@@ -37,12 +37,13 @@ else {
 
 <?php
 // content type 
-$nt_class = $nt_title = '';
+$nt_class = $nt_title = $target = '';
 switch ($row->node_type) {
   case 'feed_import':
     $nt_class = 'blog';
     $nt_title = 'Blog';
     $raw_date = $row->node_created;
+    $target = ' target="_blank"';
     break;
   case 'lupdate':
     $nt_class = 'legal';
@@ -89,5 +90,5 @@ else {
 <h2><?php print truncate_utf8($row->node_title, 55, TRUE, TRUE); ?></h2>
 <p class="date"><?php echo format_date($raw_date, 'brodies_date_only_long_'); ?></p>
 <p class="abstract"><?php echo truncate_utf8(filter_xss($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], array()), 110, TRUE, TRUE); ?></p>
-<p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>">Read more</a></p>
+<p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>"<?php echo  $target; ?>>Read more</a></p>
 </div>
