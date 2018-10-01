@@ -26,6 +26,7 @@ features[image][] = col-12-sm-full
 features[image][] = col-3--lg
 features[image][] = col-3--lg--fixed
 features[image][] = col-3--lg--thumb-fixed
+features[image][] = col-3--lg--thumb-fixed-mod-height
 features[image][] = col-4--lg
 features[image][] = col-4--lg-max-h559
 features[image][] = col-6--lg

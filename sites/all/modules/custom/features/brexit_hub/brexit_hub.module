@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Brexit Hub feature.
+ */
+
+include_once 'brexit_hub.features.inc';

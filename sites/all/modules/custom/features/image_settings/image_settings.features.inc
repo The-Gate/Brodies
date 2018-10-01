@@ -208,6 +208,21 @@ function image_settings_image_default_styles() {
     ),
   );
 
+  // Exported image style: col-3--lg--thumb-fixed-mod-height.
+  $styles['col-3--lg--thumb-fixed-mod-height'] = array(
+    'label' => 'col-3--lg--thumb-fixed-mod-height',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 720,
+          'height' => 298,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: col-4--lg.
   $styles['col-4--lg'] = array(
     'label' => 'col-4--lg',
