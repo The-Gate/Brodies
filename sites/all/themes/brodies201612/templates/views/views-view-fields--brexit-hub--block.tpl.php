@@ -92,6 +92,7 @@ else {
     <p class="abstract"><?php
         $string = htmlentities($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], null, 'utf-8');
         $string = str_replace('&nbsp;', ' ', $string);
+        $string = html_entity_decode($string);
         echo truncate_utf8(filter_xss($string, array()), 110, TRUE, TRUE);
         ?></p>
     <p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>"<?php echo $target; ?>>Read more</a></p>
