@@ -198,7 +198,7 @@
                   $blockDetails = explode(':', $node->field_block_reference[LANGUAGE_NONE][0]['moddelta']);
                   $block = module_invoke($blockDetails[0], 'block_view', $blockDetails[1]);
                   if (!empty($block['content'])) {
-                    print ('<div class="block-wrapper">' . $block['content'] . '</div>');
+                    print ('<div class="block-wrapper">' . render($block['content']) . '</div>');
                   }
                 }
 

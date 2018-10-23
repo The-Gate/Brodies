@@ -6,7 +6,6 @@ sites/*/files
 sites/*/private
 sites/all/themes/brodies201612/.sass-cache/
 *.db
+nbproject/private/private.xml
 sites/all/themes/brodies201612/prepros.cfg
 sites/all/themes/brodies201612/microsites/prepros.cfg
-nbproject/
-tmp/
