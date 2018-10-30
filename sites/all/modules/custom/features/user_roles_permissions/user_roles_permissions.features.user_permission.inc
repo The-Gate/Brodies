@@ -124,6 +124,15 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'webform',
   );
 
+  // Exported permission: 'access protected page password screen'.
+  $permissions['access protected page password screen'] = array(
+    'name' => 'access protected page password screen',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+    ),
+    'module' => 'protected_pages',
+  );
+
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
@@ -181,6 +190,13 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'administer actions',
     'roles' => array(),
     'module' => 'system',
+  );
+
+  // Exported permission: 'administer addtoany'.
+  $permissions['administer addtoany'] = array(
+    'name' => 'administer addtoany',
+    'roles' => array(),
+    'module' => 'addtoany',
   );
 
   // Exported permission: 'administer autoassignrole'.
@@ -331,6 +347,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'imce',
   );
 
+  // Exported permission: 'administer mailsystem'.
+  $permissions['administer mailsystem'] = array(
+    'name' => 'administer mailsystem',
+    'roles' => array(),
+    'module' => 'mailsystem',
+  );
+
   // Exported permission: 'administer matchredirect'.
   $permissions['administer matchredirect'] = array(
     'name' => 'administer matchredirect',
@@ -391,6 +414,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'aggregator',
   );
 
+  // Exported permission: 'administer nodequeue'.
+  $permissions['administer nodequeue'] = array(
+    'name' => 'administer nodequeue',
+    'roles' => array(),
+    'module' => 'nodequeue',
+  );
+
   // Exported permission: 'administer nodes'.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -398,6 +428,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: 'administer paragraphs bundles'.
+  $permissions['administer paragraphs bundles'] = array(
+    'name' => 'administer paragraphs bundles',
+    'roles' => array(),
+    'module' => 'paragraphs',
   );
 
   // Exported permission: 'administer pathauto'.
@@ -421,6 +458,13 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'administer pictures',
     'roles' => array(),
     'module' => 'picture',
+  );
+
+  // Exported permission: 'administer protected pages configuration'.
+  $permissions['administer protected pages configuration'] = array(
+    'name' => 'administer protected pages configuration',
+    'roles' => array(),
+    'module' => 'protected_pages',
   );
 
   // Exported permission: 'administer recaptcha'.
@@ -558,6 +602,15 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'bypass pages password protection'.
+  $permissions['bypass pages password protection'] = array(
+    'name' => 'bypass pages password protection',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'protected_pages',
+  );
+
   // Exported permission: 'cancel account'.
   $permissions['cancel account'] = array(
     'name' => 'cancel account',
@@ -572,6 +625,20 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'user',
+  );
+
+  // Exported permission: 'choose htmlmail_plaintext'.
+  $permissions['choose htmlmail_plaintext'] = array(
+    'name' => 'choose htmlmail_plaintext',
+    'roles' => array(),
+    'module' => 'htmlmail',
+  );
+
+  // Exported permission: 'clear brexit_blog_import feeds'.
+  $permissions['clear brexit_blog_import feeds'] = array(
+    'name' => 'clear brexit_blog_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
   );
 
   // Exported permission: 'clear payments_import feeds'.
@@ -612,6 +679,13 @@ function user_roles_permissions_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create brexit_hub content'.
+  $permissions['create brexit_hub content'] = array(
+    'name' => 'create brexit_hub content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -670,6 +744,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'create feed_import content'.
+  $permissions['create feed_import content'] = array(
+    'name' => 'create feed_import content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'create files'.
   $permissions['create files'] = array(
     'name' => 'create files',
@@ -712,6 +793,13 @@ function user_roles_permissions_user_default_permissions() {
     'roles' => array(
       'admin' => 'admin',
     ),
+    'module' => 'node',
+  );
+
+  // Exported permission: 'create landing_page content'.
+  $permissions['create landing_page content'] = array(
+    'name' => 'create landing_page content',
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -956,6 +1044,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'delete any brexit_hub content'.
+  $permissions['delete any brexit_hub content'] = array(
+    'name' => 'delete any brexit_hub content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any call_to_action content'.
   $permissions['delete any call_to_action content'] = array(
     'name' => 'delete any call_to_action content',
@@ -1020,6 +1115,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete any feed_import content'.
+  $permissions['delete any feed_import content'] = array(
+    'name' => 'delete any feed_import content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete any graduate_content content'.
   $permissions['delete any graduate_content content'] = array(
     'name' => 'delete any graduate_content content',
@@ -1063,6 +1165,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'delete any landing_page content'.
+  $permissions['delete any landing_page content'] = array(
+    'name' => 'delete any landing_page content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete any larea content'.
@@ -1290,6 +1399,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'delete own brexit_hub content'.
+  $permissions['delete own brexit_hub content'] = array(
+    'name' => 'delete own brexit_hub content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own call_to_action content'.
   $permissions['delete own call_to_action content'] = array(
     'name' => 'delete own call_to_action content',
@@ -1353,6 +1469,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'delete own feed_import content'.
+  $permissions['delete own feed_import content'] = array(
+    'name' => 'delete own feed_import content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'delete own graduate_content content'.
   $permissions['delete own graduate_content content'] = array(
     'name' => 'delete own graduate_content content',
@@ -1396,6 +1519,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'delete own landing_page content'.
+  $permissions['delete own landing_page content'] = array(
+    'name' => 'delete own landing_page content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'delete own larea content'.
@@ -1621,6 +1751,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'delete terms in slideshow_type'.
+  $permissions['delete terms in slideshow_type'] = array(
+    'name' => 'delete terms in slideshow_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'delete terms in vocabulary_1'.
   $permissions['delete terms in vocabulary_1'] = array(
     'name' => 'delete terms in vocabulary_1',
@@ -1772,6 +1909,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'edit any brexit_hub content'.
+  $permissions['edit any brexit_hub content'] = array(
+    'name' => 'edit any brexit_hub content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any call_to_action content'.
   $permissions['edit any call_to_action content'] = array(
     'name' => 'edit any call_to_action content',
@@ -1836,6 +1980,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit any feed_import content'.
+  $permissions['edit any feed_import content'] = array(
+    'name' => 'edit any feed_import content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit any graduate_content content'.
   $permissions['edit any graduate_content content'] = array(
     'name' => 'edit any graduate_content content',
@@ -1880,6 +2031,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'edit any landing_page content'.
+  $permissions['edit any landing_page content'] = array(
+    'name' => 'edit any landing_page content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit any larea content'.
@@ -2116,6 +2274,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: 'edit own brexit_hub content'.
+  $permissions['edit own brexit_hub content'] = array(
+    'name' => 'edit own brexit_hub content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own call_to_action content'.
   $permissions['edit own call_to_action content'] = array(
     'name' => 'edit own call_to_action content',
@@ -2188,6 +2353,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: 'edit own feed_import content'.
+  $permissions['edit own feed_import content'] = array(
+    'name' => 'edit own feed_import content',
+    'roles' => array(),
+    'module' => 'node',
+  );
+
   // Exported permission: 'edit own graduate_content content'.
   $permissions['edit own graduate_content content'] = array(
     'name' => 'edit own graduate_content content',
@@ -2231,6 +2403,13 @@ function user_roles_permissions_user_default_permissions() {
       'admin' => 'admin',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: 'edit own landing_page content'.
+  $permissions['edit own landing_page content'] = array(
+    'name' => 'edit own landing_page content',
+    'roles' => array(),
+    'module' => 'node',
   );
 
   // Exported permission: 'edit own larea content'.
@@ -2447,6 +2626,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: 'edit terms in slideshow_type'.
+  $permissions['edit terms in slideshow_type'] = array(
+    'name' => 'edit terms in slideshow_type',
+    'roles' => array(),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: 'edit terms in vocabulary_1'.
   $permissions['edit terms in vocabulary_1'] = array(
     'name' => 'edit terms in vocabulary_1',
@@ -2491,6 +2677,13 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: 'import brexit_blog_import feeds'.
+  $permissions['import brexit_blog_import feeds'] = array(
+    'name' => 'import brexit_blog_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
+  );
+
   // Exported permission: 'import payments_import feeds'.
   $permissions['import payments_import feeds'] = array(
     'name' => 'import payments_import feeds',
@@ -2503,6 +2696,24 @@ function user_roles_permissions_user_default_permissions() {
     'name' => 'manage features',
     'roles' => array(),
     'module' => 'features',
+  );
+
+  // Exported permission: 'manipulate all queues'.
+  $permissions['manipulate all queues'] = array(
+    'name' => 'manipulate all queues',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'nodequeue',
+  );
+
+  // Exported permission: 'manipulate queues'.
+  $permissions['manipulate queues'] = array(
+    'name' => 'manipulate queues',
+    'roles' => array(
+      'admin' => 'admin',
+    ),
+    'module' => 'nodequeue',
   );
 
   // Exported permission: 'notify of path changes'.
@@ -2585,11 +2796,25 @@ function user_roles_permissions_user_default_permissions() {
     'module' => 'location',
   );
 
+  // Exported permission: 'tamper brexit_blog_import'.
+  $permissions['tamper brexit_blog_import'] = array(
+    'name' => 'tamper brexit_blog_import',
+    'roles' => array(),
+    'module' => 'feeds_tamper',
+  );
+
   // Exported permission: 'tamper payments_import'.
   $permissions['tamper payments_import'] = array(
     'name' => 'tamper payments_import',
     'roles' => array(),
     'module' => 'feeds_tamper',
+  );
+
+  // Exported permission: 'unlock brexit_blog_import feeds'.
+  $permissions['unlock brexit_blog_import feeds'] = array(
+    'name' => 'unlock brexit_blog_import feeds',
+    'roles' => array(),
+    'module' => 'feeds',
   );
 
   // Exported permission: 'unlock payments_import feeds'.
@@ -2648,6 +2873,13 @@ function user_roles_permissions_user_default_permissions() {
       'Emergency-Page-Login' => 'Emergency-Page-Login',
       'admin' => 'admin',
     ),
+    'module' => 'filter',
+  );
+
+  // Exported permission: 'use text format email'.
+  $permissions['use text format email'] = array(
+    'name' => 'use text format email',
+    'roles' => array(),
     'module' => 'filter',
   );
 
