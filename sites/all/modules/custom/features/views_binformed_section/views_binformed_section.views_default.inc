@@ -93,7 +93,7 @@ function views_binformed_section_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Download Url */
+  /* Field: Content: Image URL */
   $handler->display->display_options['fields']['field_d_url']['id'] = 'field_d_url';
   $handler->display->display_options['fields']['field_d_url']['table'] = 'field_data_field_d_url';
   $handler->display->display_options['fields']['field_d_url']['field'] = 'field_d_url';
@@ -340,7 +340,7 @@ Title Desc|Z -> A',
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Legal left */
+  /* Field: Content: Item Reference */
   $handler->display->display_options['fields']['field_l_left']['id'] = 'field_l_left';
   $handler->display->display_options['fields']['field_l_left']['table'] = 'field_data_field_l_left';
   $handler->display->display_options['fields']['field_l_left']['field'] = 'field_l_left';
@@ -631,7 +631,7 @@ Title Desc|Z -> A',
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Publications Archive';
+  $handler->display->display_options['title'] = 'Publications';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
@@ -777,9 +777,9 @@ Title Desc|Z -> A',
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'binformed/publications-archive';
+  $handler->display->display_options['path'] = 'binformed/publications';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Publications Archive';
+  $handler->display->display_options['menu']['title'] = 'Publications';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'menu-sector';
   $handler->display->display_options['menu']['context'] = 0;

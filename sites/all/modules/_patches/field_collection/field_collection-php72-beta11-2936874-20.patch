@@ -1,0 +1,14 @@
+diff --git a/field_collection.entity.inc b/field_collection.entity.inc
+index 2e8a11b..c04680d 100644
+--- a/field_collection.entity.inc
++++ b/field_collection.entity.inc
+@@ -299,7 +299,8 @@ class FieldCollectionItemEntity extends Entity {
+           $query->age(FIELD_LOAD_REVISION);
+         }
+         $result = $query->execute();
+-        list($this->hostEntityType, $data) = each($result);
++        $this->hostEntityType = key($result);
++        $data = current($result);
+ 
+         if ($this->isInUse()) {
+           $this->hostEntityId = $data ? key($data) : FALSE;

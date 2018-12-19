@@ -900,7 +900,7 @@ function brSeminarBooking_calendar_links() {
   return $calendar_links;
 }
 
-function _getLocation($locationInput, $addressInput) {
+function _getLocation($locationInput, $addressInput=null) {
   $locationOut = 'TBC';
   if (!(empty($locationInput))) {
     $location = node_load($locationInput);

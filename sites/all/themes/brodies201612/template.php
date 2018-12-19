@@ -237,7 +237,7 @@ function br_get_video_data($url, $thumbnail = FALSE) {
     if (!$thumbnail) {
       $thumbnail = '//img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
     }
-    $embed = '<iframe src="//www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+    $embed = '<iframe src="//www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1&rel=0" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
   }
 
   if ($vid) {
