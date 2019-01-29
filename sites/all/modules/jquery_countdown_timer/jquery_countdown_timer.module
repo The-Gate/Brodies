@@ -75,6 +75,7 @@ function jquery_countdown_timer_block_view($delta = '', $edit = array()) {
   $block = '';
   switch ($delta) {
     case 'jquery_countdown_timer':
+      $block = array();
       $block['subject'] = 'Countdown';
       $block['content'] = array(
         '#markup' => theme('jquery_countdown_timer_container', array()),

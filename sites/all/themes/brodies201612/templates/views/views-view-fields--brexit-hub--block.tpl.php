@@ -6,13 +6,16 @@
  * - $view: The view in use.
  * - $fields: an array of $field objects. Each one contains:
  *   - $field->content: The output of the field.
- *   - $field->raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - $field->raw: The raw data for the field, if it exists. This is NOT
+ *   output safe.
  *   - $field->class: The safe class id to use.
- *   - $field->handler: The Views field handler object controlling this field. Do not use
- *     var_export to dump this object, as it can't handle the recursion.
+ *   - $field->handler: The Views field handler object controlling this field.
+ *   Do not use var_export to dump this object, as it can't handle the
+ *   recursion.
  *   - $field->inline: Whether or not the field should be inline.
  *   - $field->inline_html: either div or span based on the above flag.
- *   - $field->wrapper_prefix: A complete wrapper containing the inline_html to use.
+ *   - $field->wrapper_prefix: A complete wrapper containing the inline_html to
+ *   use.
  *   - $field->wrapper_suffix: The closing tag for the wrapper.
  *   - $field->separator: an optional separator that may appear before a field.
  *   - $field->label: The wrap label text to use.
@@ -26,7 +29,7 @@
 <?php
 // content link
 if (isset($row->field_field_lp_cta_l_url[0]['raw']['safe_value'])) {
-// external
+  // external
   $link = $row->field_field_lp_cta_l_url[0]['raw']['safe_value'];
 }
 else {
@@ -48,12 +51,12 @@ switch ($row->node_type) {
   case 'lupdate':
     $nt_class = 'legal';
     $nt_title = 'Legal Update';
-    $raw_date = $row->field_field_l_date[0]['raw']['value'];
+    $raw_date = !(empty($row->field_field_l_date[0]['raw']['value'])) ? $row->field_field_l_date[0]['raw']['value'] : $row->node_created;
     break;
   case 'news':
     $nt_class = 'news';
     $nt_title = 'News';
-    $raw_date = $row->node_created;
+    $raw_date = !(empty($row->field_field_date[0]['raw']['value'])) ? $row->field_field_date[0]['raw']['value'] : $row->node_created;
     break;
 }
 echo '<div class="icon"><span class="icon-img ' . $nt_class . '"></span>' . $nt_title . '</div>';
@@ -69,15 +72,17 @@ if (!(empty($row->field_field_d_url[0]['raw']))) {
   $xpath = new DOMXPath($doc);
   $src = $xpath->evaluate("string(//img/@src)"); # "/images/image.jpg"
   if (isset($src)) {
-    $img = theme('imagecache_external', array(
+    $img = theme('imagecache_external', [
       'path' => $src,
       'style_name' => $img_style,
-    ));
+    ]);
   }
 }
 // news / legal update iamge - internal image
 elseif (!empty($row->field_field_teaser_image)) {
   $img = render($row->field_field_teaser_image);
+  //@todo: php 7.2 update started adding some string after the image. No idea what, but this removed it
+  $img = substr($img, 0, strpos($img, "/>")) . '/>';
 }
 if (isset($img)) {
   echo($img);
@@ -90,10 +95,12 @@ else {
     <h2><?php print truncate_utf8($row->node_title, 55, TRUE, TRUE); ?></h2>
     <p class="date"><?php echo format_date($raw_date, 'brodies_date_only_long_'); ?></p>
     <p class="abstract"><?php
-        $string = htmlentities($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], null, 'utf-8');
-        $string = str_replace('&nbsp;', ' ', $string);
-        $string = html_entity_decode($string);
-        echo truncate_utf8(filter_xss($string, array()), 110, TRUE, TRUE);
-        ?></p>
-    <p class="read-more <?php echo $nt_class; ?>"><a href="<?php echo $link; ?>"<?php echo $target; ?>>Read more</a></p>
+      $string = htmlentities($row->_field_data['nid']['entity']->body['und'][0]['safe_value'], NULL, 'utf-8');
+      $string = str_replace('&nbsp;', ' ', $string);
+      $string = html_entity_decode($string);
+      echo truncate_utf8(filter_xss($string, []), 110, TRUE, TRUE);
+      ?></p>
+    <p class="read-more <?php echo $nt_class; ?>"><a
+                href="<?php echo $link; ?>"<?php echo $target; ?>>Read more</a>
+    </p>
 </div>
