@@ -110,6 +110,11 @@ body.page-graduate{
                 &:hover{
                     background:$colour-orange-01;
                 }
+                &#reciteme {
+                    span{
+                        color: $colour-white-01;
+                    }
+                }
             }
         }
     }
