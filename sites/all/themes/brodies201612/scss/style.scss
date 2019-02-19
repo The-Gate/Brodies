@@ -1033,7 +1033,7 @@ body {
       margin-right: calc((100% - (200px + (((100% - 240px) / 18) * 8))) / 2);
       text-align: left;
       @media #{$mobile-max}{
-        margin-bottom:15px;
+        margin-bottom: 15px;
       }
       @media #{$tablet}{
         width: 95px;
@@ -1064,8 +1064,8 @@ body {
         margin-left: calc((100% - 240px) / 18);
         margin-right: calc((100% - 240px) / 18);
         &#reciteme {
-        margin: 0;
-      }
+          margin: 0;
+        }
       }
       @media #{$tablet}{
         margin: 0 6px 2px;
@@ -1091,6 +1091,23 @@ body {
         font-size: 42px;
         @media #{$tablet}{
           font-size: 24px;
+        }
+
+        .fa-circle-o {
+          top: -4px;
+          left: -1px;
+          z-index: 10;
+          font-size: 50px;
+          @media #{$tablet}{
+            top: -3px;
+            font-size: 28px;
+          }
+        }
+
+        &:hover {
+          .fa-circle-o {
+            color: $colour-blue-01;
+          }
         }
 
         i {
