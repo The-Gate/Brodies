@@ -5,7 +5,6 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 sites/all/themes/brodies201612/.sass-cache/
-.idea/
-sites/all/themes/brodies201612/microsites/prepros.cfg
 sites/all/themes/brodies201612/prepros.cfg
-nbproject/
+sites/all/themes/brodies201612/microsites/prepros.cfg
+.idea/
