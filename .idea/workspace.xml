@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9d5492c-3805-4c7e-b656-35c15640d28f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Brodies.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/page--landing-page.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/page--landing-page.tpl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" afterDir="false" />
     </list>
     <list id="a55bc42b-596e-4bf7-83d7-e62b354407b4" name="field collection-php72-beta11-2936874-20" comment="" />
     <list id="81cda281-13c3-48cd-8bf8-dacb2f496e5c" name="field collection-php72-countable-2992575-17" comment="" />
@@ -18,6 +14,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
   <component name="DrupalConfiguration" enabled="true" version="7">
     <drupalPath>D:\wamp\www\theGate\brodies\httpsdocs</drupalPath>
   </component>
@@ -26,17 +27,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="53" column="102" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+            <state relative-caret-position="425">
+              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+              <folding>
+                <element signature="n#style#0;n#iframe#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/template.php">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="125" selection-start-line="13" selection-start-column="125" selection-end-line="13" selection-end-column="125" />
+            <state relative-caret-position="187">
+              <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+              <folding>
+                <element signature="n#style#0;n#iframe#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,11 +86,12 @@
         <option value="$PROJECT_DIR$/sites/all/modules/jquery_countdown_timer/jquery_countdown_timer.module" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/scss/graduates.scss" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/scss/style.scss" />
-        <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/template.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/js/brodies.js" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/page--landing-page.tpl.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/scss/_default-variables.scss" />
+        <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php" />
       </list>
     </option>
   </component>
@@ -266,17 +274,18 @@
       <workItem from="1556528368866" duration="90000" />
       <workItem from="1556862610426" duration="689000" />
       <workItem from="1557310481119" duration="1429000" />
+      <workItem from="1557724869008" duration="106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33532000" />
+    <option name="totallyTimeSpent" value="33638000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31556502" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31876332" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -426,13 +435,6 @@
     <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/config.rb">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="53" column="102" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/scss/graduates.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
@@ -475,6 +477,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="125" selection-start-line="13" selection-start-column="125" selection-end-line="13" selection-end-column="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/page.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2499" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#iframe#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#iframe#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
