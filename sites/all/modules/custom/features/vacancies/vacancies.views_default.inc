@@ -222,6 +222,15 @@ function vacancies_views_default_views() {
   );
   $handler->display->display_options['filters']['field_role_type_tid_selective']['selective_display_field'] = 'field_role_type';
   $handler->display->display_options['filters']['field_role_type_tid_selective']['selective_items_limit'] = '100';
+  /* Filter criterion: Content: Vacancy type (field_vacancy_type) */
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['id'] = 'field_vacancy_type_tid';
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['table'] = 'field_data_field_vacancy_type';
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['field'] = 'field_vacancy_type_tid';
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['value'] = array(
+    465 => '465',
+  );
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_vacancy_type_tid']['vocabulary'] = 'vacancy_type';
   $handler->display->display_options['select_labels'] = array(
     'field_location_tid_selective' => 'Location',
     'field_practice_area_tid_selective' => 'Practice area',

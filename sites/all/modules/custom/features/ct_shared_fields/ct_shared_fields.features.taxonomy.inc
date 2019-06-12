@@ -34,6 +34,14 @@ function ct_shared_fields_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'vacancy_type' => array(
+      'name' => 'Vacancy Type',
+      'machine_name' => 'vacancy_type',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'vocabulary_2' => array(
       'name' => 'CTA Display sections',
       'machine_name' => 'vocabulary_2',

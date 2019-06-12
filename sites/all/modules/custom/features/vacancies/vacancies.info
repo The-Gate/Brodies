@@ -12,6 +12,7 @@ features[field_instance][] = node-vacancy-field_d_file
 features[field_instance][] = node-vacancy-field_location
 features[field_instance][] = node-vacancy-field_practice_area
 features[field_instance][] = node-vacancy-field_role_type
+features[field_instance][] = node-vacancy-field_vacancy_type
 features[node][] = vacancy
 features[views_view][] = vacancies
 features_exclude[dependencies][ctools] = ctools
