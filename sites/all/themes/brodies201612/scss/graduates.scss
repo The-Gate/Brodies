@@ -134,10 +134,10 @@ body.page-graduate{
             margin-bottom: 5px;
             font-size: $font-size-20;
         }
-        .title-icon{
-            margin-top:-35px;
-            right:10px;
-        }
+        //.title-icon{
+        //    margin-top:-35px;
+        //    right:10px;
+        //}
         .overlay-text{
             font-size:$font-size-12;
             font-weight:400;
@@ -146,10 +146,10 @@ body.page-graduate{
             .overlay-title{
                 text-transform: none;
             }
-            .overlay-title,
-            .overlay-text{
-                max-width:calc(100% - 63px);
-            }
+            //.overlay-title,
+            //.overlay-text{
+            //    max-width:calc(100% - 63px);
+            //}
             .overlay-button{
                 float:none;
                 a{
@@ -547,9 +547,9 @@ body.page-graduate{
             padding:30px 20px 20px;
             min-height:100px;
             margin-bottom:40px;
-            .title-icon{
-                right:20px;
-            }
+            //.title-icon{
+            //    right:20px;
+            //}
         }
         .panel-title{
             font-size: $font-size-20;
