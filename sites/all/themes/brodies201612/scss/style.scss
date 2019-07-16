@@ -3344,8 +3344,19 @@ a.notice {
 /********************** Footer ***********************/
 .footer-wrapper {
   margin: 40px 0;
-  border-top: 4px solid $colour-orange-01;
-  padding-top: 35px;
+  &:before{
+    content:'';
+    display:block;
+    width:100%;
+    height:6px;
+    margin-bottom:44px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b43234+0,b43234+10,c93688+11,c93688+41,deaf46+42,deaf46+47,41b5a3+48,41b5a3+63,5fb4dd+64 */
+    background: #b43234; /* Old browsers */
+    background: -moz-linear-gradient(left,  #b43234 0%, #b43234 10%, #c93688 10%, #c93688 41%, #deaf46 41%, #deaf46 47%, #41b5a3 47%, #41b5a3 63%, #5fb4dd 63%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #b43234 0%,#b43234 10%,#c93688 10%,#c93688 41%,#deaf46 41%,#deaf46 47%,#41b5a3 47%,#41b5a3 63%,#5fb4dd 63%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #b43234 0%,#b43234 10%,#c93688 10%,#c93688 41%,#deaf46 41%,#deaf46 47%,#41b5a3 47%,#41b5a3 63%,#5fb4dd 63%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+  }
 }
 
 .footer {
@@ -3354,11 +3365,12 @@ a.notice {
   }
 
   .block {
+    margin-bottom:30px;
     h2 {
-      font-size: 12px;
-      margin: 0px 0px 15px;
+      font-size: 18px;
+      margin: 0;
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 600;
       font-family: $font-family-serif;
 
       &.block-title {
@@ -3371,16 +3383,31 @@ a.notice {
       list-style-image: none;
       list-style-type: none;
     }
+    li{
+      display:inline-block;
+    }
 
     .nav > li {
-      margin: 0px 0px 14px;
-
       & > a {
-        padding: 0;
-        font-size: 12px;
+        padding: 0 12px 0 0;
         font-family: $font-family-sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        line-height:2.4;
+        text-decoration: underline;
       }
     }
+    .media{
+      display:inline-block;
+      vertical-align: middle;
+      margin:0 10px 0 0;
+
+      @media #{$tablet-max}{
+        max-width:45%;
+      }
+      max-width: 200px;
+    }
+
   }
 
   #block-block-1 {
@@ -3391,29 +3418,8 @@ a.notice {
   }
 
   #block-block-8 {
-    margin-top: 10px;
-
-    .col-md-3 {
-      border-top: 1px solid $colour-orange-01;
-      padding-top: 20px;
-    }
-
     a {
       color: $colour-orange-01;
-    }
-  }
-
-  .menu-block-8 {
-    .menu.nav {
-      @media #{$tablet}{
-        column-count: 3;
-        column-gap: 10px;
-      }
-
-      ul {
-        display: inline-block;
-        width: 100%;
-      }
     }
   }
 
