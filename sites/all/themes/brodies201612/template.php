@@ -5,7 +5,7 @@
  * The primary PHP file for this theme.
  */
 function brodies201612_preprocess_html(&$variables) {
-  drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
+  drupal_add_css('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap&subset=latin-ext', array('type' => 'external'));
   // slick can potentially appear on any page
   drupal_add_css('sites/all/libraries/slick/slick/slick.css', array('type' => 'file'));
   drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
