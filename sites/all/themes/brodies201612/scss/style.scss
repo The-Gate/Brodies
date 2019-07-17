@@ -98,7 +98,7 @@ h2 {
   }
 }
 
-h1, h2{
+h1, h2 {
   text-transform: uppercase;
 }
 
@@ -1504,41 +1504,50 @@ h2.block-title {
   }
 }
 
+.field-collection-item-field-home-cta-block {
+  position: relative;
+
+  @media #{$normal}{
+    height: 320px;
+  }
+}
+
 .cta-overlay {
   margin-bottom: 10px;
 
+  .content {
+    position: relative;
+  }
+
   .home-cta-bg-img {
     position: relative;
-    min-height: 125px;
+
+    @media #{$normal}{
+      min-height: 320px;
+    }
   }
 
   .cta-overlay-inner {
     position: relative;
+
+    @media #{$normal}{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
     padding: 15px 20px;
     overflow: auto;
     overflow-y: hidden;
-    @media #{$tablet-max}{
-      opacity: 1 !important;
-    }
   }
 
   @media #{$normal}{
     .cta-overlay-wrapper {
       position: absolute;
-      top: 0;
-      height: 100%;
-      width: 100%;
-    }
+      bottom: 0;
+      left: 0;
+      right: 0;
 
-    .cta-overlay-inner {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    &.col-md-6 .cta-overlay-inner {
-      max-width: 75%;
-    }
-    &.col-md-12 .cta-overlay-inner {
-      max-width: 50%;
     }
   }
 
@@ -1549,36 +1558,47 @@ h2.block-title {
   }
 
   .overlay-title {
-    font-size: $font-size-16;
-    text-transform: uppercase;
-    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 2px solid $colour-white-01;
+    margin-bottom: 15px;
     font-family: $font-family-sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: $font-size-18;
+    line-height: 1.22;
 
-    &.pink {
-      border-bottom: 2px solid $colour-pink;
-    }
 
-    &.green {
-      border-bottom: 2px solid $colour-green;
-    }
-
-    &.blue {
-      border-bottom: 2px solid $colour-blue-02;
-    }
-
-    &.purple {
-      border-bottom: 2px solid $colour-purple;
-    }
+    //&.pink {
+    //  border-bottom: 2px solid $colour-pink;
+    //}
+    //
+    //&.green {
+    //  border-bottom: 2px solid $colour-green;
+    //}
+    //
+    //&.blue {
+    //  border-bottom: 2px solid $colour-blue-02;
+    //}
+    //
+    //&.purple {
+    //  border-bottom: 2px solid $colour-purple;
+    //}
   }
 
   .overlay-text {
     font-size: $font-size-16;
-    font-weight: 700;
+    line-height: 1.1875;
+    font-weight: 400;
   }
 
   .overlay-button {
-    float: right;
-    @extend .read-more-block;
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 40px;
+      font-size: $font-size-16;
+      line-height: 1.1875;
+    }
 
     &.pink a {
       background: $colour-pink;
@@ -2309,7 +2329,7 @@ body {
 
 /********************** Title Icon ***********************/
 .title-icon {
-display:none;
+  display: none;
   //position: absolute;
   //right: 0;
   //margin-top: -60px;
@@ -3344,17 +3364,18 @@ a.notice {
 /********************** Footer ***********************/
 .footer-wrapper {
   margin: 40px 0;
-  &:before{
-    content:'';
-    display:block;
-    width:100%;
-    height:6px;
-    margin-bottom:44px;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 6px;
+    margin-bottom: 44px;
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b43234+0,b43234+10,c93688+11,c93688+41,deaf46+42,deaf46+47,41b5a3+48,41b5a3+63,5fb4dd+64 */
     background: #b43234; /* Old browsers */
-    background: -moz-linear-gradient(left,  #b43234 0%, #b43234 10%, #c93688 10%, #c93688 41%, #deaf46 41%, #deaf46 47%, #41b5a3 47%, #41b5a3 63%, #5fb4dd 63%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left,  #b43234 0%,#b43234 10%,#c93688 10%,#c93688 41%,#deaf46 41%,#deaf46 47%,#41b5a3 47%,#41b5a3 63%,#5fb4dd 63%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right,  #b43234 0%,#b43234 10%,#c93688 10%,#c93688 41%,#deaf46 41%,#deaf46 47%,#41b5a3 47%,#41b5a3 63%,#5fb4dd 63%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(left, #b43234 0%, #b43234 10%, #c93688 10%, #c93688 41%, #deaf46 41%, #deaf46 47%, #41b5a3 47%, #41b5a3 63%, #5fb4dd 63%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #b43234 0%, #b43234 10%, #c93688 10%, #c93688 41%, #deaf46 41%, #deaf46 47%, #41b5a3 47%, #41b5a3 63%, #5fb4dd 63%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #b43234 0%, #b43234 10%, #c93688 10%, #c93688 41%, #deaf46 41%, #deaf46 47%, #41b5a3 47%, #41b5a3 63%, #5fb4dd 63%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
   }
 }
@@ -3365,7 +3386,8 @@ a.notice {
   }
 
   .block {
-    margin-bottom:30px;
+    margin-bottom: 30px;
+
     h2 {
       font-size: 18px;
       margin: 0;
@@ -3383,8 +3405,9 @@ a.notice {
       list-style-image: none;
       list-style-type: none;
     }
-    li{
-      display:inline-block;
+
+    li {
+      display: inline-block;
     }
 
     .nav > li {
@@ -3393,17 +3416,18 @@ a.notice {
         font-family: $font-family-sans-serif;
         font-size: 12px;
         font-weight: 600;
-        line-height:2.4;
+        line-height: 2.4;
         text-decoration: underline;
       }
     }
-    .media{
-      display:inline-block;
+
+    .media {
+      display: inline-block;
       vertical-align: middle;
-      margin:0 10px 0 0;
+      margin: 0 10px 0 0;
 
       @media #{$tablet-max}{
-        max-width:45%;
+        max-width: 45%;
       }
       max-width: 200px;
     }
@@ -4850,23 +4874,26 @@ h1.page-header {
 }
 
 // vacancies
-.view-vacancies{
-  .view-content{
-    clear:both;
+.view-vacancies {
+  .view-content {
+    clear: both;
   }
-  .views-row{
-    margin-bottom:20px;
-    padding-bottom:20px !important;
+
+  .views-row {
+    margin-bottom: 20px;
+    padding-bottom: 20px !important;
     border-bottom: 3px solid $colour-orange-01 !important;
 
-    h3{
-      font-family:$font-family-sans-serif;
-      font-size:16px;
-      font-weight:700;
+    h3 {
+      font-family: $font-family-sans-serif;
+      font-size: 16px;
+      font-weight: 700;
     }
-    .file{
-      display:block;
-      a{
+
+    .file {
+      display: block;
+
+      a {
         text-decoration: underline;
       }
     }
