@@ -64,10 +64,10 @@
       <script type='text/javascript'>
         var axel = Math.random()+"";
         var a = axel * 10000000000000;
-        document.write('<img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num='+ a +'?" width=1 height=1 border=0>');
+        document.write('<img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num='+ a +'?" width=1 height=1 border=0 style="position:absolute">');
       </script>
       <noscript>
-        <img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num=1?" width=1 height=1 border=0>
+        <img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num=1?" width=1 height=1 border=0 style="position:absolute">
       </noscript>
       <script async src='https://tag.simpli.fi/sifitag/0e384ff0-8405-0135-dc80-06659b33d47c'></script>
       <script async src="https://dni.trumeasure.com/Scripts/TMLoader.js"></script>
