@@ -17,7 +17,7 @@ $mobile-max:      "screen and (max-width: "+ ($screen-sm-min - 1) +")"; //479px;
 $tablet:      "screen and (min-width: "+$screen-sm-min+")"; //768px;
 $tablet-max:      "screen and (max-width: "+($screen-md-min - 1)+")"; // 991px
 $normal:      "screen and (min-width: "+$screen-md-min+")"; //992px
-$normal-max:      "screen and (min-width: "+($screen-lg-min - 1)+")"; //1199px
+$normal-max:      "screen and (max-width: "+($screen-lg-min - 1)+")"; //1199px
 $wide:        "screen and (min-width: "+$screen-lg-min+")"; //1200px
 
 $grid-breakpoint:     "screen and (min-width: #{$grid-float-breakpoint})";
