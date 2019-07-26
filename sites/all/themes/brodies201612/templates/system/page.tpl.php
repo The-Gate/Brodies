@@ -79,7 +79,7 @@ $title_output .= '<a id="main-content"></a>';
 $title_output .= render($title_prefix);
 
 // set up titles and title icons
-$default_icon = FALSE;
+//$default_icon = FALSE;
 // where in the template does this title appear: above / default
 $title_postion = 'default';
 // show title ONLY on mobile
@@ -103,39 +103,39 @@ if (isset($node)) {
     case 'news':
     case 'win':
       $customTitle = 'News';
-      $default_icon = 'title-icon-default-news.png';
+//      $default_icon = 'title-icon-default-news.png';
       break;
-    case 'cs':
-      $default_icon = 'title-icon-default-case-studies.png';
-      break;
-    case 'cnews':
-      $default_icon = 'title-icon-default-news.png';
-      break;
+//    case 'cs':
+//      $default_icon = 'title-icon-default-case-studies.png';
+//      break;
+//    case 'cnews':
+//      $default_icon = 'title-icon-default-news.png';
+//      break;
     case 'lupdate':
       $customTitle = 'Legal updates';
-      $default_icon = 'title-icon-default-binformed.png';
+//      $default_icon = 'title-icon-default-binformed.png';
       break;
-    case 'publication':
-    case 'video':
-    case 'download':
-      $default_icon = 'title-icon-default-binformed.png';
-      break;
+//    case 'publication':
+//    case 'video':
+//    case 'download':
+//      $default_icon = 'title-icon-default-binformed.png';
+//      break;
     case 'event':
       $customTitle = 'Seminars';
-      $default_icon = 'title-icon-default-binformed.png';
+//      $default_icon = 'title-icon-default-binformed.png';
       break;
     case 'larea':
       $title = 'Legal updates: ' . $title;
       break;
-    case 'people':
-      $default_icon = 'title-icon-default-people.png';
-      break;
+//    case 'people':
+//      $default_icon = 'title-icon-default-people.png';
+//      break;
     case 'sector':
       $title_postion = 'above';
-      $default_icon = 'title-icon-default-business-sectors.png';
+//      $default_icon = 'title-icon-default-business-sectors.png';
       break;
     case 'service':
-      $default_icon = 'title-icon-default-legal-services.png';
+//      $default_icon = 'title-icon-default-legal-services.png';
       $title_postion = 'above';
       break;
     default:
@@ -148,18 +148,18 @@ if (isset($node)) {
           if ($parent_id > 0) {
             switch ($parent_id) {
               // seminars / binformed
-              case 248;
-              case 1042;
-                $default_icon = 'title-icon-default-binformed.png';
-                break;
+//              case 248;
+//              case 1042;
+//                $default_icon = 'title-icon-default-binformed.png';
+//                break;
               // about us
-              case 231;
-                $default_icon = 'title-icon-default-about.png';
-                break;
+//              case 231;
+//                $default_icon = 'title-icon-default-about.png';
+//                break;
               // careers
-              case 1004;
-                $default_icon = 'title-icon-default-careers.png';
-                break;
+//              case 1004;
+//                $default_icon = 'title-icon-default-careers.png';
+//                break;
               // contact
               case 823;
                 $show_breadcrumb_filler = FALSE;
@@ -181,25 +181,25 @@ else {
   // views pages
   if (isset($theme_hook_suggestions)) {
     // people listing
-    if (in_array('page__views__people_listing', $theme_hook_suggestions)) {
-      $default_icon = 'title-icon-default-people.png';
-    }
+//    if (in_array('page__views__people_listing', $theme_hook_suggestions)) {
+//      $default_icon = 'title-icon-default-people.png';
+//    }
     // news
-    if (in_array('page__views__top_news', $theme_hook_suggestions)) {
-      $default_icon = 'title-icon-default-news.png';
-    }
+//    if (in_array('page__views__top_news', $theme_hook_suggestions)) {
+//      $default_icon = 'title-icon-default-news.png';
+//    }
     // case study listing
-    if (in_array('page__views__Case_Studies', $theme_hook_suggestions)) {
-      $default_icon = 'title-icon-default-case-studies.png';
-    }
+//    if (in_array('page__views__Case_Studies', $theme_hook_suggestions)) {
+//      $default_icon = 'title-icon-default-case-studies.png';
+//    }
     // binformed section
-    if (in_array('page__views__videos', $theme_hook_suggestions) or
-      in_array('page__views__latest_legal_update', $theme_hook_suggestions) or
-      in_array('page__views__publications_archive', $theme_hook_suggestions) or
-      in_array('page__views__guides_downloads', $theme_hook_suggestions)
-    ) {
-      $default_icon = 'title-icon-default-binformed.png';
-    }
+//    if (in_array('page__views__videos', $theme_hook_suggestions) or
+//      in_array('page__views__latest_legal_update', $theme_hook_suggestions) or
+//      in_array('page__views__publications_archive', $theme_hook_suggestions) or
+//      in_array('page__views__guides_downloads', $theme_hook_suggestions)
+//    ) {
+//      $default_icon = 'title-icon-default-binformed.png';
+//    }
   }
 }
 $title_class = $mobile_only ? 'page-header' . $mobile_only_class : 'page-header';

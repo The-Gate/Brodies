@@ -803,7 +803,16 @@ body {
   background-color: rgba(69, 72, 69, 0.9);
   text-transform: uppercase;
   color: $colour-white-01;
-  font-size: 10px;
+  font-size: $font-size-14;
+
+  * {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-transform: inherit;
+  }
 }
 
 /********************** HEADER: TOP MENU ***********************/
@@ -872,16 +881,21 @@ body {
   }
 }
 
+.navbar-col-wrapper {
+  margin-top: 9px;
+}
+
 .navbar {
   margin-bottom: 0;
 }
 
+.navbar-btn {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 @media #{$normal-max}{
-  .navbar-btn {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+
   .navbar {
     min-height: 0;
     margin-top: 0;
@@ -1212,24 +1226,24 @@ body {
   }
 }
 
-.node-type-brexit-hub,
-.node-type-lpage2 {
-  #block-views-search-block,
-  #block-block-38,
-  .menu-block-3 {
-    display: none !important;
-  }
-
-  @media #{$tablet} {
-    .navbar-collapse {
-      padding-top: 38px;
-    }
-  }
-
-  #block-menu-block-6 {
-    @extend .col-lg-offset-2;
-  }
-}
+//.node-type-brexit-hub,
+//.node-type-lpage2 {
+//  #block-views-search-block,
+//  #block-block-38,
+//  .menu-block-3 {
+//    display: none !important;
+//  }
+//
+//  @media #{$tablet} {
+//    .navbar-collapse {
+//      padding-top: 38px;
+//    }
+//  }
+//
+//  #block-menu-block-6 {
+//    @extend .col-lg-offset-2;
+//  }
+//}
 
 .dropdown-li {
   display: inline-block !important;
@@ -1248,7 +1262,7 @@ body {
 
 .dropdown-menu { /* Actually FF 20+ */
   @media #{$normal-max}{
-    .navbar-wrapper &{
+    .navbar-wrapper & {
       position: relative;
       background: transparent;
       float: none;
@@ -3480,9 +3494,9 @@ body.page-landing {
     }
   }
 
-  #slogan {
-    background: url("../images/logo-strap-lp.png") no-repeat 0 0 transparent;
-  }
+  //#slogan {
+  //  background: url("../images/logo-strap-lp.png") no-repeat 0 0 transparent;
+  //}
 
   h1 {
     @media #{$tablet}{
@@ -3689,7 +3703,7 @@ body.page-landing {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    margin-top: 20px;
+    margin-top: 0;
   }
 
   .main-content {
