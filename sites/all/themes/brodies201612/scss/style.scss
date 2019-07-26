@@ -742,12 +742,10 @@ body {
     .navbar-wrapper {
       @media #{$tablet} {
         height: $landingHeight;
-        .container {
+        .container:not(.title-wrapper):not(.slogan-wrapper) {
           height: $landingHeight;
         }
       }
-
-      border-bottom: 4px solid $colour-orange-01;
     }
   }
 
@@ -3499,13 +3497,6 @@ body.page-landing {
   //}
 
   h1 {
-    @media #{$tablet}{
-      position: absolute;
-      left: 0px;
-      bottom: 80px;
-      width: 30%;
-    }
-    font-family: georgia;
     font-size: 32px;
     color: #FFF;
     font-weight: normal;
@@ -3629,7 +3620,6 @@ body.page-landing {
 
   .footer-wrapper {
     margin-top: 0;
-    border-top: 4px solid $colour-orange-01;
   }
 
   @media #{$normal} {
