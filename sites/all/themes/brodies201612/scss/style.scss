@@ -814,6 +814,13 @@ body {
       text-align: center;
     }
   }
+  @media #{$normal-max} {
+    & .container {
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+  }
 }
 
 /********************** HEADER: TOP MENU ***********************/
