@@ -260,7 +260,7 @@ if (isset($node->field_lp_bkg_image)) {
     <?php if (!empty($site_slogan)): ?>
       <div id="slogan" class="clearfix">
         <div class="container slogan-wrapper">
-          <div class="col-xs-12"><p><?php echo $site_slogan; ?></p></div>
+          <div class="col-xs-6 col-md-2"><p><?php echo $site_slogan; ?></p></div>
         </div>
       </div>
     <?php endif; ?>

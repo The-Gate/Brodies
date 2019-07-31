@@ -140,12 +140,7 @@ body {
     &.container-fluid {
         margin-top: 20px;
     }*/
-    &.container > .container,
-    &.container-fluid > .container-fluid {
-        margin: 0;
-        padding: 0;
-        width: auto;
-    }
+
 }
 
 // Adjust z-index of core components.

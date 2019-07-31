@@ -240,7 +240,7 @@ if (!empty($node) and !empty($node->field_2_column_text['und'][0]['value'])) {
   <?php if (!empty($site_slogan)): ?>
     <div id="slogan" class="clearfix">
       <div class="container">
-        <div class="col-xs-12"><p><?php echo $site_slogan; ?></p></div>
+        <div class="col-xs-6 col-md-2"><p><?php echo $site_slogan; ?></p></div>
       </div>
     </div>
   <?php endif; ?>

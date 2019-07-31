@@ -801,7 +801,7 @@ body {
   background-color: rgba(69, 72, 69, 0.9);
   text-transform: uppercase;
   color: $colour-white-01;
-  font-size: $font-size-14;
+  font-size: $font-size-10;
 
   * {
     margin-top: 0;
@@ -810,6 +810,9 @@ body {
     font-family: inherit;
     font-size: inherit;
     text-transform: inherit;
+    @media #{$normal}{
+      text-align: center;
+    }
   }
 }
 
