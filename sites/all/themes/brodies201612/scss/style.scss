@@ -818,9 +818,7 @@ body {
     font-family: inherit;
     font-size: inherit;
     text-transform: inherit;
-    @media #{$normal}{
-      text-align: center;
-    }
+
   }
 
   @media #{$normal-max} {
@@ -828,6 +826,18 @@ body {
       margin: 0;
       padding: 0;
       width: auto;
+    }
+  }
+  p{
+    padding-left:7px;
+    @media #{$tablet}{
+      padding-left:.75vw;
+    }
+    @media #{$normal}{
+      padding-left:3vw;
+    }
+    @media #{$wide}{
+      padding-left:40px;
     }
   }
 }
@@ -1212,7 +1222,7 @@ body {
           @media #{$wide}{
             min-width: 130px;
           }
-          font-weight: bold;
+          font-weight: 600;
           text-align: center;
         }
 
