@@ -5,13 +5,17 @@
  * The primary PHP file for this theme.
  */
 function brodies201612_preprocess_html(&$variables) {
-  drupal_add_css('https://fonts.googleapis.com/css?family=PT+Sans:400,700&amp;subset=latin-ext', array('type' => 'external'));
+  drupal_add_css('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap&subset=latin-ext', ['type' => 'external']);
   // slick can potentially appear on any page
-  drupal_add_css('sites/all/libraries/slick/slick/slick.css', array('type' => 'file'));
-  drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', array('type' => 'file'));
-  drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', array('weight' => 5));
-  drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', array('type' => 'file'));
-  drupal_add_js('//cdn.jsdelivr.net/youtube-google-analytics/8.0.2/lunametrics-youtube.gtm.min.js',array('type' => 'external', 'scope' => 'header', 'weight'=> 5000));
+  drupal_add_css('sites/all/libraries/slick/slick/slick.css', ['type' => 'file']);
+  drupal_add_css('sites/all/libraries/slick/slick/slick-theme.css', ['type' => 'file']);
+  drupal_add_js('sites/all/libraries/slick/slick/slick.min.js', ['weight' => 5]);
+  drupal_add_css('sites/all/libraries/font-awesome/css/font-awesome.min.css', ['type' => 'file']);
+  drupal_add_js('//cdn.jsdelivr.net/youtube-google-analytics/8.0.2/lunametrics-youtube.gtm.min.js', [
+    'type' => 'external',
+    'scope' => 'header',
+    'weight' => 5000,
+  ]);
   //drupal_add_js('sites/all/themes/brodies201612/js/lunametrics-youtube.gtm.js',array('type' => 'file'));
   $node = menu_get_object();
   if ($node && $node->type) {
@@ -44,7 +48,11 @@ function brodies201612_preprocess_html(&$variables) {
         $variables['classes_array'][] = "page-graduate";
         break;
       case 'landing_page':
-        drupal_add_css('sites/all/themes/brodies201612/css/landing-page-overrides.css', array('group' => CSS_THEME, 'type' => 'file', 'weight' => 500));
+        drupal_add_css('sites/all/themes/brodies201612/css/landing-page-overrides.css', [
+          'group' => CSS_THEME,
+          'type' => 'file',
+          'weight' => 500,
+        ]);
         break;
     }
   }
@@ -98,21 +106,21 @@ function brodies201612_process_page(&$variables) {
     }
 
 
-//    if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
-//      if ($variables['node']->type == 'webform') {
-//        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
-//        if ($mlid > 0) {
-//          $variables['theme_hook_suggestions'][] = 'page__microsite_page';
-//        }
-//      }
-//      else {
-//        // "page-microsite.tpl.php".
-//        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
-//      }
-//    }
-//    else {     
-//      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
-//    }
+    //    if (($variables['node']->type == 'microsite_page' || $variables['node']->type == 'webform')) {
+    //      if ($variables['node']->type == 'webform') {
+    //        $mlid = db_query("select plid from {menu_links} where menu_name = 'menu-microsites' and link_path = 'node/" . $variables['node']->nid . "'")->fetchField();
+    //        if ($mlid > 0) {
+    //          $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+    //        }
+    //      }
+    //      else {
+    //        // "page-microsite.tpl.php".
+    //        $variables['theme_hook_suggestions'][] = 'page__microsite_page';
+    //      }
+    //    }
+    //    else {
+    //      $variables['theme_hook_suggestions'][] = 'page__' . $variables['node']->type;
+    //    }
   }
   elseif ($the_view = views_get_page_view()) {
     if (isset($the_view->name)) {
@@ -130,6 +138,9 @@ function brodies201612_process_page(&$variables) {
     $variables['content_column_class'] = ' class="' . $col_single . ' no-padding-left-md"';
     $variables['sidebar_first_column_class'] = ' class="col-md-3 sidebar-first col-md-pull-9"';
   }
+
+
+  $variables['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
 }
 
 function brodies201612_preprocess_node(&$variables) {
@@ -146,7 +157,7 @@ function brodies201612_preprocess_node(&$variables) {
           for ($i = 1; $i < 5; $i++) {
             if (isset($variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) && isset($variables['node']->{'field_p_v_text_' . $i}['und'][0]['value']) && isset($variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'])) {
               $vdata = br_get_video_data($variables['node']->{'field_p_v_url_' . $i}['und'][0]['value']);
-              $videos_html .= '<div class="col-md-3 col-sm-6 ivideo video-' . $i . '"><a class="vi" href="' . $variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) . '"><p>' . $variables['node']->{'field_p_v_text_' . $i}['und'][0]['value'] . '</p><span class="view">PLAY VIDEO</span></a></div>';
+              $videos_html .= '<div class="col-md-3 col-sm-6 ivideo video-' . $i . '"><a class="vi" href="' . $variables['node']->{'field_p_v_url_' . $i}['und'][0]['value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(['video' => $vdata['embed']]) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $variables['node']->{'field_p_v_image_' . $i}['und'][0]['uri']) . '"><p>' . $variables['node']->{'field_p_v_text_' . $i}['und'][0]['value'] . '</p><span class="view">PLAY VIDEO</span></a></div>';
             }
           }
           if ($videos_html) {
@@ -158,7 +169,7 @@ function brodies201612_preprocess_node(&$variables) {
       case 'video':
         if (!$variables['teaser']) {
           $vdata = br_get_video_data($variables['field_video_url'][0]['safe_value']);
-          $videos_html = '<a class="vi" href="' . $variables['field_video_url'][0]['safe_value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(array('video' => $vdata['embed'])) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $variables['field_teaser_image'][0]['uri']) . '"></a></div>';
+          $videos_html = '<a class="vi" href="' . $variables['field_video_url'][0]['safe_value'] . '"><span class="video" style="display:none;">' . drupal_json_encode(['video' => $vdata['embed']]) . '</span><img class="img-responsive" src="' . image_style_url('col-3--lg', $variables['field_teaser_image'][0]['uri']) . '"></a></div>';
           $variables['content']['body'][0]['#markup'] = '<div class="col-md-9">' . $variables['content']['body'][0]['#markup'] . '</div><div class="col-md-3">' . $videos_html . '</div>';
           $variables['content']['field_video_url'][0]['#markup'] = '';
           $variables['content']['field_teaser_image'] = '';
@@ -170,7 +181,12 @@ function brodies201612_preprocess_node(&$variables) {
 
 // remove the boostrap dropdown menu
 function brodies201612_menu_link__menu_block($variables) {
-  $keep_bootstrap_array = array('menu_link__menu_block__3', 'menu_link__menu_block__10', 'menu_link__menu_block__11', 'menu_link__menu_block__12');
+  $keep_bootstrap_array = [
+    'menu_link__menu_block__3',
+    'menu_link__menu_block__10',
+    'menu_link__menu_block__11',
+    'menu_link__menu_block__12',
+  ];
   if (in_array($variables['element']['#theme'][0], $keep_bootstrap_array)) {
     return brodies201612_bootstrap_menu_link($variables);
   }
@@ -185,8 +201,8 @@ function brodies201612_bootstrap_menu_link(array $variables) {
 
   $title = $element['#title'];
   $href = $element['#href'];
-  $options = !empty($element['#localized_options']) ? $element['#localized_options'] : array();
-  $attributes = !empty($element['#attributes']) ? $element['#attributes'] : array();
+  $options = !empty($element['#localized_options']) ? $element['#localized_options'] : [];
+  $attributes = !empty($element['#attributes']) ? $element['#attributes'] : [];
 
   if ($element['#below']) {
     // Prevent dropdown functions from being added to management menu so it
@@ -232,23 +248,28 @@ function br_get_video_data($url, $thumbnail = FALSE) {
     }
     $embed = '<iframe src="//player.vimeo.com/video/' . $vid . '" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
   }
-  else if (strpos($url, 'youtube') !== FALSE) {
-    $vid = substr($url, strrpos($url, '?v=') + 3);
-    if (!$thumbnail) {
-      $thumbnail = '//img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
+  else {
+    if (strpos($url, 'youtube') !== FALSE) {
+      $vid = substr($url, strrpos($url, '?v=') + 3);
+      if (!$thumbnail) {
+        $thumbnail = '//img.youtube.com/vi/' . $vid . '/hqdefault.jpg';
+      }
+      $embed = '<iframe src="//www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1&rel=0" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
     }
-    $embed = '<iframe src="//www.youtube.com/embed/' . $vid . '?wmode=opaque&autoplay=1&rel=0" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
   }
 
   if ($vid) {
-    return array('vid' => $vid, 'thumbnail' => $thumbnail, 'embed' => $embed);
+    return ['vid' => $vid, 'thumbnail' => $thumbnail, 'embed' => $embed];
   }
-  return false;
+  return FALSE;
 }
 
 /**
- * the homepage filed collection needs the top level wrapper removed to allow for content defined width;
+ * the homepage filed collection needs the top level wrapper removed to allow
+ * for content defined width;
+ *
  * @param type $variables
+ *
  * @return type
  */
 function brodies201612_field_collection_view($variables) {
@@ -256,8 +277,20 @@ function brodies201612_field_collection_view($variables) {
   return $element['#children'];
 }
 
+function brodies201612_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form_id == 'views_exposed_form') {
+    $view = $form_state['view'];
+    if ($view->name == 'search') {
+      $form['submit']['#value'] = '<i class="fa fa-search" aria-hidden="true"></i>';
+    }
+  }
+
+}
+
+
 function brodies201612_form_webform_client_form_alter(&$form, &$form_state, $form_id) {
-  $form['#attributes'] = array('OnSubmit' => 'customGAIntegration();');
+  $form['#attributes'] = ['OnSubmit' => 'customGAIntegration();'];
   $js = "
     function customGAIntegration(){
       if (jQuery('.node-type-landing-page').length >0){
@@ -266,23 +299,27 @@ function brodies201612_form_webform_client_form_alter(&$form, &$form_state, $for
             hitType: 'event',
             eventCategory: 'Form',
             eventAction: 'submit',
-            eventLabel: '".$form['#node']->title."'
+            eventLabel: '" . $form['#node']->title . "'
           });
         }
       }
     }";
-  drupal_add_js($js, array('type' => 'inline', 'scope' => 'header', 'weight'=> 5000));
+  drupal_add_js($js, [
+    'type' => 'inline',
+    'scope' => 'header',
+    'weight' => 5000,
+  ]);
 }
 
 // provide location template name options.
 function brodies201612_preprocess_location(&$variables) {
-    $query = db_select('location_instance', 'n');
-    $nid_field = $query->addField('n', 'nid');
-    $query->condition('lid', $variables['location']['lid']);
-    $result = $query->execute();
-    foreach($result as $n){
-        $node = node_load($n->nid);
-        $variables['theme_hook_suggestions'][] = 'location__node__' . $node->type;      
-        $variables['theme_hook_suggestions'][] = 'location__node_' . $n->nid;       
-    }
+  $query = db_select('location_instance', 'n');
+  $nid_field = $query->addField('n', 'nid');
+  $query->condition('lid', $variables['location']['lid']);
+  $result = $query->execute();
+  foreach ($result as $n) {
+    $node = node_load($n->nid);
+    $variables['theme_hook_suggestions'][] = 'location__node__' . $node->type;
+    $variables['theme_hook_suggestions'][] = 'location__node_' . $n->nid;
+  }
 }

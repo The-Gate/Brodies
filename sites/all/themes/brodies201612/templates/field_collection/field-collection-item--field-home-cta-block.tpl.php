@@ -55,7 +55,7 @@ $overlay_button = (!empty($content['field_lp_cta_r_title'][0]['#markup'])) ? $co
 // bg colour [convert to rgba]
 if (!empty($content['field_lp_blk_1_colour'][0]['#markup'])) {
   list($r, $g, $b) = sscanf(ltrim($content['field_lp_blk_1_colour'][0]['#markup'], '#'), "%02x%02x%02x");
-  $overlay_bg = ' style="background:rgb(' . $r . ',' . $g . ',' . $b . '); opacity: .8;" ';
+  $overlay_bg = ' style="background:rgb(' . $r . ',' . $g . ',' . $b . ');" ';
 }
 else {
   $overlay_bg = '';

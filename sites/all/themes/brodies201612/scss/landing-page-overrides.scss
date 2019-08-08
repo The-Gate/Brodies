@@ -555,22 +555,18 @@ blockquote{
     border:0;
     text-align:center;
     margin:0;
-    .footer-blue{
-        background: $colour-blue-01;
-        color: #fff;
-    }
     .col-md-2,
     .col-md-3,
     .col-sm-4,
     .col-md-12{
-        width:100%;
-        float:none;
+      margin:0 auto !important;
+      float:none;
     }
     .social-links{
         padding:15px 0 7px;
         margin:0;
         a{
-            color: #fff;
+            color: #000;
             font-size:$font-size-22;
             padding:0 6px;
         }
@@ -578,6 +574,7 @@ blockquote{
     #block-block-8{
         padding:8px 0 15px;
         margin:0;
+      text-align: center;
         .col-md-3{
             border:0;
         }

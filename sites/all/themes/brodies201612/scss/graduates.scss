@@ -1,629 +1,527 @@
-body.page-graduate{
+body.page-graduate {
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5{
-        color: $colour-pink;
-        font-family: $font-family-sans-serif;
-        border: 0;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: $colour-pink;
+    font-family: $font-family-sans-serif;
+    border: 0;
+  }
+
+  .page-header,
+  h1,
+  h2 {
+    font-size: $font-size-18;
+  }
+
+  /********************** BANNER OVERLAY***********************/
+
+  .cta-overlay {
+    position: relative;
+
+    .home-cta-bg-img {
+      position: relative;
+      min-height: 125px;
+    }
+    .cta-overlay-inner {
+      background: rgb(0, 35, 93);
+      @media #{$normal}{
+        background: rgba(0, 35, 93, 0.8);
+      }
+    }
+    .overlay-title {
+      border-bottom: 2px solid $colour-white-01;
+      margin-bottom: 5px;
+      font-size: $font-size-20;
+    }
+    @media #{$normal}{
+      .cta-overlay-inner {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .cta-overlay-inner {
+        position: relative;
+        padding: 15px 20px;
+        overflow: auto;
+        overflow-y: hidden;
+      }
     }
 
-    .page-header,
-    h1,
-    h2{
+
+    //.title-icon{
+    //    margin-top:-35px;
+    //    right:10px;
+    //}
+    .overlay-text {
+      font-size: $font-size-12;
+      font-weight: 400;
+    }
+
+    &.field-collection-item-field-graduate-banner {
+      .overlay-title {
+        text-transform: none;
+      }
+
+      //.overlay-title,
+      //.overlay-text{
+      //    max-width:calc(100% - 63px);
+      //}
+      .overlay-button {
+        float: none;
+
+        a {
+          background: $colour-pink;
+        }
+      }
+
+    }
+
+    &.field-collection-item-field-graduate-cta {
+      .overlay-title {
         font-size: $font-size-18;
+        border-bottom: 2px solid $colour-pink;
+      }
+
+      a {
+        color: $colour-white-01;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .overlay-text {
+        min-height: 50px;
+      }
     }
 
 
-    .navbar-wrapper{
-        border-bottom:$colour-pink 4px solid;
-        background: $colour-blue-01;
-        @media #{$tablet} {
-            $navbar-height:120px;
-            height:$navbar-height;
-            .container{
-                height:$navbar-height - 4px;
-            }
-        }
-    }
-    .navbar-default .navbar-toggle{
-        margin-top: 18px;
-        margin-bottom: 0;
-    }
-    .logo-wrapper-desktop{
-        bottom:8px;
+    .slide-header {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      background: rgba(0, 35, 93, 0.8);
+      display: inline-block;
+
+      a {
+        display: block;
+        color: $colour-white-01;
+        padding: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
     }
 
-    /********************** HEADER: TOP MENU ***********************/
 
-    @media #{$tablet} {
-        .navbar-collapse{
-            padding-top:50px;
-        }
+  }
+
+  .field-name-field-graduate-slideshow,
+  .field-name-field-graduate-slideshow-bottom,
+  .mod-quote {
+    .cta-overlay {
+      .overlay-title {
+        color: $colour-pink;
+        font-size: $font-size-14;
+        border: 0;
+        font-weight: 400;
+        text-transform: none;
+      }
+
+      blockquote {
+        text-transform: none;
+        margin-bottom: 10px;
+        font-family: $font-family-sans-serif;
+      }
+
+      .overlay-subtitle {
+        color: $colour-black-01;
+        font-size: $font-size-12;
+      }
     }
-    @media #{$normal} {
-        .navbar-collapse{
-            padding-top:85px;
-        }
-    }
-    @media #{$tablet} {
-        .navbar-btn{
-            margin-bottom:0;
-        }
-    }
-    .navbar{
-        .menu {
-            &.nav {
-                &>li {
-                    padding:0 6px;
-                    @media #{$normal} {
-                        padding:0 10px;
-                    }
-                    & a{
-                        padding:0;
-                        color: $colour-white-01;
-                        background: none;
-                        @media #{$mobile-max} {
-                            padding:15px 0;
-                        }
+  }
 
-                        @media #{$tablet} {
-                            &:hover{
-                                border-bottom:1px solid $colour-orange-01;
-                            }
-                        }
-
-                    }
-                    &.active-trail,
-                    &.active{
-                        & > a{
-                            color: $colour-white-01;
-                            font-weight:700;
-                            @media #{$tablet} {
-                                border-bottom:1px solid $colour-orange-01;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @media #{$mobile-max}{
-        .caret{
-            top:-10px;
-        }
-    }
-    /********************** HEADER: SOCIAL ICONS ***********************/
-    #block-block-38 {
-        float:right;
-        @media #{$normal}{
-            float:right;
-        }
-        .social-links{
-            text-align:right;
-            a{
-                background: $colour-white-01;
-                color: $colour-blue-01;
-                &:hover{
-                    background:$colour-orange-01;
-                }
-                &#reciteme {
-                    span{
-                        color: $colour-white-01;
-                    }
-                }
-            }
-        }
-    }
-    /********************** BANNER OVERLAY***********************/
-
-    .cta-overlay{
-        position:relative;
-        .cta-overlay-inner{
-            background:rgb(0,35,93);
-            @media #{$normal}{
-                background:rgba(0,35,93,0.8);
-            }
-        }
-
-        .overlay-title{
-            border-bottom: 2px solid $colour-white-01;
-            margin-bottom: 5px;
-            font-size: $font-size-20;
-        }
-        .title-icon{
-            margin-top:-35px;
-            right:10px;
-        }
-        .overlay-text{
-            font-size:$font-size-12;
-            font-weight:400;
-        }
-        &.field-collection-item-field-graduate-banner{
-            .overlay-title{
-                text-transform: none;
-            }
-            .overlay-title,
-            .overlay-text{
-                max-width:calc(100% - 63px);
-            }
-            .overlay-button{
-                float:none;
-                a{
-                    background: $colour-pink;
-                }
-            }
-
-        }
-
-        &.field-collection-item-field-graduate-cta{
-            .overlay-title{
-                font-size: $font-size-18;
-                border-bottom: 2px solid $colour-pink;
-            }
-            a{
-                color: $colour-white-01;
-                &:hover{
-                    text-decoration: none;
-                }
-            }
-            .overlay-text{
-                min-height:50px;
-            }
-        }
-
-
-        .slide-header{
-            position: absolute;
-            top:15px;
-            left:0;
-            background:rgba(0,35,93,0.8);
-            display: inline-block;
-            a{
-                display:block;
-                color: $colour-white-01;
-                padding:10px;
-                font-weight:700;
-                text-transform:uppercase;
-            }
-        }
-
-
-    }
-    .field-name-field-graduate-slideshow,
-    .field-name-field-graduate-slideshow-bottom,
-    .mod-quote{
-        .cta-overlay{
-            .overlay-title{
-                color: $colour-pink;
-                font-size: $font-size-14;
-                border:0;
-                font-weight: 400;
-                text-transform: none;
-            }
-            blockquote{
-                text-transform: none;
-                margin-bottom:10px;
-                font-family: $font-family-sans-serif;
-            }
-            .overlay-subtitle{
-                color: $colour-black-01;
-                font-size:$font-size-12;
-            }
-        }
-    }
-    .view-graduate-news,
-    .field-name-field-graduate-slideshow {
-        .cta-overlay{
-            .cta-overlay-inner{
-                top:auto;
-                bottom:0;
-                position: absolute;
-                transform:translateY(0);
-                background:rgba(255,255,255,0.8);
-                @media #{$mobile-max}{
-                    width:100%;
-                }
-            }
-
-        }
-        .slick-dots{
-            li{
-                border:0;
-            }
-        }
-        @media #{$normal}{
-            .slick-dots{
-                bottom:0;
-                li{
-                    display:block;
-                }
-            }
-        }
-    }
-    .slick-grad-quote{
-        overflow:hidden;
-    }
-    .field-name-field-graduate-slideshow {
-        @media #{$normal}{
-            .slick-dots{
-                text-align: left;
-                left:0;
-            }
-        }
-    }
-
-    .view-graduate-news{
+  .view-graduate-news,
+  .field-name-field-graduate-slideshow {
+    .cta-overlay {
+      .cta-overlay-inner {
+        top: auto;
+        bottom: 0;
+        position: absolute;
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.8);
         @media #{$mobile-max}{
-            .home-cta-bg-img{
-                min-height:260px;
-            }
-            .cta-overlay .slide-header{
-                top:0;
-            }
-            .cta-overlay-inner{
-                top:40px !important;
-            }
+          width: 100%;
         }
-        @media #{$normal}{
-            .slick-dots{
-                right:0;
-                width:auto;
-            }
-        }
-        .mod-quote .cta-overlay{
-            .overlay-title {
-                font-size:$font-size-18;
-                font-family:$font-family-sans-serif;
-                text-transform:none;
-                a{
-                    color: $colour-pink;
-                }
-            }
-        }
+      }
+
     }
 
-    &.node-type-graduate-homepage {
-        #block-system-main{
-            padding-right:0;
-        }
-        .cta-overlay.field-collection-item-field-graduate-cta{
-            .cta-overlay-inner{
-                top:auto;
-                bottom:20px;
-                position: absolute;
-                transform:translateY(0);
-            }
-        }
-    }
-    &.node-type-graduate-content .cta-overlay.field-collection-item-field-graduate-cta{
-        .cta-overlay-inner{
-            max-width:100%;
-            @media #{$normal}{
-                max-width:90%;
-            }
-            .overlay-title{
-                border-color: $colour-pink;
-                display: inline-block;
-            }
-        }
+    .slick-dots {
+      li {
+        border: 0;
+      }
     }
 
-    .field-name-field-graduate-slideshow-bottom {
-        .slick-prev, 
-        .slick-next{
-            &:before{
-                font-family: FontAwesome; 
-                font-size: 40px; 
-                line-height: 1; 
-                color: $colour-grey-01; 
-                opacity: 0.75; 
-                -webkit-font-smoothing: antialiased; 
-                -moz-osx-font-smoothing: grayscale;
-            }   
-            &:hover{
-                &:before{
-                    color: $colour-orange-01; 
+    @media #{$normal}{
+      .slick-dots {
+        bottom: 0;
 
-                }  
-            }
-        }   
-
-        .slick-prev{
-            left:10px;
-            &:before { 
-                content: "\f053"; 
-            }
+        li {
+          display: block;
         }
+      }
+    }
+  }
 
-        .slick-next{
-            right:10px;
-            &:before { 
-                content: "\f054"; 
-            }
-        }
+  .slick-grad-quote {
+    overflow: hidden;
+  }
 
-        @media #{$tablet}{
-            .is-table-row [class*="col-"] {
-                vertical-align: middle;
-            }
-        }
-        .slick-list{
-            margin:0 60px;
-        }
+  .field-name-field-graduate-slideshow {
+    @media #{$normal}{
+      .slick-dots {
+        text-align: left;
+        left: 0;
+      }
+    }
+  }
 
+  .view-graduate-news {
+    @media #{$mobile-max}{
+      .home-cta-bg-img {
+        min-height: 260px;
+      }
+      .cta-overlay .slide-header {
+        top: 0;
+      }
+      .cta-overlay-inner {
+        top: 40px !important;
+      }
+    }
+    @media #{$normal}{
+      .slick-dots {
+        right: 0;
+        width: auto;
+      }
+    }
+
+    .mod-quote .cta-overlay {
+      .overlay-title {
+        font-size: $font-size-18;
+        font-family: $font-family-sans-serif;
+        text-transform: none;
+
+        a {
+          color: $colour-pink;
+        }
+      }
+    }
+  }
+
+  &.node-type-graduate-homepage {
+    #block-system-main {
+      padding-right: 0;
+    }
+
+    .cta-overlay.field-collection-item-field-graduate-cta {
+      .cta-overlay-inner {
+        top: auto;
+        bottom: 20px;
+        position: absolute;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &.node-type-graduate-content .cta-overlay.field-collection-item-field-graduate-cta {
+    .cta-overlay-inner {
+      max-width: 100%;
+      @media #{$normal}{
+        max-width: 90%;
+      }
+
+      .overlay-title {
+        border-color: $colour-pink;
+        display: inline-block;
+      }
+    }
+  }
+
+  .field-name-field-graduate-slideshow-bottom {
+    .slick-prev,
+    .slick-next {
+      &:before {
+        font-family: FontAwesome;
+        font-size: 40px;
+        line-height: 1;
+        color: $colour-grey-01;
+        opacity: 0.75;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      &:hover {
+        &:before {
+          color: $colour-orange-01;
+
+        }
+      }
+    }
+
+    .slick-prev {
+      left: 10px;
+
+      &:before {
+        content: "\f053";
+      }
+    }
+
+    .slick-next {
+      right: 10px;
+
+      &:before {
+        content: "\f054";
+      }
     }
 
     @media #{$tablet}{
-        .multi_col_text{
-            .field-name-body{
-                -webkit-column-count: $col-count; /* Chrome, Safari, Opera */
-                -moz-column-count: $col-count; /* Firefox */
-                column-count: $col-count;
-
-                -webkit-column-gap: $col-gap; /* Chrome, Safari, Opera */
-                -moz-column-gap: $col-gap; /* Firefox */
-                column-gap: $col-gap;
-                p,h2,h3,h4,h5,h6,ul,ol{
-                    display:inline-block;
-                    width:100%;
-                }
-                .no-split{
-                    -webkit-column-break-inside: avoid; /* Chrome, Safari */
-                    page-break-inside: avoid;           /* Theoretically FF 20+ */
-                    break-inside: avoid-column;         /* IE 11 */
-                }
-            }
-        }
-    }
-    @media #{$mobile-max}{
-        .no-split{
-            clear:both;
-            margin-bottom:1em;
-            overflow:hidden;
-        }
+      .is-table-row [class*="col-"] {
+        vertical-align: middle;
+      }
     }
 
-    .field-name-field-postscript{
-        margin-bottom:2em;
-        h2:last-child{
-            margin-top:2em;
-            margin-bottom:-1em;
-        }
-    }
-    .postscript-wrapper{
-        background: none;
+    .slick-list {
+      margin: 0 60px;
     }
 
+  }
 
-    /********************** Forms ***********************/
-    form{
-        margin-top:40px;
+  @media #{$tablet}{
+    .multi_col_text {
+      .field-name-body {
+        -webkit-column-count: $col-count; /* Chrome, Safari, Opera */
+        -moz-column-count: $col-count; /* Firefox */
+        column-count: $col-count;
+
+        -webkit-column-gap: $col-gap; /* Chrome, Safari, Opera */
+        -moz-column-gap: $col-gap; /* Firefox */
+        column-gap: $col-gap;
+
+        p, h2, h3, h4, h5, h6, ul, ol {
+          display: inline-block;
+          width: 100%;
+        }
+
+        .no-split {
+          -webkit-column-break-inside: avoid; /* Chrome, Safari */
+          page-break-inside: avoid; /* Theoretically FF 20+ */
+          break-inside: avoid-column; /* IE 11 */
+        }
+      }
     }
-    /********************** Footer ***********************/
-    .footer-wrapper{
-        border-top:0;
-        background: $colour-blue-01;
-        margin-bottom:0;
-        padding-bottom:20px;
-        h2,
-        a,
-        p{
-            color: $colour-white-01;   
-        }
-        h2{
-            display:inline-block;
-            border-bottom:1px solid $colour-pink;
-        }
-        #block-block-8{
-            .col-md-3{
-                border-top-color:$colour-pink;
-            }
-        }
-        .media-element-container{
-            display:inline-block;
-            max-width:100%;
-        }
-        #block-menu-block-8{
-            h2.block-title{
-                border-bottom:1px solid $colour-pink;
-                display:inline-block;
-                width:auto;
-            }
-
-            @media #{$mobile-max}{
-                a{
-                    padding:10px 0;
-                }
-                .nav{
-                    -webkit-column-count: $col-count; /* Chrome, Safari, Opera */
-                    -moz-column-count: $col-count; /* Firefox */
-                    column-count: $col-count;
-
-                    -webkit-column-gap: $col-gap; /* Chrome, Safari, Opera */
-                    -moz-column-gap: $col-gap; /* Firefox */
-                    column-gap: $col-gap;
-                }
-            }
-        }
-        .block .nav>li{
-            margin-bottom:1px;
-        }
-        #block-block-41{
-            @media #{$mobile-max}{
-                margin-bottom:20px;
-                img{
-                    max-width:214px;
-                    margin-bottom:20px;
-                }
-            }
-        }
-        @media #{$tablet}{
-            #block-block-41{
-                margin-right: 8.33333333%;
-                img{
-                    max-width:214px;
-                    margin-bottom:20px;
-                }
-            }
-            #block-block-42{
-                text-align: right;
-                .media{
-                    margin-left:10px;
-                }
-            }
-        }
-
-        @media #{$normal}{
-            #block-block-41,
-            #block-block-42{
-                padding-top:20px;
-            }
-
-            #block-block-41{
-                img{
-                    max-width:100%;
-                    margin-bottom:0;
-                }
-            }
-        }
+  }
+  @media #{$mobile-max}{
+    .no-split {
+      clear: both;
+      margin-bottom: 1em;
+      overflow: hidden;
     }
+  }
+
+  .field-name-field-postscript {
+    margin-bottom: 2em;
+
+    h2:last-child {
+      margin-top: 2em;
+      margin-bottom: -1em;
+    }
+  }
+
+  .postscript-wrapper {
+    background: none;
+  }
+
+
+  /********************** Forms ***********************/
+  form {
+    margin-top: 40px;
+  }
+
+  /********************** Footer ***********************/
+  .footer-wrapper {
+    h2 {
+      color: $colour-blue-01;
+    }
+  }
+
+  #block-block-38 {
+    @extend .col-lg-offset-3;
+  }
 }
 
-.field-name-body{
-    margin-bottom:3em;
-    .no-split{
-        span{
-            position:relative;
-            &.quote-title-1,
-            &.quote-title-2{
-                top:30px;
-              display:inline-block;
-            }
-        }
-    }
+/********************** main nav ***********************/
+
+.menu-block-9 {
+  margin-top: 25px;
+  text-align: right;
 }
+
+
+.field-name-body {
+  margin-bottom: 3em;
+
+  .no-split {
+    span {
+      position: relative;
+
+      &.quote-title-1,
+      &.quote-title-2 {
+        top: 30px;
+        display: inline-block;
+      }
+    }
+  }
+}
+
 // contact page
 .page-node-9678 {
-    .col-sm-4.rtecenter{
-        img{
-            margin-bottom:15px;
-            @media #{$mobile-max}{
-                margin-top:15px;
-            }
-        }
-
+  .col-sm-4.rtecenter {
+    img {
+      margin-bottom: 15px;
+      @media #{$mobile-max}{
+        margin-top: 15px;
+      }
     }
+
+  }
 }
 
 // home news feed
-#block-views-graduate-news-block{
-    margin-top:0;
-    .slick-slider{
-        margin-bottom:0;
-    }
+#block-views-graduate-news-block {
+  margin-top: 0;
+
+  .slick-slider {
+    margin-bottom: 0;
+  }
 }
+
 // application form
-.node-type-webform.page-graduate{
-    .panel-default{
-        border:0;
-        box-shadow: none;
-        &>.panel-heading{
-            border:0;
-            background: transparent;
-        }
-    }
-    .panel-body{
-        padding:0;
-    }
-    form fieldset:first-of-type{
-        &>.panel-heading{
-            background:rgba(0,35,93,1);
-            @extend .col-sm-6;
-            color: $colour-white-01;
-            padding:30px 20px 20px;
-            min-height:100px;
-            margin-bottom:40px;
-            .title-icon{
-                right:20px;
-            }
-        }
-        .panel-title{
-            font-size: $font-size-20;
-            font-weight:700;
-        }
-        fieldset>.panel-heading{
-            background: transparent;
-            color: $colour-blue-01;
-            padding:0;
-            margin-bottom:1em;
-            min-height:auto;
-            width:100%;
-        }
+.node-type-webform.page-graduate {
+  .panel-default {
+    border: 0;
+    box-shadow: none;
 
+    & > .panel-heading {
+      border: 0;
+      background: transparent;
     }
-    fieldset fieldset{
-        padding: 5px;
-    }
-    .webform-progressbar{
-        width:auto;
-        text-align: left;
-        .webform-progressbar-number{
-            font-size:$font-size-12;
-        }
+  }
+
+  .panel-body {
+    padding: 0;
+  }
+
+  form fieldset:first-of-type {
+    & > .panel-heading {
+      background: rgba(0, 35, 93, 1);
+      @extend .col-sm-6;
+      color: $colour-white-01;
+      padding: 30px 20px 20px;
+      min-height: 100px;
+      margin-bottom: 40px;
+      //.title-icon{
+      //    right:20px;
+      //}
     }
 
-    .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11){
-        @extend .col-md-12;
+    .panel-title {
+      font-size: $font-size-20;
+      font-weight: 700;
     }
-    .webform-component-fieldset .webform-component-fieldset .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11){
-        padding-left:0;
-        padding-right:0;
-    }
-    .form-inline button{
-        margin-bottom:1em;
-    }
-    .btn.webform-draft{
-        background: $colour-purple;
-        display:block;
-    }
-    .radio,
-    .checkbox{
-        display: inline-block;
-        margin-right:10px;
-    }
-    .webform-previous,
-    .webform-next,
-    .btn-primary.form-submit{
-        float:none;
-    }
-    .webform-previous{
-        margin-right:10px;
 
-        @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
+    fieldset > .panel-heading {
+      background: transparent;
+      color: $colour-blue-01;
+      padding: 0;
+      margin-bottom: 1em;
+      min-height: auto;
+      width: 100%;
     }
-    .form-actions{
-        @extend .col-md-12;
+
+  }
+
+  fieldset fieldset {
+    padding: 5px;
+  }
+
+  .webform-progressbar {
+    width: auto;
+    text-align: left;
+
+    .webform-progressbar-number {
+      font-size: $font-size-12;
     }
+  }
+
+  .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11) {
+    @extend .col-md-12;
+  }
+
+  .webform-component-fieldset .webform-component-fieldset .webform-component:not(.col-md-1):not(.col-md-2):not(.col-md-3):not(.col-md-4):not(.col-md-5):not(.col-md-6):not(.col-md-7):not(.col-md-8):not(.col-md-9):not(.col-md-10):not(.col-md-11) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .form-inline button {
+    margin-bottom: 1em;
+  }
+
+  .btn.webform-draft {
+    background: $colour-purple;
+    display: block;
+  }
+
+  .radio,
+  .checkbox {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .webform-previous,
+  .webform-next,
+  .btn-primary.form-submit {
+    float: none;
+  }
+
+  .webform-previous {
+    margin-right: 10px;
+
+    @include button-variant($colour-white-01, #b5bdcd, #b5bdcd);
+  }
+
+  .form-actions {
+    @extend .col-md-12;
+  }
 
 }
 
 // graduate home page - remove left / right padding on CTA
-.page-node-9672{
-    .field-item.even .col-md-6{
-        @extend .no-padding-left-md;
+.page-node-9672 {
+  .field-item.even .col-md-6 {
+    @extend .no-padding-left-md;
+  }
+
+  .field-item.odd .col-md-6 {
+    @extend .no-padding-right-md;
+  }
+
+  @media #{$tablet}{
+    .region-sidebar-second {
+      .block {
+        margin-bottom: 0;
+      }
     }
-    .field-item.odd .col-md-6{
-        @extend .no-padding-right-md;
-    }
-    @media #{$tablet}{
-        .region-sidebar-second{
-            .block{
-                margin-bottom:0;
-            }
-        }
-    }
+  }
 }

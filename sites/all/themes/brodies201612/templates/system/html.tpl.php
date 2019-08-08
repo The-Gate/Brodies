@@ -64,13 +64,35 @@
       <script type='text/javascript'>
         var axel = Math.random()+"";
         var a = axel * 10000000000000;
-        document.write('<img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num='+ a +'?" width=1 height=1 border=0>');
+        document.write('<img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num='+ a +'?" width=1 height=1 border=0 style="position:absolute">');
       </script>
       <noscript>
-        <img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num=1?" width=1 height=1 border=0>
+        <img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num=1?" width=1 height=1 border=0 style="position:absolute">
       </noscript>
       <script async src='https://tag.simpli.fi/sifitag/0e384ff0-8405-0135-dc80-06659b33d47c'></script>
       <script async src="https://dni.trumeasure.com/Scripts/TMLoader.js"></script>
+
+      <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-57x57.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-114x114.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-72x72.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-144x144.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-60x60.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-120x120.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-76x76.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-152x152.png" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-196x196.png" sizes="196x196" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-32x32.png" sizes="32x32" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-16x16.png" sizes="16x16" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-128.png" sizes="128x128" />
+      <meta name="application-name" content="&nbsp;"/>
+      <meta name="msapplication-TileColor" content="#FFFFFF" />
+      <meta name="msapplication-TileImage" content="/sites/all/themes/brodies201612/images/favicons/mstile-144x144.png" />
+      <meta name="msapplication-square70x70logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-70x70.png" />
+      <meta name="msapplication-square150x150logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-150x150.png" />
+      <meta name="msapplication-wide310x150logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-310x150.png" />
+      <meta name="msapplication-square310x310logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-310x310.png" />
+
 
     </head>
     <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
