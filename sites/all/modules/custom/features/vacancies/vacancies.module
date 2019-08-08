@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Vacancies feature.
+ */
+
+include_once 'vacancies.features.inc';

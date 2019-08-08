@@ -46,14 +46,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 
     <head profile="<?php print $grddl_profile; ?>">
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-53WJ2RT');</script>
+      <!-- End Google Tag Manager -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php print $head; ?>
         <title><?php print $head_title; ?></title>
         <?php print $styles; ?>
         <?php print $scripts; ?>
         <meta name="google-site-verification" content="QSV_lzQJ0VNBkE5Cd_oGD0wfrY5lZqSPmZ9RPDAOs68" />
+      <!-- Activity name for this tag: Whole Site -->
+      <!-- URL of the webpage where the tag will be placed: https://brodies.com/ -->
+      <script type='text/javascript'>
+        var axel = Math.random()+"";
+        var a = axel * 10000000000000;
+        document.write('<img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num='+ a +'?" width=1 height=1 border=0 style="position:absolute">');
+      </script>
+      <noscript>
+        <img src="https://pubads.g.doubleclick.net/activity;xsp=4458049;ord=1;num=1?" width=1 height=1 border=0 style="position:absolute">
+      </noscript>
+      <script async src='https://tag.simpli.fi/sifitag/0e384ff0-8405-0135-dc80-06659b33d47c'></script>
+      <script async src="https://dni.trumeasure.com/Scripts/TMLoader.js"></script>
+
+      <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-57x57.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-114x114.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-72x72.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-144x144.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-60x60.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-120x120.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-76x76.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/sites/all/themes/brodies201612/images/favicons/apple-touch-icon-152x152.png" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-196x196.png" sizes="196x196" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-32x32.png" sizes="32x32" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-16x16.png" sizes="16x16" />
+      <link rel="icon" type="image/png" href="/sites/all/themes/brodies201612/images/favicons/favicon-128.png" sizes="128x128" />
+      <meta name="application-name" content="&nbsp;"/>
+      <meta name="msapplication-TileColor" content="#FFFFFF" />
+      <meta name="msapplication-TileImage" content="/sites/all/themes/brodies201612/images/favicons/mstile-144x144.png" />
+      <meta name="msapplication-square70x70logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-70x70.png" />
+      <meta name="msapplication-square150x150logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-150x150.png" />
+      <meta name="msapplication-wide310x150logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-310x150.png" />
+      <meta name="msapplication-square310x310logo" content="/sites/all/themes/brodies201612/images/favicons/mstile-310x310.png" />
+
+
     </head>
     <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53WJ2RT"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
         <div id="skip-link">
             <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
         </div>
