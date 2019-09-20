@@ -290,9 +290,9 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   $values = $form_values['values'];
   $seminarBooking = false;
   $webinarBooking = false;
-  $emailtxtSeminarOnly = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking the following:</p>'.PHP_EOL;
-  $emailtxtWebinarOnly = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking the following:</p>'.PHP_EOL;
-  $emailtxtSeminarWebinar = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking the following:</p>'.PHP_EOL;
+  $emailtxtSeminarOnly = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for requesting the following:</p>'.PHP_EOL;
+  $emailtxtWebinarOnly = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for requesting the following:</p>'.PHP_EOL;
+  $emailtxtSeminarWebinar = '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for requesting the following:</p>'.PHP_EOL;
 
 //send email
 //$form_values['values']['submission-time'] = date("Y-m-d H:i", time());
@@ -317,7 +317,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
       . '</tr>'.PHP_EOL;
   $client_out .= $table_start . '<tr>'.PHP_EOL
       . '<td>&nbsp;</td>'.PHP_EOL
-      . '<td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Hi ' . $values['first-name'] . ' ' . $values['surname'] . ',</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for booking to attend the following Brodies ' . $event_txt . ':</p></td>'.PHP_EOL
+      . '<td colspan="2"><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Hi ' . $values['first-name'] . ' ' . $values['surname'] . ',</p><p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Thank you for requesting to attend the following Brodies ' . $event_txt . ':</p></td>'.PHP_EOL
       . '<td>&nbsp;</td>'.PHP_EOL
       . '</tr>'.PHP_EOL;
 
@@ -479,7 +479,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
       . '<tr>'.PHP_EOL
       . '<td>&nbsp;</td>'.PHP_EOL
       . '<td colspan="2">'
-      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">We look forward to seeing you there.</p>'.PHP_EOL
+      . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Your place will be confirmed within one working day and you will receive a confirmation email one week prior to each seminar that you have requested to attend.</p>'.PHP_EOL
       . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you have any queries, please contact a member of our events team on <a href="mailto:seminars@brodies.com" style="color:#F6A01A; text-decoration:none;"><strong>seminars@brodies.com</strong></a></p>'.PHP_EOL
       . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">If you would like to hear more about upcoming Brodies seminars and events, and keep up-to-date with blogs and legal updates – you can log into <a href="https://brodiespm.concep.com/preferences/brodiespm/SignUp" target="_blank" style="color:#F6A01A; text-decoration:none;">Preference Manager</a> and tell us which topics are of most interest and useful to you!</p>'.PHP_EOL
       . '<p style="font-family: Helvetica,Arial,sans-serif; color:#162b4;font-size: 14px;">Any questions, please get in touch at <a href="mailto:bintouch@brodies.com" style="color:#F6A01A; text-decoration:none;">bintouch@brodies.com</a></p>'.PHP_EOL
@@ -493,7 +493,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
       . '</tr>'.PHP_EOL
       . '<tr>'.PHP_EOL
       . '<td>&nbsp;</td>'.PHP_EOL
-      . '<td colspan="2" align="center"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-logo.gif" width="155" height="39" /></td>'.PHP_EOL
+      . '<td colspan="2" align="center"><img src="' . $protocol . $_SERVER['HTTP_HOST'] . '/sites/all/themes/brodies201612/email/img/email-logo.png" width="155" height="119" /></td>'.PHP_EOL
       . '<td>&nbsp;</td>'.PHP_EOL
       . '</tr>'.PHP_EOL
       . '<tr>'.PHP_EOL
@@ -529,7 +529,7 @@ function brSeminarBooking_seminars_form_submit($form_state, $form_values) {
   );
   $client_params = array(
     'body' => $client_out,
-    'subject' => 'Seminar Booking Confirmation',
+    'subject' => 'Seminar booking request',
   );
   if (drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $admin_email, language_default(), $admin_params, $from, TRUE) &&
       drupal_mail('brSeminarBooking_seminars_form', 'seminars-checkout-admin', $from, language_default(), $client_params, $admin_email, TRUE)) {
