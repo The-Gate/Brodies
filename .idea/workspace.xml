@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24e6bbd3-ded8-4ef7-885c-5e25e2e8521c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html--microsite-page.tpl.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" beforeDir="false" afterPath="$PROJECT_DIR$/sites/all/themes/brodies201612/templates/system/html.tpl.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/wp-content/themes/flipflop/cache/timthumb_int_d614df07e84fb5a5cdc634698cbdc4b6.timthumb.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/wp-content/themes/flipflop/cache/timthumb_int_ea850a1ba2447a3b0f42986a25afb1a3.timthumb.txt" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DrupalConfiguration" enabled="true" version="7">
     <drupalPath>D:\wamp\www\theGate\brodies\httpsdocs</drupalPath>
@@ -23,23 +21,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1P876vTjlvaJ3dHWaGLJxLDLlxs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -61,23 +53,30 @@
       <workItem from="1568813671470" duration="27000" />
       <workItem from="1568957350212" duration="226000" />
       <workItem from="1570006760080" duration="626000" />
+      <workItem from="1585204913340" duration="19000" />
+      <workItem from="1586940312280" duration="1504000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="668" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1585204920275">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="347" key="com.intellij.ide.util.TipDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1585204920275" />
   </component>
 </project>
