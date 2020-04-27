@@ -1,0 +1,231 @@
+diff --git a/includes/ckeditor.lib.inc b/includes/ckeditor.lib.inc
+index 822d694..429e631 100644
+--- a/includes/ckeditor.lib.inc
++++ b/includes/ckeditor.lib.inc
+@@ -948,19 +948,50 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
+   }
+ 
+   if (!empty($conf['js_conf'])) {
+-    preg_match_all('#config\.(\w+)[\s]*=[\s]*(.+?);[\s]*(?=config\.|$)#is', preg_replace("/[\n\r]+/", "", $conf['js_conf']), $matches);
++    $dtd = [];
++    // Remove comments lines
++    // multi-line
++    $jsConf = preg_replace('#^/\*(?:[^*]*(?:\*(?!/))*)*\*/#m','', $conf['js_conf']);
++    // single-line double slash
++    $jsConf = preg_replace('#([;,{}()\[\]]|[\s\t]+)//.*[ \t]*#m','', $jsConf);
++    // single-line hash
++    $jsConf = preg_replace('/^[ \t]*#.*[ \t]*/m','', $jsConf);
++    //$jsConf = preg_replace('/^#.*/','', $jsConf);
++    // Strip blank lines
++    $jsConf = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "", $jsConf);
++
++    preg_match_all('#config\.(\w+)[\s]*=[\s]*(.+?)[\s]*(?=(^[\s]*|;[\s]*)config\.|$)#is', $jsConf, $matches);
+     foreach ($matches[2] as $i => $match) {
+       if (!empty($match)) {
++        $match = rtrim($match, ';').';';
++        preg_match_all('#(CKEDITOR\.+[\w\.\$]+[\s]*)=[\s]*(.+?);[\s]*(?=CKEDITOR\.|\/\/|\/*$)#is', $match, $subMatches);
++        // Custom CKEditor setting concatenated
++        if (!empty($subMatches[2])) {
++          foreach($subMatches[2] as $idx => $val) {
++            $match = str_replace($subMatches[0][$idx], '', $match);
++            $dtd[$subMatches[1][$idx]] = $val;
++          }
++        }
++
+         $value = trim($match, " ;\n\r\t\0\x0B");
+         if (strcasecmp($value, 'true') == 0) {
+           $value = TRUE;
+         }
+-        if (strcasecmp($value, 'false') == 0) {
++        elseif (strcasecmp($value, 'false') == 0) {
+           $value = FALSE;
+         }
++        else if ( preg_match('#["|\'][\s]*\+[\s]*["|\']#is', $value)) {
++          // Special case for JS concatenated strings
++          $value = preg_replace('#["|\'][\s]*\+[\s]*["|\']#', '', $value);
++        }
++
+         $settings["js_conf"][$matches[1][$i]] = $value;
+       }
+     }
++
++    if (!empty($dtd)) {
++      $settings["js_conf"]["dtd"] = $dtd;
++    }
+   }
+ 
+   $settings['stylesCombo_stylesSet'] = "drupal:" . $module_drupal_path . '/ckeditor.styles.js';
+diff --git a/includes/ckeditor.utils.js b/includes/ckeditor.utils.js
+index 54cc5b0..a0cde40 100644
+--- a/includes/ckeditor.utils.js
++++ b/includes/ckeditor.utils.js
+@@ -86,6 +86,19 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
+           }
+         }
+ 
++        if (typeof(ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].dtd) != 'undefined') {
++          var dtd = CKEDITOR.dtd;
++          var customDtd = ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].dtd;
++          for ( var idx in customDtd) {
++            var levels = idx.replace('CKEDITOR.dtd.', '').split('.');
++            if (levels.length == 2) {
++              var key1 = levels[0].toString().replace(/\s/gmi, '');
++              var key2 = levels[1].toString().replace(/\s/gmi, '');
++              dtd[key1][key2] = parseInt(customDtd[idx], 10);
++            }
++          }
++        }
++
+         if (ev.editor.config.bodyClass)
+           body.addClass(ev.editor.config.bodyClass);
+         if (ev.editor.config.bodyId)
+@@ -123,15 +136,87 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
+       textarea_settings['scayt_sLang'] = Drupal.settings.ckeditor.scayt_language;
+     }
+ 
+-    if (typeof textarea_settings['js_conf'] != 'undefined'){
++    if (typeof textarea_settings['js_conf'] != 'undefined') {
++      var data, item;
++
++      if (typeof textarea_settings['js_conf']['dtd'] != 'undefined') {
++        textarea_settings['dtd'] = textarea_settings['js_conf']['dtd'];
++        delete textarea_settings['js_conf']['dtd'];
++      }
++
+       for (var add_conf in textarea_settings['js_conf']){
+-        var data;
+-        if (add_conf == 'toolbar') {
+-          data = Drupal.ckeditorToolbarToArray(textarea_settings['js_conf'][add_conf]);
+-        } else if (typeof textarea_settings['js_conf'][add_conf] === "boolean" ) {
+-          data = textarea_settings['js_conf'][add_conf];
++        item = textarea_settings['js_conf'][add_conf];
++        if (typeof item === "boolean" ) {
++          data = item;
+         } else {
+-          data = JSON.parse(textarea_settings['js_conf'][add_conf].replace(/'/g, '"'));
++          item = item.toString().replace(/‘/g, "'").replace(/(^['|"]|['|"]$)/g, '');
++
++          // Try to replace all CKEDITOR. constants with their values
++          if (item.indexOf('CKEDITOR.') > -1) {
++            var matches = item.match(/CKEDITOR\.([A-Z_]+)/g);
++            for (var constIdx in matches) {
++              var constKey = matches[constIdx].toString().replace('CKEDITOR.', '');
++              item = (typeof CKEDITOR[constKey] !== 'undefined') ? item.replace(matches[constIdx], CKEDITOR[constKey]) : item;
++            }
++          }
++
++          // Special case for keystrokes
++          if (add_conf === 'keystrokes') {
++            var keystrokes = [];
++            var items = item.substr(1, item.length-2)
++                .replace(/\r?\n|\r/gmi, '')
++                .replace(/\s/gmi, '')
++                .split(']');
++
++            for (var itm in items) {
++              var row = items[itm].replace(/^(\[|,\[)/g, '');
++              if (row.length > 0) {
++                var keyVal = row.split(',');
++                keyVal[0] = (new Function('"use strict"; return '+keyVal[0])());
++                keyVal[1] = keyVal[1].replace(/'/g, '"').replace(/^"|"$/g, '');
++                if (keyVal[1] == 'null') {
++                  keyVal[1] = null;
++                }
++                keystrokes.push([keyVal[0], keyVal[1]]);
++              }
++            }
++            if (keystrokes.length) {
++              textarea_settings[add_conf] = keystrokes;
++              continue;
++            }
++          }
++
++          // Case for use or config.XXX.concat() method
++          var regex = /^config\.(\w+)\.concat\((.*)(?=\))/g;
++          if (item.match(regex)) {
++            var matches = regex.exec(item);
++            if (matches.length === 3 && CKEDITOR.config[matches[1]]) {
++              var params = Drupal.ckeditorToolbarToArray(matches[2]);
++              if (typeof CKEDITOR.config[matches[1]] === 'string') {
++                CKEDITOR.config[matches[1]] = [ CKEDITOR.config[matches[1]] ];
++              }
++              textarea_settings[add_conf] = CKEDITOR.config[matches[1]].concat(params);
++              continue;
++            }
++          }
++
++          if (item.indexOf('<') > -1) { /* Found HTML string */
++            data = item.replace(/(^['|"]|['|"]$)/g, '');
++          } else if (item.indexOf('function(') > -1) { /* Found JS function */
++            data = (new Function('"use strict"; return '+item)());
++          } else if (item.charAt(0) === '{' || item.charAt(0) === '[') {
++            data = Drupal.ckeditorToolbarToArray(item);
++          } else { /* Custom JS */
++            try {
++              data = (new Function('"use strict"; return '+item)());
++            } catch (e) {
++              try {
++                data = (new Function('"use strict"; return "'+item+'"')());
++              } catch (e) {
++                data = item;
++              }
++            }
++          }
+         }
+ 
+         textarea_settings[add_conf] = data;
+@@ -271,10 +356,18 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
+     Drupal.ckeditorToolbarToArray = function (toolbar) {
+       toolbar = toolbar.replace(/\r?\n|\r/gmi, '')
+           .replace(/\s/gmi, '')
+-          .replace(/([a-zA-Z0-9]+?):/g, '"$1":')
+           .replace(/'/g, '"');
+ 
+-      return JSON.parse(toolbar);
++      try {
++        return JSON.parse(toolbar);
++      } catch (e) {
++        toolbar = toolbar.replace(/([a-zA-Z0-9]+?):/g, '"$1":')
++        try {
++          return JSON.parse(toolbar);
++        } catch (e) {
++          return toolbar;
++        }
++      }
+     };
+   }
+ 
+diff --git a/includes/jqueryUI/sort.js b/includes/jqueryUI/sort.js
+index 0f4ab91..9d42d01 100644
+--- a/includes/jqueryUI/sort.js
++++ b/includes/jqueryUI/sort.js
+@@ -147,14 +147,22 @@ jQuery(document).ready(function() {
+     };
+ 
+     if (typeof(Drupal.ckeditorToolbarToArray) == 'undefined') {
+-        Drupal.ckeditorToolbarToArray = function (toolbar) {
+-            toolbar = toolbar.replace(/\r?\n|\r/gmi, '')
+-                .replace(/\s/gmi, '')
+-                .replace(/([a-zA-Z0-9]+?):/g, '"$1":')
+-                .replace(/'/g, '"');
+-
++      Drupal.ckeditorToolbarToArray = function (toolbar) {
++        toolbar = toolbar.replace(/\r?\n|\r/gmi, '')
++          .replace(/\s/gmi, '')
++          .replace(/'/g, '"');
++
++        try {
++          return JSON.parse(toolbar);
++        } catch (e) {
++          toolbar = toolbar.replace(/([a-zA-Z0-9]+?):/g, '"$1":')
++          try {
+             return JSON.parse(toolbar);
+-        };
++          } catch (e) {
++            return toolbar;
++          }
++        }
++      };
+     }
+ 
+     Drupal.ckeditorToolbaInit();
