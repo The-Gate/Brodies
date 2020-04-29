@@ -37,7 +37,9 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
     $("#" + textarea_id).addClass("ckeditor-processed");
 
     var textarea_settings = false;
-    ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].toolbar = eval(ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].toolbar);
+    if (typeof(ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].toolbar) != 'object') {
+      ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].toolbar = Drupal.ckeditorToolbarToArray(ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].toolbar);
+    }
     textarea_settings = ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]];
 
     var drupalTopToolbar = $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document);
@@ -84,6 +86,19 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
           }
         }
 
+        if (typeof(ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].dtd) != 'undefined') {
+          var dtd = CKEDITOR.dtd;
+          var customDtd = ckeditor_obj.input_formats[ckeditor_obj.elements[textarea_id]].dtd;
+          for ( var idx in customDtd) {
+            var levels = idx.replace('CKEDITOR.dtd.', '').split('.');
+            if (levels.length == 2) {
+              var key1 = levels[0].toString().replace(/\s/gmi, '');
+              var key2 = levels[1].toString().replace(/\s/gmi, '');
+              dtd[key1][key2] = parseInt(customDtd[idx], 10);
+            }
+          }
+        }
+
         if (ev.editor.config.bodyClass)
           body.addClass(ev.editor.config.bodyClass);
         if (ev.editor.config.bodyId)
@@ -121,9 +136,90 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
       textarea_settings['scayt_sLang'] = Drupal.settings.ckeditor.scayt_language;
     }
 
-    if (typeof textarea_settings['js_conf'] != 'undefined'){
+    if (typeof textarea_settings['js_conf'] != 'undefined') {
+      var data, item;
+
+      if (typeof textarea_settings['js_conf']['dtd'] != 'undefined') {
+        textarea_settings['dtd'] = textarea_settings['js_conf']['dtd'];
+        delete textarea_settings['js_conf']['dtd'];
+      }
+
       for (var add_conf in textarea_settings['js_conf']){
-        textarea_settings[add_conf] = eval(textarea_settings['js_conf'][add_conf]);
+        item = textarea_settings['js_conf'][add_conf];
+        if (typeof item === "boolean" ) {
+          data = item;
+        } else {
+          item = item.toString().replace(/‘/g, "'").replace(/(^['|"]|['|"]$)/g, '');
+
+          // Try to replace all CKEDITOR. constants with their values
+          if (item.indexOf('CKEDITOR.') > -1) {
+            var matches = item.match(/CKEDITOR\.([A-Z_]+)/g);
+            for (var constIdx in matches) {
+              var constKey = matches[constIdx].toString().replace('CKEDITOR.', '');
+              item = (typeof CKEDITOR[constKey] !== 'undefined') ? item.replace(matches[constIdx], CKEDITOR[constKey]) : item;
+            }
+          }
+
+          // Special case for keystrokes
+          if (add_conf === 'keystrokes') {
+            var keystrokes = [];
+            var items = item.substr(1, item.length-2)
+                .replace(/\r?\n|\r/gmi, '')
+                .replace(/\s/gmi, '')
+                .split(']');
+
+            for (var itm in items) {
+              var row = items[itm].replace(/^(\[|,\[)/g, '');
+              if (row.length > 0) {
+                var keyVal = row.split(',');
+                keyVal[0] = (new Function('"use strict"; return '+keyVal[0])());
+                keyVal[1] = keyVal[1].replace(/'/g, '"').replace(/^"|"$/g, '');
+                if (keyVal[1] == 'null') {
+                  keyVal[1] = null;
+                }
+                keystrokes.push([keyVal[0], keyVal[1]]);
+              }
+            }
+            if (keystrokes.length) {
+              textarea_settings[add_conf] = keystrokes;
+              continue;
+            }
+          }
+
+          // Case for use or config.XXX.concat() method
+          var regex = /^config\.(\w+)\.concat\((.*)(?=\))/g;
+          if (item.match(regex)) {
+            var matches = regex.exec(item);
+            if (matches.length === 3 && CKEDITOR.config[matches[1]]) {
+              var params = Drupal.ckeditorToolbarToArray(matches[2]);
+              if (typeof CKEDITOR.config[matches[1]] === 'string') {
+                CKEDITOR.config[matches[1]] = [ CKEDITOR.config[matches[1]] ];
+              }
+              textarea_settings[add_conf] = CKEDITOR.config[matches[1]].concat(params);
+              continue;
+            }
+          }
+
+          if (item.indexOf('<') > -1) { /* Found HTML string */
+            data = item.replace(/(^['|"]|['|"]$)/g, '');
+          } else if (item.indexOf('function(') > -1) { /* Found JS function */
+            data = (new Function('"use strict"; return '+item)());
+          } else if (item.charAt(0) === '{' || item.charAt(0) === '[') {
+            data = Drupal.ckeditorToolbarToArray(item);
+          } else { /* Custom JS */
+            try {
+              data = (new Function('"use strict"; return '+item)());
+            } catch (e) {
+              try {
+                data = (new Function('"use strict"; return "'+item+'"')());
+              } catch (e) {
+                data = item;
+              }
+            }
+          }
+        }
+
+        textarea_settings[add_conf] = data;
       }
     }
 
@@ -141,7 +237,7 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
       textarea_settings = Drupal.ckeditorLoadPlugins(textarea_settings);
       Drupal.ckeditorInstance = CKEDITOR.replace(textarea_id, textarea_settings);
     }
-  }
+  };
 
   Drupal.ckeditorOn = function(textarea_id, run_filter) {
 
@@ -256,6 +352,25 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
     }
   };
 
+  if (typeof(Drupal.ckeditorToolbarToArray) == 'undefined') {
+    Drupal.ckeditorToolbarToArray = function (toolbar) {
+      toolbar = toolbar.replace(/\r?\n|\r/gmi, '')
+          .replace(/\s/gmi, '')
+          .replace(/'/g, '"');
+
+      try {
+        return JSON.parse(toolbar);
+      } catch (e) {
+        toolbar = toolbar.replace(/([a-zA-Z0-9]+?):/g, '"$1":')
+        try {
+          return JSON.parse(toolbar);
+        } catch (e) {
+          return toolbar;
+        }
+      }
+    };
+  }
+
   /**
  * Ajax support
  */
@@ -280,6 +395,11 @@ if (typeof window.CKEDITOR_BASEPATH === 'undefined') {
     // make sure the textarea behavior is run first, to get a correctly sized grippie
     if (Drupal.behaviors.textarea && Drupal.behaviors.textarea.attach) {
       Drupal.behaviors.textarea.attach(context);
+    }
+
+    // Manually set the cache-busting string to the same value as Drupal.
+    if (typeof(Drupal.settings.ckeditor.timestamp) != 'undefined') {
+      CKEDITOR.timestamp = Drupal.settings.ckeditor.timestamp;
     }
 
     $(context).find("textarea.ckeditor-mod:not(.ckeditor-processed)").each(function () {

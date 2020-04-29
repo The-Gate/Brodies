@@ -161,9 +161,10 @@ function ckeditor_load_toolbar_options() {
  */
 function ckeditor_load_skin_options() {
   $arr = array();
+  $editor_path = ckeditor_path('relative');
   $editor_local_path = ckeditor_path('local');
-  $skin_dir = $editor_local_path . '/skins';
-  if ($editor_local_path != '<URL>' && is_dir($skin_dir)) {
+  $skin_dir = ckeditor_skins_path('local');
+  if (is_dir($skin_dir) && ($editor_local_path != '<URL>' || ($editor_path == '<URL>' && $editor_local_path == '<URL>') ) ) {
     $dh = @opendir($skin_dir);
     if (FALSE !== $dh) {
       while (($file = readdir($dh)) !== FALSE) {
@@ -177,13 +178,16 @@ function ckeditor_load_skin_options() {
       closedir($dh);
     }
   }
-  //oops, we have no information about skins, let's use only default
+
+  // If we have no information about skins, use the default for this version.
   if (empty($arr)) {
     $arr = array(
+      'moono-lisa' => 'Moono-lisa',
       'moono' => 'Moono',
-      'kama' => 'Kama'
+      'kama' => 'Kama',
     );
   }
+
   asort($arr);
 
   return $arr;
@@ -196,14 +200,22 @@ function ckeditor_load_skin_options() {
  */
 function ckeditor_default_skin() {
   $skin_options = ckeditor_load_skin_options();
-  if (array_key_exists('moono', $skin_options)) {
-    return 'moono';
-  }
-  if (array_key_exists('kama', $skin_options)) {
+
+  // Return default skin for used CKEditor version
+  $version = explode('.', ckeditor_get_version());
+  if ($version[0] == 3 && array_key_exists('kama', $skin_options)) {
     return 'kama';
   }
-  reset($skin_options);
-  //if any default theme not exists select first from the list
+  elseif ($version[0] == 4 && $version[1] <= 5 && array_key_exists('moono', $skin_options)) {
+    return 'moono';
+  }
+
+  // Check if default skin is in options
+  if (array_key_exists('moono-lisa', $skin_options)) {
+    return 'moono-lisa';
+  }
+
+  // If there are no defaults, or only one skin, select the first from the list.
   return key($skin_options);
 }
 
@@ -574,6 +586,8 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
   $module_drupal_local_path = ckeditor_module_path('local');
   $editor_path = ckeditor_path('relative');
   $editor_local_path = ckeditor_path('local');
+  $skins_path = ckeditor_skins_path('relative');
+  $skins_local_path = ckeditor_skins_path('local');
 
   $toolbar = $conf['toolbar'];
 
@@ -595,8 +609,37 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
   }
   $settings['width'] = $conf['width'];
   //check if skin exists, if not select default one
-  if (isset($global_profile->settings['skin']) && file_exists($editor_local_path . '/skins/' . $global_profile->settings['skin'])) {
+  if (isset($global_profile->settings['skin']) && file_exists($editor_local_path . '/skins/' . $global_profile->settings['skin']) ||
+    isset($global_profile->settings['skin']) && $editor_local_path == '<URL>'
+  ) {
     $settings['skin'] = $global_profile->settings['skin'];
+    // Check if skin exists, if not select default one
+    if (isset($global_profile->settings['skin'])) {
+      // If the skin exists, check if local file is present
+      if (file_exists($skins_local_path . '/' . $global_profile->settings['skin'])) {
+        // If editor is local, set skin as profile value
+        if ($editor_local_path != '<URL>') {
+          $settings['skin'] = $global_profile->settings['skin'];
+        }
+        // If editor is remote, set skin as profile value plus local path
+        // example: http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-skin
+        else if ($editor_path == '<URL>' && $editor_local_path == '<URL>') {
+          $settings['skin'] = $global_profile->settings['skin'] . ',' . $skins_path . '/' . $global_profile->settings['skin'] . '/';
+        }
+        else {
+          $settings['skin'] = ckeditor_default_skin();
+        }
+      }
+      else {
+        // If no local skin file, check if editor is hosted remotely
+        if ($editor_path == '<URL>' && $editor_local_path == '<URL>') {
+          $settings['skin'] = $global_profile->settings['skin'];
+        }
+        else {
+          $settings['skin'] = ckeditor_default_skin();
+        }
+      }
+    }
   }
   else {
     $settings['skin'] = ckeditor_default_skin();
@@ -905,18 +948,49 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
   }
 
   if (!empty($conf['js_conf'])) {
-    preg_match_all('#config\.(\w+)[\s]*=[\s]*(.+?);[\s]*(?=config\.|$)#is', preg_replace("/[\n\r]+/", "", $conf['js_conf']), $matches);
+    $dtd = [];
+    // Remove comments lines
+    // multi-line
+    $jsConf = preg_replace('#^/\*(?:[^*]*(?:\*(?!/))*)*\*/#m','', $conf['js_conf']);
+    // single-line double slash
+    $jsConf = preg_replace('#([;,{}()\[\]]|[\s\t]+)//.*[ \t]*#m','', $jsConf);
+    // single-line hash
+    $jsConf = preg_replace('/^[ \t]*#.*[ \t]*/m','', $jsConf);
+    //$jsConf = preg_replace('/^#.*/','', $jsConf);
+    // Strip blank lines
+    $jsConf = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "", $jsConf);
+
+    preg_match_all('#config\.(\w+)[\s]*=[\s]*(.+?)[\s]*(?=(^[\s]*|;[\s]*)config\.|$)#is', $jsConf, $matches);
     foreach ($matches[2] as $i => $match) {
       if (!empty($match)) {
+        $match = rtrim($match, ';').';';
+        preg_match_all('#(CKEDITOR\.+[\w\.\$]+[\s]*)=[\s]*(.+?);[\s]*(?=CKEDITOR\.|\/\/|\/*$)#is', $match, $subMatches);
+        // Custom CKEditor setting concatenated
+        if (!empty($subMatches[2])) {
+          foreach($subMatches[2] as $idx => $val) {
+            $match = str_replace($subMatches[0][$idx], '', $match);
+            $dtd[$subMatches[1][$idx]] = $val;
+          }
+        }
+
         $value = trim($match, " ;\n\r\t\0\x0B");
         if (strcasecmp($value, 'true') == 0) {
           $value = TRUE;
         }
-        if (strcasecmp($value, 'false') == 0) {
+        elseif (strcasecmp($value, 'false') == 0) {
           $value = FALSE;
         }
+        else if ( preg_match('#["|\'][\s]*\+[\s]*["|\']#is', $value)) {
+          // Special case for JS concatenated strings
+          $value = preg_replace('#["|\'][\s]*\+[\s]*["|\']#', '', $value);
+        }
+
         $settings["js_conf"][$matches[1][$i]] = $value;
       }
+    }
+
+    if (!empty($dtd)) {
+      $settings["js_conf"]["dtd"] = $dtd;
     }
   }
 
@@ -937,87 +1011,7 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
   $css_files = array();
   switch ($conf['css_mode']) {
     case 'theme':
-      global $language, $base_theme_info;
-      $themes = list_themes();
-      $theme_info = $themes[$current_theme];
-      if (!empty($theme_info->stylesheets)) {
-        $editorcss = "\"";
-        foreach ($base_theme_info as $base) { // Grab stylesheets from base theme
-          if (!empty($base->stylesheets)) { // may be empty when the base theme reference in the info file is invalid
-            foreach ($base->stylesheets as $type => $stylesheets) {
-              if ($type != "print") {
-                foreach ($stylesheets as $name => $path) {
-                  if (file_exists($path)) {
-                    $css_files[$name] = $host . $path . $query_string;
-                    // Grab rtl stylesheets ( will get rtl css files when thay are named with suffix "-rtl.css" (ex: fusion baased themes) )
-                    if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && substr($path, 0, -8) != "-rtl.css") {
-                      $rtl_path = substr($path, 0, -4) . "-rtl.css";
-                      if (file_exists($rtl_path)) {
-                        $css_files[$name . "-rtl"] = $host . $rtl_path . $query_string;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        if (!empty($theme_info->stylesheets)) { // Grab stylesheets from current theme
-          foreach ($theme_info->stylesheets as $type => $stylesheets) {
-            if ($type != "print") {
-              foreach ($stylesheets as $name => $path) {
-                // Checks if less module exists...
-                if (strstr($path, '.less') && module_exists('less')) {
-                  $path = 'sites/default/files/less/' . $path; // append the less file path
-                  $path = str_replace('.less', '', $path); // remove the .less
-                }
-                if (file_exists($path)) {
-                  $css_files[$name] = $host . $path . $query_string;
-                  // Grab rtl stylesheets ( will get rtl css files when thay are named with suffix "-rtl.css" (ex: fusion baased themes) )
-                  if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && substr($path, 0, -8) != "-rtl.css") {
-                    $rtl_path = substr($path, 0, -4) . "-rtl.css";
-                    if (file_exists($rtl_path)) {
-                      $css_files[$name . "-rtl"] = $host . $rtl_path . $query_string;
-                    }
-                  }
-                }
-                elseif (!empty($css_files[$name])) {
-                  unset($css_files[$name]);
-                }
-              }
-            }
-          }
-        }
-        // Grab stylesheets local.css and local-rtl.css if they exist (fusion based themes)
-        if (file_exists($themepath . 'css/local.css')) {
-          $css_files[] = $host . $themepath . 'css/local.css' . $query_string;
-        }
-        if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && file_exists($themepath . 'css/local-rtl.css')) {
-          $css_files[] = $host . $themepath . 'css/local-rtl.css' . $query_string;
-        }
-
-        // Grab stylesheets from color module
-        $color_paths = variable_get('color_' . $current_theme . '_stylesheets', array());
-        if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL) {
-          if (!empty($color_paths[1])) {
-            $css_files[] = $host . $color_paths[1] . $query_string;
-          }
-        }
-        elseif (!empty($color_paths[0])) {
-          $css_files[] = $host . $color_paths[0] . $query_string;
-        }
-      }
-      else {
-        if (!file_exists($themepath . 'ckeditor.css') && file_exists($themepath . 'style.css')) {
-          $css_files[] = $host . $themepath . 'style.css' . $query_string;
-        }
-      }
-      if (file_exists($module_drupal_local_path . '/css/ckeditor.css')) {
-        $css_files[] = $module_drupal_path . '/css/ckeditor.css' . $query_string;
-      }
-      if (file_exists($themepath . 'ckeditor.css')) {
-        $css_files[] = $host . $themepath . 'ckeditor.css' . $query_string;
-      }
+      _ckeditor_add_css_from_theme($current_theme, $css_files);
       break;
 
     case 'self':
@@ -1088,6 +1082,110 @@ function ckeditor_profile_settings_compile($global_profile, $profile) {
   drupal_alter('ckeditor_settings', $settings, $conf);
 
   return $settings;
+}
+
+function _ckeditor_add_css_from_theme($current_theme, &$css_files) {
+  global $language, $base_theme_info;
+
+  $themes = list_themes();
+  $theme_info = $themes[$current_theme];
+  if (!empty($theme_info->base_theme)) {
+    _ckeditor_add_css_from_theme($theme_info->base_theme, $css_files);
+  }
+
+  $query_string = '?' . variable_get('css_js_query_string', '0');
+  $host = base_path();
+  $themepath = drupal_get_path('theme', $current_theme) . '/';
+  $module_drupal_local_path = ckeditor_module_path('local');
+  $module_drupal_path = drupal_get_path('module', 'ckeditor');
+  if (!empty($theme_info->stylesheets)) {
+    $editorcss = "\"";
+    foreach ($base_theme_info as $base) { // Grab stylesheets from base theme
+      if (!empty($base->stylesheets)) { // may be empty when the base theme reference in the info file is invalid
+        foreach ($base->stylesheets as $type => $stylesheets) {
+          if ($type != "print") {
+            foreach ($stylesheets as $name => $path) {
+              if (file_exists($path)) {
+                $css_files[$name] = $host . $path . $query_string;
+                // Grab rtl stylesheets ( will get rtl css files when thay are named with suffix "-rtl.css" (ex: fusion baased themes) )
+                if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && substr($path, 0, -8) != "-rtl.css") {
+                  $rtl_path = substr($path, 0, -4) . "-rtl.css";
+                  if (file_exists($rtl_path)) {
+                    $css_files[$name . "-rtl"] = $host . $rtl_path . $query_string;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if (!empty($theme_info->stylesheets)) { // Grab stylesheets from current theme
+      foreach ($theme_info->stylesheets as $type => $stylesheets) {
+        if ($type != "print") {
+          foreach ($stylesheets as $name => $path) {
+            // Checks if less module exists...
+            if (strstr($path, '.less') && module_exists('less')) {
+              $path = 'sites/default/files/less/' . $path; // append the less file path
+              $path = str_replace('.less', '', $path); // remove the .less
+            }
+            if (file_exists($path)) {
+              $css_files[$name] = $host . $path . $query_string;
+              // Grab rtl stylesheets ( will get rtl css files when thay are named with suffix "-rtl.css" (ex: fusion baased themes) )
+              if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && substr($path, 0, -8) != "-rtl.css") {
+                $rtl_path = substr($path, 0, -4) . "-rtl.css";
+                if (file_exists($rtl_path)) {
+                  $css_files[$name . "-rtl"] = $host . $rtl_path . $query_string;
+                }
+              }
+            }
+            elseif (!empty($css_files[$name])) {
+              unset($css_files[$name]);
+            }
+          }
+        }
+      }
+    }
+    // Grab stylesheets local.css and local-rtl.css if they exist (fusion based themes)
+    if (file_exists($themepath . 'css/local.css')) {
+      $css_files[] = $host . $themepath . 'css/local.css' . $query_string;
+    }
+    if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL && file_exists($themepath . 'css/local-rtl.css')) {
+      $css_files[] = $host . $themepath . 'css/local-rtl.css' . $query_string;
+    }
+
+    // Grab stylesheets from color module
+    $color_paths = variable_get('color_' . $current_theme . '_stylesheets', array());
+    if (defined('LANGUAGE_RTL') && $language->direction == LANGUAGE_RTL) {
+      if (!empty($color_paths[1])) {
+        if (substr($color_paths[0], 0, 9) == 'public://') {
+          $css_files[] = file_create_url($color_paths[1]) . $query_string;
+        }
+        else {
+          $css_files[] = $host . $color_paths[1] . $query_string;
+        }
+      }
+    }
+    elseif (!empty($color_paths[0])) {
+      if (substr($color_paths[0], 0, 9) == 'public://') {
+        $css_files[] = file_create_url($color_paths[0]) . $query_string;
+      }
+      else {
+        $css_files[] = $host . $color_paths[0] . $query_string;
+      }
+    }
+  }
+  else {
+    if (!file_exists($themepath . 'ckeditor.css') && file_exists($themepath . 'style.css')) {
+      $css_files[] = $host . $themepath . 'style.css' . $query_string;
+    }
+  }
+  if (file_exists($module_drupal_local_path . '/css/ckeditor.css')) {
+    $css_files[] = $host . $module_drupal_path . '/css/ckeditor.css' . $query_string;
+  }
+  if (file_exists($themepath . 'ckeditor.css')) {
+    $css_files[] = $host . $themepath . 'ckeditor.css' . $query_string;
+  }
 }
 
 /**
@@ -1288,6 +1386,9 @@ function ckeditor_load_by_field($field, $format, $show_toggle = TRUE, $add_field
     elseif (!empty($field["#language"]) && $field["#language"] != LANGUAGE_NONE) {
       drupal_add_js(array('ckeditor' => array('scayt_language' => ckeditor_scayt_langcode($field["#language"]))), 'setting');
     }
+
+    // Pass Drupal's JS cache-busting string via settings along to CKEditor.
+    drupal_add_js(array('ckeditor' => array('timestamp' => variable_get('css_js_query_string', '0'))), 'setting');
 
     // Remember extra information and reuse it during "Preview"
     $processed_ids[$field['#id']]['suffix'] = $suffix;

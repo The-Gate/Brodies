@@ -233,7 +233,16 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
   if ($current_path == '<URL>') {
     $current_path = ckeditor_path('url');
   }
-  $form['ckeditor_advanced_settings']['ckeditor_path'] = array(
+
+  $form['ckeditor_advanced_settings']['cke_path'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('CKEditor path'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => FALSE,
+  );
+
+  $form['ckeditor_advanced_settings']['cke_path']['ckeditor_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Path to CKEditor'),
     '#default_value' => !empty($profile->settings['ckeditor_path']) ? $profile->settings['ckeditor_path'] : '%m/ckeditor',
@@ -267,7 +276,7 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
   if ($local_path == '<URL>') {
     $local_path = t('CKEditor is loaded from URL. Local path is not available.');
   }
-  $form['ckeditor_advanced_settings']['ckeditor_local_path'] = array(
+  $form['ckeditor_advanced_settings']['cke_path']['ckeditor_local_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Local path to CKEditor'),
     '#default_value' => isset($profile->settings['ckeditor_local_path']) ? $profile->settings['ckeditor_local_path'] : '',
@@ -285,7 +294,15 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
     )
   );
 
-  $form['ckeditor_advanced_settings']['ckeditor_plugins_path'] = array(
+  $form['ckeditor_advanced_settings']['plugins_path'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('CKEditor plugins'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => FALSE,
+  );
+
+  $form['ckeditor_advanced_settings']['plugins_path']['ckeditor_plugins_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Path to the CKEditor plugins directory'),
     '#default_value' => !empty($profile->settings['ckeditor_plugins_path']) ? $profile->settings['ckeditor_plugins_path'] : '%m/plugins',
@@ -309,7 +326,7 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
     )
   );
 
-  $form['ckeditor_advanced_settings']['ckeditor_plugins_local_path'] = array(
+  $form['ckeditor_advanced_settings']['plugins_path']['ckeditor_plugins_local_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Local path to the CKEditor plugins directory'),
     '#default_value' => isset($profile->settings['ckeditor_plugins_local_path']) ? $profile->settings['ckeditor_plugins_local_path'] : '',
@@ -327,7 +344,58 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
     )
   );
 
-  $form['ckeditor_advanced_settings']['ckfinder_path'] = array(
+  $form['ckeditor_advanced_settings']['skins_path'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('CKEditor skins'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => FALSE,
+  );
+
+  $form['ckeditor_advanced_settings']['skins_path']['ckeditor_skins_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Path to the CKEditor skins directory'),
+    '#default_value' => !empty($profile->settings['ckeditor_skins_path']) ? $profile->settings['ckeditor_skins_path'] : '',
+    '#size' => 40,
+    '#maxlength' => 128,
+    '#description' => t('Path to the CKEditor skins directory relative to the document root.') .
+      '<br />' .
+      t('Available placeholders:<br /><code>%b</code> &ndash; path of the Drupal installation (<code>@base</code>) <br /><code>%m</code> &ndash; the base URL path where the CKEditor module is stored (<code>@module</code>).<br /><code>%l</code> &ndash; the base URL path to the libraries directory (<code>@library</code>)', array(
+          '@base' => $drupal_base_path,
+          '@module' => $module_drupal_path,
+          '@library' => $drupal_library_path,
+        )
+      ) .
+      '<br /> ' .
+      t('Current path: <code>@path</code>', array(
+          '@path' => ckeditor_skins_path('relative')
+        )
+      )
+  );
+
+  $form['ckeditor_advanced_settings']['skins_path']['ckeditor_skins_local_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Local path to the CKEditor skins directory'),
+    '#default_value' => isset($profile->settings['ckeditor_skins_local_path']) ? $profile->settings['ckeditor_skins_local_path'] : '',
+    '#size' => 40,
+    '#maxlength' => 128,
+    '#description' => t('The path to the local directory (on the server) that points to the path defined above. Enter either an absolute server path or a path relative to the <code>index.php</code> file. If left empty, the CKEditor module will try to find the right path.') .
+      '<br /> ' .
+      t('Current path: <code>@path</code>', array(
+          '@path' => ckeditor_skins_path('local')
+        )
+      )
+  );
+
+  $form['ckeditor_advanced_settings']['ckf_path'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('CKFinder path'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => FALSE,
+  );
+
+  $form['ckeditor_advanced_settings']['ckf_path']['ckfinder_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Path to CKFinder'),
     '#default_value' => !empty($profile->settings['ckfinder_path']) ? $profile->settings['ckfinder_path'] : '%m/ckfinder',
@@ -355,7 +423,7 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
     )
   );
 
-  $form['ckeditor_advanced_settings']['ckfinder_local_path'] = array(
+  $form['ckeditor_advanced_settings']['ckf_path']['ckfinder_local_path'] = array(
     '#type' => 'textfield',
     '#title' => t('Local path to CKFinder'),
     '#default_value' => isset($profile->settings['ckfinder_local_path']) ? $profile->settings['ckfinder_local_path'] : '',
@@ -387,7 +455,7 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
       ),
       '#required' => FALSE
     );
-    $current_private_dir = !empty($profile->settings['private_dir']) ? $profile->settings['private_dir'] : '';
+
     $form['ckeditor_advanced_settings']['private_dir'] = array(
       '#type' => 'textfield',
       '#title' => t('Location of files uploaded with CKEditor to the private folder'),
@@ -458,7 +526,43 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
  * Form validation for a global profile
  */
 function ckeditor_admin_global_profile_form_validate($form, &$form_state) {
+  $edit = & $form_state['values'];
 
+  if (!empty($edit['skin'])) {
+    if (preg_match('/^\/\/cdn\.ckeditor\.com\/(.*)\/(.*)$/', $edit['ckeditor_path'], $matches)) {
+      // Assume a default skin is being used, then check if this is true.
+      $default_skin = TRUE;
+      $default_skin_string = '';
+      // CKEditor v4.6 and above use "moono-lisa" as the default skin.
+      if (version_compare($matches[1], '4.6', '>=')) {
+        // Presets standard-all and full-all contains all default skins
+        $defaults = (!empty($matches[2]) && substr($matches[2], -4) == '-all')
+          ? ['moono-lisa', 'moono', 'kama']
+          : ['moono-lisa'];
+
+        if (!in_array($edit['skin'], $defaults)) {
+          $default_skin = FALSE;
+          $default_skin_string = 'Moono-lisa';
+        }
+      }
+      // Below version 4.6, "moono" and "kama" are the default CKEditor skins.
+      elseif (!in_array($edit['skin'], ['moono', 'kama'])) {
+        $default_skin = FALSE;
+        $default_skin_string = 'Moono or Kama';
+      }
+
+      $skin_js_local = ckeditor_skins_path('local') . '/' . $edit['skin'] . '/skin.js';
+      if (!$default_skin && !file_exists($skin_js_local)) {
+        $skin_js_relative = ckeditor_skins_path('relative') . '/' . $edit['skin'] . '/skin.js';
+        $err_msg = t('When using the CKEditor CDN and a skin other than @skin_string, the <strong>skin.js</strong> file must be accessible locally. To fix this issue, download the skin from <a href="@url">CKEditor Addons</a>, extract skin.js, and place the file in the sub-directory named for the selected skin (for example: <em>@skin_js</em>).', array(
+          '@skin_string' => $default_skin_string,
+          '@url' => 'http://ckeditor.com/addons/skins/all',
+          '@skin_js' => $skin_js_relative,
+        ));
+        form_set_error('ckeditor_skins_path', $err_msg);
+      }
+    }
+  }
 }
 
 /**
@@ -512,6 +616,16 @@ function ckeditor_admin_global_profile_form_submit($form, &$form_state) {
   }
   //no slash at the end
   $edit['ckeditor_plugins_path'] = trim(rtrim($edit['ckeditor_plugins_path'], "/"));
+
+  //strip slash from the end
+  $edit['ckeditor_skins_path'] = trim(rtrim(trim($edit['ckeditor_skins_path']), "/"));
+  if ($edit['ckeditor_skins_path'] && 0 !== strpos($edit['ckeditor_skins_path'], "/") && 0 !== strpos($edit['ckeditor_skins_path'], "%")) {
+    //ensure that slash is at the beginning
+    $edit['ckeditor_skins_path'] = "/" . $edit['ckeditor_skins_path'];
+  }
+
+  //no slash at the end
+  $edit['ckeditor_skins_local_path'] = trim(rtrimtrim(($edit['ckeditor_skins_local_path']), "/"));
 
   //strip slash from the end
   if (empty($edit['ckfinder_path'])) {
@@ -1758,11 +1872,18 @@ function ckeditor_toolbar_buttons_all() {
   );
 
   $plugins = ckeditor_load_plugins(TRUE);
+
   foreach ($plugins as $plugin_name => $plugin) {
-    if (!isset($plugin['buttons']) || $plugin['buttons'] == FALSE)
+    if (empty($plugin['buttons'])) {
       continue;
+    }
     foreach ((array) $plugin['buttons'] as $button_name => $button) {
-      $buttons[$button_name] = array('name' => $button_name, 'icon' => $plugin['path'] . $button['icon'], 'title' => t($button['label']), 'row' => 4);
+      $buttons[$button_name] = array(
+        'name' => $button_name,
+        'icon' => !empty($button['icon_path']) ? $button['icon_path'] . $button['icon'] : $plugin['path'] . $button['icon'],
+        'title' => t($button['label']),
+        'row' => 4,
+      );
     }
   }
 
