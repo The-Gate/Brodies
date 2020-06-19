@@ -6,3 +6,5 @@ sites/*/files
 sites/*/private
 /blog/wp-content/themes/flipflop/cache
 .idea/workspace.xml
+_zip/files.zip.*
+_zip/*.zip

@@ -1,1 +1,0 @@
-/* NE PAS SUPPRIMER ! fichier requis pour la gestion des themes de mailpress */
